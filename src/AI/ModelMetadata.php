@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI;
 
+use Telnyx\AI\ModelMetadata\ServiceTier;
 use Telnyx\AI\ModelMetadata\Tier;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -33,6 +34,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   pricing?: array<string,string>|null,
  *   recommendedForAssistants?: bool|null,
  *   regions?: list<string>|null,
+ *   serviceTiers?: list<ServiceTier|value-of<ServiceTier>>|null,
  *   task?: string|null,
  * }
  */
@@ -164,6 +166,14 @@ final class ModelMetadata implements BaseModel
     public ?array $regions;
 
     /**
+     * Service tiers supported by this Telnyx-hosted model. Use one of these values as `service_tier` in Chat Completions or Responses requests. This field is omitted for externally hosted models.
+     *
+     * @var list<value-of<ServiceTier>>|null $serviceTiers
+     */
+    #[Optional('service_tiers', list: ServiceTier::class)]
+    public ?array $serviceTiers;
+
+    /**
      * Primary task the model is intended for, e.g. `text-generation`, `audio-text-to-text`, `feature-extraction` (embeddings).
      */
     #[Optional]
@@ -216,6 +226,7 @@ final class ModelMetadata implements BaseModel
      * @param Tier|value-of<Tier> $tier
      * @param array<string,string>|null $pricing
      * @param list<string>|null $regions
+     * @param list<ServiceTier|value-of<ServiceTier>>|null $serviceTiers
      */
     public static function with(
         string $id,
@@ -237,6 +248,7 @@ final class ModelMetadata implements BaseModel
         ?array $pricing = null,
         ?bool $recommendedForAssistants = null,
         ?array $regions = null,
+        ?array $serviceTiers = null,
         ?string $task = null,
     ): self {
         $self = new self;
@@ -261,6 +273,7 @@ final class ModelMetadata implements BaseModel
         null !== $pricing && $self['pricing'] = $pricing;
         null !== $recommendedForAssistants && $self['recommendedForAssistants'] = $recommendedForAssistants;
         null !== $regions && $self['regions'] = $regions;
+        null !== $serviceTiers && $self['serviceTiers'] = $serviceTiers;
         null !== $task && $self['task'] = $task;
 
         return $self;
@@ -480,6 +493,19 @@ final class ModelMetadata implements BaseModel
     {
         $self = clone $this;
         $self['regions'] = $regions;
+
+        return $self;
+    }
+
+    /**
+     * Service tiers supported by this Telnyx-hosted model. Use one of these values as `service_tier` in Chat Completions or Responses requests. This field is omitted for externally hosted models.
+     *
+     * @param list<ServiceTier|value-of<ServiceTier>> $serviceTiers
+     */
+    public function withServiceTiers(array $serviceTiers): self
+    {
+        $self = clone $this;
+        $self['serviceTiers'] = $serviceTiers;
 
         return $self;
     }

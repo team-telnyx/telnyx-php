@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.96.0](https://github.com/team-telnyx/telnyx-php/compare/v7.95.0...v7.96.0) (2026-08-03)
+
+
+### Features
+
+* promote from staging 614fbbc ([ba4f138](https://github.com/team-telnyx/telnyx-php/commit/ba4f138f4bacb2a54dee9bc4d114e91fb8e99be8))
+
+
+### Chores
+
+* add repository code owner ([#363](https://github.com/team-telnyx/telnyx-php/issues/363)) ([e28f98a](https://github.com/team-telnyx/telnyx-php/commit/e28f98a315c94693cbd551df7356910717fdde18))
+
 ## [7.95.0](https://github.com/team-telnyx/telnyx-php/compare/v7.94.0...v7.95.0) (2026-07-24)
 
 

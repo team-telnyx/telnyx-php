@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration;
+use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration\S3GenericConfigurationData;
 
 /**
  * @phpstan-import-type ConfigurationVariants from \Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration
@@ -29,7 +30,7 @@ final class CustomStorageConfiguration implements BaseModel
 
     /** @var ConfigurationVariants $configuration */
     #[Required(union: Configuration::class)]
-    public GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration;
+    public GcsConfigurationData|S3ConfigurationData|S3GenericConfigurationData|AzureConfigurationData $configuration;
 
     /**
      * `new CustomStorageConfiguration()` is missing required properties by the API.
@@ -60,7 +61,7 @@ final class CustomStorageConfiguration implements BaseModel
      */
     public static function with(
         Backend|string $backend,
-        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
+        GcsConfigurationData|array|S3ConfigurationData|S3GenericConfigurationData|AzureConfigurationData $configuration,
     ): self {
         $self = new self;
 
@@ -85,7 +86,7 @@ final class CustomStorageConfiguration implements BaseModel
      * @param ConfigurationShape $configuration
      */
     public function withConfiguration(
-        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
+        GcsConfigurationData|array|S3ConfigurationData|S3GenericConfigurationData|AzureConfigurationData $configuration,
     ): self {
         $self = clone $this;
         $self['configuration'] = $configuration;

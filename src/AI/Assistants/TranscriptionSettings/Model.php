@@ -16,6 +16,7 @@ namespace Telnyx\AI\Assistants\TranscriptionSettings;
  * - `soniox/stt-rt-v4` is a multilingual streaming model with automatic language detection and configurable endpointing.
  * - `nvidia/parakeet-v3` is a multilingual transcription model with automatic language detection.
  * - `humain/realtime` is a streaming model with native Arabic and Arabic/English code-switching support.
+ * - `reson8/turns` is a turn-based streaming model covering 10 European languages with automatic language detection.
  */
 enum Model: string
 {
@@ -36,6 +37,8 @@ enum Model: string
     case NVIDIA_PARAKEET_V3 = 'nvidia/parakeet-v3';
 
     case HUMAIN_REALTIME = 'humain/realtime';
+
+    case RESON8_TURNS = 'reson8/turns';
 
     case DISTIL_WHISPER_DISTIL_LARGE_V2 = 'distil-whisper/distil-large-v2';
 

@@ -4,17 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
 use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\ResembleVoiceSettings;
-use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * Start an AI assistant on the call.
@@ -27,13 +22,11 @@ use Telnyx\XaiVoiceSettings;
  * @see Telnyx\Services\Calls\ActionsService::startAIAssistant()
  *
  * @phpstan-import-type MessageHistoryVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory
- * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
  * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory
  * @phpstan-import-type AIAssistantJoinParticipantShape from \Telnyx\Calls\Actions\AIAssistantJoinParticipant
  * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
  *
  * @phpstan-type ActionStartAIAssistantParamsShape = array{
  *   assistant?: null|CallAssistantRequest|CallAssistantRequestShape,
@@ -45,8 +38,6 @@ use Telnyx\XaiVoiceSettings;
  *   participants?: list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape>|null,
  *   sendMessageHistoryUpdates?: bool|null,
  *   transcription?: null|TranscriptionConfig|TranscriptionConfigShape,
- *   voice?: string|null,
- *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
 final class ActionStartAIAssistantParams implements BaseModel
@@ -113,30 +104,6 @@ final class ActionStartAIAssistantParams implements BaseModel
     #[Optional]
     public ?TranscriptionConfig $transcription;
 
-    /**
-     * The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
-     *
-     *  **Supported Providers:**
-     * - **AWS:** Use `AWS.Polly.<VoiceId>` (e.g., `AWS.Polly.Joanna`). For neural voices, which provide more realistic, human-like speech, append `-Neural` to the `VoiceId` (e.g., `AWS.Polly.Joanna-Neural`). Check the [available voices](https://docs.aws.amazon.com/polly/latest/dg/available-voices.html) for compatibility.
-     * - **Azure:** Use `Azure.<VoiceId>. (e.g. Azure.en-CA-ClaraNeural, Azure.en-CA-LiamNeural, Azure.en-US-BrianMultilingualNeural, Azure.en-US-Ava:DragonHDLatestNeural. For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).)
-     * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
-     *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
-     * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`.
-     * - **Fish Audio:** Use `FishAudio.<ModelId>.<VoiceId>` (e.g., `FishAudio.s2.1-pro.<reference_id>`). Supported models: `s2.1-pro`, `s2-pro`, `s1`. `VoiceId` is a Fish Voice-Library reference ID.
-     * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
-     * - **Humain:** Use `Humain.<VoiceId>` (e.g., `Humain.sara-ar`). Available voices: `sara-en`, `abdulaziz-en`, `sara-ar`, `abdulaziz-ar`, `nourah-ar`, `abdullah-ar`. Native Arabic (Saudi dialect) and English voices only — no `ModelId` segment.
-     */
-    #[Optional]
-    public ?string $voice;
-
-    /**
-     * The settings associated with the voice selected.
-     *
-     * @var VoiceSettingsVariants|null $voiceSettings
-     */
-    #[Optional('voice_settings', union: VoiceSettings::class)]
-    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings;
-
     public function __construct()
     {
         $this->initialize();
@@ -152,7 +119,6 @@ final class ActionStartAIAssistantParams implements BaseModel
      * @param list<MessageHistoryShape>|null $messageHistory
      * @param list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape>|null $participants
      * @param TranscriptionConfig|TranscriptionConfigShape|null $transcription
-     * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         CallAssistantRequest|array|null $assistant = null,
@@ -164,8 +130,6 @@ final class ActionStartAIAssistantParams implements BaseModel
         ?array $participants = null,
         ?bool $sendMessageHistoryUpdates = null,
         TranscriptionConfig|array|null $transcription = null,
-        ?string $voice = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
 
@@ -178,8 +142,6 @@ final class ActionStartAIAssistantParams implements BaseModel
         null !== $participants && $self['participants'] = $participants;
         null !== $sendMessageHistoryUpdates && $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
         null !== $transcription && $self['transcription'] = $transcription;
-        null !== $voice && $self['voice'] = $voice;
-        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
         return $self;
     }
@@ -292,41 +254,6 @@ final class ActionStartAIAssistantParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['transcription'] = $transcription;
-
-        return $self;
-    }
-
-    /**
-     * The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
-     *
-     *  **Supported Providers:**
-     * - **AWS:** Use `AWS.Polly.<VoiceId>` (e.g., `AWS.Polly.Joanna`). For neural voices, which provide more realistic, human-like speech, append `-Neural` to the `VoiceId` (e.g., `AWS.Polly.Joanna-Neural`). Check the [available voices](https://docs.aws.amazon.com/polly/latest/dg/available-voices.html) for compatibility.
-     * - **Azure:** Use `Azure.<VoiceId>. (e.g. Azure.en-CA-ClaraNeural, Azure.en-CA-LiamNeural, Azure.en-US-BrianMultilingualNeural, Azure.en-US-Ava:DragonHDLatestNeural. For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).)
-     * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
-     *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
-     * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`.
-     * - **Fish Audio:** Use `FishAudio.<ModelId>.<VoiceId>` (e.g., `FishAudio.s2.1-pro.<reference_id>`). Supported models: `s2.1-pro`, `s2-pro`, `s1`. `VoiceId` is a Fish Voice-Library reference ID.
-     * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
-     * - **Humain:** Use `Humain.<VoiceId>` (e.g., `Humain.sara-ar`). Available voices: `sara-en`, `abdulaziz-en`, `sara-ar`, `abdulaziz-ar`, `nourah-ar`, `abdullah-ar`. Native Arabic (Saudi dialect) and English voices only — no `ModelId` segment.
-     */
-    public function withVoice(string $voice): self
-    {
-        $self = clone $this;
-        $self['voice'] = $voice;
-
-        return $self;
-    }
-
-    /**
-     * The settings associated with the voice selected.
-     *
-     * @param VoiceSettingsShape $voiceSettings
-     */
-    public function withVoiceSettings(
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings $voiceSettings,
-    ): self {
-        $self = clone $this;
-        $self['voiceSettings'] = $voiceSettings;
 
         return $self;
     }

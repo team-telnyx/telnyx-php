@@ -20,6 +20,7 @@ use Telnyx\UacConnections\UacExternalSettings\Transport;
  *   password?: string|null,
  *   proxy?: string|null,
  *   transport?: null|Transport|value-of<Transport>,
+ *   userAgent?: string|null,
  *   username?: string|null,
  * }
  */
@@ -73,6 +74,12 @@ final class UacExternalSettings implements BaseModel
     public ?string $transport;
 
     /**
+     * Custom SIP User-Agent header value that Telnyx uses on outbound REGISTER and INVITE messages. Set to null to use Telnyx's default User-Agent.
+     */
+    #[Optional('user_agent', nullable: true)]
+    public ?string $userAgent;
+
+    /**
      * The SIP username used to authenticate with the external SIP peer for registrations and outbound calls. Must start with a letter or number and contain only letters, numbers, hyphens, and underscores.
      */
     #[Optional]
@@ -98,6 +105,7 @@ final class UacExternalSettings implements BaseModel
         ?string $password = null,
         ?string $proxy = null,
         Transport|string|null $transport = null,
+        ?string $userAgent = null,
         ?string $username = null,
     ): self {
         $self = new self;
@@ -109,6 +117,7 @@ final class UacExternalSettings implements BaseModel
         null !== $password && $self['password'] = $password;
         null !== $proxy && $self['proxy'] = $proxy;
         null !== $transport && $self['transport'] = $transport;
+        null !== $userAgent && $self['userAgent'] = $userAgent;
         null !== $username && $self['username'] = $username;
 
         return $self;
@@ -189,6 +198,17 @@ final class UacExternalSettings implements BaseModel
     {
         $self = clone $this;
         $self['transport'] = $transport;
+
+        return $self;
+    }
+
+    /**
+     * Custom SIP User-Agent header value that Telnyx uses on outbound REGISTER and INVITE messages. Set to null to use Telnyx's default User-Agent.
+     */
+    public function withUserAgent(?string $userAgent): self
+    {
+        $self = clone $this;
+        $self['userAgent'] = $userAgent;
 
         return $self;
     }

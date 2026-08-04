@@ -116,7 +116,7 @@ final class ReferencesTest extends TestCase
         }
 
         $result = $this->client->dir->references->update(
-            0,
+            1,
             dirID: '16635d38-75a6-4481-82e8-69af60e05011',
             refType: 'business'
         );
@@ -133,7 +133,7 @@ final class ReferencesTest extends TestCase
         }
 
         $result = $this->client->dir->references->update(
-            0,
+            1,
             dirID: '16635d38-75a6-4481-82e8-69af60e05011',
             refType: 'business',
             email: 'dana.reyes@example.com',

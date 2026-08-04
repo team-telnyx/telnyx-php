@@ -46,6 +46,12 @@ use Telnyx\Calls\Actions\ActionLeaveQueueParams;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
 use Telnyx\Calls\Actions\ActionPauseRecordingParams;
 use Telnyx\Calls\Actions\ActionPauseRecordingResponse;
+use Telnyx\Calls\Actions\ActionPayParams;
+use Telnyx\Calls\Actions\ActionPayParams\Currency;
+use Telnyx\Calls\Actions\ActionPayParams\PaymentMethod;
+use Telnyx\Calls\Actions\ActionPayParams\Prompts;
+use Telnyx\Calls\Actions\ActionPayParams\TransactionType;
+use Telnyx\Calls\Actions\ActionPayResponse;
 use Telnyx\Calls\Actions\ActionReferParams;
 use Telnyx\Calls\Actions\ActionReferResponse;
 use Telnyx\Calls\Actions\ActionRejectParams;
@@ -163,14 +169,14 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings as VoiceSettingsShape1
+ * @phpstan-import-type PromptsShape from \Telnyx\Calls\Actions\ActionPayParams\Prompts
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant as AssistantShape1
  * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
  * @phpstan-import-type ConversationRelayInterruptionSettingsShape from \Telnyx\Calls\ConversationRelayInterruptionSettings
  * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -202,7 +208,10 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
-     *   clientState?: string, commandID?: string, messages?: list<MessageShape>
+     *   clientState?: string,
+     *   commandID?: string,
+     *   messages?: list<MessageShape>,
+     *   triggerResponse?: bool,
      * }|ActionAddAIAssistantMessagesParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -784,6 +793,67 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
+     * Collect payment details from the caller using DTMF and either charge or tokenize the payment method through a configured Pay connector. Pay pauses active call recordings while sensitive payment details are collected.
+     *
+     * When `payment_token` is supplied, the DTMF collection steps are skipped and the existing token is sent to the connector.
+     *
+     * **Expected Webhooks:**
+     *
+     * - `call.payment.progress`
+     * - `call.payment.completed`
+     *
+     * **Test mode card numbers:** `4111111111111111` (Visa), `5555555555554444` (Mastercard), `378282246310005` (American Express), `6011111111111117` (Discover), `3065930009020004` (Diners Club), `3566002020360505` (JCB), `6200000000000005` (UnionPay), and `6771798021000008` (Maestro). Test-mode connectors reject other card numbers before contacting the configured processor. The UnionPay and Maestro numbers are accepted for processor testing, but Pay currently does not emit a card type for them.
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param array{
+     *   amount?: float,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   connectorName?: string,
+     *   currency?: Currency|value-of<Currency>,
+     *   description?: string,
+     *   interDigitTimeoutMillis?: int,
+     *   language?: string,
+     *   maxAttempts?: int,
+     *   metadata?: array<string,mixed>,
+     *   parameters?: array<string,mixed>,
+     *   paymentMethod?: PaymentMethod|value-of<PaymentMethod>,
+     *   paymentToken?: string,
+     *   prompts?: Prompts|PromptsShape,
+     *   serviceLevel?: string,
+     *   timeoutMillis?: int,
+     *   transactionType?: TransactionType|value-of<TransactionType>,
+     *   voice?: string,
+     * }|ActionPayParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionPayResponse>
+     *
+     * @throws APIException
+     */
+    public function pay(
+        string $callControlID,
+        array|ActionPayParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ActionPayParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['calls/%1$s/actions/pay', $callControlID],
+            body: (object) $parsed,
+            options: $options,
+            convert: ActionPayResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
      * Initiate a SIP Refer on a Call Control call. You can initiate a SIP Refer at any point in the duration of a call.
      *
      * **Expected Webhooks:**
@@ -1055,8 +1125,6 @@ final class ActionsRawService implements ActionsRawContract
      *   participants?: list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape>,
      *   sendMessageHistoryUpdates?: bool,
      *   transcription?: TranscriptionConfig|TranscriptionConfigShape,
-     *   voice?: string,
-     *   voiceSettings?: VoiceSettingsShape3,
      * }|ActionStartAIAssistantParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -1117,7 +1185,7 @@ final class ActionsRawService implements ActionsRawContract
      *   ttsProvider?: string,
      *   url?: string,
      *   voice?: string,
-     *   voiceSettings?: VoiceSettingsShape4,
+     *   voiceSettings?: VoiceSettingsShape3,
      * }|ActionStartConversationRelayParams $params
      * @param RequestOpts|null $requestOptions
      *

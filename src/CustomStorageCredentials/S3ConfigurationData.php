@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomStorageCredentials;
 
-use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +11,29 @@ use Telnyx\CustomStorageCredentials\S3ConfigurationData\Backend;
 
 /**
  * @phpstan-type S3ConfigurationDataShape = array{
+ *   awsAccessKeyID: string,
+ *   awsSecretAccessKey: string,
  *   backend: Backend|value-of<Backend>,
- *   awsAccessKeyID?: string|null,
- *   awsSecretAccessKey?: string|null,
- *   bucket?: string|null,
- *   region?: string|null,
+ *   bucket: string,
+ *   region: string,
  * }
  */
 final class S3ConfigurationData implements BaseModel
 {
     /** @use SdkModel<S3ConfigurationDataShape> */
     use SdkModel;
+
+    /**
+     * AWS credentials access key id.
+     */
+    #[Required('aws_access_key_id')]
+    public string $awsAccessKeyID;
+
+    /**
+     * AWS secret access key.
+     */
+    #[Required('aws_secret_access_key')]
+    public string $awsSecretAccessKey;
 
     /**
      * Storage backend type.
@@ -33,41 +44,40 @@ final class S3ConfigurationData implements BaseModel
     public string $backend;
 
     /**
-     * AWS credentials access key id.
-     */
-    #[Optional('aws_access_key_id')]
-    public ?string $awsAccessKeyID;
-
-    /**
-     * AWS secret access key.
-     */
-    #[Optional('aws_secret_access_key')]
-    public ?string $awsSecretAccessKey;
-
-    /**
      * Name of the bucket to be used to store recording files.
      */
-    #[Optional]
-    public ?string $bucket;
+    #[Required]
+    public string $bucket;
 
     /**
      * Region where the bucket is located.
      */
-    #[Optional]
-    public ?string $region;
+    #[Required]
+    public string $region;
 
     /**
      * `new S3ConfigurationData()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * S3ConfigurationData::with(backend: ...)
+     * S3ConfigurationData::with(
+     *   awsAccessKeyID: ...,
+     *   awsSecretAccessKey: ...,
+     *   backend: ...,
+     *   bucket: ...,
+     *   region: ...,
+     * )
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new S3ConfigurationData)->withBackend(...)
+     * (new S3ConfigurationData)
+     *   ->withAwsAccessKeyID(...)
+     *   ->withAwsSecretAccessKey(...)
+     *   ->withBackend(...)
+     *   ->withBucket(...)
+     *   ->withRegion(...)
      * ```
      */
     public function __construct()
@@ -83,33 +93,19 @@ final class S3ConfigurationData implements BaseModel
      * @param Backend|value-of<Backend> $backend
      */
     public static function with(
+        string $awsAccessKeyID,
+        string $awsSecretAccessKey,
         Backend|string $backend,
-        ?string $awsAccessKeyID = null,
-        ?string $awsSecretAccessKey = null,
-        ?string $bucket = null,
-        ?string $region = null,
+        string $bucket,
+        string $region,
     ): self {
         $self = new self;
 
+        $self['awsAccessKeyID'] = $awsAccessKeyID;
+        $self['awsSecretAccessKey'] = $awsSecretAccessKey;
         $self['backend'] = $backend;
-
-        null !== $awsAccessKeyID && $self['awsAccessKeyID'] = $awsAccessKeyID;
-        null !== $awsSecretAccessKey && $self['awsSecretAccessKey'] = $awsSecretAccessKey;
-        null !== $bucket && $self['bucket'] = $bucket;
-        null !== $region && $self['region'] = $region;
-
-        return $self;
-    }
-
-    /**
-     * Storage backend type.
-     *
-     * @param Backend|value-of<Backend> $backend
-     */
-    public function withBackend(Backend|string $backend): self
-    {
-        $self = clone $this;
-        $self['backend'] = $backend;
+        $self['bucket'] = $bucket;
+        $self['region'] = $region;
 
         return $self;
     }
@@ -132,6 +128,19 @@ final class S3ConfigurationData implements BaseModel
     {
         $self = clone $this;
         $self['awsSecretAccessKey'] = $awsSecretAccessKey;
+
+        return $self;
+    }
+
+    /**
+     * Storage backend type.
+     *
+     * @param Backend|value-of<Backend> $backend
+     */
+    public function withBackend(Backend|string $backend): self
+    {
+        $self = clone $this;
+        $self['backend'] = $backend;
 
         return $self;
     }

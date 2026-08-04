@@ -8,48 +8,41 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\MapOf;
-use Telnyx\Webhooks\InboundMessage\Bcc;
-use Telnyx\Webhooks\InboundMessage\Cc;
-use Telnyx\Webhooks\InboundMessage\Direction;
-use Telnyx\Webhooks\InboundMessage\From;
-use Telnyx\Webhooks\InboundMessage\RecordType;
-use Telnyx\Webhooks\InboundMessage\ReplyTo;
-use Telnyx\Webhooks\InboundMessage\Status;
-use Telnyx\Webhooks\InboundMessage\To;
+use Telnyx\EmailInboxes\Threads\InboundEmailAddress;
+use Telnyx\EmailInboxes\Threads\ThreadMessage\Direction;
+use Telnyx\EmailInboxes\Threads\ThreadMessage\RecordType;
 
 /**
- * @phpstan-import-type BccShape from \Telnyx\Webhooks\InboundMessage\Bcc
- * @phpstan-import-type CcShape from \Telnyx\Webhooks\InboundMessage\Cc
- * @phpstan-import-type FromShape from \Telnyx\Webhooks\InboundMessage\From
- * @phpstan-import-type ReplyToShape from \Telnyx\Webhooks\InboundMessage\ReplyTo
- * @phpstan-import-type ToShape from \Telnyx\Webhooks\InboundMessage\To
+ * @phpstan-import-type InboundEmailAddressShape from \Telnyx\EmailInboxes\Threads\InboundEmailAddress
  *
  * @phpstan-type InboundMessageShape = array{
  *   id: string,
  *   attachments: list<array<string,mixed>>,
- *   bcc: list<Bcc|BccShape>,
- *   cc: list<Cc|CcShape>,
+ *   bcc: list<InboundEmailAddress|InboundEmailAddressShape>,
+ *   cc: list<InboundEmailAddress|InboundEmailAddressShape>,
  *   createdAt: \DateTimeInterface,
  *   direction: Direction|value-of<Direction>,
- *   from: From|FromShape,
+ *   from: InboundEmailAddress|InboundEmailAddressShape,
  *   hasQuotedText: bool,
  *   headers: array<string,mixed>,
  *   htmlBodyURL: string|null,
  *   inReplyTo: string|null,
  *   inboxID: string,
  *   inlineFiles: list<array<string,mixed>>,
- *   messageID: string,
+ *   labels: list<string>,
+ *   messageID: string|null,
  *   readAt: \DateTimeInterface|null,
- *   receivedAt: \DateTimeInterface,
+ *   receivedAt: \DateTimeInterface|null,
  *   recordType: RecordType|value-of<RecordType>,
  *   references: list<string>,
  *   replyText: string|null,
- *   replyTo: list<ReplyTo|ReplyToShape>,
- *   status: Status|value-of<Status>,
+ *   replyTo: list<InboundEmailAddress|InboundEmailAddressShape>,
+ *   sentAt: \DateTimeInterface|null,
+ *   status: string,
  *   subject: string|null,
  *   textBodyURL: string|null,
  *   threadID: string,
- *   to: list<To|ToShape>,
+ *   to: list<InboundEmailAddress|InboundEmailAddressShape>,
  *   updatedAt: \DateTimeInterface,
  * }
  */
@@ -65,12 +58,12 @@ final class InboundMessage implements BaseModel
     #[Required(list: new MapOf('mixed'))]
     public array $attachments;
 
-    /** @var list<Bcc> $bcc */
-    #[Required(list: Bcc::class)]
+    /** @var list<InboundEmailAddress> $bcc */
+    #[Required(list: InboundEmailAddress::class)]
     public array $bcc;
 
-    /** @var list<Cc> $cc */
-    #[Required(list: Cc::class)]
+    /** @var list<InboundEmailAddress> $cc */
+    #[Required(list: InboundEmailAddress::class)]
     public array $cc;
 
     #[Required('created_at')]
@@ -81,7 +74,7 @@ final class InboundMessage implements BaseModel
     public string $direction;
 
     #[Required]
-    public From $from;
+    public InboundEmailAddress $from;
 
     /**
      * Whether conservative plain-text extraction detected a quoted tail. False does not prove that the source contains no quoted content.
@@ -94,7 +87,7 @@ final class InboundMessage implements BaseModel
     public array $headers;
 
     /**
-     * URL for an offloaded HTML body. Null means the body is not offloaded to a URL; an inline HTML body may still exist but is not returned on list reads. `reply_text` and `has_quoted_text` are computed from the inline plain-text body when present.
+     * URL for an offloaded HTML body. Null means the body is not offloaded to a URL; an inline HTML body may still exist but is not returned on list reads. Reply extraction uses only the plain-text body during ingest.
      */
     #[Required('html_body_url')]
     public ?string $htmlBodyURL;
@@ -110,16 +103,30 @@ final class InboundMessage implements BaseModel
     public array $inlineFiles;
 
     /**
-     * RFC Message-ID header.
+     * Mutable message labels used for agent workflow state (for example `spam`, `needs_review`, `processed`). Distinct from the immutable send-time `tags` on outbound messages: labels are never propagated to Email Detail Records or Mission Control reporting. Always empty for outbound messages. Labels on a message are independent of the labels on its thread.
+     *
+     * @var list<string> $labels
+     */
+    #[Required(list: 'string')]
+    public array $labels;
+
+    /**
+     * RFC Message-ID header. Null is possible for legacy outbound messages.
      */
     #[Required('message_id')]
-    public string $messageID;
+    public ?string $messageID;
 
+    /**
+     * Time the inbound message was marked read. Null means unread.
+     */
     #[Required('read_at')]
     public ?\DateTimeInterface $readAt;
 
+    /**
+     * Receipt time for inbound messages; null for outbound messages.
+     */
     #[Required('received_at')]
-    public \DateTimeInterface $receivedAt;
+    public ?\DateTimeInterface $receivedAt;
 
     /** @var value-of<RecordType> $recordType */
     #[Required('record_type', enum: RecordType::class)]
@@ -134,24 +141,32 @@ final class InboundMessage implements BaseModel
     public array $references;
 
     /**
-     * Conservatively extracted new-reply content from the available plain-text body. Null means no plain-text body was available because it was absent or offloaded; HTML bodies are not parsed.
+     * Conservatively extracted new-reply content persisted from the plain-text body during ingest. Null means no plain-text extraction input was available or extraction was skipped or failed; HTML bodies are not parsed.
      */
     #[Required('reply_text')]
     public ?string $replyText;
 
-    /** @var list<ReplyTo> $replyTo */
-    #[Required('reply_to', list: ReplyTo::class)]
+    /** @var list<InboundEmailAddress> $replyTo */
+    #[Required('reply_to', list: InboundEmailAddress::class)]
     public array $replyTo;
 
-    /** @var value-of<Status> $status */
-    #[Required(enum: Status::class)]
+    /**
+     * Creation/send-acceptance time for outbound messages; null for inbound messages.
+     */
+    #[Required('sent_at')]
+    public ?\DateTimeInterface $sentAt;
+
+    /**
+     * Received for inbound messages; the current send status for outbound messages.
+     */
+    #[Required]
     public string $status;
 
     #[Required]
     public ?string $subject;
 
     /**
-     * URL for an offloaded plain-text body. Null means the body is not offloaded to a URL; an inline plain-text body may still exist but is not returned on list reads. `reply_text` and `has_quoted_text` are computed from the inline plain-text body when present.
+     * URL for an offloaded plain-text body. Null means the body is not offloaded to a URL; an inline plain-text body may still exist but is not returned on list reads. `reply_text` and `has_quoted_text` are persisted during ingest before any body offload.
      */
     #[Required('text_body_url')]
     public ?string $textBodyURL;
@@ -159,8 +174,8 @@ final class InboundMessage implements BaseModel
     #[Required('thread_id')]
     public string $threadID;
 
-    /** @var list<To> $to */
-    #[Required(list: To::class)]
+    /** @var list<InboundEmailAddress> $to */
+    #[Required(list: InboundEmailAddress::class)]
     public array $to;
 
     #[Required('updated_at')]
@@ -185,6 +200,7 @@ final class InboundMessage implements BaseModel
      *   inReplyTo: ...,
      *   inboxID: ...,
      *   inlineFiles: ...,
+     *   labels: ...,
      *   messageID: ...,
      *   readAt: ...,
      *   receivedAt: ...,
@@ -192,6 +208,7 @@ final class InboundMessage implements BaseModel
      *   references: ...,
      *   replyText: ...,
      *   replyTo: ...,
+     *   sentAt: ...,
      *   status: ...,
      *   subject: ...,
      *   textBodyURL: ...,
@@ -218,6 +235,7 @@ final class InboundMessage implements BaseModel
      *   ->withInReplyTo(...)
      *   ->withInboxID(...)
      *   ->withInlineFiles(...)
+     *   ->withLabels(...)
      *   ->withMessageID(...)
      *   ->withReadAt(...)
      *   ->withReceivedAt(...)
@@ -225,6 +243,7 @@ final class InboundMessage implements BaseModel
      *   ->withReferences(...)
      *   ->withReplyText(...)
      *   ->withReplyTo(...)
+     *   ->withSentAt(...)
      *   ->withStatus(...)
      *   ->withSubject(...)
      *   ->withTextBodyURL(...)
@@ -244,17 +263,17 @@ final class InboundMessage implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<array<string,mixed>> $attachments
-     * @param list<Bcc|BccShape> $bcc
-     * @param list<Cc|CcShape> $cc
+     * @param list<InboundEmailAddress|InboundEmailAddressShape> $bcc
+     * @param list<InboundEmailAddress|InboundEmailAddressShape> $cc
      * @param Direction|value-of<Direction> $direction
-     * @param From|FromShape $from
+     * @param InboundEmailAddress|InboundEmailAddressShape $from
      * @param array<string,mixed> $headers
      * @param list<array<string,mixed>> $inlineFiles
+     * @param list<string> $labels
      * @param RecordType|value-of<RecordType> $recordType
      * @param list<string> $references
-     * @param list<ReplyTo|ReplyToShape> $replyTo
-     * @param Status|value-of<Status> $status
-     * @param list<To|ToShape> $to
+     * @param list<InboundEmailAddress|InboundEmailAddressShape> $replyTo
+     * @param list<InboundEmailAddress|InboundEmailAddressShape> $to
      */
     public static function with(
         string $id,
@@ -263,21 +282,23 @@ final class InboundMessage implements BaseModel
         array $cc,
         \DateTimeInterface $createdAt,
         Direction|string $direction,
-        From|array $from,
+        InboundEmailAddress|array $from,
         bool $hasQuotedText,
         array $headers,
         ?string $htmlBodyURL,
         ?string $inReplyTo,
         string $inboxID,
         array $inlineFiles,
-        string $messageID,
+        array $labels,
+        ?string $messageID,
         ?\DateTimeInterface $readAt,
-        \DateTimeInterface $receivedAt,
+        ?\DateTimeInterface $receivedAt,
         RecordType|string $recordType,
         array $references,
         ?string $replyText,
         array $replyTo,
-        Status|string $status,
+        ?\DateTimeInterface $sentAt,
+        string $status,
         ?string $subject,
         ?string $textBodyURL,
         string $threadID,
@@ -299,6 +320,7 @@ final class InboundMessage implements BaseModel
         $self['inReplyTo'] = $inReplyTo;
         $self['inboxID'] = $inboxID;
         $self['inlineFiles'] = $inlineFiles;
+        $self['labels'] = $labels;
         $self['messageID'] = $messageID;
         $self['readAt'] = $readAt;
         $self['receivedAt'] = $receivedAt;
@@ -306,6 +328,7 @@ final class InboundMessage implements BaseModel
         $self['references'] = $references;
         $self['replyText'] = $replyText;
         $self['replyTo'] = $replyTo;
+        $self['sentAt'] = $sentAt;
         $self['status'] = $status;
         $self['subject'] = $subject;
         $self['textBodyURL'] = $textBodyURL;
@@ -336,7 +359,7 @@ final class InboundMessage implements BaseModel
     }
 
     /**
-     * @param list<Bcc|BccShape> $bcc
+     * @param list<InboundEmailAddress|InboundEmailAddressShape> $bcc
      */
     public function withBcc(array $bcc): self
     {
@@ -347,7 +370,7 @@ final class InboundMessage implements BaseModel
     }
 
     /**
-     * @param list<Cc|CcShape> $cc
+     * @param list<InboundEmailAddress|InboundEmailAddressShape> $cc
      */
     public function withCc(array $cc): self
     {
@@ -377,9 +400,9 @@ final class InboundMessage implements BaseModel
     }
 
     /**
-     * @param From|FromShape $from
+     * @param InboundEmailAddress|InboundEmailAddressShape $from
      */
-    public function withFrom(From|array $from): self
+    public function withFrom(InboundEmailAddress|array $from): self
     {
         $self = clone $this;
         $self['from'] = $from;
@@ -410,7 +433,7 @@ final class InboundMessage implements BaseModel
     }
 
     /**
-     * URL for an offloaded HTML body. Null means the body is not offloaded to a URL; an inline HTML body may still exist but is not returned on list reads. `reply_text` and `has_quoted_text` are computed from the inline plain-text body when present.
+     * URL for an offloaded HTML body. Null means the body is not offloaded to a URL; an inline HTML body may still exist but is not returned on list reads. Reply extraction uses only the plain-text body during ingest.
      */
     public function withHTMLBodyURL(?string $htmlBodyURL): self
     {
@@ -448,9 +471,22 @@ final class InboundMessage implements BaseModel
     }
 
     /**
-     * RFC Message-ID header.
+     * Mutable message labels used for agent workflow state (for example `spam`, `needs_review`, `processed`). Distinct from the immutable send-time `tags` on outbound messages: labels are never propagated to Email Detail Records or Mission Control reporting. Always empty for outbound messages. Labels on a message are independent of the labels on its thread.
+     *
+     * @param list<string> $labels
      */
-    public function withMessageID(string $messageID): self
+    public function withLabels(array $labels): self
+    {
+        $self = clone $this;
+        $self['labels'] = $labels;
+
+        return $self;
+    }
+
+    /**
+     * RFC Message-ID header. Null is possible for legacy outbound messages.
+     */
+    public function withMessageID(?string $messageID): self
     {
         $self = clone $this;
         $self['messageID'] = $messageID;
@@ -458,6 +494,9 @@ final class InboundMessage implements BaseModel
         return $self;
     }
 
+    /**
+     * Time the inbound message was marked read. Null means unread.
+     */
     public function withReadAt(?\DateTimeInterface $readAt): self
     {
         $self = clone $this;
@@ -466,7 +505,10 @@ final class InboundMessage implements BaseModel
         return $self;
     }
 
-    public function withReceivedAt(\DateTimeInterface $receivedAt): self
+    /**
+     * Receipt time for inbound messages; null for outbound messages.
+     */
+    public function withReceivedAt(?\DateTimeInterface $receivedAt): self
     {
         $self = clone $this;
         $self['receivedAt'] = $receivedAt;
@@ -499,7 +541,7 @@ final class InboundMessage implements BaseModel
     }
 
     /**
-     * Conservatively extracted new-reply content from the available plain-text body. Null means no plain-text body was available because it was absent or offloaded; HTML bodies are not parsed.
+     * Conservatively extracted new-reply content persisted from the plain-text body during ingest. Null means no plain-text extraction input was available or extraction was skipped or failed; HTML bodies are not parsed.
      */
     public function withReplyText(?string $replyText): self
     {
@@ -510,7 +552,7 @@ final class InboundMessage implements BaseModel
     }
 
     /**
-     * @param list<ReplyTo|ReplyToShape> $replyTo
+     * @param list<InboundEmailAddress|InboundEmailAddressShape> $replyTo
      */
     public function withReplyTo(array $replyTo): self
     {
@@ -521,9 +563,20 @@ final class InboundMessage implements BaseModel
     }
 
     /**
-     * @param Status|value-of<Status> $status
+     * Creation/send-acceptance time for outbound messages; null for inbound messages.
      */
-    public function withStatus(Status|string $status): self
+    public function withSentAt(?\DateTimeInterface $sentAt): self
+    {
+        $self = clone $this;
+        $self['sentAt'] = $sentAt;
+
+        return $self;
+    }
+
+    /**
+     * Received for inbound messages; the current send status for outbound messages.
+     */
+    public function withStatus(string $status): self
     {
         $self = clone $this;
         $self['status'] = $status;
@@ -540,7 +593,7 @@ final class InboundMessage implements BaseModel
     }
 
     /**
-     * URL for an offloaded plain-text body. Null means the body is not offloaded to a URL; an inline plain-text body may still exist but is not returned on list reads. `reply_text` and `has_quoted_text` are computed from the inline plain-text body when present.
+     * URL for an offloaded plain-text body. Null means the body is not offloaded to a URL; an inline plain-text body may still exist but is not returned on list reads. `reply_text` and `has_quoted_text` are persisted during ingest before any body offload.
      */
     public function withTextBodyURL(?string $textBodyURL): self
     {
@@ -559,7 +612,7 @@ final class InboundMessage implements BaseModel
     }
 
     /**
-     * @param list<To|ToShape> $to
+     * @param list<InboundEmailAddress|InboundEmailAddressShape> $to
      */
     public function withTo(array $to): self
     {

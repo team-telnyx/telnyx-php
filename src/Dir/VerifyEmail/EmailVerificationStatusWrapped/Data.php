@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Dir\VerifyEmail\EmailVerificationStatusWrapped;
 
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -17,6 +18,8 @@ use Telnyx\Dir\VerifyEmail\EmailVerificationStatusWrapped\Data\Status;
  *   emailVerified: bool,
  *   recordType: RecordType|value-of<RecordType>,
  *   status: Status|value-of<Status>,
+ *   expiresAt?: \DateTimeInterface|null,
+ *   sendsRemainingToday?: int|null,
  * }
  */
 final class Data implements BaseModel
@@ -45,6 +48,18 @@ final class Data implements BaseModel
      */
     #[Required(enum: Status::class)]
     public string $status;
+
+    /**
+     * When the outstanding code stops being accepted. Null when no verification is in progress.
+     */
+    #[Optional('expires_at', nullable: true)]
+    public ?\DateTimeInterface $expiresAt;
+
+    /**
+     * How many more codes may be requested for this DIR today. Null when the daily cap does not apply.
+     */
+    #[Optional('sends_remaining_today', nullable: true)]
+    public ?int $sendsRemainingToday;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -76,13 +91,18 @@ final class Data implements BaseModel
     public static function with(
         bool $emailVerified,
         RecordType|string $recordType,
-        Status|string $status
+        Status|string $status,
+        ?\DateTimeInterface $expiresAt = null,
+        ?int $sendsRemainingToday = null,
     ): self {
         $self = new self;
 
         $self['emailVerified'] = $emailVerified;
         $self['recordType'] = $recordType;
         $self['status'] = $status;
+
+        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        null !== $sendsRemainingToday && $self['sendsRemainingToday'] = $sendsRemainingToday;
 
         return $self;
     }
@@ -120,6 +140,28 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['status'] = $status;
+
+        return $self;
+    }
+
+    /**
+     * When the outstanding code stops being accepted. Null when no verification is in progress.
+     */
+    public function withExpiresAt(?\DateTimeInterface $expiresAt): self
+    {
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
+
+        return $self;
+    }
+
+    /**
+     * How many more codes may be requested for this DIR today. Null when the daily cap does not apply.
+     */
+    public function withSendsRemainingToday(?int $sendsRemainingToday): self
+    {
+        $self = clone $this;
+        $self['sendsRemainingToday'] = $sendsRemainingToday;
 
         return $self;
     }

@@ -114,7 +114,7 @@ final class V1MessagesParams implements BaseModel
     public ?array $metadata;
 
     /**
-     * Service tier for the request.
+     * The service tier to use for this request. Supported values vary by model; use the Telnyx models endpoint and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
      */
     #[Optional('service_tier')]
     public ?string $serviceTier;
@@ -380,7 +380,7 @@ final class V1MessagesParams implements BaseModel
     }
 
     /**
-     * Service tier for the request.
+     * The service tier to use for this request. Supported values vary by model; use the Telnyx models endpoint and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
      */
     public function withServiceTier(string $serviceTier): self
     {

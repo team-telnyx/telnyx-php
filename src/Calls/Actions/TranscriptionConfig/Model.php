@@ -15,6 +15,7 @@ namespace Telnyx\Calls\Actions\TranscriptionConfig;
  * - `soniox/stt-rt-v4` for live streaming multilingual transcription with automatic language detection.
  * - `nvidia/parakeet-v3` for multilingual transcription with automatic language detection.
  * - `humain/realtime` for live streaming transcription with native Arabic and Arabic/English code-switching support.
+ * - `reson8/turns` for live streaming turn-based transcription of 10 European languages with automatic language detection.
  * - `azure/fast` and `azure/realtime`; Azure models require `region`, and unsupported regions require `api_key_ref`.
  * - `google/latest_long` for non-streaming multilingual transcription.
  * - `distil-whisper/distil-large-v2` for lower-latency English-only non-streaming transcription.
@@ -43,6 +44,8 @@ enum Model: string
     case NVIDIA_PARAKEET_V3 = 'nvidia/parakeet-v3';
 
     case HUMAIN_REALTIME = 'humain/realtime';
+
+    case RESON8_TURNS = 'reson8/turns';
 
     case AZURE_FAST = 'azure/fast';
 
