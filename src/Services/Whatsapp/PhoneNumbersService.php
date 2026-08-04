@@ -14,6 +14,7 @@ use Telnyx\Services\Whatsapp\PhoneNumbers\CallingSettingsService;
 use Telnyx\Services\Whatsapp\PhoneNumbers\ConversationalComponentsService;
 use Telnyx\Services\Whatsapp\PhoneNumbers\ProfileService;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams\VerificationMethod;
 
@@ -97,6 +98,30 @@ final class PhoneNumbersService implements PhoneNumbersContract
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($phoneNumber, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * List Whatsapp phone numbers
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function get(
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): PhoneNumberGetResponse {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->get(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

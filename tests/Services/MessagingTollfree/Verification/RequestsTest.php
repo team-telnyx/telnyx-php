@@ -8,11 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForMessagingTollfree;
+use Telnyx\MessagingTollfree\Verification\Requests\MessagingTollFreeVerificationEntityType;
+use Telnyx\MessagingTollfree\Verification\Requests\MessagingTollFreeVerificationVerificationRequestEgress;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestGetResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestGetStatusHistoryResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
-use Telnyx\MessagingTollfree\Verification\Requests\TollFreeVerificationEntityType;
 use Telnyx\MessagingTollfree\Verification\Requests\UseCaseCategories;
-use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestEgress;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus;
 use Telnyx\MessagingTollfree\Verification\Requests\Volume;
 use Tests\UnsupportedMockTests;
@@ -69,7 +70,10 @@ final class RequestsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VerificationRequestEgress::class, $result);
+        $this->assertInstanceOf(
+            MessagingTollFreeVerificationVerificationRequestEgress::class,
+            $result
+        );
     }
 
     #[Test]
@@ -110,7 +114,7 @@ final class RequestsTest extends TestCase
             businessRegistrationType: 'EIN',
             campaignVerifyAuthorizationToken: 'cv_token_abc123xyz',
             doingBusinessAs: 'Acme Services',
-            entityType: TollFreeVerificationEntityType::SOLE_PROPRIETOR,
+            entityType: MessagingTollFreeVerificationEntityType::SOLE_PROPRIETOR,
             helpMessageResponse: 'Reply HELP for assistance or STOP to unsubscribe. Contact: support@example.com',
             isvReseller: 'isvReseller',
             optInConfirmationResponse: 'You have successfully opted in to receive messages from Acme Corp',
@@ -121,7 +125,10 @@ final class RequestsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VerificationRequestEgress::class, $result);
+        $this->assertInstanceOf(
+            MessagingTollFreeVerificationVerificationRequestEgress::class,
+            $result
+        );
     }
 
     #[Test]
@@ -140,7 +147,7 @@ final class RequestsTest extends TestCase
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VerificationRequestStatus::class, $result);
+        $this->assertInstanceOf(RequestGetResponse::class, $result);
     }
 
     #[Test]
@@ -178,7 +185,10 @@ final class RequestsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VerificationRequestEgress::class, $result);
+        $this->assertInstanceOf(
+            MessagingTollFreeVerificationVerificationRequestEgress::class,
+            $result
+        );
     }
 
     #[Test]
@@ -220,7 +230,7 @@ final class RequestsTest extends TestCase
             businessRegistrationType: 'EIN',
             campaignVerifyAuthorizationToken: 'cv_token_abc123xyz',
             doingBusinessAs: 'Acme Services',
-            entityType: TollFreeVerificationEntityType::SOLE_PROPRIETOR,
+            entityType: MessagingTollFreeVerificationEntityType::SOLE_PROPRIETOR,
             helpMessageResponse: 'Reply HELP for assistance or STOP to unsubscribe. Contact: support@example.com',
             isvReseller: 'isvReseller',
             optInConfirmationResponse: 'You have successfully opted in to receive messages from Acme Corp',
@@ -231,7 +241,10 @@ final class RequestsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VerificationRequestEgress::class, $result);
+        $this->assertInstanceOf(
+            MessagingTollFreeVerificationVerificationRequestEgress::class,
+            $result
+        );
     }
 
     #[Test]

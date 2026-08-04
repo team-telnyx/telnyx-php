@@ -7,12 +7,13 @@ namespace Telnyx\ServiceContracts\MessagingTollfree\Verification;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPaginationForMessagingTollfree;
+use Telnyx\MessagingTollfree\Verification\Requests\MessagingTollFreeVerificationVerificationRequestEgress;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestGetResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestGetStatusHistoryResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestRetrieveStatusHistoryParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams;
-use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestEgress;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus;
 use Telnyx\RequestOptions;
 
@@ -27,7 +28,7 @@ interface RequestsRawContract
      * @param array<string,mixed>|RequestCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VerificationRequestEgress>
+     * @return BaseResponse<MessagingTollFreeVerificationVerificationRequestEgress>
      *
      * @throws APIException
      */
@@ -42,7 +43,7 @@ interface RequestsRawContract
      * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VerificationRequestStatus>
+     * @return BaseResponse<RequestGetResponse>
      *
      * @throws APIException
      */
@@ -58,7 +59,7 @@ interface RequestsRawContract
      * @param array<string,mixed>|RequestUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VerificationRequestEgress>
+     * @return BaseResponse<MessagingTollFreeVerificationVerificationRequestEgress>
      *
      * @throws APIException
      */

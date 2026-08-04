@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create New Phone Number Campaign.
+ * Update Phone Number Campaign.
  *
  * @see Telnyx\Services\Messaging10dlc\PhoneNumberCampaignsService::update()
  *

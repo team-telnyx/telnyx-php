@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type SimCardActionShape from \Telnyx\SimCards\Actions\SimCardAction
+ * @phpstan-import-type WirelessSimCardActionShape from \Telnyx\SimCards\Actions\WirelessSimCardAction
  *
  * @phpstan-type ActionDisableResponseShape = array{
- *   data?: null|SimCardAction|SimCardActionShape
+ *   data?: null|WirelessSimCardAction|WirelessSimCardActionShape
  * }
  */
 final class ActionDisableResponse implements BaseModel
@@ -24,7 +24,7 @@ final class ActionDisableResponse implements BaseModel
      * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.
      */
     #[Optional]
-    public ?SimCardAction $data;
+    public ?WirelessSimCardAction $data;
 
     public function __construct()
     {
@@ -36,9 +36,9 @@ final class ActionDisableResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SimCardAction|SimCardActionShape|null $data
+     * @param WirelessSimCardAction|WirelessSimCardActionShape|null $data
      */
-    public static function with(SimCardAction|array|null $data = null): self
+    public static function with(WirelessSimCardAction|array|null $data = null): self
     {
         $self = new self;
 
@@ -50,9 +50,9 @@ final class ActionDisableResponse implements BaseModel
     /**
      * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.
      *
-     * @param SimCardAction|SimCardActionShape $data
+     * @param WirelessSimCardAction|WirelessSimCardActionShape $data
      */
-    public function withData(SimCardAction|array $data): self
+    public function withData(WirelessSimCardAction|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

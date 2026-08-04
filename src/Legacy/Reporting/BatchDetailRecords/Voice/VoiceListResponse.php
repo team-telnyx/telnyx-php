@@ -7,15 +7,15 @@ namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Voice;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta705dfa7312;
 
 /**
  * @phpstan-import-type CdrDetailedReqResponseShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\CdrDetailedReqResponse
- * @phpstan-import-type BatchCsvPaginationMetaShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta
+ * @phpstan-import-type BatchCsvPaginationMeta705dfa7312Shape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta705dfa7312
  *
  * @phpstan-type VoiceListResponseShape = array{
  *   data?: list<CdrDetailedReqResponse|CdrDetailedReqResponseShape>|null,
- *   meta?: null|BatchCsvPaginationMeta|BatchCsvPaginationMetaShape,
+ *   meta?: null|BatchCsvPaginationMeta705dfa7312|BatchCsvPaginationMeta705dfa7312Shape,
  * }
  */
 final class VoiceListResponse implements BaseModel
@@ -28,7 +28,7 @@ final class VoiceListResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?BatchCsvPaginationMeta $meta;
+    public ?BatchCsvPaginationMeta705dfa7312 $meta;
 
     public function __construct()
     {
@@ -41,11 +41,11 @@ final class VoiceListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<CdrDetailedReqResponse|CdrDetailedReqResponseShape>|null $data
-     * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape|null $meta
+     * @param BatchCsvPaginationMeta705dfa7312|BatchCsvPaginationMeta705dfa7312Shape|null $meta
      */
     public static function with(
         ?array $data = null,
-        BatchCsvPaginationMeta|array|null $meta = null
+        BatchCsvPaginationMeta705dfa7312|array|null $meta = null
     ): self {
         $self = new self;
 
@@ -67,9 +67,9 @@ final class VoiceListResponse implements BaseModel
     }
 
     /**
-     * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape $meta
+     * @param BatchCsvPaginationMeta705dfa7312|BatchCsvPaginationMeta705dfa7312Shape $meta
      */
-    public function withMeta(BatchCsvPaginationMeta|array $meta): self
+    public function withMeta(BatchCsvPaginationMeta705dfa7312|array $meta): self
     {
         $self = clone $this;
         $self['meta'] = $meta;

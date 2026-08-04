@@ -1,0 +1,131 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\Messages;
+
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
+use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Messages\MessagingError0b38e7044b\Source;
+
+/**
+ * @phpstan-import-type SourceShape from \Telnyx\Messages\MessagingError0b38e7044b\Source
+ *
+ * @phpstan-type MessagingError0b38e7044bShape = array{
+ *   code: string,
+ *   title: string,
+ *   detail?: string|null,
+ *   meta?: mixed,
+ *   source?: null|Source|SourceShape,
+ * }
+ */
+final class MessagingError0b38e7044b implements BaseModel
+{
+    /** @use SdkModel<MessagingError0b38e7044bShape> */
+    use SdkModel;
+
+    #[Required]
+    public string $code;
+
+    #[Required]
+    public string $title;
+
+    #[Optional]
+    public ?string $detail;
+
+    #[Optional]
+    public mixed $meta;
+
+    #[Optional]
+    public ?Source $source;
+
+    /**
+     * `new MessagingError0b38e7044b()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * MessagingError0b38e7044b::with(code: ..., title: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new MessagingError0b38e7044b)->withCode(...)->withTitle(...)
+     * ```
+     */
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Source|SourceShape|null $source
+     */
+    public static function with(
+        string $code,
+        string $title,
+        ?string $detail = null,
+        mixed $meta = null,
+        Source|array|null $source = null,
+    ): self {
+        $self = new self;
+
+        $self['code'] = $code;
+        $self['title'] = $title;
+
+        null !== $detail && $self['detail'] = $detail;
+        null !== $meta && $self['meta'] = $meta;
+        null !== $source && $self['source'] = $source;
+
+        return $self;
+    }
+
+    public function withCode(string $code): self
+    {
+        $self = clone $this;
+        $self['code'] = $code;
+
+        return $self;
+    }
+
+    public function withTitle(string $title): self
+    {
+        $self = clone $this;
+        $self['title'] = $title;
+
+        return $self;
+    }
+
+    public function withDetail(string $detail): self
+    {
+        $self = clone $this;
+        $self['detail'] = $detail;
+
+        return $self;
+    }
+
+    public function withMeta(mixed $meta): self
+    {
+        $self = clone $this;
+        $self['meta'] = $meta;
+
+        return $self;
+    }
+
+    /**
+     * @param Source|SourceShape $source
+     */
+    public function withSource(Source|array $source): self
+    {
+        $self = clone $this;
+        $self['source'] = $source;
+
+        return $self;
+    }
+}

@@ -28,7 +28,7 @@ use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesParams;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
-use Telnyx\SimCards\Actions\SimCardAction;
+use Telnyx\SimCards\Actions\WirelessSimCardAction;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\SimCards\Actions\ActionListParams\Filter
@@ -77,7 +77,7 @@ final class ActionsRawService implements ActionsRawContract
      * }|ActionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<SimCardAction>>
+     * @return BaseResponse<DefaultFlatPagination<WirelessSimCardAction>>
      *
      * @throws APIException
      */
@@ -99,7 +99,7 @@ final class ActionsRawService implements ActionsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: SimCardAction::class,
+            convert: WirelessSimCardAction::class,
             page: DefaultFlatPagination::class,
         );
     }

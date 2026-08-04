@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfileMetrics;
 
+use Telnyx\AlphanumericSenderIDs\MessagingPaginationMeta0b38e7044b;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\MapOf;
-use Telnyx\MessagingPaginationMeta;
 
 /**
- * @phpstan-import-type MessagingPaginationMetaShape from \Telnyx\MessagingPaginationMeta
+ * @phpstan-import-type MessagingPaginationMeta0b38e7044bShape from \Telnyx\AlphanumericSenderIDs\MessagingPaginationMeta0b38e7044b
  *
  * @phpstan-type MessagingProfileMetricListResponseShape = array{
  *   data?: list<array<string,mixed>>|null,
- *   meta?: null|MessagingPaginationMeta|MessagingPaginationMetaShape,
+ *   meta?: null|MessagingPaginationMeta0b38e7044b|MessagingPaginationMeta0b38e7044bShape,
  * }
  */
 final class MessagingProfileMetricListResponse implements BaseModel
@@ -28,7 +28,7 @@ final class MessagingProfileMetricListResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?MessagingPaginationMeta $meta;
+    public ?MessagingPaginationMeta0b38e7044b $meta;
 
     public function __construct()
     {
@@ -41,11 +41,11 @@ final class MessagingProfileMetricListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<array<string,mixed>>|null $data
-     * @param MessagingPaginationMeta|MessagingPaginationMetaShape|null $meta
+     * @param MessagingPaginationMeta0b38e7044b|MessagingPaginationMeta0b38e7044bShape|null $meta
      */
     public static function with(
         ?array $data = null,
-        MessagingPaginationMeta|array|null $meta = null
+        MessagingPaginationMeta0b38e7044b|array|null $meta = null
     ): self {
         $self = new self;
 
@@ -67,10 +67,11 @@ final class MessagingProfileMetricListResponse implements BaseModel
     }
 
     /**
-     * @param MessagingPaginationMeta|MessagingPaginationMetaShape $meta
+     * @param MessagingPaginationMeta0b38e7044b|MessagingPaginationMeta0b38e7044bShape $meta
      */
-    public function withMeta(MessagingPaginationMeta|array $meta): self
-    {
+    public function withMeta(
+        MessagingPaginationMeta0b38e7044b|array $meta
+    ): self {
         $self = clone $this;
         $self['meta'] = $meta;
 

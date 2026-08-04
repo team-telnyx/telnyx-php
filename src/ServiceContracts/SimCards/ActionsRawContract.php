@@ -24,7 +24,7 @@ use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesParams;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
-use Telnyx\SimCards\Actions\SimCardAction;
+use Telnyx\SimCards\Actions\WirelessSimCardAction;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -52,7 +52,7 @@ interface ActionsRawContract
      * @param array<string,mixed>|ActionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<SimCardAction>>
+     * @return BaseResponse<DefaultFlatPagination<WirelessSimCardAction>>
      *
      * @throws APIException
      */

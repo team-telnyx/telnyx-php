@@ -84,7 +84,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
     /**
      * @api
      *
-     * Create New Phone Number Campaign
+     * Update Phone Number Campaign
      *
      * @param string $campaignPhoneNumber unique identifier of the phone number
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number

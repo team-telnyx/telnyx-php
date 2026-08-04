@@ -92,7 +92,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
     /**
      * @api
      *
-     * Create New Phone Number Campaign
+     * Update Phone Number Campaign
      *
      * @param string $campaignPhoneNumber unique identifier of the phone number
      * @param array{

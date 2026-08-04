@@ -12,6 +12,8 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbersRawContract;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetParams;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams;
@@ -89,6 +91,40 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
             path: ['v2/whatsapp/phone_numbers/%1$s', $phoneNumber],
             options: $requestOptions,
             convert: null,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * List Whatsapp phone numbers
+     *
+     * @param array{pageNumber?: int, pageSize?: int}|PhoneNumberGetParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<PhoneNumberGetResponse>
+     *
+     * @throws APIException
+     */
+    public function get(
+        array|PhoneNumberGetParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = PhoneNumberGetParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: 'whatsapp/phone_numbers',
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
+            options: $options,
+            convert: PhoneNumberGetResponse::class,
         );
     }
 

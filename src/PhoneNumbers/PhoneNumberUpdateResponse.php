@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type PhoneNumberDetailedShape from \Telnyx\PhoneNumbers\PhoneNumberDetailed
+ * @phpstan-import-type NumbersPhoneNumberDetailedShape from \Telnyx\PhoneNumbers\NumbersPhoneNumberDetailed
  *
  * @phpstan-type PhoneNumberUpdateResponseShape = array{
- *   data?: null|PhoneNumberDetailed|PhoneNumberDetailedShape
+ *   data?: null|NumbersPhoneNumberDetailed|NumbersPhoneNumberDetailedShape
  * }
  */
 final class PhoneNumberUpdateResponse implements BaseModel
@@ -21,7 +21,7 @@ final class PhoneNumberUpdateResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?PhoneNumberDetailed $data;
+    public ?NumbersPhoneNumberDetailed $data;
 
     public function __construct()
     {
@@ -33,10 +33,11 @@ final class PhoneNumberUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberDetailed|PhoneNumberDetailedShape|null $data
+     * @param NumbersPhoneNumberDetailed|NumbersPhoneNumberDetailedShape|null $data
      */
-    public static function with(PhoneNumberDetailed|array|null $data = null): self
-    {
+    public static function with(
+        NumbersPhoneNumberDetailed|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -45,9 +46,9 @@ final class PhoneNumberUpdateResponse implements BaseModel
     }
 
     /**
-     * @param PhoneNumberDetailed|PhoneNumberDetailedShape $data
+     * @param NumbersPhoneNumberDetailed|NumbersPhoneNumberDetailedShape $data
      */
-    public function withData(PhoneNumberDetailed|array $data): self
+    public function withData(NumbersPhoneNumberDetailed|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

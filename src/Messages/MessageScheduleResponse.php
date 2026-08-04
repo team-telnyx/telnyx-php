@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type OutboundMessagePayloadShape from \Telnyx\Messages\OutboundMessagePayload
+ * @phpstan-import-type MessagingOutboundMessagePayloadShape from \Telnyx\Messages\MessagingOutboundMessagePayload
  *
  * @phpstan-type MessageScheduleResponseShape = array{
- *   data?: null|OutboundMessagePayload|OutboundMessagePayloadShape
+ *   data?: null|MessagingOutboundMessagePayload|MessagingOutboundMessagePayloadShape,
  * }
  */
 final class MessageScheduleResponse implements BaseModel
@@ -21,7 +21,7 @@ final class MessageScheduleResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?OutboundMessagePayload $data;
+    public ?MessagingOutboundMessagePayload $data;
 
     public function __construct()
     {
@@ -33,10 +33,11 @@ final class MessageScheduleResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param OutboundMessagePayload|OutboundMessagePayloadShape|null $data
+     * @param MessagingOutboundMessagePayload|MessagingOutboundMessagePayloadShape|null $data
      */
-    public static function with(OutboundMessagePayload|array|null $data = null): self
-    {
+    public static function with(
+        MessagingOutboundMessagePayload|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -45,9 +46,9 @@ final class MessageScheduleResponse implements BaseModel
     }
 
     /**
-     * @param OutboundMessagePayload|OutboundMessagePayloadShape $data
+     * @param MessagingOutboundMessagePayload|MessagingOutboundMessagePayloadShape $data
      */
-    public function withData(OutboundMessagePayload|array $data): self
+    public function withData(MessagingOutboundMessagePayload|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
