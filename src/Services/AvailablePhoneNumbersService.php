@@ -36,7 +36,7 @@ final class AvailablePhoneNumbersService implements AvailablePhoneNumbersContrac
     /**
      * @api
      *
-     * List available phone numbers
+     * Searches the Telnyx inventory for available phone numbers. Filters support number patterns, location, number type, features, reservability, and other inventory constraints; the response includes matching numbers and search metadata.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[locality], filter[administrative_area], filter[country_code], filter[national_destination_code], filter[rate_center], filter[phone_number_type], filter[features], filter[limit], filter[best_effort], filter[quickship], filter[reservable], filter[exclude_held_numbers]
      * @param RequestOpts|null $requestOptions

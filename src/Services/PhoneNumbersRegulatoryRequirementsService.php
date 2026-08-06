@@ -36,7 +36,7 @@ final class PhoneNumbersRegulatoryRequirementsService implements PhoneNumbersReg
     /**
      * @api
      *
-     * Retrieve regulatory requirements for a list of phone numbers
+     * Returns the regulatory requirements that apply to the supplied comma-separated phone numbers. The response includes the matching requirement records and pagination metadata.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number]
      * @param RequestOpts|null $requestOptions

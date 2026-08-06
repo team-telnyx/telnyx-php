@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams\VerificationMethod;
 
 /**
- * Resend verification code.
+ * Requests a new verification code for the specified WhatsApp phone number.
  *
  * @see Telnyx\Services\Whatsapp\PhoneNumbersService::resendVerification()
  *

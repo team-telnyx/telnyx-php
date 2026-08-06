@@ -35,7 +35,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
     /**
      * @api
      *
-     * Create Advanced Order
+     * Creates an advanced number order from the requested order configuration. The response contains the resulting advanced order and its initial state.
      *
      * @param list<Feature|value-of<Feature>> $features
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
@@ -77,7 +77,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
     /**
      * @api
      *
-     * Get Advanced Order
+     * Returns the advanced number order identified by `order_id`, including its configuration and current state.
      *
      * @param string $orderID unique identifier of the order
      * @param RequestOpts|null $requestOptions
@@ -97,7 +97,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
     /**
      * @api
      *
-     * List Advanced Orders
+     * Returns the advanced number orders associated with the account. Each result includes the order configuration and its current state.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -115,7 +115,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
     /**
      * @api
      *
-     * Update Advanced Order
+     * Updates the requirement-group configuration for the specified advanced number order. The response contains the updated advanced order.
      *
      * @param string $advancedOrderID unique identifier of the advanced order
      * @param list<\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature|value-of<\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature>> $features

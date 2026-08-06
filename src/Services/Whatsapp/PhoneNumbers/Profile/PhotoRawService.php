@@ -30,7 +30,7 @@ final class PhotoRawService implements PhotoRawContract
     /**
      * @api
      *
-     * Get Whatsapp profile photo
+     * Returns the current business-profile photo for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
@@ -55,7 +55,7 @@ final class PhotoRawService implements PhotoRawContract
     /**
      * @api
      *
-     * Delete Whatsapp profile photo
+     * Removes the business-profile photo from the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
@@ -80,7 +80,7 @@ final class PhotoRawService implements PhotoRawContract
     /**
      * @api
      *
-     * Upload Whatsapp profile photo
+     * Uploads and assigns a business-profile photo to the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param array{file: string|FileParam}|PhotoUploadParams $params

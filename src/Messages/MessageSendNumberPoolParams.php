@@ -13,7 +13,7 @@ use Telnyx\Messages\MessageSendNumberPoolParams\Encoding;
 use Telnyx\Messages\MessageSendNumberPoolParams\Type;
 
 /**
- * Send a message using number pool.
+ * Queues an outbound message using a number pool. Telnyx selects an eligible sender from the pool according to its messaging profile configuration.
  *
  * @see Telnyx\Services\MessagesService::sendNumberPool()
  *

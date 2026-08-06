@@ -34,7 +34,7 @@ final class UsecaseService implements UsecaseContract
     /**
      * @api
      *
-     * Get Campaign Cost
+     * Returns the upfront and monthly cost associated with the selected 10DLC campaign use case.
      *
      * @param string $usecase filter results by usecase
      * @param RequestOpts|null $requestOptions

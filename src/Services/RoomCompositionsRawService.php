@@ -76,7 +76,7 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
     /**
      * @api
      *
-     * View a room composition.
+     * Returns the composition identified by `room_composition_id`, including its room and session, processing status, media details, video layout, lifecycle timestamps, and download URL.
      *
      * @param string $roomCompositionID the unique identifier of a room composition
      * @param RequestOpts|null $requestOptions
@@ -101,7 +101,7 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
     /**
      * @api
      *
-     * View a list of room compositions.
+     * Returns a paginated list of room compositions. Filter compositions by creation date, room session, or processing status.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int

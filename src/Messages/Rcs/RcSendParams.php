@@ -15,7 +15,7 @@ use Telnyx\Messages\Rcs\RcSendParams\Type;
 use Telnyx\Messages\RcsAgentMessage;
 
 /**
- * Send an RCS message.
+ * Queues an outbound RCS message through the selected RCS agent. Check recipient capabilities before sending features that require RCS support.
  *
  * @see Telnyx\Services\Messages\RcsService::send()
  *

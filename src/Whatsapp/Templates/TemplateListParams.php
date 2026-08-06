@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Whatsapp\Templates\TemplateListParams\FilterCategory;
 
 /**
- * List Whatsapp message templates.
+ * Returns WhatsApp message templates owned by the authenticated account, including their current review state.
  *
  * @see Telnyx\Services\Whatsapp\TemplatesService::list()
  *

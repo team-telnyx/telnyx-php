@@ -30,7 +30,7 @@ final class MessagingURLDomainsRawService implements MessagingURLDomainsRawContr
     /**
      * @api
      *
-     * List messaging URL domains
+     * Returns the URL domains available to the authenticated account for message URL shortening.
      *
      * @param array{
      *   pageNumber?: int, pageSize?: int

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\SessionList0Params\Filter;
 
 /**
- * View a list of room sessions.
+ * Returns a paginated list of room sessions across the account. Filter sessions by room, creation, update, or end date and active status, and use `include_participants` to include participant records.
  *
  * @see Telnyx\Services\Rooms\SessionsService::list0()
  *

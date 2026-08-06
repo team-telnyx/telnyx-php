@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter;
 
 /**
- * View a list of room participants.
+ * Returns a paginated list of participants for the specified room session. Filter participants by join, update, or leave date and by participant context.
  *
  * @see Telnyx\Services\Rooms\SessionsService::retrieveParticipants()
  *

@@ -30,7 +30,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
     /**
      * @api
      *
-     * Create Advanced Order
+     * Creates an advanced number order from the requested order configuration. The response contains the resulting advanced order and its initial state.
      *
      * @param array{
      *   areaCode?: string,
@@ -70,7 +70,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
     /**
      * @api
      *
-     * Get Advanced Order
+     * Returns the advanced number order identified by `order_id`, including its configuration and current state.
      *
      * @param string $orderID unique identifier of the order
      * @param RequestOpts|null $requestOptions
@@ -95,7 +95,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
     /**
      * @api
      *
-     * List Advanced Orders
+     * Returns the advanced number orders associated with the account. Each result includes the order configuration and its current state.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -118,7 +118,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
     /**
      * @api
      *
-     * Update Advanced Order
+     * Updates the requirement-group configuration for the specified advanced number order. The response contains the updated advanced order.
      *
      * @param string $advancedOrderID unique identifier of the advanced order
      * @param array{

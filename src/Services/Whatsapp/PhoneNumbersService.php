@@ -59,7 +59,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * List Whatsapp phone numbers
+     * Returns WhatsApp phone numbers linked to the authenticated Telnyx account.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -85,7 +85,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Delete a Whatsapp phone number
+     * Removes the specified phone number from Telnyx WhatsApp management.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
@@ -129,7 +129,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Resend verification code
+     * Requests a new verification code for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
@@ -177,7 +177,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Submit verification code for a phone number
+     * Submits the verification code received for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions

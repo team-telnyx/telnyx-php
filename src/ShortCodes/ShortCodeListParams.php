@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ShortCodes\ShortCodeListParams\Filter;
 
 /**
- * List short codes.
+ * Returns short codes owned by the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
  *
  * @see Telnyx\Services\ShortCodesService::list()
  *

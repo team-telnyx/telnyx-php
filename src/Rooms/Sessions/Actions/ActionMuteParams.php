@@ -12,7 +12,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\AllParticipants;
 
 /**
- * Mute participants in room session.
+ * Mutes the selected participants in the specified room session. Apply the action to a list of participant IDs or to `all`, with optional participant IDs excluded from the action.
  *
  * @see Telnyx\Services\Rooms\Sessions\ActionsService::mute()
  *

@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List available phone number blocks.
+ * Searches the Telnyx inventory for available contiguous phone-number blocks. Results can be filtered by locality, country, national destination code, and number type.
  *
  * @see Telnyx\Services\AvailablePhoneNumberBlocksService::list()
  *

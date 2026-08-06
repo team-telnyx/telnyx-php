@@ -36,7 +36,7 @@ final class JobsRawService implements JobsRawContract
     /**
      * @api
      *
-     * Retrieves a phone number blocks job
+     * Returns the status and details of the phone-number-block background job identified by `id`.
      *
      * @param string $id identifies the Phone Number Blocks Job
      * @param RequestOpts|null $requestOptions
@@ -61,7 +61,7 @@ final class JobsRawService implements JobsRawContract
     /**
      * @api
      *
-     * Lists the phone number blocks jobs
+     * Returns background jobs that operate on phone-number blocks. Results can be filtered by job type and status, sorted by creation time, and include pagination metadata.
      *
      * @param array{
      *   filter?: Filter|FilterShape,

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Retrieve a webhook.
+ * Returns the webhook subscription identified by ID within the specified email domain.
  *
  * @see Telnyx\Services\EmailDomains\WebhooksService::retrieve()
  *

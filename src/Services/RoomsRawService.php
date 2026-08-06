@@ -76,7 +76,7 @@ final class RoomsRawService implements RoomsRawContract
     /**
      * @api
      *
-     * View a room.
+     * Returns the room identified by `room_id`, including its participant limit, recording and webhook configuration, and active session identifier. Use `include_sessions` to include its sessions.
      *
      * @param string $roomID the unique identifier of a room
      * @param array{includeSessions?: bool}|RoomRetrieveParams $params
@@ -152,7 +152,7 @@ final class RoomsRawService implements RoomsRawContract
     /**
      * @api
      *
-     * View a list of rooms.
+     * Returns a paginated list of rooms. Filter the results by creation or update date and unique name, and use `include_sessions` to include each room’s sessions.
      *
      * @param array{
      *   filter?: Filter|FilterShape,

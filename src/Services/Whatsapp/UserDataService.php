@@ -35,7 +35,7 @@ final class UserDataService implements UserDataContract
     /**
      * @api
      *
-     * Fetch Whatsapp user data
+     * Returns the WhatsApp user-data settings associated with the authenticated Telnyx account.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -53,7 +53,7 @@ final class UserDataService implements UserDataContract
     /**
      * @api
      *
-     * Update Whatsapp user data
+     * Updates the supplied WhatsApp user-data settings for the authenticated Telnyx account.
      *
      * @param string $webhookFailoverURL Failover URL to send Whatsapp signup events
      * @param string $webhookURL URL to send Whatsapp signup events

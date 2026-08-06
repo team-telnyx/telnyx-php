@@ -34,7 +34,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
     /**
      * @api
      *
-     * Create New Phone Number Campaign
+     * Assigns a phone number to a 10DLC campaign. The assignment controls which registered campaign is used for traffic from that number.
      *
      * @param array{
      *   campaignID: string, phoneNumber: string
@@ -92,7 +92,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
     /**
      * @api
      *
-     * Update Phone Number Campaign
+     * Replaces the 10DLC campaign assignment for the specified phone number.
      *
      * @param string $campaignPhoneNumber unique identifier of the phone number
      * @param array{
@@ -127,7 +127,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
     /**
      * @api
      *
-     * List phone number campaigns
+     * Returns phone-number-to-campaign assignments for the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
      *
      * @param array{
      *   filter?: Filter|FilterShape,

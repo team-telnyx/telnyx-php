@@ -13,7 +13,7 @@ use Telnyx\Messages\MessageSendShortCodeParams\Encoding;
 use Telnyx\Messages\MessageSendShortCodeParams\Type;
 
 /**
- * Send a short code message.
+ * Queues an outbound SMS or MMS using a short-code sender. Delivery progress and final disposition are reported asynchronously through messaging webhooks.
  *
  * @see Telnyx\Services\MessagesService::sendShortCode()
  *

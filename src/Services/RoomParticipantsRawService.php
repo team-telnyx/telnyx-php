@@ -33,7 +33,7 @@ final class RoomParticipantsRawService implements RoomParticipantsRawContract
     /**
      * @api
      *
-     * View a room participant.
+     * Returns the participant identified by `room_participant_id`, including its session, context, and join, update, and leave timestamps.
      *
      * @param string $roomParticipantID the unique identifier of a room participant
      * @param RequestOpts|null $requestOptions
@@ -58,7 +58,7 @@ final class RoomParticipantsRawService implements RoomParticipantsRawContract
     /**
      * @api
      *
-     * View a list of room participants.
+     * Returns a paginated list of room participants across sessions. Filter participants by session, join, update, or leave date and by participant context.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int

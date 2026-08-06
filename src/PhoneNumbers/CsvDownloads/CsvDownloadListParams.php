@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List CSV downloads.
+ * Returns CSV export jobs created for account phone numbers, including each export's current status and pagination metadata.
  *
  * @see Telnyx\Services\PhoneNumbers\CsvDownloadsService::list()
  *

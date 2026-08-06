@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter;
 
 /**
- * Delete several room recordings in a bulk.
+ * Deletes the room recordings that match the supplied filters and returns the number of recordings affected. Filters support room, session, participant, recording type, status, duration, and start or end dates.
  *
  * @see Telnyx\Services\RoomRecordingsService::deleteBulk()
  *

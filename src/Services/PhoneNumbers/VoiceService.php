@@ -50,7 +50,7 @@ final class VoiceService implements VoiceContract
     /**
      * @api
      *
-     * Retrieve a phone number with voice settings
+     * Returns the specified phone number together with its current voice configuration.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -70,7 +70,7 @@ final class VoiceService implements VoiceContract
     /**
      * @api
      *
-     * Update a phone number with voice settings
+     * Updates the voice configuration for the specified phone number. The response contains the phone number with its updated voice settings.
      *
      * @param string $id identifies the resource
      * @param CallForwarding|CallForwardingShape $callForwarding the call forwarding settings for a phone number
@@ -122,7 +122,7 @@ final class VoiceService implements VoiceContract
     /**
      * @api
      *
-     * List phone numbers with voice settings
+     * Returns account phone numbers together with their voice settings. Results support pagination, sorting, and filters for number, connection name, customer reference, and voice usage payment method.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[connection_name], filter[customer_reference], filter[voice.usage_payment_method]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.

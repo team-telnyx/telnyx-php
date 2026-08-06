@@ -40,7 +40,7 @@ final class CommentsService implements CommentsContract
     /**
      * @api
      *
-     * Create a comment
+     * Creates a comment associated with a supported number-order record. The response contains the created comment.
      *
      * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
      * @param RequestOpts|null $requestOptions
@@ -70,7 +70,7 @@ final class CommentsService implements CommentsContract
     /**
      * @api
      *
-     * Retrieve a comment
+     * Returns the comment identified by `id`, including its associated record and comment metadata.
      *
      * @param string $id the comment ID
      * @param RequestOpts|null $requestOptions
@@ -90,7 +90,7 @@ final class CommentsService implements CommentsContract
     /**
      * @api
      *
-     * Retrieve all comments
+     * Returns comments associated with number-order records. Results can be filtered by record type and record ID and include pagination metadata.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id]
      * @param RequestOpts|null $requestOptions
@@ -112,7 +112,7 @@ final class CommentsService implements CommentsContract
     /**
      * @api
      *
-     * Mark a comment as read
+     * Marks the specified comment as read. The response contains the updated read state for the comment.
      *
      * @param string $id the comment ID
      * @param RequestOpts|null $requestOptions

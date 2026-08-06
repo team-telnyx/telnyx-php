@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Check RCS capabilities (batch).
+ * Returns RCS capability information for multiple recipients in one request.
  *
  * @see Telnyx\Services\Messaging\RcsService::listBulkCapabilities()
  *

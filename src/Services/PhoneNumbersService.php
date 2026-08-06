@@ -86,7 +86,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Retrieve a phone number
+     * Returns the detailed configuration and current state of the phone number identified by `id`.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -106,7 +106,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Update a phone number
+     * Updates the configurable settings of the specified phone number. The response contains the complete updated phone-number representation.
      *
      * @param string $phoneNumberID identifies the resource
      * @param string $addressID identifies the address associated with the phone number
@@ -152,7 +152,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * List phone numbers
+     * Returns phone numbers associated with the account. Results support pagination, sorting, and filters for number attributes, status, source, connections, billing groups, emergency addresses, tags, and customer references.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
      * @param HandleMessagingProfileError|value-of<HandleMessagingProfileError> $handleMessagingProfileError Although it is an infrequent occurrence, due to the highly distributed nature of the Telnyx platform, it is possible that there will be an issue when loading in Messaging Profile information. As such, when this parameter is set to `true` and an error in fetching this information occurs, messaging profile related fields will be omitted in the response and an error message will be included instead of returning a 503 error.
@@ -190,7 +190,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Delete a phone number
+     * Deletes the specified phone number from the account. The response contains the phone number's final deleted representation.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

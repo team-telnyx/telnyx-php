@@ -36,7 +36,7 @@ final class PhotoService implements PhotoContract
     /**
      * @api
      *
-     * Get Whatsapp profile photo
+     * Returns the current business-profile photo for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
@@ -56,7 +56,7 @@ final class PhotoService implements PhotoContract
     /**
      * @api
      *
-     * Delete Whatsapp profile photo
+     * Removes the business-profile photo from the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
@@ -76,7 +76,7 @@ final class PhotoService implements PhotoContract
     /**
      * @api
      *
-     * Upload Whatsapp profile photo
+     * Uploads and assigns a business-profile photo to the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param string|FileParam $file Image file (JPEG recommended, max 10 MB)

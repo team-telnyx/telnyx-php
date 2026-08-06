@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
 
 /**
- * Verify verification code by ID.
+ * Checks the supplied code, or the supplied status for a custom-code verification, against the verification identified by ID. The response indicates whether the verification was accepted or rejected.
  *
  * @see Telnyx\Services\Verifications\ActionsService::verify()
  *

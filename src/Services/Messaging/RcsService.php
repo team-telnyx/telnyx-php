@@ -67,7 +67,7 @@ final class RcsService implements RcsContract
     /**
      * @api
      *
-     * Check RCS capabilities (batch)
+     * Returns RCS capability information for multiple recipients in one request.
      *
      * @param string $agentID RCS Agent ID
      * @param list<string> $phoneNumbers List of phone numbers to check
@@ -93,7 +93,7 @@ final class RcsService implements RcsContract
     /**
      * @api
      *
-     * Check RCS capabilities
+     * Returns the RCS features supported by the specified recipient for the selected agent.
      *
      * @param string $phoneNumber Phone number in E164 format
      * @param string $agentID RCS agent ID

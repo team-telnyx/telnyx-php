@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create New Phone Number Campaign.
+ * Assigns a phone number to a 10DLC campaign. The assignment controls which registered campaign is used for traffic from that number.
  *
  * @see Telnyx\Services\Messaging10dlc\PhoneNumberCampaignsService::create()
  *

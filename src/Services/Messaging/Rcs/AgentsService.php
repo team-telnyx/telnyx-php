@@ -36,7 +36,7 @@ final class AgentsService implements AgentsContract
     /**
      * @api
      *
-     * Retrieve an RCS agent
+     * Returns the configuration and current state of the specified RCS agent.
      *
      * @param string $id RCS agent ID
      * @param RequestOpts|null $requestOptions
@@ -56,7 +56,7 @@ final class AgentsService implements AgentsContract
     /**
      * @api
      *
-     * Modify an RCS agent
+     * Updates the supplied configuration fields on the specified RCS agent.
      *
      * @param string $id RCS agent ID
      * @param string|null $profileID Messaging profile ID associated with the RCS Agent
@@ -90,7 +90,7 @@ final class AgentsService implements AgentsContract
     /**
      * @api
      *
-     * List all RCS agents
+     * Returns RCS agents available to the authenticated account.
      *
      * @param RequestOpts|null $requestOptions
      *

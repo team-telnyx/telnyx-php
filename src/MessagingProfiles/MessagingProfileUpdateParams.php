@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
 
 /**
- * Update a messaging profile.
+ * Updates the supplied settings on the specified messaging profile. Settings omitted from the request remain unchanged.
  *
  * @see Telnyx\Services\MessagingProfilesService::update()
  *

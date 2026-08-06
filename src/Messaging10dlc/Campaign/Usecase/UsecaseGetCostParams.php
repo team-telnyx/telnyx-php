@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get Campaign Cost.
+ * Returns the upfront and monthly cost associated with the selected 10DLC campaign use case.
  *
  * @see Telnyx\Services\Messaging10dlc\Campaign\UsecaseService::getCost()
  *

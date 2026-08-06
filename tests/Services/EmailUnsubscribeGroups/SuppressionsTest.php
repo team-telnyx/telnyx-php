@@ -39,7 +39,7 @@ final class SuppressionsTest extends TestCase
 
         $result = $this->client->emailUnsubscribeGroups->suppressions->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            to: 'to'
+            to: 'user@example.com'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -55,7 +55,7 @@ final class SuppressionsTest extends TestCase
 
         $result = $this->client->emailUnsubscribeGroups->suppressions->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            to: 'to'
+            to: 'user@example.com'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

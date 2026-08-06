@@ -35,7 +35,7 @@ final class CommentsRawService implements CommentsRawContract
     /**
      * @api
      *
-     * Create a comment
+     * Creates a comment associated with a supported number-order record. The response contains the created comment.
      *
      * @param array{
      *   body?: string,
@@ -70,7 +70,7 @@ final class CommentsRawService implements CommentsRawContract
     /**
      * @api
      *
-     * Retrieve a comment
+     * Returns the comment identified by `id`, including its associated record and comment metadata.
      *
      * @param string $id the comment ID
      * @param RequestOpts|null $requestOptions
@@ -95,7 +95,7 @@ final class CommentsRawService implements CommentsRawContract
     /**
      * @api
      *
-     * Retrieve all comments
+     * Returns comments associated with number-order records. Results can be filtered by record type and record ID and include pagination metadata.
      *
      * @param array{filter?: Filter|FilterShape}|CommentListParams $params
      * @param RequestOpts|null $requestOptions
@@ -126,7 +126,7 @@ final class CommentsRawService implements CommentsRawContract
     /**
      * @api
      *
-     * Mark a comment as read
+     * Marks the specified comment as read. The response contains the updated read state for the comment.
      *
      * @param string $id the comment ID
      * @param RequestOpts|null $requestOptions

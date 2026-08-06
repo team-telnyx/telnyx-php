@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List Whatsapp phone numbers.
+ * Returns WhatsApp phone numbers linked to the authenticated Telnyx account.
  *
  * @see Telnyx\Services\Whatsapp\PhoneNumbersService::list()
  *

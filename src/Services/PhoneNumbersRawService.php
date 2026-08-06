@@ -41,7 +41,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * Retrieve a phone number
+     * Returns the detailed configuration and current state of the phone number identified by `id`.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -66,7 +66,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * Update a phone number
+     * Updates the configurable settings of the specified phone number. The response contains the complete updated phone-number representation.
      *
      * @param string $phoneNumberID identifies the resource
      * @param array{
@@ -107,7 +107,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * List phone numbers
+     * Returns phone numbers associated with the account. Results support pagination, sorting, and filters for number attributes, status, source, connections, billing groups, emergency addresses, tags, and customer references.
      *
      * @param array{
      *   filter?: Filter|FilterShape,
@@ -152,7 +152,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * Delete a phone number
+     * Deletes the specified phone number from the account. The response contains the phone number's final deleted representation.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

@@ -38,7 +38,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
     /**
      * @api
      *
-     * Create New Phone Number Campaign
+     * Assigns a phone number to a 10DLC campaign. The assignment controls which registered campaign is used for traffic from that number.
      *
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number
      * @param string $phoneNumber the phone number you want to link to a specified campaign
@@ -84,7 +84,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
     /**
      * @api
      *
-     * Update Phone Number Campaign
+     * Replaces the 10DLC campaign assignment for the specified phone number.
      *
      * @param string $campaignPhoneNumber unique identifier of the phone number
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number
@@ -112,7 +112,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
     /**
      * @api
      *
-     * List phone number campaigns
+     * Returns phone-number-to-campaign assignments for the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[telnyx_campaign_id], filter[telnyx_brand_id], filter[tcr_campaign_id], filter[tcr_brand_id]
      * @param int $page page number to retrieve (1-based)

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get Auto-Response Setting.
+ * Returns the matching criteria and response content for the specified auto-response rule.
  *
  * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::retrieve()
  *

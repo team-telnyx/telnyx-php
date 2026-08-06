@@ -31,7 +31,7 @@ final class ConversationalComponentsRawService implements ConversationalComponen
     /**
      * @api
      *
-     * Get phone number conversational components
+     * Returns the conversational components configured for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
@@ -58,7 +58,7 @@ final class ConversationalComponentsRawService implements ConversationalComponen
     /**
      * @api
      *
-     * Update phone number conversational components
+     * Updates the conversational components configured for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param array{

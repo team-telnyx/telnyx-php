@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update Phone Number Campaign.
+ * Replaces the 10DLC campaign assignment for the specified phone number.
  *
  * @see Telnyx\Services\Messaging10dlc\PhoneNumberCampaignsService::update()
  *

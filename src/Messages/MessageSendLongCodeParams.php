@@ -13,7 +13,7 @@ use Telnyx\Messages\MessageSendLongCodeParams\Encoding;
 use Telnyx\Messages\MessageSendLongCodeParams\Type;
 
 /**
- * Send a long code message.
+ * Queues an outbound SMS or MMS using a long-code sender. Delivery progress and final disposition are reported asynchronously through messaging webhooks.
  *
  * @see Telnyx\Services\MessagesService::sendLongCode()
  *

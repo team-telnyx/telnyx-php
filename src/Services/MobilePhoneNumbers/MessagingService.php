@@ -34,7 +34,7 @@ final class MessagingService implements MessagingContract
     /**
      * @api
      *
-     * Retrieve a mobile phone number with messaging settings
+     * Returns the messaging configuration for the specified mobile phone number.
      *
      * @param string $id identifies the type of resource
      * @param RequestOpts|null $requestOptions
@@ -54,7 +54,7 @@ final class MessagingService implements MessagingContract
     /**
      * @api
      *
-     * List mobile phone numbers with messaging settings
+     * Returns mobile phone numbers with their current messaging configuration.
      *
      * @param RequestOpts|null $requestOptions
      *

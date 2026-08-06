@@ -12,7 +12,7 @@ use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
 
 /**
- * Lists the phone numbers jobs.
+ * Returns background jobs that operate on phone numbers. Results can be filtered by job type and sorted by creation time, and include pagination metadata.
  *
  * @see Telnyx\Services\PhoneNumbers\JobsService::list()
  *

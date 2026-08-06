@@ -117,7 +117,7 @@ final class VerifyProfilesRawService implements VerifyProfilesRawContract
     /**
      * @api
      *
-     * Update Verify profile
+     * Updates the specified Verify profile's name, webhook destinations, language, daily spend limits, or channel-specific settings. Returns the updated profile.
      *
      * @param string $verifyProfileID the identifier of the Verify profile to update
      * @param array{
@@ -197,7 +197,7 @@ final class VerifyProfilesRawService implements VerifyProfilesRawContract
     /**
      * @api
      *
-     * Delete Verify profile
+     * Deletes the specified Verify profile and returns the deleted profile record.
      *
      * @param string $verifyProfileID the identifier of the Verify profile to delete
      * @param RequestOpts|null $requestOptions

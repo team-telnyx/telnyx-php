@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List mobile phone numbers with messaging settings.
+ * Returns mobile phone numbers with their current messaging configuration.
  *
  * @see Telnyx\Services\MobilePhoneNumbers\MessagingService::list()
  *

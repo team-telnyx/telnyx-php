@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op;
 
 /**
- * Update Auto-Response Setting.
+ * Replaces the configuration of the specified auto-response rule.
  *
  * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::update()
  *

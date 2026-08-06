@@ -142,7 +142,7 @@ final class MessagingHostedNumbersRawService implements MessagingHostedNumbersRa
     /**
      * @api
      *
-     * Delete a messaging hosted number
+     * Removes the specified hosted number from Telnyx messaging management.
      *
      * @param string $id identifies the type of resource
      * @param RequestOpts|null $requestOptions

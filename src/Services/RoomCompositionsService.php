@@ -85,7 +85,7 @@ final class RoomCompositionsService implements RoomCompositionsContract
     /**
      * @api
      *
-     * View a room composition.
+     * Returns the composition identified by `room_composition_id`, including its room and session, processing status, media details, video layout, lifecycle timestamps, and download URL.
      *
      * @param string $roomCompositionID the unique identifier of a room composition
      * @param RequestOpts|null $requestOptions
@@ -105,7 +105,7 @@ final class RoomCompositionsService implements RoomCompositionsContract
     /**
      * @api
      *
-     * View a list of room compositions.
+     * Returns a paginated list of room compositions. Filter compositions by creation date, room session, or processing status.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status]
      * @param RequestOpts|null $requestOptions

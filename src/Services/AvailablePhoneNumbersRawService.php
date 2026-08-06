@@ -30,7 +30,7 @@ final class AvailablePhoneNumbersRawService implements AvailablePhoneNumbersRawC
     /**
      * @api
      *
-     * List available phone numbers
+     * Searches the Telnyx inventory for available phone numbers. Filters support number patterns, location, number type, features, reservability, and other inventory constraints; the response includes matching numbers and search metadata.
      *
      * @param array{filter?: Filter|FilterShape}|AvailablePhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions

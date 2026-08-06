@@ -12,7 +12,7 @@ use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\InboundCallScreening;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
 
 /**
- * Update a phone number with voice settings.
+ * Updates the voice configuration for the specified phone number. The response contains the phone number with its updated voice settings.
  *
  * @see Telnyx\Services\PhoneNumbers\VoiceService::update()
  *

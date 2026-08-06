@@ -37,7 +37,7 @@ final class WhatsappMessageTemplatesService implements WhatsappMessageTemplatesC
     /**
      * @api
      *
-     * Get a Whatsapp message template by ID
+     * Returns the content, components, language, and current review state of the specified WhatsApp message template.
      *
      * @param string $id Whatsapp message template ID
      * @param RequestOpts|null $requestOptions
@@ -57,7 +57,7 @@ final class WhatsappMessageTemplatesService implements WhatsappMessageTemplatesC
     /**
      * @api
      *
-     * Update a Whatsapp message template
+     * Updates the editable fields of the specified WhatsApp message template.
      *
      * @param string $id Whatsapp message template ID
      * @param Category|value-of<Category> $category
@@ -85,7 +85,7 @@ final class WhatsappMessageTemplatesService implements WhatsappMessageTemplatesC
     /**
      * @api
      *
-     * Delete a Whatsapp message template
+     * Deletes the specified WhatsApp message template.
      *
      * @param string $id Whatsapp message template ID
      * @param RequestOpts|null $requestOptions

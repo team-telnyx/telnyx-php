@@ -257,7 +257,7 @@ final class MessagesService implements MessagesContract
     /**
      * @api
      *
-     * Send a group MMS message
+     * Queues an MMS addressed to multiple recipients as a group conversation. Delivery events are reported asynchronously through messaging webhooks.
      *
      * @param string $from Phone number, in +E.164 format, used to send the message.
      * @param list<string> $to A list of destinations. No more than 8 destinations are allowed.
@@ -304,7 +304,7 @@ final class MessagesService implements MessagesContract
     /**
      * @api
      *
-     * Send a long code message
+     * Queues an outbound SMS or MMS using a long-code sender. Delivery progress and final disposition are reported asynchronously through messaging webhooks.
      *
      * @param string $from Phone number, in +E.164 format, used to send the message.
      * @param string $to Receiving address (+E.164 formatted phone number or short code).
@@ -364,7 +364,7 @@ final class MessagesService implements MessagesContract
     /**
      * @api
      *
-     * Send a message using number pool
+     * Queues an outbound message using a number pool. Telnyx selects an eligible sender from the pool according to its messaging profile configuration.
      *
      * @param string $messagingProfileID unique identifier for a messaging profile
      * @param string $to Receiving address (+E.164 formatted phone number or short code).
@@ -424,7 +424,7 @@ final class MessagesService implements MessagesContract
     /**
      * @api
      *
-     * Send a short code message
+     * Queues an outbound SMS or MMS using a short-code sender. Delivery progress and final disposition are reported asynchronously through messaging webhooks.
      *
      * @param string $from Phone number, in +E.164 format, used to send the message.
      * @param string $to Receiving address (+E.164 formatted phone number or short code).

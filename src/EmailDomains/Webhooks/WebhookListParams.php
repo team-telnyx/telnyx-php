@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\EmailDomains\Webhooks\WebhookListParams\Sort;
 
 /**
- * List webhooks for an email domain.
+ * Returns a paginated list of webhook subscriptions scoped to the email domain. Results can be sorted by creation time.
  *
  * @see Telnyx\Services\EmailDomains\WebhooksService::list()
  *

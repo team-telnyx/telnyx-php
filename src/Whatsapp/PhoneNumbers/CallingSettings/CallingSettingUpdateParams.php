@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Enable or disable Whatsapp calling for a phone number.
+ * Enables or disables WhatsApp calling for the specified phone number.
  *
  * @see Telnyx\Services\Whatsapp\PhoneNumbers\CallingSettingsService::update()
  *

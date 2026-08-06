@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Delete an email domain.
+ * Deletes an email domain configuration. Verified domains require `force=true`, and shared domains are read-only for non-owner accounts.
  *
  * @see Telnyx\Services\EmailDomainsService::delete()
  *

@@ -12,7 +12,7 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
 
 /**
- * Create a CSV download.
+ * Starts generation of a CSV export for phone numbers matching the supplied filters. The `csv_format` parameter selects the output format, and the response contains the resulting download record.
  *
  * @see Telnyx\Services\PhoneNumbers\CsvDownloadsService::create()
  *
