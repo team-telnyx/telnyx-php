@@ -36,7 +36,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
     /**
      * @api
      *
-     * Create a billing group
+     * Create a new billing group, which can be used to organize resources for billing purposes.
      *
      * @param array{name?: string}|BillingGroupCreateParams $params
      * @param RequestOpts|null $requestOptions
@@ -67,7 +67,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
     /**
      * @api
      *
-     * Get a billing group
+     * Retrieve the details of a specific billing group.
      *
      * @param string $id The id of the billing group
      * @param RequestOpts|null $requestOptions
@@ -92,7 +92,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
     /**
      * @api
      *
-     * Update a billing group
+     * Update the properties of an existing billing group.
      *
      * @param string $id The id of the billing group
      * @param array{name?: string}|BillingGroupUpdateParams $params
@@ -125,7 +125,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
     /**
      * @api
      *
-     * List all billing groups
+     * Retrieve a paginated list of billing groups on your account.
      *
      * @param array{pageNumber?: int, pageSize?: int}|BillingGroupListParams $params
      * @param RequestOpts|null $requestOptions
@@ -160,7 +160,7 @@ final class BillingGroupsRawService implements BillingGroupsRawContract
     /**
      * @api
      *
-     * Delete a billing group
+     * Delete a billing group from your account.
      *
      * @param string $id The id of the billing group
      * @param RequestOpts|null $requestOptions

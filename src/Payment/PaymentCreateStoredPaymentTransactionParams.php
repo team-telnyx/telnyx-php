@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a stored payment transaction.
+ * Create a transaction that charges a stored payment method on the account.
  *
  * @see Telnyx\Services\PaymentService::createStoredPaymentTransaction()
  *

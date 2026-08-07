@@ -30,7 +30,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Add Assistant Tool
+     * Attach an existing tool to an AI assistant.
      *
      * @param string $toolID unique identifier of the tool
      * @param array{assistantID: string}|ToolAddParams $params
@@ -64,7 +64,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Remove Assistant Tool
+     * Detach a tool from an AI assistant.
      *
      * @param string $toolID unique identifier of the tool
      * @param array{assistantID: string}|ToolRemoveParams $params

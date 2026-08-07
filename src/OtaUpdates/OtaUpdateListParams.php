@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter;
 
 /**
- * List OTA updates.
+ * Retrieve a paginated list of over-the-air (OTA) update operations for your SIM cards.
  *
  * @see Telnyx\Services\OtaUpdatesService::list()
  *

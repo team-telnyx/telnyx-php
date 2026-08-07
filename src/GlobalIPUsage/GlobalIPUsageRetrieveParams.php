@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter;
 
 /**
- * Global IP Usage Metrics.
+ * Retrieve usage metrics for your Global IPs.
  *
  * @see Telnyx\Services\GlobalIPUsageService::retrieve()
  *

@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create Tool.
+ * Create a new custom AI tool that can be attached to AI assistants.
  *
  * @see Telnyx\Services\AI\ToolsService::create()
  *

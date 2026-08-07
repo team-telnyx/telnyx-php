@@ -37,7 +37,7 @@ final class ClustersService implements ClustersContract
     /**
      * @api
      *
-     * Fetch a cluster
+     * Fetch the results of a clustering task, including the discovered clusters.
      *
      * @param string $taskID unique identifier of the task
      * @param bool $showSubclusters whether or not to include subclusters and their nodes in the response
@@ -65,7 +65,7 @@ final class ClustersService implements ClustersContract
     /**
      * @api
      *
-     * List all clusters
+     * Retrieve a paginated list of clustering tasks and their statuses.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -91,7 +91,7 @@ final class ClustersService implements ClustersContract
     /**
      * @api
      *
-     * Delete a cluster
+     * Delete a clustering task and its computed results.
      *
      * @param string $taskID unique identifier of the task
      * @param RequestOpts|null $requestOptions
@@ -149,7 +149,7 @@ final class ClustersService implements ClustersContract
     /**
      * @api
      *
-     * Fetch a cluster visualization
+     * Fetch a visualization image of the clusters computed by a clustering task.
      *
      * @param string $taskID unique identifier of the task
      * @param int $clusterID filter results by cluster id

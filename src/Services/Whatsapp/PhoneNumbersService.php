@@ -105,7 +105,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * List Whatsapp phone numbers
+     * Retrieve a list of the phone numbers registered for WhatsApp on your account.
      *
      * @param RequestOpts|null $requestOptions
      *

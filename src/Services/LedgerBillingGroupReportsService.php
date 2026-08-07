@@ -35,7 +35,7 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
     /**
      * @api
      *
-     * Create a ledger billing group report
+     * Create a ledger billing group report, which aggregates ledger activity by billing group.
      *
      * @param int $month Month of the ledger billing group report
      * @param int $year Year of the ledger billing group report
@@ -59,7 +59,7 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
     /**
      * @api
      *
-     * Get a ledger billing group report
+     * Retrieve the details and status of a previously created ledger billing group report.
      *
      * @param string $id The id of the ledger billing group report
      * @param RequestOpts|null $requestOptions

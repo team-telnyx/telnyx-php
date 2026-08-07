@@ -58,7 +58,7 @@ final class OtaUpdatesService implements OtaUpdatesContract
     /**
      * @api
      *
-     * List OTA updates
+     * Retrieve a paginated list of over-the-air (OTA) update operations for your SIM cards.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter for OTA updates (deepObject style). Originally: filter[status], filter[sim_card_id], filter[type]
      * @param RequestOpts|null $requestOptions

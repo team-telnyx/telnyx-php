@@ -36,7 +36,7 @@ final class GlobalIPAssignmentHealthService implements GlobalIPAssignmentHealthC
     /**
      * @api
      *
-     * Global IP Assignment Health Check Metrics
+     * Retrieve health check metrics for your Global IP assignments.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in], filter[global_ip_assignment_id][in]
      * @param RequestOpts|null $requestOptions

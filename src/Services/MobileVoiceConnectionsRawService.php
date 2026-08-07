@@ -43,7 +43,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
     /**
      * @api
      *
-     * Create a Mobile Voice Connection
+     * Create a new mobile voice connection.
      *
      * @param array{
      *   active?: bool,
@@ -84,7 +84,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
     /**
      * @api
      *
-     * Retrieve a Mobile Voice Connection
+     * Retrieve the details of a specific mobile voice connection.
      *
      * @param string $id The ID of the mobile voice connection
      * @param RequestOpts|null $requestOptions
@@ -109,7 +109,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
     /**
      * @api
      *
-     * Update a Mobile Voice Connection
+     * Update the settings of a specific mobile voice connection.
      *
      * @param string $id The ID of the mobile voice connection
      * @param array{
@@ -152,7 +152,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
     /**
      * @api
      *
-     * List Mobile Voice Connections
+     * Retrieve a paginated list of mobile voice connections on your account.
      *
      * @param array{
      *   filterConnectionNameContains?: string,
@@ -196,7 +196,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
     /**
      * @api
      *
-     * Delete a Mobile Voice Connection
+     * Delete a mobile voice connection from your account.
      *
      * @param string $id The ID of the mobile voice connection
      * @param RequestOpts|null $requestOptions

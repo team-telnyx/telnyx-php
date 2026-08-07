@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List Whatsapp phone numbers.
+ * Retrieve a list of the phone numbers registered for WhatsApp on your account.
  *
  * @see Telnyx\Services\Whatsapp\PhoneNumbersService::get()
  *

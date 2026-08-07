@@ -97,7 +97,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * List Whatsapp phone numbers
+     * Retrieve a list of the phone numbers registered for WhatsApp on your account.
      *
      * @param array{pageNumber?: int, pageSize?: int}|PhoneNumberGetParams $params
      * @param RequestOpts|null $requestOptions

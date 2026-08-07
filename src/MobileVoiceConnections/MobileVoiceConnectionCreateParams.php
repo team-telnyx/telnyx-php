@@ -13,7 +13,7 @@ use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Outbound;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\WebhookAPIVersion;
 
 /**
- * Create a Mobile Voice Connection.
+ * Create a new mobile voice connection.
  *
  * @see Telnyx\Services\MobileVoiceConnectionsService::create()
  *

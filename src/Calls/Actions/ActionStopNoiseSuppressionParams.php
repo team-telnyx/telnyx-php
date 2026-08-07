@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Noise Suppression Stop (BETA).
+ * Stop noise suppression previously started on an active call. This feature is currently in beta.
  *
  * @see Telnyx\Services\Calls\ActionsService::stopNoiseSuppression()
  *

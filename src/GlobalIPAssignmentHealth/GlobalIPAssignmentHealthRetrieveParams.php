@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter;
 
 /**
- * Global IP Assignment Health Check Metrics.
+ * Retrieve health check metrics for your Global IP assignments.
  *
  * @see Telnyx\Services\GlobalIPAssignmentHealthService::retrieve()
  *

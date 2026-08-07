@@ -36,7 +36,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Create Tool
+     * Create a new custom AI tool that can be attached to AI assistants.
      *
      * @param array{
      *   displayName: string,
@@ -79,7 +79,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Get Tool
+     * Retrieve the details of a specific AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
@@ -104,7 +104,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Update Tool
+     * Update the configuration of an existing AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param array{
@@ -149,7 +149,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * List Tools
+     * Retrieve a list of the custom AI tools configured on your account.
      *
      * @param array{
      *   filterName?: string, filterType?: string, pageNumber?: int, pageSize?: int
@@ -191,7 +191,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Delete Tool
+     * Delete a custom AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions

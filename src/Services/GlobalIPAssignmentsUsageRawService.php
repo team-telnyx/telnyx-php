@@ -30,7 +30,7 @@ final class GlobalIPAssignmentsUsageRawService implements GlobalIPAssignmentsUsa
     /**
      * @api
      *
-     * Global IP Assignment Usage Metrics
+     * Retrieve usage metrics for your Global IP assignments.
      *
      * @param array{
      *   filter?: Filter|FilterShape

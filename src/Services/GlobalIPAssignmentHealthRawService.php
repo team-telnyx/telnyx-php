@@ -30,7 +30,7 @@ final class GlobalIPAssignmentHealthRawService implements GlobalIPAssignmentHeal
     /**
      * @api
      *
-     * Global IP Assignment Health Check Metrics
+     * Retrieve health check metrics for your Global IP assignments.
      *
      * @param array{
      *   filter?: Filter|FilterShape

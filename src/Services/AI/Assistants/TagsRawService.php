@@ -29,7 +29,7 @@ final class TagsRawService implements TagsRawContract
     /**
      * @api
      *
-     * Get All Tags
+     * Retrieve all tags that have been applied to your AI assistants.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -52,7 +52,7 @@ final class TagsRawService implements TagsRawContract
     /**
      * @api
      *
-     * Add Assistant Tag
+     * Add a tag to an AI assistant. Tags help you organize and filter your assistants.
      *
      * @param string $assistantID unique identifier of the assistant
      * @param array{tag: string}|TagAddParams $params
@@ -85,7 +85,7 @@ final class TagsRawService implements TagsRawContract
     /**
      * @api
      *
-     * Remove Assistant Tag
+     * Remove a tag from an AI assistant.
      *
      * @param string $tag unique identifier of the tag
      * @param array{assistantID: string}|TagRemoveParams $params

@@ -30,7 +30,7 @@ final class GlobalIPUsageRawService implements GlobalIPUsageRawContract
     /**
      * @api
      *
-     * Global IP Usage Metrics
+     * Retrieve usage metrics for your Global IPs.
      *
      * @param array{filter?: Filter|FilterShape}|GlobalIPUsageRetrieveParams $params
      * @param RequestOpts|null $requestOptions

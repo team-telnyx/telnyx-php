@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List Mobile Voice Connections.
+ * Retrieve a paginated list of mobile voice connections on your account.
  *
  * @see Telnyx\Services\MobileVoiceConnectionsService::list()
  *

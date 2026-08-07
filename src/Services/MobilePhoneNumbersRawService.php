@@ -44,7 +44,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
     /**
      * @api
      *
-     * Retrieve a Mobile Phone Number
+     * Retrieve the details of a specific mobile phone number.
      *
      * @param string $id The ID of the mobile phone number
      * @param RequestOpts|null $requestOptions
@@ -69,7 +69,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
     /**
      * @api
      *
-     * Update a Mobile Phone Number
+     * Update the settings of a specific mobile phone number.
      *
      * @param string $id The ID of the mobile phone number
      * @param array{
@@ -114,7 +114,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
     /**
      * @api
      *
-     * List Mobile Phone Numbers
+     * Retrieve a paginated list of mobile phone numbers on your account.
      *
      * @param array{
      *   pageNumber?: int, pageSize?: int

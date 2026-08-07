@@ -30,7 +30,7 @@ final class GlobalIPLatencyRawService implements GlobalIPLatencyRawContract
     /**
      * @api
      *
-     * Global IP Latency Metrics
+     * Retrieve latency metrics measured for your Global IPs.
      *
      * @param array{filter?: Filter|FilterShape}|GlobalIPLatencyRetrieveParams $params
      * @param RequestOpts|null $requestOptions

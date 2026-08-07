@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update Tool.
+ * Update the configuration of an existing AI tool.
  *
  * @see Telnyx\Services\AI\ToolsService::update()
  *

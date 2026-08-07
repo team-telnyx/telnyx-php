@@ -39,7 +39,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * Create Tool
+     * Create a new custom AI tool that can be attached to AI assistants.
      *
      * @param array<string,mixed> $clientSideTool
      * @param array<string,mixed> $function
@@ -92,7 +92,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * Get Tool
+     * Retrieve the details of a specific AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
@@ -112,7 +112,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * Update Tool
+     * Update the configuration of an existing AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param array<string,mixed> $clientSideTool
@@ -167,7 +167,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * List Tools
+     * Retrieve a list of the custom AI tools configured on your account.
      *
      * @param string $filterName filter results by filter name
      * @param string $filterType filter results by filter type
@@ -204,7 +204,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * Delete Tool
+     * Delete a custom AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions

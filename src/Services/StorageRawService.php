@@ -27,7 +27,7 @@ final class StorageRawService implements StorageRawContract
     /**
      * @api
      *
-     * List Migration Source coverage
+     * List the external storage providers and regions supported as migration sources.
      *
      * @param RequestOpts|null $requestOptions
      *

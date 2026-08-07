@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Fetch a cluster visualization.
+ * Fetch a visualization image of the clusters computed by a clustering task.
  *
  * @see Telnyx\Services\AI\ClustersService::fetchGraph()
  *
