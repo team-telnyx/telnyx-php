@@ -137,7 +137,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->whatsapp->phoneNumbers->verify(
             'phone_number',
-            code: 'code'
+            code: 'string'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -153,7 +153,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->whatsapp->phoneNumbers->verify(
             'phone_number',
-            code: 'code'
+            code: 'string'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

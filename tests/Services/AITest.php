@@ -79,8 +79,8 @@ final class AITest extends TestCase
         }
 
         $result = $this->client->ai->summarize(
-            bucket: 'bucket',
-            filename: 'filename'
+            bucket: 'string',
+            filename: 'string'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -95,9 +95,9 @@ final class AITest extends TestCase
         }
 
         $result = $this->client->ai->summarize(
-            bucket: 'bucket',
-            filename: 'filename',
-            systemPrompt: 'system_prompt'
+            bucket: 'string',
+            filename: 'string',
+            systemPrompt: 'string'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -118,8 +118,8 @@ final class ToolsTest extends TestCase
         $result = $this->client->ai->assistants->tools->test(
             'tool_id',
             assistantID: 'assistant_id',
-            arguments: ['foo' => 'bar'],
-            dynamicVariables: ['foo' => 'bar'],
+            arguments: ['order_id' => 'bar'],
+            dynamicVariables: ['customer_name' => 'bar'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

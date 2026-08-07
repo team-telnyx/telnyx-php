@@ -83,7 +83,7 @@ final class InsightGroupsTest extends TestCase
         }
 
         $result = $this->client->ai->conversations->insightGroups->insightGroups(
-            name: 'name'
+            name: 'Name'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -98,9 +98,9 @@ final class InsightGroupsTest extends TestCase
         }
 
         $result = $this->client->ai->conversations->insightGroups->insightGroups(
-            name: 'name',
-            description: 'description',
-            webhook: 'webhook'
+            name: 'Name',
+            description: 'Description',
+            webhook: ''
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

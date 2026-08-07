@@ -54,8 +54,8 @@ final class OAuthTest extends TestCase
         }
 
         $result = $this->client->oauth->grants(
-            allowed: true,
-            consentToken: 'consent_token'
+            allowed: false,
+            consentToken: 'string'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -70,8 +70,8 @@ final class OAuthTest extends TestCase
         }
 
         $result = $this->client->oauth->grants(
-            allowed: true,
-            consentToken: 'consent_token'
+            allowed: false,
+            consentToken: 'string'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -85,7 +85,7 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->oauth->introspect(token: 'token');
+        $result = $this->client->oauth->introspect(token: 'string');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthIntrospectResponse::class, $result);
@@ -98,7 +98,7 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->oauth->introspect(token: 'token');
+        $result = $this->client->oauth->introspect(token: 'string');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(OAuthIntrospectResponse::class, $result);

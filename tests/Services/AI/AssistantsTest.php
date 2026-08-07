@@ -506,7 +506,7 @@ final class AssistantsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->imports(
-            apiKeyRef: 'api_key_ref',
+            apiKeyRef: 'string',
             provider: 'elevenlabs'
         );
 
@@ -522,7 +522,7 @@ final class AssistantsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->imports(
-            apiKeyRef: 'api_key_ref',
+            apiKeyRef: 'string',
             provider: 'elevenlabs',
             importIDs: ['string']
         );
@@ -540,8 +540,8 @@ final class AssistantsTest extends TestCase
 
         $result = $this->client->ai->assistants->sendSMS(
             'assistant_id',
-            from: 'from',
-            to: 'to'
+            from: 'From',
+            to: 'To'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -557,11 +557,11 @@ final class AssistantsTest extends TestCase
 
         $result = $this->client->ai->assistants->sendSMS(
             'assistant_id',
-            from: 'from',
-            to: 'to',
+            from: 'From',
+            to: 'To',
             conversationMetadata: ['foo' => 'string'],
-            shouldCreateConversation: true,
-            text: 'text',
+            shouldCreateConversation: false,
+            text: 'Text',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

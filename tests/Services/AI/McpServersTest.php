@@ -37,9 +37,9 @@ final class McpServersTest extends TestCase
         }
 
         $result = $this->client->ai->mcpServers->create(
-            name: 'name',
-            type: 'type',
-            url: 'url'
+            name: 'Name',
+            type: 'Type',
+            url: 'Url'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,9 +54,9 @@ final class McpServersTest extends TestCase
         }
 
         $result = $this->client->ai->mcpServers->create(
-            name: 'name',
-            type: 'type',
-            url: 'url',
+            name: 'Name',
+            type: 'Type',
+            url: 'Url',
             allowedTools: ['string'],
             apiKeyRef: 'api_key_ref',
         );
