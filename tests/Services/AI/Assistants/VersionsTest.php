@@ -307,6 +307,7 @@ final class VersionsTest extends TestCase
             tags: ['string'],
             telephonySettings: [
                 'defaultTexmlAppID' => 'default_texml_app_id',
+                'disableDtmf' => true,
                 'noiseSuppression' => 'krisp',
                 'noiseSuppressionConfig' => [
                     'attenuationLimit' => 0, 'mode' => 'advanced',

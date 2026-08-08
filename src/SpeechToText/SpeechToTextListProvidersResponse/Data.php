@@ -15,6 +15,7 @@ use Telnyx\SpeechToText\SpeechToTextListProvidersResponse\Data\ServiceType;
  * @phpstan-import-type ServiceTypeShape from \Telnyx\SpeechToText\SpeechToTextListProvidersResponse\Data\ServiceType
  *
  * @phpstan-type DataShape = array{
+ *   hosted: bool,
  *   model: string,
  *   provider: string,
  *   serviceTypes: list<ServiceType|ServiceTypeShape>,
@@ -24,6 +25,12 @@ final class Data implements BaseModel
 {
     /** @use SdkModel<DataShape> */
     use SdkModel;
+
+    /**
+     * Whether this model runs on Telnyx-hosted infrastructure (`true`) or is provided by a third-party vendor (`false`).
+     */
+    #[Required]
+    public bool $hosted;
 
     /**
      * Provider-scoped model name.
@@ -50,13 +57,17 @@ final class Data implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Data::with(model: ..., provider: ..., serviceTypes: ...)
+     * Data::with(hosted: ..., model: ..., provider: ..., serviceTypes: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Data)->withModel(...)->withProvider(...)->withServiceTypes(...)
+     * (new Data)
+     *   ->withHosted(...)
+     *   ->withModel(...)
+     *   ->withProvider(...)
+     *   ->withServiceTypes(...)
      * ```
      */
     public function __construct()
@@ -72,15 +83,28 @@ final class Data implements BaseModel
      * @param list<ServiceType|ServiceTypeShape> $serviceTypes
      */
     public static function with(
+        bool $hosted,
         string $model,
         string $provider,
         array $serviceTypes
     ): self {
         $self = new self;
 
+        $self['hosted'] = $hosted;
         $self['model'] = $model;
         $self['provider'] = $provider;
         $self['serviceTypes'] = $serviceTypes;
+
+        return $self;
+    }
+
+    /**
+     * Whether this model runs on Telnyx-hosted infrastructure (`true`) or is provided by a third-party vendor (`false`).
+     */
+    public function withHosted(bool $hosted): self
+    {
+        $self = clone $this;
+        $self['hosted'] = $hosted;
 
         return $self;
     }
