@@ -19,13 +19,14 @@ use Telnyx\Messages\MessageSendParams\Encoding;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
+use Telnyx\Messages\MessageWhatsappResponse;
+use Telnyx\Messages\WhatsappMessageContent;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesContract;
 use Telnyx\Services\Messages\RcsService;
 
 /**
- * Messages.
- *
+ * @phpstan-import-type WhatsappMessageContentShape from \Telnyx\Messages\WhatsappMessageContent
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagesService implements MessagesContract
@@ -521,6 +522,47 @@ final class MessagesService implements MessagesContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendWithAlphanumericSender(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Sends a WhatsApp message using a Telnyx WhatsApp-enabled number. The message body, interactive elements, media, location, and reaction content are specified in the `whatsapp_message` field. Delivery progress and final disposition are reported asynchronously through messaging webhooks.
+     *
+     * @param string $from Phone number in +E.164 format associated with Whatsapp account
+     * @param string $to Phone number in +E.164 format
+     * @param WhatsappMessageContent|WhatsappMessageContentShape $whatsappMessage
+     * @param string $messagingProfileID Messaging profile ID - required if the 'from' number is not SMS-enabled
+     * @param \Telnyx\Messages\MessageWhatsappParams\Type|value-of<\Telnyx\Messages\MessageWhatsappParams\Type> $type Message type - must be set to "WHATSAPP"
+     * @param string $webhookURL the URL where webhooks related to this message will be sent
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function whatsapp(
+        string $from,
+        string $to,
+        WhatsappMessageContent|array $whatsappMessage,
+        ?string $messagingProfileID = null,
+        \Telnyx\Messages\MessageWhatsappParams\Type|string|null $type = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): MessageWhatsappResponse {
+        $params = Util::removeNulls(
+            [
+                'from' => $from,
+                'to' => $to,
+                'whatsappMessage' => $whatsappMessage,
+                'messagingProfileID' => $messagingProfileID,
+                'type' => $type,
+                'webhookURL' => $webhookURL,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->whatsapp(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

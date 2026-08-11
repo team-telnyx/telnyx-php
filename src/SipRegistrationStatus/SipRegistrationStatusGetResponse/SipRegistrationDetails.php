@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Detailed registration information reported by the registrar. The populated fields depend on `credential_type`.
+ * Detailed registration information reported by the registrar. The populated fields depend on `credential_type`: UAC external credentials report `auth_retries`, `uptime`, `next_action_at`, `failures`, and `sip_uri_user_host`; telephony credentials and SIP credential connections report `ua_ip`, `ua_port`, `transport`, and `last_modified`. All types report `expires`.
  *
  * @phpstan-type SipRegistrationDetailsShape = array{
  *   authRetries?: int|null,
@@ -17,7 +17,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *   failures?: int|null,
  *   lastModified?: string|null,
  *   nextActionAt?: int|null,
- *   node?: string|null,
  *   sipUriUserHost?: string|null,
  *   transport?: string|null,
  *   uaIP?: string|null,
@@ -31,7 +30,7 @@ final class SipRegistrationDetails implements BaseModel
     use SdkModel;
 
     /**
-     * Number of authentication retries on the last attempt.
+     * Number of authentication retries on the last attempt (uac_external_credential).
      */
     #[Optional('auth_retries')]
     public ?int $authRetries;
@@ -43,55 +42,49 @@ final class SipRegistrationDetails implements BaseModel
     public ?int $expires;
 
     /**
-     * Count of consecutive registration failures.
+     * Count of consecutive registration failures (uac_external_credential).
      */
     #[Optional]
     public ?int $failures;
 
     /**
-     * Timestamp when the registration row was last modified (telephony_credential).
+     * Timestamp when the registration was last modified (telephony_credential and sip_credential_connection).
      */
     #[Optional('last_modified')]
     public ?string $lastModified;
 
     /**
-     * Unix timestamp of the next scheduled registration action.
+     * Unix timestamp of the next scheduled registration action (uac_external_credential).
      */
     #[Optional('next_action_at')]
     public ?int $nextActionAt;
 
     /**
-     * Registrar node handling the registration (telephony_credential).
-     */
-    #[Optional]
-    public ?string $node;
-
-    /**
-     * SIP URI user@host of the registered contact.
+     * SIP URI user@host of the registered contact (uac_external_credential).
      */
     #[Optional('sip_uri_user_host')]
     public ?string $sipUriUserHost;
 
     /**
-     * Transport used for the registration, e.g. UDP/TCP/TLS (telephony_credential).
+     * Transport used for the registration, e.g. UDP/TCP/TLS (telephony_credential and sip_credential_connection).
      */
     #[Optional]
     public ?string $transport;
 
     /**
-     * IP address of the registered user agent (telephony_credential).
+     * IP address of the registered user agent (telephony_credential and sip_credential_connection).
      */
     #[Optional('ua_ip')]
     public ?string $uaIP;
 
     /**
-     * Port of the registered user agent (telephony_credential).
+     * Port of the registered user agent (telephony_credential and sip_credential_connection).
      */
     #[Optional('ua_port')]
     public ?int $uaPort;
 
     /**
-     * Registration uptime reported by the registrar.
+     * Registration uptime reported by the registrar (uac_external_credential).
      */
     #[Optional]
     public ?int $uptime;
@@ -112,7 +105,6 @@ final class SipRegistrationDetails implements BaseModel
         ?int $failures = null,
         ?string $lastModified = null,
         ?int $nextActionAt = null,
-        ?string $node = null,
         ?string $sipUriUserHost = null,
         ?string $transport = null,
         ?string $uaIP = null,
@@ -126,7 +118,6 @@ final class SipRegistrationDetails implements BaseModel
         null !== $failures && $self['failures'] = $failures;
         null !== $lastModified && $self['lastModified'] = $lastModified;
         null !== $nextActionAt && $self['nextActionAt'] = $nextActionAt;
-        null !== $node && $self['node'] = $node;
         null !== $sipUriUserHost && $self['sipUriUserHost'] = $sipUriUserHost;
         null !== $transport && $self['transport'] = $transport;
         null !== $uaIP && $self['uaIP'] = $uaIP;
@@ -137,7 +128,7 @@ final class SipRegistrationDetails implements BaseModel
     }
 
     /**
-     * Number of authentication retries on the last attempt.
+     * Number of authentication retries on the last attempt (uac_external_credential).
      */
     public function withAuthRetries(int $authRetries): self
     {
@@ -159,7 +150,7 @@ final class SipRegistrationDetails implements BaseModel
     }
 
     /**
-     * Count of consecutive registration failures.
+     * Count of consecutive registration failures (uac_external_credential).
      */
     public function withFailures(int $failures): self
     {
@@ -170,7 +161,7 @@ final class SipRegistrationDetails implements BaseModel
     }
 
     /**
-     * Timestamp when the registration row was last modified (telephony_credential).
+     * Timestamp when the registration was last modified (telephony_credential and sip_credential_connection).
      */
     public function withLastModified(string $lastModified): self
     {
@@ -181,7 +172,7 @@ final class SipRegistrationDetails implements BaseModel
     }
 
     /**
-     * Unix timestamp of the next scheduled registration action.
+     * Unix timestamp of the next scheduled registration action (uac_external_credential).
      */
     public function withNextActionAt(int $nextActionAt): self
     {
@@ -192,18 +183,7 @@ final class SipRegistrationDetails implements BaseModel
     }
 
     /**
-     * Registrar node handling the registration (telephony_credential).
-     */
-    public function withNode(string $node): self
-    {
-        $self = clone $this;
-        $self['node'] = $node;
-
-        return $self;
-    }
-
-    /**
-     * SIP URI user@host of the registered contact.
+     * SIP URI user@host of the registered contact (uac_external_credential).
      */
     public function withSipUriUserHost(string $sipUriUserHost): self
     {
@@ -214,7 +194,7 @@ final class SipRegistrationDetails implements BaseModel
     }
 
     /**
-     * Transport used for the registration, e.g. UDP/TCP/TLS (telephony_credential).
+     * Transport used for the registration, e.g. UDP/TCP/TLS (telephony_credential and sip_credential_connection).
      */
     public function withTransport(string $transport): self
     {
@@ -225,7 +205,7 @@ final class SipRegistrationDetails implements BaseModel
     }
 
     /**
-     * IP address of the registered user agent (telephony_credential).
+     * IP address of the registered user agent (telephony_credential and sip_credential_connection).
      */
     public function withUaIP(string $uaIP): self
     {
@@ -236,7 +216,7 @@ final class SipRegistrationDetails implements BaseModel
     }
 
     /**
-     * Port of the registered user agent (telephony_credential).
+     * Port of the registered user agent (telephony_credential and sip_credential_connection).
      */
     public function withUaPort(int $uaPort): self
     {
@@ -247,7 +227,7 @@ final class SipRegistrationDetails implements BaseModel
     }
 
     /**
-     * Registration uptime reported by the registrar.
+     * Registration uptime reported by the registrar (uac_external_credential).
      */
     public function withUptime(int $uptime): self
     {

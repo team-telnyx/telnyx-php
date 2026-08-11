@@ -59,7 +59,7 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     /**
      * SIP response from the last registration attempt.
      */
-    #[Optional('last_registration_response')]
+    #[Optional('last_registration_response', nullable: true)]
     public ?string $lastRegistrationResponse;
 
     /**
@@ -69,7 +69,7 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     public ?bool $registered;
 
     /**
-     * Detailed registration information reported by the registrar. The populated fields depend on `credential_type`.
+     * Detailed registration information reported by the registrar. The populated fields depend on `credential_type`: UAC external credentials report `auth_retries`, `uptime`, `next_action_at`, `failures`, and `sip_uri_user_host`; telephony credentials and SIP credential connections report `ua_ip`, `ua_port`, `transport`, and `last_modified`. All types report `expires`.
      */
     #[Optional('sip_registration_details')]
     public ?SipRegistrationDetails $sipRegistrationDetails;
@@ -171,7 +171,7 @@ final class SipRegistrationStatusGetResponse implements BaseModel
      * SIP response from the last registration attempt.
      */
     public function withLastRegistrationResponse(
-        string $lastRegistrationResponse
+        ?string $lastRegistrationResponse
     ): self {
         $self = clone $this;
         $self['lastRegistrationResponse'] = $lastRegistrationResponse;
@@ -191,7 +191,7 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     }
 
     /**
-     * Detailed registration information reported by the registrar. The populated fields depend on `credential_type`.
+     * Detailed registration information reported by the registrar. The populated fields depend on `credential_type`: UAC external credentials report `auth_retries`, `uptime`, `next_action_at`, `failures`, and `sip_uri_user_host`; telephony credentials and SIP credential connections report `ua_ip`, `ua_port`, `transport`, and `last_modified`. All types report `expires`.
      *
      * @param SipRegistrationDetails|SipRegistrationDetailsShape $sipRegistrationDetails
      */
