@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Services;
+namespace Telnyx\Services\Rcs;
 
 use Telnyx\Client;
-use Telnyx\ServiceContracts\RcsAgentsRawContract;
+use Telnyx\ServiceContracts\Rcs\AgentsRawContract;
 
-final class RcsAgentsRawService implements RcsAgentsRawContract
+final class AgentsRawService implements AgentsRawContract
 {
     // @phpstan-ignore-next-line
     /**

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\RcsAgents;
+namespace Telnyx\Rcs\Agents;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type RcsAgentShape from \Telnyx\RcsAgents\RcsAgent
+ * @phpstan-import-type RcsAgentShape from \Telnyx\Rcs\Agents\RcsAgent
  *
  * @phpstan-type RcsAgentResponseShape = array{data?: null|RcsAgent|RcsAgentShape}
  */

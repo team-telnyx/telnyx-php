@@ -4,4 +4,4 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-interface RcsAgentsContract {}
+interface RcsRawContract {}

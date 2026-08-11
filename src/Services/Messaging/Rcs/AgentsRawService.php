@@ -11,8 +11,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams;
 use Telnyx\Messaging\Rcs\Agents\AgentUpdateParams;
-use Telnyx\RcsAgents\RcsAgent;
-use Telnyx\RcsAgents\RcsAgentResponse;
+use Telnyx\Rcs\Agents\RcsAgent;
+use Telnyx\Rcs\Agents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\Rcs\AgentsRawContract;
 

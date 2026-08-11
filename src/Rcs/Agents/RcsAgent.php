@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\RcsAgents;
+namespace Telnyx\Rcs\Agents;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
