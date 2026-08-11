@@ -28,6 +28,7 @@ use Telnyx\FqdnConnections\TransportProtocol;
 use Telnyx\FqdnConnections\WebhookAPIVersion;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FqdnConnectionsContract;
+use Telnyx\Services\FqdnConnections\FqdnAuthenticationService;
 
 /**
  * FQDN connection operations.
@@ -48,11 +49,17 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
     public FqdnConnectionsRawService $raw;
 
     /**
+     * @api
+     */
+    public FqdnAuthenticationService $fqdnAuthentication;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new FqdnConnectionsRawService($client);
+        $this->fqdnAuthentication = new FqdnAuthenticationService($client);
     }
 
     /**
