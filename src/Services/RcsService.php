@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\ServiceContracts\RcsContract;
 use Telnyx\Services\Rcs\AgentsService;
+use Telnyx\Services\Rcs\BrandsService;
 
 final class RcsService implements RcsContract
 {
@@ -21,11 +22,17 @@ final class RcsService implements RcsContract
     public AgentsService $agents;
 
     /**
+     * @api
+     */
+    public BrandsService $brands;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new RcsRawService($client);
         $this->agents = new AgentsService($client);
+        $this->brands = new BrandsService($client);
     }
 }
