@@ -29,7 +29,7 @@ final class UserDataRawService implements UserDataRawContract
     /**
      * @api
      *
-     * Fetch Whatsapp user data
+     * Returns the WhatsApp user-data settings associated with the authenticated Telnyx account.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -52,7 +52,7 @@ final class UserDataRawService implements UserDataRawContract
     /**
      * @api
      *
-     * Update Whatsapp user data
+     * Updates the supplied WhatsApp user-data settings for the authenticated Telnyx account.
      *
      * @param array{
      *   webhookFailoverURL?: string, webhookURL?: string

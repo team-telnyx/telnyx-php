@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create an email domain.
+ * Registers a domain for email sending and optional inbound delivery. The response includes the domain configuration and current verification state.
  *
  * @see Telnyx\Services\EmailDomainsService::create()
  *

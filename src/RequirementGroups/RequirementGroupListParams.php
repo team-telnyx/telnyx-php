@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementGroups\RequirementGroupListParams\Filter;
 
 /**
- * List requirement groups.
+ * Returns regulatory requirement groups for the account. Results can be filtered by country, number type, action, approval status, and customer reference.
  *
  * @see Telnyx\Services\RequirementGroupsService::list()
  *

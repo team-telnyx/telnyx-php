@@ -14,7 +14,7 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams\PhoneNumberType;
 use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
 
 /**
- * Create a new requirement group.
+ * Creates a regulatory requirement group for a country, number type, and ordering or porting action. Optional customer-reference and requirement values are retained on the created group.
  *
  * @see Telnyx\Services\RequirementGroupsService::create()
  *

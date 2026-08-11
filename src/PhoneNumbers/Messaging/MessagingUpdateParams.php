@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update the messaging profile and/or messaging product of a phone number.
+ * Updates the messaging product, messaging profile, or both for the specified phone number.
  *
  * @see Telnyx\Services\PhoneNumbers\MessagingService::update()
  *

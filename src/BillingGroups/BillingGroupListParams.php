@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all billing groups.
+ * Retrieve a paginated list of billing groups on your account.
  *
  * @see Telnyx\Services\BillingGroupsService::list()
  *

@@ -45,7 +45,7 @@ final class EmailUnsubscribeGroupsService implements EmailUnsubscribeGroupsContr
     /**
      * @api
      *
-     * Create an unsubscribe group
+     * Creates an account-owned unsubscribe group for associating email categories with separate recipient suppression lists.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -69,7 +69,7 @@ final class EmailUnsubscribeGroupsService implements EmailUnsubscribeGroupsContr
     /**
      * @api
      *
-     * Retrieve an unsubscribe group
+     * Returns the account-owned unsubscribe group identified by ID.
      *
      * @param string $id Resource UUID. Malformed UUIDs are treated as not-found (not 400).
      * @param RequestOpts|null $requestOptions

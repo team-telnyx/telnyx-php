@@ -7,14 +7,13 @@ namespace Telnyx\NetworkCoverage;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\NetappsLocation;
 
 /**
- * @phpstan-import-type NetappsLocationShape from \Telnyx\NetappsLocation
+ * @phpstan-import-type NetappsLocation17904fcfbcShape from \Telnyx\NetworkCoverage\NetappsLocation17904fcfbc
  *
  * @phpstan-type NetworkCoverageListResponseShape = array{
  *   availableServices?: list<AvailableService|value-of<AvailableService>>|null,
- *   location?: null|NetappsLocation|NetappsLocationShape,
+ *   location?: null|NetappsLocation17904fcfbc|NetappsLocation17904fcfbcShape,
  *   recordType?: string|null,
  * }
  */
@@ -32,7 +31,7 @@ final class NetworkCoverageListResponse implements BaseModel
     public ?array $availableServices;
 
     #[Optional]
-    public ?NetappsLocation $location;
+    public ?NetappsLocation17904fcfbc $location;
 
     /**
      * Identifies the type of the resource.
@@ -51,11 +50,11 @@ final class NetworkCoverageListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<AvailableService|value-of<AvailableService>>|null $availableServices
-     * @param NetappsLocation|NetappsLocationShape|null $location
+     * @param NetappsLocation17904fcfbc|NetappsLocation17904fcfbcShape|null $location
      */
     public static function with(
         ?array $availableServices = null,
-        NetappsLocation|array|null $location = null,
+        NetappsLocation17904fcfbc|array|null $location = null,
         ?string $recordType = null,
     ): self {
         $self = new self;
@@ -81,10 +80,11 @@ final class NetworkCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param NetappsLocation|NetappsLocationShape $location
+     * @param NetappsLocation17904fcfbc|NetappsLocation17904fcfbcShape $location
      */
-    public function withLocation(NetappsLocation|array $location): self
-    {
+    public function withLocation(
+        NetappsLocation17904fcfbc|array $location
+    ): self {
         $self = clone $this;
         $self['location'] = $location;
 

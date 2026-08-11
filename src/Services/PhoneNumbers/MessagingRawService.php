@@ -35,7 +35,7 @@ final class MessagingRawService implements MessagingRawContract
     /**
      * @api
      *
-     * Retrieve a phone number with messaging settings
+     * Returns the messaging product and messaging-profile assignment for the specified phone number.
      *
      * @param string $id identifies the type of resource
      * @param RequestOpts|null $requestOptions
@@ -60,7 +60,7 @@ final class MessagingRawService implements MessagingRawContract
     /**
      * @api
      *
-     * Update the messaging profile and/or messaging product of a phone number
+     * Updates the messaging product, messaging profile, or both for the specified phone number.
      *
      * @param string $id the phone number to update
      * @param array{
@@ -95,7 +95,7 @@ final class MessagingRawService implements MessagingRawContract
     /**
      * @api
      *
-     * List phone numbers with messaging settings
+     * Returns phone numbers with their current messaging product and messaging-profile assignments.
      *
      * @param array{
      *   filterMessagingProfileID?: string,

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update a phone number.
+ * Updates the configurable settings of the specified phone number. The response contains the complete updated phone-number representation.
  *
  * @see Telnyx\Services\PhoneNumbersService::update()
  *

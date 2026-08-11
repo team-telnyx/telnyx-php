@@ -81,7 +81,7 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
     /**
      * @api
      *
-     * Get an email template
+     * Returns the account-owned template identified by ID, including its Liquid subject and bodies, declared variables, and timestamps.
      *
      * @param string $id email template UUID
      * @param RequestOpts|null $requestOptions
@@ -181,7 +181,7 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
     /**
      * @api
      *
-     * Delete an email template
+     * Deletes the account-owned template. The operation returns `204` with no body and prevents future sends or renders from using the deleted template ID.
      *
      * @param string $id email template UUID
      * @param RequestOpts|null $requestOptions

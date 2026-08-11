@@ -41,9 +41,9 @@ final class InexplicitNumberOrdersTest extends TestCase
         $result = $this->client->inexplicitNumberOrders->create(
             orderingGroups: [
                 [
-                    'countRequested' => 'count_requested',
+                    'countRequested' => '5',
                     'countryISO' => 'US',
-                    'phoneNumberType' => 'phone_number_type',
+                    'phoneNumberType' => 'local',
                 ],
             ],
         );
@@ -62,12 +62,12 @@ final class InexplicitNumberOrdersTest extends TestCase
         $result = $this->client->inexplicitNumberOrders->create(
             orderingGroups: [
                 [
-                    'countRequested' => 'count_requested',
+                    'countRequested' => '5',
                     'countryISO' => 'US',
-                    'phoneNumberType' => 'phone_number_type',
-                    'administrativeArea' => 'administrative_area',
+                    'phoneNumberType' => 'local',
+                    'administrativeArea' => 'CA',
                     'excludeHeldNumbers' => true,
-                    'features' => ['string'],
+                    'features' => ['voice'],
                     'locality' => 'locality',
                     'nationalDestinationCode' => 'national_destination_code',
                     'phoneNumber' => [

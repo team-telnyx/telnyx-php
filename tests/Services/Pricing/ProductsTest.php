@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Pricing\Products\ProductGetResponse;
 use Telnyx\Pricing\Products\ProductListResponse;
 use Tests\UnsupportedMockTests;
@@ -53,10 +53,7 @@ final class ProductsTest extends TestCase
         $page = $this->client->pricing->products->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            DefaultFlatPaginationForInexplicitNumberOrders::class,
-            $page
-        );
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType

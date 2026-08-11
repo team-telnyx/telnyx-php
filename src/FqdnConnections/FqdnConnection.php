@@ -32,6 +32,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  *   androidPushCredentialID?: string|null,
  *   callCostEnabled?: bool|null,
  *   callCostInWebhooks?: bool|null,
+ *   conversationPersistence?: bool|null,
  *   createdAt?: string|null,
  *   defaultOnHoldComfortNoiseEnabled?: bool|null,
  *   dtmfType?: null|DtmfType|value-of<DtmfType>,
@@ -120,6 +121,12 @@ final class FqdnConnection implements BaseModel
      */
     #[Optional('call_cost_in_webhooks')]
     public ?bool $callCostInWebhooks;
+
+    /**
+     * Whether conversation persistence is enabled for this connection. When enabled, calls handled by the connection are transcribed, stored, and indexed. Defaults to false.
+     */
+    #[Optional('conversation_persistence')]
+    public ?bool $conversationPersistence;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
@@ -362,6 +369,7 @@ final class FqdnConnection implements BaseModel
         ?string $androidPushCredentialID = null,
         ?bool $callCostEnabled = null,
         ?bool $callCostInWebhooks = null,
+        ?bool $conversationPersistence = null,
         ?string $createdAt = null,
         ?bool $defaultOnHoldComfortNoiseEnabled = null,
         DtmfType|string|null $dtmfType = null,
@@ -406,6 +414,7 @@ final class FqdnConnection implements BaseModel
         null !== $androidPushCredentialID && $self['androidPushCredentialID'] = $androidPushCredentialID;
         null !== $callCostEnabled && $self['callCostEnabled'] = $callCostEnabled;
         null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
+        null !== $conversationPersistence && $self['conversationPersistence'] = $conversationPersistence;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $defaultOnHoldComfortNoiseEnabled && $self['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
         null !== $dtmfType && $self['dtmfType'] = $dtmfType;
@@ -530,6 +539,18 @@ final class FqdnConnection implements BaseModel
     {
         $self = clone $this;
         $self['callCostInWebhooks'] = $callCostInWebhooks;
+
+        return $self;
+    }
+
+    /**
+     * Whether conversation persistence is enabled for this connection. When enabled, calls handled by the connection are transcribed, stored, and indexed. Defaults to false.
+     */
+    public function withConversationPersistence(
+        bool $conversationPersistence
+    ): self {
+        $self = clone $this;
+        $self['conversationPersistence'] = $conversationPersistence;
 
         return $self;
     }

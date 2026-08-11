@@ -173,7 +173,7 @@ final class ExternalConnectionsTest extends TestCase
         $result = $this->client->externalConnections->updateLocation(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            staticEmergencyAddressID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            staticEmergencyAddressID: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -193,7 +193,7 @@ final class ExternalConnectionsTest extends TestCase
         $result = $this->client->externalConnections->updateLocation(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            staticEmergencyAddressID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            staticEmergencyAddressID: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

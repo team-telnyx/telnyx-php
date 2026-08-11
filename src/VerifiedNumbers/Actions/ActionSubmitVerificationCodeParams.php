@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Submit verification code.
+ * Submit the verification code received via the selected verification method to verify a phone number.
  *
  * @see Telnyx\Services\VerifiedNumbers\ActionsService::submitVerificationCode()
  *

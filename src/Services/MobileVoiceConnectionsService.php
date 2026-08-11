@@ -46,7 +46,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
     /**
      * @api
      *
-     * Create a Mobile Voice Connection
+     * Create a new mobile voice connection.
      *
      * @param Inbound|InboundShape $inbound
      * @param Outbound|OutboundShape $outbound
@@ -91,7 +91,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
     /**
      * @api
      *
-     * Retrieve a Mobile Voice Connection
+     * Retrieve the details of a specific mobile voice connection.
      *
      * @param string $id The ID of the mobile voice connection
      * @param RequestOpts|null $requestOptions
@@ -111,7 +111,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
     /**
      * @api
      *
-     * Update a Mobile Voice Connection
+     * Update the settings of a specific mobile voice connection.
      *
      * @param string $id The ID of the mobile voice connection
      * @param \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Inbound|InboundShape1 $inbound
@@ -158,7 +158,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
     /**
      * @api
      *
-     * List Mobile Voice Connections
+     * Retrieve a paginated list of mobile voice connections on your account.
      *
      * @param string $filterConnectionNameContains Filter by connection name containing the given string
      * @param int $pageNumber The page number to load
@@ -195,7 +195,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
     /**
      * @api
      *
-     * Delete a Mobile Voice Connection
+     * Delete a mobile voice connection from your account.
      *
      * @param string $id The ID of the mobile voice connection
      * @param RequestOpts|null $requestOptions

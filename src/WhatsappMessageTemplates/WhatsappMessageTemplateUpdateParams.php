@@ -12,7 +12,7 @@ use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Category
 use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component;
 
 /**
- * Update a Whatsapp message template.
+ * Updates the editable fields of the specified WhatsApp message template.
  *
  * @see Telnyx\Services\WhatsappMessageTemplatesService::update()
  *

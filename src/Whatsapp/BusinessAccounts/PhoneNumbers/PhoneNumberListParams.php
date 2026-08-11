@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List phone numbers for a WABA.
+ * Returns phone numbers registered under the specified WhatsApp Business Account.
  *
  * @see Telnyx\Services\Whatsapp\BusinessAccounts\PhoneNumbersService::list()
  *

@@ -17,6 +17,7 @@ use Telnyx\Services\AI\AssistantsService;
 use Telnyx\Services\AI\AudioService;
 use Telnyx\Services\AI\ChatService;
 use Telnyx\Services\AI\ClustersService;
+use Telnyx\Services\AI\CollectionsService;
 use Telnyx\Services\AI\ConversationsService;
 use Telnyx\Services\AI\EmbeddingsService;
 use Telnyx\Services\AI\FineTuningService;
@@ -55,6 +56,11 @@ final class AIService implements AIContract
      * @api
      */
     public ClustersService $clusters;
+
+    /**
+     * @api
+     */
+    public CollectionsService $collections;
 
     /**
      * @api
@@ -111,6 +117,7 @@ final class AIService implements AIContract
         $this->audio = new AudioService($client);
         $this->chat = new ChatService($client);
         $this->clusters = new ClustersService($client);
+        $this->collections = new CollectionsService($client);
         $this->conversations = new ConversationsService($client);
         $this->embeddings = new EmbeddingsService($client);
         $this->fineTuning = new FineTuningService($client);
@@ -152,13 +159,11 @@ final class AIService implements AIContract
      * - `contains` — wildcard substring match
      *
      * **Examples:**
-     * ```
-     * GET /v2/ai/conversation_histories?q=billing+issue&page[size]=10
-     * GET /v2/ai/conversation_histories?q=setup+guide&region=USA&min_score=0.5
-     * GET /v2/ai/conversation_histories?q=refund&filter[record_created_at][gte]=2026-01-01T00:00:00Z
-     * GET /v2/ai/conversation_histories?q=outage&filter[region][in]=USA,DEU
-     * GET /v2/ai/conversation_histories?q=hold+time&filter[language]=en
-     * ```
+     * - `GET /v2/ai/conversation_histories?q=billing+issue&page[size]=10`
+     * - `GET /v2/ai/conversation_histories?q=setup+guide&region=USA&min_score=0.5`
+     * - `GET /v2/ai/conversation_histories?q=refund&filter[record_created_at][gte]=2026-01-01T00:00:00Z`
+     * - `GET /v2/ai/conversation_histories?q=outage&filter[region][in]=USA,DEU`
+     * - `GET /v2/ai/conversation_histories?q=hold+time&filter[language]=en`
      *
      * @param string $q Natural language search query. The text is embedded into a 1024-dimensional vector and compared against indexed record chunks using semantic similarity.
      * @param \DateTimeInterface $filterIngestedAtGte only include records ingested (chunked, embedded, and indexed) on or after this ISO 8601 timestamp

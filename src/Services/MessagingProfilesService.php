@@ -63,7 +63,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
     /**
      * @api
      *
-     * Create a messaging profile
+     * Creates a messaging profile that controls outbound sender selection, webhook delivery, and inbound message handling for associated numbers and short codes.
      *
      * @param string $name a user friendly name for the messaging profile
      * @param list<string> $whitelistedDestinations Destinations to which the messaging profile is allowed to send. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]` all destinations will be allowed.
@@ -150,7 +150,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
     /**
      * @api
      *
-     * Retrieve a messaging profile
+     * Returns the complete configuration of the specified messaging profile, including webhook and sender-selection settings.
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
      * @param RequestOpts|null $requestOptions
@@ -170,7 +170,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
     /**
      * @api
      *
-     * Update a messaging profile
+     * Updates the supplied settings on the specified messaging profile. Settings omitted from the request remain unchanged.
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
      * @param string|null $aiAssistantID the ID of the AI assistant associated with this messaging profile
@@ -258,7 +258,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
     /**
      * @api
      *
-     * List messaging profiles
+     * Returns messaging profiles owned by the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param string $filterNameContains filter profiles by name containing the given string
@@ -296,7 +296,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
     /**
      * @api
      *
-     * Delete a messaging profile
+     * Deletes the specified messaging profile and returns the profile's final configuration.
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
      * @param RequestOpts|null $requestOptions
@@ -346,7 +346,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
     /**
      * @api
      *
-     * List phone numbers associated with a messaging profile
+     * Returns the phone numbers currently associated with the specified messaging profile.
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
      * @param RequestOpts|null $requestOptions
@@ -374,7 +374,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
     /**
      * @api
      *
-     * List short codes associated with a messaging profile
+     * Returns the short codes currently associated with the specified messaging profile.
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
      * @param RequestOpts|null $requestOptions

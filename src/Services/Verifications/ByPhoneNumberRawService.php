@@ -27,7 +27,7 @@ final class ByPhoneNumberRawService implements ByPhoneNumberRawContract
     /**
      * @api
      *
-     * List verifications by phone number
+     * Returns a paginated list of verifications associated with the specified phone number.
      *
      * @param string $phoneNumber +E164 formatted phone number
      * @param RequestOpts|null $requestOptions

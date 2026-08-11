@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Trigger Call verification.
+ * Starts a verification for the specified phone number and delivers its code in a voice call using the selected Verify profile. Returns the pending verification record.
  *
  * @see Telnyx\Services\VerificationsService::triggerCall()
  *

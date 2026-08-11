@@ -89,7 +89,7 @@ final class EmailBlocksService implements EmailBlocksContract
     /**
      * @api
      *
-     * Retrieve a suppression
+     * Returns the account-owned suppression identified by ID. Cross-account lookups and malformed IDs return `404` without exposing another account’s data.
      *
      * @param string $id Resource UUID. Malformed UUIDs are treated as not-found (not 400).
      * @param RequestOpts|null $requestOptions

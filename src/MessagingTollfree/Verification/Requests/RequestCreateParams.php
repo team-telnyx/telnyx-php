@@ -44,7 +44,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   businessRegistrationType?: string|null,
  *   campaignVerifyAuthorizationToken?: string|null,
  *   doingBusinessAs?: string|null,
- *   entityType?: null|TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>,
+ *   entityType?: null|MessagingTollFreeVerificationEntityType|value-of<MessagingTollFreeVerificationEntityType>,
  *   helpMessageResponse?: string|null,
  *   isvReseller?: string|null,
  *   optInConfirmationResponse?: string|null,
@@ -221,9 +221,12 @@ final class RequestCreateParams implements BaseModel
     /**
      * Business entity classification.
      *
-     * @var value-of<TollFreeVerificationEntityType>|null $entityType
+     * @var value-of<MessagingTollFreeVerificationEntityType>|null $entityType
      */
-    #[Optional(enum: TollFreeVerificationEntityType::class, nullable: true)]
+    #[Optional(
+        enum: MessagingTollFreeVerificationEntityType::class,
+        nullable: true
+    )]
     public ?string $entityType;
 
     /**
@@ -333,7 +336,7 @@ final class RequestCreateParams implements BaseModel
      * @param list<URL|URLShape> $optInWorkflowImageURLs
      * @param list<TfPhoneNumber|TfPhoneNumberShape> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
-     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
+     * @param MessagingTollFreeVerificationEntityType|value-of<MessagingTollFreeVerificationEntityType>|null $entityType
      */
     public static function with(
         string $additionalInformation,
@@ -361,7 +364,7 @@ final class RequestCreateParams implements BaseModel
         ?string $businessRegistrationType = null,
         ?string $campaignVerifyAuthorizationToken = null,
         ?string $doingBusinessAs = null,
-        TollFreeVerificationEntityType|string|null $entityType = null,
+        MessagingTollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
         ?string $isvReseller = null,
         ?string $optInConfirmationResponse = null,
@@ -705,10 +708,10 @@ final class RequestCreateParams implements BaseModel
     /**
      * Business entity classification.
      *
-     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
+     * @param MessagingTollFreeVerificationEntityType|value-of<MessagingTollFreeVerificationEntityType>|null $entityType
      */
     public function withEntityType(
-        TollFreeVerificationEntityType|string|null $entityType
+        MessagingTollFreeVerificationEntityType|string|null $entityType
     ): self {
         $self = clone $this;
         $self['entityType'] = $entityType;

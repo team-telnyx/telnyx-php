@@ -36,7 +36,7 @@ final class GlobalIPAssignmentsUsageService implements GlobalIPAssignmentsUsageC
     /**
      * @api
      *
-     * Global IP Assignment Usage Metrics
+     * Retrieve usage metrics for your Global IP assignments.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_assignment_id][in], filter[global_ip_id][in]
      * @param RequestOpts|null $requestOptions

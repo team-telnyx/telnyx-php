@@ -35,7 +35,7 @@ final class SettingsService implements SettingsContract
     /**
      * @api
      *
-     * Get WABA settings
+     * Returns account-level settings for the specified WhatsApp Business Account.
      *
      * @param string $id Whatsapp Business Account ID
      * @param RequestOpts|null $requestOptions
@@ -55,7 +55,7 @@ final class SettingsService implements SettingsContract
     /**
      * @api
      *
-     * Update WABA settings
+     * Updates the supplied account-level settings for the specified WhatsApp Business Account.
      *
      * @param string $id Whatsapp Business Account ID
      * @param string $timezone IANA timezone identifier

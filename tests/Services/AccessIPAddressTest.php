@@ -36,7 +36,7 @@ final class AccessIPAddressTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->accessIPAddress->create(ipAddress: 'ip_address');
+        $result = $this->client->accessIPAddress->create(ipAddress: 'Ip Address');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AccessIPAddressResponse::class, $result);
@@ -50,8 +50,8 @@ final class AccessIPAddressTest extends TestCase
         }
 
         $result = $this->client->accessIPAddress->create(
-            ipAddress: 'ip_address',
-            description: 'description'
+            ipAddress: 'Ip Address',
+            description: 'Description'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

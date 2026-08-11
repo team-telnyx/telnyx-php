@@ -50,7 +50,7 @@ final class EmailDomainsService implements EmailDomainsContract
     /**
      * @api
      *
-     * Create an email domain
+     * Registers a domain for email sending and optional inbound delivery. The response includes the domain configuration and current verification state.
      *
      * @param EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy DMARC policy for a sending domain. Drives the recommended _dmarc.<domain> TXT record. DMARC is advisory and never blocks sending. When omitted or null, the domain uses the advisory default (v=DMARC1; p=none; rua=mailto:dmarc@telnyx.com).
      * @param bool $inboundEnabled Enable inbound routing for this domain
@@ -104,7 +104,7 @@ final class EmailDomainsService implements EmailDomainsContract
     /**
      * @api
      *
-     * Update an email domain
+     * Updates mutable settings for an existing email domain, including inbound delivery and tracking configuration. Shared domains are read-only for non-owner accounts.
      *
      * @param string $id Email domain UUID
      * @param EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy DMARC policy for a sending domain. Drives the recommended _dmarc.<domain> TXT record. DMARC is advisory and never blocks sending. When omitted or null, the domain uses the advisory default (v=DMARC1; p=none; rua=mailto:dmarc@telnyx.com).
@@ -194,7 +194,7 @@ final class EmailDomainsService implements EmailDomainsContract
     /**
      * @api
      *
-     * Delete an email domain
+     * Deletes an email domain configuration. Verified domains require `force=true`, and shared domains are read-only for non-owner accounts.
      *
      * @param string $id Email domain UUID
      * @param bool $force Required as true when deleting verified domains
@@ -218,7 +218,7 @@ final class EmailDomainsService implements EmailDomainsContract
     /**
      * @api
      *
-     * List DNS records for an email domain
+     * Returns the DNS records Telnyx generated for domain ownership and DKIM verification, plus MX records when inbound delivery is enabled.
      *
      * @param string $domainID Email domain UUID
      * @param RequestOpts|null $requestOptions
@@ -258,7 +258,7 @@ final class EmailDomainsService implements EmailDomainsContract
     /**
      * @api
      *
-     * Verify DNS records for an email domain
+     * Checks the published DNS records against the records required for the email domain and returns the latest verification results.
      *
      * @param string $domainID Email domain UUID
      * @param RequestOpts|null $requestOptions

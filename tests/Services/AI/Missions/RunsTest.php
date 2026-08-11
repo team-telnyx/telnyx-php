@@ -107,8 +107,8 @@ final class RunsTest extends TestCase
             error: 'error',
             metadata: ['foo' => 'bar'],
             resultPayload: ['foo' => 'bar'],
-            resultSummary: 'result_summary',
-            status: RunStatus::PENDING,
+            resultSummary: 'Processed 24 customer records successfully.',
+            status: RunStatus::SUCCEEDED,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

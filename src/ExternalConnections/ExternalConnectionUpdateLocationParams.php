@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update a location's static emergency address.
+ * Update the static emergency address assigned to a specific location of an external connection.
  *
  * @see Telnyx\Services\ExternalConnectionsService::updateLocation()
  *

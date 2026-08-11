@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update requirement group for a phone number order.
+ * Associates an existing requirement group with a phone number in a number order. The response contains the updated number-order phone-number details.
  *
  * @see Telnyx\Services\NumberOrderPhoneNumbersService::updateRequirementGroup()
  *

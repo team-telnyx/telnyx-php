@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement;
 
 /**
- * Update requirement values in requirement group.
+ * Updates the customer reference or regulatory requirement values on the specified requirement group. The response contains the updated group.
  *
  * @see Telnyx\Services\RequirementGroupsService::update()
  *

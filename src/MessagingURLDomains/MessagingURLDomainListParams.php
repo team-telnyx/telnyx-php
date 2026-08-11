@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List messaging URL domains.
+ * Returns the URL domains available to the authenticated account for message URL shortening.
  *
  * @see Telnyx\Services\MessagingURLDomainsService::list()
  *

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomCompositions\RoomCompositionListParams\Filter;
 
 /**
- * View a list of room compositions.
+ * Returns a paginated list of room compositions. Filter compositions by creation date, room session, or processing status.
  *
  * @see Telnyx\Services\RoomCompositionsService::list()
  *

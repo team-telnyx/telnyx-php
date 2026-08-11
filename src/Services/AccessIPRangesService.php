@@ -37,7 +37,7 @@ final class AccessIPRangesService implements AccessIPRangesContract
     /**
      * @api
      *
-     * Create new Access IP Range
+     * Create a new access IP range on your account.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -61,7 +61,7 @@ final class AccessIPRangesService implements AccessIPRangesContract
     /**
      * @api
      *
-     * List all Access IP Ranges
+     * Retrieve a paginated list of access IP ranges configured on your account.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      * @param RequestOpts|null $requestOptions
@@ -93,7 +93,7 @@ final class AccessIPRangesService implements AccessIPRangesContract
     /**
      * @api
      *
-     * Delete access IP ranges
+     * Delete an access IP range from your account.
      *
      * @param string $accessIPRangeID unique identifier of the access ip range
      * @param RequestOpts|null $requestOptions

@@ -10,7 +10,7 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserAddressesContract;
-use Telnyx\UserAddresses\UserAddress;
+use Telnyx\UserAddresses\UserAddressesUserAddress;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressListParams\Filter;
 use Telnyx\UserAddresses\UserAddressListParams\Sort;
@@ -142,7 +142,7 @@ final class UserAddressesService implements UserAddressesContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<UserAddress>
+     * @return DefaultFlatPagination<UserAddressesUserAddress>
      *
      * @throws APIException
      */

@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create new Access IP Address.
+ * Create a new access IP address entry on your account.
  *
  * @see Telnyx\Services\AccessIPAddressService::create()
  *

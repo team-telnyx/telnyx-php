@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all clusters.
+ * Retrieve a paginated list of clustering tasks and their statuses.
  *
  * @see Telnyx\Services\AI\ClustersService::list()
  *

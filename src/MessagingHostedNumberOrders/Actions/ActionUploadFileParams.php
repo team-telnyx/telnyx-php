@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\FileParam;
 
 /**
- * Upload hosted number document.
+ * Uploads a supporting document to the specified hosted-messaging order.
  *
  * @see Telnyx\Services\MessagingHostedNumberOrders\ActionsService::uploadFile()
  *

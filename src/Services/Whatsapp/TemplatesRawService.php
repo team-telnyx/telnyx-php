@@ -35,7 +35,7 @@ final class TemplatesRawService implements TemplatesRawContract
     /**
      * @api
      *
-     * Create a Whatsapp message template
+     * Creates a WhatsApp message template for review and subsequent use in template messages.
      *
      * @param array{
      *   category: Category|value-of<Category>,
@@ -72,7 +72,7 @@ final class TemplatesRawService implements TemplatesRawContract
     /**
      * @api
      *
-     * List Whatsapp message templates
+     * Returns WhatsApp message templates owned by the authenticated account, including their current review state.
      *
      * @param array{
      *   filterCategory?: FilterCategory|value-of<FilterCategory>,

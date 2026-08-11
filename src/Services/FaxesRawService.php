@@ -103,7 +103,7 @@ final class FaxesRawService implements FaxesRawContract
     /**
      * @api
      *
-     * View a fax
+     * Retrieve the details of a single fax.
      *
      * @param string $id the unique identifier of a fax
      * @param RequestOpts|null $requestOptions
@@ -128,7 +128,7 @@ final class FaxesRawService implements FaxesRawContract
     /**
      * @api
      *
-     * View a list of faxes
+     * Retrieve a paginated list of faxes sent or received on your account.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -165,7 +165,7 @@ final class FaxesRawService implements FaxesRawContract
     /**
      * @api
      *
-     * Delete a fax
+     * Delete a fax resource from your account.
      *
      * @param string $id the unique identifier of a fax
      * @param RequestOpts|null $requestOptions

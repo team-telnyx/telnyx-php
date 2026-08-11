@@ -28,7 +28,7 @@ final class PaymentRawService implements PaymentRawContract
     /**
      * @api
      *
-     * Create a stored payment transaction
+     * Create a transaction that charges a stored payment method on the account.
      *
      * @param array{amount: string}|PaymentCreateStoredPaymentTransactionParams $params
      * @param RequestOpts|null $requestOptions

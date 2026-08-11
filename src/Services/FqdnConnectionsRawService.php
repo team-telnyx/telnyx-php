@@ -145,6 +145,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *   androidPushCredentialID?: string|null,
      *   callCostInWebhooks?: bool,
      *   connectionName?: string,
+     *   conversationPersistence?: bool,
      *   defaultOnHoldComfortNoiseEnabled?: bool,
      *   dtmfType?: DtmfType|value-of<DtmfType>,
      *   encodeContactHeaderEnabled?: bool,

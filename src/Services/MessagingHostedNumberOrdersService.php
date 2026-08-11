@@ -51,7 +51,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
     /**
      * @api
      *
-     * Create a messaging hosted number order
+     * Creates an order to enable Telnyx messaging on phone numbers whose voice service remains with another carrier.
      *
      * @param string $messagingProfileID automatically associate the number with this messaging profile ID when the order is complete
      * @param list<string> $phoneNumbers phone numbers to be used for hosted messaging
@@ -80,7 +80,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
     /**
      * @api
      *
-     * Retrieve a messaging hosted number order
+     * Returns the current state, phone numbers, and required actions for the specified hosted-messaging order.
      *
      * @param string $id identifies the type of resource
      * @param RequestOpts|null $requestOptions
@@ -100,7 +100,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
     /**
      * @api
      *
-     * List messaging hosted number orders
+     * Returns hosted-messaging orders for the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -146,7 +146,7 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
     /**
      * @api
      *
-     * Check hosted messaging eligibility
+     * Checks whether the supplied phone numbers are eligible for hosted messaging before an order is created.
      *
      * @param list<string> $phoneNumbers List of phone numbers to check eligibility
      * @param RequestOpts|null $requestOptions

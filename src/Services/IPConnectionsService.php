@@ -178,6 +178,7 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      * @param string|null $androidPushCredentialID The uuid of the push credential for Android
      * @param bool $callCostInWebhooks specifies if call cost webhooks should be sent for this connection
+     * @param bool $conversationPersistence Whether conversation persistence is enabled for this connection. When enabled, calls handled by the connection are transcribed, stored, and indexed. Defaults to false.
      * @param bool $defaultOnHoldComfortNoiseEnabled When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      * @param DtmfType|value-of<DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      * @param bool $encodeContactHeaderEnabled encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios
@@ -207,6 +208,7 @@ final class IPConnectionsService implements IPConnectionsContract
         ?string $androidPushCredentialID = null,
         bool $callCostInWebhooks = false,
         ?string $connectionName = null,
+        ?bool $conversationPersistence = null,
         bool $defaultOnHoldComfortNoiseEnabled = true,
         DtmfType|string $dtmfType = 'RFC 2833',
         bool $encodeContactHeaderEnabled = false,
@@ -234,6 +236,7 @@ final class IPConnectionsService implements IPConnectionsContract
                 'androidPushCredentialID' => $androidPushCredentialID,
                 'callCostInWebhooks' => $callCostInWebhooks,
                 'connectionName' => $connectionName,
+                'conversationPersistence' => $conversationPersistence,
                 'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
                 'dtmfType' => $dtmfType,
                 'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,

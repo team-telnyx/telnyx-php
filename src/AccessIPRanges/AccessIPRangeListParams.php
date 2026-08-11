@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all Access IP Ranges.
+ * Retrieve a paginated list of access IP ranges configured on your account.
  *
  * @see Telnyx\Services\AccessIPRangesService::list()
  *

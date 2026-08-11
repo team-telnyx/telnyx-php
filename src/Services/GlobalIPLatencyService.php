@@ -36,7 +36,7 @@ final class GlobalIPLatencyService implements GlobalIPLatencyContract
     /**
      * @api
      *
-     * Global IP Latency Metrics
+     * Retrieve latency metrics measured for your Global IPs.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
      * @param RequestOpts|null $requestOptions

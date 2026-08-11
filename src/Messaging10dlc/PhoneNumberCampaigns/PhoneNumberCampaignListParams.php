@@ -12,7 +12,7 @@ use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Fil
 use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
 
 /**
- * List phone number campaigns.
+ * Returns phone-number-to-campaign assignments for the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
  *
  * @see Telnyx\Services\Messaging10dlc\PhoneNumberCampaignsService::list()
  *

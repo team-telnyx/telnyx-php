@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Enable emergency for a phone number.
+ * Associates emergency-service settings with the specified phone number. The operation returns the updated phone-number configuration when completed immediately or an accepted state when processing continues asynchronously.
  *
  * @see Telnyx\Services\PhoneNumbers\ActionsService::enableEmergency()
  *

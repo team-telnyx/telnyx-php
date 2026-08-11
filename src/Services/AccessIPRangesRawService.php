@@ -33,7 +33,7 @@ final class AccessIPRangesRawService implements AccessIPRangesRawContract
     /**
      * @api
      *
-     * Create new Access IP Range
+     * Create a new access IP range on your account.
      *
      * @param array{
      *   cidrBlock: string, description?: string
@@ -66,7 +66,7 @@ final class AccessIPRangesRawService implements AccessIPRangesRawContract
     /**
      * @api
      *
-     * List all Access IP Ranges
+     * Retrieve a paginated list of access IP ranges configured on your account.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -103,7 +103,7 @@ final class AccessIPRangesRawService implements AccessIPRangesRawContract
     /**
      * @api
      *
-     * Delete access IP ranges
+     * Delete an access IP range from your account.
      *
      * @param string $accessIPRangeID unique identifier of the access ip range
      * @param RequestOpts|null $requestOptions

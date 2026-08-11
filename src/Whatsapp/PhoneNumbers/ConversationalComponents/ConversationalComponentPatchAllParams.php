@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Whatsapp\PhoneNumbers\ConversationalComponents\ConversationalComponentPatchAllParams\Command;
 
 /**
- * Update phone number conversational components.
+ * Updates the conversational components configured for the specified WhatsApp phone number.
  *
  * @see Telnyx\Services\Whatsapp\PhoneNumbers\ConversationalComponentsService::patchAll()
  *

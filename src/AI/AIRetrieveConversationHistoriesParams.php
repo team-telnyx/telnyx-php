@@ -39,13 +39,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `contains` — wildcard substring match
  *
  * **Examples:**
- * ```
- * GET /v2/ai/conversation_histories?q=billing+issue&page[size]=10
- * GET /v2/ai/conversation_histories?q=setup+guide&region=USA&min_score=0.5
- * GET /v2/ai/conversation_histories?q=refund&filter[record_created_at][gte]=2026-01-01T00:00:00Z
- * GET /v2/ai/conversation_histories?q=outage&filter[region][in]=USA,DEU
- * GET /v2/ai/conversation_histories?q=hold+time&filter[language]=en
- * ```
+ * - `GET /v2/ai/conversation_histories?q=billing+issue&page[size]=10`
+ * - `GET /v2/ai/conversation_histories?q=setup+guide&region=USA&min_score=0.5`
+ * - `GET /v2/ai/conversation_histories?q=refund&filter[record_created_at][gte]=2026-01-01T00:00:00Z`
+ * - `GET /v2/ai/conversation_histories?q=outage&filter[region][in]=USA,DEU`
+ * - `GET /v2/ai/conversation_histories?q=hold+time&filter[language]=en`
  *
  * @see Telnyx\Services\AIService::retrieveConversationHistories()
  *

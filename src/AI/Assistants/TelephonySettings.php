@@ -19,6 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type TelephonySettingsShape = array{
  *   defaultTexmlAppID?: string|null,
+ *   disableDtmf?: bool|null,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
  *   noiseSuppressionConfig?: null|NoiseSuppressionConfig|NoiseSuppressionConfigShape,
  *   recordingSettings?: null|RecordingSettings|RecordingSettingsShape,
@@ -39,6 +40,12 @@ final class TelephonySettings implements BaseModel
      */
     #[Optional('default_texml_app_id')]
     public ?string $defaultTexmlAppID;
+
+    /**
+     * Disable inbound DTMF for the entire call. Must be set to true if a 'pay' tool is configured anywhere on the assistant — on the main tool array or on any workflow node — enforced at write time.
+     */
+    #[Optional('disable_dtmf')]
+    public ?bool $disableDtmf;
 
     /**
      * The noise suppression engine to use. Use 'disabled' to turn off noise suppression.
@@ -107,6 +114,7 @@ final class TelephonySettings implements BaseModel
      */
     public static function with(
         ?string $defaultTexmlAppID = null,
+        ?bool $disableDtmf = null,
         NoiseSuppression|string|null $noiseSuppression = null,
         NoiseSuppressionConfig|array|null $noiseSuppressionConfig = null,
         RecordingSettings|array|null $recordingSettings = null,
@@ -119,6 +127,7 @@ final class TelephonySettings implements BaseModel
         $self = new self;
 
         null !== $defaultTexmlAppID && $self['defaultTexmlAppID'] = $defaultTexmlAppID;
+        null !== $disableDtmf && $self['disableDtmf'] = $disableDtmf;
         null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
         null !== $noiseSuppressionConfig && $self['noiseSuppressionConfig'] = $noiseSuppressionConfig;
         null !== $recordingSettings && $self['recordingSettings'] = $recordingSettings;
@@ -138,6 +147,17 @@ final class TelephonySettings implements BaseModel
     {
         $self = clone $this;
         $self['defaultTexmlAppID'] = $defaultTexmlAppID;
+
+        return $self;
+    }
+
+    /**
+     * Disable inbound DTMF for the entire call. Must be set to true if a 'pay' tool is configured anywhere on the assistant — on the main tool array or on any workflow node — enforced at write time.
+     */
+    public function withDisableDtmf(bool $disableDtmf): self
+    {
+        $self = clone $this;
+        $self['disableDtmf'] = $disableDtmf;
 
         return $self;
     }

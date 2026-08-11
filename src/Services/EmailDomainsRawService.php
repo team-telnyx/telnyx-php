@@ -41,7 +41,7 @@ final class EmailDomainsRawService implements EmailDomainsRawContract
     /**
      * @api
      *
-     * Create an email domain
+     * Registers a domain for email sending and optional inbound delivery. The response includes the domain configuration and current verification state.
      *
      * @param array{
      *   domain: string,
@@ -102,7 +102,7 @@ final class EmailDomainsRawService implements EmailDomainsRawContract
     /**
      * @api
      *
-     * Update an email domain
+     * Updates mutable settings for an existing email domain, including inbound delivery and tracking configuration. Shared domains are read-only for non-owner accounts.
      *
      * @param string $id Email domain UUID
      * @param array{
@@ -197,7 +197,7 @@ final class EmailDomainsRawService implements EmailDomainsRawContract
     /**
      * @api
      *
-     * Delete an email domain
+     * Deletes an email domain configuration. Verified domains require `force=true`, and shared domains are read-only for non-owner accounts.
      *
      * @param string $id Email domain UUID
      * @param array{force?: bool}|EmailDomainDeleteParams $params
@@ -230,7 +230,7 @@ final class EmailDomainsRawService implements EmailDomainsRawContract
     /**
      * @api
      *
-     * List DNS records for an email domain
+     * Returns the DNS records Telnyx generated for domain ownership and DKIM verification, plus MX records when inbound delivery is enabled.
      *
      * @param string $domainID Email domain UUID
      * @param RequestOpts|null $requestOptions
@@ -280,7 +280,7 @@ final class EmailDomainsRawService implements EmailDomainsRawContract
     /**
      * @api
      *
-     * Verify DNS records for an email domain
+     * Checks the published DNS records against the records required for the email domain and returns the latest verification results.
      *
      * @param string $domainID Email domain UUID
      * @param RequestOpts|null $requestOptions

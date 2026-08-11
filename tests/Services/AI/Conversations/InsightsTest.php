@@ -38,8 +38,8 @@ final class InsightsTest extends TestCase
         }
 
         $result = $this->client->ai->conversations->insights->create(
-            instructions: 'instructions',
-            name: 'name'
+            instructions: 'Instructions',
+            name: 'Name'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,10 +54,10 @@ final class InsightsTest extends TestCase
         }
 
         $result = $this->client->ai->conversations->insights->create(
-            instructions: 'instructions',
-            name: 'name',
+            instructions: 'Instructions',
+            name: 'Name',
             jsonSchema: 'string',
-            webhook: 'webhook',
+            webhook: '',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

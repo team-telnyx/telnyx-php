@@ -50,7 +50,7 @@ final class TagsTest extends TestCase
 
         $result = $this->client->ai->assistants->tags->add(
             'assistant_id',
-            tag: 'tag'
+            tag: 'Tag'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -66,7 +66,7 @@ final class TagsTest extends TestCase
 
         $result = $this->client->ai->assistants->tags->add(
             'assistant_id',
-            tag: 'tag'
+            tag: 'Tag'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

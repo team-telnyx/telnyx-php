@@ -10,11 +10,11 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-import-type MdrDetailReportResponseShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse
- * @phpstan-import-type BatchCsvPaginationMetaShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta
+ * @phpstan-import-type BatchCsvPaginationMeta705dfa7312Shape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta705dfa7312
  *
  * @phpstan-type MessagingListResponseShape = array{
  *   data?: list<MdrDetailReportResponse|MdrDetailReportResponseShape>|null,
- *   meta?: null|BatchCsvPaginationMeta|BatchCsvPaginationMetaShape,
+ *   meta?: null|BatchCsvPaginationMeta705dfa7312|BatchCsvPaginationMeta705dfa7312Shape,
  * }
  */
 final class MessagingListResponse implements BaseModel
@@ -27,7 +27,7 @@ final class MessagingListResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?BatchCsvPaginationMeta $meta;
+    public ?BatchCsvPaginationMeta705dfa7312 $meta;
 
     public function __construct()
     {
@@ -40,11 +40,11 @@ final class MessagingListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<MdrDetailReportResponse|MdrDetailReportResponseShape>|null $data
-     * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape|null $meta
+     * @param BatchCsvPaginationMeta705dfa7312|BatchCsvPaginationMeta705dfa7312Shape|null $meta
      */
     public static function with(
         ?array $data = null,
-        BatchCsvPaginationMeta|array|null $meta = null
+        BatchCsvPaginationMeta705dfa7312|array|null $meta = null
     ): self {
         $self = new self;
 
@@ -66,9 +66,9 @@ final class MessagingListResponse implements BaseModel
     }
 
     /**
-     * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape $meta
+     * @param BatchCsvPaginationMeta705dfa7312|BatchCsvPaginationMeta705dfa7312Shape $meta
      */
-    public function withMeta(BatchCsvPaginationMeta|array $meta): self
+    public function withMeta(BatchCsvPaginationMeta705dfa7312|array $meta): self
     {
         $self = clone $this;
         $self['meta'] = $meta;

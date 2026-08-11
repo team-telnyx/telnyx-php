@@ -12,7 +12,7 @@ use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
 
 /**
- * List phone numbers with voice settings.
+ * Returns account phone numbers together with their voice settings. Results support pagination, sorting, and filters for number, connection name, customer reference, and voice usage payment method.
  *
  * @see Telnyx\Services\PhoneNumbers\VoiceService::list()
  *

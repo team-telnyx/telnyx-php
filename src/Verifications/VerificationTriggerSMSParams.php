@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Trigger SMS verification.
+ * Starts a verification for the specified phone number and sends its code by SMS using the selected Verify profile. Returns the pending verification record.
  *
  * @see Telnyx\Services\VerificationsService::triggerSMS()
  *

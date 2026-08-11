@@ -36,7 +36,7 @@ final class AccessIPRangesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->accessIPRanges->create(cidrBlock: 'cidr_block');
+        $result = $this->client->accessIPRanges->create(cidrBlock: 'Cidr Block');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AccessIPRange::class, $result);
@@ -50,8 +50,8 @@ final class AccessIPRangesTest extends TestCase
         }
 
         $result = $this->client->accessIPRanges->create(
-            cidrBlock: 'cidr_block',
-            description: 'description'
+            cidrBlock: 'Cidr Block',
+            description: 'Description'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

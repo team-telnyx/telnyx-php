@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Faxes\FaxListParams\Filter;
 
 /**
- * View a list of faxes.
+ * Retrieve a paginated list of faxes sent or received on your account.
  *
  * @see Telnyx\Services\FaxesService::list()
  *

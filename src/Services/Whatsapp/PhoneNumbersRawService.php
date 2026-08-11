@@ -12,6 +12,8 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbersRawContract;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetParams;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams;
@@ -35,7 +37,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * List Whatsapp phone numbers
+     * Returns WhatsApp phone numbers linked to the authenticated Telnyx account.
      *
      * @param array{pageNumber?: int, pageSize?: int}|PhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
@@ -70,7 +72,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * Delete a Whatsapp phone number
+     * Removes the specified phone number from Telnyx WhatsApp management.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
@@ -95,7 +97,41 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * Resend verification code
+     * Retrieve a list of the phone numbers registered for WhatsApp on your account.
+     *
+     * @param array{pageNumber?: int, pageSize?: int}|PhoneNumberGetParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<PhoneNumberGetResponse>
+     *
+     * @throws APIException
+     */
+    public function get(
+        array|PhoneNumberGetParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = PhoneNumberGetParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: 'whatsapp/phone_numbers',
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
+            options: $options,
+            convert: PhoneNumberGetResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Requests a new verification code for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param array{
@@ -172,7 +208,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * Submit verification code for a phone number
+     * Submits the verification code received for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param array{code: string}|PhoneNumberVerifyParams $params

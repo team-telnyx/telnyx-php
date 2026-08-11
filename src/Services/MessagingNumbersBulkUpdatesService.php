@@ -35,7 +35,7 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
     /**
      * @api
      *
-     * Bulk update phone number profiles
+     * Starts a bulk update of messaging-profile assignments for the supplied phone numbers. The response identifies the order used to monitor processing.
      *
      * @param string $messagingProfileID Configure the messaging profile these phone numbers are assigned to:
      *
@@ -70,7 +70,7 @@ final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUp
     /**
      * @api
      *
-     * Retrieve bulk update status
+     * Returns processing status and results for a bulk messaging-settings update order.
      *
      * @param string $orderID order ID to verify bulk update status
      * @param RequestOpts|null $requestOptions

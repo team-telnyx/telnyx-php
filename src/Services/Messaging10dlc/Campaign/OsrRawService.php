@@ -27,7 +27,7 @@ final class OsrRawService implements OsrRawContract
     /**
      * @api
      *
-     * Get OSR campaign attributes
+     * Returns the optional shared-responsibility attributes recorded for the campaign. Use these values to inspect the campaign configuration submitted to the registry.
      *
      * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions

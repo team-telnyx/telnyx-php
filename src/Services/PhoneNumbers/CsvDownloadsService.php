@@ -38,7 +38,7 @@ final class CsvDownloadsService implements CsvDownloadsContract
     /**
      * @api
      *
-     * Create a CSV download
+     * Starts generation of a CSV export for phone numbers matching the supplied filters. The `csv_format` parameter selects the output format, and the response contains the resulting download record.
      *
      * @param CsvFormat|value-of<CsvFormat> $csvFormat Which format to use when generating the CSV file. The default for backwards compatibility is 'V1'
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
@@ -64,7 +64,7 @@ final class CsvDownloadsService implements CsvDownloadsContract
     /**
      * @api
      *
-     * Retrieve a CSV download
+     * Returns the current status and download details for the CSV export identified by `id`.
      *
      * @param string $id identifies the CSV download
      * @param RequestOpts|null $requestOptions
@@ -84,7 +84,7 @@ final class CsvDownloadsService implements CsvDownloadsContract
     /**
      * @api
      *
-     * List CSV downloads
+     * Returns CSV export jobs created for account phone numbers, including each export's current status and pagination metadata.
      *
      * @param RequestOpts|null $requestOptions
      *

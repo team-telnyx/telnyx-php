@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 
 /**
- * Create auto-response setting.
+ * Creates an auto-response rule on the specified messaging profile. Matching inbound messages trigger the configured response.
  *
  * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::create()
  *

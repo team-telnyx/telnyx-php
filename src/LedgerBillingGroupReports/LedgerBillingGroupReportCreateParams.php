@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a ledger billing group report.
+ * Create a ledger billing group report, which aggregates ledger activity by billing group.
  *
  * @see Telnyx\Services\LedgerBillingGroupReportsService::create()
  *

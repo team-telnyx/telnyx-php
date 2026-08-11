@@ -13,6 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type VoiceShape = array{
  *   gender?: string|null,
+ *   hosted?: bool|null,
  *   language?: string|null,
  *   name?: string|null,
  *   provider?: string|null,
@@ -29,6 +30,12 @@ final class Voice implements BaseModel
      */
     #[Optional]
     public ?string $gender;
+
+    /**
+     * Whether this voice runs on Telnyx-hosted infrastructure (`true`) or is provided by a third-party vendor (`false`).
+     */
+    #[Optional]
+    public ?bool $hosted;
 
     /**
      * Language code.
@@ -66,6 +73,7 @@ final class Voice implements BaseModel
      */
     public static function with(
         ?string $gender = null,
+        ?bool $hosted = null,
         ?string $language = null,
         ?string $name = null,
         ?string $provider = null,
@@ -74,6 +82,7 @@ final class Voice implements BaseModel
         $self = new self;
 
         null !== $gender && $self['gender'] = $gender;
+        null !== $hosted && $self['hosted'] = $hosted;
         null !== $language && $self['language'] = $language;
         null !== $name && $self['name'] = $name;
         null !== $provider && $self['provider'] = $provider;
@@ -89,6 +98,17 @@ final class Voice implements BaseModel
     {
         $self = clone $this;
         $self['gender'] = $gender;
+
+        return $self;
+    }
+
+    /**
+     * Whether this voice runs on Telnyx-hosted infrastructure (`true`) or is provided by a third-party vendor (`false`).
+     */
+    public function withHosted(bool $hosted): self
+    {
+        $self = clone $this;
+        $self['hosted'] = $hosted;
 
         return $self;
     }

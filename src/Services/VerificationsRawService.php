@@ -32,7 +32,7 @@ final class VerificationsRawService implements VerificationsRawContract
     /**
      * @api
      *
-     * Retrieve verification
+     * Returns the verification identified by ID, including its channel, phone number, Verify profile, timeout, and current status.
      *
      * @param string $verificationID the identifier of the verification to retrieve
      * @param RequestOpts|null $requestOptions
@@ -57,7 +57,7 @@ final class VerificationsRawService implements VerificationsRawContract
     /**
      * @api
      *
-     * Trigger Call verification
+     * Starts a verification for the specified phone number and delivers its code in a voice call using the selected Verify profile. Returns the pending verification record.
      *
      * @param array{
      *   phoneNumber: string,
@@ -94,7 +94,7 @@ final class VerificationsRawService implements VerificationsRawContract
     /**
      * @api
      *
-     * Trigger Flash call verification
+     * Starts a verification for the specified phone number and places a brief call with the code embedded in the caller ID. Returns the pending verification record.
      *
      * @param array{
      *   phoneNumber: string, verifyProfileID: string, timeoutSecs?: int
@@ -127,7 +127,7 @@ final class VerificationsRawService implements VerificationsRawContract
     /**
      * @api
      *
-     * Trigger SMS verification
+     * Starts a verification for the specified phone number and sends its code by SMS using the selected Verify profile. Returns the pending verification record.
      *
      * @param array{
      *   phoneNumber: string,
@@ -163,7 +163,7 @@ final class VerificationsRawService implements VerificationsRawContract
     /**
      * @api
      *
-     * Trigger WhatsApp verification
+     * Starts a verification for the specified phone number and sends its code over WhatsApp using the selected Verify profile. Returns the pending verification record.
      *
      * @param array{
      *   phoneNumber: string,

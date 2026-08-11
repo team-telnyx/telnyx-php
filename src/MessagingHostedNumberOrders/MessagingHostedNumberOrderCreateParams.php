@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a messaging hosted number order.
+ * Creates an order to enable Telnyx messaging on phone numbers whose voice service remains with another carrier.
  *
  * @see Telnyx\Services\MessagingHostedNumberOrdersService::create()
  *

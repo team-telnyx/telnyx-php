@@ -37,7 +37,9 @@ final class EmailUnsubscribeGroupsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailUnsubscribeGroups->create(name: 'x');
+        $result = $this->client->emailUnsubscribeGroups->create(
+            name: 'Marketing Newsletter'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UnsubscribeGroupResponse::class, $result);
@@ -51,8 +53,8 @@ final class EmailUnsubscribeGroupsTest extends TestCase
         }
 
         $result = $this->client->emailUnsubscribeGroups->create(
-            name: 'x',
-            description: 'description'
+            name: 'Marketing Newsletter',
+            description: 'Weekly product updates and promotions',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

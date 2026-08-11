@@ -34,7 +34,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * List phone numbers for a WABA
+     * Returns phone numbers registered under the specified WhatsApp Business Account.
      *
      * @param string $id Whatsapp Business Account ID
      * @param RequestOpts|null $requestOptions
@@ -62,7 +62,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Initialize Whatsapp phone number verification
+     * Starts verification of a phone number for the specified WhatsApp Business Account using the requested verification method.
      *
      * @param string $id Whatsapp Business Account ID
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod

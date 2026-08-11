@@ -35,7 +35,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Verify verification code by ID
+     * Checks the supplied code, or the supplied status for a custom-code verification, against the verification identified by ID. The response indicates whether the verification was accepted or rejected.
      *
      * @param string $verificationID the identifier of the verification to retrieve
      * @param string $code this is the code the user submits for verification

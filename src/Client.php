@@ -132,7 +132,7 @@ use Telnyx\Services\PrivateWirelessGatewaysService;
 use Telnyx\Services\PronunciationDictsService;
 use Telnyx\Services\PublicInternetGatewaysService;
 use Telnyx\Services\QueuesService;
-use Telnyx\Services\RcsAgentsService;
+use Telnyx\Services\RcsService;
 use Telnyx\Services\RecordingsService;
 use Telnyx\Services\RecordingTranscriptionsService;
 use Telnyx\Services\RegionsService;
@@ -719,7 +719,7 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public RcsAgentsService $rcsAgents;
+    public RcsService $rcs;
 
     /**
      * @api
@@ -1280,7 +1280,7 @@ class Client extends BaseClient
         $this->privateWirelessGateways = new PrivateWirelessGatewaysService($this);
         $this->publicInternetGateways = new PublicInternetGatewaysService($this);
         $this->queues = new QueuesService($this);
-        $this->rcsAgents = new RcsAgentsService($this);
+        $this->rcs = new RcsService($this);
         $this->recordingTranscriptions = new RecordingTranscriptionsService($this);
         $this->recordings = new RecordingsService($this);
         $this->regions = new RegionsService($this);

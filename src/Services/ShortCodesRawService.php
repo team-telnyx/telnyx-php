@@ -35,7 +35,7 @@ final class ShortCodesRawService implements ShortCodesRawContract
     /**
      * @api
      *
-     * Retrieve a short code
+     * Returns the messaging configuration and assignment details for the specified short code.
      *
      * @param string $id The id of the short code
      * @param RequestOpts|null $requestOptions
@@ -96,7 +96,7 @@ final class ShortCodesRawService implements ShortCodesRawContract
     /**
      * @api
      *
-     * List short codes
+     * Returns short codes owned by the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int

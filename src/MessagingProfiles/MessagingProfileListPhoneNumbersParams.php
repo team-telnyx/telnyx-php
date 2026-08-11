@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List phone numbers associated with a messaging profile.
+ * Returns the phone numbers currently associated with the specified messaging profile.
  *
  * @see Telnyx\Services\MessagingProfilesService::listPhoneNumbers()
  *

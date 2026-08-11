@@ -9,8 +9,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\PhoneNumbers\NumbersPhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
-use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter;
@@ -41,7 +41,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * Retrieve a phone number
+     * Returns the detailed configuration and current state of the phone number identified by `id`.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -66,7 +66,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * Update a phone number
+     * Updates the configurable settings of the specified phone number. The response contains the complete updated phone-number representation.
      *
      * @param string $phoneNumberID identifies the resource
      * @param array{
@@ -107,7 +107,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * List phone numbers
+     * Returns phone numbers associated with the account. Results support pagination, sorting, and filters for number attributes, status, source, connections, billing groups, emergency addresses, tags, and customer references.
      *
      * @param array{
      *   filter?: Filter|FilterShape,
@@ -118,7 +118,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      * }|PhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumberDetailed>>
+     * @return BaseResponse<DefaultFlatPagination<NumbersPhoneNumberDetailed>>
      *
      * @throws APIException
      */
@@ -144,7 +144,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
                 ],
             ),
             options: $options,
-            convert: PhoneNumberDetailed::class,
+            convert: NumbersPhoneNumberDetailed::class,
             page: DefaultFlatPagination::class,
         );
     }
@@ -152,7 +152,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
     /**
      * @api
      *
-     * Delete a phone number
+     * Deletes the specified phone number from the account. The response contains the phone number's final deleted representation.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

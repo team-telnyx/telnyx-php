@@ -33,7 +33,7 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
     /**
      * @api
      *
-     * Create new Access IP Address
+     * Create a new access IP address entry on your account.
      *
      * @param array{
      *   ipAddress: string, description?: string
@@ -66,7 +66,7 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
     /**
      * @api
      *
-     * Retrieve an access IP address
+     * Retrieve the details of a specific access IP address.
      *
      * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions
@@ -91,7 +91,7 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
     /**
      * @api
      *
-     * List all Access IP Addresses
+     * Retrieve a paginated list of access IP addresses configured on your account.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -128,7 +128,7 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
     /**
      * @api
      *
-     * Delete access IP address
+     * Delete an access IP address entry from your account.
      *
      * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions

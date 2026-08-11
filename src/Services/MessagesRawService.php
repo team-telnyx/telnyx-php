@@ -26,12 +26,14 @@ use Telnyx\Messages\MessageSendShortCodeParams;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderParams;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
+use Telnyx\Messages\MessageWhatsappParams;
+use Telnyx\Messages\MessageWhatsappResponse;
+use Telnyx\Messages\WhatsappMessageContent;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesRawContract;
 
 /**
- * Messages.
- *
+ * @phpstan-import-type WhatsappMessageContentShape from \Telnyx\Messages\WhatsappMessageContent
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagesRawService implements MessagesRawContract
@@ -217,7 +219,7 @@ final class MessagesRawService implements MessagesRawContract
     /**
      * @api
      *
-     * Send a group MMS message
+     * Queues an MMS addressed to multiple recipients as a group conversation. Delivery events are reported asynchronously through messaging webhooks.
      *
      * @param array{
      *   from: string,
@@ -257,7 +259,7 @@ final class MessagesRawService implements MessagesRawContract
     /**
      * @api
      *
-     * Send a long code message
+     * Queues an outbound SMS or MMS using a long-code sender. Delivery progress and final disposition are reported asynchronously through messaging webhooks.
      *
      * @param array{
      *   from: string,
@@ -300,7 +302,7 @@ final class MessagesRawService implements MessagesRawContract
     /**
      * @api
      *
-     * Send a message using number pool
+     * Queues an outbound message using a number pool. Telnyx selects an eligible sender from the pool according to its messaging profile configuration.
      *
      * @param array{
      *   messagingProfileID: string,
@@ -343,7 +345,7 @@ final class MessagesRawService implements MessagesRawContract
     /**
      * @api
      *
-     * Send a short code message
+     * Queues an outbound SMS or MMS using a short-code sender. Delivery progress and final disposition are reported asynchronously through messaging webhooks.
      *
      * @param array{
      *   from: string,
@@ -419,6 +421,44 @@ final class MessagesRawService implements MessagesRawContract
             body: (object) $parsed,
             options: $options,
             convert: MessageSendWithAlphanumericSenderResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Sends a WhatsApp message using a Telnyx WhatsApp-enabled number. The message body, interactive elements, media, location, and reaction content are specified in the `whatsapp_message` field. Delivery progress and final disposition are reported asynchronously through messaging webhooks.
+     *
+     * @param array{
+     *   from: string,
+     *   to: string,
+     *   whatsappMessage: WhatsappMessageContent|WhatsappMessageContentShape,
+     *   messagingProfileID?: string,
+     *   type?: MessageWhatsappParams\Type|value-of<MessageWhatsappParams\Type>,
+     *   webhookURL?: string,
+     * }|MessageWhatsappParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<MessageWhatsappResponse>
+     *
+     * @throws APIException
+     */
+    public function whatsapp(
+        array|MessageWhatsappParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = MessageWhatsappParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'messages/whatsapp',
+            body: (object) $parsed,
+            options: $options,
+            convert: MessageWhatsappResponse::class,
         );
     }
 }

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update Whatsapp user data.
+ * Updates the supplied WhatsApp user-data settings for the authenticated Telnyx account.
  *
  * @see Telnyx\Services\Whatsapp\UserDataService::update()
  *

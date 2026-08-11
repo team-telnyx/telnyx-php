@@ -13,7 +13,7 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\HandleMessagingProfileError;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 
 /**
- * List phone numbers.
+ * Returns phone numbers associated with the account. Results support pagination, sorting, and filters for number attributes, status, source, connections, billing groups, emergency addresses, tags, and customer references.
  *
  * @see Telnyx\Services\PhoneNumbersService::list()
  *

@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type UserAddressShape from \Telnyx\UserAddresses\UserAddress
+ * @phpstan-import-type UserAddressesUserAddressShape from \Telnyx\UserAddresses\UserAddressesUserAddress
  *
  * @phpstan-type UserAddressNewResponseShape = array{
- *   data?: null|UserAddress|UserAddressShape
+ *   data?: null|UserAddressesUserAddress|UserAddressesUserAddressShape
  * }
  */
 final class UserAddressNewResponse implements BaseModel
@@ -21,7 +21,7 @@ final class UserAddressNewResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?UserAddress $data;
+    public ?UserAddressesUserAddress $data;
 
     public function __construct()
     {
@@ -33,10 +33,11 @@ final class UserAddressNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param UserAddress|UserAddressShape|null $data
+     * @param UserAddressesUserAddress|UserAddressesUserAddressShape|null $data
      */
-    public static function with(UserAddress|array|null $data = null): self
-    {
+    public static function with(
+        UserAddressesUserAddress|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -45,9 +46,9 @@ final class UserAddressNewResponse implements BaseModel
     }
 
     /**
-     * @param UserAddress|UserAddressShape $data
+     * @param UserAddressesUserAddress|UserAddressesUserAddressShape $data
      */
-    public function withData(UserAddress|array $data): self
+    public function withData(UserAddressesUserAddress|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

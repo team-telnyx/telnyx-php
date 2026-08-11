@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List Tools.
+ * Retrieve a list of the custom AI tools configured on your account.
  *
  * @see Telnyx\Services\AI\ToolsService::list()
  *

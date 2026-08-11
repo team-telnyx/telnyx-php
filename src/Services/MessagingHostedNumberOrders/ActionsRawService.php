@@ -29,7 +29,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Upload hosted number document
+     * Uploads a supporting document to the specified hosted-messaging order.
      *
      * @param string $id identifies the type of resource
      * @param array{

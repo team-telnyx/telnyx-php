@@ -76,7 +76,7 @@ final class RcsRawService implements RcsRawContract
     /**
      * @api
      *
-     * Send an RCS message
+     * Queues an outbound RCS message through the selected RCS agent. Check recipient capabilities before sending features that require RCS support.
      *
      * @param array{
      *   agentID: string,

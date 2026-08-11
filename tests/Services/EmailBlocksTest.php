@@ -38,7 +38,7 @@ final class EmailBlocksTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailBlocks->create(to: 'to');
+        $result = $this->client->emailBlocks->create(to: 'spammer@bad.tld');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(EmailBlockResponse::class, $result);
@@ -52,9 +52,9 @@ final class EmailBlocksTest extends TestCase
         }
 
         $result = $this->client->emailBlocks->create(
-            to: 'to',
+            to: 'spammer@bad.tld',
             domainID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            expiresAt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            expiresAt: new \DateTimeImmutable('2026-12-31T23:59:59Z'),
             from: 'from',
         );
 

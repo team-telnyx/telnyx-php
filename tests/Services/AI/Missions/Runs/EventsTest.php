@@ -122,7 +122,7 @@ final class EventsTest extends TestCase
         $result = $this->client->ai->missions->runs->events->log(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             missionID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            summary: 'summary',
+            summary: 'Summary',
             type: EventType::STATUS_CHANGE,
         );
 
@@ -140,12 +140,12 @@ final class EventsTest extends TestCase
         $result = $this->client->ai->missions->runs->events->log(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             missionID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            summary: 'summary',
+            summary: 'Summary',
             type: EventType::STATUS_CHANGE,
-            agentID: 'agent_id',
-            idempotencyKey: 'idempotency_key',
+            agentID: 'Agent Id',
+            idempotencyKey: 'Idempotency Key',
             payload: ['foo' => 'bar'],
-            stepID: 'step_id',
+            stepID: 'Step Id',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

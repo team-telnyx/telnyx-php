@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update phone number business profile.
+ * Updates the supplied business-profile fields for the specified WhatsApp phone number.
  *
  * @see Telnyx\Services\Whatsapp\PhoneNumbers\ProfileService::update()
  *

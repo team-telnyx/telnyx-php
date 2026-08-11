@@ -8,13 +8,14 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForMessagingTollfree;
+use Telnyx\MessagingTollfree\Verification\Requests\MessagingTollFreeVerificationEntityType;
+use Telnyx\MessagingTollfree\Verification\Requests\MessagingTollFreeVerificationVerificationRequestEgress;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestGetResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestGetStatusHistoryResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
-use Telnyx\MessagingTollfree\Verification\Requests\TollFreeVerificationEntityType;
 use Telnyx\MessagingTollfree\Verification\Requests\URL;
 use Telnyx\MessagingTollfree\Verification\Requests\UseCaseCategories;
-use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestEgress;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus;
 use Telnyx\MessagingTollfree\Verification\Requests\Volume;
 use Telnyx\RequestOptions;
@@ -72,7 +73,7 @@ final class RequestsService implements RequestsContract
      * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
      * @param string|null $campaignVerifyAuthorizationToken Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
-     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
+     * @param MessagingTollFreeVerificationEntityType|value-of<MessagingTollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
      * @param string|null $isvReseller ISV name
      * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
@@ -110,7 +111,7 @@ final class RequestsService implements RequestsContract
         ?string $businessRegistrationType = null,
         ?string $campaignVerifyAuthorizationToken = null,
         ?string $doingBusinessAs = null,
-        TollFreeVerificationEntityType|string|null $entityType = null,
+        MessagingTollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
         ?string $isvReseller = null,
         ?string $optInConfirmationResponse = null,
@@ -119,7 +120,7 @@ final class RequestsService implements RequestsContract
         ?string $termsAndConditionURL = null,
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
-    ): VerificationRequestEgress {
+    ): MessagingTollFreeVerificationVerificationRequestEgress {
         $params = Util::removeNulls(
             [
                 'additionalInformation' => $additionalInformation,
@@ -177,7 +178,7 @@ final class RequestsService implements RequestsContract
     public function retrieve(
         string $id,
         RequestOptions|array|null $requestOptions = null
-    ): VerificationRequestStatus {
+    ): RequestGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
@@ -215,7 +216,7 @@ final class RequestsService implements RequestsContract
      * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
      * @param string|null $campaignVerifyAuthorizationToken Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
-     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
+     * @param MessagingTollFreeVerificationEntityType|value-of<MessagingTollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
      * @param string|null $isvReseller ISV name
      * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
@@ -254,7 +255,7 @@ final class RequestsService implements RequestsContract
         ?string $businessRegistrationType = null,
         ?string $campaignVerifyAuthorizationToken = null,
         ?string $doingBusinessAs = null,
-        TollFreeVerificationEntityType|string|null $entityType = null,
+        MessagingTollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
         ?string $isvReseller = null,
         ?string $optInConfirmationResponse = null,
@@ -263,7 +264,7 @@ final class RequestsService implements RequestsContract
         ?string $termsAndConditionURL = null,
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
-    ): VerificationRequestEgress {
+    ): MessagingTollFreeVerificationVerificationRequestEgress {
         $params = Util::removeNulls(
             [
                 'additionalInformation' => $additionalInformation,

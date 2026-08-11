@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Bulk update phone number profiles.
+ * Starts a bulk update of messaging-profile assignments for the supplied phone numbers. The response identifies the order used to monitor processing.
  *
  * @see Telnyx\Services\MessagingNumbersBulkUpdatesService::create()
  *

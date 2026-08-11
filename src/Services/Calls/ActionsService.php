@@ -1548,7 +1548,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Noise Suppression Start (BETA)
+     * Start noise suppression on an active call to reduce background noise. This feature is currently in beta.
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -2032,7 +2032,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Noise Suppression Stop (BETA)
+     * Stop noise suppression previously started on an active call. This feature is currently in beta.
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.

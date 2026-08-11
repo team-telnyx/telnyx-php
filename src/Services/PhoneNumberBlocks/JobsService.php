@@ -40,7 +40,7 @@ final class JobsService implements JobsContract
     /**
      * @api
      *
-     * Retrieves a phone number blocks job
+     * Returns the status and details of the phone-number-block background job identified by `id`.
      *
      * @param string $id identifies the Phone Number Blocks Job
      * @param RequestOpts|null $requestOptions
@@ -60,7 +60,7 @@ final class JobsService implements JobsContract
     /**
      * @api
      *
-     * Lists the phone number blocks jobs
+     * Returns background jobs that operate on phone-number blocks. Results can be filtered by job type and status, sorted by creation time, and include pagination metadata.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[status]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.

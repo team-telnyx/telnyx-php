@@ -7,15 +7,15 @@ namespace Telnyx\Messages\MessageGetResponse;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\InboundMessagePayload;
-use Telnyx\Messages\OutboundMessagePayload;
+use Telnyx\Messages\MessageGetResponse\Data\MessagingInboundMessagePayload;
+use Telnyx\Messages\MessagingOutboundMessagePayload;
 
 /**
- * @phpstan-import-type OutboundMessagePayloadShape from \Telnyx\Messages\OutboundMessagePayload
- * @phpstan-import-type InboundMessagePayloadShape from \Telnyx\InboundMessagePayload
+ * @phpstan-import-type MessagingOutboundMessagePayloadShape from \Telnyx\Messages\MessagingOutboundMessagePayload
+ * @phpstan-import-type MessagingInboundMessagePayloadShape from \Telnyx\Messages\MessageGetResponse\Data\MessagingInboundMessagePayload
  *
- * @phpstan-type DataVariants = OutboundMessagePayload|InboundMessagePayload
- * @phpstan-type DataShape = DataVariants|OutboundMessagePayloadShape|InboundMessagePayloadShape
+ * @phpstan-type DataVariants = MessagingOutboundMessagePayload|MessagingInboundMessagePayload
+ * @phpstan-type DataShape = DataVariants|MessagingOutboundMessagePayloadShape|MessagingInboundMessagePayloadShape
  */
 final class Data implements ConverterSource
 {
@@ -32,8 +32,8 @@ final class Data implements ConverterSource
     public static function variants(): array
     {
         return [
-            'outbound' => OutboundMessagePayload::class,
-            'inbound' => InboundMessagePayload::class,
+            'outbound' => MessagingOutboundMessagePayload::class,
+            'inbound' => MessagingInboundMessagePayload::class,
         ];
     }
 }

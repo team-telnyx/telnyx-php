@@ -13,7 +13,7 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Whatsapp;
 
 /**
- * Update Verify profile.
+ * Updates the specified Verify profile's name, webhook destinations, language, daily spend limits, or channel-specific settings. Returns the updated profile.
  *
  * @see Telnyx\Services\VerifyProfilesService::update()
  *

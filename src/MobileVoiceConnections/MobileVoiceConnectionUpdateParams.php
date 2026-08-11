@@ -13,7 +13,7 @@ use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Outbound;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\WebhookAPIVersion;
 
 /**
- * Update a Mobile Voice Connection.
+ * Update the settings of a specific mobile voice connection.
  *
  * @see Telnyx\Services\MobileVoiceConnectionsService::update()
  *

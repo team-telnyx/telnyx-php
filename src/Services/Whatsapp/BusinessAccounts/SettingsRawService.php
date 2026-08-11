@@ -29,7 +29,7 @@ final class SettingsRawService implements SettingsRawContract
     /**
      * @api
      *
-     * Get WABA settings
+     * Returns account-level settings for the specified WhatsApp Business Account.
      *
      * @param string $id Whatsapp Business Account ID
      * @param RequestOpts|null $requestOptions
@@ -54,7 +54,7 @@ final class SettingsRawService implements SettingsRawContract
     /**
      * @api
      *
-     * Update WABA settings
+     * Updates the supplied account-level settings for the specified WhatsApp Business Account.
      *
      * @param string $id Whatsapp Business Account ID
      * @param array{

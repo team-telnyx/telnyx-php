@@ -61,7 +61,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Kick participants from a room session.
+     * Removes the selected participants from the specified room session. Apply the action to a list of participant IDs or to `all`, with optional participant IDs excluded from the action.
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param list<string> $exclude list of participant id to exclude from the action
@@ -89,7 +89,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Mute participants in room session.
+     * Mutes the selected participants in the specified room session. Apply the action to a list of participant IDs or to `all`, with optional participant IDs excluded from the action.
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param list<string> $exclude list of participant id to exclude from the action
@@ -117,7 +117,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Unmute participants in room session.
+     * Unmutes the selected participants in the specified room session. Apply the action to a list of participant IDs or to `all`, with optional participant IDs excluded from the action.
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param list<string> $exclude list of participant id to exclude from the action

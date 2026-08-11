@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\Actions\Purchase;
 
-use Telnyx\Actions\WirelessError;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,11 +11,11 @@ use Telnyx\SimpleSimCard;
 
 /**
  * @phpstan-import-type SimpleSimCardShape from \Telnyx\SimpleSimCard
- * @phpstan-import-type WirelessErrorShape from \Telnyx\Actions\WirelessError
+ * @phpstan-import-type WirelessErrorC5290d5308Shape from \Telnyx\Actions\Purchase\WirelessErrorC5290d5308
  *
  * @phpstan-type PurchaseNewResponseShape = array{
  *   data?: list<SimpleSimCard|SimpleSimCardShape>|null,
- *   errors?: list<WirelessError|WirelessErrorShape>|null,
+ *   errors?: list<WirelessErrorC5290d5308|WirelessErrorC5290d5308Shape>|null,
  * }
  */
 final class PurchaseNewResponse implements BaseModel
@@ -32,8 +31,8 @@ final class PurchaseNewResponse implements BaseModel
     #[Optional(list: SimpleSimCard::class)]
     public ?array $data;
 
-    /** @var list<WirelessError>|null $errors */
-    #[Optional(list: WirelessError::class)]
+    /** @var list<WirelessErrorC5290d5308>|null $errors */
+    #[Optional(list: WirelessErrorC5290d5308::class)]
     public ?array $errors;
 
     public function __construct()
@@ -47,7 +46,7 @@ final class PurchaseNewResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<SimpleSimCard|SimpleSimCardShape>|null $data
-     * @param list<WirelessError|WirelessErrorShape>|null $errors
+     * @param list<WirelessErrorC5290d5308|WirelessErrorC5290d5308Shape>|null $errors
      */
     public static function with(?array $data = null, ?array $errors = null): self
     {
@@ -73,7 +72,7 @@ final class PurchaseNewResponse implements BaseModel
     }
 
     /**
-     * @param list<WirelessError|WirelessErrorShape> $errors
+     * @param list<WirelessErrorC5290d5308|WirelessErrorC5290d5308Shape> $errors
      */
     public function withErrors(array $errors): self
     {

@@ -18,7 +18,7 @@ use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
-use Telnyx\SimCards\Actions\SimCardAction;
+use Telnyx\SimCards\Actions\WirelessSimCardAction;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -68,7 +68,7 @@ final class ActionsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(SimCardAction::class, $item);
+            $this->assertInstanceOf(WirelessSimCardAction::class, $item);
         }
     }
 

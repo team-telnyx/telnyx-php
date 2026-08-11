@@ -9,17 +9,18 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForMessagingTollfree;
+use Telnyx\MessagingTollfree\Verification\Requests\MessagingTollFreeVerificationEntityType;
+use Telnyx\MessagingTollfree\Verification\Requests\MessagingTollFreeVerificationVerificationRequestEgress;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestGetResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestGetStatusHistoryResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestRetrieveStatusHistoryParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
-use Telnyx\MessagingTollfree\Verification\Requests\TollFreeVerificationEntityType;
 use Telnyx\MessagingTollfree\Verification\Requests\URL;
 use Telnyx\MessagingTollfree\Verification\Requests\UseCaseCategories;
-use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestEgress;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus;
 use Telnyx\MessagingTollfree\Verification\Requests\Volume;
 use Telnyx\RequestOptions;
@@ -71,7 +72,7 @@ final class RequestsRawService implements RequestsRawContract
      *   businessRegistrationType?: string|null,
      *   campaignVerifyAuthorizationToken?: string|null,
      *   doingBusinessAs?: string|null,
-     *   entityType?: TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null,
+     *   entityType?: MessagingTollFreeVerificationEntityType|value-of<MessagingTollFreeVerificationEntityType>|null,
      *   helpMessageResponse?: string|null,
      *   isvReseller?: string|null,
      *   optInConfirmationResponse?: string|null,
@@ -82,7 +83,7 @@ final class RequestsRawService implements RequestsRawContract
      * }|RequestCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VerificationRequestEgress>
+     * @return BaseResponse<MessagingTollFreeVerificationVerificationRequestEgress>
      *
      * @throws APIException
      */
@@ -101,7 +102,7 @@ final class RequestsRawService implements RequestsRawContract
             path: 'messaging_tollfree/verification/requests',
             body: (object) $parsed,
             options: $options,
-            convert: VerificationRequestEgress::class,
+            convert: MessagingTollFreeVerificationVerificationRequestEgress::class,
         );
     }
 
@@ -113,7 +114,7 @@ final class RequestsRawService implements RequestsRawContract
      * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VerificationRequestStatus>
+     * @return BaseResponse<RequestGetResponse>
      *
      * @throws APIException
      */
@@ -126,7 +127,7 @@ final class RequestsRawService implements RequestsRawContract
             method: 'get',
             path: ['messaging_tollfree/verification/requests/%1$s', $id],
             options: $requestOptions,
-            convert: VerificationRequestStatus::class,
+            convert: RequestGetResponse::class,
         );
     }
 
@@ -162,7 +163,7 @@ final class RequestsRawService implements RequestsRawContract
      *   businessRegistrationType?: string|null,
      *   campaignVerifyAuthorizationToken?: string|null,
      *   doingBusinessAs?: string|null,
-     *   entityType?: TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null,
+     *   entityType?: MessagingTollFreeVerificationEntityType|value-of<MessagingTollFreeVerificationEntityType>|null,
      *   helpMessageResponse?: string|null,
      *   isvReseller?: string|null,
      *   optInConfirmationResponse?: string|null,
@@ -173,7 +174,7 @@ final class RequestsRawService implements RequestsRawContract
      * }|RequestUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VerificationRequestEgress>
+     * @return BaseResponse<MessagingTollFreeVerificationVerificationRequestEgress>
      *
      * @throws APIException
      */
@@ -193,7 +194,7 @@ final class RequestsRawService implements RequestsRawContract
             path: ['messaging_tollfree/verification/requests/%1$s', $id],
             body: (object) $parsed,
             options: $options,
-            convert: VerificationRequestEgress::class,
+            convert: MessagingTollFreeVerificationVerificationRequestEgress::class,
         );
     }
 

@@ -30,7 +30,7 @@ final class PhoneNumbersRegulatoryRequirementsRawService implements PhoneNumbers
     /**
      * @api
      *
-     * Retrieve regulatory requirements for a list of phone numbers
+     * Returns the regulatory requirements that apply to the supplied comma-separated phone numbers. The response includes the matching requirement records and pagination metadata.
      *
      * @param array{
      *   filter?: Filter|FilterShape

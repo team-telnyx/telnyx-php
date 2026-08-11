@@ -33,6 +33,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  *   androidPushCredentialID?: string|null,
  *   callCostInWebhooks?: bool|null,
  *   connectionName?: string|null,
+ *   conversationPersistence?: bool|null,
  *   defaultOnHoldComfortNoiseEnabled?: bool|null,
  *   dtmfType?: null|DtmfType|value-of<DtmfType>,
  *   encodeContactHeaderEnabled?: bool|null,
@@ -90,6 +91,12 @@ final class FqdnConnectionUpdateParams implements BaseModel
      */
     #[Optional('connection_name')]
     public ?string $connectionName;
+
+    /**
+     * Whether conversation persistence is enabled for this connection. When enabled, calls handled by the connection are transcribed, stored, and indexed. Defaults to false.
+     */
+    #[Optional('conversation_persistence')]
+    public ?bool $conversationPersistence;
 
     /**
      * When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
@@ -231,6 +238,7 @@ final class FqdnConnectionUpdateParams implements BaseModel
         ?string $androidPushCredentialID = null,
         ?bool $callCostInWebhooks = null,
         ?string $connectionName = null,
+        ?bool $conversationPersistence = null,
         ?bool $defaultOnHoldComfortNoiseEnabled = null,
         DtmfType|string|null $dtmfType = null,
         ?bool $encodeContactHeaderEnabled = null,
@@ -257,6 +265,7 @@ final class FqdnConnectionUpdateParams implements BaseModel
         null !== $androidPushCredentialID && $self['androidPushCredentialID'] = $androidPushCredentialID;
         null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
         null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $conversationPersistence && $self['conversationPersistence'] = $conversationPersistence;
         null !== $defaultOnHoldComfortNoiseEnabled && $self['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
         null !== $dtmfType && $self['dtmfType'] = $dtmfType;
         null !== $encodeContactHeaderEnabled && $self['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
@@ -334,6 +343,18 @@ final class FqdnConnectionUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['connectionName'] = $connectionName;
+
+        return $self;
+    }
+
+    /**
+     * Whether conversation persistence is enabled for this connection. When enabled, calls handled by the connection are transcribed, stored, and indexed. Defaults to false.
+     */
+    public function withConversationPersistence(
+        bool $conversationPersistence
+    ): self {
+        $self = clone $this;
+        $self['conversationPersistence'] = $conversationPersistence;
 
         return $self;
     }

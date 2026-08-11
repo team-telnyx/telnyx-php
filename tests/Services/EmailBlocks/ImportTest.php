@@ -53,7 +53,7 @@ final class ImportTest extends TestCase
 
         $result = $this->client->emailBlocks->import->create(
             file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
-            blockTtlDays: 1,
+            blockTtlDays: 30,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

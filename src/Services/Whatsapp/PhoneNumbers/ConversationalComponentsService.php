@@ -37,7 +37,7 @@ final class ConversationalComponentsService implements ConversationalComponentsC
     /**
      * @api
      *
-     * Get phone number conversational components
+     * Returns the conversational components configured for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
@@ -57,7 +57,7 @@ final class ConversationalComponentsService implements ConversationalComponentsC
     /**
      * @api
      *
-     * Update phone number conversational components
+     * Updates the conversational components configured for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param list<Command|CommandShape> $commands List of commands

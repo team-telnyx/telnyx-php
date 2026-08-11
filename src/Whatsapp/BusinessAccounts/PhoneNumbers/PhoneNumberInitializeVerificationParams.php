@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberInitializeVerificationParams\VerificationMethod;
 
 /**
- * Initialize Whatsapp phone number verification.
+ * Starts verification of a phone number for the specified WhatsApp Business Account using the requested verification method.
  *
  * @see Telnyx\Services\Whatsapp\BusinessAccounts\PhoneNumbersService::initializeVerification()
  *

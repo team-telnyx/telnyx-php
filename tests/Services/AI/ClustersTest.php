@@ -82,7 +82,7 @@ final class ClustersTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->clusters->compute(bucket: 'bucket');
+        $result = $this->client->ai->clusters->compute(bucket: 'string');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ClusterComputeResponse::class, $result);
@@ -96,11 +96,11 @@ final class ClustersTest extends TestCase
         }
 
         $result = $this->client->ai->clusters->compute(
-            bucket: 'bucket',
+            bucket: 'string',
             files: ['string'],
-            minClusterSize: 0,
-            minSubclusterSize: 0,
-            prefix: 'prefix',
+            minClusterSize: 25,
+            minSubclusterSize: 5,
+            prefix: 'string',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
