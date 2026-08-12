@@ -12,7 +12,9 @@ use Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
+use Telnyx\SimCards\Actions\ActionDisableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
+use Telnyx\SimCards\Actions\ActionEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
@@ -125,7 +127,8 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->simCards->actions->bulkEnableVoice(
-            simCardGroupID: '6b14e151-8493-4fa1-8664-1cc4e6d14158'
+            simCardGroupID: '6b14e151-8493-4fa1-8664-1cc4e6d14158',
+            connectionID: '123456789',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -178,6 +181,21 @@ final class ActionsTest extends TestCase
     }
 
     #[Test]
+    public function testDisableVoice(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->simCards->actions->disableVoice(
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionDisableVoiceResponse::class, $result);
+    }
+
+    #[Test]
     public function testEnable(): void
     {
         if (UnsupportedMockTests::$skip) {
@@ -190,6 +208,21 @@ final class ActionsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionEnableResponse::class, $result);
+    }
+
+    #[Test]
+    public function testEnableVoice(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->simCards->actions->enableVoice(
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionEnableVoiceResponse::class, $result);
     }
 
     #[Test]

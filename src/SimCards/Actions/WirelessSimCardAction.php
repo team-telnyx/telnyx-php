@@ -44,6 +44,8 @@ final class WirelessSimCardAction implements BaseModel
      *  <li><code>enable_standby_sim_card</code> - move a SIM card previously on the <code>standby</code> status to the <code>enabled</code> status after it consumes data.</li>
      *  <li><code>disable</code> - move the SIM card to the <code>disabled</code> status</li>
      *  <li><code>set_standby</code> - move the SIM card to the <code>standby</code> status</li>
+     *  <li><code>enable_voice</code> - enable voice calling on the SIM card</li>
+     *  <li><code>disable_voice</code> - disable voice calling on the SIM card</li>
      *  </ul>.
      *
      * @var value-of<ActionType>|null $actionType
@@ -139,6 +141,8 @@ final class WirelessSimCardAction implements BaseModel
      *  <li><code>enable_standby_sim_card</code> - move a SIM card previously on the <code>standby</code> status to the <code>enabled</code> status after it consumes data.</li>
      *  <li><code>disable</code> - move the SIM card to the <code>disabled</code> status</li>
      *  <li><code>set_standby</code> - move the SIM card to the <code>standby</code> status</li>
+     *  <li><code>enable_voice</code> - enable voice calling on the SIM card</li>
+     *  <li><code>disable_voice</code> - disable voice calling on the SIM card</li>
      *  </ul>.
      *
      * @param ActionType|value-of<ActionType> $actionType

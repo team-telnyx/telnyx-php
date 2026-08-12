@@ -14,7 +14,9 @@ use Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
+use Telnyx\SimCards\Actions\ActionDisableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
+use Telnyx\SimCards\Actions\ActionEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionListParams\Filter;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
@@ -126,15 +128,19 @@ final class ActionsService implements ActionsContract
      *
      * The overall status of the Bulk SIM Card Action can be followed through the [List Bulk SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-bulk-sim-card-actions) API.
      *
+     * @param string $connectionID The identifier of the Mobile Voice Connection to associate with the SIM cards. The connection must be owned by the same user and of type <code>mobile_voice</code>. If omitted, voice is enabled without a connection association.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function bulkEnableVoice(
         string $simCardGroupID,
-        RequestOptions|array|null $requestOptions = null
+        ?string $connectionID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionBulkEnableVoiceResponse {
-        $params = Util::removeNulls(['simCardGroupID' => $simCardGroupID]);
+        $params = Util::removeNulls(
+            ['simCardGroupID' => $simCardGroupID, 'connectionID' => $connectionID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bulkEnableVoice(params: $params, requestOptions: $requestOptions);
@@ -189,6 +195,27 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
+     * This API disables voice calling on a SIM card. The SIM card will no longer be able to make or receive calls.<br/>
+     * The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
+     *
+     * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function disableVoice(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): ActionDisableVoiceResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->disableVoice($id, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
      * This API enables a SIM card, connecting it to the network and making it possible to consume data.<br/>
      * To enable a SIM card, it must be associated with a SIM card group.<br/>
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the enabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
@@ -204,6 +231,31 @@ final class ActionsService implements ActionsContract
     ): ActionEnableResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->enable($id, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * This API enables voice calling on a SIM card. When a <code>connection_id</code> is provided, the SIM is associated with the specified Mobile Voice Connection. The connection must be owned by the same user and of type <code>mobile_voice</code>.<br/>
+     * The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
+     *
+     * @param string $id identifies the SIM
+     * @param string $connectionID The identifier of the Mobile Voice Connection to associate with this SIM card. The connection must be owned by the same user and of type <code>mobile_voice</code>. If omitted, voice is enabled without a connection association.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function enableVoice(
+        string $id,
+        ?string $connectionID = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): ActionEnableVoiceResponse {
+        $params = Util::removeNulls(['connectionID' => $connectionID]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->enableVoice($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
