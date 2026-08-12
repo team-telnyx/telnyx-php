@@ -16,7 +16,7 @@ use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\InboundCallScreening
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\Outbound;
 
 /**
- * Update a Mobile Phone Number.
+ * Update the settings of a specific mobile phone number.
  *
  * @see Telnyx\Services\MobilePhoneNumbersService::update()
  *

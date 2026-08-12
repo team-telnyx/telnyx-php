@@ -81,7 +81,7 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
     /**
      * @api
      *
-     * Update requirement group for a phone number order
+     * Associates an existing requirement group with a phone number in a number order. The response contains the updated number-order phone-number details.
      *
      * @param string $id The unique identifier of the number order phone number
      * @param string $requirementGroupID The ID of the requirement group to associate

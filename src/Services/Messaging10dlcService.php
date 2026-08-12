@@ -74,7 +74,7 @@ final class Messaging10dlcService implements Messaging10dlcContract
     /**
      * @api
      *
-     * Get Enum
+     * Returns the accepted values for the selected 10DLC enumeration endpoint. Use these values when constructing brand and campaign requests.
      *
      * @param Endpoint|value-of<Endpoint> $endpoint unique identifier of the endpoint
      * @param RequestOpts|null $requestOptions

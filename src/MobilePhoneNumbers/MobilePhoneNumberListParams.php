@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List Mobile Phone Numbers.
+ * Retrieve a paginated list of mobile phone numbers on your account.
  *
  * @see Telnyx\Services\MobilePhoneNumbersService::list()
  *

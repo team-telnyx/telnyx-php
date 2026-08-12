@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List short codes associated with a messaging profile.
+ * Returns the short codes currently associated with the specified messaging profile.
  *
  * @see Telnyx\Services\MessagingProfilesService::listShortCodes()
  *

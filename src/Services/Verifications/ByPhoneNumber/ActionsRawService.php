@@ -28,7 +28,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Verify verification code by phone number
+     * Submits a verification code for the specified phone number and Verify profile. The response indicates whether the code was accepted or rejected.
      *
      * @param string $phoneNumber +E164 formatted phone number
      * @param array{code: string, verifyProfileID: string}|ActionVerifyParams $params

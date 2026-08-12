@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\PhoneNumbers\NumbersPhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
-use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\HandleMessagingProfileError;
@@ -71,7 +71,7 @@ interface PhoneNumbersContract
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PhoneNumberDetailed>
+     * @return DefaultFlatPagination<NumbersPhoneNumberDetailed>
      *
      * @throws APIException
      */

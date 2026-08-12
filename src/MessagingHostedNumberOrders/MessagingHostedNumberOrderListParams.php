@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List messaging hosted number orders.
+ * Returns hosted-messaging orders for the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
  *
  * @see Telnyx\Services\MessagingHostedNumberOrdersService::list()
  *

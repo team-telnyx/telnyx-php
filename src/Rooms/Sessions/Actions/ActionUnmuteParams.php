@@ -12,7 +12,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\AllParticipants;
 
 /**
- * Unmute participants in room session.
+ * Unmutes the selected participants in the specified room session. Apply the action to a list of participant IDs or to `all`, with optional participant IDs excluded from the action.
  *
  * @see Telnyx\Services\Rooms\Sessions\ActionsService::unmute()
  *

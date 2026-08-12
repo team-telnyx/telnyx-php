@@ -243,7 +243,7 @@ final class CampaignRawService implements CampaignRawContract
     /**
      * @api
      *
-     * Get Sharing Status
+     * Returns whether the campaign is configured for partner sharing and the current sharing state.
      *
      * @param string $campaignID ID of the campaign in question
      * @param RequestOpts|null $requestOptions

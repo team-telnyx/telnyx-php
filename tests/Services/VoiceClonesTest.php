@@ -151,8 +151,8 @@ final class VoiceClonesTest extends TestCase
             voiceCloneUploadRequest: [
                 'audioFile' => FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
                 'gender' => 'male',
-                'language' => 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
-                'name' => 'name',
+                'language' => 'en',
+                'name' => 'My cloned voice',
                 'provider' => 'telnyx',
             ],
         );
@@ -172,8 +172,8 @@ final class VoiceClonesTest extends TestCase
             voiceCloneUploadRequest: [
                 'audioFile' => FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
                 'gender' => 'male',
-                'language' => 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
-                'name' => 'name',
+                'language' => 'en',
+                'name' => 'My cloned voice',
                 'provider' => 'telnyx',
                 'label' => 'label',
                 'modelID' => 'Qwen3TTS',

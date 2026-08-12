@@ -28,7 +28,7 @@ final class UsecaseRawService implements UsecaseRawContract
     /**
      * @api
      *
-     * Get Campaign Cost
+     * Returns the upfront and monthly cost associated with the selected 10DLC campaign use case.
      *
      * @param array{usecase: string}|UsecaseGetCostParams $params
      * @param RequestOpts|null $requestOptions

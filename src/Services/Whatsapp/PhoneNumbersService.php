@@ -14,6 +14,7 @@ use Telnyx\Services\Whatsapp\PhoneNumbers\CallingSettingsService;
 use Telnyx\Services\Whatsapp\PhoneNumbers\ConversationalComponentsService;
 use Telnyx\Services\Whatsapp\PhoneNumbers\ProfileService;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams\VerificationMethod;
 
@@ -58,7 +59,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * List Whatsapp phone numbers
+     * Returns WhatsApp phone numbers linked to the authenticated Telnyx account.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -84,7 +85,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Delete a Whatsapp phone number
+     * Removes the specified phone number from Telnyx WhatsApp management.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
@@ -104,7 +105,31 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Resend verification code
+     * Retrieve a list of the phone numbers registered for WhatsApp on your account.
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function get(
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): PhoneNumberGetResponse {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->get(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Requests a new verification code for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
@@ -152,7 +177,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Submit verification code for a phone number
+     * Submits the verification code received for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions

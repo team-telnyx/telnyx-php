@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List Whatsapp Business Accounts.
+ * Returns WhatsApp Business Accounts linked to the authenticated Telnyx account.
  *
  * @see Telnyx\Services\Whatsapp\BusinessAccountsService::list()
  *

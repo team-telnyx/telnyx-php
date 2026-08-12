@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Check RCS capabilities.
+ * Returns the RCS features supported by the specified recipient for the selected agent.
  *
  * @see Telnyx\Services\Messaging\RcsService::retrieveCapabilities()
  *

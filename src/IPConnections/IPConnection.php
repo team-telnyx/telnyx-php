@@ -31,6 +31,7 @@ use Telnyx\IPConnections\IPConnection\WebhookAPIVersion;
  *   androidPushCredentialID?: string|null,
  *   callCostInWebhooks?: bool|null,
  *   connectionName?: string|null,
+ *   conversationPersistence?: bool|null,
  *   createdAt?: string|null,
  *   defaultOnHoldComfortNoiseEnabled?: bool|null,
  *   dtmfType?: null|DtmfType|value-of<DtmfType>,
@@ -93,6 +94,12 @@ final class IPConnection implements BaseModel
 
     #[Optional('connection_name')]
     public ?string $connectionName;
+
+    /**
+     * Whether conversation persistence is enabled for this connection. When enabled, calls handled by the connection are transcribed, stored, and indexed. Defaults to false.
+     */
+    #[Optional('conversation_persistence')]
+    public ?bool $conversationPersistence;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
@@ -253,6 +260,7 @@ final class IPConnection implements BaseModel
         ?string $androidPushCredentialID = null,
         ?bool $callCostInWebhooks = null,
         ?string $connectionName = null,
+        ?bool $conversationPersistence = null,
         ?string $createdAt = null,
         ?bool $defaultOnHoldComfortNoiseEnabled = null,
         DtmfType|string|null $dtmfType = null,
@@ -283,6 +291,7 @@ final class IPConnection implements BaseModel
         null !== $androidPushCredentialID && $self['androidPushCredentialID'] = $androidPushCredentialID;
         null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
         null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $conversationPersistence && $self['conversationPersistence'] = $conversationPersistence;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $defaultOnHoldComfortNoiseEnabled && $self['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
         null !== $dtmfType && $self['dtmfType'] = $dtmfType;
@@ -371,6 +380,18 @@ final class IPConnection implements BaseModel
     {
         $self = clone $this;
         $self['connectionName'] = $connectionName;
+
+        return $self;
+    }
+
+    /**
+     * Whether conversation persistence is enabled for this connection. When enabled, calls handled by the connection are transcribed, stored, and indexed. Defaults to false.
+     */
+    public function withConversationPersistence(
+        bool $conversationPersistence
+    ): self {
+        $self = clone $this;
+        $self['conversationPersistence'] = $conversationPersistence;
 
         return $self;
     }

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update requirement group for a sub number order.
+ * Associates an existing requirement group with the specified sub number order. The response contains the updated sub number order requirement-group relationship.
  *
  * @see Telnyx\Services\SubNumberOrdersService::updateRequirementGroup()
  *

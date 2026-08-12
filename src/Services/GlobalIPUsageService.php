@@ -36,7 +36,7 @@ final class GlobalIPUsageService implements GlobalIPUsageContract
     /**
      * @api
      *
-     * Global IP Usage Metrics
+     * Retrieve usage metrics for your Global IPs.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
      * @param RequestOpts|null $requestOptions

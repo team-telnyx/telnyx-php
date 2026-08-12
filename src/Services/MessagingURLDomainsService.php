@@ -35,7 +35,7 @@ final class MessagingURLDomainsService implements MessagingURLDomainsContract
     /**
      * @api
      *
-     * List messaging URL domains
+     * Returns the URL domains available to the authenticated account for message URL shortening.
      *
      * @param RequestOpts|null $requestOptions
      *

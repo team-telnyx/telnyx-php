@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Trigger Flash call verification.
+ * Starts a verification for the specified phone number and places a brief call with the code embedded in the caller ID. Returns the pending verification record.
  *
  * @see Telnyx\Services\VerificationsService::triggerFlashcall()
  *

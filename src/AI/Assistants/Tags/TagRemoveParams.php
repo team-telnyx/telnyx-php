@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Remove Assistant Tag.
+ * Remove a tag from an AI assistant.
  *
  * @see Telnyx\Services\AI\Assistants\TagsService::remove()
  *

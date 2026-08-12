@@ -135,7 +135,7 @@ final class FaxesService implements FaxesContract
     /**
      * @api
      *
-     * View a fax
+     * Retrieve the details of a single fax.
      *
      * @param string $id the unique identifier of a fax
      * @param RequestOpts|null $requestOptions
@@ -155,7 +155,7 @@ final class FaxesService implements FaxesContract
     /**
      * @api
      *
-     * View a list of faxes
+     * Retrieve a paginated list of faxes sent or received on your account.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq]
      * @param RequestOpts|null $requestOptions
@@ -187,7 +187,7 @@ final class FaxesService implements FaxesContract
     /**
      * @api
      *
-     * Delete a fax
+     * Delete a fax resource from your account.
      *
      * @param string $id the unique identifier of a fax
      * @param RequestOpts|null $requestOptions

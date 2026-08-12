@@ -35,7 +35,7 @@ final class CallingSettingsService implements CallingSettingsContract
     /**
      * @api
      *
-     * Get calling settings for a phone number
+     * Returns the WhatsApp calling configuration for the specified phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
@@ -55,7 +55,7 @@ final class CallingSettingsService implements CallingSettingsContract
     /**
      * @api
      *
-     * Enable or disable Whatsapp calling for a phone number
+     * Enables or disables WhatsApp calling for the specified phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions

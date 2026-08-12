@@ -39,7 +39,7 @@ final class MigrationSourcesTest extends TestCase
         }
 
         $result = $this->client->storage->migrationSources->create(
-            bucketName: 'bucket_name',
+            bucketName: 'string',
             provider: 'aws',
             providerAuth: []
         );
@@ -56,12 +56,10 @@ final class MigrationSourcesTest extends TestCase
         }
 
         $result = $this->client->storage->migrationSources->create(
-            bucketName: 'bucket_name',
+            bucketName: 'string',
             provider: 'aws',
-            providerAuth: [
-                'accessKey' => 'access_key', 'secretAccessKey' => 'secret_access_key',
-            ],
-            sourceRegion: 'source_region',
+            providerAuth: ['accessKey' => 'string', 'secretAccessKey' => 'string'],
+            sourceRegion: 'string',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

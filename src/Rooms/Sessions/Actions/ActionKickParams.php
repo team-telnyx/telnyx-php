@@ -12,7 +12,7 @@ use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\AllParticipants;
 
 /**
- * Kick participants from a room session.
+ * Removes the selected participants from the specified room session. Apply the action to a list of participant IDs or to `all`, with optional participant IDs excluded from the action.
  *
  * @see Telnyx\Services\Rooms\Sessions\ActionsService::kick()
  *

@@ -36,7 +36,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
     /**
      * @api
      *
-     * View a room recording.
+     * Returns the recording identified by `room_recording_id`, including its room, session, participant, status, media details, lifecycle timestamps, and download URL.
      *
      * @param string $roomRecordingID the unique identifier of a room recording
      * @param RequestOpts|null $requestOptions
@@ -61,7 +61,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
     /**
      * @api
      *
-     * View a list of room recordings.
+     * Returns a paginated list of room recordings. Filter recordings by room, session, participant, recording type, status, duration, or start and end dates.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -123,7 +123,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
     /**
      * @api
      *
-     * Delete several room recordings in a bulk.
+     * Deletes the room recordings that match the supplied filters and returns the number of recordings affected. Filters support room, session, participant, recording type, status, duration, and start or end dates.
      *
      * @param array{
      *   filter?: RoomRecordingDeleteBulkParams\Filter|FilterShape1,

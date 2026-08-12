@@ -28,7 +28,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Submit verification code
+     * Submit the verification code received via the selected verification method to verify a phone number.
      *
      * @param string $phoneNumber +E164 formatted phone number
      * @param array{

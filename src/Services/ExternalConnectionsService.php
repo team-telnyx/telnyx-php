@@ -249,7 +249,7 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
     /**
      * @api
      *
-     * Update a location's static emergency address
+     * Update the static emergency address assigned to a specific location of an external connection.
      *
      * @param string $locationID Path param: The ID of the location to update
      * @param string $id Path param: The ID of the external connection

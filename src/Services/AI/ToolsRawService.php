@@ -9,6 +9,7 @@ use Telnyx\AI\Tools\SharedToolResponse;
 use Telnyx\AI\Tools\ToolCreateParams;
 use Telnyx\AI\Tools\ToolListParams;
 use Telnyx\AI\Tools\ToolUpdateParams;
+use Telnyx\AI\Tools\UpdateDynamicVariablesToolParams;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -21,6 +22,7 @@ use Telnyx\ServiceContracts\AI\ToolsRawContract;
  * Configure AI assistant specifications.
  *
  * @phpstan-import-type PayToolParamsShape from \Telnyx\AI\Tools\PayToolParams
+ * @phpstan-import-type UpdateDynamicVariablesToolParamsShape from \Telnyx\AI\Tools\UpdateDynamicVariablesToolParams
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ToolsRawService implements ToolsRawContract
@@ -34,7 +36,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Create Tool
+     * Create a new custom AI tool that can be attached to AI assistants.
      *
      * @param array{
      *   displayName: string,
@@ -46,6 +48,7 @@ final class ToolsRawService implements ToolsRawContract
      *   pay?: PayToolParams|PayToolParamsShape,
      *   retrieval?: array<string,mixed>,
      *   timeoutMs?: int,
+     *   updateDynamicVariables?: UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape,
      *   webhook?: array<string,mixed>,
      * }|ToolCreateParams $params
      * @param RequestOpts|null $requestOptions
@@ -76,7 +79,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Get Tool
+     * Retrieve the details of a specific AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
@@ -101,7 +104,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Update Tool
+     * Update the configuration of an existing AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param array{
@@ -114,6 +117,7 @@ final class ToolsRawService implements ToolsRawContract
      *   retrieval?: array<string,mixed>,
      *   timeoutMs?: int,
      *   type?: string,
+     *   updateDynamicVariables?: UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape,
      *   webhook?: array<string,mixed>,
      * }|ToolUpdateParams $params
      * @param RequestOpts|null $requestOptions
@@ -145,7 +149,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * List Tools
+     * Retrieve a list of the custom AI tools configured on your account.
      *
      * @param array{
      *   filterName?: string, filterType?: string, pageNumber?: int, pageSize?: int
@@ -187,7 +191,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Delete Tool
+     * Delete a custom AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions

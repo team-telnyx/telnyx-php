@@ -61,7 +61,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Kick participants from a room session.
+     * Removes the selected participants from the specified room session. Apply the action to a list of participant IDs or to `all`, with optional participant IDs excluded from the action.
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{
@@ -96,7 +96,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Mute participants in room session.
+     * Mutes the selected participants in the specified room session. Apply the action to a list of participant IDs or to `all`, with optional participant IDs excluded from the action.
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{
@@ -131,7 +131,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Unmute participants in room session.
+     * Unmutes the selected participants in the specified room session. Apply the action to a list of participant IDs or to `all`, with optional participant IDs excluded from the action.
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{

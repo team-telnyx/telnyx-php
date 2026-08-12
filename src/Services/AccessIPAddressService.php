@@ -37,7 +37,7 @@ final class AccessIPAddressService implements AccessIPAddressContract
     /**
      * @api
      *
-     * Create new Access IP Address
+     * Create a new access IP address entry on your account.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -61,7 +61,7 @@ final class AccessIPAddressService implements AccessIPAddressContract
     /**
      * @api
      *
-     * Retrieve an access IP address
+     * Retrieve the details of a specific access IP address.
      *
      * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions
@@ -81,7 +81,7 @@ final class AccessIPAddressService implements AccessIPAddressContract
     /**
      * @api
      *
-     * List all Access IP Addresses
+     * Retrieve a paginated list of access IP addresses configured on your account.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      * @param RequestOpts|null $requestOptions
@@ -113,7 +113,7 @@ final class AccessIPAddressService implements AccessIPAddressContract
     /**
      * @api
      *
-     * Delete access IP address
+     * Delete an access IP address entry from your account.
      *
      * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions

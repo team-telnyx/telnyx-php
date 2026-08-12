@@ -12,7 +12,7 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
 
 /**
- * List Auto-Response Settings.
+ * Returns the auto-response rules configured for the specified messaging profile.
  *
  * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::list()
  *

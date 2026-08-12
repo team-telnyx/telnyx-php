@@ -39,7 +39,7 @@ final class BillingGroupsService implements BillingGroupsContract
     /**
      * @api
      *
-     * Create a billing group
+     * Create a new billing group, which can be used to organize resources for billing purposes.
      *
      * @param string $name A name for the billing group
      * @param RequestOpts|null $requestOptions
@@ -61,7 +61,7 @@ final class BillingGroupsService implements BillingGroupsContract
     /**
      * @api
      *
-     * Get a billing group
+     * Retrieve the details of a specific billing group.
      *
      * @param string $id The id of the billing group
      * @param RequestOpts|null $requestOptions
@@ -81,7 +81,7 @@ final class BillingGroupsService implements BillingGroupsContract
     /**
      * @api
      *
-     * Update a billing group
+     * Update the properties of an existing billing group.
      *
      * @param string $id The id of the billing group
      * @param string $name A name for the billing group
@@ -105,7 +105,7 @@ final class BillingGroupsService implements BillingGroupsContract
     /**
      * @api
      *
-     * List all billing groups
+     * Retrieve a paginated list of billing groups on your account.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -131,7 +131,7 @@ final class BillingGroupsService implements BillingGroupsContract
     /**
      * @api
      *
-     * Delete a billing group
+     * Delete a billing group from your account.
      *
      * @param string $id The id of the billing group
      * @param RequestOpts|null $requestOptions

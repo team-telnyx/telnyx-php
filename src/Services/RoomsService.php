@@ -95,7 +95,7 @@ final class RoomsService implements RoomsContract
     /**
      * @api
      *
-     * View a room.
+     * Returns the room identified by `room_id`, including its participant limit, recording and webhook configuration, and active session identifier. Use `include_sessions` to include its sessions.
      *
      * @param string $roomID the unique identifier of a room
      * @param bool $includeSessions to decide if room sessions should be included in the response
@@ -162,7 +162,7 @@ final class RoomsService implements RoomsContract
     /**
      * @api
      *
-     * View a list of rooms.
+     * Returns a paginated list of rooms. Filter the results by creation or update date and unique name, and use `include_sessions` to include each room’s sessions.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name]
      * @param bool $includeSessions to decide if room sessions should be included in the response

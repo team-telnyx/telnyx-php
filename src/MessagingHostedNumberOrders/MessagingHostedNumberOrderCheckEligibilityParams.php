@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Check hosted messaging eligibility.
+ * Checks whether the supplied phone numbers are eligible for hosted messaging before an order is created.
  *
  * @see Telnyx\Services\MessagingHostedNumberOrdersService::checkEligibility()
  *

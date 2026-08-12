@@ -36,7 +36,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Change the bundle status for a phone number (set to being in a bundle or remove from a bundle)
+     * Adds the specified phone number to a bundle or removes it from a bundle according to the requested status change. The response contains the phone number with its updated bundle state.
      *
      * @param string $id identifies the resource
      * @param string|null $bundleID The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
@@ -60,7 +60,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Enable emergency for a phone number
+     * Associates emergency-service settings with the specified phone number. The operation returns the updated phone-number configuration when completed immediately or an accepted state when processing continues asynchronously.
      *
      * @param string $id identifies the resource
      * @param string $emergencyAddressID identifies the address to be used with emergency services

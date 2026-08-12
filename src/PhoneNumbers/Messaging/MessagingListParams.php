@@ -12,7 +12,7 @@ use Telnyx\PhoneNumbers\Messaging\MessagingListParams\FilterType;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams\SortPhoneNumber;
 
 /**
- * List phone numbers with messaging settings.
+ * Returns phone numbers with their current messaging product and messaging-profile assignments.
  *
  * @see Telnyx\Services\PhoneNumbers\MessagingService::list()
  *

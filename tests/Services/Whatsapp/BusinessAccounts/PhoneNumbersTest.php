@@ -61,8 +61,8 @@ final class PhoneNumbersTest extends TestCase
             ->phoneNumbers
             ->initializeVerification(
                 'id',
-                displayName: 'display_name',
-                phoneNumber: 'phone_number'
+                displayName: 'string',
+                phoneNumber: 'string'
             )
         ;
 
@@ -84,9 +84,9 @@ final class PhoneNumbersTest extends TestCase
             ->phoneNumbers
             ->initializeVerification(
                 'id',
-                displayName: 'display_name',
-                phoneNumber: 'phone_number',
-                language: 'language',
+                displayName: 'string',
+                phoneNumber: 'string',
+                language: 'en_US',
                 verificationMethod: 'sms',
             )
         ;

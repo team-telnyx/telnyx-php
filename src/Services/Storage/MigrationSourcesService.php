@@ -75,7 +75,7 @@ final class MigrationSourcesService implements MigrationSourcesContract
     /**
      * @api
      *
-     * Get a Migration Source
+     * Retrieve the details of a specific migration source.
      *
      * @param string $id unique identifier for the data migration source
      * @param RequestOpts|null $requestOptions
@@ -95,7 +95,7 @@ final class MigrationSourcesService implements MigrationSourcesContract
     /**
      * @api
      *
-     * List all Migration Sources
+     * List the migration sources configured on your account. A migration source is an external storage bucket from which data can be migrated into Telnyx Cloud Storage.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -113,7 +113,7 @@ final class MigrationSourcesService implements MigrationSourcesContract
     /**
      * @api
      *
-     * Delete a Migration Source
+     * Delete a migration source configuration.
      *
      * @param string $id unique identifier for the data migration source
      * @param RequestOpts|null $requestOptions

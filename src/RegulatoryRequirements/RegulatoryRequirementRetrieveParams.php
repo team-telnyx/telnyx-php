@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RegulatoryRequirements\RegulatoryRequirementRetrieveParams\Filter;
 
 /**
- * Retrieve regulatory requirements.
+ * Returns regulatory requirements for number ordering, porting, or other supported actions. Results can be filtered by phone number, requirement group, country, number type, and action.
  *
  * @see Telnyx\Services\RegulatoryRequirementsService::retrieve()
  *

@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\RcsAgents\RcsAgent;
-use Telnyx\RcsAgents\RcsAgentResponse;
+use Telnyx\Rcs\Agents\RcsAgent;
+use Telnyx\Rcs\Agents\RcsAgentResponse;
 use Tests\UnsupportedMockTests;
 
 /**

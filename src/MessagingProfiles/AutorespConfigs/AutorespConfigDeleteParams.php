@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Delete Auto-Response Setting.
+ * Deletes the specified auto-response rule from the messaging profile.
  *
  * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::delete()
  *

@@ -333,7 +333,7 @@ final class BrandRawService implements BrandRawContract
     /**
      * @api
      *
-     * Resend brand 2FA email
+     * Requests a new two-factor authentication email for the specified 10DLC brand. Complete verification through the link delivered to the brand contact before continuing registration.
      *
      * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions

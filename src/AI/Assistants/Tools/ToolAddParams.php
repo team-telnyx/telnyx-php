@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Add Assistant Tool.
+ * Attach an existing tool to an AI assistant.
  *
  * @see Telnyx\Services\AI\Assistants\ToolsService::add()
  *

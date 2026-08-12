@@ -6,6 +6,7 @@ namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Tools\PayToolParams;
 use Telnyx\AI\Tools\SharedToolResponse;
+use Telnyx\AI\Tools\UpdateDynamicVariablesToolParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -17,6 +18,7 @@ use Telnyx\ServiceContracts\AI\ToolsContract;
  * Configure AI assistant specifications.
  *
  * @phpstan-import-type PayToolParamsShape from \Telnyx\AI\Tools\PayToolParams
+ * @phpstan-import-type UpdateDynamicVariablesToolParamsShape from \Telnyx\AI\Tools\UpdateDynamicVariablesToolParams
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ToolsService implements ToolsContract
@@ -37,7 +39,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * Create Tool
+     * Create a new custom AI tool that can be attached to AI assistants.
      *
      * @param array<string,mixed> $clientSideTool
      * @param array<string,mixed> $function
@@ -45,6 +47,7 @@ final class ToolsService implements ToolsContract
      * @param array<string,mixed> $invite
      * @param PayToolParams|PayToolParamsShape $pay
      * @param array<string,mixed> $retrieval
+     * @param UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape $updateDynamicVariables configuration for an update_dynamic_variables tool
      * @param array<string,mixed> $webhook
      * @param RequestOpts|null $requestOptions
      *
@@ -60,6 +63,7 @@ final class ToolsService implements ToolsContract
         PayToolParams|array|null $pay = null,
         ?array $retrieval = null,
         int $timeoutMs = 5000,
+        UpdateDynamicVariablesToolParams|array|null $updateDynamicVariables = null,
         ?array $webhook = null,
         RequestOptions|array|null $requestOptions = null,
     ): SharedToolResponse {
@@ -74,6 +78,7 @@ final class ToolsService implements ToolsContract
                 'pay' => $pay,
                 'retrieval' => $retrieval,
                 'timeoutMs' => $timeoutMs,
+                'updateDynamicVariables' => $updateDynamicVariables,
                 'webhook' => $webhook,
             ],
         );
@@ -87,7 +92,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * Get Tool
+     * Retrieve the details of a specific AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
@@ -107,7 +112,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * Update Tool
+     * Update the configuration of an existing AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param array<string,mixed> $clientSideTool
@@ -116,6 +121,7 @@ final class ToolsService implements ToolsContract
      * @param array<string,mixed> $invite
      * @param PayToolParams|PayToolParamsShape $pay
      * @param array<string,mixed> $retrieval
+     * @param UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape $updateDynamicVariables configuration for an update_dynamic_variables tool
      * @param array<string,mixed> $webhook
      * @param RequestOpts|null $requestOptions
      *
@@ -132,6 +138,7 @@ final class ToolsService implements ToolsContract
         ?array $retrieval = null,
         ?int $timeoutMs = null,
         ?string $type = null,
+        UpdateDynamicVariablesToolParams|array|null $updateDynamicVariables = null,
         ?array $webhook = null,
         RequestOptions|array|null $requestOptions = null,
     ): SharedToolResponse {
@@ -146,6 +153,7 @@ final class ToolsService implements ToolsContract
                 'retrieval' => $retrieval,
                 'timeoutMs' => $timeoutMs,
                 'type' => $type,
+                'updateDynamicVariables' => $updateDynamicVariables,
                 'webhook' => $webhook,
             ],
         );
@@ -159,7 +167,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * List Tools
+     * Retrieve a list of the custom AI tools configured on your account.
      *
      * @param string $filterName filter results by filter name
      * @param string $filterType filter results by filter type
@@ -196,7 +204,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * Delete Tool
+     * Delete a custom AI tool.
      *
      * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions

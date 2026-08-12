@@ -46,7 +46,7 @@ final class VoiceRawService implements VoiceRawContract
     /**
      * @api
      *
-     * Retrieve a phone number with voice settings
+     * Returns the specified phone number together with its current voice configuration.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -71,7 +71,7 @@ final class VoiceRawService implements VoiceRawContract
     /**
      * @api
      *
-     * Update a phone number with voice settings
+     * Updates the voice configuration for the specified phone number. The response contains the phone number with its updated voice settings.
      *
      * @param string $id identifies the resource
      * @param array{
@@ -114,7 +114,7 @@ final class VoiceRawService implements VoiceRawContract
     /**
      * @api
      *
-     * List phone numbers with voice settings
+     * Returns account phone numbers together with their voice settings. Results support pagination, sorting, and filters for number, connection name, customer reference, and voice usage payment method.
      *
      * @param array{
      *   filter?: Filter|FilterShape,

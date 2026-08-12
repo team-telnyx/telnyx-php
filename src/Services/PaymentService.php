@@ -41,7 +41,7 @@ final class PaymentService implements PaymentContract
     /**
      * @api
      *
-     * Create a stored payment transaction
+     * Create a transaction that charges a stored payment method on the account.
      *
      * @param string $amount Amount in dollars and cents, e.g. "120.00"
      * @param RequestOpts|null $requestOptions

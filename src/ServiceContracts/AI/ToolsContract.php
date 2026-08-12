@@ -6,12 +6,14 @@ namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Tools\PayToolParams;
 use Telnyx\AI\Tools\SharedToolResponse;
+use Telnyx\AI\Tools\UpdateDynamicVariablesToolParams;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type PayToolParamsShape from \Telnyx\AI\Tools\PayToolParams
+ * @phpstan-import-type UpdateDynamicVariablesToolParamsShape from \Telnyx\AI\Tools\UpdateDynamicVariablesToolParams
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface ToolsContract
@@ -25,6 +27,7 @@ interface ToolsContract
      * @param array<string,mixed> $invite
      * @param PayToolParams|PayToolParamsShape $pay
      * @param array<string,mixed> $retrieval
+     * @param UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape $updateDynamicVariables configuration for an update_dynamic_variables tool
      * @param array<string,mixed> $webhook
      * @param RequestOpts|null $requestOptions
      *
@@ -40,6 +43,7 @@ interface ToolsContract
         PayToolParams|array|null $pay = null,
         ?array $retrieval = null,
         int $timeoutMs = 5000,
+        UpdateDynamicVariablesToolParams|array|null $updateDynamicVariables = null,
         ?array $webhook = null,
         RequestOptions|array|null $requestOptions = null,
     ): SharedToolResponse;
@@ -67,6 +71,7 @@ interface ToolsContract
      * @param array<string,mixed> $invite
      * @param PayToolParams|PayToolParamsShape $pay
      * @param array<string,mixed> $retrieval
+     * @param UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape $updateDynamicVariables configuration for an update_dynamic_variables tool
      * @param array<string,mixed> $webhook
      * @param RequestOpts|null $requestOptions
      *
@@ -83,6 +88,7 @@ interface ToolsContract
         ?array $retrieval = null,
         ?int $timeoutMs = null,
         ?string $type = null,
+        UpdateDynamicVariablesToolParams|array|null $updateDynamicVariables = null,
         ?array $webhook = null,
         RequestOptions|array|null $requestOptions = null,
     ): SharedToolResponse;

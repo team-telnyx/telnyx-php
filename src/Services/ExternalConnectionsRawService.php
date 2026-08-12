@@ -215,7 +215,7 @@ final class ExternalConnectionsRawService implements ExternalConnectionsRawContr
     /**
      * @api
      *
-     * Update a location's static emergency address
+     * Update the static emergency address assigned to a specific location of an external connection.
      *
      * @param string $locationID Path param: The ID of the location to update
      * @param array{

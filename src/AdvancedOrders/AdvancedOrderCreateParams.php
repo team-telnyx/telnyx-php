@@ -12,7 +12,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create Advanced Order.
+ * Creates an advanced number order from the requested order configuration. The response contains the resulting advanced order and its initial state.
  *
  * @see Telnyx\Services\AdvancedOrdersService::create()
  *

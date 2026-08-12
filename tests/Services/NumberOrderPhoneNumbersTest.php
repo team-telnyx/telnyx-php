@@ -68,7 +68,7 @@ final class NumberOrderPhoneNumbersTest extends TestCase
 
         $result = $this->client->numberOrderPhoneNumbers->updateRequirementGroup(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            requirementGroupID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            requirementGroupID: 'a4b201f9-8646-4e54-a7d2-b2e403eeaf8c',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -87,7 +87,7 @@ final class NumberOrderPhoneNumbersTest extends TestCase
 
         $result = $this->client->numberOrderPhoneNumbers->updateRequirementGroup(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            requirementGroupID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            requirementGroupID: 'a4b201f9-8646-4e54-a7d2-b2e403eeaf8c',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

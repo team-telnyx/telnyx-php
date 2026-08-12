@@ -12,7 +12,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update Advanced Order.
+ * Updates the requirement-group configuration for the specified advanced number order. The response contains the updated advanced order.
  *
  * @see Telnyx\Services\AdvancedOrdersService::updateRequirementGroup()
  *

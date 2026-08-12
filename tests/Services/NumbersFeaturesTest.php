@@ -35,7 +35,9 @@ final class NumbersFeaturesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->numbersFeatures->create(phoneNumbers: ['string']);
+        $result = $this->client->numbersFeatures->create(
+            phoneNumbers: ['+19705555098']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumbersFeatureNewResponse::class, $result);
@@ -48,7 +50,9 @@ final class NumbersFeaturesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->numbersFeatures->create(phoneNumbers: ['string']);
+        $result = $this->client->numbersFeatures->create(
+            phoneNumbers: ['+19705555098']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumbersFeatureNewResponse::class, $result);

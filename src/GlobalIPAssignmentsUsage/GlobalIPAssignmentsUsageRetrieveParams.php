@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter;
 
 /**
- * Global IP Assignment Usage Metrics.
+ * Retrieve usage metrics for your Global IP assignments.
  *
  * @see Telnyx\Services\GlobalIPAssignmentsUsageService::retrieve()
  *

@@ -68,7 +68,7 @@ final class StorageService implements StorageContract
     /**
      * @api
      *
-     * List Migration Source coverage
+     * List the external storage providers and regions supported as migration sources.
      *
      * @param RequestOpts|null $requestOptions
      *

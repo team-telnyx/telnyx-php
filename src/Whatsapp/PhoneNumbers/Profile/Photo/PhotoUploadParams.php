@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\FileParam;
 
 /**
- * Upload Whatsapp profile photo.
+ * Uploads and assigns a business-profile photo to the specified WhatsApp phone number.
  *
  * @see Telnyx\Services\Whatsapp\PhoneNumbers\Profile\PhotoService::upload()
  *

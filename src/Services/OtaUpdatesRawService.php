@@ -58,7 +58,7 @@ final class OtaUpdatesRawService implements OtaUpdatesRawContract
     /**
      * @api
      *
-     * List OTA updates
+     * Retrieve a paginated list of over-the-air (OTA) update operations for your SIM cards.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int

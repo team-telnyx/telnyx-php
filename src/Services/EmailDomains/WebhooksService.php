@@ -64,7 +64,7 @@ final class WebhooksService implements WebhooksContract
     /**
      * @api
      *
-     * Retrieve a webhook
+     * Returns the webhook subscription identified by ID within the specified email domain.
      *
      * @param string $id Email webhook UUID
      * @param string $domainID Email domain UUID
@@ -118,7 +118,7 @@ final class WebhooksService implements WebhooksContract
     /**
      * @api
      *
-     * List webhooks for an email domain
+     * Returns a paginated list of webhook subscriptions scoped to the email domain. Results can be sorted by creation time.
      *
      * @param string $domainID Email domain UUID
      * @param int $pageNumber Page number to return (offset pagination)
@@ -150,7 +150,7 @@ final class WebhooksService implements WebhooksContract
     /**
      * @api
      *
-     * Delete a webhook
+     * Deletes the webhook subscription identified by ID within the specified email domain and returns the deleted subscription.
      *
      * @param string $id Email webhook UUID
      * @param string $domainID Email domain UUID

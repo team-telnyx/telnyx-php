@@ -39,7 +39,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
     /**
      * @api
      *
-     * Create auto-response setting
+     * Creates an auto-response rule on the specified messaging profile. Matching inbound messages trigger the configured response.
      *
      * @param string $profileID unique identifier of the profile
      * @param array{
@@ -77,7 +77,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
     /**
      * @api
      *
-     * Get Auto-Response Setting
+     * Returns the matching criteria and response content for the specified auto-response rule.
      *
      * @param string $autorespCfgID unique identifier of the autoresp cfg
      * @param array{profileID: string}|AutorespConfigRetrieveParams $params
@@ -115,7 +115,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
     /**
      * @api
      *
-     * Update Auto-Response Setting
+     * Replaces the configuration of the specified auto-response rule.
      *
      * @param string $autorespCfgID path param: Unique identifier of the autoresp cfg
      * @param array{
@@ -160,7 +160,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
     /**
      * @api
      *
-     * List Auto-Response Settings
+     * Returns the auto-response rules configured for the specified messaging profile.
      *
      * @param string $profileID unique identifier of the profile
      * @param array{
@@ -204,7 +204,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
     /**
      * @api
      *
-     * Delete Auto-Response Setting
+     * Deletes the specified auto-response rule from the messaging profile.
      *
      * @param string $autorespCfgID unique identifier of the autoresp cfg
      * @param array{profileID: string}|AutorespConfigDeleteParams $params

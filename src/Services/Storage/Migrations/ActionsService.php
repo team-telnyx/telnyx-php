@@ -33,7 +33,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Stop a Migration
+     * Stop an in-progress storage migration.
      *
      * @param string $id unique identifier for the data migration
      * @param RequestOpts|null $requestOptions

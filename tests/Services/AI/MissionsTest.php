@@ -39,7 +39,7 @@ final class MissionsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->missions->create(name: 'name');
+        $result = $this->client->ai->missions->create(name: 'Name');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MissionResponse::class, $result);
@@ -53,12 +53,12 @@ final class MissionsTest extends TestCase
         }
 
         $result = $this->client->ai->missions->create(
-            name: 'name',
-            description: 'description',
+            name: 'Name',
+            description: 'Description',
             executionMode: ExecutionMode::EXTERNAL,
-            instructions: 'instructions',
+            instructions: 'Instructions',
             metadata: ['foo' => 'bar'],
-            model: 'model',
+            model: 'Model',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

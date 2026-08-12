@@ -78,7 +78,7 @@ final class MigrationsService implements MigrationsContract
     /**
      * @api
      *
-     * Get a Migration
+     * Retrieve the details and status of a specific storage migration.
      *
      * @param string $id unique identifier for the data migration
      * @param RequestOpts|null $requestOptions
@@ -98,7 +98,7 @@ final class MigrationsService implements MigrationsContract
     /**
      * @api
      *
-     * List all Migrations
+     * Retrieve a list of the storage migrations on your account.
      *
      * @param RequestOpts|null $requestOptions
      *

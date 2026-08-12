@@ -72,7 +72,7 @@ final class WebhooksRawService implements WebhooksRawContract
     /**
      * @api
      *
-     * Retrieve a webhook
+     * Returns the webhook subscription identified by ID within the specified email domain.
      *
      * @param string $id Email webhook UUID
      * @param array{domainID: string}|WebhookRetrieveParams $params
@@ -145,7 +145,7 @@ final class WebhooksRawService implements WebhooksRawContract
     /**
      * @api
      *
-     * List webhooks for an email domain
+     * Returns a paginated list of webhook subscriptions scoped to the email domain. Results can be sorted by creation time.
      *
      * @param string $domainID Email domain UUID
      * @param array{
@@ -184,7 +184,7 @@ final class WebhooksRawService implements WebhooksRawContract
     /**
      * @api
      *
-     * Delete a webhook
+     * Deletes the webhook subscription identified by ID within the specified email domain and returns the deleted subscription.
      *
      * @param string $id Email webhook UUID
      * @param array{domainID: string}|WebhookDeleteParams $params

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Modify an RCS agent.
+ * Updates the supplied configuration fields on the specified RCS agent.
  *
  * @see Telnyx\Services\Messaging\Rcs\AgentsService::update()
  *

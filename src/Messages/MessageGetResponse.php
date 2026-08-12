@@ -7,8 +7,8 @@ namespace Telnyx\Messages;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\InboundMessagePayload;
 use Telnyx\Messages\MessageGetResponse\Data;
+use Telnyx\Messages\MessageGetResponse\Data\MessagingInboundMessagePayload;
 
 /**
  * @phpstan-import-type DataVariants from \Telnyx\Messages\MessageGetResponse\Data
@@ -23,7 +23,7 @@ final class MessageGetResponse implements BaseModel
 
     /** @var DataVariants|null $data */
     #[Optional(union: Data::class)]
-    public OutboundMessagePayload|InboundMessagePayload|null $data;
+    public MessagingOutboundMessagePayload|MessagingInboundMessagePayload|null $data;
 
     public function __construct()
     {
@@ -38,7 +38,7 @@ final class MessageGetResponse implements BaseModel
      * @param DataShape|null $data
      */
     public static function with(
-        OutboundMessagePayload|array|InboundMessagePayload|null $data = null
+        MessagingOutboundMessagePayload|array|MessagingInboundMessagePayload|null $data = null,
     ): self {
         $self = new self;
 
@@ -51,7 +51,7 @@ final class MessageGetResponse implements BaseModel
      * @param DataShape $data
      */
     public function withData(
-        OutboundMessagePayload|array|InboundMessagePayload $data
+        MessagingOutboundMessagePayload|array|MessagingInboundMessagePayload $data
     ): self {
         $self = clone $this;
         $self['data'] = $data;

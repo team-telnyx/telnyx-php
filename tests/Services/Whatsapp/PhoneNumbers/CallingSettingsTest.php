@@ -53,7 +53,7 @@ final class CallingSettingsTest extends TestCase
 
         $result = $this->client->whatsapp->phoneNumbers->callingSettings->update(
             'phone_number',
-            enabled: true
+            enabled: false
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -69,7 +69,7 @@ final class CallingSettingsTest extends TestCase
 
         $result = $this->client->whatsapp->phoneNumbers->callingSettings->update(
             'phone_number',
-            enabled: true
+            enabled: false
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

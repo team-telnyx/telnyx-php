@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Fetch a cluster.
+ * Fetch the results of a clustering task, including the discovered clusters.
  *
  * @see Telnyx\Services\AI\ClustersService::retrieve()
  *

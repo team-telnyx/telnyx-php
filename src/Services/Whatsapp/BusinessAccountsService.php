@@ -50,7 +50,7 @@ final class BusinessAccountsService implements BusinessAccountsContract
     /**
      * @api
      *
-     * Get a single Whatsapp Business Account
+     * Returns the configuration and status of the specified WhatsApp Business Account.
      *
      * @param string $id Whatsapp Business Account ID
      * @param RequestOpts|null $requestOptions
@@ -70,7 +70,7 @@ final class BusinessAccountsService implements BusinessAccountsContract
     /**
      * @api
      *
-     * List Whatsapp Business Accounts
+     * Returns WhatsApp Business Accounts linked to the authenticated Telnyx account.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -96,7 +96,7 @@ final class BusinessAccountsService implements BusinessAccountsContract
     /**
      * @api
      *
-     * Delete a Whatsapp Business Account
+     * Unlinks and deletes the specified WhatsApp Business Account resource from Telnyx.
      *
      * @param string $id Whatsapp Business Account ID
      * @param RequestOpts|null $requestOptions

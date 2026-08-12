@@ -13,7 +13,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Noise Suppression Start (BETA).
+ * Start noise suppression on an active call to reduce background noise. This feature is currently in beta.
  *
  * @see Telnyx\Services\Calls\ActionsService::startNoiseSuppression()
  *

@@ -34,7 +34,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * Add Assistant Tool
+     * Attach an existing tool to an AI assistant.
      *
      * @param string $toolID unique identifier of the tool
      * @param string $assistantID unique identifier of the assistant
@@ -58,7 +58,7 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
-     * Remove Assistant Tool
+     * Detach a tool from an AI assistant.
      *
      * @param string $toolID unique identifier of the tool
      * @param string $assistantID unique identifier of the assistant

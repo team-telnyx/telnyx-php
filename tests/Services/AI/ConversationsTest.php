@@ -106,7 +106,7 @@ final class ConversationsTest extends TestCase
 
         $result = $this->client->ai->conversations->addMessage(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            role: 'role'
+            role: 'Role'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -122,12 +122,12 @@ final class ConversationsTest extends TestCase
 
         $result = $this->client->ai->conversations->addMessage(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            role: 'role',
-            content: 'content',
+            role: 'Role',
+            content: '',
             metadata: ['foo' => 'string'],
-            name: 'name',
-            sentAt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-            toolCallID: 'tool_call_id',
+            name: 'Name',
+            sentAt: new \DateTimeImmutable('2024-01-23T18:10:02.574Z'),
+            toolCallID: 'Tool Call Id',
             toolCalls: [['foo' => 'bar']],
             toolChoice: 'string',
         );

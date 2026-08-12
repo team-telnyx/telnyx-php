@@ -17,6 +17,7 @@ use Telnyx\Messages\MessageSendNumberPoolResponse;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
+use Telnyx\Messages\MessageWhatsappResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -365,5 +366,202 @@ final class MessagesTest extends TestCase
             MessageSendWithAlphanumericSenderResponse::class,
             $result
         );
+    }
+
+    #[Test]
+    public function testWhatsapp(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->messages->whatsapp(
+            from: '+13125551234',
+            to: '+13125551234',
+            whatsappMessage: []
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessageWhatsappResponse::class, $result);
+    }
+
+    #[Test]
+    public function testWhatsappWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->messages->whatsapp(
+            from: '+13125551234',
+            to: '+13125551234',
+            whatsappMessage: [
+                'audio' => [
+                    'caption' => 'caption',
+                    'filename' => 'filename',
+                    'link' => 'http://example.com/media.jpg',
+                    'voice' => true,
+                ],
+                'bizOpaqueCallbackData' => 'biz_opaque_callback_data',
+                'contacts' => [
+                    [
+                        'addresses' => [
+                            [
+                                'city' => 'city',
+                                'country' => 'country',
+                                'countryCode' => 'country_code',
+                                'state' => 'state',
+                                'street' => 'street',
+                                'type' => 'type',
+                                'zip' => 'zip',
+                            ],
+                        ],
+                        'birthday' => 'birthday',
+                        'emails' => [['email' => 'email', 'type' => 'type']],
+                        'name' => 'name',
+                        'org' => [
+                            'company' => 'company',
+                            'department' => 'department',
+                            'title' => 'title',
+                        ],
+                        'phones' => [
+                            ['phone' => 'phone', 'type' => 'type', 'waID' => 'wa_id'],
+                        ],
+                        'urls' => [['type' => 'type', 'url' => 'url']],
+                    ],
+                ],
+                'document' => [
+                    'caption' => 'caption',
+                    'filename' => 'filename',
+                    'link' => 'http://example.com/media.jpg',
+                    'voice' => true,
+                ],
+                'image' => [
+                    'caption' => 'caption',
+                    'filename' => 'filename',
+                    'link' => 'http://example.com/media.jpg',
+                    'voice' => true,
+                ],
+                'interactive' => [
+                    'action' => [
+                        'button' => 'button',
+                        'buttons' => [
+                            ['reply' => ['id' => 'id', 'title' => 'title'], 'type' => 'reply'],
+                        ],
+                        'cards' => [
+                            [
+                                'action' => [
+                                    'catalogID' => 'catalog_id',
+                                    'productRetailerID' => 'product_retailer_id',
+                                ],
+                                'body' => ['text' => 'text'],
+                                'cardIndex' => 0,
+                                'header' => [
+                                    'image' => [
+                                        'caption' => 'caption',
+                                        'filename' => 'filename',
+                                        'link' => 'http://example.com/media.jpg',
+                                        'voice' => true,
+                                    ],
+                                    'type' => 'image',
+                                    'video' => [
+                                        'caption' => 'caption',
+                                        'filename' => 'filename',
+                                        'link' => 'http://example.com/media.jpg',
+                                        'voice' => true,
+                                    ],
+                                ],
+                                'type' => 'cta_url',
+                            ],
+                        ],
+                        'catalogID' => 'catalog_id',
+                        'mode' => 'mode',
+                        'name' => 'name',
+                        'parameters' => ['displayText' => 'display_text', 'url' => 'url'],
+                        'productRetailerID' => 'product_retailer_id',
+                        'sections' => [
+                            [
+                                'productItems' => [
+                                    ['productRetailerID' => 'product_retailer_id'],
+                                ],
+                                'rows' => [
+                                    [
+                                        'id' => 'id',
+                                        'description' => 'description',
+                                        'title' => 'title',
+                                    ],
+                                ],
+                                'title' => 'title',
+                            ],
+                        ],
+                    ],
+                    'body' => ['text' => 'text'],
+                    'footer' => ['text' => 'text'],
+                    'header' => [
+                        'document' => [
+                            'caption' => 'caption',
+                            'filename' => 'filename',
+                            'link' => 'http://example.com/media.jpg',
+                            'voice' => true,
+                        ],
+                        'image' => [
+                            'caption' => 'caption',
+                            'filename' => 'filename',
+                            'link' => 'http://example.com/media.jpg',
+                            'voice' => true,
+                        ],
+                        'subText' => 'sub_text',
+                        'text' => 'text',
+                        'video' => [
+                            'caption' => 'caption',
+                            'filename' => 'filename',
+                            'link' => 'http://example.com/media.jpg',
+                            'voice' => true,
+                        ],
+                    ],
+                    'type' => 'cta_url',
+                ],
+                'location' => [
+                    'address' => 'address',
+                    'latitude' => 'latitude',
+                    'longitude' => 'longitude',
+                    'name' => 'name',
+                ],
+                'reaction' => ['emoji' => 'emoji', 'messageID' => 'message_id'],
+                'sticker' => [
+                    'caption' => 'caption',
+                    'filename' => 'filename',
+                    'link' => 'http://example.com/media.jpg',
+                    'voice' => true,
+                ],
+                'template' => [
+                    'components' => [
+                        [
+                            'index' => 0,
+                            'parameters' => [['text' => 'text', 'type' => 'text']],
+                            'subType' => 'quick_reply',
+                            'type' => 'header',
+                        ],
+                    ],
+                    'language' => ['code' => 'en_US', 'policy' => 'deterministic'],
+                    'name' => 'order_confirmation',
+                    'templateID' => '019cd44b-3a1c-781b-956e-bd33e9fd2ac6',
+                ],
+                'text' => ['body' => 'Hello from Telnyx!', 'previewURL' => true],
+                'type' => 'audio',
+                'video' => [
+                    'caption' => 'caption',
+                    'filename' => 'filename',
+                    'link' => 'http://example.com/media.jpg',
+                    'voice' => true,
+                ],
+            ],
+            messagingProfileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            type: 'WHATSAPP',
+            webhookURL: 'webhook_url',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessageWhatsappResponse::class, $result);
     }
 }

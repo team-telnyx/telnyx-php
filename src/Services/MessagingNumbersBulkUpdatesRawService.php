@@ -29,7 +29,7 @@ final class MessagingNumbersBulkUpdatesRawService implements MessagingNumbersBul
     /**
      * @api
      *
-     * Bulk update phone number profiles
+     * Starts a bulk update of messaging-profile assignments for the supplied phone numbers. The response identifies the order used to monitor processing.
      *
      * @param array{
      *   messagingProfileID: string, numbers: list<string>, assignOnly?: bool
@@ -62,7 +62,7 @@ final class MessagingNumbersBulkUpdatesRawService implements MessagingNumbersBul
     /**
      * @api
      *
-     * Retrieve bulk update status
+     * Returns processing status and results for a bulk messaging-settings update order.
      *
      * @param string $orderID order ID to verify bulk update status
      * @param RequestOpts|null $requestOptions

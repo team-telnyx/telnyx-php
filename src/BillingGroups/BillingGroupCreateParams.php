@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a billing group.
+ * Create a new billing group, which can be used to organize resources for billing purposes.
  *
  * @see Telnyx\Services\BillingGroupsService::create()
  *

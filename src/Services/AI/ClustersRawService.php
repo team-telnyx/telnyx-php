@@ -35,7 +35,7 @@ final class ClustersRawService implements ClustersRawContract
     /**
      * @api
      *
-     * Fetch a cluster
+     * Fetch the results of a clustering task, including the discovered clusters.
      *
      * @param string $taskID unique identifier of the task
      * @param array{
@@ -73,7 +73,7 @@ final class ClustersRawService implements ClustersRawContract
     /**
      * @api
      *
-     * List all clusters
+     * Retrieve a paginated list of clustering tasks and their statuses.
      *
      * @param array{pageNumber?: int, pageSize?: int}|ClusterListParams $params
      * @param RequestOpts|null $requestOptions
@@ -108,7 +108,7 @@ final class ClustersRawService implements ClustersRawContract
     /**
      * @api
      *
-     * Delete a cluster
+     * Delete a clustering task and its computed results.
      *
      * @param string $taskID unique identifier of the task
      * @param RequestOpts|null $requestOptions
@@ -170,7 +170,7 @@ final class ClustersRawService implements ClustersRawContract
     /**
      * @api
      *
-     * Fetch a cluster visualization
+     * Fetch a visualization image of the clusters computed by a clustering task.
      *
      * @param string $taskID unique identifier of the task
      * @param array{clusterID?: int}|ClusterFetchGraphParams $params

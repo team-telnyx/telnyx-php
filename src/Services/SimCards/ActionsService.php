@@ -21,7 +21,7 @@ use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
 use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
-use Telnyx\SimCards\Actions\SimCardAction;
+use Telnyx\SimCards\Actions\WirelessSimCardAction;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\SimCards\Actions\ActionListParams\Filter
@@ -70,7 +70,7 @@ final class ActionsService implements ActionsContract
      * @param Filter|FilterShape $filter Consolidated filter parameter for SIM card actions (deepObject style). Originally: filter[sim_card_id], filter[status], filter[bulk_sim_card_action_id], filter[action_type]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<SimCardAction>
+     * @return DefaultFlatPagination<WirelessSimCardAction>
      *
      * @throws APIException
      */

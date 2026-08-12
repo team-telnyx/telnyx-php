@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update a billing group.
+ * Update the properties of an existing billing group.
  *
  * @see Telnyx\Services\BillingGroupsService::update()
  *

@@ -71,7 +71,7 @@ final class TelnyxAgentsTest extends TestCase
         $result = $this->client->ai->missions->runs->telnyxAgents->link(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             missionID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            telnyxAgentID: 'telnyx_agent_id',
+            telnyxAgentID: 'Telnyx Agent Id',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -88,7 +88,7 @@ final class TelnyxAgentsTest extends TestCase
         $result = $this->client->ai->missions->runs->telnyxAgents->link(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             missionID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            telnyxAgentID: 'telnyx_agent_id',
+            telnyxAgentID: 'Telnyx Agent Id',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

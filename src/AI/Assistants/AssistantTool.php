@@ -13,6 +13,7 @@ use Telnyx\AI\Assistants\AssistantTool\PayTool;
 use Telnyx\AI\Assistants\AssistantTool\SendMessageTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\AssistantTool\SkipTurnTool;
+use Telnyx\AI\Assistants\AssistantTool\UpdateDynamicVariablesTool;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -32,9 +33,10 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type SendMessageToolShape from \Telnyx\AI\Assistants\AssistantTool\SendMessageTool
  * @phpstan-import-type SkipTurnToolShape from \Telnyx\AI\Assistants\AssistantTool\SkipTurnTool
  * @phpstan-import-type PayToolShape from \Telnyx\AI\Assistants\AssistantTool\PayTool
+ * @phpstan-import-type UpdateDynamicVariablesToolShape from \Telnyx\AI\Assistants\AssistantTool\UpdateDynamicVariablesTool
  *
- * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|ClientSideTool|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|InviteTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool|PayTool
- * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|ClientSideToolShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|InviteToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape|PayToolShape
+ * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|ClientSideTool|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|InviteTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool|PayTool|UpdateDynamicVariablesTool
+ * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|ClientSideToolShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|InviteToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape|PayToolShape|UpdateDynamicVariablesToolShape
  */
 final class AssistantTool implements ConverterSource
 {
@@ -63,6 +65,7 @@ final class AssistantTool implements ConverterSource
             'send_message' => SendMessageTool::class,
             'skip_turn' => SkipTurnTool::class,
             'pay' => PayTool::class,
+            'update_dynamic_variables' => UpdateDynamicVariablesTool::class,
         ];
     }
 }

@@ -46,7 +46,7 @@ final class SessionsService implements SessionsContract
     /**
      * @api
      *
-     * View a room session.
+     * Returns the room session identified by `room_session_id`, including its room, active status, and lifecycle timestamps. Use `include_participants` to include its participant records.
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param bool $includeParticipants to decide if room participants should be included in the response
@@ -72,7 +72,7 @@ final class SessionsService implements SessionsContract
     /**
      * @api
      *
-     * View a list of room sessions.
+     * Returns a paginated list of room sessions across the account. Filter sessions by room, creation, update, or end date and active status, and use `include_participants` to include participant records.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[room_id], filter[active]
      * @param bool $includeParticipants to decide if room participants should be included in the response
@@ -107,7 +107,7 @@ final class SessionsService implements SessionsContract
     /**
      * @api
      *
-     * View a list of room sessions.
+     * Returns a paginated list of sessions for the specified room. Filter sessions by creation, update, or end date and active status, and use `include_participants` to include participant records.
      *
      * @param string $roomID the unique identifier of a room
      * @param \Telnyx\Rooms\Sessions\SessionList1Params\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active]
@@ -144,7 +144,7 @@ final class SessionsService implements SessionsContract
     /**
      * @api
      *
-     * View a list of room participants.
+     * Returns a paginated list of participants for the specified room session. Filter participants by join, update, or leave date and by participant context.
      *
      * @param string $roomSessionID the unique identifier of a room session
      * @param \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter|FilterShape2 $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context]

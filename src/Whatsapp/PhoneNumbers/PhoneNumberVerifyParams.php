@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Submit verification code for a phone number.
+ * Submits the verification code received for the specified WhatsApp phone number.
  *
  * @see Telnyx\Services\Whatsapp\PhoneNumbersService::verify()
  *

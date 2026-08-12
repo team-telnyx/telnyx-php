@@ -35,7 +35,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Upload hosted number document
+     * Uploads a supporting document to the specified hosted-messaging order.
      *
      * @param string $id identifies the type of resource
      * @param string|FileParam $bill must be the last month's bill with proof of ownership of all of the numbers in the order in PDF format

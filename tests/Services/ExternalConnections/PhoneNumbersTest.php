@@ -89,7 +89,7 @@ final class PhoneNumbersTest extends TestCase
         $result = $this->client->externalConnections->phoneNumbers->update(
             '1234567889',
             id: '1293384261075731499',
-            locationID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            locationID: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

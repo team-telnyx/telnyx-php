@@ -16,13 +16,12 @@ use Telnyx\Messages\MessageCancelScheduledResponse\Media;
 use Telnyx\Messages\MessageCancelScheduledResponse\RecordType;
 use Telnyx\Messages\MessageCancelScheduledResponse\To;
 use Telnyx\Messages\MessageCancelScheduledResponse\Type;
-use Telnyx\MessagingError;
 
 /**
  * @phpstan-import-type CcShape from \Telnyx\Messages\MessageCancelScheduledResponse\Cc
  * @phpstan-import-type CostShape from \Telnyx\Messages\MessageCancelScheduledResponse\Cost
  * @phpstan-import-type CostBreakdownShape from \Telnyx\Messages\MessageCancelScheduledResponse\CostBreakdown
- * @phpstan-import-type MessagingErrorShape from \Telnyx\MessagingError
+ * @phpstan-import-type MessagingError0b38e7044bShape from \Telnyx\Messages\MessagingError0b38e7044b
  * @phpstan-import-type FromShape from \Telnyx\Messages\MessageCancelScheduledResponse\From
  * @phpstan-import-type MediaShape from \Telnyx\Messages\MessageCancelScheduledResponse\Media
  * @phpstan-import-type ToShape from \Telnyx\Messages\MessageCancelScheduledResponse\To
@@ -35,7 +34,7 @@ use Telnyx\MessagingError;
  *   costBreakdown?: null|CostBreakdown|CostBreakdownShape,
  *   direction?: null|Direction|value-of<Direction>,
  *   encoding?: string|null,
- *   errors?: list<MessagingError|MessagingErrorShape>|null,
+ *   errors?: list<MessagingError0b38e7044b|MessagingError0b38e7044bShape>|null,
  *   from?: null|From|FromShape,
  *   media?: list<Media|MediaShape>|null,
  *   messagingProfileID?: string|null,
@@ -106,9 +105,9 @@ final class MessageCancelScheduledResponse implements BaseModel
     /**
      * These errors may point at addressees when referring to unsuccessful/unconfirmed delivery statuses.
      *
-     * @var list<MessagingError>|null $errors
+     * @var list<MessagingError0b38e7044b>|null $errors
      */
-    #[Optional(list: MessagingError::class)]
+    #[Optional(list: MessagingError0b38e7044b::class)]
     public ?array $errors;
 
     #[Optional]
@@ -252,7 +251,7 @@ final class MessageCancelScheduledResponse implements BaseModel
      * @param Cost|CostShape|null $cost
      * @param CostBreakdown|CostBreakdownShape|null $costBreakdown
      * @param Direction|value-of<Direction>|null $direction
-     * @param list<MessagingError|MessagingErrorShape>|null $errors
+     * @param list<MessagingError0b38e7044b|MessagingError0b38e7044bShape>|null $errors
      * @param From|FromShape|null $from
      * @param list<Media|MediaShape>|null $media
      * @param RecordType|value-of<RecordType>|null $recordType
@@ -411,7 +410,7 @@ final class MessageCancelScheduledResponse implements BaseModel
     /**
      * These errors may point at addressees when referring to unsuccessful/unconfirmed delivery statuses.
      *
-     * @param list<MessagingError|MessagingErrorShape> $errors
+     * @param list<MessagingError0b38e7044b|MessagingError0b38e7044bShape> $errors
      */
     public function withErrors(array $errors): self
     {

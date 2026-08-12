@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts\Messaging\Rcs;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\RcsAgents\RcsAgent;
-use Telnyx\RcsAgents\RcsAgentResponse;
+use Telnyx\Rcs\Agents\RcsAgent;
+use Telnyx\Rcs\Agents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 
 /**

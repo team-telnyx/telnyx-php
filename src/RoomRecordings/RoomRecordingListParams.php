@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomRecordings\RoomRecordingListParams\Filter;
 
 /**
- * View a list of room recordings.
+ * Returns a paginated list of room recordings. Filter recordings by room, session, participant, recording type, status, duration, or start and end dates.
  *
  * @see Telnyx\Services\RoomRecordingsService::list()
  *

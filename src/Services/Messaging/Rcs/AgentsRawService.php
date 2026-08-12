@@ -11,8 +11,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams;
 use Telnyx\Messaging\Rcs\Agents\AgentUpdateParams;
-use Telnyx\RcsAgents\RcsAgent;
-use Telnyx\RcsAgents\RcsAgentResponse;
+use Telnyx\Rcs\Agents\RcsAgent;
+use Telnyx\Rcs\Agents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\Rcs\AgentsRawContract;
 
@@ -32,7 +32,7 @@ final class AgentsRawService implements AgentsRawContract
     /**
      * @api
      *
-     * Retrieve an RCS agent
+     * Returns the configuration and current state of the specified RCS agent.
      *
      * @param string $id RCS agent ID
      * @param RequestOpts|null $requestOptions
@@ -57,7 +57,7 @@ final class AgentsRawService implements AgentsRawContract
     /**
      * @api
      *
-     * Modify an RCS agent
+     * Updates the supplied configuration fields on the specified RCS agent.
      *
      * @param string $id RCS agent ID
      * @param array{
@@ -94,7 +94,7 @@ final class AgentsRawService implements AgentsRawContract
     /**
      * @api
      *
-     * List all RCS agents
+     * Returns RCS agents available to the authenticated account.
      *
      * @param array{pageNumber?: int, pageSize?: int}|AgentListParams $params
      * @param RequestOpts|null $requestOptions

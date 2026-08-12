@@ -39,7 +39,7 @@ final class MessagingService implements MessagingContract
     /**
      * @api
      *
-     * Retrieve a phone number with messaging settings
+     * Returns the messaging product and messaging-profile assignment for the specified phone number.
      *
      * @param string $id identifies the type of resource
      * @param RequestOpts|null $requestOptions
@@ -59,7 +59,7 @@ final class MessagingService implements MessagingContract
     /**
      * @api
      *
-     * Update the messaging profile and/or messaging product of a phone number
+     * Updates the messaging product, messaging profile, or both for the specified phone number.
      *
      * @param string $id the phone number to update
      * @param string $messagingProduct Configure the messaging product for this number:
@@ -100,7 +100,7 @@ final class MessagingService implements MessagingContract
     /**
      * @api
      *
-     * List phone numbers with messaging settings
+     * Returns phone numbers with their current messaging product and messaging-profile assignments.
      *
      * @param string $filterMessagingProfileID filter by messaging profile ID
      * @param string $filterPhoneNumber filter by exact phone number (supports comma-separated list)

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\UserAddresses\UserAddress;
+use Telnyx\UserAddresses\UserAddressesUserAddress;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressNewResponse;
 use Tests\UnsupportedMockTests;
@@ -106,7 +106,7 @@ final class UserAddressesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(UserAddress::class, $item);
+            $this->assertInstanceOf(UserAddressesUserAddress::class, $item);
         }
     }
 }

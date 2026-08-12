@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Send a group MMS message.
+ * Queues an MMS addressed to multiple recipients as a group conversation. Delivery events are reported asynchronously through messaging webhooks.
  *
  * @see Telnyx\Services\MessagesService::sendGroupMms()
  *

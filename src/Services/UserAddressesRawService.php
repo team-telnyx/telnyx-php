@@ -11,8 +11,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserAddressesRawContract;
-use Telnyx\UserAddresses\UserAddress;
 use Telnyx\UserAddresses\UserAddressCreateParams;
+use Telnyx\UserAddresses\UserAddressesUserAddress;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressListParams;
 use Telnyx\UserAddresses\UserAddressListParams\Filter;
@@ -117,7 +117,7 @@ final class UserAddressesRawService implements UserAddressesRawContract
      * }|UserAddressListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<UserAddress>>
+     * @return BaseResponse<DefaultFlatPagination<UserAddressesUserAddress>>
      *
      * @throws APIException
      */
@@ -139,7 +139,7 @@ final class UserAddressesRawService implements UserAddressesRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: UserAddress::class,
+            convert: UserAddressesUserAddress::class,
             page: DefaultFlatPagination::class,
         );
     }

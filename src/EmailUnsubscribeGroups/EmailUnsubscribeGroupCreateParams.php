@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create an unsubscribe group.
+ * Creates an account-owned unsubscribe group for associating email categories with separate recipient suppression lists.
  *
  * @see Telnyx\Services\EmailUnsubscribeGroupsService::create()
  *

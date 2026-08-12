@@ -29,7 +29,7 @@ final class ProfileRawService implements ProfileRawContract
     /**
      * @api
      *
-     * Get phone number business profile
+     * Returns the business profile displayed for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
@@ -54,7 +54,7 @@ final class ProfileRawService implements ProfileRawContract
     /**
      * @api
      *
-     * Update phone number business profile
+     * Updates the supplied business-profile fields for the specified WhatsApp phone number.
      *
      * @param string $phoneNumber Phone number (E.164 format)
      * @param array{

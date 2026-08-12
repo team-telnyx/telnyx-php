@@ -30,7 +30,7 @@ final class RegulatoryRequirementsRawService implements RegulatoryRequirementsRa
     /**
      * @api
      *
-     * Retrieve regulatory requirements
+     * Returns regulatory requirements for number ordering, porting, or other supported actions. Results can be filtered by phone number, requirement group, country, number type, and action.
      *
      * @param array{
      *   filter?: Filter|FilterShape

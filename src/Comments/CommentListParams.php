@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Retrieve all comments.
+ * Returns comments associated with number-order records. Results can be filtered by record type and record ID and include pagination metadata.
  *
  * @see Telnyx\Services\CommentsService::list()
  *

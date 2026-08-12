@@ -39,7 +39,7 @@ final class TemplatesService implements TemplatesContract
     /**
      * @api
      *
-     * Create a Whatsapp message template
+     * Creates a WhatsApp message template for review and subsequent use in template messages.
      *
      * @param Category|value-of<Category> $category template category: AUTHENTICATION, UTILITY, or MARKETING
      * @param list<ComponentShape> $components Template components defining message structure. Passed through to Meta Graph API. Templates with variables must include example values. Supports HEADER, BODY, FOOTER, BUTTONS, CAROUSEL and any future Meta component types.
@@ -77,7 +77,7 @@ final class TemplatesService implements TemplatesContract
     /**
      * @api
      *
-     * List Whatsapp message templates
+     * Returns WhatsApp message templates owned by the authenticated account, including their current review state.
      *
      * @param FilterCategory|value-of<FilterCategory> $filterCategory Filter by category
      * @param string $filterSearch Search templates by name

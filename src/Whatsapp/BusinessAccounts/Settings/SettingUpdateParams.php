@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update WABA settings.
+ * Updates the supplied account-level settings for the specified WhatsApp Business Account.
  *
  * @see Telnyx\Services\Whatsapp\BusinessAccounts\SettingsService::update()
  *

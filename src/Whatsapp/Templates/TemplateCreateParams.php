@@ -12,7 +12,7 @@ use Telnyx\Whatsapp\Templates\TemplateCreateParams\Category;
 use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component;
 
 /**
- * Create a Whatsapp message template.
+ * Creates a WhatsApp message template for review and subsequent use in template messages.
  *
  * @see Telnyx\Services\Whatsapp\TemplatesService::create()
  *

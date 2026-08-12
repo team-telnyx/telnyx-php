@@ -40,7 +40,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
     /**
      * @api
      *
-     * Create auto-response setting
+     * Creates an auto-response rule on the specified messaging profile. Matching inbound messages trigger the configured response.
      *
      * @param string $profileID unique identifier of the profile
      * @param list<string> $keywords
@@ -75,7 +75,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
     /**
      * @api
      *
-     * Get Auto-Response Setting
+     * Returns the matching criteria and response content for the specified auto-response rule.
      *
      * @param string $autorespCfgID unique identifier of the autoresp cfg
      * @param string $profileID unique identifier of the profile
@@ -99,7 +99,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
     /**
      * @api
      *
-     * Update Auto-Response Setting
+     * Replaces the configuration of the specified auto-response rule.
      *
      * @param string $autorespCfgID path param: Unique identifier of the autoresp cfg
      * @param string $profileID path param: Unique identifier of the profile
@@ -139,7 +139,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
     /**
      * @api
      *
-     * List Auto-Response Settings
+     * Returns the auto-response rules configured for the specified messaging profile.
      *
      * @param string $profileID unique identifier of the profile
      * @param string $countryCode filter results by country code
@@ -173,7 +173,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
     /**
      * @api
      *
-     * Delete Auto-Response Setting
+     * Deletes the specified auto-response rule from the messaging profile.
      *
      * @param string $autorespCfgID unique identifier of the autoresp cfg
      * @param string $profileID unique identifier of the profile

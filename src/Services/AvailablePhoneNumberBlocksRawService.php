@@ -30,7 +30,7 @@ final class AvailablePhoneNumberBlocksRawService implements AvailablePhoneNumber
     /**
      * @api
      *
-     * List available phone number blocks
+     * Searches the Telnyx inventory for available contiguous phone-number blocks. Results can be filtered by locality, country, national destination code, and number type.
      *
      * @param array{
      *   filter?: Filter|FilterShape

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Delete a webhook.
+ * Deletes the webhook subscription identified by ID within the specified email domain and returns the deleted subscription.
  *
  * @see Telnyx\Services\EmailDomains\WebhooksService::delete()
  *

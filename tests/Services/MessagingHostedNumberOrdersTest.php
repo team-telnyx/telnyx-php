@@ -194,7 +194,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
 
         $result = $this->client->messagingHostedNumberOrders->validateCodes(
             'id',
-            verificationCodes: [['code' => 'code', 'phoneNumber' => 'phone_number']],
+            verificationCodes: [['code' => 'string', 'phoneNumber' => 'string']]
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -213,7 +213,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
 
         $result = $this->client->messagingHostedNumberOrders->validateCodes(
             'id',
-            verificationCodes: [['code' => 'code', 'phoneNumber' => 'phone_number']],
+            verificationCodes: [['code' => 'string', 'phoneNumber' => 'string']]
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

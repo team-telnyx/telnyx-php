@@ -42,7 +42,7 @@ final class PlanTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             missionID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             steps: [
-                ['description' => 'description', 'sequence' => 0, 'stepID' => 'step_id'],
+                ['description' => 'Description', 'sequence' => 0, 'stepID' => 'Step Id'],
             ],
         );
 
@@ -62,11 +62,11 @@ final class PlanTest extends TestCase
             missionID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             steps: [
                 [
-                    'description' => 'description',
+                    'description' => 'Description',
                     'sequence' => 0,
-                    'stepID' => 'step_id',
+                    'stepID' => 'Step Id',
                     'metadata' => ['foo' => 'bar'],
-                    'parentStepID' => 'parent_step_id',
+                    'parentStepID' => 'Parent Step Id',
                 ],
             ],
         );
@@ -118,7 +118,7 @@ final class PlanTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             missionID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             steps: [
-                ['description' => 'description', 'sequence' => 0, 'stepID' => 'step_id'],
+                ['description' => 'Description', 'sequence' => 0, 'stepID' => 'Step Id'],
             ],
         );
 
@@ -138,11 +138,11 @@ final class PlanTest extends TestCase
             missionID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             steps: [
                 [
-                    'description' => 'description',
+                    'description' => 'Description',
                     'sequence' => 0,
-                    'stepID' => 'step_id',
+                    'stepID' => 'Step Id',
                     'metadata' => ['foo' => 'bar'],
-                    'parentStepID' => 'parent_step_id',
+                    'parentStepID' => 'Parent Step Id',
                 ],
             ],
         );

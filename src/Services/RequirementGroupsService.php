@@ -41,7 +41,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
     /**
      * @api
      *
-     * Create a new requirement group
+     * Creates a regulatory requirement group for a country, number type, and ordering or porting action. Optional customer-reference and requirement values are retained on the created group.
      *
      * @param Action|value-of<Action> $action
      * @param string $countryCode ISO alpha 2 country code
@@ -78,7 +78,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
     /**
      * @api
      *
-     * Get a single requirement group by ID
+     * Returns the regulatory requirement group identified by `id`, including its requirement values and current approval status.
      *
      * @param string $id ID of the requirement group to retrieve
      * @param RequestOpts|null $requestOptions
@@ -98,7 +98,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
     /**
      * @api
      *
-     * Update requirement values in requirement group
+     * Updates the customer reference or regulatory requirement values on the specified requirement group. The response contains the updated group.
      *
      * @param string $id ID of the requirement group
      * @param string $customerReference Reference for the customer
@@ -129,7 +129,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
     /**
      * @api
      *
-     * List requirement groups
+     * Returns regulatory requirement groups for the account. Results can be filtered by country, number type, action, approval status, and customer reference.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference]
      * @param RequestOpts|null $requestOptions
@@ -153,7 +153,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
     /**
      * @api
      *
-     * Delete a requirement group by ID
+     * Deletes the regulatory requirement group identified by `id`. The response contains the deleted requirement-group representation.
      *
      * @param string $id ID of the requirement group
      * @param RequestOpts|null $requestOptions
@@ -173,7 +173,7 @@ final class RequirementGroupsService implements RequirementGroupsContract
     /**
      * @api
      *
-     * Submit a Requirement Group for Approval
+     * Submits the specified regulatory requirement group for approval. The response contains the requirement group with its resulting approval status.
      *
      * @param string $id ID of the requirement group to submit
      * @param RequestOpts|null $requestOptions

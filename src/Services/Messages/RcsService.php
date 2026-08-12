@@ -70,7 +70,7 @@ final class RcsService implements RcsContract
     /**
      * @api
      *
-     * Send an RCS message
+     * Queues an outbound RCS message through the selected RCS agent. Check recipient capabilities before sending features that require RCS support.
      *
      * @param string $agentID RCS Agent ID
      * @param RcsAgentMessage|RcsAgentMessageShape $agentMessage

@@ -36,7 +36,7 @@ final class AvailablePhoneNumberBlocksService implements AvailablePhoneNumberBlo
     /**
      * @api
      *
-     * List available phone number blocks
+     * Searches the Telnyx inventory for available contiguous phone-number blocks. Results can be filtered by locality, country, national destination code, and number type.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[locality], filter[country_code], filter[national_destination_code], filter[phone_number_type]
      * @param RequestOpts|null $requestOptions

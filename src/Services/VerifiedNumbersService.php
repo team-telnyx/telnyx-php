@@ -76,7 +76,7 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
     /**
      * @api
      *
-     * Retrieve a verified number
+     * Retrieve the details of a verified number on your account.
      *
      * @param string $phoneNumber +E164 formatted phone number
      * @param RequestOpts|null $requestOptions
@@ -122,7 +122,7 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
     /**
      * @api
      *
-     * Delete a verified number
+     * Remove a verified number from your account.
      *
      * @param string $phoneNumber +E164 formatted phone number
      * @param RequestOpts|null $requestOptions

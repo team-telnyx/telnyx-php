@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Verify verification code by phone number.
+ * Submits a verification code for the specified phone number and Verify profile. The response indicates whether the code was accepted or rejected.
  *
  * @see Telnyx\Services\Verifications\ByPhoneNumber\ActionsService::verify()
  *

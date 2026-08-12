@@ -40,7 +40,7 @@ final class RoomRecordingsService implements RoomRecordingsContract
     /**
      * @api
      *
-     * View a room recording.
+     * Returns the recording identified by `room_recording_id`, including its room, session, participant, status, media details, lifecycle timestamps, and download URL.
      *
      * @param string $roomRecordingID the unique identifier of a room recording
      * @param RequestOpts|null $requestOptions
@@ -60,7 +60,7 @@ final class RoomRecordingsService implements RoomRecordingsContract
     /**
      * @api
      *
-     * View a list of room recordings.
+     * Returns a paginated list of room recordings. Filter recordings by room, session, participant, recording type, status, duration, or start and end dates.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
      * @param RequestOpts|null $requestOptions
@@ -112,7 +112,7 @@ final class RoomRecordingsService implements RoomRecordingsContract
     /**
      * @api
      *
-     * Delete several room recordings in a bulk.
+     * Deletes the room recordings that match the supplied filters and returns the number of recordings affected. Filters support room, session, participant, recording type, status, duration, and start or end dates.
      *
      * @param \Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
      * @param RequestOpts|null $requestOptions

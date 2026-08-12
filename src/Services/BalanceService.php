@@ -33,7 +33,7 @@ final class BalanceService implements BalanceContract
     /**
      * @api
      *
-     * Get user balance details
+     * Retrieve the current balance, available credit, and credit limit for your account.
      *
      * @param RequestOpts|null $requestOptions
      *

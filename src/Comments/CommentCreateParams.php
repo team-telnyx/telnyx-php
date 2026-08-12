@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a comment.
+ * Creates a comment associated with a supported number-order record. The response contains the created comment.
  *
  * @see Telnyx\Services\CommentsService::create()
  *

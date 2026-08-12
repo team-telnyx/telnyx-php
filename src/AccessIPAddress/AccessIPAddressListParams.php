@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all Access IP Addresses.
+ * Retrieve a paginated list of access IP addresses configured on your account.
  *
  * @see Telnyx\Services\AccessIPAddressService::list()
  *

@@ -23,6 +23,8 @@ use Telnyx\Messages\MessageSendShortCodeParams;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderParams;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
+use Telnyx\Messages\MessageWhatsappParams;
+use Telnyx\Messages\MessageWhatsappResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -177,6 +179,21 @@ interface MessagesRawContract
      */
     public function sendWithAlphanumericSender(
         array|MessageSendWithAlphanumericSenderParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|MessageWhatsappParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<MessageWhatsappResponse>
+     *
+     * @throws APIException
+     */
+    public function whatsapp(
+        array|MessageWhatsappParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

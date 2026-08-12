@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all RCS agents.
+ * Returns RCS agents available to the authenticated account.
  *
  * @see Telnyx\Services\Messaging\Rcs\AgentsService::list()
  *
