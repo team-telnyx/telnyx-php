@@ -180,6 +180,7 @@ use Telnyx\Services\VoiceDesignsService;
 use Telnyx\Services\VoiceSDKCallReportsService;
 use Telnyx\Services\WebhookDeliveriesService;
 use Telnyx\Services\WebhooksService;
+use Telnyx\Services\WebSearchService;
 use Telnyx\Services\WellKnownService;
 use Telnyx\Services\WhatsappMessageTemplatesService;
 use Telnyx\Services\WhatsappService;
@@ -1106,6 +1107,11 @@ class Client extends BaseClient
      */
     public PricingService $pricing;
 
+    /**
+     * @api
+     */
+    public WebSearchService $webSearch;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1358,6 +1364,7 @@ class Client extends BaseClient
         $this->emailUnsubscribeGroups = new EmailUnsubscribeGroupsService($this);
         $this->emailValidations = new EmailValidationsService($this);
         $this->pricing = new PricingService($this);
+        $this->webSearch = new WebSearchService($this);
     }
 
     /** @return array<string,string> */
