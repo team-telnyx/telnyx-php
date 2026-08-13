@@ -149,7 +149,7 @@ final class CallsRawService implements CallsRawContract
      *   webhookRetriesPolicies?: array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>,
      *   webhookURL?: string,
      *   webhookURLMethod?: WebhookURLMethod|value-of<WebhookURLMethod>,
-     *   webhookURLs?: array<string,string>,
+     *   webhookURLs?: array<string,list<string>>,
      *   webhookURLsMethod?: WebhookURLsMethod|value-of<WebhookURLsMethod>,
      * }|CallDialParams $params
      * @param RequestOpts|null $requestOptions

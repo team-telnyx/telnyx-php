@@ -161,7 +161,7 @@ final class CallsService implements CallsContract
      * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape> $webhookRetriesPolicies A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
-     * @param array<string,string> $webhookURLs A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of the default webhook URL. Events not mapped here will use the default webhook URL.
+     * @param array<string,list<string>> $webhookURLs A map of event types to arrays of webhook URLs. When an event of the specified type occurs, the webhook URLs associated with that event type will be called instead of the default webhook URL. Events not mapped here will use the default webhook URL.
      * @param WebhookURLsMethod|value-of<WebhookURLsMethod> $webhookURLsMethod HTTP request method to invoke `webhook_urls`
      * @param RequestOpts|null $requestOptions
      *

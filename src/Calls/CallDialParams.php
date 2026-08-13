@@ -29,6 +29,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\ListOf;
 
 /**
  * Dial a number or SIP URI from a given connection. A successful response will include a `call_leg_id` which can be used to correlate the command with subsequent webhooks.
@@ -127,7 +128,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   webhookRetriesPolicies?: array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>|null,
  *   webhookURL?: string|null,
  *   webhookURLMethod?: null|WebhookURLMethod|value-of<WebhookURLMethod>,
- *   webhookURLs?: array<string,string>|null,
+ *   webhookURLs?: array<string,list<string>>|null,
  *   webhookURLsMethod?: null|WebhookURLsMethod|value-of<WebhookURLsMethod>,
  * }
  */
@@ -560,11 +561,11 @@ final class CallDialParams implements BaseModel
     public ?string $webhookURLMethod;
 
     /**
-     * A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of the default webhook URL. Events not mapped here will use the default webhook URL.
+     * A map of event types to arrays of webhook URLs. When an event of the specified type occurs, the webhook URLs associated with that event type will be called instead of the default webhook URL. Events not mapped here will use the default webhook URL.
      *
-     * @var array<string,string>|null $webhookURLs
+     * @var array<string,list<string>>|null $webhookURLs
      */
-    #[Optional('webhook_urls', map: 'string')]
+    #[Optional('webhook_urls', map: new ListOf('string'))]
     public ?array $webhookURLs;
 
     /**
@@ -629,7 +630,7 @@ final class CallDialParams implements BaseModel
      * @param TranscriptionStartRequest|TranscriptionStartRequestShape|null $transcriptionConfig
      * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>|null $webhookRetriesPolicies
      * @param WebhookURLMethod|value-of<WebhookURLMethod>|null $webhookURLMethod
-     * @param array<string,string>|null $webhookURLs
+     * @param array<string,list<string>>|null $webhookURLs
      * @param WebhookURLsMethod|value-of<WebhookURLsMethod>|null $webhookURLsMethod
      */
     public static function with(
@@ -1528,9 +1529,9 @@ final class CallDialParams implements BaseModel
     }
 
     /**
-     * A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of the default webhook URL. Events not mapped here will use the default webhook URL.
+     * A map of event types to arrays of webhook URLs. When an event of the specified type occurs, the webhook URLs associated with that event type will be called instead of the default webhook URL. Events not mapped here will use the default webhook URL.
      *
-     * @param array<string,string> $webhookURLs
+     * @param array<string,list<string>> $webhookURLs
      */
     public function withWebhookURLs(array $webhookURLs): self
     {

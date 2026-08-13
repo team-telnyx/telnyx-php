@@ -28,6 +28,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\ListOf;
 
 /**
  * Answer an incoming call. You must issue this command before executing subsequent commands on an incoming call.
@@ -84,7 +85,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   webhookRetriesPolicies?: array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>|null,
  *   webhookURL?: string|null,
  *   webhookURLMethod?: null|WebhookURLMethod|value-of<WebhookURLMethod>,
- *   webhookURLs?: array<string,string>|null,
+ *   webhookURLs?: array<string,list<string>>|null,
  *   webhookURLsMethod?: null|WebhookURLsMethod|value-of<WebhookURLsMethod>,
  * }
  */
@@ -308,11 +309,11 @@ final class ActionAnswerParams implements BaseModel
     public ?string $webhookURLMethod;
 
     /**
-     * A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of `webhook_url`. Events not mapped here will use the default `webhook_url`.
+     * A map of event types to arrays of webhook URLs. When an event of the specified type occurs, the webhook URLs associated with that event type will be called instead of `webhook_url`. Events not mapped here will use the default `webhook_url`.
      *
-     * @var array<string,string>|null $webhookURLs
+     * @var array<string,list<string>>|null $webhookURLs
      */
-    #[Optional('webhook_urls', map: 'string')]
+    #[Optional('webhook_urls', map: new ListOf('string'))]
     public ?array $webhookURLs;
 
     /**
@@ -353,7 +354,7 @@ final class ActionAnswerParams implements BaseModel
      * @param TranscriptionStartRequest|TranscriptionStartRequestShape|null $transcriptionConfig
      * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>|null $webhookRetriesPolicies
      * @param WebhookURLMethod|value-of<WebhookURLMethod>|null $webhookURLMethod
-     * @param array<string,string>|null $webhookURLs
+     * @param array<string,list<string>>|null $webhookURLs
      * @param WebhookURLsMethod|value-of<WebhookURLsMethod>|null $webhookURLsMethod
      */
     public static function with(
@@ -808,9 +809,9 @@ final class ActionAnswerParams implements BaseModel
     }
 
     /**
-     * A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of `webhook_url`. Events not mapped here will use the default `webhook_url`.
+     * A map of event types to arrays of webhook URLs. When an event of the specified type occurs, the webhook URLs associated with that event type will be called instead of `webhook_url`. Events not mapped here will use the default `webhook_url`.
      *
-     * @param array<string,string> $webhookURLs
+     * @param array<string,list<string>> $webhookURLs
      */
     public function withWebhookURLs(array $webhookURLs): self
     {
