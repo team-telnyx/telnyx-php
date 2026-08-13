@@ -13,6 +13,7 @@ use Telnyx\Services\Storage\CloudfsService;
 use Telnyx\Services\Storage\KvsService;
 use Telnyx\Services\Storage\MigrationSourcesService;
 use Telnyx\Services\Storage\MigrationsService;
+use Telnyx\Services\Storage\SqldbsService;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse;
 
 /**
@@ -53,6 +54,11 @@ final class StorageService implements StorageContract
     public CloudfsService $cloudfs;
 
     /**
+     * @api
+     */
+    public SqldbsService $sqldbs;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -63,6 +69,7 @@ final class StorageService implements StorageContract
         $this->migrations = new MigrationsService($client);
         $this->kvs = new KvsService($client);
         $this->cloudfs = new CloudfsService($client);
+        $this->sqldbs = new SqldbsService($client);
     }
 
     /**
