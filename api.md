@@ -3072,3 +3072,33 @@ Methods:
 
 - <code title="post /web_search/research">$client->webSearch->research-><a href="./src/Services/WebSearch/ResearchService.php">create</a>(...$params)</code>
 - <code title="get /web_search/research/{task_id}">$client->webSearch->research-><a href="./src/Services/WebSearch/ResearchService.php">retrieve</a>(...$params)</code>
+
+# MeetingSessions
+
+Methods:
+
+- <code title="post /meeting_sessions">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">create</a>(...$params)</code>
+- <code title="get /meeting_sessions/{id}">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">retrieve</a>(...$params)</code>
+- <code title="patch /meeting_sessions/{id}">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">update</a>(...$params)</code>
+- <code title="get /meeting_sessions">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">list</a>(...$params)</code>
+- <code title="delete /meeting_sessions/{id}">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">delete</a>(...$params)</code>
+- <code title="delete /meeting_sessions/{id}/recording_media">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">deleteRecordingMedia</a>(...$params)</code>
+- <code title="get /meeting_sessions/{id}/events">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">retrieveEvents</a>(...$params)</code>
+- <code title="get /meeting_sessions/{id}/recordings">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">retrieveRecordings</a>(...$params)</code>
+- <code title="get /meeting_sessions/{id}/transcript">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">retrieveTranscript</a>(...$params)</code>
+
+## Actions
+
+Methods:
+
+- <code title="post /meeting_sessions/{id}/actions/send_chat">$client->meetingSessions->actions-><a href="./src/Services/MeetingSessions/ActionsService.php">sendChat</a>(...$params)</code>
+- <code title="post /meeting_sessions/{id}/actions/speak">$client->meetingSessions->actions-><a href="./src/Services/MeetingSessions/ActionsService.php">speak</a>(...$params)</code>
+- <code title="post /meeting_sessions/{id}/actions/stop_speaking">$client->meetingSessions->actions-><a href="./src/Services/MeetingSessions/ActionsService.php">stopSpeaking</a>(...$params)</code>
+
+## Artifacts
+
+Methods:
+
+- <code title="post /meeting_sessions/{id}/artifacts">$client->meetingSessions->artifacts-><a href="./src/Services/MeetingSessions/ArtifactsService.php">create</a>(...$params)</code>
+- <code title="get /meeting_sessions/{id}/artifacts/{artifact_id}">$client->meetingSessions->artifacts-><a href="./src/Services/MeetingSessions/ArtifactsService.php">retrieve</a>(...$params)</code>
+- <code title="get /meeting_sessions/{id}/artifacts">$client->meetingSessions->artifacts-><a href="./src/Services/MeetingSessions/ArtifactsService.php">list</a>(...$params)</code>

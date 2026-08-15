@@ -83,6 +83,7 @@ use Telnyx\Services\LegacyService;
 use Telnyx\Services\ListService;
 use Telnyx\Services\ManagedAccountsService;
 use Telnyx\Services\MediaService;
+use Telnyx\Services\MeetingSessionsService;
 use Telnyx\Services\MessagesService;
 use Telnyx\Services\Messaging10dlcService;
 use Telnyx\Services\MessagingHostedNumberOrdersService;
@@ -1112,6 +1113,11 @@ class Client extends BaseClient
      */
     public WebSearchService $webSearch;
 
+    /**
+     * @api
+     */
+    public MeetingSessionsService $meetingSessions;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1365,6 +1371,7 @@ class Client extends BaseClient
         $this->emailValidations = new EmailValidationsService($this);
         $this->pricing = new PricingService($this);
         $this->webSearch = new WebSearchService($this);
+        $this->meetingSessions = new MeetingSessionsService($this);
     }
 
     /** @return array<string,string> */
