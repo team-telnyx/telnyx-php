@@ -286,7 +286,7 @@ final class ActionsRawService implements ActionsRawContract
      *   webhookRetriesPolicies?: array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>,
      *   webhookURL?: string,
      *   webhookURLMethod?: WebhookURLMethod|value-of<WebhookURLMethod>,
-     *   webhookURLs?: array<string,string>,
+     *   webhookURLs?: array<string,list<string>>,
      *   webhookURLsMethod?: WebhookURLsMethod|value-of<WebhookURLsMethod>,
      * }|ActionAnswerParams $params
      * @param RequestOpts|null $requestOptions
@@ -2015,7 +2015,7 @@ final class ActionsRawService implements ActionsRawContract
      *   webhookRetriesPolicies?: array<string,ActionTransferParams\WebhookRetriesPolicy|WebhookRetriesPolicyShape1>,
      *   webhookURL?: string,
      *   webhookURLMethod?: ActionTransferParams\WebhookURLMethod|value-of<ActionTransferParams\WebhookURLMethod>,
-     *   webhookURLs?: array<string,string>,
+     *   webhookURLs?: array<string,list<string>>,
      *   webhookURLsMethod?: ActionTransferParams\WebhookURLsMethod|value-of<ActionTransferParams\WebhookURLsMethod>,
      * }|ActionTransferParams $params
      * @param RequestOpts|null $requestOptions

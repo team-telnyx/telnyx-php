@@ -11,7 +11,9 @@ use Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
+use Telnyx\SimCards\Actions\ActionDisableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
+use Telnyx\SimCards\Actions\ActionEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionListParams\Filter;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
@@ -71,13 +73,15 @@ interface ActionsContract
     /**
      * @api
      *
+     * @param string $connectionID The identifier of the Mobile Voice Connection to associate with the SIM cards. The connection must be owned by the same user and of type <code>mobile_voice</code>. If omitted, voice is enabled without a connection association.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function bulkEnableVoice(
         string $simCardGroupID,
-        RequestOptions|array|null $requestOptions = null
+        ?string $connectionID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionBulkEnableVoiceResponse;
 
     /**
@@ -114,10 +118,38 @@ interface ActionsContract
      *
      * @throws APIException
      */
+    public function disableVoice(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): ActionDisableVoiceResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
     public function enable(
         string $id,
         RequestOptions|array|null $requestOptions = null
     ): ActionEnableResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id identifies the SIM
+     * @param string $connectionID The identifier of the Mobile Voice Connection to associate with this SIM card. The connection must be owned by the same user and of type <code>mobile_voice</code>. If omitted, voice is enabled without a connection association.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function enableVoice(
+        string $id,
+        ?string $connectionID = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): ActionEnableVoiceResponse;
 
     /**
      * @api

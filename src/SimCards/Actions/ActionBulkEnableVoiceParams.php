@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions;
 
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -17,7 +18,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\SimCards\ActionsService::bulkEnableVoice()
  *
- * @phpstan-type ActionBulkEnableVoiceParamsShape = array{simCardGroupID: string}
+ * @phpstan-type ActionBulkEnableVoiceParamsShape = array{
+ *   simCardGroupID: string, connectionID?: string|null
+ * }
  */
 final class ActionBulkEnableVoiceParams implements BaseModel
 {
@@ -27,6 +30,12 @@ final class ActionBulkEnableVoiceParams implements BaseModel
 
     #[Required('sim_card_group_id')]
     public string $simCardGroupID;
+
+    /**
+     * The identifier of the Mobile Voice Connection to associate with the SIM cards. The connection must be owned by the same user and of type <code>mobile_voice</code>. If omitted, voice is enabled without a connection association.
+     */
+    #[Optional('connection_id')]
+    public ?string $connectionID;
 
     /**
      * `new ActionBulkEnableVoiceParams()` is missing required properties by the API.
@@ -52,11 +61,15 @@ final class ActionBulkEnableVoiceParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $simCardGroupID): self
-    {
+    public static function with(
+        string $simCardGroupID,
+        ?string $connectionID = null
+    ): self {
         $self = new self;
 
         $self['simCardGroupID'] = $simCardGroupID;
+
+        null !== $connectionID && $self['connectionID'] = $connectionID;
 
         return $self;
     }
@@ -65,6 +78,17 @@ final class ActionBulkEnableVoiceParams implements BaseModel
     {
         $self = clone $this;
         $self['simCardGroupID'] = $simCardGroupID;
+
+        return $self;
+    }
+
+    /**
+     * The identifier of the Mobile Voice Connection to associate with the SIM cards. The connection must be owned by the same user and of type <code>mobile_voice</code>. If omitted, voice is enabled without a connection association.
+     */
+    public function withConnectionID(string $connectionID): self
+    {
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
         return $self;
     }

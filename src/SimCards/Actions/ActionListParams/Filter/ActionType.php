@@ -20,4 +20,8 @@ enum ActionType: string
     case REMOVE_PUBLIC_IP = 'remove_public_ip';
 
     case SET_PUBLIC_IP = 'set_public_ip';
+
+    case ENABLE_VOICE = 'enable_voice';
+
+    case DISABLE_VOICE = 'disable_voice';
 }

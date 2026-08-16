@@ -1051,8 +1051,8 @@ final class ActionsTest extends TestCase
             webhookURL: 'https://www.example.com/server-b/',
             webhookURLMethod: 'POST',
             webhookURLs: [
-                'call.answered' => 'https://www.example.com/webhooks/answered',
-                'call.hangup' => 'https://www.example.com/webhooks/hangup',
+                'call.answered' => ['https://www.example.com/webhooks/answered'],
+                'call.hangup' => ['https://www.example.com/webhooks/hangup'],
             ],
             webhookURLsMethod: 'POST',
         );

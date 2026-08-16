@@ -282,8 +282,8 @@ final class CallsTest extends TestCase
             webhookURL: 'https://www.example.com/server-b/',
             webhookURLMethod: 'POST',
             webhookURLs: [
-                'call.hangup' => 'https://www.example.com/webhooks/hangup',
-                'call.bridge' => 'https://www.example.com/webhooks/bridge',
+                'call.hangup' => ['https://www.example.com/webhooks/hangup'],
+                'call.bridge' => ['https://www.example.com/webhooks/bridge'],
             ],
             webhookURLsMethod: 'POST',
         );

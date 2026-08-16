@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailCreateParams;
+use Telnyx\PhoneNumbers\Voicemail\VoicemailCreateParams\Greeting;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailGetResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailNewResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateParams;
@@ -18,6 +19,8 @@ use Telnyx\ServiceContracts\PhoneNumbers\VoicemailRawContract;
 /**
  * Voicemail API.
  *
+ * @phpstan-import-type GreetingShape from \Telnyx\PhoneNumbers\Voicemail\VoicemailCreateParams\Greeting
+ * @phpstan-import-type GreetingShape from \Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateParams\Greeting as GreetingShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VoicemailRawService implements VoicemailRawContract
@@ -31,10 +34,12 @@ final class VoicemailRawService implements VoicemailRawContract
     /**
      * @api
      *
-     * Create voicemail settings for a phone number
+     * Create voicemail settings for a phone number. You can also configure a custom greeting by setting the `greeting` object: use `mode` `custom_greeting` together with a `media_name` that points to an audio file uploaded through the Media Storage API, or `mode` `default` to use the standard system greeting.
      *
      * @param string $phoneNumberID the ID of the phone number
-     * @param array{enabled?: bool, pin?: string}|VoicemailCreateParams $params
+     * @param array{
+     *   enabled?: bool, greeting?: Greeting|GreetingShape, pin?: string
+     * }|VoicemailCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoicemailNewResponse>
@@ -89,10 +94,14 @@ final class VoicemailRawService implements VoicemailRawContract
     /**
      * @api
      *
-     * Update voicemail settings for a phone number
+     * Update voicemail settings for a phone number. You can also configure a custom greeting by setting the `greeting` object: use `mode` `custom_greeting` together with a `media_name` that points to an audio file uploaded through the Media Storage API, or `mode` `default` to use the standard system greeting.
      *
      * @param string $phoneNumberID the ID of the phone number
-     * @param array{enabled?: bool, pin?: string}|VoicemailUpdateParams $params
+     * @param array{
+     *   enabled?: bool,
+     *   greeting?: VoicemailUpdateParams\Greeting|GreetingShape1,
+     *   pin?: string,
+     * }|VoicemailUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoicemailUpdateResponse>
