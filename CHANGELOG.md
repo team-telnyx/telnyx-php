@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.98.0](https://github.com/team-telnyx/telnyx-php/compare/v7.97.0...v7.98.0) (2026-08-16)
+
+
+### Features
+
+* promote from staging e27b39b ([59d05cb](https://github.com/team-telnyx/telnyx-php/commit/59d05cb9cb504091d7495d8dbae7be21692c2d2b))
+
+
+### Bug Fixes
+
+* **ci:** attest private release provenance ([#368](https://github.com/team-telnyx/telnyx-php/issues/368)) ([29d7f2f](https://github.com/team-telnyx/telnyx-php/commit/29d7f2f505c355f1fb7e3a073297dcfee9bca56a))
+
 ## [7.97.0](https://github.com/team-telnyx/telnyx-php/compare/v7.96.0...v7.97.0) (2026-08-11)
 
 

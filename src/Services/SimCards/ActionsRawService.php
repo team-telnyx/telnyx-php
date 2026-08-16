@@ -18,7 +18,10 @@ use Telnyx\SimCards\Actions\ActionBulkEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
+use Telnyx\SimCards\Actions\ActionDisableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
+use Telnyx\SimCards\Actions\ActionEnableVoiceParams;
+use Telnyx\SimCards\Actions\ActionEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionListParams;
 use Telnyx\SimCards\Actions\ActionListParams\Filter;
@@ -146,7 +149,9 @@ final class ActionsRawService implements ActionsRawContract
      *
      * The overall status of the Bulk SIM Card Action can be followed through the [List Bulk SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-bulk-sim-card-actions) API.
      *
-     * @param array{simCardGroupID: string}|ActionBulkEnableVoiceParams $params
+     * @param array{
+     *   simCardGroupID: string, connectionID?: string
+     * }|ActionBulkEnableVoiceParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionBulkEnableVoiceResponse>
@@ -233,6 +238,32 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
+     * This API disables voice calling on a SIM card. The SIM card will no longer be able to make or receive calls.<br/>
+     * The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
+     *
+     * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionDisableVoiceResponse>
+     *
+     * @throws APIException
+     */
+    public function disableVoice(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['sim_cards/%1$s/actions/disable_voice', $id],
+            options: $requestOptions,
+            convert: ActionDisableVoiceResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
      * This API enables a SIM card, connecting it to the network and making it possible to consume data.<br/>
      * To enable a SIM card, it must be associated with a SIM card group.<br/>
      * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the enabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
@@ -254,6 +285,40 @@ final class ActionsRawService implements ActionsRawContract
             path: ['sim_cards/%1$s/actions/enable', $id],
             options: $requestOptions,
             convert: ActionEnableResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * This API enables voice calling on a SIM card. When a <code>connection_id</code> is provided, the SIM is associated with the specified Mobile Voice Connection. The connection must be owned by the same user and of type <code>mobile_voice</code>.<br/>
+     * The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
+     *
+     * @param string $id identifies the SIM
+     * @param array{connectionID?: string}|ActionEnableVoiceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionEnableVoiceResponse>
+     *
+     * @throws APIException
+     */
+    public function enableVoice(
+        string $id,
+        array|ActionEnableVoiceParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ActionEnableVoiceParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['sim_cards/%1$s/actions/enable_voice', $id],
+            body: (object) $parsed,
+            options: $options,
+            convert: ActionEnableVoiceResponse::class,
         );
     }
 

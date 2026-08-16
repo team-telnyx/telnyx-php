@@ -15,7 +15,10 @@ use Telnyx\SimCards\Actions\ActionBulkEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
+use Telnyx\SimCards\Actions\ActionDisableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
+use Telnyx\SimCards\Actions\ActionEnableVoiceParams;
+use Telnyx\SimCards\Actions\ActionEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionListParams;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
@@ -127,6 +130,21 @@ interface ActionsRawContract
      * @param string $id identifies the SIM
      * @param RequestOpts|null $requestOptions
      *
+     * @return BaseResponse<ActionDisableVoiceResponse>
+     *
+     * @throws APIException
+     */
+    public function disableVoice(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id identifies the SIM
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<ActionEnableResponse>
      *
      * @throws APIException
@@ -134,6 +152,23 @@ interface ActionsRawContract
     public function enable(
         string $id,
         RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id identifies the SIM
+     * @param array<string,mixed>|ActionEnableVoiceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionEnableVoiceResponse>
+     *
+     * @throws APIException
+     */
+    public function enableVoice(
+        string $id,
+        array|ActionEnableVoiceParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
