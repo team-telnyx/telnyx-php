@@ -293,29 +293,61 @@ jobs:
             --manifest-file .release-please-manifest.json \
             2>&1
 
-      - name: Verify release commit produced a tag (ghost-release guard)
+      - name: Verify release commit produced an exact tag (ghost-release guard)
         if: github.ref == 'refs/heads/master'
+        id: release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # `github-release` exits 0 even when it finds nothing to release ([]).
-          # If the commit that triggered this run is a merged `release: X.Y.Z`
-          # commit, a missing vX.Y.Z tag here means it silently no-opped —
-          # usually a merged release PR that lost its `autorelease: pending`
-          # label. Fail loud instead of ghosting the release.
+          set -euo pipefail
           MSG=$(git log -1 --format=%s "$GITHUB_SHA")
           VER=$(echo "$MSG" | grep -oP '^release:\s*\K[0-9][0-9.]*' || true)
           if [ -z "$VER" ]; then
+            echo "is_release=false" >> "$GITHUB_OUTPUT"
             echo "Not a release commit; nothing to verify"
             exit 0
           fi
-          if git ls-remote --exit-code --tags origin "v$VER" >/dev/null 2>&1; then
-            if ! gh api "repos/${{ github.repository }}/releases/tags/v$VER" >/dev/null 2>&1; then
-              echo "::error::Tag v$VER exists but there is no GitHub Release for it - the publish workflow (release: published) will never fire. Create it: gh release create v$VER --generate-notes"
-              exit 1
-            fi
-            echo "Tag v$VER and its GitHub Release exist - release verified"
-          else
-            echo "::error::Merged release commit for $VER but no v$VER tag exists. github-release silently no-opped (merged release PR likely missing the autorelease pending label). Add the label to the merged PR and re-run this workflow."
+
+          TAG="v$VER"
+          if ! git ls-remote --exit-code --tags origin "$TAG" >/dev/null 2>&1; then
+            echo "::error::Merged release commit for $VER but no $TAG tag exists"
             exit 1
           fi
+          if ! gh api "repos/${{ github.repository }}/releases/tags/$TAG" >/dev/null 2>&1; then
+            echo "::error::Tag $TAG exists but there is no GitHub Release"
+            exit 1
+          fi
+
+          TAG_OBJECT=$(gh api "repos/${{ github.repository }}/git/ref/tags/$TAG")
+          TAG_TYPE=$(jq -r '.object.type' <<<"$TAG_OBJECT")
+          TAG_SHA=$(jq -r '.object.sha' <<<"$TAG_OBJECT")
+          for _ in 1 2 3 4 5; do
+            [ "$TAG_TYPE" = commit ] && break
+            if [ "$TAG_TYPE" != tag ]; then
+              echo "::error::$TAG points to unsupported object type $TAG_TYPE"
+              exit 1
+            fi
+            TAG_OBJECT=$(gh api "repos/${{ github.repository }}/git/tags/$TAG_SHA")
+            TAG_TYPE=$(jq -r '.object.type' <<<"$TAG_OBJECT")
+            TAG_SHA=$(jq -r '.object.sha' <<<"$TAG_OBJECT")
+          done
+          if [ "$TAG_TYPE" != commit ] || [ "$TAG_SHA" != "$GITHUB_SHA" ]; then
+            echo "::error::$TAG resolves to ${TAG_TYPE}:${TAG_SHA}, expected commit:${GITHUB_SHA}"
+            exit 1
+          fi
+          {
+            echo "is_release=true"
+            echo "version=$VER"
+            echo "release_sha=$GITHUB_SHA"
+          } >> "$GITHUB_OUTPUT"
+          echo "Tag $TAG and its GitHub Release exist at exact commit $GITHUB_SHA"
+
+      - name: Verify Packagist release availability
+        if: github.ref == 'refs/heads/master' && steps.release.outputs.is_release == 'true'
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+          RELEASE_SHA: ${{ steps.release.outputs.release_sha }}
+        run: |
+          python3 .github/scripts/verify_packagist_release.py \
+            --version "$VERSION" \
+            --release-sha "$RELEASE_SHA"
