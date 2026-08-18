@@ -17,6 +17,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\DeepfakeDetection;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DeepfakeDetectionCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetectionBeepProfile;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MediaEncryption;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
@@ -161,6 +162,7 @@ final class CallsRawService implements CallsRawContract
      *   fallbackURL?: string,
      *   from?: string,
      *   machineDetection?: MachineDetection|value-of<MachineDetection>,
+     *   machineDetectionBeepProfile?: MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile>,
      *   machineDetectionPromptEndTimeout?: int,
      *   machineDetectionSilenceTimeout?: int,
      *   machineDetectionSpeechEndThreshold?: int,

@@ -67,6 +67,7 @@ final class CallsTest extends TestCase
             answeringMachineDetection: 'detect',
             answeringMachineDetectionConfig: [
                 'afterGreetingSilenceMillis' => 1000,
+                'beepDetectionProfile' => 'freq_only',
                 'betweenWordsSilenceMillis' => 1000,
                 'greetingDurationMillis' => 1000,
                 'greetingSilenceDurationMillis' => 2000,
