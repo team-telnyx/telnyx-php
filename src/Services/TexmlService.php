@@ -15,6 +15,7 @@ use Telnyx\Texml\TexmlInitiateAICallParams\ConversationCallbackMethod;
 use Telnyx\Texml\TexmlInitiateAICallParams\CustomHeader;
 use Telnyx\Texml\TexmlInitiateAICallParams\DetectionMode;
 use Telnyx\Texml\TexmlInitiateAICallParams\MachineDetection;
+use Telnyx\Texml\TexmlInitiateAICallParams\MachineDetectionBeepProfile;
 use Telnyx\Texml\TexmlInitiateAICallParams\RecordingChannels;
 use Telnyx\Texml\TexmlInitiateAICallParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\TexmlInitiateAICallParams\RecordingTrack;
@@ -80,6 +81,7 @@ final class TexmlService implements TexmlContract
      * @param list<CustomHeader|CustomHeaderShape> $customHeaders Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      * @param DetectionMode|value-of<DetectionMode> $detectionMode Allows you to choose between Regular, Premium, and PremiumCallScreening detections. See https://developers.telnyx.com/docs/voice/programmable-voice/answering-machine-detection
      * @param MachineDetection|value-of<MachineDetection> $machineDetection enables Answering Machine Detection
+     * @param MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile> $machineDetectionBeepProfile Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile. Only used when MachineDetection is enabled.
      * @param int $machineDetectionPromptEndTimeout Silence duration threshold after a call screening prompt before ending prompt detection, in milliseconds. Used when `DetectionMode` is `PremiumCallScreening`.
      * @param int $machineDetectionSilenceTimeout If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      * @param int $machineDetectionSpeechEndThreshold Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
@@ -126,6 +128,7 @@ final class TexmlService implements TexmlContract
         ?array $customHeaders = null,
         DetectionMode|string $detectionMode = 'Regular',
         MachineDetection|string $machineDetection = 'Disable',
+        MachineDetectionBeepProfile|string $machineDetectionBeepProfile = 'both',
         ?int $machineDetectionPromptEndTimeout = null,
         int $machineDetectionSilenceTimeout = 3500,
         int $machineDetectionSpeechEndThreshold = 800,
@@ -170,6 +173,7 @@ final class TexmlService implements TexmlContract
                 'customHeaders' => $customHeaders,
                 'detectionMode' => $detectionMode,
                 'machineDetection' => $machineDetection,
+                'machineDetectionBeepProfile' => $machineDetectionBeepProfile,
                 'machineDetectionPromptEndTimeout' => $machineDetectionPromptEndTimeout,
                 'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
                 'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,

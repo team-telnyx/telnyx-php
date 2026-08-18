@@ -1,5 +1,18 @@
 # Changelog
 
+## [7.99.0](https://github.com/team-telnyx/telnyx-php/compare/v7.98.0...v7.99.0) (2026-08-18)
+
+
+### Features
+
+* promote from staging 83ce8be ([55f0840](https://github.com/team-telnyx/telnyx-php/commit/55f0840e76748c56e0a539b5ee1e73a929b85bb3))
+
+
+### Bug Fixes
+
+* **ci:** ignore closed release PR events ([#369](https://github.com/team-telnyx/telnyx-php/issues/369)) ([eebaf7b](https://github.com/team-telnyx/telnyx-php/commit/eebaf7b15d9d0fdae1d1935578e28a3bfc06efa6))
+* **ci:** isolate release policy validation context ([#370](https://github.com/team-telnyx/telnyx-php/issues/370)) ([248d106](https://github.com/team-telnyx/telnyx-php/commit/248d106fcbe2e185549283bf6e626c2e5f76053c))
+
 ## [7.98.0](https://github.com/team-telnyx/telnyx-php/compare/v7.97.0...v7.98.0) (2026-08-16)
 
 

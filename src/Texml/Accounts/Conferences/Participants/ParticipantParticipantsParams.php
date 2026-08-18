@@ -17,6 +17,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceTrim;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetectionBeepProfile;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingTrack;
@@ -56,6 +57,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  *   from?: string|null,
  *   label?: string|null,
  *   machineDetection?: null|MachineDetection|value-of<MachineDetection>,
+ *   machineDetectionBeepProfile?: null|MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile>,
  *   machineDetectionSilenceTimeout?: int|null,
  *   machineDetectionSpeechEndThreshold?: int|null,
  *   machineDetectionSpeechThreshold?: int|null,
@@ -258,6 +260,17 @@ final class ParticipantParticipantsParams implements BaseModel
     public ?string $machineDetection;
 
     /**
+     * Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile. Only used when MachineDetection is enabled.
+     *
+     * @var value-of<MachineDetectionBeepProfile>|null $machineDetectionBeepProfile
+     */
+    #[Optional(
+        'MachineDetectionBeepProfile',
+        enum: MachineDetectionBeepProfile::class
+    )]
+    public ?string $machineDetectionBeepProfile;
+
+    /**
      * If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      */
     #[Optional('MachineDetectionSilenceTimeout')]
@@ -446,6 +459,7 @@ final class ParticipantParticipantsParams implements BaseModel
      * @param ConferenceTrim|value-of<ConferenceTrim>|null $conferenceTrim
      * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
      * @param MachineDetection|value-of<MachineDetection>|null $machineDetection
+     * @param MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile>|null $machineDetectionBeepProfile
      * @param RecordingChannels|value-of<RecordingChannels>|null $recordingChannels
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
      * @param RecordingTrack|value-of<RecordingTrack>|null $recordingTrack
@@ -478,6 +492,7 @@ final class ParticipantParticipantsParams implements BaseModel
         ?string $from = null,
         ?string $label = null,
         MachineDetection|string|null $machineDetection = null,
+        MachineDetectionBeepProfile|string|null $machineDetectionBeepProfile = null,
         ?int $machineDetectionSilenceTimeout = null,
         ?int $machineDetectionSpeechEndThreshold = null,
         ?int $machineDetectionSpeechThreshold = null,
@@ -531,6 +546,7 @@ final class ParticipantParticipantsParams implements BaseModel
         null !== $from && $self['from'] = $from;
         null !== $label && $self['label'] = $label;
         null !== $machineDetection && $self['machineDetection'] = $machineDetection;
+        null !== $machineDetectionBeepProfile && $self['machineDetectionBeepProfile'] = $machineDetectionBeepProfile;
         null !== $machineDetectionSilenceTimeout && $self['machineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
         null !== $machineDetectionSpeechEndThreshold && $self['machineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
         null !== $machineDetectionSpeechThreshold && $self['machineDetectionSpeechThreshold'] = $machineDetectionSpeechThreshold;
@@ -856,6 +872,20 @@ final class ParticipantParticipantsParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['machineDetection'] = $machineDetection;
+
+        return $self;
+    }
+
+    /**
+     * Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile. Only used when MachineDetection is enabled.
+     *
+     * @param MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile> $machineDetectionBeepProfile
+     */
+    public function withMachineDetectionBeepProfile(
+        MachineDetectionBeepProfile|string $machineDetectionBeepProfile
+    ): self {
+        $self = clone $this;
+        $self['machineDetectionBeepProfile'] = $machineDetectionBeepProfile;
 
         return $self;
     }

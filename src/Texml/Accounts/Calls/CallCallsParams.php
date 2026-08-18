@@ -14,6 +14,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\DeepfakeDetection;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DeepfakeDetectionCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetectionBeepProfile;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MediaEncryption;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
@@ -48,6 +49,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   fallbackURL?: string|null,
  *   from?: string|null,
  *   machineDetection?: null|MachineDetection|value-of<MachineDetection>,
+ *   machineDetectionBeepProfile?: null|MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile>,
  *   machineDetectionPromptEndTimeout?: int|null,
  *   machineDetectionSilenceTimeout?: int|null,
  *   machineDetectionSpeechEndThreshold?: int|null,
@@ -195,6 +197,17 @@ final class CallCallsParams implements BaseModel
      */
     #[Optional('MachineDetection', enum: MachineDetection::class)]
     public ?string $machineDetection;
+
+    /**
+     * Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile. Only used when MachineDetection is enabled.
+     *
+     * @var value-of<MachineDetectionBeepProfile>|null $machineDetectionBeepProfile
+     */
+    #[Optional(
+        'MachineDetectionBeepProfile',
+        enum: MachineDetectionBeepProfile::class
+    )]
+    public ?string $machineDetectionBeepProfile;
 
     /**
      * Silence duration threshold after a call screening prompt before ending prompt detection, in milliseconds. Used when `DetectionMode` is `PremiumCallScreening`.
@@ -404,6 +417,7 @@ final class CallCallsParams implements BaseModel
      * @param DeepfakeDetectionCallbackMethod|value-of<DeepfakeDetectionCallbackMethod>|null $deepfakeDetectionCallbackMethod
      * @param DetectionMode|value-of<DetectionMode>|null $detectionMode
      * @param MachineDetection|value-of<MachineDetection>|null $machineDetection
+     * @param MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile>|null $machineDetectionBeepProfile
      * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
      * @param RecordingChannels|value-of<RecordingChannels>|null $recordingChannels
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
@@ -431,6 +445,7 @@ final class CallCallsParams implements BaseModel
         ?string $fallbackURL = null,
         ?string $from = null,
         MachineDetection|string|null $machineDetection = null,
+        MachineDetectionBeepProfile|string|null $machineDetectionBeepProfile = null,
         ?int $machineDetectionPromptEndTimeout = null,
         ?int $machineDetectionSilenceTimeout = null,
         ?int $machineDetectionSpeechEndThreshold = null,
@@ -479,6 +494,7 @@ final class CallCallsParams implements BaseModel
         null !== $fallbackURL && $self['fallbackURL'] = $fallbackURL;
         null !== $from && $self['from'] = $from;
         null !== $machineDetection && $self['machineDetection'] = $machineDetection;
+        null !== $machineDetectionBeepProfile && $self['machineDetectionBeepProfile'] = $machineDetectionBeepProfile;
         null !== $machineDetectionPromptEndTimeout && $self['machineDetectionPromptEndTimeout'] = $machineDetectionPromptEndTimeout;
         null !== $machineDetectionSilenceTimeout && $self['machineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
         null !== $machineDetectionSpeechEndThreshold && $self['machineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
@@ -701,6 +717,20 @@ final class CallCallsParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['machineDetection'] = $machineDetection;
+
+        return $self;
+    }
+
+    /**
+     * Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile. Only used when MachineDetection is enabled.
+     *
+     * @param MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile> $machineDetectionBeepProfile
+     */
+    public function withMachineDetectionBeepProfile(
+        MachineDetectionBeepProfile|string $machineDetectionBeepProfile
+    ): self {
+        $self = clone $this;
+        $self['machineDetectionBeepProfile'] = $machineDetectionBeepProfile;
 
         return $self;
     }

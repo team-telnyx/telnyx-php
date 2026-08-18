@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
 
 /**
- * Returns messaging profiles owned by the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
+ * Lists messaging profiles owned by the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
  *
  * @see Telnyx\Services\MessagingProfilesService::list()
  *
