@@ -15,6 +15,7 @@ use Telnyx\Texml\TexmlInitiateAICallParams\ConversationCallbackMethod;
 use Telnyx\Texml\TexmlInitiateAICallParams\CustomHeader;
 use Telnyx\Texml\TexmlInitiateAICallParams\DetectionMode;
 use Telnyx\Texml\TexmlInitiateAICallParams\MachineDetection;
+use Telnyx\Texml\TexmlInitiateAICallParams\MachineDetectionBeepProfile;
 use Telnyx\Texml\TexmlInitiateAICallParams\RecordingChannels;
 use Telnyx\Texml\TexmlInitiateAICallParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\TexmlInitiateAICallParams\RecordingTrack;
@@ -69,6 +70,7 @@ final class TexmlRawService implements TexmlRawContract
      *   customHeaders?: list<CustomHeader|CustomHeaderShape>,
      *   detectionMode?: DetectionMode|value-of<DetectionMode>,
      *   machineDetection?: MachineDetection|value-of<MachineDetection>,
+     *   machineDetectionBeepProfile?: MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile>,
      *   machineDetectionPromptEndTimeout?: int,
      *   machineDetectionSilenceTimeout?: int,
      *   machineDetectionSpeechEndThreshold?: int,

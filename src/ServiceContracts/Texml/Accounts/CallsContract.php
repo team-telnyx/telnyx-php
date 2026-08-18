@@ -12,6 +12,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\DeepfakeDetection;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DeepfakeDetectionCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetectionBeepProfile;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MediaEncryption;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
@@ -105,6 +106,7 @@ interface CallsContract
      * @param string $fallbackURL a failover URL for which Telnyx will retrieve the TeXML call instructions if the `Url` is not responding
      * @param string $from The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
      * @param MachineDetection|value-of<MachineDetection> $machineDetection enables Answering Machine Detection
+     * @param MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile> $machineDetectionBeepProfile Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile. Only used when MachineDetection is enabled.
      * @param int $machineDetectionPromptEndTimeout Silence duration threshold after a call screening prompt before ending prompt detection, in milliseconds. Used when `DetectionMode` is `PremiumCallScreening`.
      * @param int $machineDetectionSilenceTimeout If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      * @param int $machineDetectionSpeechEndThreshold Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
@@ -155,6 +157,7 @@ interface CallsContract
         ?string $fallbackURL = null,
         ?string $from = null,
         MachineDetection|string $machineDetection = 'Disable',
+        MachineDetectionBeepProfile|string $machineDetectionBeepProfile = 'both',
         ?int $machineDetectionPromptEndTimeout = null,
         int $machineDetectionSilenceTimeout = 3500,
         int $machineDetectionSpeechEndThreshold = 800,

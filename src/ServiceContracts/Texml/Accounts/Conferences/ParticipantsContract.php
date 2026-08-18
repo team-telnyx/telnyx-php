@@ -15,6 +15,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceTrim;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetectionBeepProfile;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingTrack;
@@ -133,6 +134,7 @@ interface ParticipantsContract
      * @param string $from Body param: The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
      * @param string $label Body param: A unique label for the participant that will be added to the conference. The label can be used to reference the participant for updates via the TeXML REST API.
      * @param MachineDetection|value-of<MachineDetection> $machineDetection Body param: Whether to detect if a human or an answering machine picked up the call. Use `Enable` if you would like to ne notified as soon as the called party is identified. Use `DetectMessageEnd`, if you would like to leave a message on an answering machine.
+     * @param MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile> $machineDetectionBeepProfile Body param: Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile. Only used when MachineDetection is enabled.
      * @param int $machineDetectionSilenceTimeout Body param: If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      * @param int $machineDetectionSpeechEndThreshold Body param: Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
      * @param int $machineDetectionSpeechThreshold Body param: Maximum threshold of a human greeting. If greeting longer than this value, considered machine. Ignored when `premium` detection is used.
@@ -188,6 +190,7 @@ interface ParticipantsContract
         ?string $from = null,
         ?string $label = null,
         MachineDetection|string|null $machineDetection = null,
+        MachineDetectionBeepProfile|string $machineDetectionBeepProfile = 'both',
         int $machineDetectionSilenceTimeout = 3500,
         int $machineDetectionSpeechEndThreshold = 800,
         int $machineDetectionSpeechThreshold = 3500,

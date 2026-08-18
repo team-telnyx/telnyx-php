@@ -20,6 +20,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceTrim;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\MachineDetectionBeepProfile;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\RecordingTrack;
@@ -225,6 +226,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
      *   from?: string,
      *   label?: string,
      *   machineDetection?: MachineDetection|value-of<MachineDetection>,
+     *   machineDetectionBeepProfile?: MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile>,
      *   machineDetectionSilenceTimeout?: int,
      *   machineDetectionSpeechEndThreshold?: int,
      *   machineDetectionSpeechThreshold?: int,

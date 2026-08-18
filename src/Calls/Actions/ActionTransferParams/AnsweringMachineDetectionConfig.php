@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionTransferParams;
 
+use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig\BeepDetectionProfile;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,6 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AnsweringMachineDetectionConfigShape = array{
  *   afterGreetingSilenceMillis?: int|null,
+ *   beepDetectionProfile?: null|BeepDetectionProfile|value-of<BeepDetectionProfile>,
  *   betweenWordsSilenceMillis?: int|null,
  *   greetingDurationMillis?: int|null,
  *   greetingSilenceDurationMillis?: int|null,
@@ -34,6 +36,14 @@ final class AnsweringMachineDetectionConfig implements BaseModel
      */
     #[Optional('after_greeting_silence_millis')]
     public ?int $afterGreetingSilenceMillis;
+
+    /**
+     * Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile.
+     *
+     * @var value-of<BeepDetectionProfile>|null $beepDetectionProfile
+     */
+    #[Optional('beep_detection_profile', enum: BeepDetectionProfile::class)]
+    public ?string $beepDetectionProfile;
 
     /**
      * Maximum threshold for silence between words.
@@ -98,9 +108,12 @@ final class AnsweringMachineDetectionConfig implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param BeepDetectionProfile|value-of<BeepDetectionProfile>|null $beepDetectionProfile
      */
     public static function with(
         ?int $afterGreetingSilenceMillis = null,
+        BeepDetectionProfile|string|null $beepDetectionProfile = null,
         ?int $betweenWordsSilenceMillis = null,
         ?int $greetingDurationMillis = null,
         ?int $greetingSilenceDurationMillis = null,
@@ -114,6 +127,7 @@ final class AnsweringMachineDetectionConfig implements BaseModel
         $self = new self;
 
         null !== $afterGreetingSilenceMillis && $self['afterGreetingSilenceMillis'] = $afterGreetingSilenceMillis;
+        null !== $beepDetectionProfile && $self['beepDetectionProfile'] = $beepDetectionProfile;
         null !== $betweenWordsSilenceMillis && $self['betweenWordsSilenceMillis'] = $betweenWordsSilenceMillis;
         null !== $greetingDurationMillis && $self['greetingDurationMillis'] = $greetingDurationMillis;
         null !== $greetingSilenceDurationMillis && $self['greetingSilenceDurationMillis'] = $greetingSilenceDurationMillis;
@@ -135,6 +149,20 @@ final class AnsweringMachineDetectionConfig implements BaseModel
     ): self {
         $self = clone $this;
         $self['afterGreetingSilenceMillis'] = $afterGreetingSilenceMillis;
+
+        return $self;
+    }
+
+    /**
+     * Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile.
+     *
+     * @param BeepDetectionProfile|value-of<BeepDetectionProfile> $beepDetectionProfile
+     */
+    public function withBeepDetectionProfile(
+        BeepDetectionProfile|string $beepDetectionProfile
+    ): self {
+        $self = clone $this;
+        $self['beepDetectionProfile'] = $beepDetectionProfile;
 
         return $self;
     }

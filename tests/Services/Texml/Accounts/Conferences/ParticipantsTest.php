@@ -217,6 +217,7 @@ final class ParticipantsTest extends TestCase
                 from: '+12065550200',
                 label: 'customer',
                 machineDetection: 'Enable',
+                machineDetectionBeepProfile: 'freq_only',
                 machineDetectionSilenceTimeout: 2000,
                 machineDetectionSpeechEndThreshold: 2000,
                 machineDetectionSpeechThreshold: 2000,

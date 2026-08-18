@@ -12,7 +12,7 @@ use Telnyx\RimeVoiceSettings\Type;
 
 /**
  * @phpstan-type RimeVoiceSettingsShape = array{
- *   type: Type|value-of<Type>, voiceSpeed?: float|null
+ *   type: Type|value-of<Type>, apiKeyRef?: string|null, voiceSpeed?: float|null
  * }
  */
 final class RimeVoiceSettings implements BaseModel
@@ -27,6 +27,12 @@ final class RimeVoiceSettings implements BaseModel
      */
     #[Required(enum: Type::class)]
     public string $type;
+
+    /**
+     * The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your Rime API key. Only required when using your own Rime account.
+     */
+    #[Optional('api_key_ref')]
+    public ?string $apiKeyRef;
 
     /**
      * Speech speed multiplier. Default is 1.0.
@@ -62,12 +68,14 @@ final class RimeVoiceSettings implements BaseModel
      */
     public static function with(
         Type|string $type,
+        ?string $apiKeyRef = null,
         ?float $voiceSpeed = null
     ): self {
         $self = new self;
 
         $self['type'] = $type;
 
+        null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
         null !== $voiceSpeed && $self['voiceSpeed'] = $voiceSpeed;
 
         return $self;
@@ -82,6 +90,17 @@ final class RimeVoiceSettings implements BaseModel
     {
         $self = clone $this;
         $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
+     * The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your Rime API key. Only required when using your own Rime account.
+     */
+    public function withAPIKeyRef(string $apiKeyRef): self
+    {
+        $self = clone $this;
+        $self['apiKeyRef'] = $apiKeyRef;
 
         return $self;
     }

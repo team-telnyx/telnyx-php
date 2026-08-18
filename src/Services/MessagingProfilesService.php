@@ -258,7 +258,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
     /**
      * @api
      *
-     * Returns messaging profiles owned by the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
+     * Lists messaging profiles owned by the authenticated account. Apply the documented filters and pagination parameters to narrow the result set.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param string $filterNameContains filter profiles by name containing the given string
