@@ -6,6 +6,7 @@ namespace Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams;
 
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\BodyParameters;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\Header;
+use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\Message;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\Method;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\PathParameters;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\QueryParameters;
@@ -16,8 +17,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type MessageVariants from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\Message
  * @phpstan-import-type BodyParametersShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\BodyParameters
  * @phpstan-import-type HeaderShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\Header
+ * @phpstan-import-type MessageShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\Message
  * @phpstan-import-type PathParametersShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\PathParameters
  * @phpstan-import-type QueryParametersShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\QueryParameters
  * @phpstan-import-type StoreFieldsAsVariableShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\StoreFieldsAsVariable
@@ -30,6 +33,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   asyncTimeoutMs?: int|null,
  *   bodyParameters?: null|BodyParameters|BodyParametersShape,
  *   headers?: list<Header|HeaderShape>|null,
+ *   messages?: list<MessageShape>|null,
  *   method?: null|Method|value-of<Method>,
  *   pathParameters?: null|PathParameters|PathParametersShape,
  *   queryParameters?: null|QueryParameters|QueryParametersShape,
@@ -85,6 +89,14 @@ final class Webhook implements BaseModel
      */
     #[Optional(list: Header::class)]
     public ?array $headers;
+
+    /**
+     * Filler messages spoken while a synchronous webhook request is in progress. `request_start` messages are spoken immediately when the request begins. `request_response_delayed` messages are spoken after `timing_ms` has elapsed only if the webhook response is still pending. Filler messages are not used for asynchronous webhooks.
+     *
+     * @var list<MessageVariants>|null $messages
+     */
+    #[Optional(list: Message::class)]
+    public ?array $messages;
 
     /**
      * The HTTP method to be used when calling the external tool.
@@ -146,6 +158,7 @@ final class Webhook implements BaseModel
      *
      * @param BodyParameters|BodyParametersShape|null $bodyParameters
      * @param list<Header|HeaderShape>|null $headers
+     * @param list<MessageShape>|null $messages
      * @param Method|value-of<Method>|null $method
      * @param PathParameters|PathParametersShape|null $pathParameters
      * @param QueryParameters|QueryParametersShape|null $queryParameters
@@ -159,6 +172,7 @@ final class Webhook implements BaseModel
         ?int $asyncTimeoutMs = null,
         BodyParameters|array|null $bodyParameters = null,
         ?array $headers = null,
+        ?array $messages = null,
         Method|string|null $method = null,
         PathParameters|array|null $pathParameters = null,
         QueryParameters|array|null $queryParameters = null,
@@ -175,6 +189,7 @@ final class Webhook implements BaseModel
         null !== $asyncTimeoutMs && $self['asyncTimeoutMs'] = $asyncTimeoutMs;
         null !== $bodyParameters && $self['bodyParameters'] = $bodyParameters;
         null !== $headers && $self['headers'] = $headers;
+        null !== $messages && $self['messages'] = $messages;
         null !== $method && $self['method'] = $method;
         null !== $pathParameters && $self['pathParameters'] = $pathParameters;
         null !== $queryParameters && $self['queryParameters'] = $queryParameters;
@@ -262,6 +277,19 @@ final class Webhook implements BaseModel
     {
         $self = clone $this;
         $self['headers'] = $headers;
+
+        return $self;
+    }
+
+    /**
+     * Filler messages spoken while a synchronous webhook request is in progress. `request_start` messages are spoken immediately when the request begins. `request_response_delayed` messages are spoken after `timing_ms` has elapsed only if the webhook response is still pending. Filler messages are not used for asynchronous webhooks.
+     *
+     * @param list<MessageShape> $messages
+     */
+    public function withMessages(array $messages): self
+    {
+        $self = clone $this;
+        $self['messages'] = $messages;
 
         return $self;
     }
