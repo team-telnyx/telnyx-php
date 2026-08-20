@@ -8,12 +8,12 @@ use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallAnswered\Payload\SipHeader;
 use Telnyx\Webhooks\CallAnswered\Payload\State;
+use Telnyx\Webhooks\InboundSipHeader;
 
 /**
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
- * @phpstan-import-type SipHeaderShape from \Telnyx\Webhooks\CallAnswered\Payload\SipHeader
+ * @phpstan-import-type InboundSipHeaderShape from \Telnyx\Webhooks\InboundSipHeader
  *
  * @phpstan-type PayloadShape = array{
  *   callControlID?: string|null,
@@ -23,7 +23,7 @@ use Telnyx\Webhooks\CallAnswered\Payload\State;
  *   connectionID?: string|null,
  *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
  *   from?: string|null,
- *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
+ *   sipHeaders?: list<InboundSipHeader|InboundSipHeaderShape>|null,
  *   startTime?: \DateTimeInterface|null,
  *   state?: null|State|value-of<State>,
  *   tags?: list<string>|null,
@@ -82,9 +82,9 @@ final class Payload implements BaseModel
     /**
      * User-to-User and Diversion headers from sip invite.
      *
-     * @var list<SipHeader>|null $sipHeaders
+     * @var list<InboundSipHeader>|null $sipHeaders
      */
-    #[Optional('sip_headers', list: SipHeader::class)]
+    #[Optional('sip_headers', list: InboundSipHeader::class)]
     public ?array $sipHeaders;
 
     /**
@@ -126,7 +126,7 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
-     * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
+     * @param list<InboundSipHeader|InboundSipHeaderShape>|null $sipHeaders
      * @param State|value-of<State>|null $state
      * @param list<string>|null $tags
      */
@@ -244,7 +244,7 @@ final class Payload implements BaseModel
     /**
      * User-to-User and Diversion headers from sip invite.
      *
-     * @param list<SipHeader|SipHeaderShape> $sipHeaders
+     * @param list<InboundSipHeader|InboundSipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {

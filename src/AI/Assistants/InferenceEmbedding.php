@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -12,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
- * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow
+ * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\ConversationFlow
  * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\ExternalLlm
  * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\FallbackConfig
  * @phpstan-import-type ImportMetadataShape from \Telnyx\AI\Assistants\ImportMetadata

@@ -11,12 +11,12 @@ use Telnyx\Calls\Actions\TranscriptionEngineAssemblyaiConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineHumainConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineParakeetConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineSonioxConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineXaiConfig;
-use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineHumainConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineReson8Config;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
@@ -31,7 +31,7 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type TranscriptionEngineSpeechmaticsConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig
  * @phpstan-import-type TranscriptionEngineSonioxConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineSonioxConfig
  * @phpstan-import-type TranscriptionEngineParakeetConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineParakeetConfig
- * @phpstan-import-type TranscriptionEngineHumainConfigShape from \Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineHumainConfig
+ * @phpstan-import-type TranscriptionEngineHumainConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineHumainConfig
  * @phpstan-import-type TranscriptionEngineReson8ConfigShape from \Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineReson8Config
  * @phpstan-import-type TranscriptionEngineAConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineAConfig
  * @phpstan-import-type TranscriptionEngineBConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineBConfig
