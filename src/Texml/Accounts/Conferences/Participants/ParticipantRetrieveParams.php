@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Gets conference participant resource.
+ * Returns a single conference participant resource by call SID or participant label.
  *
  * @see Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService::retrieve()
  *

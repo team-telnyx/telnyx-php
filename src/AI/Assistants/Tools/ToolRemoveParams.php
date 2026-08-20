@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Detach a tool from an AI assistant.
+ * Detaches the specified tool from the AI assistant so the assistant can no longer invoke it.
  *
  * @see Telnyx\Services\AI\Assistants\ToolsService::remove()
  *

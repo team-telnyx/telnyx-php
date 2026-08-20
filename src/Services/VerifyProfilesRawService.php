@@ -92,7 +92,7 @@ final class VerifyProfilesRawService implements VerifyProfilesRawContract
     /**
      * @api
      *
-     * Gets a single Verify profile.
+     * Returns the details of a single Verify profile by its ID, including its verification channel configuration.
      *
      * @param string $verifyProfileID the identifier of the Verify profile to retrieve
      * @param RequestOpts|null $requestOptions

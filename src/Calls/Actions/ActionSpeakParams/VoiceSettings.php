@@ -14,7 +14,6 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
-use Telnyx\RimeVoiceSettings;
 use Telnyx\XaiVoiceSettings;
 
 /**
@@ -25,13 +24,12 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type AwsVoiceSettingsShape from \Telnyx\Calls\Actions\AwsVoiceSettings
  * @phpstan-import-type MinimaxVoiceSettingsShape from \Telnyx\MinimaxVoiceSettings
  * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\AzureVoiceSettings
- * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\RimeVoiceSettings
  * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\ResembleVoiceSettings
  * @phpstan-import-type InworldVoiceSettingsShape from \Telnyx\InworldVoiceSettings
  * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\XaiVoiceSettings
  *
- * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings
- * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape|InworldVoiceSettingsShape|XaiVoiceSettingsShape
+ * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings
+ * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|ResembleVoiceSettingsShape|InworldVoiceSettingsShape|XaiVoiceSettingsShape
  */
 final class VoiceSettings implements ConverterSource
 {
@@ -53,7 +51,6 @@ final class VoiceSettings implements ConverterSource
             'aws' => AwsVoiceSettings::class,
             'minimax' => MinimaxVoiceSettings::class,
             'azure' => AzureVoiceSettings::class,
-            'rime' => RimeVoiceSettings::class,
             'resemble' => ResembleVoiceSettings::class,
             'inworld' => InworldVoiceSettings::class,
             'xai' => XaiVoiceSettings::class,

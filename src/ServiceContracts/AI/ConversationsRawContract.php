@@ -102,7 +102,7 @@ interface ConversationsRawContract
     /**
      * @api
      *
-     * @param string $conversationID The ID of the conversation
+     * @param string $conversationID Path param: The ID of the conversation
      * @param array<string,mixed>|ConversationAddMessageParams $params
      * @param RequestOpts|null $requestOptions
      *

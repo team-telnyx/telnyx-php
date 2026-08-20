@@ -40,7 +40,7 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
     /**
      * @api
      *
-     * Creates an authentication provider.
+     * Creates a new authentication provider for single sign-on, configured from the provided identity provider details, and returns the created resource.
      *
      * @param string $name the name associated with the authentication provider
      * @param Settings|SettingsShape $settings the settings associated with the authentication provider

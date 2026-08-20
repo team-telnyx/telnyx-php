@@ -35,7 +35,7 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
     /**
      * @api
      *
-     * Creates a new mobile push credential
+     * Creates a new mobile push credential for delivering push notifications to iOS or Android apps, and returns the created credential.
      *
      * @param array{
      *   createMobilePushCredentialRequest: CreateMobilePushCredentialRequestShape
@@ -93,7 +93,7 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
     /**
      * @api
      *
-     * List mobile push credentials
+     * Returns a paginated list of the mobile push credentials on your account, with support for filtering.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int

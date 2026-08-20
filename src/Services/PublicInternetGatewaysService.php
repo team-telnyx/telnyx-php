@@ -42,7 +42,7 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
     /**
      * @api
      *
-     * Create a new Public Internet Gateway.
+     * Requests creation of a public internet gateway on the specified network, giving the network internet egress. Creation is asynchronous, so the request is accepted and completes in the background.
      *
      * @param Body|BodyShape $body
      * @param RequestOpts|null $requestOptions
@@ -64,7 +64,7 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
     /**
      * @api
      *
-     * Retrieve a Public Internet Gateway.
+     * Returns the details of a single public internet gateway by its identifier.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -84,7 +84,7 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
     /**
      * @api
      *
-     * List all Public Internet Gateways.
+     * Returns a paginated list of the public internet gateways on your account, with support for filtering.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param RequestOpts|null $requestOptions
@@ -116,7 +116,7 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
     /**
      * @api
      *
-     * Delete a Public Internet Gateway.
+     * Deletes the specified public internet gateway, removing internet egress through it.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

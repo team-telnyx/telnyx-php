@@ -12,7 +12,7 @@ use Telnyx\SimCards\SimCardUpdateParams\DataLimit;
 use Telnyx\SimCardStatus;
 
 /**
- * Updates SIM card data.
+ * Updates the specified SIM card's attributes and returns the updated SIM card.
  *
  * @see Telnyx\Services\SimCardsService::update()
  *

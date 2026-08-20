@@ -104,7 +104,7 @@ final class TrafficPolicyProfilesRawService implements TrafficPolicyProfilesRawC
     /**
      * @api
      *
-     * Updates a traffic policy profile.
+     * Updates the specified traffic policy profile and returns the updated profile.
      *
      * @param string $id identifies the traffic policy profile
      * @param array{
@@ -189,7 +189,7 @@ final class TrafficPolicyProfilesRawService implements TrafficPolicyProfilesRawC
     /**
      * @api
      *
-     * Deletes the traffic policy profile.
+     * Permanently deletes the specified traffic policy profile from your account.
      *
      * @param string $id identifies the traffic policy profile
      * @param RequestOpts|null $requestOptions

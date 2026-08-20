@@ -17,7 +17,6 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble;
-use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\TextType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
@@ -34,7 +33,6 @@ use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
  * @phpstan-import-type HumainShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain
  * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble
- * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime
  * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx
  * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -61,9 +59,9 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header.
      *
-     * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy` or `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
+     * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `xai`, `humain`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`.
      *
      * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
      *
@@ -77,11 +75,10 @@ final class TextToSpeechService implements TextToSpeechContract
      * @param OutputType|value-of<OutputType> $outputType Determines the response format. `binary_output` returns raw audio bytes, `base64_output` returns base64-encoded audio in JSON.
      * @param Provider|value-of<Provider> $provider TTS provider. Required unless `voice` is provided.
      * @param Resemble|ResembleShape $resemble resemble AI provider-specific parameters
-     * @param Rime|RimeShape $rime rime provider-specific parameters
-     * @param Telnyx|TelnyxShape $telnyx Telnyx provider-specific parameters. Use `voice_speed` and `temperature` for `Natural` and `NaturalHD` models. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
+     * @param Telnyx|TelnyxShape $telnyx Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
      * @param string $text the text to convert to speech
      * @param TextType|value-of<TextType> $textType Text type. Use `ssml` for SSML-formatted input (supported by AWS and Azure).
-     * @param string $voice Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `telnyx.NaturalHD.Alloy`, `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
+     * @param string $voice Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
      * @param array<string,mixed> $voiceSettings Provider-specific voice settings. Contents vary by provider — see provider-specific parameter objects below.
      * @param Xai|XaiShape $xai xAI provider-specific parameters
      * @param RequestOpts|null $requestOptions
@@ -99,7 +96,6 @@ final class TextToSpeechService implements TextToSpeechContract
         OutputType|string $outputType = 'binary_output',
         Provider|string|null $provider = null,
         Resemble|array|null $resemble = null,
-        Rime|array|null $rime = null,
         Telnyx|array|null $telnyx = null,
         ?string $text = null,
         TextType|string|null $textType = null,
@@ -120,7 +116,6 @@ final class TextToSpeechService implements TextToSpeechContract
                 'outputType' => $outputType,
                 'provider' => $provider,
                 'resemble' => $resemble,
-                'rime' => $rime,
                 'telnyx' => $telnyx,
                 'text' => $text,
                 'textType' => $textType,
@@ -167,7 +162,7 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * Open a WebSocket connection to stream text and receive synthesized audio in real time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header. Send JSON frames with text to synthesize; receive JSON frames containing base64-encoded audio chunks.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `rime`, `resemble`, `elevenlabs`, `xai`, `humain`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `resemble`, `elevenlabs`, `xai`, `humain`.
      *
      * **Connection flow:**
      * 1. Open WebSocket with query parameters specifying provider, voice, and model.
@@ -180,12 +175,12 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * **Note:** The Telnyx `Ultra` model is not available over WebSocket. Use the HTTP POST `/text-to-speech/speech` endpoint instead.
      *
-     * @param AudioFormat|value-of<AudioFormat> $audioFormat Audio output format override. Supported for Telnyx models. `pcm` and `wav` are available for `Natural`/`NaturalHD` models. The `Ultra` model outputs PCM at 24kHz s16le or MP3 at 128kbps 24kHz.
+     * @param AudioFormat|value-of<AudioFormat> $audioFormat Audio output format override. Supported for Telnyx models. The `Ultra` model outputs PCM at 24kHz s16le or MP3 at 128kbps 24kHz.
      * @param bool $disableCache when `true`, bypass the audio cache and generate fresh audio
-     * @param string $modelID Model identifier for the chosen provider. Examples: `Natural`, `NaturalHD`, `Ultra` (Telnyx); `Polly.Generative` (AWS).
+     * @param string $modelID Model identifier for the chosen provider. Examples: `Ultra`, `KokoroTTS` (Telnyx); `Polly.Generative` (AWS).
      * @param \Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\Provider|value-of<\Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\Provider> $provider TTS provider. Defaults to `telnyx` if not specified. Ignored when `voice` is provided.
      * @param string $socketID Client-provided socket identifier for tracking. If not provided, one is generated server-side.
-     * @param string $voice Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id` (e.g. `telnyx.NaturalHD.Telnyx_Alloy`, `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, or `azure.en-US-AvaMultilingualNeural`). When provided, the `provider`, `model_id`, and `voice_id` are extracted automatically. Takes precedence over individual `provider`/`model_id`/`voice_id` parameters.
+     * @param string $voice Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id` (e.g. `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, or `azure.en-US-AvaMultilingualNeural`). When provided, the `provider`, `model_id`, and `voice_id` are extracted automatically. Takes precedence over individual `provider`/`model_id`/`voice_id` parameters.
      * @param string $voiceID voice identifier for the chosen provider
      * @param RequestOpts|null $requestOptions
      *

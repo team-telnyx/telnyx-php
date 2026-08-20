@@ -47,17 +47,31 @@ final class EmailDomainListParams implements BaseModel
     #[Optional]
     public ?string $filterProfileID;
 
-    /** @var value-of<EmailDomainStatus>|null $filterStatus */
+    /**
+     * Filter domains by verification status: pending, verifying, verified, failed, degraded, or suspended.
+     *
+     * @var value-of<EmailDomainStatus>|null $filterStatus
+     */
     #[Optional(enum: EmailDomainStatus::class)]
     public ?string $filterStatus;
 
-    /** @var value-of<EmailDomainType>|null $filterType */
+    /**
+     * Filter domains by type: custom, shared, or shared_inbound.
+     *
+     * @var value-of<EmailDomainType>|null $filterType
+     */
     #[Optional(enum: EmailDomainType::class)]
     public ?string $filterType;
 
+    /**
+     * Filter domains by whether they can currently receive inbound email.
+     */
     #[Optional]
     public ?bool $filterUsableForInbound;
 
+    /**
+     * Filter domains by whether they can currently be used to send email.
+     */
     #[Optional]
     public ?bool $filterUsableForSending;
 
@@ -160,6 +174,8 @@ final class EmailDomainListParams implements BaseModel
     }
 
     /**
+     * Filter domains by verification status: pending, verifying, verified, failed, degraded, or suspended.
+     *
      * @param EmailDomainStatus|value-of<EmailDomainStatus> $filterStatus
      */
     public function withFilterStatus(
@@ -172,6 +188,8 @@ final class EmailDomainListParams implements BaseModel
     }
 
     /**
+     * Filter domains by type: custom, shared, or shared_inbound.
+     *
      * @param EmailDomainType|value-of<EmailDomainType> $filterType
      */
     public function withFilterType(EmailDomainType|string $filterType): self
@@ -182,6 +200,9 @@ final class EmailDomainListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter domains by whether they can currently receive inbound email.
+     */
     public function withFilterUsableForInbound(
         bool $filterUsableForInbound
     ): self {
@@ -191,6 +212,9 @@ final class EmailDomainListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter domains by whether they can currently be used to send email.
+     */
     public function withFilterUsableForSending(
         bool $filterUsableForSending
     ): self {

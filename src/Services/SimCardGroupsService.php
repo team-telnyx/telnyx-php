@@ -49,7 +49,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
     /**
      * @api
      *
-     * Creates a new SIM card group object
+     * Creates a new SIM card group and returns it. Groups let you apply shared settings to a set of SIM cards.
      *
      * @param string $name a user friendly name for the SIM card group
      * @param DataLimit|DataLimitShape $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
@@ -97,7 +97,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
     /**
      * @api
      *
-     * Updates a SIM card group
+     * Updates the specified SIM card group's attributes and returns the updated group.
      *
      * @param string $id identifies the SIM group
      * @param \Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit|DataLimitShape1 $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
@@ -163,7 +163,7 @@ final class SimCardGroupsService implements SimCardGroupsContract
     /**
      * @api
      *
-     * Permanently deletes a SIM card group
+     * Permanently deletes the specified SIM card group from your account.
      *
      * @param string $id identifies the SIM group
      * @param RequestOpts|null $requestOptions

@@ -391,6 +391,7 @@ final class AssistantsTest extends TestCase
                 'theme' => 'light',
                 'viewHistoryURL' => 'view_history_url',
             ],
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -537,7 +538,8 @@ final class AssistantsTest extends TestCase
         $result = $this->client->ai->assistants->imports(
             apiKeyRef: 'string',
             provider: 'elevenlabs',
-            importIDs: ['string']
+            importIDs: ['string'],
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -575,6 +577,7 @@ final class AssistantsTest extends TestCase
             conversationMetadata: ['foo' => 'string'],
             shouldCreateConversation: false,
             text: 'Text',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

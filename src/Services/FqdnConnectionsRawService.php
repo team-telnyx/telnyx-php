@@ -55,7 +55,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
     /**
      * @api
      *
-     * Creates a FQDN connection.
+     * Creates a new FQDN-based SIP connection. FQDN connections authenticate by your registered domain names rather than static IP addresses.
      *
      * @param array{
      *   connectionName: string,
@@ -234,7 +234,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
     /**
      * @api
      *
-     * Deletes an FQDN connection.
+     * Permanently deletes the specified FQDN connection from your account.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

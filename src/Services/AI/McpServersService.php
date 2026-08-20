@@ -33,9 +33,14 @@ final class McpServersService implements McpServersContract
     /**
      * @api
      *
-     * Create a new MCP server.
+     * Creates a new MCP server configuration on your account and returns the created server.
      *
-     * @param list<string>|null $allowedTools
+     * @param string $name Body param
+     * @param string $type Body param
+     * @param string $url Body param
+     * @param list<string>|null $allowedTools Body param
+     * @param string|null $apiKeyRef Body param
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -46,6 +51,7 @@ final class McpServersService implements McpServersContract
         string $url,
         ?array $allowedTools = null,
         ?string $apiKeyRef = null,
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): McpServer {
         $params = Util::removeNulls(
@@ -55,6 +61,7 @@ final class McpServersService implements McpServersContract
                 'url' => $url,
                 'allowedTools' => $allowedTools,
                 'apiKeyRef' => $apiKeyRef,
+                'idempotencyKey' => $idempotencyKey,
             ],
         );
 
@@ -87,7 +94,7 @@ final class McpServersService implements McpServersContract
     /**
      * @api
      *
-     * Update an existing MCP server.
+     * Updates the specified MCP server's configuration and returns the updated server.
      *
      * @param string $mcpServerID unique identifier of the mcp server
      * @param list<string>|null $allowedTools
@@ -127,7 +134,7 @@ final class McpServersService implements McpServersContract
     /**
      * @api
      *
-     * Retrieve a list of MCP servers.
+     * Returns a paginated list of the MCP servers configured on your account, with optional filtering by type or URL.
      *
      * @param int $pageNumber page number to retrieve (1-based)
      * @param int $pageSize number of items to return per page
@@ -164,7 +171,7 @@ final class McpServersService implements McpServersContract
     /**
      * @api
      *
-     * Delete a specific MCP server.
+     * Permanently deletes the specified MCP server configuration from your account.
      *
      * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions

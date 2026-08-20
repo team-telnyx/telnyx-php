@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Deletes a conference participant.
+ * Removes the specified participant from the conference, ending their leg of the call.
  *
  * @see Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService::delete()
  *

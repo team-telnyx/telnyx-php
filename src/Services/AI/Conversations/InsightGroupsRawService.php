@@ -33,7 +33,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
     /**
      * @api
      *
-     * Get insight group by ID
+     * Returns the details of a single insight template group, including the insight templates assigned to it.
      *
      * @param string $groupID The ID of the insight group
      * @param RequestOpts|null $requestOptions
@@ -58,7 +58,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
     /**
      * @api
      *
-     * Update an insight template group
+     * Updates the specified insight template group and returns the updated group.
      *
      * @param string $groupID The ID of the insight group
      * @param array{
@@ -93,7 +93,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
     /**
      * @api
      *
-     * Delete insight group by ID
+     * Permanently deletes the specified insight template group by its ID.
      *
      * @param string $groupID The ID of the insight group
      * @param RequestOpts|null $requestOptions
@@ -118,10 +118,10 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
     /**
      * @api
      *
-     * Create a new insight group
+     * Creates a new insight template group for organizing related insight templates, and returns the created group.
      *
      * @param array{
-     *   name: string, description?: string, webhook?: string
+     *   name: string, description?: string, webhook?: string, idempotencyKey?: string
      * }|InsightGroupInsightGroupsParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -137,12 +137,20 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/conversations/insight-groups',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: InsightTemplateGroupDetail::class,
         );
@@ -151,7 +159,7 @@ final class InsightGroupsRawService implements InsightGroupsRawContract
     /**
      * @api
      *
-     * Get all insight groups
+     * Returns a paginated list of your insight template groups. Groups organize related insight templates that are applied together when analyzing conversations.
      *
      * @param array{
      *   pageNumber?: int, pageSize?: int

@@ -38,7 +38,7 @@ final class RoomsRawService implements RoomsRawContract
     /**
      * @api
      *
-     * Synchronously create a Room.
+     * Synchronously creates a new video room with the provided configuration and returns the created room.
      *
      * @param array{
      *   enableRecording?: bool,
@@ -112,7 +112,7 @@ final class RoomsRawService implements RoomsRawContract
     /**
      * @api
      *
-     * Synchronously update a Room.
+     * Synchronously updates the specified video room's configuration and returns the updated room.
      *
      * @param string $roomID the unique identifier of a room
      * @param array{

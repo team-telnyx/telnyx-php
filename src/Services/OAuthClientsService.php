@@ -40,7 +40,7 @@ final class OAuthClientsService implements OAuthClientsContract
     /**
      * @api
      *
-     * Create a new OAuth client
+     * Creates a new OAuth client on your account for authenticating third-party integrations, and returns the created client.
      *
      * @param list<AllowedGrantType|value-of<AllowedGrantType>> $allowedGrantTypes List of allowed OAuth grant types
      * @param list<string> $allowedScopes List of allowed OAuth scopes
@@ -90,7 +90,7 @@ final class OAuthClientsService implements OAuthClientsContract
     /**
      * @api
      *
-     * Retrieve a single OAuth client by ID
+     * Returns the details of a single OAuth client on your account by its ID.
      *
      * @param string $id OAuth client ID
      * @param RequestOpts|null $requestOptions
@@ -110,7 +110,7 @@ final class OAuthClientsService implements OAuthClientsContract
     /**
      * @api
      *
-     * Update an existing OAuth client
+     * Updates the specified OAuth client's configuration and returns the updated client.
      *
      * @param string $id OAuth client ID
      * @param list<\Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType|value-of<\Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType>> $allowedGrantTypes List of allowed OAuth grant types
@@ -208,7 +208,7 @@ final class OAuthClientsService implements OAuthClientsContract
     /**
      * @api
      *
-     * Delete an OAuth client
+     * Permanently deletes the specified OAuth client from your account.
      *
      * @param string $id OAuth client ID
      * @param RequestOpts|null $requestOptions

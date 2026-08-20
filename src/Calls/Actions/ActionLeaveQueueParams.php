@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Removes the call from a queue.
+ * Removes the call from the queue it is currently waiting in. The call remains active and can be directed with further call commands.
  *
  * @see Telnyx\Services\Calls\ActionsService::leaveQueue()
  *

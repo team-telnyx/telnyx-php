@@ -12,7 +12,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort;
 
 /**
- * List customer service records.
+ * Returns a paginated list of your customer service record (CSR) requests, with support for filtering and sorting.
  *
  * @see Telnyx\Services\CustomerServiceRecordsService::list()
  *

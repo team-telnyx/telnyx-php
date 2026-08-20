@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update an AI Assistant's attributes.
+ * Updates the specified AI assistant's attributes and returns the updated assistant. The request can also control how the change is promoted across assistant versions.
  *
  * @see Telnyx\Services\AI\AssistantsService::update()
  *

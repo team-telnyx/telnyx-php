@@ -36,7 +36,7 @@ final class UserTagsService implements UserTagsContract
     /**
      * @api
      *
-     * List all user tags.
+     * Returns the user tags defined on your account, with support for filtering. Tags help organize resources such as phone numbers.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
      * @param RequestOpts|null $requestOptions

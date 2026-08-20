@@ -10,11 +10,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type SubNumberOrderShape from \Telnyx\SubNumberOrders\SubNumberOrder
+ * @phpstan-import-type NumbersSubNumberOrderShape from \Telnyx\SubNumberOrders\NumbersSubNumberOrder
  * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
  *
  * @phpstan-type SubNumberOrderListResponseShape = array{
- *   data?: list<SubNumberOrder|SubNumberOrderShape>|null,
+ *   data?: list<NumbersSubNumberOrder|NumbersSubNumberOrderShape>|null,
  *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
@@ -23,8 +23,8 @@ final class SubNumberOrderListResponse implements BaseModel
     /** @use SdkModel<SubNumberOrderListResponseShape> */
     use SdkModel;
 
-    /** @var list<SubNumberOrder>|null $data */
-    #[Optional(list: SubNumberOrder::class)]
+    /** @var list<NumbersSubNumberOrder>|null $data */
+    #[Optional(list: NumbersSubNumberOrder::class)]
     public ?array $data;
 
     #[Optional]
@@ -40,7 +40,7 @@ final class SubNumberOrderListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SubNumberOrder|SubNumberOrderShape>|null $data
+     * @param list<NumbersSubNumberOrder|NumbersSubNumberOrderShape>|null $data
      * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
@@ -56,7 +56,7 @@ final class SubNumberOrderListResponse implements BaseModel
     }
 
     /**
-     * @param list<SubNumberOrder|SubNumberOrderShape> $data
+     * @param list<NumbersSubNumberOrder|NumbersSubNumberOrderShape> $data
      */
     public function withData(array $data): self
     {

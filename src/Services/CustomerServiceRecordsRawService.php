@@ -76,7 +76,7 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
     /**
      * @api
      *
-     * Get a specific customer service record.
+     * Returns the details of a single customer service record (CSR) request, including its status and any retrieved record data.
      *
      * @param string $customerServiceRecordID The ID of the customer service record
      * @param RequestOpts|null $requestOptions
@@ -101,7 +101,7 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
     /**
      * @api
      *
-     * List customer service records.
+     * Returns a paginated list of your customer service record (CSR) requests, with support for filtering and sorting.
      *
      * @param array{
      *   filter?: Filter|FilterShape,

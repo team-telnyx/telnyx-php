@@ -62,7 +62,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
     /**
      * @api
      *
-     * Creates a new porting order object.
+     * Creates a new porting order to bring phone numbers from another carrier to Telnyx. Complete the order's requirements and then confirm it to submit the port.
      *
      * @param array{
      *   phoneNumbers: list<string>,
@@ -183,7 +183,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
     /**
      * @api
      *
-     * Returns a list of your porting order.
+     * Returns a paginated list of your porting orders. Supports filtering and sorting, and can optionally include the phone numbers attached to each order.
      *
      * @param array{
      *   filter?: Filter|FilterShape,
@@ -301,7 +301,7 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
     /**
      * @api
      *
-     * Download a porting order loa template
+     * Downloads the Letter of Authorization (LOA) template document for this porting order, optionally rendered with a specific LOA configuration.
      *
      * @param string $id Porting Order id
      * @param array{

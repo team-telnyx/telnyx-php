@@ -106,7 +106,7 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
     /**
      * @api
      *
-     * Updates one or more template fields.
+     * Updates one or more fields of the specified email template and returns the updated template.
      *
      * @param string $id email template UUID
      * @param array{

@@ -143,7 +143,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
     /**
      * @api
      *
-     * Deletes the Private Wireless Gateway.
+     * Permanently deletes the specified Private Wireless Gateway from your account.
      *
      * @param string $id identifies the private wireless gateway
      * @param RequestOpts|null $requestOptions

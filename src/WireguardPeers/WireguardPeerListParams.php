@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WireguardPeers\WireguardPeerListParams\Filter;
 
 /**
- * List all WireGuard peers.
+ * Returns a paginated list of your WireGuard peers, with support for filtering.
  *
  * @see Telnyx\Services\WireguardPeersService::list()
  *

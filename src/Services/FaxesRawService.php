@@ -103,7 +103,7 @@ final class FaxesRawService implements FaxesRawContract
     /**
      * @api
      *
-     * Retrieve the details of a single fax.
+     * Returns the details of a single fax, including its current status.
      *
      * @param string $id the unique identifier of a fax
      * @param RequestOpts|null $requestOptions

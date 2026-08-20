@@ -345,7 +345,7 @@ final class UacConnectionsService implements UacConnectionsContract
     /**
      * @api
      *
-     * Deletes an existing UAC connection.
+     * Permanently deletes the specified UAC connection from your account.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

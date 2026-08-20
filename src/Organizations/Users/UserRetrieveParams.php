@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Returns a user in your organization.
+ * Returns the details of a user in your organization, optionally including the groups the user belongs to.
  *
  * @see Telnyx\Services\Organizations\UsersService::retrieve()
  *

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update a tool definition.
+ * Replaces the definition of the specified tool on this mission.
  *
  * @see Telnyx\Services\AI\Missions\ToolsService::updateTool()
  *

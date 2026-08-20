@@ -37,7 +37,7 @@ interface RunsRawContract
     /**
      * @api
      *
-     * @param string $suiteName name of the suite
+     * @param string $suiteName path param: Name of the suite
      * @param array<string,mixed>|RunTriggerParams $params
      * @param RequestOpts|null $requestOptions
      *

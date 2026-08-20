@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Retrieve a scheduled event by event ID.
+ * Returns the details of a single scheduled event configured for the specified assistant.
  *
  * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::retrieve()
  *

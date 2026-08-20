@@ -39,7 +39,7 @@ final class EventsRawService implements EventsRawContract
     /**
      * @api
      *
-     * Show a specific porting event.
+     * Returns the details of a single porting event, including its type and payload.
      *
      * @param string $id identifies the porting event
      * @param RequestOpts|null $requestOptions
@@ -64,7 +64,7 @@ final class EventsRawService implements EventsRawContract
     /**
      * @api
      *
-     * Returns a list of all porting events.
+     * Returns a paginated list of porting-related events on your account, such as status changes on porting orders. Supports filtering and is useful for auditing or reconciling webhook deliveries.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -101,7 +101,7 @@ final class EventsRawService implements EventsRawContract
     /**
      * @api
      *
-     * Republish a specific porting event.
+     * Republishes the specified porting event, triggering re-delivery of the corresponding webhook to your account.
      *
      * @param string $id identifies the porting event
      * @param RequestOpts|null $requestOptions

@@ -29,7 +29,7 @@ final class CommentsRawService implements CommentsRawContract
     /**
      * @api
      *
-     * Creates a comment on a portout request.
+     * Creates a comment on the specified port-out request and returns the created comment.
      *
      * @param string $id Portout id
      * @param array{body?: string}|CommentCreateParams $params

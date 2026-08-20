@@ -68,9 +68,11 @@ final class ConversationsService implements ConversationsContract
     /**
      * @api
      *
-     * Create a new AI Conversation.
+     * Creates a new AI conversation, the container for messages exchanged with an assistant, and returns the created conversation.
      *
-     * @param array<string,string> $metadata Metadata associated with the conversation. Set `ai_disabled` to `true` to create the conversation with AI message responses disabled.
+     * @param array<string,string> $metadata Body param: Metadata associated with the conversation. Set `ai_disabled` to `true` to create the conversation with AI message responses disabled.
+     * @param string $name Body param
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -78,9 +80,16 @@ final class ConversationsService implements ConversationsContract
     public function create(
         ?array $metadata = null,
         ?string $name = null,
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): Conversation {
-        $params = Util::removeNulls(['metadata' => $metadata, 'name' => $name]);
+        $params = Util::removeNulls(
+            [
+                'metadata' => $metadata,
+                'name' => $name,
+                'idempotencyKey' => $idempotencyKey,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -216,10 +225,16 @@ final class ConversationsService implements ConversationsContract
      *
      * Add a new message to the conversation. Used to insert a new messages to a conversation manually ( without using chat endpoint )
      *
-     * @param string $conversationID The ID of the conversation
-     * @param array<string,MetadataShape> $metadata
-     * @param list<array<string,mixed>> $toolCalls
-     * @param ToolChoiceShape $toolChoice
+     * @param string $conversationID Path param: The ID of the conversation
+     * @param string $role Body param
+     * @param string $content Body param
+     * @param array<string,MetadataShape> $metadata Body param
+     * @param string $name Body param
+     * @param \DateTimeInterface $sentAt Body param
+     * @param string $toolCallID Body param
+     * @param list<array<string,mixed>> $toolCalls Body param
+     * @param ToolChoiceShape $toolChoice Body param
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -234,6 +249,7 @@ final class ConversationsService implements ConversationsContract
         ?string $toolCallID = null,
         ?array $toolCalls = null,
         string|array|null $toolChoice = null,
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(
@@ -246,6 +262,7 @@ final class ConversationsService implements ConversationsContract
                 'toolCallID' => $toolCallID,
                 'toolCalls' => $toolCalls,
                 'toolChoice' => $toolChoice,
+                'idempotencyKey' => $idempotencyKey,
             ],
         );
 

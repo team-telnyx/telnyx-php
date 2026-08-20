@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Unlink a Telnyx agent from a run.
+ * Unlinks the specified Telnyx agent from the run so it no longer participates in execution. The run itself and its history are unaffected.
  *
  * @see Telnyx\Services\AI\Missions\Runs\TelnyxAgentsService::unlink()
  *

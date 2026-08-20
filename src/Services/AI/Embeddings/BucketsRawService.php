@@ -53,7 +53,7 @@ final class BucketsRawService implements BucketsRawContract
     /**
      * @api
      *
-     * Get all embedding buckets for a user.
+     * Returns the list of storage buckets that have been embedded for your account, for use with similarity search.
      *
      * @param RequestOpts|null $requestOptions
      *

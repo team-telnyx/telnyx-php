@@ -57,7 +57,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Cancel a porting order
+     * Requests cancellation of the porting order and returns the updated order.
      *
      * @param string $id Porting Order id
      * @param RequestOpts|null $requestOptions
@@ -82,7 +82,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Confirm and submit your porting order.
+     * Confirms the porting order and submits it for processing. Make sure all required information and documents are attached before confirming.
      *
      * @param string $id Porting Order id
      * @param RequestOpts|null $requestOptions

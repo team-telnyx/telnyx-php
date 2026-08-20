@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
 
 /**
- * Create a notification channel.
+ * Creates a new notification channel defining where notifications are delivered, and returns the created channel.
  *
  * @see Telnyx\Services\NotificationChannelsService::create()
  *

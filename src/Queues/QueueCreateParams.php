@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a new call queue.
+ * Creates a new call queue with the provided configuration and returns the created queue.
  *
  * @see Telnyx\Services\QueuesService::create()
  *

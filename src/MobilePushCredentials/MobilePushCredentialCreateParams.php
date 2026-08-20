@@ -13,7 +13,7 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePu
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateIosPushCredentialRequest;
 
 /**
- * Creates a new mobile push credential.
+ * Creates a new mobile push credential for delivering push notifications to iOS or Android apps, and returns the created credential.
  *
  * @see Telnyx\Services\MobilePushCredentialsService::create()
  *

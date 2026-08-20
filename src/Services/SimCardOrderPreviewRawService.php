@@ -28,7 +28,7 @@ final class SimCardOrderPreviewRawService implements SimCardOrderPreviewRawContr
     /**
      * @api
      *
-     * Preview SIM card order purchases.
+     * Previews a SIM card order purchase, returning estimated costs and details before you place the order. The preview is processed asynchronously.
      *
      * @param array{
      *   addressID: string, quantity: int

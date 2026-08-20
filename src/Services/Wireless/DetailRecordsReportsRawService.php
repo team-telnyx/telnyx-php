@@ -66,7 +66,7 @@ final class DetailRecordsReportsRawService implements DetailRecordsReportsRawCon
     /**
      * @api
      *
-     * Returns one specific WDR report
+     * Returns a single Wireless Detail Record (WDR) report by its identifier, including its parameters and current status.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -127,7 +127,7 @@ final class DetailRecordsReportsRawService implements DetailRecordsReportsRawCon
     /**
      * @api
      *
-     * Deletes one specific WDR report.
+     * Permanently deletes the specified Wireless Detail Record (WDR) report.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

@@ -69,7 +69,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
     /**
      * @api
      *
-     * Retrieve a WireGuard Interfaces.
+     * Returns the details of a single WireGuard interface by its identifier.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -94,7 +94,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
     /**
      * @api
      *
-     * List all WireGuard Interfaces.
+     * Returns a paginated list of the WireGuard interfaces on your account, with support for filtering.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -131,7 +131,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
     /**
      * @api
      *
-     * Delete a WireGuard Interface.
+     * Deletes the specified WireGuard interface from its network.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

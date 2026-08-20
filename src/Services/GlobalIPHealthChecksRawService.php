@@ -34,7 +34,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
     /**
      * @api
      *
-     * Create a Global IP health check.
+     * Creates a health check for a Global IP to monitor the health of its assignments. Creation is asynchronous, so the request is accepted and the health check becomes active once provisioning completes.
      *
      * @param array{
      *   globalIPID?: string,
@@ -69,7 +69,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
     /**
      * @api
      *
-     * Retrieve a Global IP health check.
+     * Returns the details of a single Global IP health check, including its type and configuration.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -94,7 +94,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
     /**
      * @api
      *
-     * List all Global IP health checks.
+     * Returns a paginated list of the Global IP health checks configured on your account.
      *
      * @param array{
      *   pageNumber?: int, pageSize?: int
@@ -131,7 +131,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
     /**
      * @api
      *
-     * Delete a Global IP health check.
+     * Deletes the specified Global IP health check so it no longer monitors the Global IP's assignments.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

@@ -131,7 +131,10 @@ final class AIRawService implements AIRawContract
      * - Up to 100 MB
      *
      * @param array{
-     *   bucket: string, filename: string, systemPrompt?: string
+     *   bucket: string,
+     *   filename: string,
+     *   systemPrompt?: string,
+     *   idempotencyKey?: string,
      * }|AISummarizeParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -147,12 +150,20 @@ final class AIRawService implements AIRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/summarize',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: AISummarizeResponse::class,
         );

@@ -89,7 +89,7 @@ final class SimCardsRawService implements SimCardsRawContract
     /**
      * @api
      *
-     * Updates SIM card data
+     * Updates the specified SIM card's attributes and returns the updated SIM card.
      *
      * @param string $simCardID identifies the SIM
      * @param array{

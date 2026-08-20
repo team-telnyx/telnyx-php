@@ -18,7 +18,6 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
-use Telnyx\RimeVoiceSettings;
 use Telnyx\XaiVoiceSettings;
 
 /**
@@ -238,7 +237,7 @@ final class ActionStartConversationRelayParams implements BaseModel
      * @var VoiceSettingsVariants|null $voiceSettings
      */
     #[Optional('voice_settings', union: VoiceSettings::class)]
-    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings;
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings;
 
     public function __construct()
     {
@@ -286,7 +285,7 @@ final class ActionStartConversationRelayParams implements BaseModel
         ?string $ttsProvider = null,
         ?string $url = null,
         ?string $voice = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
 
@@ -604,7 +603,7 @@ final class ActionStartConversationRelayParams implements BaseModel
      * @param VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings $voiceSettings,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings $voiceSettings,
     ): self {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;

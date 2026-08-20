@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Filter;
 
 /**
- * List all Virtual Cross Connects.
+ * Returns a paginated list of the virtual cross connects on your account, with support for filtering.
  *
  * @see Telnyx\Services\VirtualCrossConnectsService::list()
  *

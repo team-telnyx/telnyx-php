@@ -32,7 +32,7 @@ final class BillingBundlesRawService implements BillingBundlesRawContract
     /**
      * @api
      *
-     * Get a single bundle by ID.
+     * Returns the details of a single billing bundle by its ID, so you can inspect its contents before purchasing a user bundle.
      *
      * @param string $bundleID billing bundle's ID, this is used to identify the billing bundle in the API
      * @param array{authorizationBearer?: string}|BillingBundleRetrieveParams $params
@@ -68,7 +68,7 @@ final class BillingBundlesRawService implements BillingBundlesRawContract
     /**
      * @api
      *
-     * Get all allowed bundles.
+     * Returns a paginated list of the billing bundles available to your account, with support for filtering.
      *
      * @param array{
      *   filter?: Filter|FilterShape,

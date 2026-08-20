@@ -98,7 +98,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
     /**
      * @api
      *
-     * Synchronously delete a Room Recording.
+     * Synchronously deletes the specified video room recording. The recording's media is removed permanently.
      *
      * @param string $roomRecordingID the unique identifier of a room recording
      * @param RequestOpts|null $requestOptions

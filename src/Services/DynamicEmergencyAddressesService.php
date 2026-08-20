@@ -41,7 +41,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
     /**
      * @api
      *
-     * Creates a dynamic emergency address.
+     * Creates a dynamic emergency address, the validated physical location used when provisioning dynamic emergency endpoints.
      *
      * @param CountryCode|value-of<CountryCode> $countryCode
      * @param RequestOpts|null $requestOptions

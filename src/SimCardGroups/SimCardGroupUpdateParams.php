@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit;
 
 /**
- * Updates a SIM card group.
+ * Updates the specified SIM card group's attributes and returns the updated group.
  *
  * @see Telnyx\Services\SimCardGroupsService::update()
  *

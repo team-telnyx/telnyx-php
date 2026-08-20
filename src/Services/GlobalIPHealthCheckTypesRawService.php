@@ -27,7 +27,7 @@ final class GlobalIPHealthCheckTypesRawService implements GlobalIPHealthCheckTyp
     /**
      * @api
      *
-     * List all Global IP Health check types.
+     * Returns the health check types available for Global IPs, for use when creating Global IP health checks.
      *
      * @param RequestOpts|null $requestOptions
      *

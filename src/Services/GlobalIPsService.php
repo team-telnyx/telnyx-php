@@ -38,7 +38,7 @@ final class GlobalIPsService implements GlobalIPsContract
     /**
      * @api
      *
-     * Create a Global IP.
+     * Requests creation of a new Global IP, a static IP address announced from the Telnyx network. Provisioning is asynchronous, so the request is accepted and the Global IP becomes available once provisioning completes.
      *
      * @param string $description a user specified description for the address
      * @param string $name a user specified name for the address
@@ -66,7 +66,7 @@ final class GlobalIPsService implements GlobalIPsContract
     /**
      * @api
      *
-     * Retrieve a Global IP.
+     * Returns the details of a single Global IP, including its address and current configuration.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -86,7 +86,7 @@ final class GlobalIPsService implements GlobalIPsContract
     /**
      * @api
      *
-     * List all Global IPs.
+     * Returns a paginated list of the Global IPs on your account, including each IP's address and configuration.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -112,7 +112,7 @@ final class GlobalIPsService implements GlobalIPsContract
     /**
      * @api
      *
-     * Delete a Global IP.
+     * Deletes the specified Global IP and releases its address back to Telnyx.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

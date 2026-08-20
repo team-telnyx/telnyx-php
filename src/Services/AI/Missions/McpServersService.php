@@ -31,7 +31,7 @@ final class McpServersService implements McpServersContract
     /**
      * @api
      *
-     * Create a new MCP server for a mission
+     * Adds an MCP server to the specified mission, making the server's tools available to agents during runs of this mission.
      *
      * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
@@ -51,7 +51,7 @@ final class McpServersService implements McpServersContract
     /**
      * @api
      *
-     * Delete an MCP server from a mission
+     * Removes the specified MCP server from the mission, revoking agent access to its tools in subsequent runs.
      *
      * @param string $mcpServerID unique identifier of the mcp server
      * @param string $missionID unique identifier of the mission
@@ -75,7 +75,7 @@ final class McpServersService implements McpServersContract
     /**
      * @api
      *
-     * Get a specific MCP server by ID
+     * Returns the configuration of a single MCP server attached to the specified mission.
      *
      * @param string $mcpServerID unique identifier of the mcp server
      * @param string $missionID unique identifier of the mission
@@ -99,7 +99,7 @@ final class McpServersService implements McpServersContract
     /**
      * @api
      *
-     * List all MCP servers for a mission
+     * Returns the MCP servers configured on the specified mission. MCP servers expose external tools and data sources agents can use during runs.
      *
      * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
@@ -119,7 +119,7 @@ final class McpServersService implements McpServersContract
     /**
      * @api
      *
-     * Update an MCP server definition
+     * Replaces the configuration of the specified MCP server on this mission.
      *
      * @param string $mcpServerID unique identifier of the mcp server
      * @param string $missionID unique identifier of the mission

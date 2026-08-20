@@ -60,7 +60,7 @@ final class MediaRawService implements MediaRawContract
     /**
      * @api
      *
-     * Updates a stored media file.
+     * Updates the specified stored media file and returns the updated resource.
      *
      * @param string $mediaName uniquely identifies a media resource
      * @param array{mediaURL?: string, ttlSecs?: int}|MediaUpdateParams $params
@@ -93,7 +93,7 @@ final class MediaRawService implements MediaRawContract
     /**
      * @api
      *
-     * Returns a list of stored media files.
+     * Returns a list of the media files stored on your account, with support for filtering.
      *
      * @param array{filter?: Filter|FilterShape}|MediaListParams $params
      * @param RequestOpts|null $requestOptions
@@ -124,7 +124,7 @@ final class MediaRawService implements MediaRawContract
     /**
      * @api
      *
-     * Deletes a stored media file.
+     * Permanently deletes the specified media file from storage.
      *
      * @param string $mediaName uniquely identifies a media resource
      * @param RequestOpts|null $requestOptions
@@ -149,7 +149,7 @@ final class MediaRawService implements MediaRawContract
     /**
      * @api
      *
-     * Downloads a stored media file.
+     * Downloads the raw content of the specified stored media file.
      *
      * @param string $mediaName uniquely identifies a media resource
      * @param RequestOpts|null $requestOptions

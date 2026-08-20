@@ -58,7 +58,7 @@ final class RecordingsRawService implements RecordingsRawContract
     /**
      * @api
      *
-     * Returns a list of your call recordings.
+     * Returns a paginated list of your call recordings, with support for filtering to locate specific recordings.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -95,7 +95,7 @@ final class RecordingsRawService implements RecordingsRawContract
     /**
      * @api
      *
-     * Permanently deletes a call recording.
+     * Permanently deletes the specified call recording and returns the deleted recording resource. The media is removed and can no longer be downloaded.
      *
      * @param string $recordingID uniquely identifies the recording by id
      * @param RequestOpts|null $requestOptions

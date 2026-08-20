@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get details of a specific event.
+ * Returns the details of a single event logged for the specified run, including its type and payload.
  *
  * @see Telnyx\Services\AI\Missions\Runs\EventsService::getEventDetails()
  *

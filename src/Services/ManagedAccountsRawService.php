@@ -103,7 +103,7 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
     /**
      * @api
      *
-     * Update a single managed account.
+     * Updates the specified managed account's attributes and returns the updated account.
      *
      * @param string $id Managed Account User ID
      * @param array{

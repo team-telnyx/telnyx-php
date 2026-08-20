@@ -43,7 +43,7 @@ final class InsightGroupsService implements InsightGroupsContract
     /**
      * @api
      *
-     * Get insight group by ID
+     * Returns the details of a single insight template group, including the insight templates assigned to it.
      *
      * @param string $groupID The ID of the insight group
      * @param RequestOpts|null $requestOptions
@@ -63,7 +63,7 @@ final class InsightGroupsService implements InsightGroupsContract
     /**
      * @api
      *
-     * Update an insight template group
+     * Updates the specified insight template group and returns the updated group.
      *
      * @param string $groupID The ID of the insight group
      * @param RequestOpts|null $requestOptions
@@ -90,7 +90,7 @@ final class InsightGroupsService implements InsightGroupsContract
     /**
      * @api
      *
-     * Delete insight group by ID
+     * Permanently deletes the specified insight template group by its ID.
      *
      * @param string $groupID The ID of the insight group
      * @param RequestOpts|null $requestOptions
@@ -110,8 +110,12 @@ final class InsightGroupsService implements InsightGroupsContract
     /**
      * @api
      *
-     * Create a new insight group
+     * Creates a new insight template group for organizing related insight templates, and returns the created group.
      *
+     * @param string $name Body param
+     * @param string $description Body param
+     * @param string $webhook Body param
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -120,10 +124,16 @@ final class InsightGroupsService implements InsightGroupsContract
         string $name,
         ?string $description = null,
         string $webhook = '',
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateGroupDetail {
         $params = Util::removeNulls(
-            ['name' => $name, 'description' => $description, 'webhook' => $webhook]
+            [
+                'name' => $name,
+                'description' => $description,
+                'webhook' => $webhook,
+                'idempotencyKey' => $idempotencyKey,
+            ],
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -135,7 +145,7 @@ final class InsightGroupsService implements InsightGroupsContract
     /**
      * @api
      *
-     * Get all insight groups
+     * Returns a paginated list of your insight template groups. Groups organize related insight templates that are applied together when analyzing conversations.
      *
      * @param RequestOpts|null $requestOptions
      *

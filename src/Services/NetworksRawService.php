@@ -43,7 +43,7 @@ final class NetworksRawService implements NetworksRawContract
     /**
      * @api
      *
-     * Create a new Network.
+     * Creates a new private network, the container that links your WireGuard interfaces, gateways, and cross connects.
      *
      * @param array{
      *   networkCreate: NetworkCreate|NetworkCreateShape
@@ -76,7 +76,7 @@ final class NetworksRawService implements NetworksRawContract
     /**
      * @api
      *
-     * Retrieve a Network.
+     * Returns the details of a single network by its identifier.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -101,7 +101,7 @@ final class NetworksRawService implements NetworksRawContract
     /**
      * @api
      *
-     * Update a Network.
+     * Updates the specified network's attributes and returns the updated network.
      *
      * @param string $networkID identifies the resource
      * @param array{
@@ -136,7 +136,7 @@ final class NetworksRawService implements NetworksRawContract
     /**
      * @api
      *
-     * List all Networks.
+     * Returns a paginated list of the private networks on your account, with support for filtering.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -173,7 +173,7 @@ final class NetworksRawService implements NetworksRawContract
     /**
      * @api
      *
-     * Delete a Network.
+     * Permanently deletes the specified network from your account.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -198,7 +198,7 @@ final class NetworksRawService implements NetworksRawContract
     /**
      * @api
      *
-     * List all Interfaces for a Network.
+     * Returns a paginated list of the interfaces attached to the specified network, with support for filtering.
      *
      * @param string $id identifies the resource
      * @param array{

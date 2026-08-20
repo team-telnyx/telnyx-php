@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get a specific tool by ID.
+ * Returns the definition of a single tool configured on the specified mission.
  *
  * @see Telnyx\Services\AI\Missions\ToolsService::getTool()
  *

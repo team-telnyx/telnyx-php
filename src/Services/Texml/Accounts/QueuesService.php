@@ -35,7 +35,7 @@ final class QueuesService implements QueuesContract
     /**
      * @api
      *
-     * Creates a new queue resource.
+     * Creates a new queue resource for the account with the provided settings and returns it.
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param string $friendlyName a human readable name for the queue
@@ -63,7 +63,7 @@ final class QueuesService implements QueuesContract
     /**
      * @api
      *
-     * Returns a queue resource.
+     * Returns a single queue resource for the account by its QueueSid.
      *
      * @param string $queueSid the QueueSid that identifies the call queue
      * @param string $accountSid the id of the account the resource belongs to
@@ -87,7 +87,7 @@ final class QueuesService implements QueuesContract
     /**
      * @api
      *
-     * Updates a queue resource.
+     * Updates the specified queue resource's settings and returns the updated queue.
      *
      * @param string $queueSid path param: The QueueSid that identifies the call queue
      * @param string $accountSid path param: The id of the account the resource belongs to
@@ -115,7 +115,7 @@ final class QueuesService implements QueuesContract
     /**
      * @api
      *
-     * Lists queue resources.
+     * Returns a paginated list of queue resources for the account, with support for filtering by creation or update dates.
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param string $dateCreated Filters conferences by the creation date. Expected format is YYYY-MM-DD. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
@@ -157,7 +157,7 @@ final class QueuesService implements QueuesContract
     /**
      * @api
      *
-     * Delete a queue resource.
+     * Permanently deletes the specified queue resource from the account.
      *
      * @param string $queueSid the QueueSid that identifies the call queue
      * @param string $accountSid the id of the account the resource belongs to

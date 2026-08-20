@@ -42,7 +42,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
     /**
      * @api
      *
-     * Create a notification channel.
+     * Creates a new notification channel defining where notifications are delivered, and returns the created channel.
      *
      * @param string $channelDestination the destination associated with the channel type
      * @param ChannelTypeID|value-of<ChannelTypeID> $channelTypeID A Channel Type ID
@@ -74,7 +74,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
     /**
      * @api
      *
-     * Get a notification channel.
+     * Returns the details of a single notification channel by its identifier.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions
@@ -94,7 +94,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
     /**
      * @api
      *
-     * Update a notification channel.
+     * Updates the specified notification channel and returns the updated channel.
      *
      * @param string $notificationChannelID the id of the resource
      * @param string $channelDestination the destination associated with the channel type
@@ -128,7 +128,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
     /**
      * @api
      *
-     * List notification channels.
+     * Returns a paginated list of your notification channels, the destinations that receive notifications.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
      * @param RequestOpts|null $requestOptions
@@ -160,7 +160,7 @@ final class NotificationChannelsService implements NotificationChannelsContract
     /**
      * @api
      *
-     * Delete a notification channel.
+     * Deletes the specified notification channel so notifications are no longer delivered to it.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions

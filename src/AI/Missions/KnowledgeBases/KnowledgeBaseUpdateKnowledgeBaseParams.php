@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update a knowledge base definition.
+ * Replaces the definition of the specified knowledge base on this mission.
  *
  * @see Telnyx\Services\AI\Missions\KnowledgeBasesService::updateKnowledgeBase()
  *

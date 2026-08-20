@@ -39,7 +39,7 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
     /**
      * @api
      *
-     * Retrieve a list of opt-out blocks.
+     * Returns a paginated list of opt-out blocks created when message recipients opt out. Supports filtering and optional redaction of recipient numbers.
      *
      * @param CreatedAt|CreatedAtShape $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from]

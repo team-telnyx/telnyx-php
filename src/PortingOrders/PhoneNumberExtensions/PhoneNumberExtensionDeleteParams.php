@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Deletes a phone number extension.
+ * Deletes the specified phone number extension from the porting order.
  *
  * @see Telnyx\Services\PortingOrders\PhoneNumberExtensionsService::delete()
  *

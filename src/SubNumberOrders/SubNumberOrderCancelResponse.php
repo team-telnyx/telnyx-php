@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type SubNumberOrderShape from \Telnyx\SubNumberOrders\SubNumberOrder
+ * @phpstan-import-type NumbersSubNumberOrderShape from \Telnyx\SubNumberOrders\NumbersSubNumberOrder
  *
  * @phpstan-type SubNumberOrderCancelResponseShape = array{
- *   data?: null|SubNumberOrder|SubNumberOrderShape
+ *   data?: null|NumbersSubNumberOrder|NumbersSubNumberOrderShape
  * }
  */
 final class SubNumberOrderCancelResponse implements BaseModel
@@ -21,7 +21,7 @@ final class SubNumberOrderCancelResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?SubNumberOrder $data;
+    public ?NumbersSubNumberOrder $data;
 
     public function __construct()
     {
@@ -33,9 +33,9 @@ final class SubNumberOrderCancelResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SubNumberOrder|SubNumberOrderShape|null $data
+     * @param NumbersSubNumberOrder|NumbersSubNumberOrderShape|null $data
      */
-    public static function with(SubNumberOrder|array|null $data = null): self
+    public static function with(NumbersSubNumberOrder|array|null $data = null): self
     {
         $self = new self;
 
@@ -45,9 +45,9 @@ final class SubNumberOrderCancelResponse implements BaseModel
     }
 
     /**
-     * @param SubNumberOrder|SubNumberOrderShape $data
+     * @param NumbersSubNumberOrder|NumbersSubNumberOrderShape $data
      */
-    public function withData(SubNumberOrder|array $data): self
+    public function withData(NumbersSubNumberOrder|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

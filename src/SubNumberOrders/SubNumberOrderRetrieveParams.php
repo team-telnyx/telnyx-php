@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams\Filter;
 
 /**
- * Get an existing sub number order.
+ * Returns the details of an existing sub number order, with support for filtering.
  *
  * @see Telnyx\Services\SubNumberOrdersService::retrieve()
  *

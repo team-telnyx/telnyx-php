@@ -65,7 +65,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
     /**
      * @api
      *
-     * Creates a credential connection.
+     * Creates a new credential-based SIP connection. Credential connections authenticate with a username and password rather than by IP address.
      *
      * @param string $connectionName a user-assigned name to help manage the connection
      * @param string $password The password to be used as part of the credentials. Must be 8 to 128 characters long.

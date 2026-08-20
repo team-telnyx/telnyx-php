@@ -61,7 +61,7 @@ final class OAuthService implements OAuthContract
     /**
      * @api
      *
-     * Create an OAuth authorization grant
+     * Creates an OAuth authorization grant and returns the grant response for completing the authorization flow.
      *
      * @param bool $allowed Whether the grant is allowed
      * @param string $consentToken Consent token
@@ -181,7 +181,7 @@ final class OAuthService implements OAuthContract
         ?string $scope = null,
         ?string $state = null,
         RequestOptions|array|null $requestOptions = null,
-    ): mixed {
+    ): string {
         $params = Util::removeNulls(
             [
                 'clientID' => $clientID,

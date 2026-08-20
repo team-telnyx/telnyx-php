@@ -97,7 +97,7 @@ final class ConferencesRawService implements ConferencesRawContract
     /**
      * @api
      *
-     * Retrieve an existing conference
+     * Returns the details of an existing conference, including its current status.
      *
      * @param string $id Uniquely identifies the conference by id
      * @param array{
@@ -172,7 +172,7 @@ final class ConferencesRawService implements ConferencesRawContract
     /**
      * @api
      *
-     * Lists conference participants
+     * Returns a paginated list of participants in the specified conference, with support for filtering.
      *
      * @param string $conferenceID Uniquely identifies the conference by id
      * @param array{

@@ -14,7 +14,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a call control application.
+ * Creates a call control application, which defines the webhook endpoints and settings used to control calls on associated connections.
  *
  * @see Telnyx\Services\CallControlApplicationsService::create()
  *

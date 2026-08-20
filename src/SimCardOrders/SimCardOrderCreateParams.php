@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Creates a new order for SIM cards.
+ * Creates a new order for physical SIM cards, including quantity and shipping details, and returns the created order.
  *
  * @see Telnyx\Services\SimCardOrdersService::create()
  *

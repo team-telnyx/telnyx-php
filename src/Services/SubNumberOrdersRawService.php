@@ -38,7 +38,7 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
     /**
      * @api
      *
-     * Get an existing sub number order.
+     * Returns the details of an existing sub number order, with support for filtering.
      *
      * @param string $subNumberOrderID the sub number order ID
      * @param array{filter?: Filter|FilterShape}|SubNumberOrderRetrieveParams $params
@@ -71,7 +71,7 @@ final class SubNumberOrdersRawService implements SubNumberOrdersRawContract
     /**
      * @api
      *
-     * Updates a sub number order.
+     * Updates the requirements of an existing sub number order and returns the updated order.
      *
      * @param string $subNumberOrderID the sub number order ID
      * @param array{

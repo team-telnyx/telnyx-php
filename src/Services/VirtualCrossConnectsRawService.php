@@ -86,7 +86,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
     /**
      * @api
      *
-     * Retrieve a Virtual Cross Connect.
+     * Returns the details of a single virtual cross connect by its identifier.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -151,7 +151,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
     /**
      * @api
      *
-     * List all Virtual Cross Connects.
+     * Returns a paginated list of the virtual cross connects on your account, with support for filtering.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -188,7 +188,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
     /**
      * @api
      *
-     * Delete a Virtual Cross Connect.
+     * Deletes the specified virtual cross connect from your account.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID;
 
 /**
- * Update a notification channel.
+ * Updates the specified notification channel and returns the updated channel.
  *
  * @see Telnyx\Services\NotificationChannelsService::update()
  *

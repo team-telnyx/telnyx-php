@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a new mission definition.
+ * Creates a new mission definition from the provided configuration and returns the created mission. Execute the mission by starting runs against it.
  *
  * @see Telnyx\Services\AI\MissionsService::create()
  *

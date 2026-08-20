@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
 
 /**
- * List all Public Internet Gateways.
+ * Returns a paginated list of the public internet gateways on your account, with support for filtering.
  *
  * @see Telnyx\Services\PublicInternetGatewaysService::list()
  *

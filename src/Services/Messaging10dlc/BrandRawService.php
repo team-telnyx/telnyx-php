@@ -102,7 +102,7 @@ final class BrandRawService implements BrandRawContract
     /**
      * @api
      *
-     * Retrieve a brand by `brandId`.
+     * Returns the details of a 10DLC brand by its brandId, including the count of campaigns associated with the brand.
      *
      * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions

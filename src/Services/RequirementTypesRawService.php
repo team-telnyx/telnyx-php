@@ -32,7 +32,7 @@ final class RequirementTypesRawService implements RequirementTypesRawContract
     /**
      * @api
      *
-     * Retrieve a requirement type by id
+     * Returns the details of a single requirement type by its identifier, describing a kind of documentation needed for regulatory purposes.
      *
      * @param string $id Uniquely identifies the requirement_type record
      * @param RequestOpts|null $requestOptions

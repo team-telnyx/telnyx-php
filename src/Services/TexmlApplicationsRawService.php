@@ -49,7 +49,7 @@ final class TexmlApplicationsRawService implements TexmlApplicationsRawContract
     /**
      * @api
      *
-     * Creates a TeXML Application.
+     * Creates a TeXML application, which defines the voice URLs and settings used to serve TeXML instructions for calls, and returns the created application.
      *
      * @param array{
      *   friendlyName: string,
@@ -210,7 +210,7 @@ final class TexmlApplicationsRawService implements TexmlApplicationsRawContract
     /**
      * @api
      *
-     * Deletes a TeXML Application.
+     * Permanently deletes the specified TeXML application from your account.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

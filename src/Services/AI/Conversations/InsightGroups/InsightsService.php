@@ -33,7 +33,7 @@ final class InsightsService implements InsightsContract
     /**
      * @api
      *
-     * Assign an insight to a group
+     * Assigns the specified insight template to the specified insight template group.
      *
      * @param string $insightID The ID of the insight
      * @param string $groupID The ID of the insight group
@@ -57,7 +57,7 @@ final class InsightsService implements InsightsContract
     /**
      * @api
      *
-     * Remove an insight from a group
+     * Removes the specified insight template from the specified group. The insight template itself is not deleted.
      *
      * @param string $insightID The ID of the insight
      * @param string $groupID The ID of the insight group

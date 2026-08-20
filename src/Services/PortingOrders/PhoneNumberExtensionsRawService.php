@@ -42,7 +42,7 @@ final class PhoneNumberExtensionsRawService implements PhoneNumberExtensionsRawC
     /**
      * @api
      *
-     * Creates a new phone number extension.
+     * Creates a phone number extension on the porting order, mapping extension ranges to one of the order's phone numbers.
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number extension
      * @param array{
@@ -121,7 +121,7 @@ final class PhoneNumberExtensionsRawService implements PhoneNumberExtensionsRawC
     /**
      * @api
      *
-     * Deletes a phone number extension.
+     * Deletes the specified phone number extension from the porting order.
      *
      * @param string $id Identifies the phone number extension to be deleted
      * @param array{portingOrderID: string}|PhoneNumberExtensionDeleteParams $params

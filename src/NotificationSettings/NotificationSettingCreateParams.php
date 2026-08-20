@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
 
 /**
- * Add a notification setting.
+ * Adds a notification setting that enables delivery of a notification event type to a notification profile.
  *
  * @see Telnyx\Services\NotificationSettingsService::create()
  *

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Deletes a phone number block.
+ * Deletes the specified phone number block from the porting order.
  *
  * @see Telnyx\Services\PortingOrders\PhoneNumberBlocksService::delete()
  *

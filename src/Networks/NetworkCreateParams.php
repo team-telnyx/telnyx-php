@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a new Network.
+ * Creates a new private network, the container that links your WireGuard interfaces, gateways, and cross connects.
  *
  * @see Telnyx\Services\NetworksService::create()
  *

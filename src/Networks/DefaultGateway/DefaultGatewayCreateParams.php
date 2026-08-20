@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create Default Gateway.
+ * Creates a default gateway on the specified network, directing the network's outbound traffic through the chosen gateway.
  *
  * @see Telnyx\Services\Networks\DefaultGatewayService::create()
  *

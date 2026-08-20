@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Retrieve a list of MCP servers.
+ * Returns a paginated list of the MCP servers configured on your account, with optional filtering by type or URL.
  *
  * @see Telnyx\Services\AI\McpServersService::list()
  *

@@ -16,7 +16,6 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble;
-use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\TextType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
@@ -26,9 +25,9 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
  *
  * Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header.
  *
- * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy` or `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
+ * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
  *
- * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `xai`, `humain`.
+ * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`.
  *
  * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
  *
@@ -40,7 +39,6 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
  * @phpstan-import-type HumainShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain
  * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble
- * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime
  * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx
  * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai
  *
@@ -55,7 +53,6 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
  *   outputType?: null|OutputType|value-of<OutputType>,
  *   provider?: null|Provider|value-of<Provider>,
  *   resemble?: null|Resemble|ResembleShape,
- *   rime?: null|Rime|RimeShape,
  *   telnyx?: null|Telnyx|TelnyxShape,
  *   text?: string|null,
  *   textType?: null|TextType|value-of<TextType>,
@@ -135,13 +132,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     public ?Resemble $resemble;
 
     /**
-     * Rime provider-specific parameters.
-     */
-    #[Optional]
-    public ?Rime $rime;
-
-    /**
-     * Telnyx provider-specific parameters. Use `voice_speed` and `temperature` for `Natural` and `NaturalHD` models. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
+     * Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
      */
     #[Optional]
     public ?Telnyx $telnyx;
@@ -161,7 +152,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     public ?string $textType;
 
     /**
-     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `telnyx.NaturalHD.Alloy`, `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
+     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
      */
     #[Optional]
     public ?string $voice;
@@ -198,7 +189,6 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
      * @param OutputType|value-of<OutputType>|null $outputType
      * @param Provider|value-of<Provider>|null $provider
      * @param Resemble|ResembleShape|null $resemble
-     * @param Rime|RimeShape|null $rime
      * @param Telnyx|TelnyxShape|null $telnyx
      * @param TextType|value-of<TextType>|null $textType
      * @param array<string,mixed>|null $voiceSettings
@@ -215,7 +205,6 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
         OutputType|string|null $outputType = null,
         Provider|string|null $provider = null,
         Resemble|array|null $resemble = null,
-        Rime|array|null $rime = null,
         Telnyx|array|null $telnyx = null,
         ?string $text = null,
         TextType|string|null $textType = null,
@@ -235,7 +224,6 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
         null !== $outputType && $self['outputType'] = $outputType;
         null !== $provider && $self['provider'] = $provider;
         null !== $resemble && $self['resemble'] = $resemble;
-        null !== $rime && $self['rime'] = $rime;
         null !== $telnyx && $self['telnyx'] = $telnyx;
         null !== $text && $self['text'] = $text;
         null !== $textType && $self['textType'] = $textType;
@@ -373,20 +361,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     }
 
     /**
-     * Rime provider-specific parameters.
-     *
-     * @param Rime|RimeShape $rime
-     */
-    public function withRime(Rime|array $rime): self
-    {
-        $self = clone $this;
-        $self['rime'] = $rime;
-
-        return $self;
-    }
-
-    /**
-     * Telnyx provider-specific parameters. Use `voice_speed` and `temperature` for `Natural` and `NaturalHD` models. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
+     * Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
      *
      * @param Telnyx|TelnyxShape $telnyx
      */
@@ -423,7 +398,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     }
 
     /**
-     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `telnyx.NaturalHD.Alloy`, `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
+     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
      */
     public function withVoice(string $voice): self
     {

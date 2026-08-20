@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update the details of a specific IP.
+ * Updates the details of the specified IP record and returns the updated IP.
  *
  * @see Telnyx\Services\IPsService::update()
  *

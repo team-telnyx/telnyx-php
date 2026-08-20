@@ -142,8 +142,10 @@ final class EmailDomainsService implements EmailDomainsContract
      *
      * @param string $filterDomain Partial match on domain name (case-insensitive)
      * @param string $filterProfileID Filter by profile UUID
-     * @param EmailDomainStatus|value-of<EmailDomainStatus> $filterStatus
-     * @param EmailDomainType|value-of<EmailDomainType> $filterType
+     * @param EmailDomainStatus|value-of<EmailDomainStatus> $filterStatus filter domains by verification status: pending, verifying, verified, failed, degraded, or suspended
+     * @param EmailDomainType|value-of<EmailDomainType> $filterType filter domains by type: custom, shared, or shared_inbound
+     * @param bool $filterUsableForInbound filter domains by whether they can currently receive inbound email
+     * @param bool $filterUsableForSending filter domains by whether they can currently be used to send email
      * @param string $pageAfter Cursor for records after the provided value (cursor pagination)
      * @param string $pageBefore Cursor for records before the provided value (cursor pagination)
      * @param int $pageNumber Page number to return (offset pagination)

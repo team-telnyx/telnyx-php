@@ -12,7 +12,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Returns a list of your addresses.
+ * Returns a paginated list of the addresses on your account, with support for filtering and sorting.
  *
  * @see Telnyx\Services\AddressesService::list()
  *

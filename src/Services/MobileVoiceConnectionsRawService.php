@@ -43,7 +43,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
     /**
      * @api
      *
-     * Create a new mobile voice connection.
+     * Creates a new mobile voice connection with the provided configuration and returns the created connection.
      *
      * @param array{
      *   active?: bool,

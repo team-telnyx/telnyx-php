@@ -64,7 +64,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Detach a tool from an AI assistant.
+     * Detaches the specified tool from the AI assistant so the assistant can no longer invoke it.
      *
      * @param string $toolID unique identifier of the tool
      * @param array{assistantID: string}|ToolRemoveParams $params
@@ -98,7 +98,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Test a webhook tool for an assistant
+     * Executes a test invocation of the specified webhook tool for the assistant and returns the outcome, so you can verify the webhook's behavior before relying on it in conversations.
      *
      * @param string $toolID path param: Unique identifier of the tool
      * @param array{

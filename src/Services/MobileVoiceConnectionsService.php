@@ -46,7 +46,7 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
     /**
      * @api
      *
-     * Create a new mobile voice connection.
+     * Creates a new mobile voice connection with the provided configuration and returns the created connection.
      *
      * @param Inbound|InboundShape $inbound
      * @param Outbound|OutboundShape $outbound

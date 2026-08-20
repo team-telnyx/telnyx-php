@@ -97,7 +97,8 @@ final class AITest extends TestCase
         $result = $this->client->ai->summarize(
             bucket: 'string',
             filename: 'string',
-            systemPrompt: 'string'
+            systemPrompt: 'string',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

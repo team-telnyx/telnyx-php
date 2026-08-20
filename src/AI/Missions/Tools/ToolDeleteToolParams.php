@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Delete a tool from a mission.
+ * Removes the specified tool from the mission so agents can no longer invoke it in subsequent runs.
  *
  * @see Telnyx\Services\AI\Missions\ToolsService::deleteTool()
  *

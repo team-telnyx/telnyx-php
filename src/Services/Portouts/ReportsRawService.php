@@ -72,7 +72,7 @@ final class ReportsRawService implements ReportsRawContract
     /**
      * @api
      *
-     * Retrieve a specific report generated.
+     * Returns the details of a previously requested port-out report, including its status and parameters.
      *
      * @param string $id identifies a report
      * @param RequestOpts|null $requestOptions

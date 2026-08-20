@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update an insight template.
+ * Updates the specified insight template and returns the updated template.
  *
  * @see Telnyx\Services\AI\Conversations\InsightsService::update()
  *

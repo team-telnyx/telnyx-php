@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Put the call in a queue.
+ * Places the call into a queue, where it waits until it is removed or bridged to another leg. Queue behavior is configured through the request body.
  *
  * @see Telnyx\Services\Calls\ActionsService::enqueue()
  *

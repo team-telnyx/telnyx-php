@@ -119,7 +119,7 @@ final class ConferencesService implements ConferencesContract
     /**
      * @api
      *
-     * Retrieve an existing conference
+     * Returns the details of an existing conference, including its current status.
      *
      * @param string $id Uniquely identifies the conference by id
      * @param \Telnyx\Conferences\ConferenceRetrieveParams\Region|value-of<\Telnyx\Conferences\ConferenceRetrieveParams\Region> $region Region where the conference data is located
@@ -178,7 +178,7 @@ final class ConferencesService implements ConferencesContract
     /**
      * @api
      *
-     * Lists conference participants
+     * Returns a paginated list of participants in the specified conference, with support for filtering.
      *
      * @param string $conferenceID Uniquely identifies the conference by id
      * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]

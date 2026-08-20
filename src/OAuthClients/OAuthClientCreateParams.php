@@ -13,7 +13,7 @@ use Telnyx\OAuthClients\OAuthClientCreateParams\AllowedGrantType;
 use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
 
 /**
- * Create a new OAuth client.
+ * Creates a new OAuth client on your account for authenticating third-party integrations, and returns the created client.
  *
  * @see Telnyx\Services\OAuthClientsService::create()
  *

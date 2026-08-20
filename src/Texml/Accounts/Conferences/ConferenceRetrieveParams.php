@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Returns a conference resource.
+ * Returns a single conference resource for the account by its ConferenceSid.
  *
  * @see Telnyx\Services\Texml\Accounts\ConferencesService::retrieve()
  *

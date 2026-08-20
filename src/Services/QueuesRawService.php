@@ -35,7 +35,7 @@ final class QueuesRawService implements QueuesRawContract
     /**
      * @api
      *
-     * Create a new call queue.
+     * Creates a new call queue with the provided configuration and returns the created queue.
      *
      * @param array{queueName: string, maxSize?: int}|QueueCreateParams $params
      * @param RequestOpts|null $requestOptions
@@ -66,7 +66,7 @@ final class QueuesRawService implements QueuesRawContract
     /**
      * @api
      *
-     * Retrieve an existing call queue
+     * Returns the details of an existing call queue, including its current configuration.
      *
      * @param string $queueName Uniquely identifies the queue by name
      * @param RequestOpts|null $requestOptions
@@ -159,7 +159,7 @@ final class QueuesRawService implements QueuesRawContract
     /**
      * @api
      *
-     * Delete an existing call queue.
+     * Permanently deletes the specified call queue from your account.
      *
      * @param string $queueName Uniquely identifies the queue by name
      * @param RequestOpts|null $requestOptions

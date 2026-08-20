@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Recordings\RecordingListParams\Filter;
 
 /**
- * Returns a list of your call recordings.
+ * Returns a paginated list of your call recordings, with support for filtering to locate specific recordings.
  *
  * @see Telnyx\Services\RecordingsService::list()
  *

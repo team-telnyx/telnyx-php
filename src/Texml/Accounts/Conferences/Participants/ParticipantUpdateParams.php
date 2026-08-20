@@ -13,7 +13,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\Annou
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldMethod;
 
 /**
- * Updates a conference participant.
+ * Updates the specified conference participant, for example muting or holding them, and returns the updated participant.
  *
  * @see Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService::update()
  *

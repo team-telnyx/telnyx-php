@@ -35,13 +35,14 @@ final class InsightsRawService implements InsightsRawContract
     /**
      * @api
      *
-     * Create a new insight
+     * Creates a new insight template defining an analysis to run over conversations, and returns the created template.
      *
      * @param array{
      *   instructions: string,
      *   name: string,
      *   jsonSchema?: JsonSchemaShape,
      *   webhook?: string,
+     *   idempotencyKey?: string,
      * }|InsightCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -57,12 +58,20 @@ final class InsightsRawService implements InsightsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/conversations/insights',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: InsightTemplateDetail::class,
         );
@@ -71,7 +80,7 @@ final class InsightsRawService implements InsightsRawContract
     /**
      * @api
      *
-     * Get insight by ID
+     * Returns the details of a single insight template by its ID, including its configuration.
      *
      * @param string $insightID The ID of the insight
      * @param RequestOpts|null $requestOptions
@@ -96,7 +105,7 @@ final class InsightsRawService implements InsightsRawContract
     /**
      * @api
      *
-     * Update an insight template
+     * Updates the specified insight template and returns the updated template.
      *
      * @param string $insightID The ID of the insight
      * @param array{
@@ -134,7 +143,7 @@ final class InsightsRawService implements InsightsRawContract
     /**
      * @api
      *
-     * Get all insights
+     * Returns a paginated list of your insight templates. Insight templates define analyses that run over AI conversations to extract structured findings.
      *
      * @param array{pageNumber?: int, pageSize?: int}|InsightListParams $params
      * @param RequestOpts|null $requestOptions
@@ -169,7 +178,7 @@ final class InsightsRawService implements InsightsRawContract
     /**
      * @api
      *
-     * Delete insight by ID
+     * Permanently deletes the specified insight template by its ID.
      *
      * @param string $insightID The ID of the insight
      * @param RequestOpts|null $requestOptions

@@ -39,6 +39,7 @@ final class ProductsService implements ProductsContract
      * Returns pricing entries for a single product. Most products return standard rate entries with fields like rate, unit, country_iso, direction, and tiers. Inference products return model-specific fields (model, input_rate, output_rate, cached_input_rate) with tiered pricing. Some products use rate decks (pricing_type: rate_deck) where rates are determined dynamically.
      *
      * @param string $slug product slug from the catalog listing
+     * @param string|null $filterCountryISO Two-letter ISO 3166-1 alpha-2 country code (uppercase, e.g. US) to filter pricing to a single country.
      * @param int $pageNumber page number (1-based)
      * @param int $pageSize number of items per page (max 100)
      * @param RequestOpts|null $requestOptions

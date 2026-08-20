@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status;
 
 /**
- * Lists conference resources.
+ * Returns a paginated list of conference resources for the account, with support for filtering by friendly name, status, and creation or update dates.
  *
  * @see Telnyx\Services\Texml\Accounts\ConferencesService::retrieveConferences()
  *

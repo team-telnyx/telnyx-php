@@ -65,7 +65,7 @@ final class WireguardPeersService implements WireguardPeersContract
     /**
      * @api
      *
-     * Retrieve the WireGuard peer.
+     * Returns the details of a single WireGuard peer by its identifier.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -85,7 +85,7 @@ final class WireguardPeersService implements WireguardPeersContract
     /**
      * @api
      *
-     * Update the WireGuard peer.
+     * Updates the specified WireGuard peer and returns the updated peer.
      *
      * @param string $id identifies the resource
      * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
@@ -109,7 +109,7 @@ final class WireguardPeersService implements WireguardPeersContract
     /**
      * @api
      *
-     * List all WireGuard peers.
+     * Returns a paginated list of your WireGuard peers, with support for filtering.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id]
      * @param RequestOpts|null $requestOptions
@@ -141,7 +141,7 @@ final class WireguardPeersService implements WireguardPeersContract
     /**
      * @api
      *
-     * Delete the WireGuard peer.
+     * Deletes the specified WireGuard peer from its interface.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

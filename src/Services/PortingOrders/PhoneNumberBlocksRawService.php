@@ -42,7 +42,7 @@ final class PhoneNumberBlocksRawService implements PhoneNumberBlocksRawContract
     /**
      * @api
      *
-     * Creates a new phone number block.
+     * Creates a phone number block on the porting order, representing a contiguous range of phone numbers to be ported together.
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number block
      * @param array{
@@ -120,7 +120,7 @@ final class PhoneNumberBlocksRawService implements PhoneNumberBlocksRawContract
     /**
      * @api
      *
-     * Deletes a phone number block.
+     * Deletes the specified phone number block from the porting order.
      *
      * @param string $id Identifies the phone number block to be deleted
      * @param array{portingOrderID: string}|PhoneNumberBlockDeleteParams $params

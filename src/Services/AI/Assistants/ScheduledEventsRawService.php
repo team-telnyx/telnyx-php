@@ -42,7 +42,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      *
      * Create a scheduled event for an assistant
      *
-     * @param string $assistantID unique identifier of the assistant
+     * @param string $assistantID path param: Unique identifier of the assistant
      * @param array{
      *   scheduledAtFixedDatetime: \DateTimeInterface,
      *   telnyxAgentTarget: string,
@@ -54,6 +54,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      *   maxRetriesClientErrors?: int,
      *   retryIntervalSecs?: int,
      *   text?: string,
+     *   idempotencyKey?: string,
      * }|ScheduledEventCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -70,12 +71,20 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/scheduled_events', $assistantID],
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: ScheduledEventResponse::class,
         );
@@ -84,7 +93,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
     /**
      * @api
      *
-     * Retrieve a scheduled event by event ID
+     * Returns the details of a single scheduled event configured for the specified assistant.
      *
      * @param string $eventID unique identifier of the event
      * @param array{assistantID: string}|ScheduledEventRetrieveParams $params

@@ -12,7 +12,7 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\Activati
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNumberRange;
 
 /**
- * Creates a new phone number block.
+ * Creates a phone number block on the porting order, representing a contiguous range of phone numbers to be ported together.
  *
  * @see Telnyx\Services\PortingOrders\PhoneNumberBlocksService::create()
  *

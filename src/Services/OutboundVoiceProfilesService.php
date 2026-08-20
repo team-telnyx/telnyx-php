@@ -50,7 +50,7 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
     /**
      * @api
      *
-     * Create an outbound voice profile.
+     * Creates a new outbound voice profile defining calling permissions, destinations, and limits for outbound calls, and returns the created profile.
      *
      * @param string $name a user-supplied name to help with organization
      * @param string|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).

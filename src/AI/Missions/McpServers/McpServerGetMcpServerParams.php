@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get a specific MCP server by ID.
+ * Returns the configuration of a single MCP server attached to the specified mission.
  *
  * @see Telnyx\Services\AI\Missions\McpServersService::getMcpServer()
  *

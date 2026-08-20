@@ -52,7 +52,7 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
     /**
      * @api
      *
-     * Create a LOA configuration.
+     * Creates a new LOA configuration with your company details and branding for use when generating LOA documents for porting orders.
      *
      * @param array{
      *   address: Address|AddressShape,
@@ -89,7 +89,7 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
     /**
      * @api
      *
-     * Retrieve a specific LOA configuration.
+     * Returns the details of a single LOA (Letter of Authorization) configuration by its identifier.
      *
      * @param string $id identifies a LOA configuration
      * @param RequestOpts|null $requestOptions
@@ -114,7 +114,7 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
     /**
      * @api
      *
-     * Update a specific LOA configuration.
+     * Updates the specified LOA configuration with the provided fields and returns the updated configuration.
      *
      * @param string $id identifies a LOA configuration
      * @param array{
@@ -153,7 +153,7 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
     /**
      * @api
      *
-     * List the LOA configurations.
+     * Returns a paginated list of your LOA (Letter of Authorization) configurations. LOA configurations customize the company details and branding used on generated LOA documents.
      *
      * @param array{
      *   pageNumber?: int, pageSize?: int
@@ -190,7 +190,7 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
     /**
      * @api
      *
-     * Delete a specific LOA configuration.
+     * Permanently deletes the specified LOA configuration so it can no longer be used when generating LOA documents.
      *
      * @param string $id identifies a LOA configuration
      * @param RequestOpts|null $requestOptions
@@ -291,7 +291,7 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
     /**
      * @api
      *
-     * Preview a specific LOA configuration.
+     * Renders a preview of the LOA document produced by this configuration so you can verify company details and branding before using it on porting orders.
      *
      * @param string $id identifies a LOA configuration
      * @param RequestOpts|null $requestOptions

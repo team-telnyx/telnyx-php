@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
 
 /**
- * Creates a dynamic emergency address.
+ * Creates a dynamic emergency address, the validated physical location used when provisioning dynamic emergency endpoints.
  *
  * @see Telnyx\Services\DynamicEmergencyAddressesService::create()
  *

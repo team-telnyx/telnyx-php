@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Pause a running run.
+ * Pauses a currently running run and returns the updated run object. Execution halts until the run is resumed.
  *
  * @see Telnyx\Services\AI\Missions\RunsService::pauseRun()
  *

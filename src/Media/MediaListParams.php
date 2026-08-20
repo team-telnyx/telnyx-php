@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Media\MediaListParams\Filter;
 
 /**
- * Returns a list of stored media files.
+ * Returns a list of the media files stored on your account, with support for filtering.
  *
  * @see Telnyx\Services\MediaService::list()
  *

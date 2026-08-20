@@ -55,7 +55,7 @@ interface RunsRawContract
     /**
      * @api
      *
-     * @param string $testID unique identifier of the test
+     * @param string $testID path param: Unique identifier of the test
      * @param array<string,mixed>|RunTriggerParams $params
      * @param RequestOpts|null $requestOptions
      *

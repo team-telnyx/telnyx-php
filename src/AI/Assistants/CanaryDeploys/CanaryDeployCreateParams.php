@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type RuleInputShape from \Telnyx\AI\Assistants\CanaryDeploys\RuleInput
  *
  * @phpstan-type CanaryDeployCreateParamsShape = array{
- *   rules?: list<RuleInput|RuleInputShape>|null
+ *   rules?: list<RuleInput|RuleInputShape>|null, idempotencyKey?: string|null
  * }
  */
 final class CanaryDeployCreateParams implements BaseModel
@@ -32,6 +32,9 @@ final class CanaryDeployCreateParams implements BaseModel
     /** @var list<RuleInput>|null $rules */
     #[Optional(list: RuleInput::class)]
     public ?array $rules;
+
+    #[Optional]
+    public ?string $idempotencyKey;
 
     public function __construct()
     {
@@ -45,11 +48,14 @@ final class CanaryDeployCreateParams implements BaseModel
      *
      * @param list<RuleInput|RuleInputShape>|null $rules
      */
-    public static function with(?array $rules = null): self
-    {
+    public static function with(
+        ?array $rules = null,
+        ?string $idempotencyKey = null
+    ): self {
         $self = new self;
 
         null !== $rules && $self['rules'] = $rules;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -61,6 +67,14 @@ final class CanaryDeployCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['rules'] = $rules;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

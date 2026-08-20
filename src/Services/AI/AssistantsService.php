@@ -121,38 +121,41 @@ final class AssistantsService implements AssistantsContract
     /**
      * @api
      *
-     * Create a new AI Assistant.
+     * Creates a new AI assistant from the provided configuration, including its model, instructions, and attached tools, and returns the created assistant.
      *
-     * @param string $instructions System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
-     * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow Conversation flow as supplied by API clients (create / update).
+     * @param string $instructions Body param: System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
+     * @param string $name Body param
+     * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow Body param: Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
      * enforces unique node/edge IDs, that `start_node_id` references a real
      * node, and that every edge's endpoints reference real nodes.
-     * @param array<string,mixed> $dynamicVariables Map of dynamic variables and their default values
-     * @param int $dynamicVariablesWebhookTimeoutMs Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
-     * @param string $dynamicVariablesWebhookURL If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
-     * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures
-     * @param ExternalLlmReq|ExternalLlmReqShape $externalLlm
-     * @param FallbackConfigReq|FallbackConfigReqShape $fallbackConfig
-     * @param string $greeting Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
-     * @param InsightSettings|InsightSettingsShape $insightSettings
-     * @param list<AssistantIntegration|AssistantIntegrationShape> $integrations Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
-     * @param InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape $interruptionSettings Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
-     * @param string $llmAPIKeyRef This is only needed when using third-party inference providers selected by `model`. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. For bring-your-own endpoint authentication, use `external_llm.llm_api_key_ref` instead. Warning: Free plans are unlikely to work with this integration.
-     * @param list<AssistantMcpServer|AssistantMcpServerShape> $mcpServers MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
-     * @param MessagingSettings|MessagingSettingsShape $messagingSettings
-     * @param string $model ID of the model to use when `external_llm` is not set. You can use the [Get models API](https://developers.telnyx.com/api-reference/openai-chat/get-available-models-openai-compatible) to see available models. If `external_llm` is provided, the assistant uses `external_llm` instead of this field. If neither `model` nor `external_llm` is provided, Telnyx applies the default model.
-     * @param ObservabilityReq|ObservabilityReqShape $observabilitySettings
-     * @param PostConversationSettingsReq|PostConversationSettingsReqShape $postConversationSettings Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
-     * @param PrivacySettings|PrivacySettingsShape $privacySettings
-     * @param list<string> $tags Tags associated with the assistant. Tags can also be managed with the assistant tag endpoints.
-     * @param TelephonySettings|TelephonySettingsShape $telephonySettings
-     * @param list<string> $toolIDs IDs of shared tools to attach to the assistant. New integrations should prefer `tool_ids` over inline `tools`.
-     * @param list<AssistantToolShape> $tools Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints.
-     * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
-     * @param VoiceSettings|VoiceSettingsShape $voiceSettings
-     * @param WidgetSettings|WidgetSettingsShape $widgetSettings configuration settings for the assistant's web widget
+     * @param string $description Body param
+     * @param array<string,mixed> $dynamicVariables Body param: Map of dynamic variables and their default values
+     * @param int $dynamicVariablesWebhookTimeoutMs Body param: Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
+     * @param string $dynamicVariablesWebhookURL Body param: If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
+     * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures Body param
+     * @param ExternalLlmReq|ExternalLlmReqShape $externalLlm Body param
+     * @param FallbackConfigReq|FallbackConfigReqShape $fallbackConfig Body param
+     * @param string $greeting Body param: Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
+     * @param InsightSettings|InsightSettingsShape $insightSettings Body param
+     * @param list<AssistantIntegration|AssistantIntegrationShape> $integrations Body param: Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
+     * @param InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape $interruptionSettings Body param: Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
+     * @param string $llmAPIKeyRef Body param: This is only needed when using third-party inference providers selected by `model`. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. For bring-your-own endpoint authentication, use `external_llm.llm_api_key_ref` instead. Warning: Free plans are unlikely to work with this integration.
+     * @param list<AssistantMcpServer|AssistantMcpServerShape> $mcpServers Body param: MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
+     * @param MessagingSettings|MessagingSettingsShape $messagingSettings Body param
+     * @param string $model Body param: ID of the model to use when `external_llm` is not set. You can use the [Get models API](https://developers.telnyx.com/api-reference/openai-chat/get-available-models-openai-compatible) to see available models. If `external_llm` is provided, the assistant uses `external_llm` instead of this field. If neither `model` nor `external_llm` is provided, Telnyx applies the default model.
+     * @param ObservabilityReq|ObservabilityReqShape $observabilitySettings Body param
+     * @param PostConversationSettingsReq|PostConversationSettingsReqShape $postConversationSettings Body param: Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
+     * @param PrivacySettings|PrivacySettingsShape $privacySettings Body param
+     * @param list<string> $tags Body param: Tags associated with the assistant. Tags can also be managed with the assistant tag endpoints.
+     * @param TelephonySettings|TelephonySettingsShape $telephonySettings Body param
+     * @param list<string> $toolIDs Body param: IDs of shared tools to attach to the assistant. New integrations should prefer `tool_ids` over inline `tools`.
+     * @param list<AssistantToolShape> $tools Body param: Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints.
+     * @param TranscriptionSettings|TranscriptionSettingsShape $transcription Body param
+     * @param VoiceSettings|VoiceSettingsShape $voiceSettings Body param
+     * @param WidgetSettings|WidgetSettingsShape $widgetSettings body param: Configuration settings for the assistant's web widget
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -186,6 +189,7 @@ final class AssistantsService implements AssistantsContract
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
         $params = Util::removeNulls(
@@ -218,6 +222,7 @@ final class AssistantsService implements AssistantsContract
                 'transcription' => $transcription,
                 'voiceSettings' => $voiceSettings,
                 'widgetSettings' => $widgetSettings,
+                'idempotencyKey' => $idempotencyKey,
             ],
         );
 
@@ -267,7 +272,7 @@ final class AssistantsService implements AssistantsContract
     /**
      * @api
      *
-     * Update an AI Assistant's attributes.
+     * Updates the specified AI assistant's attributes and returns the updated assistant. The request can also control how the change is promoted across assistant versions.
      *
      * @param string $assistantID unique identifier of the assistant
      * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow Conversation flow as supplied by API clients (create / update).
@@ -462,16 +467,20 @@ final class AssistantsService implements AssistantsContract
      * Clone an existing assistant, excluding telephony and messaging settings.
      *
      * @param string $assistantID unique identifier of the assistant
+     * @param string $idempotencyKey Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function clone(
         string $assistantID,
-        RequestOptions|array|null $requestOptions = null
+        ?string $idempotencyKey = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
+        $params = Util::removeNulls(['idempotencyKey' => $idempotencyKey]);
+
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->clone($assistantID, requestOptions: $requestOptions);
+        $response = $this->raw->clone($assistantID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -501,9 +510,10 @@ final class AssistantsService implements AssistantsContract
      *
      * Import assistants from external providers. Any assistant that has already been imported will be overwritten with its latest version from the importing provider.
      *
-     * @param string $apiKeyRef Integration secret pointer that refers to the API key for the external provider. This should be an identifier for an integration secret created via /v2/integration_secrets.
-     * @param Provider|value-of<Provider> $provider the external provider to import assistants from
-     * @param list<string> $importIDs Optional list of assistant IDs to import from the external provider. If not provided, all assistants will be imported.
+     * @param string $apiKeyRef Body param: Integration secret pointer that refers to the API key for the external provider. This should be an identifier for an integration secret created via /v2/integration_secrets.
+     * @param Provider|value-of<Provider> $provider body param: The external provider to import assistants from
+     * @param list<string> $importIDs Body param: Optional list of assistant IDs to import from the external provider. If not provided, all assistants will be imported.
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -512,6 +522,7 @@ final class AssistantsService implements AssistantsContract
         string $apiKeyRef,
         Provider|string $provider,
         ?array $importIDs = null,
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantsList {
         $params = Util::removeNulls(
@@ -519,6 +530,7 @@ final class AssistantsService implements AssistantsContract
                 'apiKeyRef' => $apiKeyRef,
                 'provider' => $provider,
                 'importIDs' => $importIDs,
+                'idempotencyKey' => $idempotencyKey,
             ],
         );
 
@@ -538,8 +550,13 @@ final class AssistantsService implements AssistantsContract
      * 4. Updates conversation metadata if provided
      * 5. Returns the conversation ID
      *
-     * @param string $assistantID unique identifier of the assistant
-     * @param array<string,ConversationMetadataShape> $conversationMetadata
+     * @param string $assistantID path param: Unique identifier of the assistant
+     * @param string $from Body param
+     * @param string $to Body param
+     * @param array<string,ConversationMetadataShape> $conversationMetadata Body param
+     * @param bool $shouldCreateConversation Body param
+     * @param string $text Body param
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -551,6 +568,7 @@ final class AssistantsService implements AssistantsContract
         ?array $conversationMetadata = null,
         ?bool $shouldCreateConversation = null,
         ?string $text = null,
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantSendSMSResponse {
         $params = Util::removeNulls(
@@ -560,6 +578,7 @@ final class AssistantsService implements AssistantsContract
                 'conversationMetadata' => $conversationMetadata,
                 'shouldCreateConversation' => $shouldCreateConversation,
                 'text' => $text,
+                'idempotencyKey' => $idempotencyKey,
             ],
         );
 

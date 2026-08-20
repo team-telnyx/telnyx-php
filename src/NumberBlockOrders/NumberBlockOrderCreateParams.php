@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Creates a phone number block order.
+ * Creates an order for a block of consecutive phone numbers and returns the created order. Track fulfillment through the order's status.
  *
  * @see Telnyx\Services\NumberBlockOrdersService::create()
  *

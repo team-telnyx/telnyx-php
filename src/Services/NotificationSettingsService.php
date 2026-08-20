@@ -42,7 +42,7 @@ final class NotificationSettingsService implements NotificationSettingsContract
     /**
      * @api
      *
-     * Add a notification setting.
+     * Adds a notification setting that enables delivery of a notification event type to a notification profile.
      *
      * @param string $notificationChannelID a UUID reference to the associated Notification Channel
      * @param string $notificationEventConditionID a UUID reference to the associated Notification Event Condition
@@ -77,7 +77,7 @@ final class NotificationSettingsService implements NotificationSettingsContract
     /**
      * @api
      *
-     * Get a notification setting.
+     * Returns the details of a single notification setting by its identifier.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions
@@ -97,7 +97,7 @@ final class NotificationSettingsService implements NotificationSettingsContract
     /**
      * @api
      *
-     * List notification settings.
+     * Returns a paginated list of your notification settings, which map notification event types to profiles and channels.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
      * @param RequestOpts|null $requestOptions
@@ -129,7 +129,7 @@ final class NotificationSettingsService implements NotificationSettingsContract
     /**
      * @api
      *
-     * Delete a notification setting.
+     * Deletes the specified notification setting, disabling that notification delivery.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions

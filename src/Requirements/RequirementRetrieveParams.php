@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Retrieve a document requirement record.
+ * Returns a single document requirement record by its identifier, describing the documentation needed for number-related actions. A specific requirement version can be requested.
  *
  * @see Telnyx\Services\RequirementsService::retrieve()
  *

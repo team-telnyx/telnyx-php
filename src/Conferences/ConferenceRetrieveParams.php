@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Retrieve an existing conference.
+ * Returns the details of an existing conference, including its current status.
  *
  * @see Telnyx\Services\ConferencesService::retrieve()
  *

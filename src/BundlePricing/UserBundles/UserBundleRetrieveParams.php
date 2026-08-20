@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Retrieves a user bundle by its ID.
+ * Returns the details of a single user bundle on your account by its ID.
  *
  * @see Telnyx\Services\BundlePricing\UserBundlesService::retrieve()
  *

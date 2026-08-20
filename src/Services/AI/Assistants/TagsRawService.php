@@ -85,7 +85,7 @@ final class TagsRawService implements TagsRawContract
     /**
      * @api
      *
-     * Remove a tag from an AI assistant.
+     * Removes the specified tag from the AI assistant and returns the assistant's updated tag list.
      *
      * @param string $tag unique identifier of the tag
      * @param array{assistantID: string}|TagRemoveParams $params

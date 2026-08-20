@@ -13,7 +13,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo;
 
 /**
- * Update a specific LOA configuration.
+ * Updates the specified LOA configuration with the provided fields and returns the updated configuration.
  *
  * @see Telnyx\Services\Porting\LoaConfigurationsService::update()
  *

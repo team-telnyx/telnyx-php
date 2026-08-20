@@ -19,8 +19,6 @@ enum Provider: string
 
     case MINIMAX = 'minimax';
 
-    case RIME = 'rime';
-
     case RESEMBLE = 'resemble';
 
     case XAI = 'xai';

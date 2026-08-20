@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Creates an address.
+ * Creates a new address on your account from the provided details, for use with services that require a physical address such as emergency calling and regulatory compliance.
  *
  * @see Telnyx\Services\AddressesService::create()
  *

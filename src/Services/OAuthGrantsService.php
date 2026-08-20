@@ -35,7 +35,7 @@ final class OAuthGrantsService implements OAuthGrantsContract
     /**
      * @api
      *
-     * Retrieve a single OAuth grant by ID
+     * Returns the details of a single OAuth grant on your account by its ID.
      *
      * @param string $id OAuth grant ID
      * @param RequestOpts|null $requestOptions
@@ -83,7 +83,7 @@ final class OAuthGrantsService implements OAuthGrantsContract
     /**
      * @api
      *
-     * Revoke an OAuth grant
+     * Revokes the specified OAuth grant, withdrawing the access previously granted to the client.
      *
      * @param string $id OAuth grant ID
      * @param RequestOpts|null $requestOptions

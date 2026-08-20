@@ -40,7 +40,7 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
     /**
      * @api
      *
-     * Creates a dynamic emergency endpoints.
+     * Creates a dynamic emergency endpoint, associating a callback number and location with a device for emergency calling.
      *
      * @param string $dynamicEmergencyAddressID an id of a currently active dynamic emergency location
      * @param RequestOpts|null $requestOptions

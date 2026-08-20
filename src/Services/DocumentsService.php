@@ -47,7 +47,7 @@ final class DocumentsService implements DocumentsContract
     /**
      * @api
      *
-     * Retrieve a document.
+     * Returns the details of a single document on your account, including its metadata.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -67,7 +67,7 @@ final class DocumentsService implements DocumentsContract
     /**
      * @api
      *
-     * Update a document.
+     * Updates the specified document's attributes and returns the updated document.
      *
      * @param string $documentID identifies the resource
      * @param string $customerReference optional reference string for customer tracking
@@ -150,7 +150,7 @@ final class DocumentsService implements DocumentsContract
     /**
      * @api
      *
-     * Download a document.
+     * Downloads the raw file content of the specified document as originally uploaded.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

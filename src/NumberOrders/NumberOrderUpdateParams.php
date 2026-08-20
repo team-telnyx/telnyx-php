@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 
 /**
- * Updates a phone number order.
+ * Updates an existing phone number order, for example to satisfy regulatory requirements attached to the order, and returns the updated order.
  *
  * @see Telnyx\Services\NumberOrdersService::update()
  *

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get details of a specific plan step.
+ * Returns the details of a single plan step within a run's plan, including its status.
  *
  * @see Telnyx\Services\AI\Missions\Runs\PlanService::getStepDetails()
  *

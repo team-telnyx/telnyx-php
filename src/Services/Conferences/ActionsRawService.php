@@ -400,7 +400,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Pause conference recording.
+     * Pauses the active recording of the specified conference. Resume it later with the record_resume action.
      *
      * @param string $id Specifies the conference by id or name
      * @param array{
@@ -437,7 +437,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Resume conference recording.
+     * Resumes a previously paused recording of the specified conference, continuing capture from the point it was paused.
      *
      * @param string $id Specifies the conference by id or name
      * @param array{
