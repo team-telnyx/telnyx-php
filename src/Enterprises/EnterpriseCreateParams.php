@@ -26,13 +26,12 @@ use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
  *
  * @see Telnyx\Services\EnterprisesService::create()
  *
- * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\BillingAddress
+ * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\BillingContact
  * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\OrganizationContact
- * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  *
  * @phpstan-type EnterpriseCreateParamsShape = array{
- *   billingAddress: BillingAddress|BillingAddressShape,
+ *   billingAddress: PhysicalAddress|PhysicalAddressShape,
  *   billingContact: BillingContact|BillingContactShape,
  *   countryCode: string,
  *   doingBusinessAs: string,
@@ -61,7 +60,7 @@ final class EnterpriseCreateParams implements BaseModel
     use SdkParams;
 
     #[Required('billing_address')]
-    public BillingAddress $billingAddress;
+    public PhysicalAddress $billingAddress;
 
     #[Required('billing_contact')]
     public BillingContact $billingContact;
@@ -230,7 +229,7 @@ final class EnterpriseCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BillingAddress|BillingAddressShape $billingAddress
+     * @param PhysicalAddress|PhysicalAddressShape $billingAddress
      * @param BillingContact|BillingContactShape $billingContact
      * @param Industry|value-of<Industry> $industry
      * @param NumberOfEmployees|value-of<NumberOfEmployees> $numberOfEmployees
@@ -241,7 +240,7 @@ final class EnterpriseCreateParams implements BaseModel
      * @param RoleType|value-of<RoleType>|null $roleType
      */
     public static function with(
-        BillingAddress|array $billingAddress,
+        PhysicalAddress|array $billingAddress,
         BillingContact|array $billingContact,
         string $countryCode,
         string $doingBusinessAs,
@@ -290,10 +289,10 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * @param BillingAddress|BillingAddressShape $billingAddress
+     * @param PhysicalAddress|PhysicalAddressShape $billingAddress
      */
     public function withBillingAddress(
-        BillingAddress|array $billingAddress
+        PhysicalAddress|array $billingAddress
     ): self {
         $self = clone $this;
         $self['billingAddress'] = $billingAddress;

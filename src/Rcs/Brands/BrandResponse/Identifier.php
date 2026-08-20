@@ -21,11 +21,19 @@ final class Identifier implements ConverterSource
 {
     use SdkUnion;
 
+    public static function discriminator(): string
+    {
+        return 'identifierType';
+    }
+
     /**
      * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {
-        return [EinBrandIdentifier::class, StockSymbolBrandIdentifier::class];
+        return [
+            'EIN' => EinBrandIdentifier::class,
+            'STOCK_SYMBOL' => StockSymbolBrandIdentifier::class,
+        ];
     }
 }

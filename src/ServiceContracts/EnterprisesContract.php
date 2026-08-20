@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\BillingAddress;
 use Telnyx\Enterprises\BillingContact;
 use Telnyx\Enterprises\EnterpriseCreateParams\Industry;
 use Telnyx\Enterprises\EnterpriseCreateParams\NumberOfEmployees;
@@ -20,10 +19,9 @@ use Telnyx\Enterprises\PhysicalAddress;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\BillingAddress
+ * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\BillingContact
  * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\OrganizationContact
- * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface EnterprisesContract
@@ -31,7 +29,7 @@ interface EnterprisesContract
     /**
      * @api
      *
-     * @param BillingAddress|BillingAddressShape $billingAddress
+     * @param PhysicalAddress|PhysicalAddressShape $billingAddress
      * @param BillingContact|BillingContactShape $billingContact
      * @param string $countryCode ISO 3166-1 alpha-2 country code. Currently `US` and `CA` are supported.
      * @param string $fein US Federal Employer Identification Number (`NN-NNNNNNN`) or Canadian equivalent
@@ -61,7 +59,7 @@ interface EnterprisesContract
      * @throws APIException
      */
     public function create(
-        BillingAddress|array $billingAddress,
+        PhysicalAddress|array $billingAddress,
         BillingContact|array $billingContact,
         string $countryCode,
         string $doingBusinessAs,
@@ -101,7 +99,7 @@ interface EnterprisesContract
      * @api
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
-     * @param BillingAddress|BillingAddressShape $billingAddress
+     * @param PhysicalAddress|PhysicalAddressShape $billingAddress
      * @param BillingContact|BillingContactShape $billingContact
      * @param \Telnyx\Enterprises\EnterpriseUpdateParams\Industry|value-of<\Telnyx\Enterprises\EnterpriseUpdateParams\Industry> $industry
      * @param string $jurisdictionOfIncorporation Updated state/province/country of incorporation. Optional on update.
@@ -114,7 +112,7 @@ interface EnterprisesContract
      */
     public function update(
         string $enterpriseID,
-        BillingAddress|array|null $billingAddress = null,
+        PhysicalAddress|array|null $billingAddress = null,
         BillingContact|array|null $billingContact = null,
         ?string $corporateRegistrationNumber = null,
         ?string $customerReference = null,

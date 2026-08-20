@@ -7,6 +7,7 @@ namespace Telnyx\EmailInboxes\Drafts;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\EmailMessages\EmailAddressInput;
 
 /**
@@ -18,7 +19,7 @@ use Telnyx\EmailMessages\EmailAddressInput;
  * @phpstan-import-type EmailAddressInputVariants from \Telnyx\EmailMessages\EmailAddressInput
  *
  * @phpstan-type EmailDraftRequestShape = array{
- *   attachments?: list<mixed>|null,
+ *   attachments?: list<array<string,mixed>>|null,
  *   bcc?: list<EmailAddressInputShape>|null,
  *   cc?: list<EmailAddressInputShape>|null,
  *   fromEmail?: string|null,
@@ -27,7 +28,7 @@ use Telnyx\EmailMessages\EmailAddressInput;
  *   html?: string|null,
  *   htmlBody?: string|null,
  *   labels?: list<string>|null,
- *   metadata?: mixed,
+ *   metadata?: array<string,mixed>|null,
  *   replyTo?: string|null,
  *   subject?: string|null,
  *   tags?: list<string>|null,
@@ -41,8 +42,8 @@ final class EmailDraftRequest implements BaseModel
     /** @use SdkModel<EmailDraftRequestShape> */
     use SdkModel;
 
-    /** @var list<mixed>|null $attachments */
-    #[Optional(list: 'mixed')]
+    /** @var list<array<string,mixed>>|null $attachments */
+    #[Optional(list: new MapOf('mixed'))]
     public ?array $attachments;
 
     /** @var list<EmailAddressInputVariants>|null $bcc */
@@ -76,8 +77,9 @@ final class EmailDraftRequest implements BaseModel
     #[Optional(list: 'string')]
     public ?array $labels;
 
-    #[Optional]
-    public mixed $metadata;
+    /** @var array<string,mixed>|null $metadata */
+    #[Optional(map: 'mixed')]
+    public ?array $metadata;
 
     #[Optional('reply_to')]
     public ?string $replyTo;
@@ -112,11 +114,12 @@ final class EmailDraftRequest implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<mixed>|null $attachments
+     * @param list<array<string,mixed>>|null $attachments
      * @param list<EmailAddressInputShape>|null $bcc
      * @param list<EmailAddressInputShape>|null $cc
      * @param array<string,string>|null $headers
      * @param list<string>|null $labels
+     * @param array<string,mixed>|null $metadata
      * @param list<string>|null $tags
      * @param list<EmailAddressInputShape>|null $to
      */
@@ -130,7 +133,7 @@ final class EmailDraftRequest implements BaseModel
         ?string $html = null,
         ?string $htmlBody = null,
         ?array $labels = null,
-        mixed $metadata = null,
+        ?array $metadata = null,
         ?string $replyTo = null,
         ?string $subject = null,
         ?array $tags = null,
@@ -161,7 +164,7 @@ final class EmailDraftRequest implements BaseModel
     }
 
     /**
-     * @param list<mixed> $attachments
+     * @param list<array<string,mixed>> $attachments
      */
     public function withAttachments(array $attachments): self
     {
@@ -250,7 +253,10 @@ final class EmailDraftRequest implements BaseModel
         return $self;
     }
 
-    public function withMetadata(mixed $metadata): self
+    /**
+     * @param array<string,mixed> $metadata
+     */
+    public function withMetadata(array $metadata): self
     {
         $self = clone $this;
         $self['metadata'] = $metadata;

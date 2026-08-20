@@ -9,14 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\BillingAddress
+ * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\BillingContact
  * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\OrganizationContact
- * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  *
  * @phpstan-type EnterprisePublicShape = array{
  *   id?: string|null,
- *   billingAddress?: null|BillingAddress|BillingAddressShape,
+ *   billingAddress?: null|PhysicalAddress|PhysicalAddressShape,
  *   billingContact?: null|BillingContact|BillingContactShape,
  *   brandedCallingEnabled?: bool|null,
  *   corporateRegistrationNumber?: string|null,
@@ -51,7 +50,7 @@ final class EnterprisePublic implements BaseModel
     public ?string $id;
 
     #[Optional('billing_address')]
-    public ?BillingAddress $billingAddress;
+    public ?PhysicalAddress $billingAddress;
 
     #[Optional('billing_contact')]
     public ?BillingContact $billingContact;
@@ -150,14 +149,14 @@ final class EnterprisePublic implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BillingAddress|BillingAddressShape|null $billingAddress
+     * @param PhysicalAddress|PhysicalAddressShape|null $billingAddress
      * @param BillingContact|BillingContactShape|null $billingContact
      * @param OrganizationContact|OrganizationContactShape|null $organizationContact
      * @param PhysicalAddress|PhysicalAddressShape|null $organizationPhysicalAddress
      */
     public static function with(
         ?string $id = null,
-        BillingAddress|array|null $billingAddress = null,
+        PhysicalAddress|array|null $billingAddress = null,
         BillingContact|array|null $billingContact = null,
         ?bool $brandedCallingEnabled = null,
         ?string $corporateRegistrationNumber = null,
@@ -222,10 +221,10 @@ final class EnterprisePublic implements BaseModel
     }
 
     /**
-     * @param BillingAddress|BillingAddressShape $billingAddress
+     * @param PhysicalAddress|PhysicalAddressShape $billingAddress
      */
     public function withBillingAddress(
-        BillingAddress|array $billingAddress
+        PhysicalAddress|array $billingAddress
     ): self {
         $self = clone $this;
         $self['billingAddress'] = $billingAddress;

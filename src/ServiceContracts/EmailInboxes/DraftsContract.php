@@ -21,12 +21,13 @@ interface DraftsContract
      * @api
      *
      * @param string $inboxID email inbox UUID
-     * @param list<mixed> $attachments
+     * @param list<array<string,mixed>> $attachments
      * @param list<EmailAddressInputShape> $bcc
      * @param list<EmailAddressInputShape> $cc
      * @param array<string,string> $headers
      * @param string $html alias for `html_body`, matching the send endpoint
      * @param list<string> $labels
+     * @param array<string,mixed> $metadata
      * @param list<string> $tags
      * @param string $text alias for `text_body`, matching the send endpoint
      * @param list<EmailAddressInputShape> $to
@@ -45,7 +46,7 @@ interface DraftsContract
         ?string $html = null,
         ?string $htmlBody = null,
         ?array $labels = null,
-        mixed $metadata = null,
+        ?array $metadata = null,
         ?string $replyTo = null,
         ?string $subject = null,
         ?array $tags = null,
@@ -75,7 +76,7 @@ interface DraftsContract
      *
      * @param string $draftID path param: Email draft UUID
      * @param string $inboxID path param: Email inbox UUID
-     * @param list<mixed> $attachments Body param
+     * @param list<array<string,mixed>> $attachments Body param
      * @param list<EmailAddressInputShape> $bcc Body param
      * @param list<EmailAddressInputShape> $cc Body param
      * @param string $fromEmail Body param
@@ -84,7 +85,7 @@ interface DraftsContract
      * @param string $html body param: Alias for `html_body`, matching the send endpoint
      * @param string $htmlBody Body param
      * @param list<string> $labels Body param
-     * @param mixed $metadata Body param
+     * @param array<string,mixed> $metadata Body param
      * @param string $replyTo Body param
      * @param string $subject Body param
      * @param list<string> $tags Body param
@@ -107,7 +108,7 @@ interface DraftsContract
         ?string $html = null,
         ?string $htmlBody = null,
         ?array $labels = null,
-        mixed $metadata = null,
+        ?array $metadata = null,
         ?string $replyTo = null,
         ?string $subject = null,
         ?array $tags = null,
@@ -156,7 +157,7 @@ interface DraftsContract
      *
      * @param string $draftID path param: Email draft UUID
      * @param string $inboxID path param: Email inbox UUID
-     * @param list<mixed> $attachments Body param
+     * @param list<array<string,mixed>> $attachments Body param
      * @param list<EmailAddressInputShape> $bcc Body param
      * @param list<EmailAddressInputShape> $cc Body param
      * @param string $fromEmail Body param
@@ -165,7 +166,7 @@ interface DraftsContract
      * @param string $html body param: Alias for `html_body`, matching the send endpoint
      * @param string $htmlBody Body param
      * @param list<string> $labels Body param
-     * @param mixed $metadata Body param
+     * @param array<string,mixed> $metadata Body param
      * @param string $replyTo Body param
      * @param string $subject Body param
      * @param list<string> $tags Body param
@@ -188,7 +189,7 @@ interface DraftsContract
         ?string $html = null,
         ?string $htmlBody = null,
         ?array $labels = null,
-        mixed $metadata = null,
+        ?array $metadata = null,
         ?string $replyTo = null,
         ?string $subject = null,
         ?array $tags = null,

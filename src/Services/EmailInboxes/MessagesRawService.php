@@ -144,7 +144,7 @@ final class MessagesRawService implements MessagesRawContract
      * @param string $messageID path param: Inbound message UUID to reply to
      * @param array{
      *   inboxID: string,
-     *   attachments?: list<mixed>,
+     *   attachments?: list<array<string,mixed>>,
      *   bcc?: list<EmailAddressInputShape>,
      *   cc?: list<EmailAddressInputShape>,
      *   fromEmail?: string,
@@ -153,7 +153,7 @@ final class MessagesRawService implements MessagesRawContract
      *   html?: string,
      *   htmlBody?: string,
      *   labels?: list<string>,
-     *   metadata?: mixed,
+     *   metadata?: array<string,mixed>,
      *   replyTo?: string,
      *   subject?: string,
      *   tags?: list<string>,

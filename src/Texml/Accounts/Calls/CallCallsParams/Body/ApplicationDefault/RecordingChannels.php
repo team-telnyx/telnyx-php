@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Texml\Accounts\Calls\CallCallsParams;
+namespace Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\ApplicationDefault;
 
 /**
  * The number of channels in the final recording. Defaults to `mono`.

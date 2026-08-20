@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Texml\Accounts\Calls\CallCallsParams;
+namespace Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithURL;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;

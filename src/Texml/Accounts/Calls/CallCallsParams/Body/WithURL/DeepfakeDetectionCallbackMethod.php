@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Texml\Accounts\Calls\CallCallsParams;
+namespace Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithURL;
 
 /**
  * HTTP request type used for `DeepfakeDetectionCallbackUrl`.

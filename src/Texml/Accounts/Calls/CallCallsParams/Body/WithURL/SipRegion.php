@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Texml\Accounts\Calls\CallCallsParams;
+namespace Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithURL;
 
 /**
  * Defines the SIP region to be used for the call.

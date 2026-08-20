@@ -105,7 +105,7 @@ final class MessagesTest extends TestCase
         $result = $this->client->emailInboxes->messages->drafts(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             inboxID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            attachments: [(object) []],
+            attachments: [['foo' => 'bar']],
             bcc: ['string'],
             cc: ['string'],
             fromEmail: 'from_email',
@@ -114,7 +114,7 @@ final class MessagesTest extends TestCase
             html: 'html',
             htmlBody: 'html_body',
             labels: ['string'],
-            metadata: (object) [],
+            metadata: ['foo' => 'bar'],
             replyTo: 'reply_to',
             subject: 'subject',
             tags: ['string'],

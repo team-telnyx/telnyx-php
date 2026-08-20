@@ -17,8 +17,22 @@ final class Data implements BaseModel
     use SdkModel;
 
     #[Required]
-    public bool $accepted = true;
+    public bool $accepted;
 
+    /**
+     * `new Data()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * Data::with(accepted: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new Data)->withAccepted(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -29,9 +43,13 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(): self
+    public static function with(bool $accepted): self
     {
-        return new self;
+        $self = new self;
+
+        $self['accepted'] = $accepted;
+
+        return $self;
     }
 
     public function withAccepted(bool $accepted): self

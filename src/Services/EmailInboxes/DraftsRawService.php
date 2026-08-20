@@ -48,7 +48,7 @@ final class DraftsRawService implements DraftsRawContract
      *
      * @param string $inboxID email inbox UUID
      * @param array{
-     *   attachments?: list<mixed>,
+     *   attachments?: list<array<string,mixed>>,
      *   bcc?: list<EmailAddressInputShape>,
      *   cc?: list<EmailAddressInputShape>,
      *   fromEmail?: string,
@@ -57,7 +57,7 @@ final class DraftsRawService implements DraftsRawContract
      *   html?: string,
      *   htmlBody?: string,
      *   labels?: list<string>,
-     *   metadata?: mixed,
+     *   metadata?: array<string,mixed>,
      *   replyTo?: string,
      *   subject?: string,
      *   tags?: list<string>,
@@ -140,7 +140,7 @@ final class DraftsRawService implements DraftsRawContract
      * @param string $draftID path param: Email draft UUID
      * @param array{
      *   inboxID: string,
-     *   attachments?: list<mixed>,
+     *   attachments?: list<array<string,mixed>>,
      *   bcc?: list<EmailAddressInputShape>,
      *   cc?: list<EmailAddressInputShape>,
      *   fromEmail?: string,
@@ -149,7 +149,7 @@ final class DraftsRawService implements DraftsRawContract
      *   html?: string,
      *   htmlBody?: string,
      *   labels?: list<string>,
-     *   metadata?: mixed,
+     *   metadata?: array<string,mixed>,
      *   replyTo?: string,
      *   subject?: string,
      *   tags?: list<string>,
@@ -273,7 +273,7 @@ final class DraftsRawService implements DraftsRawContract
      * @param string $draftID path param: Email draft UUID
      * @param array{
      *   inboxID: string,
-     *   attachments?: list<mixed>,
+     *   attachments?: list<array<string,mixed>>,
      *   bcc?: list<EmailAddressInputShape>,
      *   cc?: list<EmailAddressInputShape>,
      *   fromEmail?: string,
@@ -282,7 +282,7 @@ final class DraftsRawService implements DraftsRawContract
      *   html?: string,
      *   htmlBody?: string,
      *   labels?: list<string>,
-     *   metadata?: mixed,
+     *   metadata?: array<string,mixed>,
      *   replyTo?: string,
      *   subject?: string,
      *   tags?: list<string>,

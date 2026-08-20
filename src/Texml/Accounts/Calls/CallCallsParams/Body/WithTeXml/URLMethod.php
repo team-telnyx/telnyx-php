@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Texml\Accounts\Calls\CallCallsParams;
+namespace Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml;
 
 /**
  * HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
