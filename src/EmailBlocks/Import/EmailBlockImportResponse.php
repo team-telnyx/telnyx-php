@@ -7,12 +7,13 @@ namespace Telnyx\EmailBlocks\Import;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailBlocks\Import\EmailBlockImportResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\EmailBlocks\Import\EmailBlockImportResponse\Data
+ * @phpstan-import-type EmailBlockImportShape from \Telnyx\EmailBlocks\Import\EmailBlockImport
  *
- * @phpstan-type EmailBlockImportResponseShape = array{data: Data|DataShape}
+ * @phpstan-type EmailBlockImportResponseShape = array{
+ *   data: EmailBlockImport|EmailBlockImportShape
+ * }
  */
 final class EmailBlockImportResponse implements BaseModel
 {
@@ -24,7 +25,7 @@ final class EmailBlockImportResponse implements BaseModel
      * `block_ttl_days`. Nullable fields use the omit-nullable pattern.
      */
     #[Required]
-    public Data $data;
+    public EmailBlockImport $data;
 
     /**
      * `new EmailBlockImportResponse()` is missing required properties by the API.
@@ -50,9 +51,9 @@ final class EmailBlockImportResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape $data
+     * @param EmailBlockImport|EmailBlockImportShape $data
      */
-    public static function with(Data|array $data): self
+    public static function with(EmailBlockImport|array $data): self
     {
         $self = new self;
 
@@ -65,9 +66,9 @@ final class EmailBlockImportResponse implements BaseModel
      * Import job. Schema fields hidden: `account_id`, `csv_content`,
      * `block_ttl_days`. Nullable fields use the omit-nullable pattern.
      *
-     * @param Data|DataShape $data
+     * @param EmailBlockImport|EmailBlockImportShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(EmailBlockImport|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

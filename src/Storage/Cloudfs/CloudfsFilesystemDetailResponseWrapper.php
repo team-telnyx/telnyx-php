@@ -7,13 +7,12 @@ namespace Telnyx\Storage\Cloudfs;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Storage\Cloudfs\CloudfsFilesystemDetailResponseWrapper\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Storage\Cloudfs\CloudfsFilesystemDetailResponseWrapper\Data
+ * @phpstan-import-type CloudfsFilesystemDetailShape from \Telnyx\Storage\Cloudfs\CloudfsFilesystemDetail
  *
  * @phpstan-type CloudfsFilesystemDetailResponseWrapperShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|CloudfsFilesystemDetail|CloudfsFilesystemDetailShape
  * }
  */
 final class CloudfsFilesystemDetailResponseWrapper implements BaseModel
@@ -25,7 +24,7 @@ final class CloudfsFilesystemDetailResponseWrapper implements BaseModel
      * A CloudFS filesystem as returned by get, update, and delete. `meta_url` omits the credential and there is no `meta_token` field — the token is only returned by create and rotate-meta-token.
      */
     #[Optional]
-    public ?Data $data;
+    public ?CloudfsFilesystemDetail $data;
 
     public function __construct()
     {
@@ -37,10 +36,11 @@ final class CloudfsFilesystemDetailResponseWrapper implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CloudfsFilesystemDetail|CloudfsFilesystemDetailShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        CloudfsFilesystemDetail|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -51,9 +51,9 @@ final class CloudfsFilesystemDetailResponseWrapper implements BaseModel
     /**
      * A CloudFS filesystem as returned by get, update, and delete. `meta_url` omits the credential and there is no `meta_token` field — the token is only returned by create and rotate-meta-token.
      *
-     * @param Data|DataShape $data
+     * @param CloudfsFilesystemDetail|CloudfsFilesystemDetailShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CloudfsFilesystemDetail|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

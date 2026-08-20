@@ -9,7 +9,6 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Rcs\Brands\BrandCreateParams\Address;
 use Telnyx\Rcs\Brands\BrandCreateParams\Contacts;
 use Telnyx\Rcs\Brands\BrandCreateParams\Identifiers;
 
@@ -18,12 +17,12 @@ use Telnyx\Rcs\Brands\BrandCreateParams\Identifiers;
  *
  * @see Telnyx\Services\Rcs\BrandsService::create()
  *
- * @phpstan-import-type AddressShape from \Telnyx\Rcs\Brands\BrandCreateParams\Address
+ * @phpstan-import-type BrandAddressShape from \Telnyx\Rcs\Brands\BrandAddress
  * @phpstan-import-type ContactsShape from \Telnyx\Rcs\Brands\BrandCreateParams\Contacts
  * @phpstan-import-type IdentifiersShape from \Telnyx\Rcs\Brands\BrandCreateParams\Identifiers
  *
  * @phpstan-type BrandCreateParamsShape = array{
- *   addresses: array<string,Address|AddressShape>,
+ *   addresses: array<string,BrandAddress|BrandAddressShape>,
  *   contacts: Contacts|ContactsShape,
  *   displayName: string,
  *   identifiers: Identifiers|IdentifiersShape,
@@ -40,8 +39,8 @@ final class BrandCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var array<string,Address> $addresses */
-    #[Required(map: Address::class)]
+    /** @var array<string,BrandAddress> $addresses */
+    #[Required(map: BrandAddress::class)]
     public array $addresses;
 
     /**
@@ -120,7 +119,7 @@ final class BrandCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,Address|AddressShape> $addresses
+     * @param array<string,BrandAddress|BrandAddressShape> $addresses
      * @param Contacts|ContactsShape $contacts
      * @param Identifiers|IdentifiersShape $identifiers
      * @param BrandLegalEntityType|value-of<BrandLegalEntityType> $legalEntityType
@@ -154,7 +153,7 @@ final class BrandCreateParams implements BaseModel
     }
 
     /**
-     * @param array<string,Address|AddressShape> $addresses
+     * @param array<string,BrandAddress|BrandAddressShape> $addresses
      */
     public function withAddresses(array $addresses): self
     {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams;
 
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineReson8Config;
 use Telnyx\Calls\Actions\DeepgramNova2Config;
 use Telnyx\Calls\Actions\DeepgramNova3Config;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
@@ -14,6 +13,7 @@ use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineHumainConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineParakeetConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineReson8Config;
 use Telnyx\Calls\Actions\TranscriptionEngineSonioxConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
@@ -32,7 +32,7 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type TranscriptionEngineSonioxConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineSonioxConfig
  * @phpstan-import-type TranscriptionEngineParakeetConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineParakeetConfig
  * @phpstan-import-type TranscriptionEngineHumainConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineHumainConfig
- * @phpstan-import-type TranscriptionEngineReson8ConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineReson8Config
+ * @phpstan-import-type TranscriptionEngineReson8ConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineReson8Config
  * @phpstan-import-type TranscriptionEngineAConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineAConfig
  * @phpstan-import-type TranscriptionEngineBConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineBConfig
  * @phpstan-import-type DeepgramNova2ConfigShape from \Telnyx\Calls\Actions\DeepgramNova2Config

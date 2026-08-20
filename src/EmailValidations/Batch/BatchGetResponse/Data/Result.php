@@ -8,13 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailValidations\Batch\BatchGetResponse\Data\Result\Checks;
+use Telnyx\EmailValidations\EmailValidationChecks;
 
 /**
- * @phpstan-import-type ChecksShape from \Telnyx\EmailValidations\Batch\BatchGetResponse\Data\Result\Checks
+ * @phpstan-import-type EmailValidationChecksShape from \Telnyx\EmailValidations\EmailValidationChecks
  *
  * @phpstan-type ResultShape = array{
- *   checks: Checks|ChecksShape,
+ *   checks: EmailValidationChecks|EmailValidationChecksShape,
  *   email: string,
  *   riskScore: float,
  *   valid: bool,
@@ -27,7 +27,7 @@ final class Result implements BaseModel
     use SdkModel;
 
     #[Required]
-    public Checks $checks;
+    public EmailValidationChecks $checks;
 
     #[Required]
     public string $email;
@@ -72,10 +72,10 @@ final class Result implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Checks|ChecksShape $checks
+     * @param EmailValidationChecks|EmailValidationChecksShape $checks
      */
     public static function with(
-        Checks|array $checks,
+        EmailValidationChecks|array $checks,
         string $email,
         float $riskScore,
         bool $valid,
@@ -94,9 +94,9 @@ final class Result implements BaseModel
     }
 
     /**
-     * @param Checks|ChecksShape $checks
+     * @param EmailValidationChecks|EmailValidationChecksShape $checks
      */
-    public function withChecks(Checks|array $checks): self
+    public function withChecks(EmailValidationChecks|array $checks): self
     {
         $self = clone $this;
         $self['checks'] = $checks;

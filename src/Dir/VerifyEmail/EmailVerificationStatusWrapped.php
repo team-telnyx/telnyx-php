@@ -7,12 +7,13 @@ namespace Telnyx\Dir\VerifyEmail;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Dir\VerifyEmail\EmailVerificationStatusWrapped\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Dir\VerifyEmail\EmailVerificationStatusWrapped\Data
+ * @phpstan-import-type EmailVerificationStatusShape from \Telnyx\Dir\VerifyEmail\EmailVerificationStatus
  *
- * @phpstan-type EmailVerificationStatusWrappedShape = array{data: Data|DataShape}
+ * @phpstan-type EmailVerificationStatusWrappedShape = array{
+ *   data: EmailVerificationStatus|EmailVerificationStatusShape
+ * }
  */
 final class EmailVerificationStatusWrapped implements BaseModel
 {
@@ -23,7 +24,7 @@ final class EmailVerificationStatusWrapped implements BaseModel
      * Verification state for a DIR's authorizer email.
      */
     #[Required]
-    public Data $data;
+    public EmailVerificationStatus $data;
 
     /**
      * `new EmailVerificationStatusWrapped()` is missing required properties by the API.
@@ -49,9 +50,9 @@ final class EmailVerificationStatusWrapped implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape $data
+     * @param EmailVerificationStatus|EmailVerificationStatusShape $data
      */
-    public static function with(Data|array $data): self
+    public static function with(EmailVerificationStatus|array $data): self
     {
         $self = new self;
 
@@ -63,9 +64,9 @@ final class EmailVerificationStatusWrapped implements BaseModel
     /**
      * Verification state for a DIR's authorizer email.
      *
-     * @param Data|DataShape $data
+     * @param EmailVerificationStatus|EmailVerificationStatusShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(EmailVerificationStatus|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

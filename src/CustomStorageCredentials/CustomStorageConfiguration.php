@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration;
-use Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration\S3GenericConfigurationData;
 
 /**
  * @phpstan-import-type ConfigurationVariants from \Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration

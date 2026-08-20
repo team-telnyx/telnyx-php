@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Rcs;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Rcs\Brands\BrandCreateParams\Address;
+use Telnyx\Rcs\Brands\BrandAddress;
 use Telnyx\Rcs\Brands\BrandCreateParams\Contacts;
 use Telnyx\Rcs\Brands\BrandCreateParams\Identifiers;
 use Telnyx\Rcs\Brands\BrandLegalEntityType;
@@ -14,12 +14,11 @@ use Telnyx\Rcs\Brands\BrandResponse;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type AddressShape from \Telnyx\Rcs\Brands\BrandCreateParams\Address
  * @phpstan-import-type ContactsShape from \Telnyx\Rcs\Brands\BrandCreateParams\Contacts
  * @phpstan-import-type IdentifiersShape from \Telnyx\Rcs\Brands\BrandCreateParams\Identifiers
- * @phpstan-import-type AddressShape from \Telnyx\Rcs\Brands\BrandUpdateParams\Address as AddressShape1
  * @phpstan-import-type ContactsShape from \Telnyx\Rcs\Brands\BrandUpdateParams\Contacts as ContactsShape1
  * @phpstan-import-type IdentifiersShape from \Telnyx\Rcs\Brands\BrandUpdateParams\Identifiers as IdentifiersShape1
+ * @phpstan-import-type BrandAddressShape from \Telnyx\Rcs\Brands\BrandAddress
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface BrandsContract
@@ -27,7 +26,7 @@ interface BrandsContract
     /**
      * @api
      *
-     * @param array<string,Address|AddressShape> $addresses
+     * @param array<string,BrandAddress|BrandAddressShape> $addresses
      * @param Contacts|ContactsShape $contacts Named business contacts. Use the `brand` key for the required BRAND contact.
      * @param Identifiers|IdentifiersShape $identifiers Named business identifiers. Use the `ein` key for the required EIN and `stock_symbol` for a public-profit brand's stock symbol.
      * @param BrandLegalEntityType|value-of<BrandLegalEntityType> $legalEntityType
@@ -67,7 +66,7 @@ interface BrandsContract
      * @api
      *
      * @param string $id the Telnyx-assigned brand identifier
-     * @param array<string,\Telnyx\Rcs\Brands\BrandUpdateParams\Address|AddressShape1> $addresses
+     * @param array<string,BrandAddress|BrandAddressShape> $addresses
      * @param \Telnyx\Rcs\Brands\BrandUpdateParams\Contacts|ContactsShape1 $contacts Named business contacts. Use the `brand` key for the required BRAND contact.
      * @param \Telnyx\Rcs\Brands\BrandUpdateParams\Identifiers|IdentifiersShape1 $identifiers Named business identifiers. Use the `ein` key for the required EIN and `stock_symbol` for a public-profit brand's stock symbol.
      * @param BrandLegalEntityType|value-of<BrandLegalEntityType> $legalEntityType
