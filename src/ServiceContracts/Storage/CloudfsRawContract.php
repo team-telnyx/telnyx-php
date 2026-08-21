@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Storage;
 
+use Telnyx\CloudfsCursorPagination;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -72,7 +73,7 @@ interface CloudfsRawContract
      * @param array<string,mixed>|CloudfListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CloudfListResponse>
+     * @return BaseResponse<CloudfsCursorPagination<CloudfListResponse>>
      *
      * @throws APIException
      */

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\EmailInboxes\EmailInboxListResponse;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailInboxes\EmailInbox;
 use Telnyx\EmailInboxes\EmailInboxResponse;
 use Telnyx\RequestOptions;
 
@@ -49,13 +50,15 @@ interface EmailInboxesContract
      * @param int $pageSize Number of results to return. Defaults to 20; maximum is 250.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailCursorPagination<EmailInbox>
+     *
      * @throws APIException
      */
     public function list(
         ?string $pageCursor = null,
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
-    ): EmailInboxListResponse;
+    ): EmailCursorPagination;
 
     /**
      * @api

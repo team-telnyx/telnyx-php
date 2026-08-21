@@ -7,13 +7,14 @@ namespace Telnyx\Services\EmailInboxes;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Drafts\EmailDraftResponse;
-use Telnyx\EmailInboxes\Messages\MessageListResponse;
 use Telnyx\EmailInboxes\Messages\MessageUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailInboxes\MessagesContract;
 use Telnyx\Services\EmailInboxes\Messages\ActionsService;
 use Telnyx\Services\EmailInboxes\Messages\LabelsService;
+use Telnyx\Webhooks\InboundMessage;
 
 /**
  * @phpstan-import-type ReadAtShape from \Telnyx\EmailInboxes\Messages\MessageUpdateParams\ReadAt
@@ -96,6 +97,8 @@ final class MessagesService implements MessagesContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailBracketCursorPagination<InboundMessage>
+     *
      * @throws APIException
      */
     public function list(
@@ -111,7 +114,7 @@ final class MessagesService implements MessagesContract
         ?string $pageAfter = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): MessageListResponse {
+    ): EmailBracketCursorPagination {
         $params = Util::removeNulls(
             [
                 'filterFrom' => $filterFrom,

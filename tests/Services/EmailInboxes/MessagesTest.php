@@ -7,9 +7,10 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Drafts\EmailDraftResponse;
-use Telnyx\EmailInboxes\Messages\MessageListResponse;
 use Telnyx\EmailInboxes\Messages\MessageUpdateResponse;
+use Telnyx\Webhooks\InboundMessage;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -71,12 +72,17 @@ final class MessagesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailInboxes->messages->list(
+        $page = $this->client->emailInboxes->messages->list(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(MessageListResponse::class, $result);
+        $this->assertInstanceOf(EmailBracketCursorPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(InboundMessage::class, $item);
+        }
     }
 
     #[Test]

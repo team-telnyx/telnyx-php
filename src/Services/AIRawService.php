@@ -13,6 +13,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIRawContract;
 
@@ -80,7 +81,7 @@ final class AIRawService implements AIRawContract
      * }|AIRetrieveConversationHistoriesParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AIGetConversationHistoriesResponse>
+     * @return BaseResponse<DefaultFlatPagination<AIGetConversationHistoriesResponse>>
      *
      * @throws APIException
      */
@@ -115,6 +116,7 @@ final class AIRawService implements AIRawContract
             ),
             options: $options,
             convert: AIGetConversationHistoriesResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailBlocks\EmailBlockGetEventsResponse\Data;
+namespace Telnyx\EmailBlocks\EmailBlockGetEventsResponse;
 
 enum EventType: string
 {

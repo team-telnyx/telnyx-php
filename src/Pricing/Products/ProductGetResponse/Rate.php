@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Pricing\Products\ProductGetResponse\Data;
+namespace Telnyx\Pricing\Products\ProductGetResponse;
 
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;

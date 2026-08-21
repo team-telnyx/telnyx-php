@@ -8,11 +8,12 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailMessages\Recipients\EmailRecipient;
 use Telnyx\EmailMessages\Recipients\RecipientGetResponse;
 use Telnyx\EmailMessages\Recipients\RecipientListParams;
 use Telnyx\EmailMessages\Recipients\RecipientListParams\Kind;
 use Telnyx\EmailMessages\Recipients\RecipientListParams\Status;
-use Telnyx\EmailMessages\Recipients\RecipientListResponse;
 use Telnyx\EmailMessages\Recipients\RecipientRetrieveParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailMessages\RecipientsRawContract;
@@ -83,7 +84,7 @@ final class RecipientsRawService implements RecipientsRawContract
      * }|RecipientListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecipientListResponse>
+     * @return BaseResponse<EmailCursorPagination<EmailRecipient>>
      *
      * @throws APIException
      */
@@ -106,7 +107,8 @@ final class RecipientsRawService implements RecipientsRawContract
                 ['pageCursor' => 'page_cursor', 'pageSize' => 'page_size']
             ),
             options: $options,
-            convert: RecipientListResponse::class,
+            convert: EmailRecipient::class,
+            page: EmailCursorPagination::class,
         );
     }
 }

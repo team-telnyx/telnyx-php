@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailEvents\EmailEventListResponse\Data;
+namespace Telnyx\EmailEvents\EmailEventListResponse;
 
 enum RecordType: string
 {

@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\EmailInboxes;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Drafts\EmailDraftResponse;
-use Telnyx\EmailInboxes\Messages\MessageListResponse;
 use Telnyx\EmailInboxes\Messages\MessageUpdateResponse;
 use Telnyx\RequestOptions;
+use Telnyx\Webhooks\InboundMessage;
 
 /**
  * @phpstan-import-type ReadAtShape from \Telnyx\EmailInboxes\Messages\MessageUpdateParams\ReadAt
@@ -50,6 +51,8 @@ interface MessagesContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailBracketCursorPagination<InboundMessage>
+     *
      * @throws APIException
      */
     public function list(
@@ -65,7 +68,7 @@ interface MessagesContract
         ?string $pageAfter = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): MessageListResponse;
+    ): EmailBracketCursorPagination;
 
     /**
      * @api

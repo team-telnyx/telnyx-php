@@ -8,6 +8,7 @@ use Telnyx\AI\AIGetConversationHistoriesResponse;
 use Telnyx\AI\AIRetrieveConversationHistoriesParams\Region;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -33,6 +34,8 @@ interface AIContract
      * @param Region|value-of<Region> $region Restrict search to a specific region. When omitted, all regions are queried in parallel (fan-out) and results are merged by similarity score.
      * @param RequestOpts|null $requestOptions
      *
+     * @return DefaultFlatPagination<AIGetConversationHistoriesResponse>
+     *
      * @throws APIException
      */
     public function retrieveConversationHistories(
@@ -50,7 +53,7 @@ interface AIContract
         int $pageSize = 20,
         Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AIGetConversationHistoriesResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailEvents\EmailEventListResponse\Data;
+namespace Telnyx\EmailEvents\EmailEventListResponse;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;

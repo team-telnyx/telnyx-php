@@ -6,13 +6,14 @@ namespace Telnyx\ServiceContracts\EmailInboxes;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Drafts\EmailDraftResponse;
 use Telnyx\EmailInboxes\Messages\MessageDraftsParams;
 use Telnyx\EmailInboxes\Messages\MessageListParams;
-use Telnyx\EmailInboxes\Messages\MessageListResponse;
 use Telnyx\EmailInboxes\Messages\MessageUpdateParams;
 use Telnyx\EmailInboxes\Messages\MessageUpdateResponse;
 use Telnyx\RequestOptions;
+use Telnyx\Webhooks\InboundMessage;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -43,7 +44,7 @@ interface MessagesRawContract
      * @param array<string,mixed>|MessageListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MessageListResponse>
+     * @return BaseResponse<EmailBracketCursorPagination<InboundMessage>>
      *
      * @throws APIException
      */

@@ -9,6 +9,7 @@ use Telnyx\AI\AIGetConversationHistoriesResponse;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -36,12 +37,17 @@ final class AITest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->retrieveConversationHistories(
+        $page = $this->client->ai->retrieveConversationHistories(
             q: 'customer called about billing issue'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(AIGetConversationHistoriesResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AIGetConversationHistoriesResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -51,7 +57,7 @@ final class AITest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->retrieveConversationHistories(
+        $page = $this->client->ai->retrieveConversationHistories(
             q: 'customer called about billing issue',
             filterIngestedAtGte: new \DateTimeImmutable('2026-01-01T00:00:00Z'),
             filterIngestedAtLte: new \DateTimeImmutable('2026-12-31T23:59:59Z'),
@@ -68,7 +74,12 @@ final class AITest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(AIGetConversationHistoriesResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AIGetConversationHistoriesResponse::class, $item);
+        }
     }
 
     #[Test]

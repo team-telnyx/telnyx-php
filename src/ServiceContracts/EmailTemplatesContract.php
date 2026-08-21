@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\EmailTemplates\EmailTemplateListResponse;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailTemplates\EmailTemplate;
 use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
 use Telnyx\EmailTemplates\EmailTemplateResponse;
 use Telnyx\RequestOptions;
@@ -80,13 +81,15 @@ interface EmailTemplatesContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100. Invalid values are clamped to the valid range.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailCursorPagination<EmailTemplate>
+     *
      * @throws APIException
      */
     public function list(
         ?string $pageCursor = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): EmailTemplateListResponse;
+    ): EmailCursorPagination;
 
     /**
      * @api

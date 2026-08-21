@@ -7,11 +7,12 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailInboxes\Drafts\EmailMessage;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\EmailMessages\EmailMessageBatchResponse;
-use Telnyx\EmailMessages\EmailMessageGetEventsResponse;
 use Telnyx\EmailMessages\EmailMessageGetResponse;
-use Telnyx\EmailMessages\EmailMessageListResponse;
+use Telnyx\EmailMessages\MessageEvent;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -118,10 +119,15 @@ final class EmailMessagesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailMessages->list();
+        $page = $this->client->emailMessages->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EmailMessageListResponse::class, $result);
+        $this->assertInstanceOf(EmailCursorPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(EmailMessage::class, $item);
+        }
     }
 
     #[Test]
@@ -295,11 +301,16 @@ final class EmailMessagesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailMessages->retrieveEvents(
+        $page = $this->client->emailMessages->retrieveEvents(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EmailMessageGetEventsResponse::class, $result);
+        $this->assertInstanceOf(EmailCursorPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(MessageEvent::class, $item);
+        }
     }
 }

@@ -248,7 +248,7 @@ final class CollectionsRawService implements CollectionsRawContract
      * }|CollectionRetrieveDocumentsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CollectionGetDocumentsResponse>
+     * @return BaseResponse<DefaultFlatPagination<CollectionGetDocumentsResponse>>
      *
      * @throws APIException
      */
@@ -277,6 +277,7 @@ final class CollectionsRawService implements CollectionsRawContract
             ),
             options: $options,
             convert: CollectionGetDocumentsResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

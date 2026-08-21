@@ -44,6 +44,8 @@ final class ProductsService implements ProductsContract
      * @param int $pageSize number of items per page (max 100)
      * @param RequestOpts|null $requestOptions
      *
+     * @return DefaultFlatPagination<ProductGetResponse>
+     *
      * @throws APIException
      */
     public function retrieve(
@@ -52,7 +54,7 @@ final class ProductsService implements ProductsContract
         int $pageNumber = 1,
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
-    ): ProductGetResponse {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
                 'filterCountryISO' => $filterCountryISO,

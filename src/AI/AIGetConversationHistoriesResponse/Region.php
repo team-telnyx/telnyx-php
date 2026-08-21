@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\AIGetConversationHistoriesResponse\Data;
+namespace Telnyx\AI\AIGetConversationHistoriesResponse;
 
 /**
  * The region where this record is stored.

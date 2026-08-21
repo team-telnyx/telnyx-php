@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\EmailInboxes;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Drafts\DraftListParams\FilterStatus;
-use Telnyx\EmailInboxes\Drafts\DraftListResponse;
+use Telnyx\EmailInboxes\Drafts\EmailDraft;
 use Telnyx\EmailInboxes\Drafts\EmailDraftResponse;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\RequestOptions;
@@ -127,6 +128,8 @@ interface DraftsContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailBracketCursorPagination<EmailDraft>
+     *
      * @throws APIException
      */
     public function list(
@@ -135,7 +138,7 @@ interface DraftsContract
         ?string $pageAfter = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): DraftListResponse;
+    ): EmailBracketCursorPagination;
 
     /**
      * @api

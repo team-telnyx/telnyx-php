@@ -8,14 +8,15 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Drafts\EmailDraftResponse;
 use Telnyx\EmailInboxes\Messages\MessageDraftsParams;
 use Telnyx\EmailInboxes\Messages\MessageListParams;
-use Telnyx\EmailInboxes\Messages\MessageListResponse;
 use Telnyx\EmailInboxes\Messages\MessageUpdateParams;
 use Telnyx\EmailInboxes\Messages\MessageUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailInboxes\MessagesRawContract;
+use Telnyx\Webhooks\InboundMessage;
 
 /**
  * @phpstan-import-type ReadAtShape from \Telnyx\EmailInboxes\Messages\MessageUpdateParams\ReadAt
@@ -90,7 +91,7 @@ final class MessagesRawService implements MessagesRawContract
      * }|MessageListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MessageListResponse>
+     * @return BaseResponse<EmailBracketCursorPagination<InboundMessage>>
      *
      * @throws APIException
      */
@@ -124,7 +125,8 @@ final class MessagesRawService implements MessagesRawContract
                 ],
             ),
             options: $options,
-            convert: MessageListResponse::class,
+            convert: InboundMessage::class,
+            page: EmailBracketCursorPagination::class,
         );
     }
 

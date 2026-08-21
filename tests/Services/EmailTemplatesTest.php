@@ -7,7 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\EmailTemplates\EmailTemplateListResponse;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailTemplates\EmailTemplate;
 use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
 use Telnyx\EmailTemplates\EmailTemplateResponse;
 use Tests\UnsupportedMockTests;
@@ -100,10 +101,15 @@ final class EmailTemplatesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailTemplates->list();
+        $page = $this->client->emailTemplates->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EmailTemplateListResponse::class, $result);
+        $this->assertInstanceOf(EmailCursorPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(EmailTemplate::class, $item);
+        }
     }
 
     #[Test]

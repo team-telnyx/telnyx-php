@@ -10,6 +10,7 @@ use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIContract;
 use Telnyx\Services\AI\AnthropicService;
@@ -180,6 +181,8 @@ final class AIService implements AIContract
      * @param Region|value-of<Region> $region Restrict search to a specific region. When omitted, all regions are queried in parallel (fan-out) and results are merged by similarity score.
      * @param RequestOpts|null $requestOptions
      *
+     * @return DefaultFlatPagination<AIGetConversationHistoriesResponse>
+     *
      * @throws APIException
      */
     public function retrieveConversationHistories(
@@ -197,7 +200,7 @@ final class AIService implements AIContract
         int $pageSize = 20,
         Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AIGetConversationHistoriesResponse {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
                 'q' => $q,

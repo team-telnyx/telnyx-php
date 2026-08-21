@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Storage;
 
+use Telnyx\CloudfsCursorPagination;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Storage\Cloudfs\CloudfCreateParams\Region;
@@ -75,6 +76,8 @@ interface CloudfsContract
      * @param Sort|value-of<Sort> $sort sort order for the results: a field name for ascending, or the field name prefixed with `-` for descending
      * @param RequestOpts|null $requestOptions
      *
+     * @return CloudfsCursorPagination<CloudfListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -86,7 +89,7 @@ interface CloudfsContract
         int $pageLimit = 20,
         Sort|string $sort = '-created_at',
         RequestOptions|array|null $requestOptions = null,
-    ): CloudfListResponse;
+    ): CloudfsCursorPagination;
 
     /**
      * @api

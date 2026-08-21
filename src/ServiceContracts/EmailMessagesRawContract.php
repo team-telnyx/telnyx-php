@@ -6,16 +6,17 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailInboxes\Drafts\EmailMessage;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\EmailMessages\EmailMessageBatchParams;
 use Telnyx\EmailMessages\EmailMessageBatchResponse;
 use Telnyx\EmailMessages\EmailMessageCreateParams;
 use Telnyx\EmailMessages\EmailMessageDeleteAllParams;
-use Telnyx\EmailMessages\EmailMessageGetEventsResponse;
 use Telnyx\EmailMessages\EmailMessageGetResponse;
 use Telnyx\EmailMessages\EmailMessageListParams;
-use Telnyx\EmailMessages\EmailMessageListResponse;
 use Telnyx\EmailMessages\EmailMessageRetrieveEventsParams;
+use Telnyx\EmailMessages\MessageEvent;
 use Telnyx\RequestOptions;
 
 /**
@@ -59,7 +60,7 @@ interface EmailMessagesRawContract
      * @param array<string,mixed>|EmailMessageListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailMessageListResponse>
+     * @return BaseResponse<EmailCursorPagination<EmailMessage>>
      *
      * @throws APIException
      */
@@ -135,7 +136,7 @@ interface EmailMessagesRawContract
      * @param array<string,mixed>|EmailMessageRetrieveEventsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailMessageGetEventsResponse>
+     * @return BaseResponse<EmailCursorPagination<MessageEvent>>
      *
      * @throws APIException
      */

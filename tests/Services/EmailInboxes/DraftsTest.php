@@ -7,7 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\EmailInboxes\Drafts\DraftListResponse;
+use Telnyx\EmailBracketCursorPagination;
+use Telnyx\EmailInboxes\Drafts\EmailDraft;
 use Telnyx\EmailInboxes\Drafts\EmailDraftResponse;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Tests\UnsupportedMockTests;
@@ -132,12 +133,17 @@ final class DraftsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailInboxes->drafts->list(
+        $page = $this->client->emailInboxes->drafts->list(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DraftListResponse::class, $result);
+        $this->assertInstanceOf(EmailBracketCursorPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(EmailDraft::class, $item);
+        }
     }
 
     #[Test]

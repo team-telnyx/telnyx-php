@@ -7,8 +7,9 @@ namespace Telnyx\Services\EmailInboxes;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Drafts\DraftListParams\FilterStatus;
-use Telnyx\EmailInboxes\Drafts\DraftListResponse;
+use Telnyx\EmailInboxes\Drafts\EmailDraft;
 use Telnyx\EmailInboxes\Drafts\EmailDraftResponse;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\RequestOptions;
@@ -226,6 +227,8 @@ final class DraftsService implements DraftsContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailBracketCursorPagination<EmailDraft>
+     *
      * @throws APIException
      */
     public function list(
@@ -234,7 +237,7 @@ final class DraftsService implements DraftsContract
         ?string $pageAfter = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): DraftListResponse {
+    ): EmailBracketCursorPagination {
         $params = Util::removeNulls(
             [
                 'filterStatus' => $filterStatus,

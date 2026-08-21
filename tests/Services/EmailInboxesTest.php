@@ -7,7 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\EmailInboxes\EmailInboxListResponse;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailInboxes\EmailInbox;
 use Telnyx\EmailInboxes\EmailInboxResponse;
 use Tests\UnsupportedMockTests;
 
@@ -64,10 +65,15 @@ final class EmailInboxesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailInboxes->list();
+        $page = $this->client->emailInboxes->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EmailInboxListResponse::class, $result);
+        $this->assertInstanceOf(EmailCursorPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(EmailInbox::class, $item);
+        }
     }
 
     #[Test]
