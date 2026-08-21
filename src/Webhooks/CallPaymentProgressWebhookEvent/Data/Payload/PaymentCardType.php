@@ -15,9 +15,15 @@ enum PaymentCardType: string
 
     case AMEX = 'amex';
 
+    case OPTIMA = 'optima';
+
     case DISCOVER = 'discover';
 
     case DINERS_CLUB = 'diners-club';
 
     case JCB = 'jcb';
+
+    case MAESTRO = 'maestro';
+
+    case ENROUTE = 'enroute';
 }

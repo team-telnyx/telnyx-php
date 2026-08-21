@@ -39,6 +39,7 @@ use Telnyx\Calls\Actions\ActionPayParams\Currency;
 use Telnyx\Calls\Actions\ActionPayParams\PaymentMethod;
 use Telnyx\Calls\Actions\ActionPayParams\Prompts;
 use Telnyx\Calls\Actions\ActionPayParams\TransactionType;
+use Telnyx\Calls\Actions\ActionPayParams\ValidCardType;
 use Telnyx\Calls\Actions\ActionPayResponse;
 use Telnyx\Calls\Actions\ActionReferResponse;
 use Telnyx\Calls\Actions\ActionRejectParams\Cause;
@@ -984,6 +985,7 @@ final class ActionsService implements ActionsContract
      * @param string $serviceLevel Speech synthesis service level used for payment prompts. Pay defaults to `premium`.
      * @param int $timeoutMillis time in milliseconds to wait for DTMF input for each collection step
      * @param TransactionType|value-of<TransactionType> $transactionType Transaction to perform. If omitted, Pay infers `tokenize` when `amount` is absent or zero and `charge` when `amount` is positive.
+     * @param list<ValidCardType|value-of<ValidCardType>> $validCardTypes Restricts accepted card numbers to the listed card types. When the caller enters a card number that does not match one of the listed types, Pay treats the input as invalid and re-prompts for the card number. Cannot be used together with `payment_token`.
      * @param string $voice Voice used for payment prompts. Accepts `male`, `female`, or a provider voice in `<Provider>.<Model>.<VoiceId>` format, for example `AWS.Polly.Joanna` or `Telnyx.KokoroTTS.af`.
      * @param RequestOpts|null $requestOptions
      *
@@ -1008,6 +1010,7 @@ final class ActionsService implements ActionsContract
         string $serviceLevel = 'premium',
         int $timeoutMillis = 5000,
         TransactionType|string|null $transactionType = null,
+        ?array $validCardTypes = null,
         string $voice = 'female',
         RequestOptions|array|null $requestOptions = null,
     ): ActionPayResponse {
@@ -1030,6 +1033,7 @@ final class ActionsService implements ActionsContract
                 'serviceLevel' => $serviceLevel,
                 'timeoutMillis' => $timeoutMillis,
                 'transactionType' => $transactionType,
+                'validCardTypes' => $validCardTypes,
                 'voice' => $voice,
             ],
         );

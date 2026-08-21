@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions\PayPromptValue\PayPromptList;
 
 /**
- * Lowercase, case-sensitive detected card type for which this prompt applies. Only the listed brands are currently detected; accepted UnionPay and Maestro test cards do not produce a card-type qualifier.
+ * Lowercase, case-sensitive detected card type for which this prompt applies.
  */
 enum CardType: string
 {
@@ -15,9 +15,15 @@ enum CardType: string
 
     case AMEX = 'amex';
 
+    case OPTIMA = 'optima';
+
     case DISCOVER = 'discover';
 
     case DINERS_CLUB = 'diners-club';
 
     case JCB = 'jcb';
+
+    case MAESTRO = 'maestro';
+
+    case ENROUTE = 'enroute';
 }

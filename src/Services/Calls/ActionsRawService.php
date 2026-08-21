@@ -51,6 +51,7 @@ use Telnyx\Calls\Actions\ActionPayParams\Currency;
 use Telnyx\Calls\Actions\ActionPayParams\PaymentMethod;
 use Telnyx\Calls\Actions\ActionPayParams\Prompts;
 use Telnyx\Calls\Actions\ActionPayParams\TransactionType;
+use Telnyx\Calls\Actions\ActionPayParams\ValidCardType;
 use Telnyx\Calls\Actions\ActionPayResponse;
 use Telnyx\Calls\Actions\ActionReferParams;
 use Telnyx\Calls\Actions\ActionReferResponse;
@@ -823,6 +824,7 @@ final class ActionsRawService implements ActionsRawContract
      *   serviceLevel?: string,
      *   timeoutMillis?: int,
      *   transactionType?: TransactionType|value-of<TransactionType>,
+     *   validCardTypes?: list<ValidCardType|value-of<ValidCardType>>,
      *   voice?: string,
      * }|ActionPayParams $params
      * @param RequestOpts|null $requestOptions

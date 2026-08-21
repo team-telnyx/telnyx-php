@@ -8,6 +8,7 @@ use Telnyx\Calls\Actions\ActionPayParams\Currency;
 use Telnyx\Calls\Actions\ActionPayParams\PaymentMethod;
 use Telnyx\Calls\Actions\ActionPayParams\Prompts;
 use Telnyx\Calls\Actions\ActionPayParams\TransactionType;
+use Telnyx\Calls\Actions\ActionPayParams\ValidCardType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -47,6 +48,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   serviceLevel?: string|null,
  *   timeoutMillis?: int|null,
  *   transactionType?: null|TransactionType|value-of<TransactionType>,
+ *   validCardTypes?: list<ValidCardType|value-of<ValidCardType>>|null,
  *   voice?: string|null,
  * }
  */
@@ -169,6 +171,14 @@ final class ActionPayParams implements BaseModel
     public ?string $transactionType;
 
     /**
+     * Restricts accepted card numbers to the listed card types. When the caller enters a card number that does not match one of the listed types, Pay treats the input as invalid and re-prompts for the card number. Cannot be used together with `payment_token`.
+     *
+     * @var list<value-of<ValidCardType>>|null $validCardTypes
+     */
+    #[Optional('valid_card_types', list: ValidCardType::class)]
+    public ?array $validCardTypes;
+
+    /**
      * Voice used for payment prompts. Accepts `male`, `female`, or a provider voice in `<Provider>.<Model>.<VoiceId>` format, for example `AWS.Polly.Joanna` or `Telnyx.KokoroTTS.af`.
      */
     #[Optional]
@@ -190,6 +200,7 @@ final class ActionPayParams implements BaseModel
      * @param PaymentMethod|value-of<PaymentMethod>|null $paymentMethod
      * @param Prompts|PromptsShape|null $prompts
      * @param TransactionType|value-of<TransactionType>|null $transactionType
+     * @param list<ValidCardType|value-of<ValidCardType>>|null $validCardTypes
      */
     public static function with(
         ?float $amount = null,
@@ -209,6 +220,7 @@ final class ActionPayParams implements BaseModel
         ?string $serviceLevel = null,
         ?int $timeoutMillis = null,
         TransactionType|string|null $transactionType = null,
+        ?array $validCardTypes = null,
         ?string $voice = null,
     ): self {
         $self = new self;
@@ -230,6 +242,7 @@ final class ActionPayParams implements BaseModel
         null !== $serviceLevel && $self['serviceLevel'] = $serviceLevel;
         null !== $timeoutMillis && $self['timeoutMillis'] = $timeoutMillis;
         null !== $transactionType && $self['transactionType'] = $transactionType;
+        null !== $validCardTypes && $self['validCardTypes'] = $validCardTypes;
         null !== $voice && $self['voice'] = $voice;
 
         return $self;
@@ -432,6 +445,19 @@ final class ActionPayParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['transactionType'] = $transactionType;
+
+        return $self;
+    }
+
+    /**
+     * Restricts accepted card numbers to the listed card types. When the caller enters a card number that does not match one of the listed types, Pay treats the input as invalid and re-prompts for the card number. Cannot be used together with `payment_token`.
+     *
+     * @param list<ValidCardType|value-of<ValidCardType>> $validCardTypes
+     */
+    public function withValidCardTypes(array $validCardTypes): self
+    {
+        $self = clone $this;
+        $self['validCardTypes'] = $validCardTypes;
 
         return $self;
     }

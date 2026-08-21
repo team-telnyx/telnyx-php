@@ -13,6 +13,8 @@ enum ErrorType: string
 
     case INVALID_CARD_NUMBER = 'invalid-card-number';
 
+    case INVALID_CARD_TYPE = 'invalid-card-type';
+
     case INVALID_DATE = 'invalid-date';
 
     case INVALID_SECURITY_CODE = 'invalid-security-code';

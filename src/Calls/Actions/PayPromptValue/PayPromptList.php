@@ -39,7 +39,7 @@ final class PayPromptList implements BaseModel
     public ?string $attempt;
 
     /**
-     * Lowercase, case-sensitive detected card type for which this prompt applies. Only the listed brands are currently detected; accepted UnionPay and Maestro test cards do not produce a card-type qualifier.
+     * Lowercase, case-sensitive detected card type for which this prompt applies.
      *
      * @var value-of<CardType>|null $cardType
      */
@@ -121,7 +121,7 @@ final class PayPromptList implements BaseModel
     }
 
     /**
-     * Lowercase, case-sensitive detected card type for which this prompt applies. Only the listed brands are currently detected; accepted UnionPay and Maestro test cards do not produce a card-type qualifier.
+     * Lowercase, case-sensitive detected card type for which this prompt applies.
      *
      * @param CardType|value-of<CardType> $cardType
      */
