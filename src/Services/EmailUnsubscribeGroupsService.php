@@ -8,7 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\EmailUnsubscribeGroups\EmailUnsubscribeGroupDeleteParams\Force\UnionMember0;
+use Telnyx\EmailUnsubscribeGroups\EmailUnsubscribeGroupDeleteParams\Force\ForceString;
 use Telnyx\EmailUnsubscribeGroups\UnsubscribeGroup;
 use Telnyx\EmailUnsubscribeGroups\UnsubscribeGroupResponse;
 use Telnyx\RequestOptions;
@@ -164,7 +164,7 @@ final class EmailUnsubscribeGroupsService implements EmailUnsubscribeGroupsContr
      */
     public function delete(
         string $id,
-        bool|UnionMember0|string|null $force = null,
+        bool|ForceString|string|null $force = null,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(['force' => $force]);

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\PayPromptValue;
 
-use Telnyx\Calls\Actions\PayPromptValue\UnionMember1\CardType;
-use Telnyx\Calls\Actions\PayPromptValue\UnionMember1\ErrorType;
+use Telnyx\Calls\Actions\PayPromptValue\PayPromptList\CardType;
+use Telnyx\Calls\Actions\PayPromptValue\PayPromptList\ErrorType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -14,16 +14,16 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * A text-to-speech prompt with optional matching qualifiers.
  *
- * @phpstan-type UnionMember1Shape = array{
+ * @phpstan-type PayPromptListShape = array{
  *   text: string,
  *   attempt?: string|null,
  *   cardType?: null|CardType|value-of<CardType>,
  *   errorType?: null|ErrorType|value-of<ErrorType>,
  * }
  */
-final class UnionMember1 implements BaseModel
+final class PayPromptList implements BaseModel
 {
-    /** @use SdkModel<UnionMember1Shape> */
+    /** @use SdkModel<PayPromptListShape> */
     use SdkModel;
 
     /**
@@ -55,17 +55,17 @@ final class UnionMember1 implements BaseModel
     public ?string $errorType;
 
     /**
-     * `new UnionMember1()` is missing required properties by the API.
+     * `new PayPromptList()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * UnionMember1::with(text: ...)
+     * PayPromptList::with(text: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new UnionMember1)->withText(...)
+     * (new PayPromptList)->withText(...)
      * ```
      */
     public function __construct()

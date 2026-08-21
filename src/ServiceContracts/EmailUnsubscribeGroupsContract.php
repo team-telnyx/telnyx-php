@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\EmailUnsubscribeGroups\EmailUnsubscribeGroupDeleteParams\Force\UnionMember0;
+use Telnyx\EmailUnsubscribeGroups\EmailUnsubscribeGroupDeleteParams\Force\ForceString;
 use Telnyx\EmailUnsubscribeGroups\UnsubscribeGroup;
 use Telnyx\EmailUnsubscribeGroups\UnsubscribeGroupResponse;
 use Telnyx\RequestOptions;
@@ -86,7 +86,7 @@ interface EmailUnsubscribeGroupsContract
      */
     public function delete(
         string $id,
-        bool|UnionMember0|string|null $force = null,
+        bool|ForceString|string|null $force = null,
         RequestOptions|array|null $requestOptions = null,
     ): mixed;
 }

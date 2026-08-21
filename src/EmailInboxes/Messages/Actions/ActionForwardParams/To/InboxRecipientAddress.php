@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailInboxes\Messages\Actions\InboxActionRecipientInput;
+namespace Telnyx\EmailInboxes\Messages\Actions\ActionForwardParams\To;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -10,11 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type UnionMember1Shape = array{email: string, name?: string|null}
+ * @phpstan-type InboxRecipientAddressShape = array{
+ *   email: string, name?: string|null
+ * }
  */
-final class UnionMember1 implements BaseModel
+final class InboxRecipientAddress implements BaseModel
 {
-    /** @use SdkModel<UnionMember1Shape> */
+    /** @use SdkModel<InboxRecipientAddressShape> */
     use SdkModel;
 
     #[Required]
@@ -24,17 +26,17 @@ final class UnionMember1 implements BaseModel
     public ?string $name;
 
     /**
-     * `new UnionMember1()` is missing required properties by the API.
+     * `new InboxRecipientAddress()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * UnionMember1::with(email: ...)
+     * InboxRecipientAddress::with(email: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new UnionMember1)->withEmail(...)
+     * (new InboxRecipientAddress)->withEmail(...)
      * ```
      */
     public function __construct()

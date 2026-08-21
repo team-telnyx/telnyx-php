@@ -13,38 +13,35 @@ use Telnyx\Rcs\Agents\AgentPhoneContact;
 use Telnyx\Rcs\Agents\AgentWebsiteContact;
 
 /**
- * @phpstan-import-type AgentWebsiteContactShape from \Telnyx\Rcs\Agents\AgentWebsiteContact
  * @phpstan-import-type AgentEmailContactShape from \Telnyx\Rcs\Agents\AgentEmailContact
  * @phpstan-import-type AgentPhoneContactShape from \Telnyx\Rcs\Agents\AgentPhoneContact
+ * @phpstan-import-type AgentWebsiteContactShape from \Telnyx\Rcs\Agents\AgentWebsiteContact
  *
- * @phpstan-type UnionMember1Shape = array{
- *   website: AgentWebsiteContact|AgentWebsiteContactShape,
+ * @phpstan-type AgentProfileContactRequirementShape = array{
+ *   email: AgentEmailContact|AgentEmailContactShape,
  *   brandColor?: string|null,
  *   description?: string|null,
- *   email?: null|AgentEmailContact|AgentEmailContactShape,
  *   heroURL?: string|null,
  *   logoURL?: string|null,
  *   phoneNumber?: null|AgentPhoneContact|AgentPhoneContactShape,
  *   privacyPolicyURL?: string|null,
  *   termsAndConditionsURL?: string|null,
+ *   website?: null|AgentWebsiteContact|AgentWebsiteContactShape,
  * }
  */
-final class UnionMember1 implements BaseModel
+final class AgentProfileContactRequirement implements BaseModel
 {
-    /** @use SdkModel<UnionMember1Shape> */
+    /** @use SdkModel<AgentProfileContactRequirementShape> */
     use SdkModel;
 
     #[Required]
-    public AgentWebsiteContact $website;
+    public AgentEmailContact $email;
 
     #[Optional('brand_color')]
     public ?string $brandColor;
 
     #[Optional]
     public ?string $description;
-
-    #[Optional(nullable: true)]
-    public ?AgentEmailContact $email;
 
     #[Optional('hero_url')]
     public ?string $heroURL;
@@ -61,18 +58,21 @@ final class UnionMember1 implements BaseModel
     #[Optional('terms_and_conditions_url')]
     public ?string $termsAndConditionsURL;
 
+    #[Optional(nullable: true)]
+    public ?AgentWebsiteContact $website;
+
     /**
-     * `new UnionMember1()` is missing required properties by the API.
+     * `new AgentProfileContactRequirement()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * UnionMember1::with(website: ...)
+     * AgentProfileContactRequirement::with(email: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new UnionMember1)->withWebsite(...)
+     * (new AgentProfileContactRequirement)->withEmail(...)
      * ```
      */
     public function __construct()
@@ -85,44 +85,44 @@ final class UnionMember1 implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AgentWebsiteContact|AgentWebsiteContactShape $website
-     * @param AgentEmailContact|AgentEmailContactShape|null $email
+     * @param AgentEmailContact|AgentEmailContactShape $email
      * @param AgentPhoneContact|AgentPhoneContactShape|null $phoneNumber
+     * @param AgentWebsiteContact|AgentWebsiteContactShape|null $website
      */
     public static function with(
-        AgentWebsiteContact|array $website,
+        AgentEmailContact|array $email,
         ?string $brandColor = null,
         ?string $description = null,
-        AgentEmailContact|array|null $email = null,
         ?string $heroURL = null,
         ?string $logoURL = null,
         AgentPhoneContact|array|null $phoneNumber = null,
         ?string $privacyPolicyURL = null,
         ?string $termsAndConditionsURL = null,
+        AgentWebsiteContact|array|null $website = null,
     ): self {
         $self = new self;
 
-        $self['website'] = $website;
+        $self['email'] = $email;
 
         null !== $brandColor && $self['brandColor'] = $brandColor;
         null !== $description && $self['description'] = $description;
-        null !== $email && $self['email'] = $email;
         null !== $heroURL && $self['heroURL'] = $heroURL;
         null !== $logoURL && $self['logoURL'] = $logoURL;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $privacyPolicyURL && $self['privacyPolicyURL'] = $privacyPolicyURL;
         null !== $termsAndConditionsURL && $self['termsAndConditionsURL'] = $termsAndConditionsURL;
+        null !== $website && $self['website'] = $website;
 
         return $self;
     }
 
     /**
-     * @param AgentWebsiteContact|AgentWebsiteContactShape $website
+     * @param AgentEmailContact|AgentEmailContactShape $email
      */
-    public function withWebsite(AgentWebsiteContact|array $website): self
+    public function withEmail(AgentEmailContact|array $email): self
     {
         $self = clone $this;
-        $self['website'] = $website;
+        $self['email'] = $email;
 
         return $self;
     }
@@ -139,17 +139,6 @@ final class UnionMember1 implements BaseModel
     {
         $self = clone $this;
         $self['description'] = $description;
-
-        return $self;
-    }
-
-    /**
-     * @param AgentEmailContact|AgentEmailContactShape|null $email
-     */
-    public function withEmail(AgentEmailContact|array|null $email): self
-    {
-        $self = clone $this;
-        $self['email'] = $email;
 
         return $self;
     }
@@ -195,6 +184,17 @@ final class UnionMember1 implements BaseModel
     ): self {
         $self = clone $this;
         $self['termsAndConditionsURL'] = $termsAndConditionsURL;
+
+        return $self;
+    }
+
+    /**
+     * @param AgentWebsiteContact|AgentWebsiteContactShape|null $website
+     */
+    public function withWebsite(AgentWebsiteContact|array|null $website): self
+    {
+        $self = clone $this;
+        $self['website'] = $website;
 
         return $self;
     }

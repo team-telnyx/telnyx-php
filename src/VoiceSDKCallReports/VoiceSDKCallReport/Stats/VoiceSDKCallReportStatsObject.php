@@ -11,16 +11,16 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Raw stats object emitted by the Voice SDK.
  *
- * @phpstan-type UnionMember1Shape = array{
+ * @phpstan-type VoiceSDKCallReportStatsObjectShape = array{
  *   audio?: array<string,mixed>|null,
  *   connection?: array<string,mixed>|null,
  *   ice?: array<string,mixed>|null,
  *   transport?: array<string,mixed>|null,
  * }
  */
-final class UnionMember1 implements BaseModel
+final class VoiceSDKCallReportStatsObject implements BaseModel
 {
-    /** @use SdkModel<UnionMember1Shape> */
+    /** @use SdkModel<VoiceSDKCallReportStatsObjectShape> */
     use SdkModel;
 
     /**

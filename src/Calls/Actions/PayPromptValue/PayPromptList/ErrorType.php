@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\PayPromptValue\UnionMember1;
+namespace Telnyx\Calls\Actions\PayPromptValue\PayPromptList;
 
 /**
  * Step error for which this prompt applies.

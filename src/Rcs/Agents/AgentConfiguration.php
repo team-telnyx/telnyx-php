@@ -8,9 +8,9 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Rcs\Agents\AgentConfiguration\Basics\UnionMember0;
-use Telnyx\Rcs\Agents\AgentConfiguration\Basics\UnionMember1;
-use Telnyx\Rcs\Agents\AgentConfiguration\Basics\UnionMember2;
+use Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentPhoneContactRequirement;
+use Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentProfileContactRequirement;
+use Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentWebhookContactRequirement;
 
 /**
  * @phpstan-import-type BasicsVariants from \Telnyx\Rcs\Agents\AgentConfiguration\Basics
@@ -35,7 +35,7 @@ final class AgentConfiguration implements BaseModel
      * @var BasicsVariants $basics
      */
     #[Required]
-    public UnionMember0|UnionMember1|UnionMember2 $basics;
+    public AgentPhoneContactRequirement|AgentWebhookContactRequirement|AgentProfileContactRequirement $basics;
 
     #[Optional(nullable: true)]
     public ?AgentCampaignConfiguration $campaign;
@@ -72,7 +72,7 @@ final class AgentConfiguration implements BaseModel
      * @param AgentTestingConfiguration|AgentTestingConfigurationShape|null $testing
      */
     public static function with(
-        UnionMember0|array|UnionMember1|UnionMember2 $basics,
+        AgentPhoneContactRequirement|array|AgentWebhookContactRequirement|AgentProfileContactRequirement $basics,
         AgentCampaignConfiguration|array|null $campaign = null,
         AgentTestingConfiguration|array|null $testing = null,
     ): self {
@@ -92,7 +92,7 @@ final class AgentConfiguration implements BaseModel
      * @param BasicsShape $basics
      */
     public function withBasics(
-        UnionMember0|array|UnionMember1|UnionMember2 $basics
+        AgentPhoneContactRequirement|array|AgentWebhookContactRequirement|AgentProfileContactRequirement $basics,
     ): self {
         $self = clone $this;
         $self['basics'] = $basics;

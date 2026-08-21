@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\PayPromptValue\UnionMember1;
+namespace Telnyx\Calls\Actions\PayPromptValue\PayPromptList;
 
 /**
  * Lowercase, case-sensitive detected card type for which this prompt applies. Only the listed brands are currently detected; accepted UnionPay and Maestro test cards do not produce a card-type qualifier.

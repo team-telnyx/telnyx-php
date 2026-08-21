@@ -17,7 +17,7 @@ use Telnyx\Rcs\Agents\AgentWebsiteContact;
  * @phpstan-import-type AgentEmailContactShape from \Telnyx\Rcs\Agents\AgentEmailContact
  * @phpstan-import-type AgentWebsiteContactShape from \Telnyx\Rcs\Agents\AgentWebsiteContact
  *
- * @phpstan-type UnionMember0Shape = array{
+ * @phpstan-type AgentPhoneContactRequirementShape = array{
  *   phoneNumber: AgentPhoneContact|AgentPhoneContactShape,
  *   brandColor?: string|null,
  *   description?: string|null,
@@ -29,9 +29,9 @@ use Telnyx\Rcs\Agents\AgentWebsiteContact;
  *   website?: null|AgentWebsiteContact|AgentWebsiteContactShape,
  * }
  */
-final class UnionMember0 implements BaseModel
+final class AgentPhoneContactRequirement implements BaseModel
 {
-    /** @use SdkModel<UnionMember0Shape> */
+    /** @use SdkModel<AgentPhoneContactRequirementShape> */
     use SdkModel;
 
     #[Required('phone_number')]
@@ -62,17 +62,17 @@ final class UnionMember0 implements BaseModel
     public ?AgentWebsiteContact $website;
 
     /**
-     * `new UnionMember0()` is missing required properties by the API.
+     * `new AgentPhoneContactRequirement()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * UnionMember0::with(phoneNumber: ...)
+     * AgentPhoneContactRequirement::with(phoneNumber: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new UnionMember0)->withPhoneNumber(...)
+     * (new AgentPhoneContactRequirement)->withPhoneNumber(...)
      * ```
      */
     public function __construct()
