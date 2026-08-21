@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all Global IP health checks.
+ * Returns a paginated list of the Global IP health checks configured on your account.
  *
  * @see Telnyx\Services\GlobalIPHealthChecksService::list()
  *

@@ -33,7 +33,7 @@ final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
     /**
      * @api
      *
-     * Creates a phone number block order.
+     * Creates an order for a block of consecutive phone numbers and returns the created order. Track fulfillment through the order's status.
      *
      * @param array{
      *   range: int,

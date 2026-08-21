@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get a paginated list of user bundles.
+ * Returns a paginated list of the bundles active on your account, with support for filtering.
  *
  * @see Telnyx\Services\BundlePricing\UserBundlesService::list()
  *

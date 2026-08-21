@@ -122,7 +122,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
     /**
      * @api
      *
-     * Deletes a stored SIPREC connector.
+     * Deletes the stored SIPREC connector with the specified connector name.
      *
      * @param string $connectorName uniquely identifies a SIPREC connector
      * @param RequestOpts|null $requestOptions

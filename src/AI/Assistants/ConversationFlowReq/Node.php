@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\ConversationFlowReq;
 
-use Telnyx\AI\Assistants\ConversationFlowReq\Node\FlowNodeReq;
-use Telnyx\AI\Assistants\ConversationFlowReq\Node\SpeakNodeReq;
-use Telnyx\AI\Assistants\ConversationFlowReq\Node\ToolNodeReq;
+use Telnyx\AI\Assistants\FlowNodeReq;
+use Telnyx\AI\Assistants\SpeakNodeReq;
+use Telnyx\AI\Assistants\ToolNodeReq;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -17,9 +17,9 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * Each node carries the prompt, tool scope, and optional overrides for
  * model/voice/transcription. Unset overrides cascade from the assistant.
  *
- * @phpstan-import-type FlowNodeReqShape from \Telnyx\AI\Assistants\ConversationFlowReq\Node\FlowNodeReq
- * @phpstan-import-type ToolNodeReqShape from \Telnyx\AI\Assistants\ConversationFlowReq\Node\ToolNodeReq
- * @phpstan-import-type SpeakNodeReqShape from \Telnyx\AI\Assistants\ConversationFlowReq\Node\SpeakNodeReq
+ * @phpstan-import-type FlowNodeReqShape from \Telnyx\AI\Assistants\FlowNodeReq
+ * @phpstan-import-type ToolNodeReqShape from \Telnyx\AI\Assistants\ToolNodeReq
+ * @phpstan-import-type SpeakNodeReqShape from \Telnyx\AI\Assistants\SpeakNodeReq
  *
  * @phpstan-type NodeVariants = FlowNodeReq|ToolNodeReq|SpeakNodeReq
  * @phpstan-type NodeShape = NodeVariants|FlowNodeReqShape|ToolNodeReqShape|SpeakNodeReqShape

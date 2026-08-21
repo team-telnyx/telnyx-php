@@ -41,7 +41,7 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
     /**
      * @api
      *
-     * Creates a new mobile push credential
+     * Creates a new mobile push credential for delivering push notifications to iOS or Android apps, and returns the created credential.
      *
      * @param CreateMobilePushCredentialRequestShape $createMobilePushCredentialRequest
      * @param RequestOpts|null $requestOptions
@@ -87,7 +87,7 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
     /**
      * @api
      *
-     * List mobile push credentials
+     * Returns a paginated list of the mobile push credentials on your account, with support for filtering.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias]
      * @param RequestOpts|null $requestOptions

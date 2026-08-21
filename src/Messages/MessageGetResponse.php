@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessageGetResponse\Data;
-use Telnyx\Messages\MessageGetResponse\Data\MessagingInboundMessagePayload;
 
 /**
  * @phpstan-import-type DataVariants from \Telnyx\Messages\MessageGetResponse\Data

@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
 
 /**
- * Updates a conference resource.
+ * Updates the specified conference resource, for example to modify its status, and returns the updated conference.
  *
  * @see Telnyx\Services\Texml\Accounts\ConferencesService::update()
  *

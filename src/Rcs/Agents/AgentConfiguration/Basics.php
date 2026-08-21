@@ -7,19 +7,19 @@ namespace Telnyx\Rcs\Agents\AgentConfiguration;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\Rcs\Agents\AgentConfiguration\Basics\UnionMember0;
-use Telnyx\Rcs\Agents\AgentConfiguration\Basics\UnionMember1;
-use Telnyx\Rcs\Agents\AgentConfiguration\Basics\UnionMember2;
+use Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentPhoneContactRequirement;
+use Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentProfileContactRequirement;
+use Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentWebhookContactRequirement;
 
 /**
  * Basic agent identity and contact information. At least one complete phone, website, or email contact is required.
  *
- * @phpstan-import-type UnionMember0Shape from \Telnyx\Rcs\Agents\AgentConfiguration\Basics\UnionMember0
- * @phpstan-import-type UnionMember1Shape from \Telnyx\Rcs\Agents\AgentConfiguration\Basics\UnionMember1
- * @phpstan-import-type UnionMember2Shape from \Telnyx\Rcs\Agents\AgentConfiguration\Basics\UnionMember2
+ * @phpstan-import-type AgentPhoneContactRequirementShape from \Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentPhoneContactRequirement
+ * @phpstan-import-type AgentWebhookContactRequirementShape from \Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentWebhookContactRequirement
+ * @phpstan-import-type AgentProfileContactRequirementShape from \Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentProfileContactRequirement
  *
- * @phpstan-type BasicsVariants = UnionMember0|UnionMember1|UnionMember2
- * @phpstan-type BasicsShape = BasicsVariants|UnionMember0Shape|UnionMember1Shape|UnionMember2Shape
+ * @phpstan-type BasicsVariants = AgentPhoneContactRequirement|AgentWebhookContactRequirement|AgentProfileContactRequirement
+ * @phpstan-type BasicsShape = BasicsVariants|AgentPhoneContactRequirementShape|AgentWebhookContactRequirementShape|AgentProfileContactRequirementShape
  */
 final class Basics implements ConverterSource
 {
@@ -30,6 +30,10 @@ final class Basics implements ConverterSource
      */
     public static function variants(): array
     {
-        return [UnionMember0::class, UnionMember1::class, UnionMember2::class];
+        return [
+            AgentPhoneContactRequirement::class,
+            AgentWebhookContactRequirement::class,
+            AgentProfileContactRequirement::class,
+        ];
     }
 }

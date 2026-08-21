@@ -115,7 +115,7 @@ interface OAuthContract
         ?string $scope = null,
         ?string $state = null,
         RequestOptions|array|null $requestOptions = null,
-    ): mixed;
+    ): string;
 
     /**
      * @api

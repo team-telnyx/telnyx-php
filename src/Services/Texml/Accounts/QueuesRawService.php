@@ -34,7 +34,7 @@ final class QueuesRawService implements QueuesRawContract
     /**
      * @api
      *
-     * Creates a new queue resource.
+     * Creates a new queue resource for the account with the provided settings and returns it.
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array{friendlyName?: string, maxSize?: int}|QueueCreateParams $params
@@ -68,7 +68,7 @@ final class QueuesRawService implements QueuesRawContract
     /**
      * @api
      *
-     * Returns a queue resource.
+     * Returns a single queue resource for the account by its QueueSid.
      *
      * @param string $queueSid the QueueSid that identifies the call queue
      * @param array{accountSid: string}|QueueRetrieveParams $params
@@ -102,7 +102,7 @@ final class QueuesRawService implements QueuesRawContract
     /**
      * @api
      *
-     * Updates a queue resource.
+     * Updates the specified queue resource's settings and returns the updated queue.
      *
      * @param string $queueSid path param: The QueueSid that identifies the call queue
      * @param array{accountSid: string, maxSize?: int}|QueueUpdateParams $params
@@ -138,7 +138,7 @@ final class QueuesRawService implements QueuesRawContract
     /**
      * @api
      *
-     * Lists queue resources.
+     * Returns a paginated list of queue resources for the account, with support for filtering by creation or update dates.
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array{
@@ -187,7 +187,7 @@ final class QueuesRawService implements QueuesRawContract
     /**
      * @api
      *
-     * Delete a queue resource.
+     * Permanently deletes the specified queue resource from the account.
      *
      * @param string $queueSid the QueueSid that identifies the call queue
      * @param array{accountSid: string}|QueueDeleteParams $params

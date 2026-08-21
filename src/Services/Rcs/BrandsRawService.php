@@ -8,8 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Rcs\Brands\BrandAddress;
 use Telnyx\Rcs\Brands\BrandCreateParams;
-use Telnyx\Rcs\Brands\BrandCreateParams\Address;
 use Telnyx\Rcs\Brands\BrandCreateParams\Contacts;
 use Telnyx\Rcs\Brands\BrandCreateParams\Identifiers;
 use Telnyx\Rcs\Brands\BrandLegalEntityType;
@@ -22,12 +22,11 @@ use Telnyx\ServiceContracts\Rcs\BrandsRawContract;
 /**
  * Manage the legal business entities that operate RCS agents.
  *
- * @phpstan-import-type AddressShape from \Telnyx\Rcs\Brands\BrandCreateParams\Address
  * @phpstan-import-type ContactsShape from \Telnyx\Rcs\Brands\BrandCreateParams\Contacts
  * @phpstan-import-type IdentifiersShape from \Telnyx\Rcs\Brands\BrandCreateParams\Identifiers
- * @phpstan-import-type AddressShape from \Telnyx\Rcs\Brands\BrandUpdateParams\Address as AddressShape1
  * @phpstan-import-type ContactsShape from \Telnyx\Rcs\Brands\BrandUpdateParams\Contacts as ContactsShape1
  * @phpstan-import-type IdentifiersShape from \Telnyx\Rcs\Brands\BrandUpdateParams\Identifiers as IdentifiersShape1
+ * @phpstan-import-type BrandAddressShape from \Telnyx\Rcs\Brands\BrandAddress
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BrandsRawService implements BrandsRawContract
@@ -44,7 +43,7 @@ final class BrandsRawService implements BrandsRawContract
      * Creates an editable RCS brand draft. Creating the draft does not begin external review.
      *
      * @param array{
-     *   addresses: array<string,Address|AddressShape>,
+     *   addresses: array<string,BrandAddress|BrandAddressShape>,
      *   contacts: Contacts|ContactsShape,
      *   displayName: string,
      *   identifiers: Identifiers|IdentifiersShape,
@@ -111,7 +110,7 @@ final class BrandsRawService implements BrandsRawContract
      *
      * @param string $id the Telnyx-assigned brand identifier
      * @param array{
-     *   addresses?: array<string,BrandUpdateParams\Address|AddressShape1>,
+     *   addresses?: array<string,BrandAddress|BrandAddressShape>,
      *   contacts?: BrandUpdateParams\Contacts|ContactsShape1,
      *   displayName?: string,
      *   identifiers?: BrandUpdateParams\Identifiers|IdentifiersShape1,

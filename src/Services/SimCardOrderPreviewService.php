@@ -34,7 +34,7 @@ final class SimCardOrderPreviewService implements SimCardOrderPreviewContract
     /**
      * @api
      *
-     * Preview SIM card order purchases.
+     * Previews a SIM card order purchase, returning estimated costs and details before you place the order. The preview is processed asynchronously.
      *
      * @param string $addressID uniquely identifies the address for the order
      * @param int $quantity the amount of SIM cards that the user would like to purchase in the SIM card order

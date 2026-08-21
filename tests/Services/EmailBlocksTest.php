@@ -117,12 +117,17 @@ final class EmailBlocksTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailBlocks->retrieveEvents(
+        $page = $this->client->emailBlocks->retrieveEvents(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EmailBlockGetEventsResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(EmailBlockGetEventsResponse::class, $item);
+        }
     }
 
     #[Test]

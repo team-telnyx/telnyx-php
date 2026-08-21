@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Synchronously create a Room.
+ * Synchronously creates a new video room with the provided configuration and returns the created room.
  *
  * @see Telnyx\Services\RoomsService::create()
  *

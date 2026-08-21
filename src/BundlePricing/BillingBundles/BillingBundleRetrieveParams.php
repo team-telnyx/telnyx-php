@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get a single bundle by ID.
+ * Returns the details of a single billing bundle by its ID, so you can inspect its contents before purchasing a user bundle.
  *
  * @see Telnyx\Services\BundlePricing\BillingBundlesService::retrieve()
  *

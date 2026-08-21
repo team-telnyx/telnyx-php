@@ -35,7 +35,7 @@ final class SimCardOrdersRawService implements SimCardOrdersRawContract
     /**
      * @api
      *
-     * Creates a new order for SIM cards.
+     * Creates a new order for physical SIM cards, including quantity and shipping details, and returns the created order.
      *
      * @param array{addressID: string, quantity: int}|SimCardOrderCreateParams $params
      * @param RequestOpts|null $requestOptions
@@ -66,7 +66,7 @@ final class SimCardOrdersRawService implements SimCardOrdersRawContract
     /**
      * @api
      *
-     * Get a single SIM card order by its ID.
+     * Returns the details of a single SIM card order by its ID, including its status.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

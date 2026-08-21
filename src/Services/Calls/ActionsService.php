@@ -39,6 +39,7 @@ use Telnyx\Calls\Actions\ActionPayParams\Currency;
 use Telnyx\Calls\Actions\ActionPayParams\PaymentMethod;
 use Telnyx\Calls\Actions\ActionPayParams\Prompts;
 use Telnyx\Calls\Actions\ActionPayParams\TransactionType;
+use Telnyx\Calls\Actions\ActionPayParams\ValidCardType;
 use Telnyx\Calls\Actions\ActionPayResponse;
 use Telnyx\Calls\Actions\ActionReferResponse;
 use Telnyx\Calls\Actions\ActionRejectParams\Cause;
@@ -71,8 +72,6 @@ use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineHumainConfig;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineReson8Config;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStopConversationRelayResponse;
@@ -109,7 +108,9 @@ use Telnyx\Calls\Actions\TranscriptionEngineAssemblyaiConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineHumainConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineParakeetConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineReson8Config;
 use Telnyx\Calls\Actions\TranscriptionEngineSonioxConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
@@ -135,7 +136,6 @@ use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ResembleVoiceSettings;
-use Telnyx\RimeVoiceSettings;
 use Telnyx\ServiceContracts\Calls\ActionsContract;
 use Telnyx\XaiVoiceSettings;
 
@@ -451,7 +451,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Put the call in a queue.
+     * Places the call into a queue, where it waits until it is removed or bridged to another leg. Queue behavior is configured through the request body.
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $queueName The name of the queue the call should be put in. If a queue with a given name doesn't exist yet it will be created.
@@ -613,7 +613,7 @@ final class ActionsService implements ActionsContract
         TranscriptionConfig|array|null $transcription = null,
         int $userResponseTimeoutMs = 10000,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingAIResponse {
         $params = Util::removeNulls(
@@ -739,7 +739,6 @@ final class ActionsService implements ActionsContract
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.eleven_multilingual_v2.21m00Tcm4TlvDq8ikWAM`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration identifier secret in `"voice_settings": {"api_key_ref": "<secret_identifier>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      * - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>` (e.g., `Telnyx.KokoroTTS.af`). Use `voice_settings` to configure voice_speed and other synthesis parameters. `Bayan` provides Arabic (multiple dialects) and English voices (e.g., `Telnyx.Bayan.Ahmed`, `Telnyx.Bayan.Amanda`). `Sukhan` provides Urdu voices (e.g., `Telnyx.Sukhan.urdu-professor`); `voice_speed` is not supported.
      * - **Minimax:** Use `Minimax.<ModelId>.<VoiceId>` (e.g., `Minimax.speech-02-hd.Wise_Woman`). Supported models: `speech-02-turbo`, `speech-02-hd`, `speech-2.6-turbo`, `speech-2.8-turbo`. Use `voice_settings` to configure speed, volume, pitch, and language_boost.
-     * - **Rime:** Use `Rime.<model_id>.<voice_id>` (e.g., `Rime.Arcana.cove`). Supported model_ids: `Arcana`, `Mist`, `ArcanaV3`, `Coda`. Use `voice_settings` to configure voice_speed. To use your own Rime account, provide your Rime API key as an integration secret in `"voice_settings": {"type": "rime", "api_key_ref": "<secret_identifier>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details.
      * - **Resemble:** Use `Resemble.Turbo.<voice_id>` (e.g., `Resemble.Turbo.my_voice`). Only `Turbo` model is supported. Use `voice_settings` to configure precision, sample_rate, and format.
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`. Use `voice_settings` to configure `delivery_mode` (`STABLE`, `BALANCED`, `CREATIVE`), supported by `TTS2` only.
      * - **Fish Audio:** Use `FishAudio.<ModelId>.<VoiceId>` (e.g., `FishAudio.s2.1-pro.<reference_id>`). Supported models: `s2.1-pro`, `s2-pro`, `s1`. `VoiceId` is a Fish Voice-Library reference ID.
@@ -782,7 +781,7 @@ final class ActionsService implements ActionsContract
         string $terminatingDigit = '#',
         int $timeoutMillis = 60000,
         string $validDigits = '0123456789#*',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingSpeakResponse {
         $params = Util::removeNulls(
@@ -891,7 +890,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Removes the call from a queue.
+     * Removes the call from the queue it is currently waiting in. The call remains active and can be directed with further call commands.
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -986,6 +985,7 @@ final class ActionsService implements ActionsContract
      * @param string $serviceLevel Speech synthesis service level used for payment prompts. Pay defaults to `premium`.
      * @param int $timeoutMillis time in milliseconds to wait for DTMF input for each collection step
      * @param TransactionType|value-of<TransactionType> $transactionType Transaction to perform. If omitted, Pay infers `tokenize` when `amount` is absent or zero and `charge` when `amount` is positive.
+     * @param list<ValidCardType|value-of<ValidCardType>> $validCardTypes Restricts accepted card numbers to the listed card types. When the caller enters a card number that does not match one of the listed types, Pay treats the input as invalid and re-prompts for the card number. Cannot be used together with `payment_token`.
      * @param string $voice Voice used for payment prompts. Accepts `male`, `female`, or a provider voice in `<Provider>.<Model>.<VoiceId>` format, for example `AWS.Polly.Joanna` or `Telnyx.KokoroTTS.af`.
      * @param RequestOpts|null $requestOptions
      *
@@ -1010,6 +1010,7 @@ final class ActionsService implements ActionsContract
         string $serviceLevel = 'premium',
         int $timeoutMillis = 5000,
         TransactionType|string|null $transactionType = null,
+        ?array $validCardTypes = null,
         string $voice = 'female',
         RequestOptions|array|null $requestOptions = null,
     ): ActionPayResponse {
@@ -1032,6 +1033,7 @@ final class ActionsService implements ActionsContract
                 'serviceLevel' => $serviceLevel,
                 'timeoutMillis' => $timeoutMillis,
                 'transactionType' => $transactionType,
+                'validCardTypes' => $validCardTypes,
                 'voice' => $voice,
             ],
         );
@@ -1274,7 +1276,6 @@ final class ActionsService implements ActionsContract
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.eleven_multilingual_v2.21m00Tcm4TlvDq8ikWAM`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration identifier secret in `"voice_settings": {"api_key_ref": "<secret_identifier>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      * - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>` (e.g., `Telnyx.KokoroTTS.af`). Use `voice_settings` to configure voice_speed and other synthesis parameters. `Bayan` provides Arabic (multiple dialects) and English voices (e.g., `Telnyx.Bayan.Ahmed`, `Telnyx.Bayan.Amanda`). `Sukhan` provides Urdu voices (e.g., `Telnyx.Sukhan.urdu-professor`); `voice_speed` is not supported.
      * - **Minimax:** Use `Minimax.<ModelId>.<VoiceId>` (e.g., `Minimax.speech-02-hd.Wise_Woman`). Supported models: `speech-02-turbo`, `speech-02-hd`, `speech-2.6-turbo`, `speech-2.8-turbo`. Use `voice_settings` to configure speed, volume, pitch, and language_boost.
-     * - **Rime:** Use `Rime.<model_id>.<voice_id>` (e.g., `Rime.Arcana.cove`). Supported model_ids: `Arcana`, `Mist`, `ArcanaV3`, `Coda`. Use `voice_settings` to configure voice_speed. To use your own Rime account, provide your Rime API key as an integration secret in `"voice_settings": {"type": "rime", "api_key_ref": "<secret_identifier>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details.
      * - **Resemble:** Use `Resemble.Turbo.<voice_id>` (e.g., `Resemble.Turbo.my_voice`). Only `Turbo` model is supported. Use `voice_settings` to configure precision, sample_rate, and format.
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`. Use `voice_settings` to configure `delivery_mode` (`STABLE`, `BALANCED`, `CREATIVE`), supported by `TTS2` only.
      * - **Fish Audio:** Use `FishAudio.<ModelId>.<VoiceId>` (e.g., `FishAudio.s2.1-pro.<reference_id>`). Supported models: `s2.1-pro`, `s2-pro`, `s1`. `VoiceId` is a Fish Voice-Library reference ID.
@@ -1307,7 +1308,7 @@ final class ActionsService implements ActionsContract
         \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|string $serviceLevel = 'premium',
         ?string $stop = null,
         TargetLegs|string $targetLegs = 'self',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse {
         $params = Util::removeNulls(
@@ -1460,7 +1461,7 @@ final class ActionsService implements ActionsContract
         ?string $ttsProvider = null,
         ?string $url = null,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartConversationRelayResponse {
         $params = Util::removeNulls(
@@ -1906,7 +1907,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Stop an AI assistant on the call.
+     * Stops the AI assistant currently engaged on the call. The call remains active and can continue with other call control commands.
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -2209,7 +2210,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Stop real-time transcription.
+     * Stops real-time transcription on the call. Transcription webhooks cease once the command takes effect; the call itself is unaffected.
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -2416,7 +2417,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Updates client state
+     * Updates the client state associated with the call. Client state is an opaque value echoed back in subsequent webhooks for the call, letting you correlate events with your application's state.
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.

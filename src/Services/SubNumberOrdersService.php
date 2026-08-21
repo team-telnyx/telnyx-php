@@ -41,7 +41,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
     /**
      * @api
      *
-     * Get an existing sub number order.
+     * Returns the details of an existing sub number order, with support for filtering.
      *
      * @param string $subNumberOrderID the sub number order ID
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers]
@@ -65,7 +65,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
     /**
      * @api
      *
-     * Updates a sub number order.
+     * Updates the requirements of an existing sub number order and returns the updated order.
      *
      * @param string $subNumberOrderID the sub number order ID
      * @param list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape> $regulatoryRequirements
@@ -93,7 +93,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
      *
      * Get a paginated list of sub number orders.
      *
-     * @param \Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
+     * @param \Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count], filter[include_phone_numbers]
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

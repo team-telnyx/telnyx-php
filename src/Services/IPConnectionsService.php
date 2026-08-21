@@ -60,7 +60,7 @@ final class IPConnectionsService implements IPConnectionsContract
     /**
      * @api
      *
-     * Creates an IP connection.
+     * Creates a new IP-based SIP connection, which authenticates traffic by source IP address.
      *
      * @param bool $active Defaults to true
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
@@ -267,7 +267,7 @@ final class IPConnectionsService implements IPConnectionsContract
     /**
      * @api
      *
-     * Returns a list of your IP connections.
+     * Returns a paginated list of your IP-based SIP connections, with support for filtering and sorting.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
@@ -313,7 +313,7 @@ final class IPConnectionsService implements IPConnectionsContract
     /**
      * @api
      *
-     * Deletes an existing IP connection.
+     * Permanently deletes the specified IP connection from your account.
      *
      * @param string $id identifies the type of resource
      * @param RequestOpts|null $requestOptions

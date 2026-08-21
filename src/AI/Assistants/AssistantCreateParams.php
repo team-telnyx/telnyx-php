@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a new AI Assistant.
+ * Creates a new AI assistant from the provided configuration, including its model, instructions, and attached tools, and returns the created assistant.
  *
  * @see Telnyx\Services\AI\AssistantsService::create()
  *
@@ -62,6 +62,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
  *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
  *   widgetSettings?: null|WidgetSettings|WidgetSettingsShape,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class AssistantCreateParams implements BaseModel
@@ -219,6 +220,9 @@ final class AssistantCreateParams implements BaseModel
     #[Optional('widget_settings')]
     public ?WidgetSettings $widgetSettings;
 
+    #[Optional]
+    public ?string $idempotencyKey;
+
     /**
      * `new AssistantCreateParams()` is missing required properties by the API.
      *
@@ -293,6 +297,7 @@ final class AssistantCreateParams implements BaseModel
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -325,6 +330,7 @@ final class AssistantCreateParams implements BaseModel
         null !== $transcription && $self['transcription'] = $transcription;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
         null !== $widgetSettings && $self['widgetSettings'] = $widgetSettings;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -664,6 +670,14 @@ final class AssistantCreateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['widgetSettings'] = $widgetSettings;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

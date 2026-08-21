@@ -95,7 +95,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
     /**
      * @api
      *
-     * Update a Wireless Blocklist.
+     * Updates the specified wireless blocklist. The update is processed asynchronously, so the request is accepted and completes in the background.
      *
      * @param string $id identifies the wireless blocklist
      * @param array{
@@ -177,7 +177,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
     /**
      * @api
      *
-     * Deletes the Wireless Blocklist.
+     * Permanently deletes the specified wireless blocklist from your account.
      *
      * @param string $id identifies the wireless blocklist
      * @param RequestOpts|null $requestOptions

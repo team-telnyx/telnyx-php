@@ -40,7 +40,7 @@ final class UserAddressesService implements UserAddressesContract
     /**
      * @api
      *
-     * Creates a user address.
+     * Creates a new user address from the provided details and returns the created address.
      *
      * @param string $businessName the business name associated with the user address
      * @param string $countryCode the two-character (ISO 3166-1 alpha-2) country code of the user address
@@ -125,7 +125,7 @@ final class UserAddressesService implements UserAddressesContract
     /**
      * @api
      *
-     * Returns a list of your user addresses.
+     * Returns a paginated list of your user addresses, with support for filtering and sorting.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[street_address][contains]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>

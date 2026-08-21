@@ -6,14 +6,15 @@ namespace Telnyx\ServiceContracts\EmailInboxes;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Drafts\DraftCreateParams;
 use Telnyx\EmailInboxes\Drafts\DraftDeleteParams;
 use Telnyx\EmailInboxes\Drafts\DraftListParams;
-use Telnyx\EmailInboxes\Drafts\DraftListResponse;
 use Telnyx\EmailInboxes\Drafts\DraftPatchParams;
 use Telnyx\EmailInboxes\Drafts\DraftRetrieveParams;
 use Telnyx\EmailInboxes\Drafts\DraftSendParams;
 use Telnyx\EmailInboxes\Drafts\DraftUpdateParams;
+use Telnyx\EmailInboxes\Drafts\EmailDraft;
 use Telnyx\EmailInboxes\Drafts\EmailDraftResponse;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\RequestOptions;
@@ -81,7 +82,7 @@ interface DraftsRawContract
      * @param array<string,mixed>|DraftListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DraftListResponse>
+     * @return BaseResponse<EmailBracketCursorPagination<EmailDraft>>
      *
      * @throws APIException
      */

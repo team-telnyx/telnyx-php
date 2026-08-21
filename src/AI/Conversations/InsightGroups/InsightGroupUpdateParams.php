@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update an insight template group.
+ * Updates the specified insight template group and returns the updated group.
  *
  * @see Telnyx\Services\AI\Conversations\InsightGroupsService::update()
  *

@@ -131,7 +131,7 @@ final class OAuthTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -152,7 +152,7 @@ final class OAuthTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
+        $this->assertIsString($result);
     }
 
     #[Test]

@@ -17,6 +17,7 @@ use Telnyx\AI\Embeddings\EmbeddingURLParams;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsRawContract;
 
@@ -63,6 +64,7 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      *   documentChunkSize?: int,
      *   embeddingModel?: EmbeddingModel|value-of<EmbeddingModel>,
      *   loader?: Loader|value-of<Loader>,
+     *   idempotencyKey?: string,
      * }|EmbeddingCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -78,12 +80,20 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/embeddings',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: EmbeddingResponse::class,
         );
@@ -196,7 +206,9 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      *
      * Embed website content from a specified URL, including child pages up to 5 levels deep within the same domain. The process crawls and loads content from the main URL and its linked pages into a Telnyx Cloud Storage bucket. As soon as each webpage is added to the bucket, its content is immediately processed for embeddings, that can be used for [similarity search](https://developers.telnyx.com/api-reference/embeddings/search-for-documents) and [clustering](https://developers.telnyx.com/docs/inference/clusters).
      *
-     * @param array{bucketName: string, url: string}|EmbeddingURLParams $params
+     * @param array{
+     *   bucketName: string, url: string, idempotencyKey?: string
+     * }|EmbeddingURLParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmbeddingResponse>
@@ -211,12 +223,20 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/embeddings/url',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: EmbeddingResponse::class,
         );

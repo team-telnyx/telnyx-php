@@ -88,7 +88,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
     /**
      * @api
      *
-     * Update a Wireless Blocklist.
+     * Updates the specified wireless blocklist. The update is processed asynchronously, so the request is accepted and completes in the background.
      *
      * @param string $id identifies the wireless blocklist
      * @param string $name the name of the Wireless Blocklist
@@ -154,7 +154,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
     /**
      * @api
      *
-     * Deletes the Wireless Blocklist.
+     * Permanently deletes the specified wireless blocklist from your account.
      *
      * @param string $id identifies the wireless blocklist
      * @param RequestOpts|null $requestOptions

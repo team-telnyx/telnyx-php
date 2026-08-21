@@ -6,9 +6,10 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailInboxes\EmailInbox;
 use Telnyx\EmailInboxes\EmailInboxCreateParams;
 use Telnyx\EmailInboxes\EmailInboxListParams;
-use Telnyx\EmailInboxes\EmailInboxListResponse;
 use Telnyx\EmailInboxes\EmailInboxResponse;
 use Telnyx\RequestOptions;
 
@@ -53,7 +54,7 @@ interface EmailInboxesRawContract
      * @param array<string,mixed>|EmailInboxListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailInboxListResponse>
+     * @return BaseResponse<EmailCursorPagination<EmailInbox>>
      *
      * @throws APIException
      */

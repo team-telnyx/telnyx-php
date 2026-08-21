@@ -27,7 +27,7 @@ final class ActionsRawService implements ActionsRawContract
     /**
      * @api
      *
-     * Stop an in-progress storage migration.
+     * Stops the specified in-progress storage migration and returns the updated migration.
      *
      * @param string $id unique identifier for the data migration
      * @param RequestOpts|null $requestOptions

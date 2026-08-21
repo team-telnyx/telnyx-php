@@ -30,7 +30,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
     /**
      * @api
      *
-     * Create Default Gateway.
+     * Creates a default gateway on the specified network, directing the network's outbound traffic through the chosen gateway.
      *
      * @param string $networkIdentifier identifies the resource
      * @param array{wireguardPeerID?: string}|DefaultGatewayCreateParams $params
@@ -63,7 +63,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
     /**
      * @api
      *
-     * Get Default Gateway status.
+     * Returns the status of the default gateway configured on the specified network.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -88,7 +88,7 @@ final class DefaultGatewayRawService implements DefaultGatewayRawContract
     /**
      * @api
      *
-     * Delete Default Gateway.
+     * Removes the default gateway from the specified network.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

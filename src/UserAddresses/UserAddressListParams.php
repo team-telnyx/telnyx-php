@@ -12,7 +12,7 @@ use Telnyx\UserAddresses\UserAddressListParams\Filter;
 use Telnyx\UserAddresses\UserAddressListParams\Sort;
 
 /**
- * Returns a list of your user addresses.
+ * Returns a paginated list of your user addresses, with support for filtering and sorting.
  *
  * @see Telnyx\Services\UserAddressesService::list()
  *

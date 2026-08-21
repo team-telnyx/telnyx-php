@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get all insights.
+ * Returns a paginated list of your insight templates. Insight templates define analyses that run over AI conversations to extract structured findings.
  *
  * @see Telnyx\Services\AI\Conversations\InsightsService::list()
  *

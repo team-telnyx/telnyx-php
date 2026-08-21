@@ -41,7 +41,7 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
     /**
      * @api
      *
-     * Creates a phone number order.
+     * Creates an order to purchase the specified phone numbers and returns the created order. Track fulfillment through the order's status.
      *
      * @param array{
      *   billingGroupID?: string,
@@ -78,7 +78,7 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
     /**
      * @api
      *
-     * Get an existing phone number order.
+     * Returns the details of an existing phone number order, including its status and the numbers included.
      *
      * @param string $numberOrderID the number order ID
      * @param RequestOpts|null $requestOptions
@@ -103,7 +103,7 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
     /**
      * @api
      *
-     * Updates a phone number order.
+     * Updates an existing phone number order, for example to satisfy regulatory requirements attached to the order, and returns the updated order.
      *
      * @param string $numberOrderID the number order ID
      * @param array{
@@ -139,7 +139,7 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
     /**
      * @api
      *
-     * Get a paginated list of number orders.
+     * Returns a paginated list of your phone number orders, with support for filtering.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int

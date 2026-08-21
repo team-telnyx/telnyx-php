@@ -9,16 +9,16 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\EmailInboxes\Messages\Actions\InboxActionEmailAddressInput;
-use Telnyx\EmailInboxes\Messages\Actions\InboxActionEmailAddressInput\UnionMember1;
+use Telnyx\EmailInboxes\Messages\Actions\InboxActionEmailAddressInput\InboxRecipientAddress;
 
 /**
  * One recipient or a non-empty recipient array. Each recipient may be an email string or an object with `email` and optional `name`.
  *
- * @phpstan-import-type UnionMember1Shape from \Telnyx\EmailInboxes\Messages\Actions\ActionForwardParams\To\UnionMember1
+ * @phpstan-import-type InboxRecipientAddressShape from \Telnyx\EmailInboxes\Messages\Actions\ActionForwardParams\To\InboxRecipientAddress
  * @phpstan-import-type InboxActionEmailAddressInputShape from \Telnyx\EmailInboxes\Messages\Actions\InboxActionEmailAddressInput
  *
- * @phpstan-type ToVariants = string|\Telnyx\EmailInboxes\Messages\Actions\ActionForwardParams\To\UnionMember1|list<string|UnionMember1>
- * @phpstan-type ToShape = ToVariants|UnionMember1Shape|list<InboxActionEmailAddressInputShape>
+ * @phpstan-type ToVariants = string|\Telnyx\EmailInboxes\Messages\Actions\ActionForwardParams\To\InboxRecipientAddress|list<string|InboxRecipientAddress>
+ * @phpstan-type ToShape = ToVariants|InboxRecipientAddressShape|list<InboxActionEmailAddressInputShape>
  */
 final class To implements ConverterSource
 {
@@ -31,7 +31,7 @@ final class To implements ConverterSource
     {
         return [
             'string',
-            To\UnionMember1::class,
+            To\InboxRecipientAddress::class,
             new ListOf(InboxActionEmailAddressInput::class),
         ];
     }

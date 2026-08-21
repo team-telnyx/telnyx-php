@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update a single managed account.
+ * Updates the specified managed account's attributes and returns the updated account.
  *
  * @see Telnyx\Services\ManagedAccountsService::update()
  *

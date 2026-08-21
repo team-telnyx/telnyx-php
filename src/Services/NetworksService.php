@@ -52,7 +52,7 @@ final class NetworksService implements NetworksContract
     /**
      * @api
      *
-     * Create a new Network.
+     * Creates a new private network, the container that links your WireGuard interfaces, gateways, and cross connects.
      *
      * @param NetworkCreate|NetworkCreateShape $networkCreate
      * @param RequestOpts|null $requestOptions
@@ -74,7 +74,7 @@ final class NetworksService implements NetworksContract
     /**
      * @api
      *
-     * Retrieve a Network.
+     * Returns the details of a single network by its identifier.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -94,7 +94,7 @@ final class NetworksService implements NetworksContract
     /**
      * @api
      *
-     * Update a Network.
+     * Updates the specified network's attributes and returns the updated network.
      *
      * @param string $networkID identifies the resource
      * @param NetworkCreate|NetworkCreateShape $networkCreate
@@ -118,7 +118,7 @@ final class NetworksService implements NetworksContract
     /**
      * @api
      *
-     * List all Networks.
+     * Returns a paginated list of the private networks on your account, with support for filtering.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param RequestOpts|null $requestOptions
@@ -150,7 +150,7 @@ final class NetworksService implements NetworksContract
     /**
      * @api
      *
-     * Delete a Network.
+     * Permanently deletes the specified network from your account.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -170,7 +170,7 @@ final class NetworksService implements NetworksContract
     /**
      * @api
      *
-     * List all Interfaces for a Network.
+     * Returns a paginated list of the interfaces attached to the specified network, with support for filtering.
      *
      * @param string $id identifies the resource
      * @param \Telnyx\Networks\NetworkListInterfacesParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]

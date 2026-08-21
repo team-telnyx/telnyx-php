@@ -15,7 +15,7 @@ use Telnyx\EmailBlocks\EmailBlockListParams\Sort;
 use Telnyx\EmailBlocks\EmailBlockResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailBlocksContract;
-use Telnyx\Services\EmailBlocks\ImportService;
+use Telnyx\Services\EmailBlocks\ImportsService;
 
 /**
  * Recipient suppression records (`/v2/email_blocks`).
@@ -32,7 +32,7 @@ final class EmailBlocksService implements EmailBlocksContract
     /**
      * @api
      */
-    public ImportService $import;
+    public ImportsService $imports;
 
     /**
      * @internal
@@ -40,7 +40,7 @@ final class EmailBlocksService implements EmailBlocksContract
     public function __construct(private Client $client)
     {
         $this->raw = new EmailBlocksRawService($client);
-        $this->import = new ImportService($client);
+        $this->imports = new ImportsService($client);
     }
 
     /**
@@ -205,6 +205,8 @@ final class EmailBlocksService implements EmailBlocksContract
      * @param int $pageSize page size (default 50, max 100)
      * @param RequestOpts|null $requestOptions
      *
+     * @return DefaultFlatPagination<EmailBlockGetEventsResponse>
+     *
      * @throws APIException
      */
     public function retrieveEvents(
@@ -212,7 +214,7 @@ final class EmailBlocksService implements EmailBlocksContract
         int $pageNumber = 1,
         int $pageSize = 50,
         RequestOptions|array|null $requestOptions = null,
-    ): EmailBlockGetEventsResponse {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
         );

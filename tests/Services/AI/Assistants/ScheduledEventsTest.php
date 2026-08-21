@@ -71,6 +71,7 @@ final class ScheduledEventsTest extends TestCase
             maxRetriesClientErrors: 0,
             retryIntervalSecs: 60,
             text: 'text',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams\Body;
 
 /**
- * Create a new Public Internet Gateway.
+ * Requests creation of a public internet gateway on the specified network, giving the network internet egress. Creation is asynchronous, so the request is accepted and completes in the background.
  *
  * @see Telnyx\Services\PublicInternetGatewaysService::create()
  *

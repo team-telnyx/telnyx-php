@@ -7,14 +7,15 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\EmailCursorPagination;
 use Telnyx\EmailInboxes\Drafts\EmailAddress;
+use Telnyx\EmailInboxes\Drafts\EmailMessage;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\EmailMessages\AttachmentRequest;
 use Telnyx\EmailMessages\EmailMessageBatchParams\Message;
 use Telnyx\EmailMessages\EmailMessageBatchResponse;
-use Telnyx\EmailMessages\EmailMessageGetEventsResponse;
 use Telnyx\EmailMessages\EmailMessageGetResponse;
-use Telnyx\EmailMessages\EmailMessageListResponse;
+use Telnyx\EmailMessages\MessageEvent;
 use Telnyx\EmailMessages\TrackingSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailMessagesContract;
@@ -220,13 +221,15 @@ final class EmailMessagesService implements EmailMessagesContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100. Invalid values are clamped to the valid range.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailCursorPagination<EmailMessage>
+     *
      * @throws APIException
      */
     public function list(
         ?string $pageCursor = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): EmailMessageListResponse {
+    ): EmailCursorPagination {
         $params = Util::removeNulls(
             ['pageCursor' => $pageCursor, 'pageSize' => $pageSize]
         );
@@ -349,6 +352,8 @@ final class EmailMessagesService implements EmailMessagesContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100. Invalid values are clamped to the valid range.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailCursorPagination<MessageEvent>
+     *
      * @throws APIException
      */
     public function retrieveEvents(
@@ -356,7 +361,7 @@ final class EmailMessagesService implements EmailMessagesContract
         ?string $pageCursor = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): EmailMessageGetEventsResponse {
+    ): EmailCursorPagination {
         $params = Util::removeNulls(
             ['pageCursor' => $pageCursor, 'pageSize' => $pageSize]
         );

@@ -8,7 +8,6 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\BillingAddress;
 use Telnyx\Enterprises\BillingContact;
 use Telnyx\Enterprises\EnterpriseCreateParams\Industry;
 use Telnyx\Enterprises\EnterpriseCreateParams\NumberOfEmployees;
@@ -27,10 +26,9 @@ use Telnyx\Services\Enterprises\ReputationService;
 /**
  * Manage the legal-entity record that owns your DIRs and phone numbers.
  *
- * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\BillingAddress
+ * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\BillingContact
  * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\OrganizationContact
- * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class EnterprisesService implements EnterprisesContract
@@ -71,7 +69,7 @@ final class EnterprisesService implements EnterprisesContract
      * - `422` - a required field is missing or malformed (the response `errors[].source.pointer` names the field).
      * - `409` - an enterprise with the same identifying details already exists under your account.
      *
-     * @param BillingAddress|BillingAddressShape $billingAddress
+     * @param PhysicalAddress|PhysicalAddressShape $billingAddress
      * @param BillingContact|BillingContactShape $billingContact
      * @param string $countryCode ISO 3166-1 alpha-2 country code. Currently `US` and `CA` are supported.
      * @param string $fein US Federal Employer Identification Number (`NN-NNNNNNN`) or Canadian equivalent
@@ -101,7 +99,7 @@ final class EnterprisesService implements EnterprisesContract
      * @throws APIException
      */
     public function create(
-        BillingAddress|array $billingAddress,
+        PhysicalAddress|array $billingAddress,
         BillingContact|array $billingContact,
         string $countryCode,
         string $doingBusinessAs,
@@ -180,7 +178,7 @@ final class EnterprisesService implements EnterprisesContract
      * Replace the enterprise's mutable fields. Only mutable fields may be sent. Server-assigned and immutable fields (`id`, `record_type`, `created_at`, `updated_at`, status fields, `organization_type`, `country_code`, `role_type`) cannot be changed: including any of them in the body is rejected with `400 Bad Request` (`Field 'X' is not allowed in this request`).
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
-     * @param BillingAddress|BillingAddressShape $billingAddress
+     * @param PhysicalAddress|PhysicalAddressShape $billingAddress
      * @param BillingContact|BillingContactShape $billingContact
      * @param \Telnyx\Enterprises\EnterpriseUpdateParams\Industry|value-of<\Telnyx\Enterprises\EnterpriseUpdateParams\Industry> $industry
      * @param string $jurisdictionOfIncorporation Updated state/province/country of incorporation. Optional on update.
@@ -193,7 +191,7 @@ final class EnterprisesService implements EnterprisesContract
      */
     public function update(
         string $enterpriseID,
-        BillingAddress|array|null $billingAddress = null,
+        PhysicalAddress|array|null $billingAddress = null,
         BillingContact|array|null $billingContact = null,
         ?string $corporateRegistrationNumber = null,
         ?string $customerReference = null,

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\NetworkListParams\Filter;
 
 /**
- * List all Networks.
+ * Returns a paginated list of the private networks on your account, with support for filtering.
  *
  * @see Telnyx\Services\NetworksService::list()
  *

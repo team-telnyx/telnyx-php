@@ -6,6 +6,7 @@ namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
+use Telnyx\AI\Assistants\AssistantCloneParams;
 use Telnyx\AI\Assistants\AssistantCreateParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams;
@@ -72,7 +73,7 @@ final class AssistantsRawService implements AssistantsRawContract
     /**
      * @api
      *
-     * Create a new AI Assistant.
+     * Creates a new AI assistant from the provided configuration, including its model, instructions, and attached tools, and returns the created assistant.
      *
      * @param array{
      *   instructions: string,
@@ -103,6 +104,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
      *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
      *   widgetSettings?: WidgetSettings|WidgetSettingsShape,
+     *   idempotencyKey?: string,
      * }|AssistantCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -118,12 +120,20 @@ final class AssistantsRawService implements AssistantsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/assistants',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: InferenceEmbedding::class,
         );
@@ -176,7 +186,7 @@ final class AssistantsRawService implements AssistantsRawContract
     /**
      * @api
      *
-     * Update an AI Assistant's attributes.
+     * Updates the specified AI assistant's attributes and returns the updated assistant. The request can also control how the change is promoted across assistant versions.
      *
      * @param string $assistantID unique identifier of the assistant
      * @param array{
@@ -326,6 +336,7 @@ final class AssistantsRawService implements AssistantsRawContract
      * Clone an existing assistant, excluding telephony and messaging settings.
      *
      * @param string $assistantID unique identifier of the assistant
+     * @param array{idempotencyKey?: string}|AssistantCloneParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
@@ -334,13 +345,23 @@ final class AssistantsRawService implements AssistantsRawContract
      */
     public function clone(
         string $assistantID,
-        RequestOptions|array|null $requestOptions = null
+        array|AssistantCloneParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
+        [$parsed, $options] = AssistantCloneParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/clone', $assistantID],
-            options: $requestOptions,
+            headers: Util::array_transform_keys(
+                $parsed,
+                ['idempotencyKey' => 'Idempotency-Key']
+            ),
+            options: $options,
             convert: InferenceEmbedding::class,
         );
     }
@@ -379,6 +400,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   apiKeyRef: string,
      *   provider: Provider|value-of<Provider>,
      *   importIDs?: list<string>,
+     *   idempotencyKey?: string,
      * }|AssistantImportsParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -394,12 +416,20 @@ final class AssistantsRawService implements AssistantsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/assistants/import',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: AssistantsList::class,
         );
@@ -415,13 +445,14 @@ final class AssistantsRawService implements AssistantsRawContract
      * 4. Updates conversation metadata if provided
      * 5. Returns the conversation ID
      *
-     * @param string $assistantID unique identifier of the assistant
+     * @param string $assistantID path param: Unique identifier of the assistant
      * @param array{
      *   from: string,
      *   to: string,
      *   conversationMetadata?: array<string,ConversationMetadataShape>,
      *   shouldCreateConversation?: bool,
      *   text?: string,
+     *   idempotencyKey?: string,
      * }|AssistantSendSMSParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -438,12 +469,20 @@ final class AssistantsRawService implements AssistantsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/chat/sms', $assistantID],
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: AssistantSendSMSResponse::class,
         );

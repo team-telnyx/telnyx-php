@@ -12,7 +12,7 @@ use Telnyx\IPConnections\IPConnectionListParams\Filter;
 use Telnyx\IPConnections\IPConnectionListParams\Sort;
 
 /**
- * Returns a list of your IP connections.
+ * Returns a paginated list of your IP-based SIP connections, with support for filtering and sorting.
  *
  * @see Telnyx\Services\IPConnectionsService::list()
  *

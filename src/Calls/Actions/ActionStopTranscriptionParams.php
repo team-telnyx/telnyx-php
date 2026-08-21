@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Stop real-time transcription.
+ * Stops real-time transcription on the call. Transcription webhooks cease once the command takes effect; the call itself is unaffected.
  *
  * @see Telnyx\Services\Calls\ActionsService::stopTranscription()
  *

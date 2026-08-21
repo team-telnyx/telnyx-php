@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
 
 use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
@@ -21,7 +22,7 @@ use Telnyx\Networks\InterfaceStatus;
  *   enableSipTrunking?: bool|null,
  *   endpoint?: string|null,
  *   publicKey?: string|null,
- *   regionCode?: string|null,
+ *   regionCode: string,
  * }
  */
 final class Body implements BaseModel
@@ -94,9 +95,23 @@ final class Body implements BaseModel
     /**
      * The region the interface should be deployed to.
      */
-    #[Optional('region_code')]
-    public ?string $regionCode;
+    #[Required('region_code')]
+    public string $regionCode;
 
+    /**
+     * `new Body()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * Body::with(regionCode: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new Body)->withRegionCode(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -110,6 +125,7 @@ final class Body implements BaseModel
      * @param InterfaceStatus|value-of<InterfaceStatus>|null $status
      */
     public static function with(
+        string $regionCode,
         ?string $id = null,
         ?string $createdAt = null,
         ?string $recordType = null,
@@ -120,9 +136,10 @@ final class Body implements BaseModel
         ?bool $enableSipTrunking = null,
         ?string $endpoint = null,
         ?string $publicKey = null,
-        ?string $regionCode = null,
     ): self {
         $self = new self;
+
+        $self['regionCode'] = $regionCode;
 
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
@@ -134,7 +151,6 @@ final class Body implements BaseModel
         null !== $enableSipTrunking && $self['enableSipTrunking'] = $enableSipTrunking;
         null !== $endpoint && $self['endpoint'] = $endpoint;
         null !== $publicKey && $self['publicKey'] = $publicKey;
-        null !== $regionCode && $self['regionCode'] = $regionCode;
 
         return $self;
     }

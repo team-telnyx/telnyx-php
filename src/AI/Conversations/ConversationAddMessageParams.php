@@ -32,6 +32,7 @@ use Telnyx\Core\Conversion\MapOf;
  *   toolCallID?: string|null,
  *   toolCalls?: list<array<string,mixed>>|null,
  *   toolChoice?: ToolChoiceShape|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class ConversationAddMessageParams implements BaseModel
@@ -66,6 +67,9 @@ final class ConversationAddMessageParams implements BaseModel
     /** @var ToolChoiceVariants|null $toolChoice */
     #[Optional('tool_choice', union: ToolChoice::class)]
     public string|array|null $toolChoice;
+
+    #[Optional]
+    public ?string $idempotencyKey;
 
     /**
      * `new ConversationAddMessageParams()` is missing required properties by the API.
@@ -104,6 +108,7 @@ final class ConversationAddMessageParams implements BaseModel
         ?string $toolCallID = null,
         ?array $toolCalls = null,
         string|array|null $toolChoice = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -116,6 +121,7 @@ final class ConversationAddMessageParams implements BaseModel
         null !== $toolCallID && $self['toolCallID'] = $toolCallID;
         null !== $toolCalls && $self['toolCalls'] = $toolCalls;
         null !== $toolChoice && $self['toolChoice'] = $toolChoice;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -189,6 +195,14 @@ final class ConversationAddMessageParams implements BaseModel
     {
         $self = clone $this;
         $self['toolChoice'] = $toolChoice;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

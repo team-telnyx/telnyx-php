@@ -15,7 +15,7 @@ use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingP
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
 
 /**
- * Creates a credential connection.
+ * Creates a new credential-based SIP connection. Credential connections authenticate with a username and password rather than by IP address.
  *
  * @see Telnyx\Services\CredentialConnectionsService::create()
  *

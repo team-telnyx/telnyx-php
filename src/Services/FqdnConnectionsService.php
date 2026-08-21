@@ -65,7 +65,7 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
     /**
      * @api
      *
-     * Creates a FQDN connection.
+     * Creates a new FQDN-based SIP connection. FQDN connections authenticate by your registered domain names rather than static IP addresses.
      *
      * @param string $connectionName a user-assigned name to help manage the connection
      * @param bool $active Defaults to true
@@ -323,7 +323,7 @@ final class FqdnConnectionsService implements FqdnConnectionsContract
     /**
      * @api
      *
-     * Deletes an FQDN connection.
+     * Permanently deletes the specified FQDN connection from your account.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

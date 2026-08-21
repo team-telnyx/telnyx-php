@@ -38,7 +38,7 @@ final class IPsRawService implements IPsRawContract
     /**
      * @api
      *
-     * Create a new IP object.
+     * Creates a new IP record for use with IP-based connections, associating an IP address with the specified connection.
      *
      * @param array{
      *   ipAddress: string, connectionID?: string, port?: int
@@ -96,7 +96,7 @@ final class IPsRawService implements IPsRawContract
     /**
      * @api
      *
-     * Update the details of a specific IP.
+     * Updates the details of the specified IP record and returns the updated IP.
      *
      * @param string $id identifies the type of resource
      * @param array{
@@ -168,7 +168,7 @@ final class IPsRawService implements IPsRawContract
     /**
      * @api
      *
-     * Delete an IP.
+     * Permanently deletes the specified IP record from its connection.
      *
      * @param string $id identifies the type of resource
      * @param RequestOpts|null $requestOptions

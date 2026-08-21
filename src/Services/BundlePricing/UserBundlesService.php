@@ -75,7 +75,7 @@ final class UserBundlesService implements UserBundlesContract
     /**
      * @api
      *
-     * Retrieves a user bundle by its ID.
+     * Returns the details of a single user bundle on your account by its ID.
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
@@ -101,7 +101,7 @@ final class UserBundlesService implements UserBundlesContract
     /**
      * @api
      *
-     * Get a paginated list of user bundles.
+     * Returns a paginated list of the bundles active on your account, with support for filtering.
      *
      * @param Filter|FilterShape $filter Query param: Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
      * @param int $pageNumber Query param
@@ -138,7 +138,7 @@ final class UserBundlesService implements UserBundlesContract
     /**
      * @api
      *
-     * Deactivates a user bundle by its ID.
+     * Deactivates the specified user bundle on your account and returns the deactivated bundle.
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY

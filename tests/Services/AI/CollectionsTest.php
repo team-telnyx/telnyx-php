@@ -151,11 +151,16 @@ final class CollectionsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->collections->retrieveDocuments(
+        $page = $this->client->ai->collections->retrieveDocuments(
             'support-transcripts'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CollectionGetDocumentsResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(CollectionGetDocumentsResponse::class, $item);
+        }
     }
 }

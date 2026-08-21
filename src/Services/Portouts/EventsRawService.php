@@ -36,7 +36,7 @@ final class EventsRawService implements EventsRawContract
     /**
      * @api
      *
-     * Show a specific port-out event.
+     * Returns the details of a single port-out event, including its type and payload.
      *
      * @param string $id identifies the port-out event
      * @param RequestOpts|null $requestOptions
@@ -61,7 +61,7 @@ final class EventsRawService implements EventsRawContract
     /**
      * @api
      *
-     * Returns a list of all port-out events.
+     * Returns a paginated list of port-out events on your account, such as status changes on port-out requests, with support for filtering.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -98,7 +98,7 @@ final class EventsRawService implements EventsRawContract
     /**
      * @api
      *
-     * Republish a specific port-out event.
+     * Republishes the specified port-out event, triggering re-delivery of the corresponding webhook to your account.
      *
      * @param string $id identifies the port-out event
      * @param RequestOpts|null $requestOptions

@@ -315,6 +315,18 @@ final class AssistantsTest extends TestCase
                             'type' => 'object',
                         ],
                         'headers' => [['name' => 'name', 'value' => 'value']],
+                        'messages' => [
+                            [
+                                'content' => 'Let me look that up for you.',
+                                'type' => 'request_start',
+                                'timingMs' => 100,
+                            ],
+                            [
+                                'content' => 'Still working on that.',
+                                'timingMs' => 5000,
+                                'type' => 'request_response_delayed',
+                            ],
+                        ],
                         'method' => 'GET',
                         'pathParameters' => [
                             'properties' => ['id' => 'bar'],
@@ -379,6 +391,7 @@ final class AssistantsTest extends TestCase
                 'theme' => 'light',
                 'viewHistoryURL' => 'view_history_url',
             ],
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -525,7 +538,8 @@ final class AssistantsTest extends TestCase
         $result = $this->client->ai->assistants->imports(
             apiKeyRef: 'string',
             provider: 'elevenlabs',
-            importIDs: ['string']
+            importIDs: ['string'],
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -563,6 +577,7 @@ final class AssistantsTest extends TestCase
             conversationMetadata: ['foo' => 'string'],
             shouldCreateConversation: false,
             text: 'Text',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

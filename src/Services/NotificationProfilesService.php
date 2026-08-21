@@ -39,7 +39,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
     /**
      * @api
      *
-     * Create a notification profile.
+     * Creates a new notification profile, a named grouping used to organize notification settings, and returns it.
      *
      * @param string $name a human readable name
      * @param RequestOpts|null $requestOptions
@@ -61,7 +61,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
     /**
      * @api
      *
-     * Get a notification profile.
+     * Returns the details of a single notification profile by its identifier.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions
@@ -81,7 +81,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
     /**
      * @api
      *
-     * Update a notification profile.
+     * Updates the specified notification profile and returns the updated profile.
      *
      * @param string $notificationProfileID the id of the resource
      * @param string $name a human readable name
@@ -131,7 +131,7 @@ final class NotificationProfilesService implements NotificationProfilesContract
     /**
      * @api
      *
-     * Delete a notification profile.
+     * Deletes the specified notification profile from your account.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions

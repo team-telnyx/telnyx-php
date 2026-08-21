@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Download a porting order loa template.
+ * Downloads the Letter of Authorization (LOA) template document for this porting order, optionally rendered with a specific LOA configuration.
  *
  * @see Telnyx\Services\PortingOrdersService::retrieveLoaTemplate()
  *

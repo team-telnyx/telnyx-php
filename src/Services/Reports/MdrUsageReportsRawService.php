@@ -134,7 +134,7 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
     /**
      * @api
      *
-     * Delete messaging usage report by id
+     * Permanently deletes the specified messaging usage report by its identifier.
      *
      * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions

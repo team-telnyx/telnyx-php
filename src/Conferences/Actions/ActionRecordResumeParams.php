@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Resume conference recording.
+ * Resumes a previously paused recording of the specified conference, continuing capture from the point it was paused.
  *
  * @see Telnyx\Services\Conferences\ActionsService::recordResume()
  *

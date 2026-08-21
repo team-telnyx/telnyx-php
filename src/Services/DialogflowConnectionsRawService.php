@@ -94,7 +94,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
     /**
      * @api
      *
-     * Updates a stored Dialogflow Connection.
+     * Updates the stored Dialogflow connection for the specified connection and returns the updated configuration.
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
      * @param array{
@@ -133,7 +133,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
     /**
      * @api
      *
-     * Deletes a stored Dialogflow Connection.
+     * Deletes the stored Dialogflow connection for the specified connection.
      *
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
      * @param RequestOpts|null $requestOptions

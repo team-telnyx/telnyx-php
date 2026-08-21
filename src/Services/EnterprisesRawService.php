@@ -9,7 +9,6 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\BillingAddress;
 use Telnyx\Enterprises\BillingContact;
 use Telnyx\Enterprises\EnterpriseCreateParams;
 use Telnyx\Enterprises\EnterpriseCreateParams\Industry;
@@ -29,10 +28,9 @@ use Telnyx\ServiceContracts\EnterprisesRawContract;
 /**
  * Manage the legal-entity record that owns your DIRs and phone numbers.
  *
- * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\BillingAddress
+ * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\BillingContact
  * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\OrganizationContact
- * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class EnterprisesRawService implements EnterprisesRawContract
@@ -55,7 +53,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
      * - `409` - an enterprise with the same identifying details already exists under your account.
      *
      * @param array{
-     *   billingAddress: BillingAddress|BillingAddressShape,
+     *   billingAddress: PhysicalAddress|PhysicalAddressShape,
      *   billingContact: BillingContact|BillingContactShape,
      *   countryCode: string,
      *   doingBusinessAs: string,
@@ -133,7 +131,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
-     *   billingAddress?: BillingAddress|BillingAddressShape,
+     *   billingAddress?: PhysicalAddress|PhysicalAddressShape,
      *   billingContact?: BillingContact|BillingContactShape,
      *   corporateRegistrationNumber?: string|null,
      *   customerReference?: string,

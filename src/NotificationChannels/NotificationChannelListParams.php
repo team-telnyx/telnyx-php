@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter;
 
 /**
- * List notification channels.
+ * Returns a paginated list of your notification channels, the destinations that receive notifications.
  *
  * @see Telnyx\Services\NotificationChannelsService::list()
  *

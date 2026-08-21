@@ -28,7 +28,7 @@ final class SubNumberOrderListParams implements BaseModel
     use SdkParams;
 
     /**
-     * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count].
+     * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count], filter[include_phone_numbers].
      */
     #[Optional]
     public ?Filter $filter;
@@ -55,7 +55,7 @@ final class SubNumberOrderListParams implements BaseModel
     }
 
     /**
-     * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count].
+     * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count], filter[include_phone_numbers].
      *
      * @param Filter|FilterShape $filter
      */

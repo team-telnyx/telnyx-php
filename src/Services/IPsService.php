@@ -41,7 +41,7 @@ final class IPsService implements IPsContract
     /**
      * @api
      *
-     * Create a new IP object.
+     * Creates a new IP record for use with IP-based connections, associating an IP address with the specified connection.
      *
      * @param string $ipAddress IP adddress represented by this resource
      * @param string $connectionID ID of the IP Connection to which this IP should be attached
@@ -93,7 +93,7 @@ final class IPsService implements IPsContract
     /**
      * @api
      *
-     * Update the details of a specific IP.
+     * Updates the details of the specified IP record and returns the updated IP.
      *
      * @param string $id identifies the type of resource
      * @param string $ipAddress IP adddress represented by this resource
@@ -159,7 +159,7 @@ final class IPsService implements IPsContract
     /**
      * @api
      *
-     * Delete an IP.
+     * Permanently deletes the specified IP record from its connection.
      *
      * @param string $id identifies the type of resource
      * @param RequestOpts|null $requestOptions

@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\EmailMessages;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailMessages\Recipients\EmailRecipient;
 use Telnyx\EmailMessages\Recipients\RecipientGetResponse;
 use Telnyx\EmailMessages\Recipients\RecipientListParams\Kind;
 use Telnyx\EmailMessages\Recipients\RecipientListParams\Status;
-use Telnyx\EmailMessages\Recipients\RecipientListResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -41,6 +42,8 @@ interface RecipientsContract
      * @param Status|value-of<Status> $status filter recipients by status
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailCursorPagination<EmailRecipient>
+     *
      * @throws APIException
      */
     public function list(
@@ -50,5 +53,5 @@ interface RecipientsContract
         int $pageSize = 25,
         Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
-    ): RecipientListResponse;
+    ): EmailCursorPagination;
 }

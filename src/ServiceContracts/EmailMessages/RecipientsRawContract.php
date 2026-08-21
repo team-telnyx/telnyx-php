@@ -6,9 +6,10 @@ namespace Telnyx\ServiceContracts\EmailMessages;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailMessages\Recipients\EmailRecipient;
 use Telnyx\EmailMessages\Recipients\RecipientGetResponse;
 use Telnyx\EmailMessages\Recipients\RecipientListParams;
-use Telnyx\EmailMessages\Recipients\RecipientListResponse;
 use Telnyx\EmailMessages\Recipients\RecipientRetrieveParams;
 use Telnyx\RequestOptions;
 
@@ -41,7 +42,7 @@ interface RecipientsRawContract
      * @param array<string,mixed>|RecipientListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecipientListResponse>
+     * @return BaseResponse<EmailCursorPagination<EmailRecipient>>
      *
      * @throws APIException
      */

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest;
 
 /**
- * Update a Global IP assignment.
+ * Updates the specified Global IP assignment with the provided fields and returns the updated assignment.
  *
  * @see Telnyx\Services\GlobalIPAssignmentsService::update()
  *

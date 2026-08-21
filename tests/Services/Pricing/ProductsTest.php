@@ -37,10 +37,15 @@ final class ProductsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->pricing->products->retrieve('slug');
+        $page = $this->client->pricing->products->retrieve('slug');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ProductGetResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ProductGetResponse::class, $item);
+        }
     }
 
     #[Test]

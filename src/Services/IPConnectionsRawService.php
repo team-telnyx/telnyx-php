@@ -57,7 +57,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
     /**
      * @api
      *
-     * Creates an IP connection.
+     * Creates a new IP-based SIP connection, which authenticates traffic by source IP address.
      *
      * @param array{
      *   active?: bool,
@@ -195,7 +195,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
     /**
      * @api
      *
-     * Returns a list of your IP connections.
+     * Returns a paginated list of your IP-based SIP connections, with support for filtering and sorting.
      *
      * @param array{
      *   filter?: Filter|FilterShape,
@@ -235,7 +235,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
     /**
      * @api
      *
-     * Deletes an existing IP connection.
+     * Permanently deletes the specified IP connection from your account.
      *
      * @param string $id identifies the type of resource
      * @param RequestOpts|null $requestOptions

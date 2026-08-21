@@ -27,7 +27,7 @@ final class GlobalIPProtocolsRawService implements GlobalIPProtocolsRawContract
     /**
      * @api
      *
-     * List all Global IP Protocols
+     * Returns the network protocols supported for Global IP traffic, for use when configuring Global IP resources.
      *
      * @param RequestOpts|null $requestOptions
      *

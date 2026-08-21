@@ -68,7 +68,7 @@ final class ReportsService implements ReportsContract
     /**
      * @api
      *
-     * Retrieve a specific report generated.
+     * Returns the details of a previously requested porting report, including its status and parameters.
      *
      * @param string $id identifies a report
      * @param RequestOpts|null $requestOptions

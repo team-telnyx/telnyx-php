@@ -18,7 +18,7 @@ use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 
 /**
- * Creates a FQDN connection.
+ * Creates a new FQDN-based SIP connection. FQDN connections authenticate by your registered domain names rather than static IP addresses.
  *
  * @see Telnyx\Services\FqdnConnectionsService::create()
  *

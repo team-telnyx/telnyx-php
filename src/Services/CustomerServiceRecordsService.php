@@ -76,7 +76,7 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
     /**
      * @api
      *
-     * Get a specific customer service record.
+     * Returns the details of a single customer service record (CSR) request, including its status and any retrieved record data.
      *
      * @param string $customerServiceRecordID The ID of the customer service record
      * @param RequestOpts|null $requestOptions
@@ -96,7 +96,7 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
     /**
      * @api
      *
-     * List customer service records.
+     * Returns a paginated list of your customer service record (CSR) requests, with support for filtering and sorting.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[phone_number][eq], filter[phone_number][in][], filter[status][eq], filter[status][in][], filter[created_at][lt], filter[created_at][gt]
      * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]

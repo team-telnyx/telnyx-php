@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Creates a dynamic emergency endpoints.
+ * Creates a dynamic emergency endpoint, associating a callback number and location with a device for emergency calling.
  *
  * @see Telnyx\Services\DynamicEmergencyEndpointsService::create()
  *

@@ -39,7 +39,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
     /**
      * @api
      *
-     * Create a notification channel.
+     * Creates a new notification channel defining where notifications are delivered, and returns the created channel.
      *
      * @param array{
      *   channelDestination?: string,
@@ -74,7 +74,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
     /**
      * @api
      *
-     * Get a notification channel.
+     * Returns the details of a single notification channel by its identifier.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions
@@ -99,7 +99,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
     /**
      * @api
      *
-     * Update a notification channel.
+     * Updates the specified notification channel and returns the updated channel.
      *
      * @param string $notificationChannelID the id of the resource
      * @param array{
@@ -136,7 +136,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
     /**
      * @api
      *
-     * List notification channels.
+     * Returns a paginated list of your notification channels, the destinations that receive notifications.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -173,7 +173,7 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
     /**
      * @api
      *
-     * Delete a notification channel.
+     * Deletes the specified notification channel so notifications are no longer delivered to it.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions

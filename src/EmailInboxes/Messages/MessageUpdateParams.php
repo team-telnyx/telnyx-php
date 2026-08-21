@@ -33,13 +33,9 @@ final class MessageUpdateParams implements BaseModel
     #[Required]
     public string $inboxID;
 
-    /**
-     * Set to `true` for server time, an ISO 8601 timestamp for an explicit read time, or `null` to mark unread.
-     *
-     * @var ReadAtVariants $readAt
-     */
+    /** @var ReadAtVariants $readAt */
     #[Required('read_at')]
-    public bool|\DateTimeInterface|null $readAt;
+    public bool|\DateTimeInterface $readAt;
 
     /**
      * `new MessageUpdateParams()` is missing required properties by the API.
@@ -69,7 +65,7 @@ final class MessageUpdateParams implements BaseModel
      */
     public static function with(
         string $inboxID,
-        bool|\DateTimeInterface|null $readAt
+        bool|\DateTimeInterface $readAt
     ): self {
         $self = new self;
 
@@ -88,11 +84,9 @@ final class MessageUpdateParams implements BaseModel
     }
 
     /**
-     * Set to `true` for server time, an ISO 8601 timestamp for an explicit read time, or `null` to mark unread.
-     *
      * @param ReadAtShape $readAt
      */
-    public function withReadAt(bool|\DateTimeInterface|null $readAt): self
+    public function withReadAt(bool|\DateTimeInterface $readAt): self
     {
         $self = clone $this;
         $self['readAt'] = $readAt;

@@ -40,7 +40,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
     /**
      * @api
      *
-     * Creates a new SIM card group object
+     * Creates a new SIM card group and returns it. Groups let you apply shared settings to a set of SIM cards.
      *
      * @param array{
      *   name: string, dataLimit?: DataLimit|DataLimitShape
@@ -109,7 +109,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
     /**
      * @api
      *
-     * Updates a SIM card group
+     * Updates the specified SIM card group's attributes and returns the updated group.
      *
      * @param string $id identifies the SIM group
      * @param array{
@@ -192,7 +192,7 @@ final class SimCardGroupsRawService implements SimCardGroupsRawContract
     /**
      * @api
      *
-     * Permanently deletes a SIM card group
+     * Permanently deletes the specified SIM card group from your account.
      *
      * @param string $id identifies the SIM group
      * @param RequestOpts|null $requestOptions

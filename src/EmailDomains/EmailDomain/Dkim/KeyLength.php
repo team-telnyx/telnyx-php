@@ -6,5 +6,5 @@ namespace Telnyx\EmailDomains\EmailDomain\Dkim;
 
 enum KeyLength: int
 {
-    case _2048 = 2048;
+    case KEY_LENGTH_2048 = 2048;
 }

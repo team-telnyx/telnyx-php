@@ -34,7 +34,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
     /**
      * @api
      *
-     * Create a Global IP.
+     * Requests creation of a new Global IP, a static IP address announced from the Telnyx network. Provisioning is asynchronous, so the request is accepted and the Global IP becomes available once provisioning completes.
      *
      * @param array{
      *   description?: string, name?: string, ports?: array<string,mixed>
@@ -67,7 +67,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
     /**
      * @api
      *
-     * Retrieve a Global IP.
+     * Returns the details of a single Global IP, including its address and current configuration.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -92,7 +92,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
     /**
      * @api
      *
-     * List all Global IPs.
+     * Returns a paginated list of the Global IPs on your account, including each IP's address and configuration.
      *
      * @param array{pageNumber?: int, pageSize?: int}|GlobalIPListParams $params
      * @param RequestOpts|null $requestOptions
@@ -127,7 +127,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
     /**
      * @api
      *
-     * Delete a Global IP.
+     * Deletes the specified Global IP and releases its address back to Telnyx.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

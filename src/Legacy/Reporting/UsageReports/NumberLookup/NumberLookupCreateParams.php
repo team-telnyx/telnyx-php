@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
 
 /**
- * Submit a new telco data usage report.
+ * Submits a new telco data (number lookup) usage report request. The report is generated asynchronously; retrieve it by its identifier once ready.
  *
  * @see Telnyx\Services\Legacy\Reporting\UsageReports\NumberLookupService::create()
  *

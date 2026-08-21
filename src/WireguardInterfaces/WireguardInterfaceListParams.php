@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter;
 
 /**
- * List all WireGuard Interfaces.
+ * Returns a paginated list of the WireGuard interfaces on your account, with support for filtering.
  *
  * @see Telnyx\Services\WireguardInterfacesService::list()
  *

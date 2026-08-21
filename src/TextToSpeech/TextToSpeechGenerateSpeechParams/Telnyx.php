@@ -10,13 +10,12 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx\Emotion;
 
 /**
- * Telnyx provider-specific parameters. Use `voice_speed` and `temperature` for `Natural` and `NaturalHD` models. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
+ * Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
  *
  * @phpstan-type TelnyxShape = array{
  *   emotion?: null|Emotion|value-of<Emotion>,
  *   responseFormat?: string|null,
  *   samplingRate?: int|null,
- *   temperature?: float|null,
  *   voiceSpeed?: float|null,
  *   volume?: float|null,
  * }
@@ -47,12 +46,6 @@ final class Telnyx implements BaseModel
     public ?int $samplingRate;
 
     /**
-     * Sampling temperature. Applies to `Natural` and `NaturalHD` models only.
-     */
-    #[Optional]
-    public ?float $temperature;
-
-    /**
      * Voice speed multiplier. Applies to all models except `Bayan` and `Sukhan`, which don't support it. Range: 0.5 to 2.0.
      */
     #[Optional('voice_speed')]
@@ -80,7 +73,6 @@ final class Telnyx implements BaseModel
         Emotion|string|null $emotion = null,
         ?string $responseFormat = null,
         ?int $samplingRate = null,
-        ?float $temperature = null,
         ?float $voiceSpeed = null,
         ?float $volume = null,
     ): self {
@@ -89,7 +81,6 @@ final class Telnyx implements BaseModel
         null !== $emotion && $self['emotion'] = $emotion;
         null !== $responseFormat && $self['responseFormat'] = $responseFormat;
         null !== $samplingRate && $self['samplingRate'] = $samplingRate;
-        null !== $temperature && $self['temperature'] = $temperature;
         null !== $voiceSpeed && $self['voiceSpeed'] = $voiceSpeed;
         null !== $volume && $self['volume'] = $volume;
 
@@ -127,17 +118,6 @@ final class Telnyx implements BaseModel
     {
         $self = clone $this;
         $self['samplingRate'] = $samplingRate;
-
-        return $self;
-    }
-
-    /**
-     * Sampling temperature. Applies to `Natural` and `NaturalHD` models only.
-     */
-    public function withTemperature(float $temperature): self
-    {
-        $self = clone $this;
-        $self['temperature'] = $temperature;
 
         return $self;
     }

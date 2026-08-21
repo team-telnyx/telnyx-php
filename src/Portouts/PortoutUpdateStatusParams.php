@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Authorize or reject portout request.
+ * Updates the status of the specified port-out request, using the status path segment to authorize or reject the port-out.
  *
  * @see Telnyx\Services\PortoutsService::updateStatus()
  *

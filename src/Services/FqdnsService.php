@@ -41,7 +41,7 @@ final class FqdnsService implements FqdnsContract
     /**
      * @api
      *
-     * Create a new FQDN object.
+     * Creates a new FQDN record and attaches it to the specified connection.
      *
      * @param string $connectionID ID of the FQDN connection to which this IP should be attached
      * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
@@ -96,7 +96,7 @@ final class FqdnsService implements FqdnsContract
     /**
      * @api
      *
-     * Update the details of a specific FQDN.
+     * Updates the details of the specified FQDN record and returns the updated FQDN.
      *
      * @param string $id identifies the resource
      * @param string $connectionID ID of the FQDN connection to which this IP should be attached
@@ -165,7 +165,7 @@ final class FqdnsService implements FqdnsContract
     /**
      * @api
      *
-     * Delete an FQDN.
+     * Permanently deletes the specified FQDN record from its connection.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

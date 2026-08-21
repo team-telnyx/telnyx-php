@@ -38,9 +38,13 @@ final class InsightsService implements InsightsContract
     /**
      * @api
      *
-     * Create a new insight
+     * Creates a new insight template defining an analysis to run over conversations, and returns the created template.
      *
-     * @param JsonSchemaShape $jsonSchema if specified, the output will follow the JSON schema
+     * @param string $instructions Body param
+     * @param string $name Body param
+     * @param JsonSchemaShape $jsonSchema body param: If specified, the output will follow the JSON schema
+     * @param string $webhook Body param
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -50,6 +54,7 @@ final class InsightsService implements InsightsContract
         string $name,
         string|array|null $jsonSchema = null,
         string $webhook = '',
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateDetail {
         $params = Util::removeNulls(
@@ -58,6 +63,7 @@ final class InsightsService implements InsightsContract
                 'name' => $name,
                 'jsonSchema' => $jsonSchema,
                 'webhook' => $webhook,
+                'idempotencyKey' => $idempotencyKey,
             ],
         );
 
@@ -70,7 +76,7 @@ final class InsightsService implements InsightsContract
     /**
      * @api
      *
-     * Get insight by ID
+     * Returns the details of a single insight template by its ID, including its configuration.
      *
      * @param string $insightID The ID of the insight
      * @param RequestOpts|null $requestOptions
@@ -90,7 +96,7 @@ final class InsightsService implements InsightsContract
     /**
      * @api
      *
-     * Update an insight template
+     * Updates the specified insight template and returns the updated template.
      *
      * @param string $insightID The ID of the insight
      * @param JsonSchemaShape1 $jsonSchema
@@ -124,7 +130,7 @@ final class InsightsService implements InsightsContract
     /**
      * @api
      *
-     * Get all insights
+     * Returns a paginated list of your insight templates. Insight templates define analyses that run over AI conversations to extract structured findings.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -150,7 +156,7 @@ final class InsightsService implements InsightsContract
     /**
      * @api
      *
-     * Delete insight by ID
+     * Permanently deletes the specified insight template by its ID.
      *
      * @param string $insightID The ID of the insight
      * @param RequestOpts|null $requestOptions

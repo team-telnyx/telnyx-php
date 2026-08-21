@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventListParams\Filter;
 
 /**
- * Returns a list of all porting events.
+ * Returns a paginated list of porting-related events on your account, such as status changes on porting orders. Supports filtering and is useful for auditing or reconciling webhook deliveries.
  *
  * @see Telnyx\Services\Porting\EventsService::list()
  *

@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a new MCP server.
+ * Creates a new MCP server configuration on your account and returns the created server.
  *
  * @see Telnyx\Services\AI\McpServersService::create()
  *
@@ -21,6 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   url: string,
  *   allowedTools?: list<string>|null,
  *   apiKeyRef?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class McpServerCreateParams implements BaseModel
@@ -44,6 +45,9 @@ final class McpServerCreateParams implements BaseModel
 
     #[Optional('api_key_ref', nullable: true)]
     public ?string $apiKeyRef;
+
+    #[Optional]
+    public ?string $idempotencyKey;
 
     /**
      * `new McpServerCreateParams()` is missing required properties by the API.
@@ -77,6 +81,7 @@ final class McpServerCreateParams implements BaseModel
         string $url,
         ?array $allowedTools = null,
         ?string $apiKeyRef = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -86,6 +91,7 @@ final class McpServerCreateParams implements BaseModel
 
         null !== $allowedTools && $self['allowedTools'] = $allowedTools;
         null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -129,6 +135,14 @@ final class McpServerCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['apiKeyRef'] = $apiKeyRef;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

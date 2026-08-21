@@ -10,6 +10,7 @@ use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -23,7 +24,7 @@ interface AIRawContract
      * @param array<string,mixed>|AIRetrieveConversationHistoriesParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AIGetConversationHistoriesResponse>
+     * @return BaseResponse<DefaultFlatPagination<AIGetConversationHistoriesResponse>>
      *
      * @throws APIException
      */

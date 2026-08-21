@@ -38,7 +38,7 @@ final class ConferencesRawService implements ConferencesRawContract
     /**
      * @api
      *
-     * Returns a conference resource.
+     * Returns a single conference resource for the account by its ConferenceSid.
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param array{accountSid: string}|ConferenceRetrieveParams $params
@@ -74,7 +74,7 @@ final class ConferencesRawService implements ConferencesRawContract
     /**
      * @api
      *
-     * Updates a conference resource.
+     * Updates the specified conference resource, for example to modify its status, and returns the updated conference.
      *
      * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
      * @param array{
@@ -117,7 +117,7 @@ final class ConferencesRawService implements ConferencesRawContract
     /**
      * @api
      *
-     * Lists conference resources.
+     * Returns a paginated list of conference resources for the account, with support for filtering by friendly name, status, and creation or update dates.
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array{
@@ -169,7 +169,7 @@ final class ConferencesRawService implements ConferencesRawContract
     /**
      * @api
      *
-     * Lists conference recordings
+     * Returns the list of recordings made for the specified conference.
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param array{accountSid: string}|ConferenceRetrieveRecordingsParams $params

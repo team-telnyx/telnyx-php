@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Lists queue resources.
+ * Returns a paginated list of queue resources for the account, with support for filtering by creation or update dates.
  *
  * @see Telnyx\Services\Texml\Accounts\QueuesService::list()
  *

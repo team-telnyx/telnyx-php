@@ -12,7 +12,7 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ExtensionRange;
 
 /**
- * Creates a new phone number extension.
+ * Creates a phone number extension on the porting order, mapping extension ranges to one of the order's phone numbers.
  *
  * @see Telnyx\Services\PortingOrders\PhoneNumberExtensionsService::create()
  *

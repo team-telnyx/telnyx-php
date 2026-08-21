@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Lists conference participants.
+ * Returns the list of participants currently in the specified conference.
  *
  * @see Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService::retrieveParticipants()
  *

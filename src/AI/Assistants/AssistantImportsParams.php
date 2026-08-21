@@ -20,6 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   apiKeyRef: string,
  *   provider: Provider|value-of<Provider>,
  *   importIDs?: list<string>|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class AssistantImportsParams implements BaseModel
@@ -49,6 +50,9 @@ final class AssistantImportsParams implements BaseModel
      */
     #[Optional('import_ids', list: 'string')]
     public ?array $importIDs;
+
+    #[Optional]
+    public ?string $idempotencyKey;
 
     /**
      * `new AssistantImportsParams()` is missing required properties by the API.
@@ -80,7 +84,8 @@ final class AssistantImportsParams implements BaseModel
     public static function with(
         string $apiKeyRef,
         Provider|string $provider,
-        ?array $importIDs = null
+        ?array $importIDs = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -88,6 +93,7 @@ final class AssistantImportsParams implements BaseModel
         $self['provider'] = $provider;
 
         null !== $importIDs && $self['importIDs'] = $importIDs;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -125,6 +131,14 @@ final class AssistantImportsParams implements BaseModel
     {
         $self = clone $this;
         $self['importIDs'] = $importIDs;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

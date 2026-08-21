@@ -27,7 +27,7 @@ final class GlobalIPAllowedPortsRawService implements GlobalIPAllowedPortsRawCon
     /**
      * @api
      *
-     * List all Global IP Allowed Ports
+     * Returns the ports allowed for Global IP traffic, for use when configuring Global IP resources.
      *
      * @param RequestOpts|null $requestOptions
      *

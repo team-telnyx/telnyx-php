@@ -11,11 +11,13 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\BucketsContract;
 use Telnyx\Services\Storage\Buckets\SslCertificateService;
 use Telnyx\Services\Storage\Buckets\UsageService;
+use Telnyx\Storage\Buckets\BucketCreatePresignedURLParams\Body;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
 /**
  * Presigned object URL operations.
  *
+ * @phpstan-import-type BodyShape from \Telnyx\Storage\Buckets\BucketCreatePresignedURLParams\Body
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BucketsService implements BucketsContract
@@ -54,7 +56,7 @@ final class BucketsService implements BucketsContract
      *
      * @param string $objectName Path param: The name of the object
      * @param string $bucketName Path param: The name of the bucket
-     * @param int $ttl Body param: The time to live of the token in seconds
+     * @param Body|BodyShape $body Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -62,10 +64,10 @@ final class BucketsService implements BucketsContract
     public function createPresignedURL(
         string $objectName,
         string $bucketName,
-        ?int $ttl = null,
+        Body|array|null $body = null,
         RequestOptions|array|null $requestOptions = null,
     ): BucketNewPresignedURLResponse {
-        $params = Util::removeNulls(['bucketName' => $bucketName, 'ttl' => $ttl]);
+        $params = Util::removeNulls(['bucketName' => $bucketName, 'body' => $body]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createPresignedURL($objectName, params: $params, requestOptions: $requestOptions);

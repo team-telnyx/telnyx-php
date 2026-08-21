@@ -8,7 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
-use Telnyx\EmailInboxes\Messages\Actions\ActionForwardParams\To\UnionMember1;
+use Telnyx\EmailInboxes\Messages\Actions\ActionForwardParams\To\InboxRecipientAddress;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailInboxes\Messages\ActionsContract;
 
@@ -60,9 +60,9 @@ final class ActionsService implements ActionsContract
     public function forward(
         string $messageID,
         string $inboxID,
-        string|UnionMember1|array $to,
-        string|\Telnyx\EmailInboxes\Messages\Actions\InboxActionRecipientInput\UnionMember1|array|null $bcc = null,
-        string|\Telnyx\EmailInboxes\Messages\Actions\InboxActionRecipientInput\UnionMember1|array|null $cc = null,
+        string|InboxRecipientAddress|array $to,
+        string|\Telnyx\EmailInboxes\Messages\Actions\InboxActionRecipientInput\InboxRecipientAddress|array|null $bcc = null,
+        string|\Telnyx\EmailInboxes\Messages\Actions\InboxActionRecipientInput\InboxRecipientAddress|array|null $cc = null,
         ?string $html = null,
         ?string $text = null,
         RequestOptions|array|null $requestOptions = null,

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update an existing credential.
+ * Updates the specified telephony credential and returns the updated credential.
  *
  * @see Telnyx\Services\TelephonyCredentialsService::update()
  *

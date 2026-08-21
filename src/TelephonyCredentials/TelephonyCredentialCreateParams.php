@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a credential.
+ * Creates a new on-demand telephony credential for the specified connection. The credential can then be used to generate access tokens for SIP or WebRTC clients.
  *
  * @see Telnyx\Services\TelephonyCredentialsService::create()
  *

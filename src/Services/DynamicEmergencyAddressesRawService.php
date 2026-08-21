@@ -37,7 +37,7 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
     /**
      * @api
      *
-     * Creates a dynamic emergency address.
+     * Creates a dynamic emergency address, the validated physical location used when provisioning dynamic emergency endpoints.
      *
      * @param array{
      *   administrativeArea: string,

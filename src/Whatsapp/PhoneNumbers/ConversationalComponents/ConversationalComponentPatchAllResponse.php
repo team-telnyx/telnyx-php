@@ -7,13 +7,12 @@ namespace Telnyx\Whatsapp\PhoneNumbers\ConversationalComponents;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Whatsapp\PhoneNumbers\ConversationalComponents\ConversationalComponentPatchAllResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Whatsapp\PhoneNumbers\ConversationalComponents\ConversationalComponentPatchAllResponse\Data
+ * @phpstan-import-type ConversationalComponentShape from \Telnyx\Whatsapp\PhoneNumbers\ConversationalComponents\ConversationalComponent
  *
  * @phpstan-type ConversationalComponentPatchAllResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|ConversationalComponent|ConversationalComponentShape
  * }
  */
 final class ConversationalComponentPatchAllResponse implements BaseModel
@@ -22,7 +21,7 @@ final class ConversationalComponentPatchAllResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?ConversationalComponent $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class ConversationalComponentPatchAllResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param ConversationalComponent|ConversationalComponentShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        ConversationalComponent|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class ConversationalComponentPatchAllResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param ConversationalComponent|ConversationalComponentShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(ConversationalComponent|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

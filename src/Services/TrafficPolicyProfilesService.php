@@ -102,7 +102,7 @@ final class TrafficPolicyProfilesService implements TrafficPolicyProfilesContrac
     /**
      * @api
      *
-     * Updates a traffic policy profile.
+     * Updates the specified traffic policy profile and returns the updated profile.
      *
      * @param string $id identifies the traffic policy profile
      * @param list<string> $domains array of domain names
@@ -182,7 +182,7 @@ final class TrafficPolicyProfilesService implements TrafficPolicyProfilesContrac
     /**
      * @api
      *
-     * Deletes the traffic policy profile.
+     * Permanently deletes the specified traffic policy profile from your account.
      *
      * @param string $id identifies the traffic policy profile
      * @param RequestOpts|null $requestOptions

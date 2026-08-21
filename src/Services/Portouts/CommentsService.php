@@ -35,7 +35,7 @@ final class CommentsService implements CommentsContract
     /**
      * @api
      *
-     * Creates a comment on a portout request.
+     * Creates a comment on the specified port-out request and returns the created comment.
      *
      * @param string $id Portout id
      * @param string $body Comment to post on this portout request

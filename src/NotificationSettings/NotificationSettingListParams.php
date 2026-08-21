@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationSettings\NotificationSettingListParams\Filter;
 
 /**
- * List notification settings.
+ * Returns a paginated list of your notification settings, which map notification event types to profiles and channels.
  *
  * @see Telnyx\Services\NotificationSettingsService::list()
  *

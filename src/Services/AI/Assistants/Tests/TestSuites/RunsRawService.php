@@ -77,8 +77,10 @@ final class RunsRawService implements RunsRawContract
      *
      * Executes all tests within a specific test suite as a batch operation
      *
-     * @param string $suiteName name of the suite
-     * @param array{destinationVersionID?: string}|RunTriggerParams $params
+     * @param string $suiteName path param: Name of the suite
+     * @param array{
+     *   destinationVersionID?: string, idempotencyKey?: string
+     * }|RunTriggerParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<TestRunResponse>>
@@ -94,12 +96,20 @@ final class RunsRawService implements RunsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/tests/test-suites/%1$s/runs', $suiteName],
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: new ListOf(TestRunResponse::class),
         );

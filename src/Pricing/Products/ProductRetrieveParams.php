@@ -24,6 +24,9 @@ final class ProductRetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Two-letter ISO 3166-1 alpha-2 country code (uppercase, e.g. US) to filter pricing to a single country.
+     */
     #[Optional(nullable: true)]
     public ?string $filterCountryISO;
 
@@ -63,6 +66,9 @@ final class ProductRetrieveParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Two-letter ISO 3166-1 alpha-2 country code (uppercase, e.g. US) to filter pricing to a single country.
+     */
     public function withFilterCountryISO(?string $filterCountryISO): self
     {
         $self = clone $this;

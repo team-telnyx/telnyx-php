@@ -100,7 +100,8 @@ final class InsightGroupsTest extends TestCase
         $result = $this->client->ai->conversations->insightGroups->insightGroups(
             name: 'Name',
             description: 'Description',
-            webhook: ''
+            webhook: '',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

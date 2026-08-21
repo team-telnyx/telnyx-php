@@ -33,7 +33,7 @@ final class ReportsRawService implements ReportsRawContract
     /**
      * @api
      *
-     * Fetch all Mdr records
+     * Returns message detail records (MDRs) matching the provided criteria, such as date range, direction, status, and message type.
      *
      * @param array{
      *   id?: string,
@@ -81,7 +81,7 @@ final class ReportsRawService implements ReportsRawContract
     /**
      * @api
      *
-     * Fetch all Wdr records
+     * Returns wireless detail records (WDRs) matching the provided criteria, such as date range, SIM card, IMSI, or phone number, with pagination and sorting.
      *
      * @param array{
      *   id?: string,

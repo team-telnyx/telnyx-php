@@ -12,7 +12,6 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\ResembleVoiceSettings;
-use Telnyx\RimeVoiceSettings;
 use Telnyx\XaiVoiceSettings;
 
 /**
@@ -22,12 +21,11 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type TelnyxVoiceSettingsShape from \Telnyx\Calls\Actions\TelnyxVoiceSettings
  * @phpstan-import-type AwsVoiceSettingsShape from \Telnyx\Calls\Actions\AwsVoiceSettings
  * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\AzureVoiceSettings
- * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\RimeVoiceSettings
  * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\ResembleVoiceSettings
  * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\XaiVoiceSettings
  *
- * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings
- * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape|XaiVoiceSettingsShape
+ * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings
+ * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|AzureVoiceSettingsShape|ResembleVoiceSettingsShape|XaiVoiceSettingsShape
  */
 final class VoiceSettings implements ConverterSource
 {
@@ -48,7 +46,6 @@ final class VoiceSettings implements ConverterSource
             'telnyx' => TelnyxVoiceSettings::class,
             'aws' => AwsVoiceSettings::class,
             'azure' => AzureVoiceSettings::class,
-            'rime' => RimeVoiceSettings::class,
             'resemble' => ResembleVoiceSettings::class,
             'xai' => XaiVoiceSettings::class,
         ];

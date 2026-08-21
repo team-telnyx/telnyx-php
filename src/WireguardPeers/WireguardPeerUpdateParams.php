@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update the WireGuard peer.
+ * Updates the specified WireGuard peer and returns the updated peer.
  *
  * @see Telnyx\Services\WireguardPeersService::update()
  *

@@ -38,7 +38,7 @@ final class FqdnsRawService implements FqdnsRawContract
     /**
      * @api
      *
-     * Create a new FQDN object.
+     * Creates a new FQDN record and attaches it to the specified connection.
      *
      * @param array{
      *   connectionID: string, dnsRecordType: string, fqdn: string, port?: int|null
@@ -96,7 +96,7 @@ final class FqdnsRawService implements FqdnsRawContract
     /**
      * @api
      *
-     * Update the details of a specific FQDN.
+     * Updates the details of the specified FQDN record and returns the updated FQDN.
      *
      * @param string $id identifies the resource
      * @param array{
@@ -168,7 +168,7 @@ final class FqdnsRawService implements FqdnsRawContract
     /**
      * @api
      *
-     * Delete an FQDN.
+     * Permanently deletes the specified FQDN record from its connection.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

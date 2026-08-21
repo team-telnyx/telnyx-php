@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all Telnyx agents linked to a run.
+ * Returns the Telnyx agents currently linked to the specified run. Linked agents participate in executing the run's plan.
  *
  * @see Telnyx\Services\AI\Missions\Runs\TelnyxAgentsService::list()
  *

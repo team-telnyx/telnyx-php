@@ -45,7 +45,7 @@ final class QueuesService implements QueuesContract
     /**
      * @api
      *
-     * Create a new call queue.
+     * Creates a new call queue with the provided configuration and returns the created queue.
      *
      * @param string $queueName The name of the queue. Must be between 1 and 255 characters.
      * @param int $maxSize the maximum number of calls allowed in the queue
@@ -71,7 +71,7 @@ final class QueuesService implements QueuesContract
     /**
      * @api
      *
-     * Retrieve an existing call queue
+     * Returns the details of an existing call queue, including its current configuration.
      *
      * @param string $queueName Uniquely identifies the queue by name
      * @param RequestOpts|null $requestOptions
@@ -143,7 +143,7 @@ final class QueuesService implements QueuesContract
     /**
      * @api
      *
-     * Delete an existing call queue.
+     * Permanently deletes the specified call queue from your account.
      *
      * @param string $queueName Uniquely identifies the queue by name
      * @param RequestOpts|null $requestOptions

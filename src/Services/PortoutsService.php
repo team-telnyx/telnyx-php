@@ -146,7 +146,7 @@ final class PortoutsService implements PortoutsContract
     /**
      * @api
      *
-     * Authorize or reject portout request
+     * Updates the status of the specified port-out request, using the status path segment to authorize or reject the port-out.
      *
      * @param Status|value-of<Status> $status Path param: Updated portout status
      * @param string $id Path param: Portout id

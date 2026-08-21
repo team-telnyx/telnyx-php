@@ -31,6 +31,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   maxRetriesClientErrors?: int|null,
  *   retryIntervalSecs?: int|null,
  *   text?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class ScheduledEventCreateParams implements BaseModel
@@ -103,6 +104,9 @@ final class ScheduledEventCreateParams implements BaseModel
     #[Optional]
     public ?string $text;
 
+    #[Optional]
+    public ?string $idempotencyKey;
+
     /**
      * `new ScheduledEventCreateParams()` is missing required properties by the API.
      *
@@ -152,6 +156,7 @@ final class ScheduledEventCreateParams implements BaseModel
         ?int $maxRetriesClientErrors = null,
         ?int $retryIntervalSecs = null,
         ?string $text = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -166,6 +171,7 @@ final class ScheduledEventCreateParams implements BaseModel
         null !== $maxRetriesClientErrors && $self['maxRetriesClientErrors'] = $maxRetriesClientErrors;
         null !== $retryIntervalSecs && $self['retryIntervalSecs'] = $retryIntervalSecs;
         null !== $text && $self['text'] = $text;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -285,6 +291,14 @@ final class ScheduledEventCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['text'] = $text;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

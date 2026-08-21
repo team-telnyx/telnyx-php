@@ -52,7 +52,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
     /**
      * @api
      *
-     * Creates a TeXML Application.
+     * Creates a TeXML application, which defines the voice URLs and settings used to serve TeXML instructions for calls, and returns the created application.
      *
      * @param string $friendlyName a user-assigned name to help manage the application
      * @param string $voiceURL URL to which Telnyx will deliver your XML Translator webhooks
@@ -256,7 +256,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
     /**
      * @api
      *
-     * Deletes a TeXML Application.
+     * Permanently deletes the specified TeXML application from your account.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

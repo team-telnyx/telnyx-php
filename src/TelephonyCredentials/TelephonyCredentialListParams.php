@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Filter;
 
 /**
- * List all On-demand Credentials.
+ * Returns a paginated list of the on-demand telephony credentials on your account, with support for filtering.
  *
  * @see Telnyx\Services\TelephonyCredentialsService::list()
  *

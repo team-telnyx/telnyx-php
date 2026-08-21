@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all Global IP assignments.
+ * Returns a paginated list of your Global IP assignments, the links between Global IPs and the WireGuard peers that receive their traffic.
  *
  * @see Telnyx\Services\GlobalIPAssignmentsService::list()
  *

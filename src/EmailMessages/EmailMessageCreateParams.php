@@ -193,9 +193,9 @@ final class EmailMessageCreateParams implements BaseModel
     public ?\DateTimeInterface $scheduledAt;
 
     /**
-     * @deprecated
+     * @deprecated Use scheduled_at instead.
      *
-     * Deprecated alias for `scheduled_at`
+     * Deprecated alias for `scheduled_at`.
      */
     #[Optional('send_at')]
     public ?\DateTimeInterface $sendAt;

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Assign an insight to a group.
+ * Assigns the specified insight template to the specified insight template group.
  *
  * @see Telnyx\Services\AI\Conversations\InsightGroups\InsightsService::assign()
  *

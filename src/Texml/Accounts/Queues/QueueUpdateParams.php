@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Updates a queue resource.
+ * Updates the specified queue resource's settings and returns the updated queue.
  *
  * @see Telnyx\Services\Texml\Accounts\QueuesService::update()
  *

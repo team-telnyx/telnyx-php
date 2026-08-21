@@ -108,7 +108,7 @@ final class ManagedAccountsService implements ManagedAccountsContract
     /**
      * @api
      *
-     * Update a single managed account.
+     * Updates the specified managed account's attributes and returns the updated account.
      *
      * @param string $id Managed Account User ID
      * @param bool $managedAccountAllowCustomPricing Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. This value may be changed, but there may be time lag between when the value is changed and pricing changes take effect.

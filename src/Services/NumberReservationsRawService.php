@@ -71,7 +71,7 @@ final class NumberReservationsRawService implements NumberReservationsRawContrac
     /**
      * @api
      *
-     * Gets a single phone number reservation.
+     * Returns the details of a single phone number reservation, including its status and the reserved numbers.
      *
      * @param string $numberReservationID the number reservation ID
      * @param RequestOpts|null $requestOptions

@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\EmailUnsubscribeGroups\EmailUnsubscribeGroupDeleteParams\Force;
-use Telnyx\EmailUnsubscribeGroups\EmailUnsubscribeGroupDeleteParams\Force\UnionMember0;
+use Telnyx\EmailUnsubscribeGroups\EmailUnsubscribeGroupDeleteParams\Force\ForceString;
 
 /**
  * If the group has 0 active suppressions, hard-deletes the row. With
@@ -55,7 +55,7 @@ final class EmailUnsubscribeGroupDeleteParams implements BaseModel
      *
      * @param ForceShape|null $force
      */
-    public static function with(bool|UnionMember0|string|null $force = null): self
+    public static function with(bool|ForceString|string|null $force = null): self
     {
         $self = new self;
 
@@ -69,7 +69,7 @@ final class EmailUnsubscribeGroupDeleteParams implements BaseModel
      *
      * @param ForceShape $force
      */
-    public function withForce(bool|UnionMember0|string $force): self
+    public function withForce(bool|ForceString|string $force): self
     {
         $self = clone $this;
         $self['force'] = $force;

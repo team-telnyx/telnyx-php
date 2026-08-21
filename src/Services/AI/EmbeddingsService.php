@@ -67,8 +67,12 @@ final class EmbeddingsService implements EmbeddingsContract
      * This loader will split each article into paragraphs and save additional parameters relevant to Intercom docs, such as
      * `article_url` and `heading`. These values will be returned by the `/v2/ai/embeddings/similarity-search` endpoint in the `loader_metadata` field.
      *
-     * @param EmbeddingModel|value-of<EmbeddingModel> $embeddingModel supported models to vectorize and embed documents
-     * @param Loader|value-of<Loader> $loader supported types of custom document loaders for embeddings
+     * @param string $bucketName Body param
+     * @param int $documentChunkOverlapSize Body param
+     * @param int $documentChunkSize Body param
+     * @param EmbeddingModel|value-of<EmbeddingModel> $embeddingModel body param: Supported models to vectorize and embed documents
+     * @param Loader|value-of<Loader> $loader body param: Supported types of custom document loaders for embeddings
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -79,6 +83,7 @@ final class EmbeddingsService implements EmbeddingsContract
         int $documentChunkSize = 1024,
         EmbeddingModel|string $embeddingModel = 'thenlper/gte-large',
         Loader|string $loader = 'default',
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmbeddingResponse {
         $params = Util::removeNulls(
@@ -88,6 +93,7 @@ final class EmbeddingsService implements EmbeddingsContract
                 'documentChunkSize' => $documentChunkSize,
                 'embeddingModel' => $embeddingModel,
                 'loader' => $loader,
+                'idempotencyKey' => $idempotencyKey,
             ],
         );
 
@@ -186,8 +192,9 @@ final class EmbeddingsService implements EmbeddingsContract
      *
      * Embed website content from a specified URL, including child pages up to 5 levels deep within the same domain. The process crawls and loads content from the main URL and its linked pages into a Telnyx Cloud Storage bucket. As soon as each webpage is added to the bucket, its content is immediately processed for embeddings, that can be used for [similarity search](https://developers.telnyx.com/api-reference/embeddings/search-for-documents) and [clustering](https://developers.telnyx.com/docs/inference/clusters).
      *
-     * @param string $bucketName Name of the bucket to store the embeddings. This bucket must already exist.
-     * @param string $url The URL of the webpage to embed
+     * @param string $bucketName Body param: Name of the bucket to store the embeddings. This bucket must already exist.
+     * @param string $url Body param: The URL of the webpage to embed
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -195,9 +202,16 @@ final class EmbeddingsService implements EmbeddingsContract
     public function url(
         string $bucketName,
         string $url,
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmbeddingResponse {
-        $params = Util::removeNulls(['bucketName' => $bucketName, 'url' => $url]);
+        $params = Util::removeNulls(
+            [
+                'bucketName' => $bucketName,
+                'url' => $url,
+                'idempotencyKey' => $idempotencyKey,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->url(params: $params, requestOptions: $requestOptions);

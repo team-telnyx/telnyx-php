@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Log an event for a run.
+ * Logs a new event against the specified run and returns the created event. Events form the run's audit trail and can reference a plan step or agent.
  *
  * @see Telnyx\Services\AI\Missions\Runs\EventsService::log()
  *

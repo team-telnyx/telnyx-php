@@ -20,7 +20,7 @@ use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 
 /**
- * Creates an IP connection.
+ * Creates a new IP-based SIP connection, which authenticates traffic by source IP address.
  *
  * @see Telnyx\Services\IPConnectionsService::create()
  *

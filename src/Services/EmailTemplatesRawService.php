@@ -8,9 +8,10 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailTemplates\EmailTemplate;
 use Telnyx\EmailTemplates\EmailTemplateCreateParams;
 use Telnyx\EmailTemplates\EmailTemplateListParams;
-use Telnyx\EmailTemplates\EmailTemplateListResponse;
 use Telnyx\EmailTemplates\EmailTemplateRenderParams;
 use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
 use Telnyx\EmailTemplates\EmailTemplateReplaceParams;
@@ -106,7 +107,7 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
     /**
      * @api
      *
-     * Updates one or more template fields.
+     * Updates one or more fields of the specified email template and returns the updated template.
      *
      * @param string $id email template UUID
      * @param array{
@@ -152,7 +153,7 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
      * }|EmailTemplateListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailTemplateListResponse>
+     * @return BaseResponse<EmailCursorPagination<EmailTemplate>>
      *
      * @throws APIException
      */
@@ -174,7 +175,8 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
                 ['pageCursor' => 'page_cursor', 'pageSize' => 'page_size']
             ),
             options: $options,
-            convert: EmailTemplateListResponse::class,
+            convert: EmailTemplate::class,
+            page: EmailCursorPagination::class,
         );
     }
 

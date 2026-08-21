@@ -12,7 +12,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a new fine tuning job.
+ * Creates a new fine-tuning job that trains a model on the provided dataset, and returns the created job.
  *
  * @see Telnyx\Services\AI\FineTuning\JobsService::create()
  *

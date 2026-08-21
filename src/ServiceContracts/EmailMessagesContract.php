@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\EmailCursorPagination;
 use Telnyx\EmailInboxes\Drafts\EmailAddress;
+use Telnyx\EmailInboxes\Drafts\EmailMessage;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\EmailMessages\AttachmentRequest;
 use Telnyx\EmailMessages\EmailMessageBatchParams\Message;
 use Telnyx\EmailMessages\EmailMessageBatchResponse;
-use Telnyx\EmailMessages\EmailMessageGetEventsResponse;
 use Telnyx\EmailMessages\EmailMessageGetResponse;
-use Telnyx\EmailMessages\EmailMessageListResponse;
+use Telnyx\EmailMessages\MessageEvent;
 use Telnyx\EmailMessages\TrackingSettings;
 use Telnyx\RequestOptions;
 
@@ -139,13 +140,15 @@ interface EmailMessagesContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100. Invalid values are clamped to the valid range.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailCursorPagination<EmailMessage>
+     *
      * @throws APIException
      */
     public function list(
         ?string $pageCursor = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): EmailMessageListResponse;
+    ): EmailCursorPagination;
 
     /**
      * @api
@@ -211,6 +214,8 @@ interface EmailMessagesContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100. Invalid values are clamped to the valid range.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailCursorPagination<MessageEvent>
+     *
      * @throws APIException
      */
     public function retrieveEvents(
@@ -218,5 +223,5 @@ interface EmailMessagesContract
         ?string $pageCursor = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): EmailMessageGetEventsResponse;
+    ): EmailCursorPagination;
 }

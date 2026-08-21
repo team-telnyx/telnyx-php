@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Remove an insight from a group.
+ * Removes the specified insight template from the specified group. The insight template itself is not deleted.
  *
  * @see Telnyx\Services\AI\Conversations\InsightGroups\InsightsService::deleteUnassign()
  *

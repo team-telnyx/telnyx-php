@@ -6,7 +6,8 @@ namespace Telnyx\ServiceContracts\EmailInboxes;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\EmailInboxes\Threads\InboundThreadListResponse;
+use Telnyx\EmailBracketCursorPagination;
+use Telnyx\EmailInboxes\Threads\InboundThread;
 use Telnyx\EmailInboxes\Threads\ThreadGetResponse;
 use Telnyx\EmailInboxes\Threads\ThreadListParams;
 use Telnyx\EmailInboxes\Threads\ThreadRetrieveParams;
@@ -41,7 +42,7 @@ interface ThreadsRawContract
      * @param array<string,mixed>|ThreadListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<InboundThreadListResponse>
+     * @return BaseResponse<EmailBracketCursorPagination<InboundThread>>
      *
      * @throws APIException
      */

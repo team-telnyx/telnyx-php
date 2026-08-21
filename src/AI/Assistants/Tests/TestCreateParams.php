@@ -27,6 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   maxDurationSeconds?: int|null,
  *   telnyxConversationChannel?: null|TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
  *   testSuite?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class TestCreateParams implements BaseModel
@@ -90,6 +91,9 @@ final class TestCreateParams implements BaseModel
     #[Optional('test_suite')]
     public ?string $testSuite;
 
+    #[Optional]
+    public ?string $idempotencyKey;
+
     /**
      * `new TestCreateParams()` is missing required properties by the API.
      *
@@ -132,6 +136,7 @@ final class TestCreateParams implements BaseModel
         ?int $maxDurationSeconds = null,
         TelnyxConversationChannel|string|null $telnyxConversationChannel = null,
         ?string $testSuite = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -144,6 +149,7 @@ final class TestCreateParams implements BaseModel
         null !== $maxDurationSeconds && $self['maxDurationSeconds'] = $maxDurationSeconds;
         null !== $telnyxConversationChannel && $self['telnyxConversationChannel'] = $telnyxConversationChannel;
         null !== $testSuite && $self['testSuite'] = $testSuite;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -237,6 +243,14 @@ final class TestCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['testSuite'] = $testSuite;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

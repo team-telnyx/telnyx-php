@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Events\EventListParams\Filter;
 
 /**
- * Returns a list of all port-out events.
+ * Returns a paginated list of port-out events on your account, such as status changes on port-out requests, with support for filtering.
  *
  * @see Telnyx\Services\Portouts\EventsService::list()
  *

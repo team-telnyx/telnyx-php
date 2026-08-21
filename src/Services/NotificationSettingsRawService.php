@@ -38,7 +38,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
     /**
      * @api
      *
-     * Add a notification setting.
+     * Adds a notification setting that enables delivery of a notification event type to a notification profile.
      *
      * @param array{
      *   notificationChannelID?: string,
@@ -74,7 +74,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
     /**
      * @api
      *
-     * Get a notification setting.
+     * Returns the details of a single notification setting by its identifier.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions
@@ -99,7 +99,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
     /**
      * @api
      *
-     * List notification settings.
+     * Returns a paginated list of your notification settings, which map notification event types to profiles and channels.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -136,7 +136,7 @@ final class NotificationSettingsRawService implements NotificationSettingsRawCon
     /**
      * @api
      *
-     * Delete a notification setting.
+     * Deletes the specified notification setting, disabling that notification delivery.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions

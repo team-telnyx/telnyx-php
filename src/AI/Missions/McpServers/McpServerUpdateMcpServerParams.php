@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update an MCP server definition.
+ * Replaces the configuration of the specified MCP server on this mission.
  *
  * @see Telnyx\Services\AI\Missions\McpServersService::updateMcpServer()
  *

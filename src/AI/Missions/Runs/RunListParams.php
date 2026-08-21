@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all runs for a specific mission.
+ * Returns a paginated list of runs for the specified mission, optionally filtered by run status, so you can track the mission's execution history over time.
  *
  * @see Telnyx\Services\AI\Missions\RunsService::list()
  *

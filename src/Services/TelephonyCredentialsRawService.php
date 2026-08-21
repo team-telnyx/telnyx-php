@@ -36,7 +36,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
     /**
      * @api
      *
-     * Create a credential.
+     * Creates a new on-demand telephony credential for the specified connection. The credential can then be used to generate access tokens for SIP or WebRTC clients.
      *
      * @param array{
      *   connectionID: string, expiresAt?: string, name?: string, tag?: string
@@ -94,7 +94,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
     /**
      * @api
      *
-     * Update an existing credential.
+     * Updates the specified telephony credential and returns the updated credential.
      *
      * @param string $id identifies the resource
      * @param array{
@@ -129,7 +129,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
     /**
      * @api
      *
-     * List all On-demand Credentials.
+     * Returns a paginated list of the on-demand telephony credentials on your account, with support for filtering.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -166,7 +166,7 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
     /**
      * @api
      *
-     * Delete an existing credential.
+     * Permanently deletes the specified telephony credential, revoking any access it provided.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

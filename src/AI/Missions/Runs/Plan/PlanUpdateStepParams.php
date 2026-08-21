@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update the status of a plan step.
+ * Updates the status of a single plan step and returns the updated step. Typically called by the executing agent as it works through the plan.
  *
  * @see Telnyx\Services\AI\Missions\Runs\PlanService::updateStep()
  *

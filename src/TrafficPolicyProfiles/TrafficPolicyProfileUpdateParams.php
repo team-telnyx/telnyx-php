@@ -12,7 +12,7 @@ use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\LimitBwKbps;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\Type;
 
 /**
- * Updates a traffic policy profile.
+ * Updates the specified traffic policy profile and returns the updated profile.
  *
  * @see Telnyx\Services\TrafficPolicyProfilesService::update()
  *

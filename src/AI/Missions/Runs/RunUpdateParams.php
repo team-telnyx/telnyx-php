@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update run status and/or result.
+ * Updates a run's status and/or result and returns the updated run object. Typically used by executing agents to report progress or record the final outcome.
  *
  * @see Telnyx\Services\AI\Missions\RunsService::update()
  *

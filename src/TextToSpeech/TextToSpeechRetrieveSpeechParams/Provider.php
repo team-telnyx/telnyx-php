@@ -21,8 +21,6 @@ enum Provider: string
 
     case MURFAI = 'murfai';
 
-    case RIME = 'rime';
-
     case RESEMBLE = 'resemble';
 
     case XAI = 'xai';

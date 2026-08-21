@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get all insight groups.
+ * Returns a paginated list of your insight template groups. Groups organize related insight templates that are applied together when analyzing conversations.
  *
  * @see Telnyx\Services\AI\Conversations\InsightGroupsService::retrieveInsightGroups()
  *

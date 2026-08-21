@@ -52,7 +52,7 @@ final class KnowledgeBasesRawService implements KnowledgeBasesRawContract
     /**
      * @api
      *
-     * Delete a knowledge base from a mission
+     * Detaches the specified knowledge base from the mission so its content is no longer available to agents in subsequent runs.
      *
      * @param string $knowledgeBaseID unique identifier of the knowledge base
      * @param array{missionID: string}|KnowledgeBaseDeleteKnowledgeBaseParams $params
@@ -88,7 +88,7 @@ final class KnowledgeBasesRawService implements KnowledgeBasesRawContract
     /**
      * @api
      *
-     * Get a specific knowledge base by ID
+     * Returns the details of a single knowledge base attached to the specified mission.
      *
      * @param string $knowledgeBaseID unique identifier of the knowledge base
      * @param array{missionID: string}|KnowledgeBaseGetKnowledgeBaseParams $params
@@ -124,7 +124,7 @@ final class KnowledgeBasesRawService implements KnowledgeBasesRawContract
     /**
      * @api
      *
-     * List all knowledge bases for a mission
+     * Returns the knowledge bases attached to the specified mission. Knowledge bases provide reference content agents can draw on during runs.
      *
      * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
@@ -149,7 +149,7 @@ final class KnowledgeBasesRawService implements KnowledgeBasesRawContract
     /**
      * @api
      *
-     * Update a knowledge base definition
+     * Replaces the definition of the specified knowledge base on this mission.
      *
      * @param string $knowledgeBaseID unique identifier of the knowledge base
      * @param array{missionID: string}|KnowledgeBaseUpdateKnowledgeBaseParams $params

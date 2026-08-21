@@ -41,7 +41,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
     /**
      * @api
      *
-     * Create a Global IP assignment.
+     * Assigns a Global IP to a WireGuard peer so traffic destined for the IP is delivered over that peer's tunnel. Assignment is asynchronous, so the request is accepted and completes in the background.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -59,7 +59,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
     /**
      * @api
      *
-     * Retrieve a Global IP assignment.
+     * Returns the details of a single Global IP assignment, including the Global IP and WireGuard peer it links.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -79,7 +79,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
     /**
      * @api
      *
-     * Update a Global IP assignment.
+     * Updates the specified Global IP assignment with the provided fields and returns the updated assignment.
      *
      * @param string $globalIPAssignmentID identifies the resource
      * @param GlobalIPAssignmentUpdateRequest|GlobalIPAssignmentUpdateRequestShape $globalIPAssignmentUpdateRequest
@@ -105,7 +105,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
     /**
      * @api
      *
-     * List all Global IP assignments.
+     * Returns a paginated list of your Global IP assignments, the links between Global IPs and the WireGuard peers that receive their traffic.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -131,7 +131,7 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
     /**
      * @api
      *
-     * Delete a Global IP assignment.
+     * Deletes the specified Global IP assignment, detaching the Global IP from its WireGuard peer.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

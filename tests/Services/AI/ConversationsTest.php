@@ -130,6 +130,7 @@ final class ConversationsTest extends TestCase
             toolCallID: 'Tool Call Id',
             toolCalls: [['foo' => 'bar']],
             toolChoice: 'string',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

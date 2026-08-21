@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create an OAuth authorization grant.
+ * Creates an OAuth authorization grant and returns the grant response for completing the authorization flow.
  *
  * @see Telnyx\Services\OAuthService::grants()
  *

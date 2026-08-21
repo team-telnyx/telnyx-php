@@ -30,6 +30,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   conversationMetadata?: array<string,ConversationMetadataShape>|null,
  *   shouldCreateConversation?: bool|null,
  *   text?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class AssistantSendSMSParams implements BaseModel
@@ -53,6 +54,9 @@ final class AssistantSendSMSParams implements BaseModel
 
     #[Optional]
     public ?string $text;
+
+    #[Optional]
+    public ?string $idempotencyKey;
 
     /**
      * `new AssistantSendSMSParams()` is missing required properties by the API.
@@ -86,6 +90,7 @@ final class AssistantSendSMSParams implements BaseModel
         ?array $conversationMetadata = null,
         ?bool $shouldCreateConversation = null,
         ?string $text = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -95,6 +100,7 @@ final class AssistantSendSMSParams implements BaseModel
         null !== $conversationMetadata && $self['conversationMetadata'] = $conversationMetadata;
         null !== $shouldCreateConversation && $self['shouldCreateConversation'] = $shouldCreateConversation;
         null !== $text && $self['text'] = $text;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -139,6 +145,14 @@ final class AssistantSendSMSParams implements BaseModel
     {
         $self = clone $this;
         $self['text'] = $text;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

@@ -2876,12 +2876,12 @@ Methods:
 - <code title="get /email_blocks/{id}/events">$client->emailBlocks-><a href="./src/Services/EmailBlocksService.php">retrieveEvents</a>(...$params)</code>
 - <code title="get /email_blocks/export">$client->emailBlocks-><a href="./src/Services/EmailBlocksService.php">retrieveExport</a>(...$params)</code>
 
-## Import
+## Imports
 
 Methods:
 
-- <code title="post /email_blocks/import">$client->emailBlocks->import-><a href="./src/Services/EmailBlocks/ImportService.php">create</a>(...$params)</code>
-- <code title="get /email_blocks/import/{id}">$client->emailBlocks->import-><a href="./src/Services/EmailBlocks/ImportService.php">retrieve</a>(...$params)</code>
+- <code title="post /email_blocks/import">$client->emailBlocks->imports-><a href="./src/Services/EmailBlocks/ImportsService.php">create</a>(...$params)</code>
+- <code title="get /email_blocks/import/{id}">$client->emailBlocks->imports-><a href="./src/Services/EmailBlocks/ImportsService.php">retrieve</a>(...$params)</code>
 
 # EmailDomains
 

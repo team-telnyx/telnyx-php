@@ -30,6 +30,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   timeoutMs?: int|null,
  *   updateDynamicVariables?: null|UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape,
  *   webhook?: array<string,mixed>|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class ToolCreateParams implements BaseModel
@@ -80,6 +81,9 @@ final class ToolCreateParams implements BaseModel
     #[Optional(map: 'mixed')]
     public ?array $webhook;
 
+    #[Optional]
+    public ?string $idempotencyKey;
+
     /**
      * `new ToolCreateParams()` is missing required properties by the API.
      *
@@ -125,6 +129,7 @@ final class ToolCreateParams implements BaseModel
         ?int $timeoutMs = null,
         UpdateDynamicVariablesToolParams|array|null $updateDynamicVariables = null,
         ?array $webhook = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -140,6 +145,7 @@ final class ToolCreateParams implements BaseModel
         null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
         null !== $updateDynamicVariables && $self['updateDynamicVariables'] = $updateDynamicVariables;
         null !== $webhook && $self['webhook'] = $webhook;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -255,6 +261,14 @@ final class ToolCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['webhook'] = $webhook;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

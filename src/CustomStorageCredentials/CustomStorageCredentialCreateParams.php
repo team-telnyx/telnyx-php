@@ -10,7 +10,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Configuration;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Configuration\S3GenericConfigurationData;
 
 /**
  * Creates a custom storage credentials configuration.

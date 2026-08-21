@@ -11,6 +11,7 @@ use Telnyx\AI\Assistants\CanaryDeploys\RuleInput;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysRawContract;
 
@@ -36,9 +37,9 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
      * Creates a new canary deploy configuration with multiple version IDs and their traffic
      * percentages for A/B testing or gradual rollouts of assistant versions.
      *
-     * @param string $assistantID unique identifier of the assistant
+     * @param string $assistantID path param: Unique identifier of the assistant
      * @param array{
-     *   rules?: list<RuleInput|RuleInputShape>
+     *   rules?: list<RuleInput|RuleInputShape>, idempotencyKey?: string
      * }|CanaryDeployCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -55,12 +56,20 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/%1$s/canary-deploys', $assistantID],
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: CanaryDeployResponse::class,
         );

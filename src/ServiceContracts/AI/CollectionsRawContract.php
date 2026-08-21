@@ -120,7 +120,7 @@ interface CollectionsRawContract
      * @param array<string,mixed>|CollectionRetrieveDocumentsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CollectionGetDocumentsResponse>
+     * @return BaseResponse<DefaultFlatPagination<CollectionGetDocumentsResponse>>
      *
      * @throws APIException
      */

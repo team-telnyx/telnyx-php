@@ -40,7 +40,7 @@ final class ProductsRawService implements ProductsRawContract
      * }|ProductRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ProductGetResponse>
+     * @return BaseResponse<DefaultFlatPagination<ProductGetResponse>>
      *
      * @throws APIException
      */
@@ -68,6 +68,7 @@ final class ProductsRawService implements ProductsRawContract
             ),
             options: $options,
             convert: ProductGetResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

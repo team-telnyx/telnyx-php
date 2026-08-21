@@ -45,7 +45,7 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
     /**
      * @api
      *
-     * Creates a new phone number block.
+     * Creates a phone number block on the porting order, representing a contiguous range of phone numbers to be ported together.
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number block
      * @param list<ActivationRange|ActivationRangeShape> $activationRanges Specifies the activation ranges for this porting phone number block. The activation range must be within the block range and should not overlap with other activation ranges.
@@ -113,7 +113,7 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
     /**
      * @api
      *
-     * Deletes a phone number block.
+     * Deletes the specified phone number block from the porting order.
      *
      * @param string $id Identifies the phone number block to be deleted
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number block

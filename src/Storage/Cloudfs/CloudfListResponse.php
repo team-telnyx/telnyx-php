@@ -7,15 +7,20 @@ namespace Telnyx\Storage\Cloudfs;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Storage\Cloudfs\CloudfListResponse\Data;
-use Telnyx\Storage\Cloudfs\CloudfListResponse\Meta;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Storage\Cloudfs\CloudfListResponse\Data
- * @phpstan-import-type MetaShape from \Telnyx\Storage\Cloudfs\CloudfListResponse\Meta
+ * A CloudFS filesystem as returned in list results. Connection details (`meta_url`, `meta_token`) are omitted — retrieve the filesystem by ID for its redacted `meta_url`.
  *
  * @phpstan-type CloudfListResponseShape = array{
- *   data?: list<Data|DataShape>|null, meta?: null|Meta|MetaShape
+ *   id?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   name?: string|null,
+ *   recordType?: string|null,
+ *   region?: string|null,
+ *   s3Bucket?: string|null,
+ *   s3Endpoint?: string|null,
+ *   status?: null|CloudfsFilesystemStatus|value-of<CloudfsFilesystemStatus>,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class CloudfListResponse implements BaseModel
@@ -23,12 +28,43 @@ final class CloudfListResponse implements BaseModel
     /** @use SdkModel<CloudfListResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
-    public ?array $data;
+    #[Optional]
+    public ?string $id;
+
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     #[Optional]
-    public ?Meta $meta;
+    public ?string $name;
+
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    #[Optional]
+    public ?string $region;
+
+    /**
+     * Name of the bucket that stores this filesystem's data. Created during provisioning.
+     */
+    #[Optional('s3_bucket')]
+    public ?string $s3Bucket;
+
+    /**
+     * URL of the Telnyx Cloud Storage endpoint backing this filesystem.
+     */
+    #[Optional('s3_endpoint')]
+    public ?string $s3Endpoint;
+
+    /**
+     * Lifecycle status of the filesystem. `ready` means it is fully provisioned and usable. `needs_format` means the storage bucket and metadata database were provisioned but the filesystem has not yet been formatted — run `juicefs format` with the filesystem's `meta_url` before mounting. `failed` means the last lifecycle action failed — see the filesystem's `error` message. `deleted` appears only in the delete response: deleted filesystems are excluded from list results and return a `404` on retrieval.
+     *
+     * @var value-of<CloudfsFilesystemStatus>|null $status
+     */
+    #[Optional(enum: CloudfsFilesystemStatus::class)]
+    public ?string $status;
+
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -40,39 +76,113 @@ final class CloudfListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|DataShape>|null $data
-     * @param Meta|MetaShape|null $meta
+     * @param CloudfsFilesystemStatus|value-of<CloudfsFilesystemStatus>|null $status
      */
     public static function with(
-        ?array $data = null,
-        Meta|array|null $meta = null
+        ?string $id = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $name = null,
+        ?string $recordType = null,
+        ?string $region = null,
+        ?string $s3Bucket = null,
+        ?string $s3Endpoint = null,
+        CloudfsFilesystemStatus|string|null $status = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $meta && $self['meta'] = $meta;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $name && $self['name'] = $name;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $region && $self['region'] = $region;
+        null !== $s3Bucket && $self['s3Bucket'] = $s3Bucket;
+        null !== $s3Endpoint && $self['s3Endpoint'] = $s3Endpoint;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+
+        return $self;
+    }
+
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
+
+        return $self;
+    }
+
+    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    public function withName(string $name): self
+    {
+        $self = clone $this;
+        $self['name'] = $name;
+
+        return $self;
+    }
+
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    public function withRegion(string $region): self
+    {
+        $self = clone $this;
+        $self['region'] = $region;
 
         return $self;
     }
 
     /**
-     * @param list<Data|DataShape> $data
+     * Name of the bucket that stores this filesystem's data. Created during provisioning.
      */
-    public function withData(array $data): self
+    public function withS3Bucket(string $s3Bucket): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['s3Bucket'] = $s3Bucket;
 
         return $self;
     }
 
     /**
-     * @param Meta|MetaShape $meta
+     * URL of the Telnyx Cloud Storage endpoint backing this filesystem.
      */
-    public function withMeta(Meta|array $meta): self
+    public function withS3Endpoint(string $s3Endpoint): self
     {
         $self = clone $this;
-        $self['meta'] = $meta;
+        $self['s3Endpoint'] = $s3Endpoint;
+
+        return $self;
+    }
+
+    /**
+     * Lifecycle status of the filesystem. `ready` means it is fully provisioned and usable. `needs_format` means the storage bucket and metadata database were provisioned but the filesystem has not yet been formatted — run `juicefs format` with the filesystem's `meta_url` before mounting. `failed` means the last lifecycle action failed — see the filesystem's `error` message. `deleted` appears only in the delete response: deleted filesystems are excluded from list results and return a `404` on retrieval.
+     *
+     * @param CloudfsFilesystemStatus|value-of<CloudfsFilesystemStatus> $status
+     */
+    public function withStatus(CloudfsFilesystemStatus|string $status): self
+    {
+        $self = clone $this;
+        $self['status'] = $status;
+
+        return $self;
+    }
+
+    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }

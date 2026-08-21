@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update a Network.
+ * Updates the specified network's attributes and returns the updated network.
  *
  * @see Telnyx\Services\NetworksService::update()
  *

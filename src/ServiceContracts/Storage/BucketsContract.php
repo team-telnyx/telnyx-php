@@ -6,9 +6,11 @@ namespace Telnyx\ServiceContracts\Storage;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\Storage\Buckets\BucketCreatePresignedURLParams\Body;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
 /**
+ * @phpstan-import-type BodyShape from \Telnyx\Storage\Buckets\BucketCreatePresignedURLParams\Body
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface BucketsContract
@@ -18,7 +20,7 @@ interface BucketsContract
      *
      * @param string $objectName Path param: The name of the object
      * @param string $bucketName Path param: The name of the bucket
-     * @param int $ttl Body param: The time to live of the token in seconds
+     * @param Body|BodyShape $body Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -26,7 +28,7 @@ interface BucketsContract
     public function createPresignedURL(
         string $objectName,
         string $bucketName,
-        ?int $ttl = null,
+        Body|array|null $body = null,
         RequestOptions|array|null $requestOptions = null,
     ): BucketNewPresignedURLResponse;
 }
