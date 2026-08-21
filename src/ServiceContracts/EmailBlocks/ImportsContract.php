@@ -6,13 +6,13 @@ namespace Telnyx\ServiceContracts\EmailBlocks;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\FileParam;
-use Telnyx\EmailBlocks\Import\EmailBlockImportResponse;
+use Telnyx\EmailBlocks\Imports\EmailBlockImportResponse;
 use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
-interface ImportContract
+interface ImportsContract
 {
     /**
      * @api

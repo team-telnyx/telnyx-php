@@ -9,7 +9,7 @@ namespace Telnyx\Calls\Actions\ActionPayParams;
  */
 enum Currency: string
 {
-    case USD = 'USD';
+    case USD_UPPERCASE = 'USD';
 
-    case USD1 = 'usd';
+    case USD_LOWERCASE = 'usd';
 }

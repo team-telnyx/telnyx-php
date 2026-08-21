@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailBlocks\Import\EmailBlockImport;
+namespace Telnyx\EmailBlocks\Imports\EmailBlockImport;
 
 /**
  * View-only.

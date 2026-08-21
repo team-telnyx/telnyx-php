@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailBlocks\Import;
+namespace Telnyx\EmailBlocks\Imports;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailBlocks\Import\EmailBlockImport\Provider;
-use Telnyx\EmailBlocks\Import\EmailBlockImport\RecordType;
-use Telnyx\EmailBlocks\Import\EmailBlockImport\Status;
+use Telnyx\EmailBlocks\Imports\EmailBlockImport\Provider;
+use Telnyx\EmailBlocks\Imports\EmailBlockImport\RecordType;
+use Telnyx\EmailBlocks\Imports\EmailBlockImport\Status;
 
 /**
  * Import job. Schema fields hidden: `account_id`, `csv_content`,

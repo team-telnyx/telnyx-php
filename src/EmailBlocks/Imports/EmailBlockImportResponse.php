@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailBlocks\Import;
+namespace Telnyx\EmailBlocks\Imports;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type EmailBlockImportShape from \Telnyx\EmailBlocks\Import\EmailBlockImport
+ * @phpstan-import-type EmailBlockImportShape from \Telnyx\EmailBlocks\Imports\EmailBlockImport
  *
  * @phpstan-type EmailBlockImportResponseShape = array{
  *   data: EmailBlockImport|EmailBlockImportShape

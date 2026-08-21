@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailBlocks\Import;
+namespace Telnyx\EmailBlocks\Imports;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -24,7 +24,7 @@ use Telnyx\Core\FileParam;
  * `expires_at: nil`. Provider is auto-detected from the CSV header
  * (`sendgrid` / `mailgun` / `ses` / `generic`).
  *
- * @see Telnyx\Services\EmailBlocks\ImportService::create()
+ * @see Telnyx\Services\EmailBlocks\ImportsService::create()
  *
  * @phpstan-type ImportCreateParamsShape = array{
  *   file: string|FileParam, blockTtlDays?: int|null

@@ -9,7 +9,7 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
- * @phpstan-type ParamVariants = string|float|bool|null
+ * @phpstan-type ParamVariants = string|float|bool
  * @phpstan-type ParamShape = ParamVariants
  */
 final class Param implements ConverterSource
@@ -21,6 +21,6 @@ final class Param implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['string', 'float', 'bool', 'null'];
+        return ['string', 'float', 'bool'];
     }
 }

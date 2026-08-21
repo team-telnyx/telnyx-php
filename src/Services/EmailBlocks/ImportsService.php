@@ -8,28 +8,28 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\FileParam;
 use Telnyx\Core\Util;
-use Telnyx\EmailBlocks\Import\EmailBlockImportResponse;
+use Telnyx\EmailBlocks\Imports\EmailBlockImportResponse;
 use Telnyx\RequestOptions;
-use Telnyx\ServiceContracts\EmailBlocks\ImportContract;
+use Telnyx\ServiceContracts\EmailBlocks\ImportsContract;
 
 /**
  * Async CSV import of competitor suppression lists.
  *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
-final class ImportService implements ImportContract
+final class ImportsService implements ImportsContract
 {
     /**
      * @api
      */
-    public ImportRawService $raw;
+    public ImportsRawService $raw;
 
     /**
      * @internal
      */
     public function __construct(private Client $client)
     {
-        $this->raw = new ImportRawService($client);
+        $this->raw = new ImportsRawService($client);
     }
 
     /**

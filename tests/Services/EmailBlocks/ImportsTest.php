@@ -8,14 +8,14 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\FileParam;
 use Telnyx\Core\Util;
-use Telnyx\EmailBlocks\Import\EmailBlockImportResponse;
+use Telnyx\EmailBlocks\Imports\EmailBlockImportResponse;
 use Tests\UnsupportedMockTests;
 
 /**
  * @internal
  */
 #[CoversNothing]
-final class ImportTest extends TestCase
+final class ImportsTest extends TestCase
 {
     protected Client $client;
 
@@ -36,7 +36,7 @@ final class ImportTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailBlocks->import->create(
+        $result = $this->client->emailBlocks->imports->create(
             file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
         );
 
@@ -51,7 +51,7 @@ final class ImportTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailBlocks->import->create(
+        $result = $this->client->emailBlocks->imports->create(
             file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
             blockTtlDays: 30,
         );
@@ -67,7 +67,7 @@ final class ImportTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailBlocks->import->retrieve(
+        $result = $this->client->emailBlocks->imports->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 

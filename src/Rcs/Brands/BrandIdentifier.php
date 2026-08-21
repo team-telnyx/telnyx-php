@@ -2,22 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Rcs\Brands\BrandResponse;
+namespace Telnyx\Rcs\Brands;
 
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\Rcs\Brands\EinBrandIdentifier;
-use Telnyx\Rcs\Brands\StockSymbolBrandIdentifier;
 
 /**
  * @phpstan-import-type EinBrandIdentifierShape from \Telnyx\Rcs\Brands\EinBrandIdentifier
  * @phpstan-import-type StockSymbolBrandIdentifierShape from \Telnyx\Rcs\Brands\StockSymbolBrandIdentifier
  *
- * @phpstan-type IdentifierVariants = EinBrandIdentifier|StockSymbolBrandIdentifier
- * @phpstan-type IdentifierShape = IdentifierVariants|EinBrandIdentifierShape|StockSymbolBrandIdentifierShape
+ * @phpstan-type BrandIdentifierVariants = EinBrandIdentifier|StockSymbolBrandIdentifier
+ * @phpstan-type BrandIdentifierShape = BrandIdentifierVariants|EinBrandIdentifierShape|StockSymbolBrandIdentifierShape
  */
-final class Identifier implements ConverterSource
+final class BrandIdentifier implements ConverterSource
 {
     use SdkUnion;
 

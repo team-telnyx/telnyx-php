@@ -15,7 +15,7 @@ use Telnyx\EmailBlocks\EmailBlockListParams\Sort;
 use Telnyx\EmailBlocks\EmailBlockResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailBlocksContract;
-use Telnyx\Services\EmailBlocks\ImportService;
+use Telnyx\Services\EmailBlocks\ImportsService;
 
 /**
  * Recipient suppression records (`/v2/email_blocks`).
@@ -32,7 +32,7 @@ final class EmailBlocksService implements EmailBlocksContract
     /**
      * @api
      */
-    public ImportService $import;
+    public ImportsService $imports;
 
     /**
      * @internal
@@ -40,7 +40,7 @@ final class EmailBlocksService implements EmailBlocksContract
     public function __construct(private Client $client)
     {
         $this->raw = new EmailBlocksRawService($client);
-        $this->import = new ImportService($client);
+        $this->imports = new ImportsService($client);
     }
 
     /**

@@ -23,7 +23,7 @@ interface MessagesContract
      *
      * @param string $messageID path param: Inbound email message UUID
      * @param string $inboxID path param: Email inbox UUID
-     * @param ReadAtShape $readAt body param: Set to `true` for server time, an ISO 8601 timestamp for an explicit read time, or `null` to mark unread
+     * @param ReadAtShape $readAt Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -31,7 +31,7 @@ interface MessagesContract
     public function update(
         string $messageID,
         string $inboxID,
-        bool|\DateTimeInterface|null $readAt,
+        bool|\DateTimeInterface $readAt,
         RequestOptions|array|null $requestOptions = null,
     ): MessageUpdateResponse;
 
