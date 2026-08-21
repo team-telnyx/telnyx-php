@@ -132,7 +132,7 @@ final class PortingOrdersService implements PortingOrdersContract
     /**
      * @api
      *
-     * Creates a new porting order object.
+     * Creates a new porting order to bring phone numbers from another carrier to Telnyx. Complete the order's requirements and then confirm it to submit the port.
      *
      * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers
      * @param string $customerGroupReference A customer-specified group reference for customer bookkeeping purposes
@@ -252,7 +252,7 @@ final class PortingOrdersService implements PortingOrdersContract
     /**
      * @api
      *
-     * Returns a list of your porting order.
+     * Returns a paginated list of your porting orders. Supports filtering and sorting, and can optionally include the phone numbers attached to each order.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains]
      * @param bool $includePhoneNumbers Include the first 50 phone number objects in the results
@@ -348,7 +348,7 @@ final class PortingOrdersService implements PortingOrdersContract
     /**
      * @api
      *
-     * Download a porting order loa template
+     * Downloads the Letter of Authorization (LOA) template document for this porting order, optionally rendered with a specific LOA configuration.
      *
      * @param string $id Porting Order id
      * @param string $loaConfigurationID The identifier of the LOA configuration to use for the template. If not provided, the default LOA configuration will be used.

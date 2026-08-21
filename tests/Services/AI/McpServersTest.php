@@ -59,6 +59,7 @@ final class McpServersTest extends TestCase
             url: 'Url',
             allowedTools: ['string'],
             apiKeyRef: 'api_key_ref',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

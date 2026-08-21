@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Returns a queue resource.
+ * Returns a single queue resource for the account by its QueueSid.
  *
  * @see Telnyx\Services\Texml\Accounts\QueuesService::retrieve()
  *

@@ -7,7 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\EmailTemplates\EmailTemplateListResponse;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailTemplates\EmailTemplate;
 use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
 use Telnyx\EmailTemplates\EmailTemplateResponse;
 use Telnyx\RequestOptions;
@@ -97,7 +98,7 @@ final class EmailTemplatesService implements EmailTemplatesContract
     /**
      * @api
      *
-     * Updates one or more template fields.
+     * Updates one or more fields of the specified email template and returns the updated template.
      *
      * @param string $id email template UUID
      * @param string|null $htmlBody liquid template HTML body
@@ -142,13 +143,15 @@ final class EmailTemplatesService implements EmailTemplatesContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100. Invalid values are clamped to the valid range.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailCursorPagination<EmailTemplate>
+     *
      * @throws APIException
      */
     public function list(
         ?string $pageCursor = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): EmailTemplateListResponse {
+    ): EmailCursorPagination {
         $params = Util::removeNulls(
             ['pageCursor' => $pageCursor, 'pageSize' => $pageSize]
         );

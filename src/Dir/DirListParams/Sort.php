@@ -19,7 +19,7 @@ enum Sort: string
 
     case DISPLAY_NAME = 'display_name';
 
-    case MINUSDISPLAY_NAME = '-display_name';
+    case MINUS_DISPLAY_NAME = '-display_name';
 
     case STATUS = 'status';
 

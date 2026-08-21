@@ -33,7 +33,7 @@ final class TelnyxAgentsService implements TelnyxAgentsContract
     /**
      * @api
      *
-     * List all Telnyx agents linked to a run
+     * Returns the Telnyx agents currently linked to the specified run. Linked agents participate in executing the run's plan.
      *
      * @param string $runID unique identifier of the run
      * @param string $missionID unique identifier of the mission
@@ -85,7 +85,7 @@ final class TelnyxAgentsService implements TelnyxAgentsContract
     /**
      * @api
      *
-     * Unlink a Telnyx agent from a run
+     * Unlinks the specified Telnyx agent from the run so it no longer participates in execution. The run itself and its history are unaffected.
      *
      * @param string $telnyxAgentID unique identifier of the telnyx agent
      * @param string $missionID unique identifier of the mission

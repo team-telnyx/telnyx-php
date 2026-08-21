@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Lists conference recordings.
+ * Returns the list of recordings made for the specified conference.
  *
  * @see Telnyx\Services\Texml\Accounts\ConferencesService::retrieveRecordings()
  *

@@ -12,7 +12,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Lists conference participants.
+ * Returns a paginated list of participants in the specified conference, with support for filtering.
  *
  * @see Telnyx\Services\ConferencesService::listParticipants()
  *

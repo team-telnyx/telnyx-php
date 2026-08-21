@@ -46,7 +46,7 @@ final class CallControlApplicationsRawService implements CallControlApplications
     /**
      * @api
      *
-     * Create a call control application.
+     * Creates a call control application, which defines the webhook endpoints and settings used to control calls on associated connections.
      *
      * @param array{
      *   applicationName: string,
@@ -206,7 +206,7 @@ final class CallControlApplicationsRawService implements CallControlApplications
     /**
      * @api
      *
-     * Deletes a call control application.
+     * Permanently deletes the specified call control application and its webhook configuration.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

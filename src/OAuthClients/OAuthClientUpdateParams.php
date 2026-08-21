@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType;
 
 /**
- * Update an existing OAuth client.
+ * Updates the specified OAuth client's configuration and returns the updated client.
  *
  * @see Telnyx\Services\OAuthClientsService::update()
  *

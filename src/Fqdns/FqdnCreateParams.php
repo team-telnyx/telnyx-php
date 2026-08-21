@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a new FQDN object.
+ * Creates a new FQDN record and attaches it to the specified connection.
  *
  * @see Telnyx\Services\FqdnsService::create()
  *

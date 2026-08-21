@@ -36,7 +36,7 @@ final class UsersRawService implements UsersRawContract
     /**
      * @api
      *
-     * Returns a user in your organization.
+     * Returns the details of a user in your organization, optionally including the groups the user belongs to.
      *
      * @param string $id Organization User ID
      * @param array{includeGroups?: bool}|UserRetrieveParams $params

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Deactivates a user bundle by its ID.
+ * Deactivates the specified user bundle on your account and returns the deactivated bundle.
  *
  * @see Telnyx\Services\BundlePricing\UserBundlesService::deactivate()
  *

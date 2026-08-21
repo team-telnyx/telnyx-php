@@ -59,7 +59,7 @@ final class MediaService implements MediaContract
     /**
      * @api
      *
-     * Updates a stored media file.
+     * Updates the specified stored media file and returns the updated resource.
      *
      * @param string $mediaName uniquely identifies a media resource
      * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
@@ -87,7 +87,7 @@ final class MediaService implements MediaContract
     /**
      * @api
      *
-     * Returns a list of stored media files.
+     * Returns a list of the media files stored on your account, with support for filtering.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
      * @param RequestOpts|null $requestOptions
@@ -109,7 +109,7 @@ final class MediaService implements MediaContract
     /**
      * @api
      *
-     * Deletes a stored media file.
+     * Permanently deletes the specified media file from storage.
      *
      * @param string $mediaName uniquely identifies a media resource
      * @param RequestOpts|null $requestOptions
@@ -129,7 +129,7 @@ final class MediaService implements MediaContract
     /**
      * @api
      *
-     * Downloads a stored media file.
+     * Downloads the raw content of the specified stored media file.
      *
      * @param string $mediaName uniquely identifies a media resource
      * @param RequestOpts|null $requestOptions

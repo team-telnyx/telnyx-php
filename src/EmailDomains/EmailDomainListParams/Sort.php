@@ -15,5 +15,5 @@ enum Sort: string
 
     case DOMAIN = 'domain';
 
-    case MINUSDOMAIN = '-domain';
+    case MINUS_DOMAIN = '-domain';
 }

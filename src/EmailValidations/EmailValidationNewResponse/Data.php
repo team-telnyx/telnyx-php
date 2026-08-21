@@ -8,14 +8,14 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailValidations\EmailValidationNewResponse\Data\Checks;
+use Telnyx\EmailValidations\EmailValidationChecks;
 use Telnyx\EmailValidations\EmailValidationNewResponse\Data\RecordType;
 
 /**
- * @phpstan-import-type ChecksShape from \Telnyx\EmailValidations\EmailValidationNewResponse\Data\Checks
+ * @phpstan-import-type EmailValidationChecksShape from \Telnyx\EmailValidations\EmailValidationChecks
  *
  * @phpstan-type DataShape = array{
- *   checks: Checks|ChecksShape,
+ *   checks: EmailValidationChecks|EmailValidationChecksShape,
  *   email: string,
  *   recordType: RecordType|value-of<RecordType>,
  *   riskScore: float,
@@ -29,7 +29,7 @@ final class Data implements BaseModel
     use SdkModel;
 
     #[Required]
-    public Checks $checks;
+    public EmailValidationChecks $checks;
 
     #[Required]
     public string $email;
@@ -79,11 +79,11 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Checks|ChecksShape $checks
+     * @param EmailValidationChecks|EmailValidationChecksShape $checks
      * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
-        Checks|array $checks,
+        EmailValidationChecks|array $checks,
         string $email,
         RecordType|string $recordType,
         float $riskScore,
@@ -104,9 +104,9 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Checks|ChecksShape $checks
+     * @param EmailValidationChecks|EmailValidationChecksShape $checks
      */
-    public function withChecks(Checks|array $checks): self
+    public function withChecks(EmailValidationChecks|array $checks): self
     {
         $self = clone $this;
         $self['checks'] = $checks;

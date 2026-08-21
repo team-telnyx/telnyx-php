@@ -65,7 +65,7 @@ final class OAuthRawService implements OAuthRawContract
     /**
      * @api
      *
-     * Create an OAuth authorization grant
+     * Creates an OAuth authorization grant and returns the grant response for completing the authorization flow.
      *
      * @param array{allowed: bool, consentToken: string}|OAuthGrantsParams $params
      * @param RequestOpts|null $requestOptions
@@ -182,7 +182,7 @@ final class OAuthRawService implements OAuthRawContract
      * }|OAuthRetrieveAuthorizeParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<mixed>
+     * @return BaseResponse<string>
      *
      * @throws APIException
      */
@@ -209,8 +209,9 @@ final class OAuthRawService implements OAuthRawContract
                     'codeChallengeMethod' => 'code_challenge_method',
                 ],
             ),
+            headers: ['Accept' => 'text/html'],
             options: $options,
-            convert: null,
+            convert: 'string',
         );
     }
 

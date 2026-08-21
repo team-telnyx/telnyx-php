@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Storage\Sqldbs\Actions\ActionQueryParams\Param;
 
 /**
@@ -20,7 +21,7 @@ use Telnyx\Storage\Sqldbs\Actions\ActionQueryParams\Param;
  * @phpstan-import-type ParamShape from \Telnyx\Storage\Sqldbs\Actions\ActionQueryParams\Param
  *
  * @phpstan-type ActionQueryParamsShape = array{
- *   sql: string, params?: list<ParamShape>|null
+ *   sql: string, params?: list<ParamShape|null>|null
  * }
  */
 final class ActionQueryParams implements BaseModel
@@ -38,9 +39,9 @@ final class ActionQueryParams implements BaseModel
     /**
      * Positional bind parameters, in placeholder order. Each value is a string, a number, a boolean, or null; booleans are cast to `1`/`0`. The count must match the number of `?` placeholders exactly — a mismatch is rejected with 422 rather than binding null for the ones you left out. (Not enforced for multi-statement scripts or named parameters, where the placeholder count is not the number bound.).
      *
-     * @var list<ParamVariants>|null $params
+     * @var list<ParamVariants|null>|null $params
      */
-    #[Optional(list: Param::class)]
+    #[Optional(type: new ListOf(Param::class, nullable: true))]
     public ?array $params;
 
     /**
@@ -67,7 +68,7 @@ final class ActionQueryParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ParamShape>|null $params
+     * @param list<ParamShape|null>|null $params
      */
     public static function with(string $sql, ?array $params = null): self
     {
@@ -94,7 +95,7 @@ final class ActionQueryParams implements BaseModel
     /**
      * Positional bind parameters, in placeholder order. Each value is a string, a number, a boolean, or null; booleans are cast to `1`/`0`. The count must match the number of `?` placeholders exactly — a mismatch is rejected with 422 rather than binding null for the ones you left out. (Not enforced for multi-statement scripts or named parameters, where the placeholder count is not the number bound.).
      *
-     * @param list<ParamShape> $params
+     * @param list<ParamShape|null> $params
      */
     public function withParams(array $params): self
     {

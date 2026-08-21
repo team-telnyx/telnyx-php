@@ -55,7 +55,7 @@ interface SubNumberOrdersContract
     /**
      * @api
      *
-     * @param \Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count]
+     * @param \Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count], filter[include_phone_numbers]
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

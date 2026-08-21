@@ -7,12 +7,13 @@ namespace Telnyx\EmailInboxes\Filters;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailInboxes\Filters\FilterAddResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\EmailInboxes\Filters\FilterAddResponse\Data
+ * @phpstan-import-type InboxFiltersShape from \Telnyx\EmailInboxes\Filters\InboxFilters
  *
- * @phpstan-type FilterAddResponseShape = array{data: Data|DataShape}
+ * @phpstan-type FilterAddResponseShape = array{
+ *   data: InboxFilters|InboxFiltersShape
+ * }
  */
 final class FilterAddResponse implements BaseModel
 {
@@ -20,7 +21,7 @@ final class FilterAddResponse implements BaseModel
     use SdkModel;
 
     #[Required]
-    public Data $data;
+    public InboxFilters $data;
 
     /**
      * `new FilterAddResponse()` is missing required properties by the API.
@@ -46,9 +47,9 @@ final class FilterAddResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape $data
+     * @param InboxFilters|InboxFiltersShape $data
      */
-    public static function with(Data|array $data): self
+    public static function with(InboxFilters|array $data): self
     {
         $self = new self;
 
@@ -58,9 +59,9 @@ final class FilterAddResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param InboxFilters|InboxFiltersShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(InboxFilters|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

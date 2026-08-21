@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update a Wireless Blocklist.
+ * Updates the specified wireless blocklist. The update is processed asynchronously, so the request is accepted and completes in the background.
  *
  * @see Telnyx\Services\WirelessBlocklistsService::update()
  *

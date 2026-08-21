@@ -51,7 +51,7 @@ final class ReportsService implements ReportsContract
     /**
      * @api
      *
-     * Fetch all Mdr records
+     * Returns message detail records (MDRs) matching the provided criteria, such as date range, direction, status, and message type.
      *
      * @param string $id filter results by identifier
      * @param string $cld filter results by cld
@@ -101,7 +101,7 @@ final class ReportsService implements ReportsContract
     /**
      * @api
      *
-     * Fetch all Wdr records
+     * Returns wireless detail records (WDRs) matching the provided criteria, such as date range, SIM card, IMSI, or phone number, with pagination and sorting.
      *
      * @param string $id filter results by identifier
      * @param string $endDate End date

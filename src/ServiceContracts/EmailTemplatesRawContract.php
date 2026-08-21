@@ -6,9 +6,10 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailTemplates\EmailTemplate;
 use Telnyx\EmailTemplates\EmailTemplateCreateParams;
 use Telnyx\EmailTemplates\EmailTemplateListParams;
-use Telnyx\EmailTemplates\EmailTemplateListResponse;
 use Telnyx\EmailTemplates\EmailTemplateRenderParams;
 use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
 use Telnyx\EmailTemplates\EmailTemplateReplaceParams;
@@ -74,7 +75,7 @@ interface EmailTemplatesRawContract
      * @param array<string,mixed>|EmailTemplateListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailTemplateListResponse>
+     * @return BaseResponse<EmailCursorPagination<EmailTemplate>>
      *
      * @throws APIException
      */

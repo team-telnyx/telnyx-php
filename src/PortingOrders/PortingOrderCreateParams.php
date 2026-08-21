@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Creates a new porting order object.
+ * Creates a new porting order to bring phone numbers from another carrier to Telnyx. Complete the order's requirements and then confirm it to submit the port.
  *
  * @see Telnyx\Services\PortingOrdersService::create()
  *

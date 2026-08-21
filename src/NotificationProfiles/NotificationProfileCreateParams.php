@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a notification profile.
+ * Creates a new notification profile, a named grouping used to organize notification settings, and returns it.
  *
  * @see Telnyx\Services\NotificationProfilesService::create()
  *

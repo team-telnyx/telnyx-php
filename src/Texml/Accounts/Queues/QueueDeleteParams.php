@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Delete a queue resource.
+ * Permanently deletes the specified queue resource from the account.
  *
  * @see Telnyx\Services\Texml\Accounts\QueuesService::delete()
  *

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderListParams\Filter;
 
 /**
- * Get a paginated list of number orders.
+ * Returns a paginated list of your phone number orders, with support for filtering.
  *
  * @see Telnyx\Services\NumberOrdersService::list()
  *

@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Creates a user address.
+ * Creates a new user address from the provided details and returns the created address.
  *
  * @see Telnyx\Services\UserAddressesService::create()
  *

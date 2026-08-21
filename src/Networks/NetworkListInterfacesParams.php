@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\NetworkListInterfacesParams\Filter;
 
 /**
- * List all Interfaces for a Network.
+ * Returns a paginated list of the interfaces attached to the specified network, with support for filtering.
  *
  * @see Telnyx\Services\NetworksService::listInterfaces()
  *

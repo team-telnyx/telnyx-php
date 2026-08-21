@@ -211,7 +211,7 @@ final class EmailBlocksRawService implements EmailBlocksRawContract
      * }|EmailBlockRetrieveEventsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailBlockGetEventsResponse>
+     * @return BaseResponse<DefaultFlatPagination<EmailBlockGetEventsResponse>>
      *
      * @throws APIException
      */
@@ -235,6 +235,7 @@ final class EmailBlocksRawService implements EmailBlocksRawContract
             ),
             options: $options,
             convert: EmailBlockGetEventsResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

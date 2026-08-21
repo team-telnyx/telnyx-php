@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\EmailInboxes\Drafts\EmailDraft\RecordType;
 use Telnyx\EmailInboxes\Drafts\EmailDraft\Status;
 
@@ -21,7 +22,7 @@ use Telnyx\EmailInboxes\Drafts\EmailDraft\Status;
  *   inboxID: string,
  *   recordType: RecordType|value-of<RecordType>,
  *   status: Status|value-of<Status>,
- *   attachments?: list<mixed>|null,
+ *   attachments?: list<array<string,mixed>>|null,
  *   bcc?: list<EmailAddress|EmailAddressShape>|null,
  *   cc?: list<EmailAddress|EmailAddressShape>|null,
  *   createdAt?: \DateTimeInterface|null,
@@ -30,7 +31,7 @@ use Telnyx\EmailInboxes\Drafts\EmailDraft\Status;
  *   headers?: array<string,string>|null,
  *   htmlBody?: string|null,
  *   labels?: list<string>|null,
- *   metadata?: mixed,
+ *   metadata?: array<string,mixed>|null,
  *   replyTo?: string|null,
  *   replyToMessageID?: string|null,
  *   sentAt?: \DateTimeInterface|null,
@@ -67,8 +68,8 @@ final class EmailDraft implements BaseModel
     #[Required(enum: Status::class)]
     public string $status;
 
-    /** @var list<mixed>|null $attachments */
-    #[Optional(list: 'mixed')]
+    /** @var list<array<string,mixed>>|null $attachments */
+    #[Optional(list: new MapOf('mixed'))]
     public ?array $attachments;
 
     /** @var list<EmailAddress>|null $bcc */
@@ -112,9 +113,11 @@ final class EmailDraft implements BaseModel
 
     /**
      * Arbitrary customer-defined metadata.
+     *
+     * @var array<string,mixed>|null $metadata
      */
-    #[Optional]
-    public mixed $metadata;
+    #[Optional(map: 'mixed')]
+    public ?array $metadata;
 
     #[Optional('reply_to', nullable: true)]
     public ?string $replyTo;
@@ -191,11 +194,12 @@ final class EmailDraft implements BaseModel
      *
      * @param RecordType|value-of<RecordType> $recordType
      * @param Status|value-of<Status> $status
-     * @param list<mixed>|null $attachments
+     * @param list<array<string,mixed>>|null $attachments
      * @param list<EmailAddress|EmailAddressShape>|null $bcc
      * @param list<EmailAddress|EmailAddressShape>|null $cc
      * @param array<string,string>|null $headers
      * @param list<string>|null $labels
+     * @param array<string,mixed>|null $metadata
      * @param list<string>|null $tags
      * @param list<EmailAddress|EmailAddressShape>|null $to
      */
@@ -213,7 +217,7 @@ final class EmailDraft implements BaseModel
         ?array $headers = null,
         ?string $htmlBody = null,
         ?array $labels = null,
-        mixed $metadata = null,
+        ?array $metadata = null,
         ?string $replyTo = null,
         ?string $replyToMessageID = null,
         ?\DateTimeInterface $sentAt = null,
@@ -298,7 +302,7 @@ final class EmailDraft implements BaseModel
     }
 
     /**
-     * @param list<mixed> $attachments
+     * @param list<array<string,mixed>> $attachments
      */
     public function withAttachments(array $attachments): self
     {
@@ -393,8 +397,10 @@ final class EmailDraft implements BaseModel
 
     /**
      * Arbitrary customer-defined metadata.
+     *
+     * @param array<string,mixed> $metadata
      */
-    public function withMetadata(mixed $metadata): self
+    public function withMetadata(array $metadata): self
     {
         $self = clone $this;
         $self['metadata'] = $metadata;

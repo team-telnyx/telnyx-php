@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit;
 
 /**
- * Creates a new SIM card group object.
+ * Creates a new SIM card group and returns it. Groups let you apply shared settings to a set of SIM cards.
  *
  * @see Telnyx\Services\SimCardGroupsService::create()
  *

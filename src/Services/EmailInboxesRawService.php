@@ -8,9 +8,10 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailInboxes\EmailInbox;
 use Telnyx\EmailInboxes\EmailInboxCreateParams;
 use Telnyx\EmailInboxes\EmailInboxListParams;
-use Telnyx\EmailInboxes\EmailInboxListResponse;
 use Telnyx\EmailInboxes\EmailInboxResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailInboxesRawContract;
@@ -96,7 +97,7 @@ final class EmailInboxesRawService implements EmailInboxesRawContract
      * @param array{pageCursor?: string, pageSize?: int}|EmailInboxListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailInboxListResponse>
+     * @return BaseResponse<EmailCursorPagination<EmailInbox>>
      *
      * @throws APIException
      */
@@ -118,7 +119,8 @@ final class EmailInboxesRawService implements EmailInboxesRawContract
                 ['pageCursor' => 'page_cursor', 'pageSize' => 'page_size']
             ),
             options: $options,
-            convert: EmailInboxListResponse::class,
+            convert: EmailInbox::class,
+            page: EmailCursorPagination::class,
         );
     }
 

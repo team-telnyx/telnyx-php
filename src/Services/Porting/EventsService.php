@@ -43,7 +43,7 @@ final class EventsService implements EventsContract
     /**
      * @api
      *
-     * Show a specific porting event.
+     * Returns the details of a single porting event, including its type and payload.
      *
      * @param string $id identifies the porting event
      * @param RequestOpts|null $requestOptions
@@ -63,7 +63,7 @@ final class EventsService implements EventsContract
     /**
      * @api
      *
-     * Returns a list of all porting events.
+     * Returns a paginated list of porting-related events on your account, such as status changes on porting orders. Supports filtering and is useful for auditing or reconciling webhook deliveries.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[porting_order_id], filter[created_at][gte], filter[created_at][lte]
      * @param RequestOpts|null $requestOptions
@@ -95,7 +95,7 @@ final class EventsService implements EventsContract
     /**
      * @api
      *
-     * Republish a specific porting event.
+     * Republishes the specified porting event, triggering re-delivery of the corresponding webhook to your account.
      *
      * @param string $id identifies the porting event
      * @param RequestOpts|null $requestOptions

@@ -14,7 +14,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ResembleVoiceSettings;
-use Telnyx\RimeVoiceSettings;
 use Telnyx\XaiVoiceSettings;
 
 /**
@@ -168,7 +167,7 @@ final class ActionGatherUsingAIParams implements BaseModel
      * @var VoiceSettingsVariants|null $voiceSettings
      */
     #[Optional('voice_settings', union: VoiceSettings::class)]
-    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings;
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings;
 
     /**
      * `new ActionGatherUsingAIParams()` is missing required properties by the API.
@@ -217,7 +216,7 @@ final class ActionGatherUsingAIParams implements BaseModel
         TranscriptionConfig|array|null $transcription = null,
         ?int $userResponseTimeoutMs = null,
         ?string $voice = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
 
@@ -427,7 +426,7 @@ final class ActionGatherUsingAIParams implements BaseModel
      * @param VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings $voiceSettings,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings $voiceSettings,
     ): self {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;

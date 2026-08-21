@@ -34,7 +34,7 @@ final class NumberLookupRawService implements NumberLookupRawContract
     /**
      * @api
      *
-     * Submit a new telco data usage report
+     * Submits a new telco data (number lookup) usage report request. The report is generated asynchronously; retrieve it by its identifier once ready.
      *
      * @param array{
      *   aggregationType?: AggregationType|value-of<AggregationType>,

@@ -7,15 +7,15 @@ namespace Telnyx\EmailInboxes\Messages\Actions;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\EmailInboxes\Messages\Actions\InboxActionEmailAddressInput\UnionMember1;
+use Telnyx\EmailInboxes\Messages\Actions\InboxActionEmailAddressInput\InboxRecipientAddress;
 
 /**
  * Email address accepted by inbox message actions, as a string or an object with `email` and optional `name`.
  *
- * @phpstan-import-type UnionMember1Shape from \Telnyx\EmailInboxes\Messages\Actions\InboxActionEmailAddressInput\UnionMember1
+ * @phpstan-import-type InboxRecipientAddressShape from \Telnyx\EmailInboxes\Messages\Actions\InboxActionEmailAddressInput\InboxRecipientAddress
  *
- * @phpstan-type InboxActionEmailAddressInputVariants = string|UnionMember1
- * @phpstan-type InboxActionEmailAddressInputShape = InboxActionEmailAddressInputVariants|UnionMember1Shape
+ * @phpstan-type InboxActionEmailAddressInputVariants = string|InboxRecipientAddress
+ * @phpstan-type InboxActionEmailAddressInputShape = InboxActionEmailAddressInputVariants|InboxRecipientAddressShape
  */
 final class InboxActionEmailAddressInput implements ConverterSource
 {
@@ -26,6 +26,6 @@ final class InboxActionEmailAddressInput implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['string', UnionMember1::class];
+        return ['string', InboxRecipientAddress::class];
     }
 }

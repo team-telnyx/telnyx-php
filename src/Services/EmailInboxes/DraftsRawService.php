@@ -8,15 +8,16 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Drafts\DraftCreateParams;
 use Telnyx\EmailInboxes\Drafts\DraftDeleteParams;
 use Telnyx\EmailInboxes\Drafts\DraftListParams;
 use Telnyx\EmailInboxes\Drafts\DraftListParams\FilterStatus;
-use Telnyx\EmailInboxes\Drafts\DraftListResponse;
 use Telnyx\EmailInboxes\Drafts\DraftPatchParams;
 use Telnyx\EmailInboxes\Drafts\DraftRetrieveParams;
 use Telnyx\EmailInboxes\Drafts\DraftSendParams;
 use Telnyx\EmailInboxes\Drafts\DraftUpdateParams;
+use Telnyx\EmailInboxes\Drafts\EmailDraft;
 use Telnyx\EmailInboxes\Drafts\EmailDraftResponse;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\RequestOptions;
@@ -48,7 +49,7 @@ final class DraftsRawService implements DraftsRawContract
      *
      * @param string $inboxID email inbox UUID
      * @param array{
-     *   attachments?: list<mixed>,
+     *   attachments?: list<array<string,mixed>>,
      *   bcc?: list<EmailAddressInputShape>,
      *   cc?: list<EmailAddressInputShape>,
      *   fromEmail?: string,
@@ -57,7 +58,7 @@ final class DraftsRawService implements DraftsRawContract
      *   html?: string,
      *   htmlBody?: string,
      *   labels?: list<string>,
-     *   metadata?: mixed,
+     *   metadata?: array<string,mixed>,
      *   replyTo?: string,
      *   subject?: string,
      *   tags?: list<string>,
@@ -140,7 +141,7 @@ final class DraftsRawService implements DraftsRawContract
      * @param string $draftID path param: Email draft UUID
      * @param array{
      *   inboxID: string,
-     *   attachments?: list<mixed>,
+     *   attachments?: list<array<string,mixed>>,
      *   bcc?: list<EmailAddressInputShape>,
      *   cc?: list<EmailAddressInputShape>,
      *   fromEmail?: string,
@@ -149,7 +150,7 @@ final class DraftsRawService implements DraftsRawContract
      *   html?: string,
      *   htmlBody?: string,
      *   labels?: list<string>,
-     *   metadata?: mixed,
+     *   metadata?: array<string,mixed>,
      *   replyTo?: string,
      *   subject?: string,
      *   tags?: list<string>,
@@ -199,7 +200,7 @@ final class DraftsRawService implements DraftsRawContract
      * }|DraftListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DraftListResponse>
+     * @return BaseResponse<EmailBracketCursorPagination<EmailDraft>>
      *
      * @throws APIException
      */
@@ -226,7 +227,8 @@ final class DraftsRawService implements DraftsRawContract
                 ],
             ),
             options: $options,
-            convert: DraftListResponse::class,
+            convert: EmailDraft::class,
+            page: EmailBracketCursorPagination::class,
         );
     }
 
@@ -273,7 +275,7 @@ final class DraftsRawService implements DraftsRawContract
      * @param string $draftID path param: Email draft UUID
      * @param array{
      *   inboxID: string,
-     *   attachments?: list<mixed>,
+     *   attachments?: list<array<string,mixed>>,
      *   bcc?: list<EmailAddressInputShape>,
      *   cc?: list<EmailAddressInputShape>,
      *   fromEmail?: string,
@@ -282,7 +284,7 @@ final class DraftsRawService implements DraftsRawContract
      *   html?: string,
      *   htmlBody?: string,
      *   labels?: list<string>,
-     *   metadata?: mixed,
+     *   metadata?: array<string,mixed>,
      *   replyTo?: string,
      *   subject?: string,
      *   tags?: list<string>,

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\EmailInboxes\Messages\Actions\ActionForwardParams\To;
-use Telnyx\EmailInboxes\Messages\Actions\ActionForwardParams\To\UnionMember1;
+use Telnyx\EmailInboxes\Messages\Actions\ActionForwardParams\To\InboxRecipientAddress;
 
 /**
  * Sends from the inbox address through the standard email send pipeline to caller-supplied
@@ -53,7 +53,7 @@ final class ActionForwardParams implements BaseModel
      * @var ToVariants $to
      */
     #[Required(union: To::class)]
-    public string|UnionMember1|array $to;
+    public string|InboxRecipientAddress|array $to;
 
     /**
      * One recipient or a recipient array. Each recipient may be an email string or an object with `email` and optional `name`.
@@ -61,7 +61,7 @@ final class ActionForwardParams implements BaseModel
      * @var InboxActionRecipientInputVariants|null $bcc
      */
     #[Optional(union: InboxActionRecipientInput::class)]
-    public string|\Telnyx\EmailInboxes\Messages\Actions\InboxActionRecipientInput\UnionMember1|array|null $bcc;
+    public string|\Telnyx\EmailInboxes\Messages\Actions\InboxActionRecipientInput\InboxRecipientAddress|array|null $bcc;
 
     /**
      * One recipient or a recipient array. Each recipient may be an email string or an object with `email` and optional `name`.
@@ -69,7 +69,7 @@ final class ActionForwardParams implements BaseModel
      * @var InboxActionRecipientInputVariants|null $cc
      */
     #[Optional(union: InboxActionRecipientInput::class)]
-    public string|\Telnyx\EmailInboxes\Messages\Actions\InboxActionRecipientInput\UnionMember1|array|null $cc;
+    public string|\Telnyx\EmailInboxes\Messages\Actions\InboxActionRecipientInput\InboxRecipientAddress|array|null $cc;
 
     /**
      * Optional HTML note prepended to the generated forwarded-message block. Blank values are treated as omitted.
@@ -113,9 +113,9 @@ final class ActionForwardParams implements BaseModel
      */
     public static function with(
         string $inboxID,
-        string|UnionMember1|array $to,
-        string|InboxActionRecipientInput\UnionMember1|array|null $bcc = null,
-        string|InboxActionRecipientInput\UnionMember1|array|null $cc = null,
+        string|InboxRecipientAddress|array $to,
+        string|InboxActionRecipientInput\InboxRecipientAddress|array|null $bcc = null,
+        string|InboxActionRecipientInput\InboxRecipientAddress|array|null $cc = null,
         ?string $html = null,
         ?string $text = null,
     ): self {
@@ -145,7 +145,7 @@ final class ActionForwardParams implements BaseModel
      *
      * @param ToShape $to
      */
-    public function withTo(string|UnionMember1|array $to): self
+    public function withTo(string|InboxRecipientAddress|array $to): self
     {
         $self = clone $this;
         $self['to'] = $to;
@@ -159,7 +159,7 @@ final class ActionForwardParams implements BaseModel
      * @param InboxActionRecipientInputShape $bcc
      */
     public function withBcc(
-        string|InboxActionRecipientInput\UnionMember1|array $bcc,
+        string|InboxActionRecipientInput\InboxRecipientAddress|array $bcc,
     ): self {
         $self = clone $this;
         $self['bcc'] = $bcc;
@@ -173,7 +173,7 @@ final class ActionForwardParams implements BaseModel
      * @param InboxActionRecipientInputShape $cc
      */
     public function withCc(
-        string|InboxActionRecipientInput\UnionMember1|array $cc,
+        string|InboxActionRecipientInput\InboxRecipientAddress|array $cc,
     ): self {
         $self = clone $this;
         $self['cc'] = $cc;

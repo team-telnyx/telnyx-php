@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Creates an authentication provider.
+ * Creates a new authentication provider for single sign-on, configured from the provided identity provider details, and returns the created resource.
  *
  * @see Telnyx\Services\AuthenticationProvidersService::create()
  *

@@ -10,12 +10,14 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a new AI Conversation.
+ * Creates a new AI conversation, the container for messages exchanged with an assistant, and returns the created conversation.
  *
  * @see Telnyx\Services\AI\ConversationsService::create()
  *
  * @phpstan-type ConversationCreateParamsShape = array{
- *   metadata?: array<string,string>|null, name?: string|null
+ *   metadata?: array<string,string>|null,
+ *   name?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class ConversationCreateParams implements BaseModel
@@ -35,6 +37,9 @@ final class ConversationCreateParams implements BaseModel
     #[Optional]
     public ?string $name;
 
+    #[Optional]
+    public ?string $idempotencyKey;
+
     public function __construct()
     {
         $this->initialize();
@@ -49,12 +54,14 @@ final class ConversationCreateParams implements BaseModel
      */
     public static function with(
         ?array $metadata = null,
-        ?string $name = null
+        ?string $name = null,
+        ?string $idempotencyKey = null
     ): self {
         $self = new self;
 
         null !== $metadata && $self['metadata'] = $metadata;
         null !== $name && $self['name'] = $name;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -76,6 +83,14 @@ final class ConversationCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

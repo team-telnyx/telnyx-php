@@ -33,7 +33,7 @@ final class GlobalIPAllowedPortsService implements GlobalIPAllowedPortsContract
     /**
      * @api
      *
-     * List all Global IP Allowed Ports
+     * Returns the ports allowed for Global IP traffic, for use when configuring Global IP resources.
      *
      * @param RequestOpts|null $requestOptions
      *

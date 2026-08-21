@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Updates client state.
+ * Updates the client state associated with the call. Client state is an opaque value echoed back in subsequent webhooks for the call, letting you correlate events with your application's state.
  *
  * @see Telnyx\Services\Calls\ActionsService::updateClientState()
  *

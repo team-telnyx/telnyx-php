@@ -7,7 +7,7 @@ namespace Telnyx\Services\Rcs;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Rcs\Brands\BrandCreateParams\Address;
+use Telnyx\Rcs\Brands\BrandAddress;
 use Telnyx\Rcs\Brands\BrandCreateParams\Contacts;
 use Telnyx\Rcs\Brands\BrandCreateParams\Identifiers;
 use Telnyx\Rcs\Brands\BrandLegalEntityType;
@@ -19,12 +19,11 @@ use Telnyx\ServiceContracts\Rcs\BrandsContract;
 /**
  * Manage the legal business entities that operate RCS agents.
  *
- * @phpstan-import-type AddressShape from \Telnyx\Rcs\Brands\BrandCreateParams\Address
  * @phpstan-import-type ContactsShape from \Telnyx\Rcs\Brands\BrandCreateParams\Contacts
  * @phpstan-import-type IdentifiersShape from \Telnyx\Rcs\Brands\BrandCreateParams\Identifiers
- * @phpstan-import-type AddressShape from \Telnyx\Rcs\Brands\BrandUpdateParams\Address as AddressShape1
  * @phpstan-import-type ContactsShape from \Telnyx\Rcs\Brands\BrandUpdateParams\Contacts as ContactsShape1
  * @phpstan-import-type IdentifiersShape from \Telnyx\Rcs\Brands\BrandUpdateParams\Identifiers as IdentifiersShape1
+ * @phpstan-import-type BrandAddressShape from \Telnyx\Rcs\Brands\BrandAddress
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BrandsService implements BrandsContract
@@ -47,7 +46,7 @@ final class BrandsService implements BrandsContract
      *
      * Creates an editable RCS brand draft. Creating the draft does not begin external review.
      *
-     * @param array<string,Address|AddressShape> $addresses
+     * @param array<string,BrandAddress|BrandAddressShape> $addresses
      * @param Contacts|ContactsShape $contacts Named business contacts. Use the `brand` key for the required BRAND contact.
      * @param Identifiers|IdentifiersShape $identifiers Named business identifiers. Use the `ein` key for the required EIN and `stock_symbol` for a public-profit brand's stock symbol.
      * @param BrandLegalEntityType|value-of<BrandLegalEntityType> $legalEntityType
@@ -115,7 +114,7 @@ final class BrandsService implements BrandsContract
      * Updates one or more fields on a brand while its status is `CREATED`. Submitted brands cannot be changed.
      *
      * @param string $id the Telnyx-assigned brand identifier
-     * @param array<string,\Telnyx\Rcs\Brands\BrandUpdateParams\Address|AddressShape1> $addresses
+     * @param array<string,BrandAddress|BrandAddressShape> $addresses
      * @param \Telnyx\Rcs\Brands\BrandUpdateParams\Contacts|ContactsShape1 $contacts Named business contacts. Use the `brand` key for the required BRAND contact.
      * @param \Telnyx\Rcs\Brands\BrandUpdateParams\Identifiers|IdentifiersShape1 $identifiers Named business identifiers. Use the `ein` key for the required EIN and `stock_symbol` for a public-profit brand's stock symbol.
      * @param BrandLegalEntityType|value-of<BrandLegalEntityType> $legalEntityType

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Resume a paused run.
+ * Resumes a previously paused run and returns the updated run object, letting execution continue from where it was paused.
  *
  * @see Telnyx\Services\AI\Missions\RunsService::resumeRun()
  *

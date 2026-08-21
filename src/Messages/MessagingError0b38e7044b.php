@@ -17,7 +17,7 @@ use Telnyx\Messages\MessagingError0b38e7044b\Source;
  *   code: string,
  *   title: string,
  *   detail?: string|null,
- *   meta?: mixed,
+ *   meta?: array<string,mixed>|null,
  *   source?: null|Source|SourceShape,
  * }
  */
@@ -35,8 +35,9 @@ final class MessagingError0b38e7044b implements BaseModel
     #[Optional]
     public ?string $detail;
 
-    #[Optional]
-    public mixed $meta;
+    /** @var array<string,mixed>|null $meta */
+    #[Optional(map: 'mixed')]
+    public ?array $meta;
 
     #[Optional]
     public ?Source $source;
@@ -65,13 +66,14 @@ final class MessagingError0b38e7044b implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param array<string,mixed>|null $meta
      * @param Source|SourceShape|null $source
      */
     public static function with(
         string $code,
         string $title,
         ?string $detail = null,
-        mixed $meta = null,
+        ?array $meta = null,
         Source|array|null $source = null,
     ): self {
         $self = new self;
@@ -110,7 +112,10 @@ final class MessagingError0b38e7044b implements BaseModel
         return $self;
     }
 
-    public function withMeta(mixed $meta): self
+    /**
+     * @param array<string,mixed> $meta
+     */
+    public function withMeta(array $meta): self
     {
         $self = clone $this;
         $self['meta'] = $meta;

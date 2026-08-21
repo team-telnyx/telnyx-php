@@ -51,7 +51,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
     /**
      * @api
      *
-     * Gets conference participant resource
+     * Returns a single conference participant resource by call SID or participant label.
      *
      * @param string $callSidOrParticipantLabel callSid or Label of the Participant to update
      * @param array{
@@ -94,7 +94,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
     /**
      * @api
      *
-     * Updates a conference participant
+     * Updates the specified conference participant, for example muting or holding them, and returns the updated participant.
      *
      * @param string $callSidOrParticipantLabel path param: CallSid or Label of the Participant to update
      * @param array{
@@ -154,7 +154,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
     /**
      * @api
      *
-     * Deletes a conference participant
+     * Removes the specified participant from the conference, ending their leg of the call.
      *
      * @param string $callSidOrParticipantLabel callSid or Label of the Participant to update
      * @param array{
@@ -197,7 +197,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
     /**
      * @api
      *
-     * Dials a new conference participant
+     * Dials a new participant into the specified conference and returns the created participant resource.
      *
      * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
      * @param array{
@@ -288,7 +288,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
     /**
      * @api
      *
-     * Lists conference participants
+     * Returns the list of participants currently in the specified conference.
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param array{accountSid: string}|ParticipantRetrieveParticipantsParams $params

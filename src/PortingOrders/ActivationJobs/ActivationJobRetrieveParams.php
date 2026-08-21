@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Returns a porting activation job.
+ * Returns the details of a single activation job for the porting order, including its current status.
  *
  * @see Telnyx\Services\PortingOrders\ActivationJobsService::retrieve()
  *

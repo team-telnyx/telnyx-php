@@ -14,7 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Assistants\Tests\RunsService::trigger()
  *
- * @phpstan-type RunTriggerParamsShape = array{destinationVersionID?: string|null}
+ * @phpstan-type RunTriggerParamsShape = array{
+ *   destinationVersionID?: string|null, idempotencyKey?: string|null
+ * }
  */
 final class RunTriggerParams implements BaseModel
 {
@@ -28,6 +30,9 @@ final class RunTriggerParams implements BaseModel
     #[Optional('destination_version_id')]
     public ?string $destinationVersionID;
 
+    #[Optional]
+    public ?string $idempotencyKey;
+
     public function __construct()
     {
         $this->initialize();
@@ -38,11 +43,14 @@ final class RunTriggerParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $destinationVersionID = null): self
-    {
+    public static function with(
+        ?string $destinationVersionID = null,
+        ?string $idempotencyKey = null
+    ): self {
         $self = new self;
 
         null !== $destinationVersionID && $self['destinationVersionID'] = $destinationVersionID;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -54,6 +62,14 @@ final class RunTriggerParams implements BaseModel
     {
         $self = clone $this;
         $self['destinationVersionID'] = $destinationVersionID;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

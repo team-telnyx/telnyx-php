@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\EmailInboxes;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Drafts\EmailDraftResponse;
-use Telnyx\EmailInboxes\Messages\MessageListResponse;
 use Telnyx\EmailInboxes\Messages\MessageUpdateResponse;
 use Telnyx\RequestOptions;
+use Telnyx\Webhooks\InboundMessage;
 
 /**
  * @phpstan-import-type ReadAtShape from \Telnyx\EmailInboxes\Messages\MessageUpdateParams\ReadAt
@@ -22,7 +23,7 @@ interface MessagesContract
      *
      * @param string $messageID path param: Inbound email message UUID
      * @param string $inboxID path param: Email inbox UUID
-     * @param ReadAtShape $readAt body param: Set to `true` for server time, an ISO 8601 timestamp for an explicit read time, or `null` to mark unread
+     * @param ReadAtShape $readAt Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -30,7 +31,7 @@ interface MessagesContract
     public function update(
         string $messageID,
         string $inboxID,
-        bool|\DateTimeInterface|null $readAt,
+        bool|\DateTimeInterface $readAt,
         RequestOptions|array|null $requestOptions = null,
     ): MessageUpdateResponse;
 
@@ -50,6 +51,8 @@ interface MessagesContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailBracketCursorPagination<InboundMessage>
+     *
      * @throws APIException
      */
     public function list(
@@ -65,14 +68,14 @@ interface MessagesContract
         ?string $pageAfter = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): MessageListResponse;
+    ): EmailBracketCursorPagination;
 
     /**
      * @api
      *
      * @param string $messageID path param: Inbound message UUID to reply to
      * @param string $inboxID path param: Email inbox UUID
-     * @param list<mixed> $attachments Body param
+     * @param list<array<string,mixed>> $attachments Body param
      * @param list<EmailAddressInputShape> $bcc Body param
      * @param list<EmailAddressInputShape> $cc Body param
      * @param string $fromEmail Body param
@@ -81,7 +84,7 @@ interface MessagesContract
      * @param string $html body param: Alias for `html_body`, matching the send endpoint
      * @param string $htmlBody Body param
      * @param list<string> $labels Body param
-     * @param mixed $metadata Body param
+     * @param array<string,mixed> $metadata Body param
      * @param string $replyTo Body param
      * @param string $subject Body param
      * @param list<string> $tags Body param
@@ -104,7 +107,7 @@ interface MessagesContract
         ?string $html = null,
         ?string $htmlBody = null,
         ?array $labels = null,
-        mixed $metadata = null,
+        ?array $metadata = null,
         ?string $replyTo = null,
         ?string $subject = null,
         ?array $tags = null,

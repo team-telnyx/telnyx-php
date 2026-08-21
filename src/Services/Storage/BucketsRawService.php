@@ -10,11 +10,13 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\BucketsRawContract;
 use Telnyx\Storage\Buckets\BucketCreatePresignedURLParams;
+use Telnyx\Storage\Buckets\BucketCreatePresignedURLParams\Body;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
 /**
  * Presigned object URL operations.
  *
+ * @phpstan-import-type BodyShape from \Telnyx\Storage\Buckets\BucketCreatePresignedURLParams\Body
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BucketsRawService implements BucketsRawContract
@@ -34,7 +36,7 @@ final class BucketsRawService implements BucketsRawContract
      *
      * @param string $objectName Path param: The name of the object
      * @param array{
-     *   bucketName: string, ttl?: int
+     *   bucketName: string, body?: Body|BodyShape
      * }|BucketCreatePresignedURLParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -54,13 +56,16 @@ final class BucketsRawService implements BucketsRawContract
         $bucketName = $parsed['bucketName'];
         unset($parsed['bucketName']);
 
+        /** @var array<string,mixed> */
+        $body = $parsed['body'];
+
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: [
                 'storage/buckets/%1$s/%2$s/presigned_url', $bucketName, $objectName,
             ],
-            body: (object) array_diff_key($parsed, array_flip(['bucketName'])),
+            body: (object) array_diff_key($body, array_flip(['bucketName'])),
             options: $options,
             convert: BucketNewPresignedURLResponse::class,
         );

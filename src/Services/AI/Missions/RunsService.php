@@ -56,7 +56,7 @@ final class RunsService implements RunsContract
     /**
      * @api
      *
-     * Start a new run for a mission
+     * Starts a new run of the specified mission and returns the created run object. Track its progress through the run detail, plan, and events endpoints.
      *
      * @param string $missionID unique identifier of the mission
      * @param array<string,mixed> $input
@@ -82,7 +82,7 @@ final class RunsService implements RunsContract
     /**
      * @api
      *
-     * Get details of a specific run
+     * Returns the full details of a single run, including its current status. Use this to poll an in-flight run or inspect the outcome of a completed one.
      *
      * @param string $runID unique identifier of the run
      * @param string $missionID unique identifier of the mission
@@ -106,7 +106,7 @@ final class RunsService implements RunsContract
     /**
      * @api
      *
-     * Update run status and/or result
+     * Updates a run's status and/or result and returns the updated run object. Typically used by executing agents to report progress or record the final outcome.
      *
      * @param string $runID path param: Unique identifier of the run
      * @param string $missionID path param: Unique identifier of the mission
@@ -149,7 +149,7 @@ final class RunsService implements RunsContract
     /**
      * @api
      *
-     * List all runs for a specific mission
+     * Returns a paginated list of runs for the specified mission, optionally filtered by run status, so you can track the mission's execution history over time.
      *
      * @param string $missionID unique identifier of the mission
      * @param int $pageNumber Page number (1-based)
@@ -185,7 +185,7 @@ final class RunsService implements RunsContract
     /**
      * @api
      *
-     * Cancel a running or paused run
+     * Cancels a running or paused run and returns the updated run object. A cancelled run stops executing; start a new run to execute the mission again.
      *
      * @param string $runID unique identifier of the run
      * @param string $missionID unique identifier of the mission
@@ -209,7 +209,7 @@ final class RunsService implements RunsContract
     /**
      * @api
      *
-     * List recent runs across all missions
+     * Returns a paginated list of recent runs across every mission in your organization, optionally filtered by run status. Useful for monitoring overall mission activity without querying each mission individually.
      *
      * @param int $pageNumber Page number (1-based)
      * @param int $pageSize Number of items per page
@@ -243,7 +243,7 @@ final class RunsService implements RunsContract
     /**
      * @api
      *
-     * Pause a running run
+     * Pauses a currently running run and returns the updated run object. Execution halts until the run is resumed.
      *
      * @param string $runID unique identifier of the run
      * @param string $missionID unique identifier of the mission
@@ -267,7 +267,7 @@ final class RunsService implements RunsContract
     /**
      * @api
      *
-     * Resume a paused run
+     * Resumes a previously paused run and returns the updated run object, letting execution continue from where it was paused.
      *
      * @param string $runID unique identifier of the run
      * @param string $missionID unique identifier of the mission

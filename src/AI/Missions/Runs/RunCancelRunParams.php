@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Cancel a running or paused run.
+ * Cancels a running or paused run and returns the updated run object. A cancelled run stops executing; start a new run to execute the mission again.
  *
  * @see Telnyx\Services\AI\Missions\RunsService::cancelRun()
  *

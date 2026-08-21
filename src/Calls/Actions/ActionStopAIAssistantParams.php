@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Stop an AI assistant on the call.
+ * Stops the AI assistant currently engaged on the call. The call remains active and can continue with other call control commands.
  *
  * @see Telnyx\Services\Calls\ActionsService::stopAIAssistant()
  *

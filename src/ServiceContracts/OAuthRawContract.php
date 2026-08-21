@@ -90,7 +90,7 @@ interface OAuthRawContract
      * @param array<string,mixed>|OAuthRetrieveAuthorizeParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<mixed>
+     * @return BaseResponse<string>
      *
      * @throws APIException
      */

@@ -87,7 +87,7 @@ final class SimCardsService implements SimCardsContract
     /**
      * @api
      *
-     * Updates SIM card data
+     * Updates the specified SIM card's attributes and returns the updated SIM card.
      *
      * @param string $simCardID identifies the SIM
      * @param list<string>|null $authorizedImeis list of IMEIs authorized to use a given SIM card

@@ -7,7 +7,8 @@ namespace Telnyx\Services\EmailInboxes;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\EmailInboxes\Threads\InboundThreadListResponse;
+use Telnyx\EmailBracketCursorPagination;
+use Telnyx\EmailInboxes\Threads\InboundThread;
 use Telnyx\EmailInboxes\Threads\ThreadGetResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailInboxes\ThreadsContract;
@@ -84,6 +85,8 @@ final class ThreadsService implements ThreadsContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailBracketCursorPagination<InboundThread>
+     *
      * @throws APIException
      */
     public function list(
@@ -92,7 +95,7 @@ final class ThreadsService implements ThreadsContract
         ?string $pageAfter = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): InboundThreadListResponse {
+    ): EmailBracketCursorPagination {
         $params = Util::removeNulls(
             [
                 'filterLabel' => $filterLabel,

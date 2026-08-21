@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update an existing MCP server.
+ * Updates the specified MCP server's configuration and returns the updated server.
  *
  * @see Telnyx\Services\AI\McpServersService::update()
  *

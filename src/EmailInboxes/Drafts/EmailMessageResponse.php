@@ -8,15 +8,15 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailInboxes\Drafts\EmailMessageResponse\Suppressed;
+use Telnyx\EmailMessages\SuppressedRecipient;
 
 /**
  * @phpstan-import-type EmailMessageShape from \Telnyx\EmailInboxes\Drafts\EmailMessage
- * @phpstan-import-type SuppressedShape from \Telnyx\EmailInboxes\Drafts\EmailMessageResponse\Suppressed
+ * @phpstan-import-type SuppressedRecipientShape from \Telnyx\EmailMessages\SuppressedRecipient
  *
  * @phpstan-type EmailMessageResponseShape = array{
  *   data: EmailMessage|EmailMessageShape,
- *   suppressed?: list<Suppressed|SuppressedShape>|null,
+ *   suppressed?: list<SuppressedRecipient|SuppressedRecipientShape>|null,
  * }
  */
 final class EmailMessageResponse implements BaseModel
@@ -30,9 +30,9 @@ final class EmailMessageResponse implements BaseModel
     /**
      * Recipients removed by suppression checks when at least one recipient remains and the message is accepted.
      *
-     * @var list<Suppressed>|null $suppressed
+     * @var list<SuppressedRecipient>|null $suppressed
      */
-    #[Optional(list: Suppressed::class)]
+    #[Optional(list: SuppressedRecipient::class)]
     public ?array $suppressed;
 
     /**
@@ -60,7 +60,7 @@ final class EmailMessageResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EmailMessage|EmailMessageShape $data
-     * @param list<Suppressed|SuppressedShape>|null $suppressed
+     * @param list<SuppressedRecipient|SuppressedRecipientShape>|null $suppressed
      */
     public static function with(
         EmailMessage|array $data,
@@ -89,7 +89,7 @@ final class EmailMessageResponse implements BaseModel
     /**
      * Recipients removed by suppression checks when at least one recipient remains and the message is accepted.
      *
-     * @param list<Suppressed|SuppressedShape> $suppressed
+     * @param list<SuppressedRecipient|SuppressedRecipientShape> $suppressed
      */
     public function withSuppressed(array $suppressed): self
     {

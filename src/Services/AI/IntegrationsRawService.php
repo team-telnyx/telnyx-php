@@ -26,7 +26,7 @@ final class IntegrationsRawService implements IntegrationsRawContract
     /**
      * @api
      *
-     * Retrieve integration details
+     * Returns the details of a single available integration, including its configuration details.
      *
      * @param string $integrationID The integration id
      * @param RequestOpts|null $requestOptions
@@ -51,7 +51,7 @@ final class IntegrationsRawService implements IntegrationsRawContract
     /**
      * @api
      *
-     * List all available integrations.
+     * Returns the list of third-party integrations available to connect to your AI assistants and workflows.
      *
      * @param RequestOpts|null $requestOptions
      *

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get details of a specific run.
+ * Returns the full details of a single run, including its current status. Use this to poll an in-flight run or inspect the outcome of a completed one.
  *
  * @see Telnyx\Services\AI\Missions\RunsService::retrieve()
  *

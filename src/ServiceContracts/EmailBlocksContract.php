@@ -101,6 +101,8 @@ interface EmailBlocksContract
      * @param int $pageSize page size (default 50, max 100)
      * @param RequestOpts|null $requestOptions
      *
+     * @return DefaultFlatPagination<EmailBlockGetEventsResponse>
+     *
      * @throws APIException
      */
     public function retrieveEvents(
@@ -108,7 +110,7 @@ interface EmailBlocksContract
         int $pageNumber = 1,
         int $pageSize = 50,
         RequestOptions|array|null $requestOptions = null,
-    ): EmailBlockGetEventsResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

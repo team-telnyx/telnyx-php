@@ -14,7 +14,7 @@ use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\Provider;
 /**
  * Open a WebSocket connection to stream text and receive synthesized audio in real time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header. Send JSON frames with text to synthesize; receive JSON frames containing base64-encoded audio chunks.
  *
- * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `rime`, `resemble`, `elevenlabs`, `xai`, `humain`.
+ * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `resemble`, `elevenlabs`, `xai`, `humain`.
  *
  * **Connection flow:**
  * 1. Open WebSocket with query parameters specifying provider, voice, and model.
@@ -46,7 +46,7 @@ final class TextToSpeechRetrieveSpeechParams implements BaseModel
     use SdkParams;
 
     /**
-     * Audio output format override. Supported for Telnyx models. `pcm` and `wav` are available for `Natural`/`NaturalHD` models. The `Ultra` model outputs PCM at 24kHz s16le or MP3 at 128kbps 24kHz.
+     * Audio output format override. Supported for Telnyx models. The `Ultra` model outputs PCM at 24kHz s16le or MP3 at 128kbps 24kHz.
      *
      * @var value-of<AudioFormat>|null $audioFormat
      */
@@ -60,7 +60,7 @@ final class TextToSpeechRetrieveSpeechParams implements BaseModel
     public ?bool $disableCache;
 
     /**
-     * Model identifier for the chosen provider. Examples: `Natural`, `NaturalHD`, `Ultra` (Telnyx); `Polly.Generative` (AWS).
+     * Model identifier for the chosen provider. Examples: `Ultra`, `KokoroTTS` (Telnyx); `Polly.Generative` (AWS).
      */
     #[Optional]
     public ?string $modelID;
@@ -80,7 +80,7 @@ final class TextToSpeechRetrieveSpeechParams implements BaseModel
     public ?string $socketID;
 
     /**
-     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id` (e.g. `telnyx.NaturalHD.Telnyx_Alloy`, `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, or `azure.en-US-AvaMultilingualNeural`). When provided, the `provider`, `model_id`, and `voice_id` are extracted automatically. Takes precedence over individual `provider`/`model_id`/`voice_id` parameters.
+     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id` (e.g. `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, or `azure.en-US-AvaMultilingualNeural`). When provided, the `provider`, `model_id`, and `voice_id` are extracted automatically. Takes precedence over individual `provider`/`model_id`/`voice_id` parameters.
      */
     #[Optional]
     public ?string $voice;
@@ -127,7 +127,7 @@ final class TextToSpeechRetrieveSpeechParams implements BaseModel
     }
 
     /**
-     * Audio output format override. Supported for Telnyx models. `pcm` and `wav` are available for `Natural`/`NaturalHD` models. The `Ultra` model outputs PCM at 24kHz s16le or MP3 at 128kbps 24kHz.
+     * Audio output format override. Supported for Telnyx models. The `Ultra` model outputs PCM at 24kHz s16le or MP3 at 128kbps 24kHz.
      *
      * @param AudioFormat|value-of<AudioFormat> $audioFormat
      */
@@ -151,7 +151,7 @@ final class TextToSpeechRetrieveSpeechParams implements BaseModel
     }
 
     /**
-     * Model identifier for the chosen provider. Examples: `Natural`, `NaturalHD`, `Ultra` (Telnyx); `Polly.Generative` (AWS).
+     * Model identifier for the chosen provider. Examples: `Ultra`, `KokoroTTS` (Telnyx); `Polly.Generative` (AWS).
      */
     public function withModelID(string $modelID): self
     {
@@ -186,7 +186,7 @@ final class TextToSpeechRetrieveSpeechParams implements BaseModel
     }
 
     /**
-     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id` (e.g. `telnyx.NaturalHD.Telnyx_Alloy`, `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, or `azure.en-US-AvaMultilingualNeural`). When provided, the `provider`, `model_id`, and `voice_id` are extracted automatically. Takes precedence over individual `provider`/`model_id`/`voice_id` parameters.
+     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id` (e.g. `Telnyx.Ultra.<voice_id>`, `Telnyx.Bayan.Ahmed`, `Telnyx.Sukhan.urdu-professor`, or `azure.en-US-AvaMultilingualNeural`). When provided, the `provider`, `model_id`, and `voice_id` are extracted automatically. Takes precedence over individual `provider`/`model_id`/`voice_id` parameters.
      */
     public function withVoice(string $voice): self
     {

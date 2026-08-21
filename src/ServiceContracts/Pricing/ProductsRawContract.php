@@ -25,7 +25,7 @@ interface ProductsRawContract
      * @param array<string,mixed>|ProductRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ProductGetResponse>
+     * @return BaseResponse<DefaultFlatPagination<ProductGetResponse>>
      *
      * @throws APIException
      */

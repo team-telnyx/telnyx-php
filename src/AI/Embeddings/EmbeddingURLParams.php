@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Embeddings;
 
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -14,7 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\EmbeddingsService::url()
  *
- * @phpstan-type EmbeddingURLParamsShape = array{bucketName: string, url: string}
+ * @phpstan-type EmbeddingURLParamsShape = array{
+ *   bucketName: string, url: string, idempotencyKey?: string|null
+ * }
  */
 final class EmbeddingURLParams implements BaseModel
 {
@@ -33,6 +36,9 @@ final class EmbeddingURLParams implements BaseModel
      */
     #[Required]
     public string $url;
+
+    #[Optional]
+    public ?string $idempotencyKey;
 
     /**
      * `new EmbeddingURLParams()` is missing required properties by the API.
@@ -58,12 +64,17 @@ final class EmbeddingURLParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $bucketName, string $url): self
-    {
+    public static function with(
+        string $bucketName,
+        string $url,
+        ?string $idempotencyKey = null
+    ): self {
         $self = new self;
 
         $self['bucketName'] = $bucketName;
         $self['url'] = $url;
+
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -86,6 +97,14 @@ final class EmbeddingURLParams implements BaseModel
     {
         $self = clone $this;
         $self['url'] = $url;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

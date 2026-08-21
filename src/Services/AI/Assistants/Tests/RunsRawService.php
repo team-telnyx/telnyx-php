@@ -107,8 +107,10 @@ final class RunsRawService implements RunsRawContract
      *
      * Initiates immediate execution of a specific assistant test
      *
-     * @param string $testID unique identifier of the test
-     * @param array{destinationVersionID?: string}|RunTriggerParams $params
+     * @param string $testID path param: Unique identifier of the test
+     * @param array{
+     *   destinationVersionID?: string, idempotencyKey?: string
+     * }|RunTriggerParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TestRunResponse>
@@ -124,12 +126,20 @@ final class RunsRawService implements RunsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/assistants/tests/%1$s/runs', $testID],
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: TestRunResponse::class,
         );

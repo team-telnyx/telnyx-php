@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Start a new run for a mission.
+ * Starts a new run of the specified mission and returns the created run object. Track its progress through the run detail, plan, and events endpoints.
  *
  * @see Telnyx\Services\AI\Missions\RunsService::create()
  *

@@ -36,7 +36,7 @@ final class BillingBundlesService implements BillingBundlesContract
     /**
      * @api
      *
-     * Get a single bundle by ID.
+     * Returns the details of a single billing bundle by its ID, so you can inspect its contents before purchasing a user bundle.
      *
      * @param string $bundleID billing bundle's ID, this is used to identify the billing bundle in the API
      * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
@@ -62,7 +62,7 @@ final class BillingBundlesService implements BillingBundlesContract
     /**
      * @api
      *
-     * Get all allowed bundles.
+     * Returns a paginated list of the billing bundles available to your account, with support for filtering.
      *
      * @param Filter|FilterShape $filter Query param: Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
      * @param int $pageNumber Query param

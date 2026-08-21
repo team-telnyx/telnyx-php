@@ -38,7 +38,7 @@ final class NumberLookupService implements NumberLookupContract
     /**
      * @api
      *
-     * Submit a new telco data usage report
+     * Submits a new telco data (number lookup) usage report request. The report is generated asynchronously; retrieve it by its identifier once ready.
      *
      * @param AggregationType|value-of<AggregationType> $aggregationType Type of aggregation for the report
      * @param string $endDate End date for the usage report

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List the LOA configurations.
+ * Returns a paginated list of your LOA (Letter of Authorization) configurations. LOA configurations customize the company details and branding used on generated LOA documents.
  *
  * @see Telnyx\Services\Porting\LoaConfigurationsService::list()
  *

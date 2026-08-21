@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams\CallingWindow;
 
 /**
- * Create an outbound voice profile.
+ * Creates a new outbound voice profile defining calling permissions, destinations, and limits for outbound calls, and returns the created profile.
  *
  * @see Telnyx\Services\OutboundVoiceProfilesService::create()
  *

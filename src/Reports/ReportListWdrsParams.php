@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Fetch all Wdr records.
+ * Returns wireless detail records (WDRs) matching the provided criteria, such as date range, SIM card, IMSI, or phone number, with pagination and sorting.
  *
  * @see Telnyx\Services\ReportsService::listWdrs()
  *

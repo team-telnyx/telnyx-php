@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Delete a knowledge base from a mission.
+ * Detaches the specified knowledge base from the mission so its content is no longer available to agents in subsequent runs.
  *
  * @see Telnyx\Services\AI\Missions\KnowledgeBasesService::deleteKnowledgeBase()
  *

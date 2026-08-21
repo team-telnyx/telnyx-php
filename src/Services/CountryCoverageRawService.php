@@ -28,7 +28,7 @@ final class CountryCoverageRawService implements CountryCoverageRawContract
     /**
      * @api
      *
-     * Get country coverage
+     * Returns Telnyx service coverage information for every country, including which number types and features are available in each.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -51,7 +51,7 @@ final class CountryCoverageRawService implements CountryCoverageRawContract
     /**
      * @api
      *
-     * Get coverage for a specific country
+     * Returns Telnyx service coverage information for the specified country, including available number types and features.
      *
      * @param string $countryCode country ISO code
      * @param RequestOpts|null $requestOptions

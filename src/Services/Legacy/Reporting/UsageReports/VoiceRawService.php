@@ -74,7 +74,7 @@ final class VoiceRawService implements VoiceRawContract
     /**
      * @api
      *
-     * Fetch single cdr usage report by id.
+     * Returns a single CDR (Call Detail Record) usage report by its identifier, including its parameters and current status.
      *
      * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions

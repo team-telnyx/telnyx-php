@@ -35,7 +35,7 @@ final class EventsService implements EventsContract
     /**
      * @api
      *
-     * List events for a run (paginated)
+     * Returns a paginated list of events logged for the specified run, filterable by event type, plan step, and agent, so you can reconstruct exactly what happened during execution.
      *
      * @param string $runID path param: Unique identifier of the run
      * @param string $missionID path param: Unique identifier of the mission
@@ -80,7 +80,7 @@ final class EventsService implements EventsContract
     /**
      * @api
      *
-     * Get details of a specific event
+     * Returns the details of a single event logged for the specified run, including its type and payload.
      *
      * @param string $eventID unique identifier of the event
      * @param string $missionID unique identifier of the mission
@@ -106,7 +106,7 @@ final class EventsService implements EventsContract
     /**
      * @api
      *
-     * Log an event for a run
+     * Logs a new event against the specified run and returns the created event. Events form the run's audit trail and can reference a plan step or agent.
      *
      * @param string $runID path param: Unique identifier of the run
      * @param string $missionID path param: Unique identifier of the mission

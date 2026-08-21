@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 
 /**
- * Updates a sub number order.
+ * Updates the requirements of an existing sub number order and returns the updated order.
  *
  * @see Telnyx\Services\SubNumberOrdersService::update()
  *

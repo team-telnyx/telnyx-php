@@ -37,7 +37,7 @@ final class AddressesRawService implements AddressesRawContract
     /**
      * @api
      *
-     * Creates an address.
+     * Creates a new address on your account from the provided details, for use with services that require a physical address such as emergency calling and regulatory compliance.
      *
      * @param array{
      *   businessName: string,
@@ -109,7 +109,7 @@ final class AddressesRawService implements AddressesRawContract
     /**
      * @api
      *
-     * Returns a list of your addresses.
+     * Returns a paginated list of the addresses on your account, with support for filtering and sorting.
      *
      * @param array{
      *   filter?: Filter|FilterShape,
@@ -149,7 +149,7 @@ final class AddressesRawService implements AddressesRawContract
     /**
      * @api
      *
-     * Deletes an existing address.
+     * Permanently deletes the specified address from your account.
      *
      * @param string $id address ID
      * @param RequestOpts|null $requestOptions

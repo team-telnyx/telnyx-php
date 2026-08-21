@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Storage\Buckets\BucketCreatePresignedURLParams\Body;
 
 /**
  * Returns a timed and authenticated URL to download (GET) or upload (PUT) an object. This is the equivalent to AWS S3’s “presigned” URL. Please note that Telnyx performs authentication differently from AWS S3 and you MUST NOT use the presign method of AWS s3api CLI or SDK to generate the presigned URL.
@@ -17,8 +18,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Storage\BucketsService::createPresignedURL()
  *
+ * @phpstan-import-type BodyShape from \Telnyx\Storage\Buckets\BucketCreatePresignedURLParams\Body
+ *
  * @phpstan-type BucketCreatePresignedURLParamsShape = array{
- *   bucketName: string, ttl?: int|null
+ *   bucketName: string, body?: null|Body|BodyShape
  * }
  */
 final class BucketCreatePresignedURLParams implements BaseModel
@@ -30,11 +33,8 @@ final class BucketCreatePresignedURLParams implements BaseModel
     #[Required]
     public string $bucketName;
 
-    /**
-     * The time to live of the token in seconds.
-     */
     #[Optional]
-    public ?int $ttl;
+    public ?Body $body;
 
     /**
      * `new BucketCreatePresignedURLParams()` is missing required properties by the API.
@@ -59,14 +59,18 @@ final class BucketCreatePresignedURLParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Body|BodyShape|null $body
      */
-    public static function with(string $bucketName, ?int $ttl = null): self
-    {
+    public static function with(
+        string $bucketName,
+        Body|array|null $body = null
+    ): self {
         $self = new self;
 
         $self['bucketName'] = $bucketName;
 
-        null !== $ttl && $self['ttl'] = $ttl;
+        null !== $body && $self['body'] = $body;
 
         return $self;
     }
@@ -80,12 +84,12 @@ final class BucketCreatePresignedURLParams implements BaseModel
     }
 
     /**
-     * The time to live of the token in seconds.
+     * @param Body|BodyShape $body
      */
-    public function withTtl(int $ttl): self
+    public function withBody(Body|array $body): self
     {
         $self = clone $this;
-        $self['ttl'] = $ttl;
+        $self['body'] = $body;
 
         return $self;
     }

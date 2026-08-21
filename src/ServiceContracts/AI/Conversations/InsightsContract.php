@@ -20,7 +20,11 @@ interface InsightsContract
     /**
      * @api
      *
-     * @param JsonSchemaShape $jsonSchema if specified, the output will follow the JSON schema
+     * @param string $instructions Body param
+     * @param string $name Body param
+     * @param JsonSchemaShape $jsonSchema body param: If specified, the output will follow the JSON schema
+     * @param string $webhook Body param
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -30,6 +34,7 @@ interface InsightsContract
         string $name,
         string|array|null $jsonSchema = null,
         string $webhook = '',
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateDetail;
 

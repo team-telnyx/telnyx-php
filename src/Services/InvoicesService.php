@@ -60,7 +60,7 @@ final class InvoicesService implements InvoicesContract
     /**
      * @api
      *
-     * Retrieve a paginated list of invoices.
+     * Returns a paginated list of your invoices, with support for sorting.
      *
      * @param Sort|value-of<Sort> $sort specifies the sort order for results
      * @param RequestOpts|null $requestOptions

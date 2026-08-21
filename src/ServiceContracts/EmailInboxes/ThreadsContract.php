@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\EmailInboxes;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\EmailInboxes\Threads\InboundThreadListResponse;
+use Telnyx\EmailBracketCursorPagination;
+use Telnyx\EmailInboxes\Threads\InboundThread;
 use Telnyx\EmailInboxes\Threads\ThreadGetResponse;
 use Telnyx\RequestOptions;
 
@@ -42,6 +43,8 @@ interface ThreadsContract
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailBracketCursorPagination<InboundThread>
+     *
      * @throws APIException
      */
     public function list(
@@ -50,5 +53,5 @@ interface ThreadsContract
         ?string $pageAfter = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
-    ): InboundThreadListResponse;
+    ): EmailBracketCursorPagination;
 }

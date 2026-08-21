@@ -64,7 +64,7 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
     /**
      * @api
      *
-     * Retrieve a WireGuard Interfaces.
+     * Returns the details of a single WireGuard interface by its identifier.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -84,7 +84,7 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
     /**
      * @api
      *
-     * List all WireGuard Interfaces.
+     * Returns a paginated list of the WireGuard interfaces on your account, with support for filtering.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param RequestOpts|null $requestOptions
@@ -116,7 +116,7 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
     /**
      * @api
      *
-     * Delete a WireGuard Interface.
+     * Deletes the specified WireGuard interface from its network.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

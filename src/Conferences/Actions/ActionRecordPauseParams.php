@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Pause conference recording.
+ * Pauses the active recording of the specified conference. Resume it later with the record_resume action.
  *
  * @see Telnyx\Services\Conferences\ActionsService::recordPause()
  *

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Updates a stored media file.
+ * Updates the specified stored media file and returns the updated resource.
  *
  * @see Telnyx\Services\MediaService::update()
  *

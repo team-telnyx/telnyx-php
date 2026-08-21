@@ -34,7 +34,7 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
     /**
      * @api
      *
-     * Returns a porting activation job.
+     * Returns the details of a single activation job for the porting order, including its current status.
      *
      * @param string $activationJobID Activation Job Identifier
      * @param array{id: string}|ActivationJobRetrieveParams $params

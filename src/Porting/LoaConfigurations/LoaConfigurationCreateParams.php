@@ -13,7 +13,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
 
 /**
- * Create a LOA configuration.
+ * Creates a new LOA configuration with your company details and branding for use when generating LOA documents for porting orders.
  *
  * @see Telnyx\Services\Porting\LoaConfigurationsService::create()
  *

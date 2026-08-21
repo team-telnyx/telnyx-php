@@ -65,7 +65,7 @@ final class InvoicesRawService implements InvoicesRawContract
     /**
      * @api
      *
-     * Retrieve a paginated list of invoices.
+     * Returns a paginated list of your invoices, with support for sorting.
      *
      * @param array{
      *   pageNumber?: int, pageSize?: int, sort?: Sort|value-of<Sort>

@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\EmailCursorPagination;
 use Telnyx\EmailEvents\EmailEventGetStatsResponse;
 use Telnyx\EmailEvents\EmailEventListParams;
 use Telnyx\EmailEvents\EmailEventListResponse;
@@ -44,7 +45,7 @@ final class EmailEventsRawService implements EmailEventsRawContract
      * }|EmailEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailEventListResponse>
+     * @return BaseResponse<EmailCursorPagination<EmailEventListResponse>>
      *
      * @throws APIException
      */
@@ -72,6 +73,7 @@ final class EmailEventsRawService implements EmailEventsRawContract
             ),
             options: $options,
             convert: EmailEventListResponse::class,
+            page: EmailCursorPagination::class,
         );
     }
 

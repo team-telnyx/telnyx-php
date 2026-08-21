@@ -11,12 +11,15 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a new insight group.
+ * Creates a new insight template group for organizing related insight templates, and returns the created group.
  *
  * @see Telnyx\Services\AI\Conversations\InsightGroupsService::insightGroups()
  *
  * @phpstan-type InsightGroupInsightGroupsParamsShape = array{
- *   name: string, description?: string|null, webhook?: string|null
+ *   name: string,
+ *   description?: string|null,
+ *   webhook?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class InsightGroupInsightGroupsParams implements BaseModel
@@ -33,6 +36,9 @@ final class InsightGroupInsightGroupsParams implements BaseModel
 
     #[Optional]
     public ?string $webhook;
+
+    #[Optional]
+    public ?string $idempotencyKey;
 
     /**
      * `new InsightGroupInsightGroupsParams()` is missing required properties by the API.
@@ -61,7 +67,8 @@ final class InsightGroupInsightGroupsParams implements BaseModel
     public static function with(
         string $name,
         ?string $description = null,
-        ?string $webhook = null
+        ?string $webhook = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -69,6 +76,7 @@ final class InsightGroupInsightGroupsParams implements BaseModel
 
         null !== $description && $self['description'] = $description;
         null !== $webhook && $self['webhook'] = $webhook;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -93,6 +101,14 @@ final class InsightGroupInsightGroupsParams implements BaseModel
     {
         $self = clone $this;
         $self['webhook'] = $webhook;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

@@ -8,24 +8,22 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rcs\Agents\CapabilitiesResponse;
-use Telnyx\Rcs\Brands\BrandResponse\Address;
-use Telnyx\Rcs\Brands\BrandResponse\Identifier;
 use Telnyx\Rcs\Brands\BrandResponse\Status;
 
 /**
- * @phpstan-import-type IdentifierVariants from \Telnyx\Rcs\Brands\BrandResponse\Identifier
- * @phpstan-import-type AddressShape from \Telnyx\Rcs\Brands\BrandResponse\Address
+ * @phpstan-import-type BrandIdentifierVariants from \Telnyx\Rcs\Brands\BrandIdentifier
+ * @phpstan-import-type BrandAddressShape from \Telnyx\Rcs\Brands\BrandAddress
  * @phpstan-import-type CapabilitiesResponseShape from \Telnyx\Rcs\Agents\CapabilitiesResponse
  * @phpstan-import-type BrandContactShape from \Telnyx\Rcs\Brands\BrandContact
- * @phpstan-import-type IdentifierShape from \Telnyx\Rcs\Brands\BrandResponse\Identifier
+ * @phpstan-import-type BrandIdentifierShape from \Telnyx\Rcs\Brands\BrandIdentifier
  *
  * @phpstan-type BrandResponseShape = array{
- *   addresses: array<string,Address|AddressShape>,
+ *   addresses: array<string,BrandAddress|BrandAddressShape>,
  *   brandID: string,
  *   capabilities: CapabilitiesResponse|CapabilitiesResponseShape,
  *   contacts: array<string,BrandContact|BrandContactShape>,
  *   displayName: string,
- *   identifiers: array<string,IdentifierShape>,
+ *   identifiers: array<string,BrandIdentifierShape>,
  *   legalEntityType: string,
  *   legalName: string,
  *   organizationType: string,
@@ -39,8 +37,8 @@ final class BrandResponse implements BaseModel
     /** @use SdkModel<BrandResponseShape> */
     use SdkModel;
 
-    /** @var array<string,Address> $addresses */
-    #[Required(map: Address::class)]
+    /** @var array<string,BrandAddress> $addresses */
+    #[Required(map: BrandAddress::class)]
     public array $addresses;
 
     #[Required('brand_id')]
@@ -56,8 +54,8 @@ final class BrandResponse implements BaseModel
     #[Required('display_name')]
     public string $displayName;
 
-    /** @var array<string,IdentifierVariants> $identifiers */
-    #[Required(map: Identifier::class)]
+    /** @var array<string,BrandIdentifierVariants> $identifiers */
+    #[Required(map: BrandIdentifier::class)]
     public array $identifiers;
 
     #[Required('legal_entity_type')]
@@ -128,10 +126,10 @@ final class BrandResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,Address|AddressShape> $addresses
+     * @param array<string,BrandAddress|BrandAddressShape> $addresses
      * @param CapabilitiesResponse|CapabilitiesResponseShape $capabilities
      * @param array<string,BrandContact|BrandContactShape> $contacts
-     * @param array<string,IdentifierShape> $identifiers
+     * @param array<string,BrandIdentifierShape> $identifiers
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -167,7 +165,7 @@ final class BrandResponse implements BaseModel
     }
 
     /**
-     * @param array<string,Address|AddressShape> $addresses
+     * @param array<string,BrandAddress|BrandAddressShape> $addresses
      */
     public function withAddresses(array $addresses): self
     {
@@ -217,7 +215,7 @@ final class BrandResponse implements BaseModel
     }
 
     /**
-     * @param array<string,IdentifierShape> $identifiers
+     * @param array<string,BrandIdentifierShape> $identifiers
      */
     public function withIdentifiers(array $identifiers): self
     {

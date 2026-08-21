@@ -37,7 +37,7 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
     /**
      * @api
      *
-     * Creates a phone number block order.
+     * Creates an order for a block of consecutive phone numbers and returns the created order. Track fulfillment through the order's status.
      *
      * @param int $range the phone number range included in the block
      * @param string $startingNumber Starting phone number block

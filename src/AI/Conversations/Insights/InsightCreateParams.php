@@ -12,7 +12,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a new insight.
+ * Creates a new insight template defining an analysis to run over conversations, and returns the created template.
  *
  * @see Telnyx\Services\AI\Conversations\InsightsService::create()
  *
@@ -24,6 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   name: string,
  *   jsonSchema?: JsonSchemaShape|null,
  *   webhook?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class InsightCreateParams implements BaseModel
@@ -48,6 +49,9 @@ final class InsightCreateParams implements BaseModel
 
     #[Optional]
     public ?string $webhook;
+
+    #[Optional]
+    public ?string $idempotencyKey;
 
     /**
      * `new InsightCreateParams()` is missing required properties by the API.
@@ -80,6 +84,7 @@ final class InsightCreateParams implements BaseModel
         string $name,
         string|array|null $jsonSchema = null,
         ?string $webhook = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -88,6 +93,7 @@ final class InsightCreateParams implements BaseModel
 
         null !== $jsonSchema && $self['jsonSchema'] = $jsonSchema;
         null !== $webhook && $self['webhook'] = $webhook;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -125,6 +131,14 @@ final class InsightCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['webhook'] = $webhook;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

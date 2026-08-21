@@ -32,7 +32,9 @@ final class ActionsRawService implements ActionsRawContract
      * Runs SQL against the database and returns the resulting rows — empty for statements that return none, such as DDL. Bind positional `?` placeholders with `params` rather than interpolating values into the SQL string.
      *
      * @param string $id SQL database ID
-     * @param array{sql: string, params?: list<ParamShape>}|ActionQueryParams $params
+     * @param array{
+     *   sql: string, params?: list<ParamShape|null>
+     * }|ActionQueryParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionQueryResponse>

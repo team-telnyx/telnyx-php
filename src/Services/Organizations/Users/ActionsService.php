@@ -33,7 +33,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Deletes a user in your organization.
+     * Removes the specified user from your organization and returns the result of the removal.
      *
      * @param string $id Organization User ID
      * @param RequestOpts|null $requestOptions

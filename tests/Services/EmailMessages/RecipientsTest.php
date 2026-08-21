@@ -7,8 +7,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailMessages\Recipients\EmailRecipient;
 use Telnyx\EmailMessages\Recipients\RecipientGetResponse;
-use Telnyx\EmailMessages\Recipients\RecipientListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -68,11 +69,16 @@ final class RecipientsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailMessages->recipients->list(
+        $page = $this->client->emailMessages->recipients->list(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RecipientListResponse::class, $result);
+        $this->assertInstanceOf(EmailCursorPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(EmailRecipient::class, $item);
+        }
     }
 }

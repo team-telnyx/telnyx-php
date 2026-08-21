@@ -36,7 +36,7 @@ final class UserAddressesRawService implements UserAddressesRawContract
     /**
      * @api
      *
-     * Creates a user address.
+     * Creates a new user address from the provided details and returns the created address.
      *
      * @param array{
      *   businessName: string,
@@ -107,7 +107,7 @@ final class UserAddressesRawService implements UserAddressesRawContract
     /**
      * @api
      *
-     * Returns a list of your user addresses.
+     * Returns a paginated list of your user addresses, with support for filtering and sorting.
      *
      * @param array{
      *   filter?: Filter|FilterShape,

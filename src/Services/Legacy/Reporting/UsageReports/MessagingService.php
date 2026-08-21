@@ -76,7 +76,7 @@ final class MessagingService implements MessagingContract
     /**
      * @api
      *
-     * Fetch single MDR usage report by id.
+     * Returns a single MDR (Message Detail Record) usage report by its identifier, including its parameters and current status.
      *
      * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions

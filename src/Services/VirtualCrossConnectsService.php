@@ -110,7 +110,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
     /**
      * @api
      *
-     * Retrieve a Virtual Cross Connect.
+     * Returns the details of a single virtual cross connect by its identifier.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -173,7 +173,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
     /**
      * @api
      *
-     * List all Virtual Cross Connects.
+     * Returns a paginated list of the virtual cross connects on your account, with support for filtering.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param RequestOpts|null $requestOptions
@@ -205,7 +205,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
     /**
      * @api
      *
-     * Delete a Virtual Cross Connect.
+     * Deletes the specified virtual cross connect from your account.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

@@ -55,7 +55,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
     /**
      * @api
      *
-     * Creates a credential connection.
+     * Creates a new credential-based SIP connection. Credential connections authenticate with a username and password rather than by IP address.
      *
      * @param array{
      *   connectionName: string,

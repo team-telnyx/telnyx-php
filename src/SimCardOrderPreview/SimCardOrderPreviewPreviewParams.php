@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Preview SIM card order purchases.
+ * Previews a SIM card order purchase, returning estimated costs and details before you place the order. The preview is processed asynchronously.
  *
  * @see Telnyx\Services\SimCardOrderPreviewService::preview()
  *

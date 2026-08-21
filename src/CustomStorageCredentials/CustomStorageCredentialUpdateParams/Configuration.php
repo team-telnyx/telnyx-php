@@ -8,14 +8,14 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\CustomStorageCredentials\AzureConfigurationData;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration\S3GenericConfigurationData;
 use Telnyx\CustomStorageCredentials\GcsConfigurationData;
 use Telnyx\CustomStorageCredentials\S3ConfigurationData;
+use Telnyx\CustomStorageCredentials\S3GenericConfigurationData;
 
 /**
  * @phpstan-import-type GcsConfigurationDataShape from \Telnyx\CustomStorageCredentials\GcsConfigurationData
  * @phpstan-import-type S3ConfigurationDataShape from \Telnyx\CustomStorageCredentials\S3ConfigurationData
- * @phpstan-import-type S3GenericConfigurationDataShape from \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration\S3GenericConfigurationData
+ * @phpstan-import-type S3GenericConfigurationDataShape from \Telnyx\CustomStorageCredentials\S3GenericConfigurationData
  * @phpstan-import-type AzureConfigurationDataShape from \Telnyx\CustomStorageCredentials\AzureConfigurationData
  *
  * @phpstan-type ConfigurationVariants = GcsConfigurationData|S3ConfigurationData|S3GenericConfigurationData|AzureConfigurationData

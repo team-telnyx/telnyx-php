@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\Messages;
 
+use Telnyx\AI\Conversations\Messages\MessageListResponse\Metadata;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Role;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\ToolCall;
 use Telnyx\Core\Attributes\Optional;
@@ -12,12 +13,15 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type MetadataVariants from \Telnyx\AI\Conversations\Messages\MessageListResponse\Metadata
+ * @phpstan-import-type MetadataShape from \Telnyx\AI\Conversations\Messages\MessageListResponse\Metadata
  * @phpstan-import-type ToolCallShape from \Telnyx\AI\Conversations\Messages\MessageListResponse\ToolCall
  *
  * @phpstan-type MessageListResponseShape = array{
  *   role: Role|value-of<Role>,
  *   text: string,
  *   createdAt?: \DateTimeInterface|null,
+ *   metadata?: array<string,MetadataShape>|null,
  *   sentAt?: \DateTimeInterface|null,
  *   toolCalls?: list<ToolCall|ToolCallShape>|null,
  * }
@@ -46,6 +50,10 @@ final class MessageListResponse implements BaseModel
      */
     #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
+
+    /** @var array<string,MetadataVariants>|null $metadata */
+    #[Optional(map: Metadata::class)]
+    public ?array $metadata;
 
     /**
      * The datetime the message was sent to the end user.
@@ -86,12 +94,14 @@ final class MessageListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Role|value-of<Role> $role
+     * @param array<string,MetadataShape>|null $metadata
      * @param list<ToolCall|ToolCallShape>|null $toolCalls
      */
     public static function with(
         Role|string $role,
         string $text,
         ?\DateTimeInterface $createdAt = null,
+        ?array $metadata = null,
         ?\DateTimeInterface $sentAt = null,
         ?array $toolCalls = null,
     ): self {
@@ -101,6 +111,7 @@ final class MessageListResponse implements BaseModel
         $self['text'] = $text;
 
         null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $metadata && $self['metadata'] = $metadata;
         null !== $sentAt && $self['sentAt'] = $sentAt;
         null !== $toolCalls && $self['toolCalls'] = $toolCalls;
 
@@ -138,6 +149,17 @@ final class MessageListResponse implements BaseModel
     {
         $self = clone $this;
         $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    /**
+     * @param array<string,MetadataShape> $metadata
+     */
+    public function withMetadata(array $metadata): self
+    {
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
         return $self;
     }

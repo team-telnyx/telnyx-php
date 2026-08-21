@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update a notification profile.
+ * Updates the specified notification profile and returns the updated profile.
  *
  * @see Telnyx\Services\NotificationProfilesService::update()
  *

@@ -23,7 +23,7 @@ interface ScheduledEventsRawContract
     /**
      * @api
      *
-     * @param string $assistantID unique identifier of the assistant
+     * @param string $assistantID path param: Unique identifier of the assistant
      * @param array<string,mixed>|ScheduledEventCreateParams $params
      * @param RequestOpts|null $requestOptions
      *

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
 
 /**
- * Creates a phone number order.
+ * Creates an order to purchase the specified phone numbers and returns the created order. Track fulfillment through the order's status.
  *
  * @see Telnyx\Services\NumberOrdersService::create()
  *

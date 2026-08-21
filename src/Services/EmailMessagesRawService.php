@@ -8,6 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\EmailCursorPagination;
+use Telnyx\EmailInboxes\Drafts\EmailMessage;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\EmailMessages\AttachmentRequest;
 use Telnyx\EmailMessages\EmailMessageBatchParams;
@@ -15,11 +17,10 @@ use Telnyx\EmailMessages\EmailMessageBatchParams\Message;
 use Telnyx\EmailMessages\EmailMessageBatchResponse;
 use Telnyx\EmailMessages\EmailMessageCreateParams;
 use Telnyx\EmailMessages\EmailMessageDeleteAllParams;
-use Telnyx\EmailMessages\EmailMessageGetEventsResponse;
 use Telnyx\EmailMessages\EmailMessageGetResponse;
 use Telnyx\EmailMessages\EmailMessageListParams;
-use Telnyx\EmailMessages\EmailMessageListResponse;
 use Telnyx\EmailMessages\EmailMessageRetrieveEventsParams;
+use Telnyx\EmailMessages\MessageEvent;
 use Telnyx\EmailMessages\TrackingSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailMessagesRawContract;
@@ -149,7 +150,7 @@ final class EmailMessagesRawService implements EmailMessagesRawContract
      * @param array{pageCursor?: string, pageSize?: int}|EmailMessageListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailMessageListResponse>
+     * @return BaseResponse<EmailCursorPagination<EmailMessage>>
      *
      * @throws APIException
      */
@@ -171,7 +172,8 @@ final class EmailMessagesRawService implements EmailMessagesRawContract
                 ['pageCursor' => 'page_cursor', 'pageSize' => 'page_size']
             ),
             options: $options,
-            convert: EmailMessageListResponse::class,
+            convert: EmailMessage::class,
+            page: EmailCursorPagination::class,
         );
     }
 
@@ -318,7 +320,7 @@ final class EmailMessagesRawService implements EmailMessagesRawContract
      * }|EmailMessageRetrieveEventsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailMessageGetEventsResponse>
+     * @return BaseResponse<EmailCursorPagination<MessageEvent>>
      *
      * @throws APIException
      */
@@ -341,7 +343,8 @@ final class EmailMessagesRawService implements EmailMessagesRawContract
                 ['pageCursor' => 'page_cursor', 'pageSize' => 'page_size']
             ),
             options: $options,
-            convert: EmailMessageGetEventsResponse::class,
+            convert: MessageEvent::class,
+            page: EmailCursorPagination::class,
         );
     }
 }

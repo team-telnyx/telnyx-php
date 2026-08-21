@@ -54,7 +54,7 @@ final class PortingService implements PortingContract
     /**
      * @api
      *
-     * List available carriers in the UK.
+     * Returns the list of UK carriers available for porting, for use when preparing porting orders for UK numbers.
      *
      * @param RequestOpts|null $requestOptions
      *

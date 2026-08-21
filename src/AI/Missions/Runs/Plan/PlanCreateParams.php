@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create the initial plan for a run.
+ * Creates the initial plan for the specified run from the provided steps and returns the created plan steps. Progress is subsequently reported by updating individual steps.
  *
  * @see Telnyx\Services\AI\Missions\Runs\PlanService::create()
  *

@@ -45,7 +45,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
     /**
      * @api
      *
-     * Creates a new phone number extension.
+     * Creates a phone number extension on the porting order, mapping extension ranges to one of the order's phone numbers.
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number extension
      * @param list<ActivationRange|ActivationRangeShape> $activationRanges Specifies the activation ranges for this porting phone number extension. The activation range must be within the extension range and should not overlap with other activation ranges.
@@ -116,7 +116,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
     /**
      * @api
      *
-     * Deletes a phone number extension.
+     * Deletes the specified phone number extension from the porting order.
      *
      * @param string $id Identifies the phone number extension to be deleted
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number extension

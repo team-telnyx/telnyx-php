@@ -31,7 +31,7 @@ final class JobsRawService implements JobsRawContract
     /**
      * @api
      *
-     * Create a new fine tuning job.
+     * Creates a new fine-tuning job that trains a model on the provided dataset, and returns the created job.
      *
      * @param array{
      *   model: string,
@@ -67,7 +67,7 @@ final class JobsRawService implements JobsRawContract
     /**
      * @api
      *
-     * Retrieve a fine tuning job by `job_id`.
+     * Returns the details of a single fine-tuning job by its job_id, including its current status.
      *
      * @param string $jobID unique identifier of the job
      * @param RequestOpts|null $requestOptions
@@ -115,7 +115,7 @@ final class JobsRawService implements JobsRawContract
     /**
      * @api
      *
-     * Cancel a fine tuning job.
+     * Cancels the specified in-progress fine-tuning job and returns the updated job.
      *
      * @param string $jobID unique identifier of the job
      * @param RequestOpts|null $requestOptions

@@ -8,9 +8,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CustomStorageCredentials\AzureConfigurationData;
 use Telnyx\CustomStorageCredentials\CredentialsResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Configuration\S3GenericConfigurationData;
 use Telnyx\CustomStorageCredentials\GcsConfigurationData;
 use Telnyx\CustomStorageCredentials\S3ConfigurationData;
+use Telnyx\CustomStorageCredentials\S3GenericConfigurationData;
 use Telnyx\RequestOptions;
 
 /**
@@ -63,7 +63,7 @@ interface CustomStorageCredentialsContract
     public function update(
         string $connectionID,
         \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|string $backend,
-        GcsConfigurationData|array|S3ConfigurationData|\Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration\S3GenericConfigurationData|AzureConfigurationData $configuration,
+        GcsConfigurationData|array|S3ConfigurationData|S3GenericConfigurationData|AzureConfigurationData $configuration,
         RequestOptions|array|null $requestOptions = null,
     ): CredentialsResponse;
 

@@ -9,10 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count].
+ * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count], filter[include_phone_numbers].
  *
  * @phpstan-type FilterShape = array{
  *   countryCode?: string|null,
+ *   includePhoneNumbers?: bool|null,
  *   orderRequestID?: string|null,
  *   phoneNumberType?: string|null,
  *   phoneNumbersCount?: int|null,
@@ -29,6 +30,12 @@ final class Filter implements BaseModel
      */
     #[Optional('country_code')]
     public ?string $countryCode;
+
+    /**
+     * Include the first 50 phone number objects in the results, including their per-number regulatory requirement statuses.
+     */
+    #[Optional('include_phone_numbers')]
+    public ?bool $includePhoneNumbers;
 
     /**
      * ID of the number order the sub number order belongs to.
@@ -66,6 +73,7 @@ final class Filter implements BaseModel
      */
     public static function with(
         ?string $countryCode = null,
+        ?bool $includePhoneNumbers = null,
         ?string $orderRequestID = null,
         ?string $phoneNumberType = null,
         ?int $phoneNumbersCount = null,
@@ -74,6 +82,7 @@ final class Filter implements BaseModel
         $self = new self;
 
         null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $includePhoneNumbers && $self['includePhoneNumbers'] = $includePhoneNumbers;
         null !== $orderRequestID && $self['orderRequestID'] = $orderRequestID;
         null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
         null !== $phoneNumbersCount && $self['phoneNumbersCount'] = $phoneNumbersCount;
@@ -89,6 +98,17 @@ final class Filter implements BaseModel
     {
         $self = clone $this;
         $self['countryCode'] = $countryCode;
+
+        return $self;
+    }
+
+    /**
+     * Include the first 50 phone number objects in the results, including their per-number regulatory requirement statuses.
+     */
+    public function withIncludePhoneNumbers(bool $includePhoneNumbers): self
+    {
+        $self = clone $this;
+        $self['includePhoneNumbers'] = $includePhoneNumbers;
 
         return $self;
     }

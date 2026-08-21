@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VoiceSDKCallReports\VoiceSDKCallReport\Logs;
 use Telnyx\VoiceSDKCallReports\VoiceSDKCallReport\Logs\Entries;
 use Telnyx\VoiceSDKCallReports\VoiceSDKCallReport\Stats;
-use Telnyx\VoiceSDKCallReports\VoiceSDKCallReport\Stats\UnionMember1;
+use Telnyx\VoiceSDKCallReports\VoiceSDKCallReport\Stats\VoiceSDKCallReportStatsObject;
 
 /**
  * A raw call report stats JSON payload. The schema is intentionally permissive because Voice SDK clients can add fields over time.
@@ -98,7 +98,7 @@ final class VoiceSDKCallReport implements BaseModel
      * @var StatsVariants|null $stats
      */
     #[Optional(union: Stats::class)]
-    public array|UnionMember1|null $stats;
+    public array|VoiceSDKCallReportStatsObject|null $stats;
 
     /**
      * Time when the call report was stored.
@@ -188,7 +188,7 @@ final class VoiceSDKCallReport implements BaseModel
         array|Entries|null $logs = null,
         ?string $organizationID = null,
         ?int $segment = null,
-        array|UnionMember1|null $stats = null,
+        array|VoiceSDKCallReportStatsObject|null $stats = null,
         ?\DateTimeInterface $storedAt = null,
         ?array $summary = null,
         ?string $telnyxLegID = null,
@@ -310,7 +310,7 @@ final class VoiceSDKCallReport implements BaseModel
      *
      * @param StatsShape $stats
      */
-    public function withStats(array|UnionMember1 $stats): self
+    public function withStats(array|VoiceSDKCallReportStatsObject $stats): self
     {
         $self = clone $this;
         $self['stats'] = $stats;

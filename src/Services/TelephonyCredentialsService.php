@@ -39,7 +39,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
     /**
      * @api
      *
-     * Create a credential.
+     * Creates a new on-demand telephony credential for the specified connection. The credential can then be used to generate access tokens for SIP or WebRTC clients.
      *
      * @param string $connectionID identifies the Credential Connection this credential is associated with
      * @param string $expiresAt ISO-8601 formatted date indicating when the credential will expire
@@ -93,7 +93,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
     /**
      * @api
      *
-     * Update an existing credential.
+     * Updates the specified telephony credential and returns the updated credential.
      *
      * @param string $id identifies the resource
      * @param string $connectionID identifies the Credential Connection this credential is associated with
@@ -129,7 +129,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
     /**
      * @api
      *
-     * List all On-demand Credentials.
+     * Returns a paginated list of the on-demand telephony credentials on your account, with support for filtering.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[name], filter[status], filter[resource_id], filter[sip_username]
      * @param RequestOpts|null $requestOptions
@@ -161,7 +161,7 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
     /**
      * @api
      *
-     * Delete an existing credential.
+     * Permanently deletes the specified telephony credential, revoking any access it provided.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

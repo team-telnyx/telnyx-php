@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Invoices\InvoiceListParams\Sort;
 
 /**
- * Retrieve a paginated list of invoices.
+ * Returns a paginated list of your invoices, with support for sorting.
  *
  * @see Telnyx\Services\InvoicesService::list()
  *

@@ -7,12 +7,12 @@ namespace Telnyx\Messages\MessageGetResponse;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\Messages\MessageGetResponse\Data\MessagingInboundMessagePayload;
+use Telnyx\Messages\MessagingInboundMessagePayload;
 use Telnyx\Messages\MessagingOutboundMessagePayload;
 
 /**
  * @phpstan-import-type MessagingOutboundMessagePayloadShape from \Telnyx\Messages\MessagingOutboundMessagePayload
- * @phpstan-import-type MessagingInboundMessagePayloadShape from \Telnyx\Messages\MessageGetResponse\Data\MessagingInboundMessagePayload
+ * @phpstan-import-type MessagingInboundMessagePayloadShape from \Telnyx\Messages\MessagingInboundMessagePayload
  *
  * @phpstan-type DataVariants = MessagingOutboundMessagePayload|MessagingInboundMessagePayload
  * @phpstan-type DataShape = DataVariants|MessagingOutboundMessagePayloadShape|MessagingInboundMessagePayloadShape

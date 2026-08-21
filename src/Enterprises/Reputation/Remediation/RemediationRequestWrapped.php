@@ -7,12 +7,13 @@ namespace Telnyx\Enterprises\Reputation\Remediation;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\Reputation\Remediation\RemediationRequestWrapped\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Enterprises\Reputation\Remediation\RemediationRequestWrapped\Data
+ * @phpstan-import-type RemediationRequestShape from \Telnyx\Enterprises\Reputation\Remediation\RemediationRequest
  *
- * @phpstan-type RemediationRequestWrappedShape = array{data: Data|DataShape}
+ * @phpstan-type RemediationRequestWrappedShape = array{
+ *   data: RemediationRequest|RemediationRequestShape
+ * }
  */
 final class RemediationRequestWrapped implements BaseModel
 {
@@ -23,7 +24,7 @@ final class RemediationRequestWrapped implements BaseModel
      * Full detail of a remediation request, returned on submit and GET by id.
      */
     #[Required]
-    public Data $data;
+    public RemediationRequest $data;
 
     /**
      * `new RemediationRequestWrapped()` is missing required properties by the API.
@@ -49,9 +50,9 @@ final class RemediationRequestWrapped implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape $data
+     * @param RemediationRequest|RemediationRequestShape $data
      */
-    public static function with(Data|array $data): self
+    public static function with(RemediationRequest|array $data): self
     {
         $self = new self;
 
@@ -63,9 +64,9 @@ final class RemediationRequestWrapped implements BaseModel
     /**
      * Full detail of a remediation request, returned on submit and GET by id.
      *
-     * @param Data|DataShape $data
+     * @param RemediationRequest|RemediationRequestShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(RemediationRequest|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

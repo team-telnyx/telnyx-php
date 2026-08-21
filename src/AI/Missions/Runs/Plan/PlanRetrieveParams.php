@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get the plan (all steps) for a run.
+ * Returns the plan for the specified run, including all plan steps and their statuses, so you can see how the mission was decomposed and how far execution has progressed.
  *
  * @see Telnyx\Services\AI\Missions\Runs\PlanService::retrieve()
  *

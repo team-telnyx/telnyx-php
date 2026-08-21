@@ -38,10 +38,10 @@ final class ConversationsRawService implements ConversationsRawContract
     /**
      * @api
      *
-     * Create a new AI Conversation.
+     * Creates a new AI conversation, the container for messages exchanged with an assistant, and returns the created conversation.
      *
      * @param array{
-     *   metadata?: array<string,string>, name?: string
+     *   metadata?: array<string,string>, name?: string, idempotencyKey?: string
      * }|ConversationCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -57,12 +57,20 @@ final class ConversationsRawService implements ConversationsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/conversations',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: Conversation::class,
         );
@@ -211,7 +219,7 @@ final class ConversationsRawService implements ConversationsRawContract
      *
      * Add a new message to the conversation. Used to insert a new messages to a conversation manually ( without using chat endpoint )
      *
-     * @param string $conversationID The ID of the conversation
+     * @param string $conversationID Path param: The ID of the conversation
      * @param array{
      *   role: string,
      *   content?: string,
@@ -221,6 +229,7 @@ final class ConversationsRawService implements ConversationsRawContract
      *   toolCallID?: string,
      *   toolCalls?: list<array<string,mixed>>,
      *   toolChoice?: ToolChoiceShape,
+     *   idempotencyKey?: string,
      * }|ConversationAddMessageParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -237,12 +246,20 @@ final class ConversationsRawService implements ConversationsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['ai/conversations/%1$s/message', $conversationID],
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: null,
         );

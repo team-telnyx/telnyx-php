@@ -7,13 +7,12 @@ namespace Telnyx\Storage\Cloudfs;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Storage\Cloudfs\CloudfsFilesystemResponseWrapper\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Storage\Cloudfs\CloudfsFilesystemResponseWrapper\Data
+ * @phpstan-import-type CloudfsFilesystemShape from \Telnyx\Storage\Cloudfs\CloudfsFilesystem
  *
  * @phpstan-type CloudfsFilesystemResponseWrapperShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|CloudfsFilesystem|CloudfsFilesystemShape
  * }
  */
 final class CloudfsFilesystemResponseWrapper implements BaseModel
@@ -25,7 +24,7 @@ final class CloudfsFilesystemResponseWrapper implements BaseModel
      * A CloudFS filesystem, including its metadata credential. This shape is returned only by create and rotate-meta-token.
      */
     #[Optional]
-    public ?Data $data;
+    public ?CloudfsFilesystem $data;
 
     public function __construct()
     {
@@ -37,9 +36,9 @@ final class CloudfsFilesystemResponseWrapper implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CloudfsFilesystem|CloudfsFilesystemShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(CloudfsFilesystem|array|null $data = null): self
     {
         $self = new self;
 
@@ -51,9 +50,9 @@ final class CloudfsFilesystemResponseWrapper implements BaseModel
     /**
      * A CloudFS filesystem, including its metadata credential. This shape is returned only by create and rotate-meta-token.
      *
-     * @param Data|DataShape $data
+     * @param CloudfsFilesystem|CloudfsFilesystemShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CloudfsFilesystem|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

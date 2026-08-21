@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
+use Telnyx\AI\Assistants\AssistantCloneParams;
 use Telnyx\AI\Assistants\AssistantCreateParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams;
@@ -122,6 +123,7 @@ interface AssistantsRawContract
      * @api
      *
      * @param string $assistantID unique identifier of the assistant
+     * @param array<string,mixed>|AssistantCloneParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
@@ -130,7 +132,8 @@ interface AssistantsRawContract
      */
     public function clone(
         string $assistantID,
-        RequestOptions|array|null $requestOptions = null
+        array|AssistantCloneParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -166,7 +169,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
-     * @param string $assistantID unique identifier of the assistant
+     * @param string $assistantID path param: Unique identifier of the assistant
      * @param array<string,mixed>|AssistantSendSMSParams $params
      * @param RequestOpts|null $requestOptions
      *

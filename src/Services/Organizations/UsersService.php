@@ -46,7 +46,7 @@ final class UsersService implements UsersContract
     /**
      * @api
      *
-     * Returns a user in your organization.
+     * Returns the details of a user in your organization, optionally including the groups the user belongs to.
      *
      * @param string $id Organization User ID
      * @param bool $includeGroups When set to true, includes the groups array for each user in the response. The groups array contains objects with id and name for each group the user belongs to.

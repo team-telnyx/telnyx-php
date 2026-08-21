@@ -65,7 +65,7 @@ final class RecordingsService implements RecordingsContract
     /**
      * @api
      *
-     * Returns a list of your call recordings.
+     * Returns a paginated list of your call recordings, with support for filtering to locate specific recordings.
      *
      * @param Filter|FilterShape $filter filter recordings by various attributes
      * @param RequestOpts|null $requestOptions
@@ -97,7 +97,7 @@ final class RecordingsService implements RecordingsContract
     /**
      * @api
      *
-     * Permanently deletes a call recording.
+     * Permanently deletes the specified call recording and returns the deleted recording resource. The media is removed and can no longer be downloaded.
      *
      * @param string $recordingID uniquely identifies the recording by id
      * @param RequestOpts|null $requestOptions

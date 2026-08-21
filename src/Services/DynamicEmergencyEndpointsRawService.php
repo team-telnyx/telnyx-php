@@ -36,7 +36,7 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
     /**
      * @api
      *
-     * Creates a dynamic emergency endpoints.
+     * Creates a dynamic emergency endpoint, associating a callback number and location with a device for emergency calling.
      *
      * @param array{
      *   callbackNumber: string, callerName: string, dynamicEmergencyAddressID: string

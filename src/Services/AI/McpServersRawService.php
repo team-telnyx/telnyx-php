@@ -30,7 +30,7 @@ final class McpServersRawService implements McpServersRawContract
     /**
      * @api
      *
-     * Create a new MCP server.
+     * Creates a new MCP server configuration on your account and returns the created server.
      *
      * @param array{
      *   name: string,
@@ -38,6 +38,7 @@ final class McpServersRawService implements McpServersRawContract
      *   url: string,
      *   allowedTools?: list<string>|null,
      *   apiKeyRef?: string|null,
+     *   idempotencyKey?: string,
      * }|McpServerCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -53,12 +54,20 @@ final class McpServersRawService implements McpServersRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/mcp_servers',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: McpServer::class,
         );
@@ -92,7 +101,7 @@ final class McpServersRawService implements McpServersRawContract
     /**
      * @api
      *
-     * Update an existing MCP server.
+     * Updates the specified MCP server's configuration and returns the updated server.
      *
      * @param string $mcpServerID unique identifier of the mcp server
      * @param array{
@@ -133,7 +142,7 @@ final class McpServersRawService implements McpServersRawContract
     /**
      * @api
      *
-     * Retrieve a list of MCP servers.
+     * Returns a paginated list of the MCP servers configured on your account, with optional filtering by type or URL.
      *
      * @param array{
      *   pageNumber?: int, pageSize?: int, type?: string, url?: string
@@ -170,7 +179,7 @@ final class McpServersRawService implements McpServersRawContract
     /**
      * @api
      *
-     * Delete a specific MCP server.
+     * Permanently deletes the specified MCP server configuration from your account.
      *
      * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions

@@ -50,6 +50,7 @@ final class ToolsRawService implements ToolsRawContract
      *   timeoutMs?: int,
      *   updateDynamicVariables?: UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape,
      *   webhook?: array<string,mixed>,
+     *   idempotencyKey?: string,
      * }|ToolCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -65,12 +66,20 @@ final class ToolsRawService implements ToolsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/tools',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: SharedToolResponse::class,
         );
@@ -191,7 +200,7 @@ final class ToolsRawService implements ToolsRawContract
     /**
      * @api
      *
-     * Delete a custom AI tool.
+     * Permanently deletes the specified custom AI tool from your account.
      *
      * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions

@@ -32,7 +32,7 @@ final class ConnectionsService implements ConnectionsContract
     /**
      * @api
      *
-     * Get user setup integrations
+     * Returns the details of a single integration connection by its ID.
      *
      * @param string $userConnectionID The connection id
      * @param RequestOpts|null $requestOptions
@@ -52,7 +52,7 @@ final class ConnectionsService implements ConnectionsContract
     /**
      * @api
      *
-     * List user setup integrations
+     * Returns the list of integration connections you have set up, linking your account to third-party services.
      *
      * @param RequestOpts|null $requestOptions
      *

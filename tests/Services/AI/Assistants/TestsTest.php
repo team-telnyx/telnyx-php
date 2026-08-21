@@ -82,6 +82,7 @@ final class TestsTest extends TestCase
             maxDurationSeconds: 1,
             telnyxConversationChannel: TelnyxConversationChannel::WEB_CHAT,
             testSuite: 'test_suite',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

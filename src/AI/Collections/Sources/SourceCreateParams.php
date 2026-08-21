@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Attaches a new source to a collection.
+ * Attaches a new content source to the specified collection and returns the created source. The source's content is ingested and embedded so it becomes searchable within the collection.
  *
  * @see Telnyx\Services\AI\Collections\SourcesService::create()
  *

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update a mission definition.
+ * Replaces the specified mission's definition with the provided configuration and returns the updated mission.
  *
  * @see Telnyx\Services\AI\MissionsService::updateMission()
  *

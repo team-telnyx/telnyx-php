@@ -64,7 +64,7 @@ final class MissionsService implements MissionsContract
     /**
      * @api
      *
-     * Create a new mission definition
+     * Creates a new mission definition from the provided configuration and returns the created mission. Execute the mission by starting runs against it.
      *
      * @param ExecutionMode|value-of<ExecutionMode> $executionMode
      * @param array<string,mixed> $metadata
@@ -121,7 +121,7 @@ final class MissionsService implements MissionsContract
     /**
      * @api
      *
-     * List all missions for the organization
+     * Returns a paginated list of all mission definitions in your organization. Missions describe a goal and the tools, knowledge bases, and MCP servers agents may use to accomplish it.
      *
      * @param int $pageNumber Page number (1-based)
      * @param int $pageSize Number of items per page
@@ -149,7 +149,7 @@ final class MissionsService implements MissionsContract
     /**
      * @api
      *
-     * Clone an existing mission
+     * Creates a copy of the specified mission as a new mission definition, so you can iterate on its configuration without modifying the original.
      *
      * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
@@ -169,7 +169,7 @@ final class MissionsService implements MissionsContract
     /**
      * @api
      *
-     * Delete a mission
+     * Permanently deletes the specified mission definition and returns no content on success.
      *
      * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
@@ -189,7 +189,7 @@ final class MissionsService implements MissionsContract
     /**
      * @api
      *
-     * List recent events across all missions
+     * Returns a paginated list of recent events across every mission in your organization, optionally filtered by event type. Useful for building activity feeds or monitoring dashboards.
      *
      * @param int $pageNumber Page number (1-based)
      * @param int $pageSize Number of items per page
@@ -219,7 +219,7 @@ final class MissionsService implements MissionsContract
     /**
      * @api
      *
-     * Update a mission definition
+     * Replaces the specified mission's definition with the provided configuration and returns the updated mission.
      *
      * @param string $missionID unique identifier of the mission
      * @param ExecutionMode|value-of<ExecutionMode> $executionMode

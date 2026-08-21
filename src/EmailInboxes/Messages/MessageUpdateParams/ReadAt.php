@@ -9,9 +9,7 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
- * Set to `true` for server time, an ISO 8601 timestamp for an explicit read time, or `null` to mark unread.
- *
- * @phpstan-type ReadAtVariants = bool|null|\DateTimeInterface
+ * @phpstan-type ReadAtVariants = bool|\DateTimeInterface
  * @phpstan-type ReadAtShape = ReadAtVariants
  */
 final class ReadAt implements ConverterSource

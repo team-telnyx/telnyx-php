@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all Global IPs.
+ * Returns a paginated list of the Global IPs on your account, including each IP's address and configuration.
  *
  * @see Telnyx\Services\GlobalIPsService::list()
  *

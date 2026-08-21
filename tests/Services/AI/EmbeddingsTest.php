@@ -57,6 +57,7 @@ final class EmbeddingsTest extends TestCase
             documentChunkSize: 1024,
             embeddingModel: 'thenlper/gte-large',
             loader: 'default',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -147,7 +148,8 @@ final class EmbeddingsTest extends TestCase
 
         $result = $this->client->ai->embeddings->url(
             bucketName: 'Bucket Name',
-            url: 'URL'
+            url: 'URL',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -28,7 +28,7 @@ final class InsightsRawService implements InsightsRawContract
     /**
      * @api
      *
-     * Assign an insight to a group
+     * Assigns the specified insight template to the specified insight template group.
      *
      * @param string $insightID The ID of the insight
      * @param array{groupID: string}|InsightAssignParams $params
@@ -66,7 +66,7 @@ final class InsightsRawService implements InsightsRawContract
     /**
      * @api
      *
-     * Remove an insight from a group
+     * Removes the specified insight template from the specified group. The insight template itself is not deleted.
      *
      * @param string $insightID The ID of the insight
      * @param array{groupID: string}|InsightDeleteUnassignParams $params

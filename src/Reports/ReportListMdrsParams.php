@@ -13,7 +13,7 @@ use Telnyx\Reports\ReportListMdrsParams\MessageType;
 use Telnyx\Reports\ReportListMdrsParams\Status;
 
 /**
- * Fetch all Mdr records.
+ * Returns message detail records (MDRs) matching the provided criteria, such as date range, direction, status, and message type.
  *
  * @see Telnyx\Services\ReportsService::listMdrs()
  *

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Creates a new queue resource.
+ * Creates a new queue resource for the account with the provided settings and returns it.
  *
  * @see Telnyx\Services\Texml\Accounts\QueuesService::create()
  *

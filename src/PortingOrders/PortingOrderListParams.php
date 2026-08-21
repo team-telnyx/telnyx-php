@@ -12,7 +12,7 @@ use Telnyx\PortingOrders\PortingOrderListParams\Filter;
 use Telnyx\PortingOrders\PortingOrderListParams\Sort;
 
 /**
- * Returns a list of your porting order.
+ * Returns a paginated list of your porting orders. Supports filtering and sorting, and can optionally include the phone numbers attached to each order.
  *
  * @see Telnyx\Services\PortingOrdersService::list()
  *

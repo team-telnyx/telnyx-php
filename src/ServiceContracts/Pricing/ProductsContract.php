@@ -19,9 +19,12 @@ interface ProductsContract
      * @api
      *
      * @param string $slug product slug from the catalog listing
+     * @param string|null $filterCountryISO Two-letter ISO 3166-1 alpha-2 country code (uppercase, e.g. US) to filter pricing to a single country.
      * @param int $pageNumber page number (1-based)
      * @param int $pageSize number of items per page (max 100)
      * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<ProductGetResponse>
      *
      * @throws APIException
      */
@@ -31,7 +34,7 @@ interface ProductsContract
         int $pageNumber = 1,
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
-    ): ProductGetResponse;
+    ): DefaultFlatPagination;
 
     /**
      * @api

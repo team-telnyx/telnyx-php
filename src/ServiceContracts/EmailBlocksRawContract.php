@@ -88,7 +88,7 @@ interface EmailBlocksRawContract
      * @param array<string,mixed>|EmailBlockRetrieveEventsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailBlockGetEventsResponse>
+     * @return BaseResponse<DefaultFlatPagination<EmailBlockGetEventsResponse>>
      *
      * @throws APIException
      */

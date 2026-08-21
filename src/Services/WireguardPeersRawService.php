@@ -71,7 +71,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
     /**
      * @api
      *
-     * Retrieve the WireGuard peer.
+     * Returns the details of a single WireGuard peer by its identifier.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions
@@ -96,7 +96,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
     /**
      * @api
      *
-     * Update the WireGuard peer.
+     * Updates the specified WireGuard peer and returns the updated peer.
      *
      * @param string $id identifies the resource
      * @param array{publicKey?: string}|WireguardPeerUpdateParams $params
@@ -129,7 +129,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
     /**
      * @api
      *
-     * List all WireGuard peers.
+     * Returns a paginated list of your WireGuard peers, with support for filtering.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
@@ -166,7 +166,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
     /**
      * @api
      *
-     * Delete the WireGuard peer.
+     * Deletes the specified WireGuard peer from its interface.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

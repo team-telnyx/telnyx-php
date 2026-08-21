@@ -23,7 +23,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AIService::summarize()
  *
  * @phpstan-type AISummarizeParamsShape = array{
- *   bucket: string, filename: string, systemPrompt?: string|null
+ *   bucket: string,
+ *   filename: string,
+ *   systemPrompt?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class AISummarizeParams implements BaseModel
@@ -49,6 +52,9 @@ final class AISummarizeParams implements BaseModel
      */
     #[Optional('system_prompt')]
     public ?string $systemPrompt;
+
+    #[Optional]
+    public ?string $idempotencyKey;
 
     /**
      * `new AISummarizeParams()` is missing required properties by the API.
@@ -77,7 +83,8 @@ final class AISummarizeParams implements BaseModel
     public static function with(
         string $bucket,
         string $filename,
-        ?string $systemPrompt = null
+        ?string $systemPrompt = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -85,6 +92,7 @@ final class AISummarizeParams implements BaseModel
         $self['filename'] = $filename;
 
         null !== $systemPrompt && $self['systemPrompt'] = $systemPrompt;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -118,6 +126,14 @@ final class AISummarizeParams implements BaseModel
     {
         $self = clone $this;
         $self['systemPrompt'] = $systemPrompt;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

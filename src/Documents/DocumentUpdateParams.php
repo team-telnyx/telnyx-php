@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update a document.
+ * Updates the specified document's attributes and returns the updated document.
  *
  * @see Telnyx\Services\DocumentsService::update()
  *

@@ -42,6 +42,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   documentChunkSize?: int|null,
  *   embeddingModel?: null|EmbeddingModel|value-of<EmbeddingModel>,
  *   loader?: null|Loader|value-of<Loader>,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class EmbeddingCreateParams implements BaseModel
@@ -74,6 +75,9 @@ final class EmbeddingCreateParams implements BaseModel
      */
     #[Optional(enum: Loader::class)]
     public ?string $loader;
+
+    #[Optional]
+    public ?string $idempotencyKey;
 
     /**
      * `new EmbeddingCreateParams()` is missing required properties by the API.
@@ -108,6 +112,7 @@ final class EmbeddingCreateParams implements BaseModel
         ?int $documentChunkSize = null,
         EmbeddingModel|string|null $embeddingModel = null,
         Loader|string|null $loader = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -117,6 +122,7 @@ final class EmbeddingCreateParams implements BaseModel
         null !== $documentChunkSize && $self['documentChunkSize'] = $documentChunkSize;
         null !== $embeddingModel && $self['embeddingModel'] = $embeddingModel;
         null !== $loader && $self['loader'] = $loader;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -169,6 +175,14 @@ final class EmbeddingCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['loader'] = $loader;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

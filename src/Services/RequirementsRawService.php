@@ -35,7 +35,7 @@ final class RequirementsRawService implements RequirementsRawContract
     /**
      * @api
      *
-     * Retrieve a document requirement record
+     * Returns a single document requirement record by its identifier, describing the documentation needed for number-related actions. A specific requirement version can be requested.
      *
      * @param string $id Uniquely identifies the requirement_type record
      * @param array{version?: int}|RequirementRetrieveParams $params

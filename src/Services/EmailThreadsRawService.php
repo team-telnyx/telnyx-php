@@ -8,7 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\EmailInboxes\Threads\InboundThreadListResponse;
+use Telnyx\EmailBracketCursorPagination;
+use Telnyx\EmailInboxes\Threads\InboundThread;
 use Telnyx\EmailThreads\EmailThreadGetResponse;
 use Telnyx\EmailThreads\EmailThreadListParams;
 use Telnyx\EmailThreads\EmailThreadRetrieveParams;
@@ -93,7 +94,7 @@ final class EmailThreadsRawService implements EmailThreadsRawContract
      * }|EmailThreadListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<InboundThreadListResponse>
+     * @return BaseResponse<EmailBracketCursorPagination<InboundThread>>
      *
      * @throws APIException
      */
@@ -120,7 +121,8 @@ final class EmailThreadsRawService implements EmailThreadsRawContract
                 ],
             ),
             options: $options,
-            convert: InboundThreadListResponse::class,
+            convert: InboundThread::class,
+            page: EmailBracketCursorPagination::class,
         );
     }
 }

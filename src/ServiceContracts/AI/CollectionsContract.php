@@ -126,6 +126,8 @@ interface CollectionsContract
      * @param int $topK Maximum number of ranked results to consider. When omitted, the collection's configured `top_k` setting is used.
      * @param RequestOpts|null $requestOptions
      *
+     * @return DefaultFlatPagination<CollectionGetDocumentsResponse>
+     *
      * @throws APIException
      */
     public function retrieveDocuments(
@@ -138,5 +140,5 @@ interface CollectionsContract
         ?string $sources = null,
         ?int $topK = null,
         RequestOptions|array|null $requestOptions = null,
-    ): CollectionGetDocumentsResponse;
+    ): DefaultFlatPagination;
 }

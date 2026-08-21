@@ -39,7 +39,7 @@ final class SimCardOrdersService implements SimCardOrdersContract
     /**
      * @api
      *
-     * Creates a new order for SIM cards.
+     * Creates a new order for physical SIM cards, including quantity and shipping details, and returns the created order.
      *
      * @param string $addressID uniquely identifies the address for the order
      * @param int $quantity the amount of SIM cards to order
@@ -65,7 +65,7 @@ final class SimCardOrdersService implements SimCardOrdersContract
     /**
      * @api
      *
-     * Get a single SIM card order by its ID.
+     * Returns the details of a single SIM card order by its ID, including its status.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

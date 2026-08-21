@@ -7,18 +7,18 @@ namespace Telnyx\Webhooks\InboundMessageWebhookEvent;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Messages\MessagingInboundMessagePayload;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\RecordType;
 
 /**
- * @phpstan-import-type PayloadShape from \Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload
+ * @phpstan-import-type MessagingInboundMessagePayloadShape from \Telnyx\Messages\MessagingInboundMessagePayload
  *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   eventType?: null|EventType|value-of<EventType>,
  *   occurredAt?: \DateTimeInterface|null,
- *   payload?: null|Payload|PayloadShape,
+ *   payload?: null|MessagingInboundMessagePayload|MessagingInboundMessagePayloadShape,
  *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
@@ -48,7 +48,7 @@ final class Data implements BaseModel
     public ?\DateTimeInterface $occurredAt;
 
     #[Optional]
-    public ?Payload $payload;
+    public ?MessagingInboundMessagePayload $payload;
 
     /**
      * Identifies the type of the resource.
@@ -69,14 +69,14 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param EventType|value-of<EventType>|null $eventType
-     * @param Payload|PayloadShape|null $payload
+     * @param MessagingInboundMessagePayload|MessagingInboundMessagePayloadShape|null $payload
      * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
         ?string $id = null,
         EventType|string|null $eventType = null,
         ?\DateTimeInterface $occurredAt = null,
-        Payload|array|null $payload = null,
+        MessagingInboundMessagePayload|array|null $payload = null,
         RecordType|string|null $recordType = null,
     ): self {
         $self = new self;
@@ -126,10 +126,11 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Payload|PayloadShape $payload
+     * @param MessagingInboundMessagePayload|MessagingInboundMessagePayloadShape $payload
      */
-    public function withPayload(Payload|array $payload): self
-    {
+    public function withPayload(
+        MessagingInboundMessagePayload|array $payload
+    ): self {
         $self = clone $this;
         $self['payload'] = $payload;
 

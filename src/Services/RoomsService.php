@@ -54,7 +54,7 @@ final class RoomsService implements RoomsContract
     /**
      * @api
      *
-     * Synchronously create a Room.
+     * Synchronously creates a new video room with the provided configuration and returns the created room.
      *
      * @param bool $enableRecording enable or disable recording for that room
      * @param int $maxParticipants The maximum amount of participants allowed in a room. If new participants try to join after that limit is reached, their request will be rejected.
@@ -119,7 +119,7 @@ final class RoomsService implements RoomsContract
     /**
      * @api
      *
-     * Synchronously update a Room.
+     * Synchronously updates the specified video room's configuration and returns the updated room.
      *
      * @param string $roomID the unique identifier of a room
      * @param bool $enableRecording enable or disable recording for that room

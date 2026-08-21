@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get a specific knowledge base by ID.
+ * Returns the details of a single knowledge base attached to the specified mission.
  *
  * @see Telnyx\Services\AI\Missions\KnowledgeBasesService::getKnowledgeBase()
  *

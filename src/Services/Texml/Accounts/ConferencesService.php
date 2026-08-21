@@ -46,7 +46,7 @@ final class ConferencesService implements ConferencesContract
     /**
      * @api
      *
-     * Returns a conference resource.
+     * Returns a single conference resource for the account by its ConferenceSid.
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param string $accountSid the id of the account the resource belongs to
@@ -70,7 +70,7 @@ final class ConferencesService implements ConferencesContract
     /**
      * @api
      *
-     * Updates a conference resource.
+     * Updates the specified conference resource, for example to modify its status, and returns the updated conference.
      *
      * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
      * @param string $accountSid path param: The id of the account the resource belongs to
@@ -107,7 +107,7 @@ final class ConferencesService implements ConferencesContract
     /**
      * @api
      *
-     * Lists conference resources.
+     * Returns a paginated list of conference resources for the account, with support for filtering by friendly name, status, and creation or update dates.
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param string $dateCreated Filters conferences by the creation date. Expected format is YYYY-MM-DD. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
@@ -153,7 +153,7 @@ final class ConferencesService implements ConferencesContract
     /**
      * @api
      *
-     * Lists conference recordings
+     * Returns the list of recordings made for the specified conference.
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param string $accountSid the id of the account the resource belongs to

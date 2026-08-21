@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams\DialogflowAPI;
 
 /**
- * Updates a stored Dialogflow Connection.
+ * Updates the stored Dialogflow connection for the specified connection and returns the updated configuration.
  *
  * @see Telnyx\Services\DialogflowConnectionsService::update()
  *

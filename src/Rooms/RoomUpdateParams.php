@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Synchronously update a Room.
+ * Synchronously updates the specified video room's configuration and returns the updated room.
  *
  * @see Telnyx\Services\RoomsService::update()
  *

@@ -19,7 +19,7 @@ enum Sort: string
 
     case DISPLAY_NAME = 'display_name';
 
-    case MINUSDISPLAY_NAME = '-display_name';
+    case MINUS_DISPLAY_NAME = '-display_name';
 
     case STATUS = 'status';
 
@@ -27,13 +27,13 @@ enum Sort: string
 
     case SUBMITTED_AT = 'submitted_at';
 
-    case MINUSSUBMITTED_AT = '-submitted_at';
+    case MINUS_SUBMITTED_AT = '-submitted_at';
 
     case VERIFIED_AT = 'verified_at';
 
-    case MINUSVERIFIED_AT = '-verified_at';
+    case MINUS_VERIFIED_AT = '-verified_at';
 
     case EXPIRING_AT = 'expiring_at';
 
-    case MINUSEXPIRING_AT = '-expiring_at';
+    case MINUS_EXPIRING_AT = '-expiring_at';
 }

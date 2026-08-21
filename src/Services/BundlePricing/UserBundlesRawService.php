@@ -86,7 +86,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
     /**
      * @api
      *
-     * Retrieves a user bundle by its ID.
+     * Returns the details of a single user bundle on your account by its ID.
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
      * @param array{authorizationBearer?: string}|UserBundleRetrieveParams $params
@@ -122,7 +122,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
     /**
      * @api
      *
-     * Get a paginated list of user bundles.
+     * Returns a paginated list of the bundles active on your account, with support for filtering.
      *
      * @param array{
      *   filter?: Filter|FilterShape,
@@ -170,7 +170,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
     /**
      * @api
      *
-     * Deactivates a user bundle by its ID.
+     * Deactivates the specified user bundle on your account and returns the deactivated bundle.
      *
      * @param string $userBundleID user bundle's ID, this is used to identify the user bundle in the API
      * @param array{authorizationBearer?: string}|UserBundleDeactivateParams $params

@@ -17,7 +17,7 @@ use Telnyx\TexmlApplications\TexmlApplicationCreateParams\StatusCallbackMethod;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams\VoiceMethod;
 
 /**
- * Creates a TeXML Application.
+ * Creates a TeXML application, which defines the voice URLs and settings used to serve TeXML instructions for calls, and returns the created application.
  *
  * @see Telnyx\Services\TexmlApplicationsService::create()
  *

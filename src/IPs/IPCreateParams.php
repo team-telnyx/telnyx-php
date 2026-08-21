@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Create a new IP object.
+ * Creates a new IP record for use with IP-based connections, associating an IP address with the specified connection.
  *
  * @see Telnyx\Services\IPsService::create()
  *

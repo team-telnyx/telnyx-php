@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter;
 
 /**
- * List mobile push credentials.
+ * Returns a paginated list of the mobile push credentials on your account, with support for filtering.
  *
  * @see Telnyx\Services\MobilePushCredentialsService::list()
  *

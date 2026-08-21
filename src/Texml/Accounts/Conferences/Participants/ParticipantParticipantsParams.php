@@ -25,7 +25,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Trim;
 
 /**
- * Dials a new conference participant.
+ * Dials a new participant into the specified conference and returns the created participant resource.
  *
  * @see Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService::participants()
  *

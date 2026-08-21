@@ -13,6 +13,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIRawContract;
 
@@ -80,7 +81,7 @@ final class AIRawService implements AIRawContract
      * }|AIRetrieveConversationHistoriesParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AIGetConversationHistoriesResponse>
+     * @return BaseResponse<DefaultFlatPagination<AIGetConversationHistoriesResponse>>
      *
      * @throws APIException
      */
@@ -115,6 +116,7 @@ final class AIRawService implements AIRawContract
             ),
             options: $options,
             convert: AIGetConversationHistoriesResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 
@@ -131,7 +133,10 @@ final class AIRawService implements AIRawContract
      * - Up to 100 MB
      *
      * @param array{
-     *   bucket: string, filename: string, systemPrompt?: string
+     *   bucket: string,
+     *   filename: string,
+     *   systemPrompt?: string,
+     *   idempotencyKey?: string,
      * }|AISummarizeParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -147,12 +152,20 @@ final class AIRawService implements AIRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'ai/summarize',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: AISummarizeResponse::class,
         );

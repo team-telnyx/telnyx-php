@@ -37,7 +37,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
     /**
      * @api
      *
-     * Create a new OAuth client
+     * Creates a new OAuth client on your account for authenticating third-party integrations, and returns the created client.
      *
      * @param array{
      *   allowedGrantTypes: list<AllowedGrantType|value-of<AllowedGrantType>>,
@@ -78,7 +78,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
     /**
      * @api
      *
-     * Retrieve a single OAuth client by ID
+     * Returns the details of a single OAuth client on your account by its ID.
      *
      * @param string $id OAuth client ID
      * @param RequestOpts|null $requestOptions
@@ -103,7 +103,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
     /**
      * @api
      *
-     * Update an existing OAuth client
+     * Updates the specified OAuth client's configuration and returns the updated client.
      *
      * @param string $id OAuth client ID
      * @param array{
@@ -198,7 +198,7 @@ final class OAuthClientsRawService implements OAuthClientsRawContract
     /**
      * @api
      *
-     * Delete an OAuth client
+     * Permanently deletes the specified OAuth client from your account.
      *
      * @param string $id OAuth client ID
      * @param RequestOpts|null $requestOptions

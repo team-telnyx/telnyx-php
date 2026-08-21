@@ -36,7 +36,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
     /**
      * @api
      *
-     * Create a notification profile.
+     * Creates a new notification profile, a named grouping used to organize notification settings, and returns it.
      *
      * @param array{name?: string}|NotificationProfileCreateParams $params
      * @param RequestOpts|null $requestOptions
@@ -67,7 +67,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
     /**
      * @api
      *
-     * Get a notification profile.
+     * Returns the details of a single notification profile by its identifier.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions
@@ -92,7 +92,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
     /**
      * @api
      *
-     * Update a notification profile.
+     * Updates the specified notification profile and returns the updated profile.
      *
      * @param string $notificationProfileID the id of the resource
      * @param array{name?: string}|NotificationProfileUpdateParams $params
@@ -162,7 +162,7 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
     /**
      * @api
      *
-     * Delete a notification profile.
+     * Deletes the specified notification profile from your account.
      *
      * @param string $id the id of the resource
      * @param RequestOpts|null $requestOptions

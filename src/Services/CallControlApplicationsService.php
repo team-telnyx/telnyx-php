@@ -49,7 +49,7 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
     /**
      * @api
      *
-     * Create a call control application.
+     * Creates a call control application, which defines the webhook endpoints and settings used to control calls on associated connections.
      *
      * @param string $applicationName a user-assigned name to help manage the application
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
@@ -250,7 +250,7 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
     /**
      * @api
      *
-     * Deletes a call control application.
+     * Permanently deletes the specified call control application and its webhook configuration.
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

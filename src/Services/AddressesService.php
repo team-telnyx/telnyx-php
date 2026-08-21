@@ -48,7 +48,7 @@ final class AddressesService implements AddressesContract
     /**
      * @api
      *
-     * Creates an address.
+     * Creates a new address on your account from the provided details, for use with services that require a physical address such as emergency calling and regulatory compliance.
      *
      * @param string $businessName The business name associated with the address. An address must have either a first last name or a business name.
      * @param string $countryCode the two-character (ISO 3166-1 alpha-2) country code of the address
@@ -136,7 +136,7 @@ final class AddressesService implements AddressesContract
     /**
      * @api
      *
-     * Returns a list of your addresses.
+     * Returns a paginated list of the addresses on your account, with support for filtering and sorting.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
@@ -182,7 +182,7 @@ final class AddressesService implements AddressesContract
     /**
      * @api
      *
-     * Deletes an existing address.
+     * Permanently deletes the specified address from your account.
      *
      * @param string $id address ID
      * @param RequestOpts|null $requestOptions
