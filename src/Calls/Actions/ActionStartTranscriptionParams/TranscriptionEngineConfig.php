@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams;
 
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineCohereConfig;
 use Telnyx\Calls\Actions\DeepgramNova2Config;
 use Telnyx\Calls\Actions\DeepgramNova3Config;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
@@ -33,13 +34,14 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type TranscriptionEngineParakeetConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineParakeetConfig
  * @phpstan-import-type TranscriptionEngineHumainConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineHumainConfig
  * @phpstan-import-type TranscriptionEngineReson8ConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineReson8Config
+ * @phpstan-import-type TranscriptionEngineCohereConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineCohereConfig
  * @phpstan-import-type TranscriptionEngineAConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineAConfig
  * @phpstan-import-type TranscriptionEngineBConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineBConfig
  * @phpstan-import-type DeepgramNova2ConfigShape from \Telnyx\Calls\Actions\DeepgramNova2Config
  * @phpstan-import-type DeepgramNova3ConfigShape from \Telnyx\Calls\Actions\DeepgramNova3Config
  *
- * @phpstan-type TranscriptionEngineConfigVariants = TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineParakeetConfig|TranscriptionEngineHumainConfig|TranscriptionEngineReson8Config|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config
- * @phpstan-type TranscriptionEngineConfigShape = TranscriptionEngineConfigVariants|TranscriptionEngineGoogleConfigShape|TranscriptionEngineTelnyxConfigShape|TranscriptionEngineAzureConfigShape|TranscriptionEngineXaiConfigShape|TranscriptionEngineAssemblyaiConfigShape|TranscriptionEngineSpeechmaticsConfigShape|TranscriptionEngineSonioxConfigShape|TranscriptionEngineParakeetConfigShape|TranscriptionEngineHumainConfigShape|TranscriptionEngineReson8ConfigShape|TranscriptionEngineAConfigShape|TranscriptionEngineBConfigShape|DeepgramNova2ConfigShape|DeepgramNova3ConfigShape
+ * @phpstan-type TranscriptionEngineConfigVariants = TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineParakeetConfig|TranscriptionEngineHumainConfig|TranscriptionEngineReson8Config|TranscriptionEngineCohereConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config
+ * @phpstan-type TranscriptionEngineConfigShape = TranscriptionEngineConfigVariants|TranscriptionEngineGoogleConfigShape|TranscriptionEngineTelnyxConfigShape|TranscriptionEngineAzureConfigShape|TranscriptionEngineXaiConfigShape|TranscriptionEngineAssemblyaiConfigShape|TranscriptionEngineSpeechmaticsConfigShape|TranscriptionEngineSonioxConfigShape|TranscriptionEngineParakeetConfigShape|TranscriptionEngineHumainConfigShape|TranscriptionEngineReson8ConfigShape|TranscriptionEngineCohereConfigShape|TranscriptionEngineAConfigShape|TranscriptionEngineBConfigShape|DeepgramNova2ConfigShape|DeepgramNova3ConfigShape
  */
 final class TranscriptionEngineConfig implements ConverterSource
 {
@@ -66,6 +68,7 @@ final class TranscriptionEngineConfig implements ConverterSource
             'Parakeet' => TranscriptionEngineParakeetConfig::class,
             'Humain' => TranscriptionEngineHumainConfig::class,
             'Reson8' => TranscriptionEngineReson8Config::class,
+            'Cohere' => TranscriptionEngineCohereConfig::class,
             'A' => TranscriptionEngineAConfig::class,
             'B' => TranscriptionEngineBConfig::class,
             'deepgram/nova-2' => DeepgramNova2Config::class,

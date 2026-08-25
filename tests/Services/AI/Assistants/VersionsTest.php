@@ -318,6 +318,7 @@ final class VersionsTest extends TestCase
                     'format' => 'wav',
                     'stopOnConversationEnd' => true,
                 ],
+                'sendMessageHistoryUpdates' => true,
                 'supportsUnauthenticatedWebCalls' => true,
                 'timeLimitSecs' => 30,
                 'userIdleReplySecs' => 0,
@@ -365,6 +366,8 @@ final class VersionsTest extends TestCase
                             'required' => ['id'],
                             'type' => 'object',
                         ],
+                        'presetBodyFields' => ['account_id' => 'bar', 'source' => 'bar'],
+                        'presetQueryParams' => ['caller' => 'bar', 'channel' => 'bar'],
                         'queryParameters' => [
                             'properties' => ['page' => 'bar'],
                             'required' => ['page'],

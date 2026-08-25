@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\OpenAI;
 
+use Telnyx\AI\OpenAI\OpenAICreateResponseParams\Reasoning;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -20,11 +21,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\OpenAIService::createResponse()
  *
+ * @phpstan-import-type ReasoningShape from \Telnyx\AI\OpenAI\OpenAICreateResponseParams\Reasoning
+ *
  * @phpstan-type OpenAICreateResponseParamsShape = array{
  *   conversation?: string|null,
  *   input?: array<string,mixed>|null,
  *   instructions?: string|null,
  *   model?: string|null,
+ *   reasoning?: null|Reasoning|ReasoningShape,
  *   serviceTier?: string|null,
  *   stream?: bool|null,
  * }
@@ -61,6 +65,9 @@ final class OpenAICreateResponseParams implements BaseModel
     #[Optional]
     public ?string $model;
 
+    #[Optional]
+    public ?Reasoning $reasoning;
+
     /**
      * The service tier to use for this request. Supported values vary by model; use `GET /v2/ai/openai/models` and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
      */
@@ -84,12 +91,14 @@ final class OpenAICreateResponseParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param array<string,mixed>|null $input
+     * @param Reasoning|ReasoningShape|null $reasoning
      */
     public static function with(
         ?string $conversation = null,
         ?array $input = null,
         ?string $instructions = null,
         ?string $model = null,
+        Reasoning|array|null $reasoning = null,
         ?string $serviceTier = null,
         ?bool $stream = null,
     ): self {
@@ -99,6 +108,7 @@ final class OpenAICreateResponseParams implements BaseModel
         null !== $input && $self['input'] = $input;
         null !== $instructions && $self['instructions'] = $instructions;
         null !== $model && $self['model'] = $model;
+        null !== $reasoning && $self['reasoning'] = $reasoning;
         null !== $serviceTier && $self['serviceTier'] = $serviceTier;
         null !== $stream && $self['stream'] = $stream;
 
@@ -147,6 +157,17 @@ final class OpenAICreateResponseParams implements BaseModel
     {
         $self = clone $this;
         $self['model'] = $model;
+
+        return $self;
+    }
+
+    /**
+     * @param Reasoning|ReasoningShape $reasoning
+     */
+    public function withReasoning(Reasoning|array $reasoning): self
+    {
+        $self = clone $this;
+        $self['reasoning'] = $reasoning;
 
         return $self;
     }

@@ -25,6 +25,8 @@ enum Provider: string
 
     case RESON8 = 'reson8';
 
+    case COHERE = 'cohere';
+
     case AZURE = 'azure';
 
     case OPENAI = 'openai';

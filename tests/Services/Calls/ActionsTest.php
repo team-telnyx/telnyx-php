@@ -256,7 +256,7 @@ final class ActionsTest extends TestCase
             sendMessageHistoryUpdates: true,
             sendPartialResults: true,
             transcription: [
-                'language' => 'auto', 'model' => 'distil-whisper/distil-large-v2',
+                'language' => 'language', 'model' => 'distil-whisper/distil-large-v2',
             ],
             userResponseTimeoutMs: 5000,
             voice: 'Telnyx.KokoroTTS.af',

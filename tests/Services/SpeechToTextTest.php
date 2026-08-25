@@ -74,6 +74,7 @@ final class SpeechToTextTest extends TestCase
             language: 'language',
             model: 'fast',
             redact: 'redact',
+            sampleRate: 0,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -72,6 +72,7 @@ use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineCohereConfig;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStopConversationRelayResponse;
@@ -1351,7 +1352,7 @@ final class ActionsService implements ActionsContract
      * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings Settings for handling user interruptions during assistant speech
      * @param list<MessageHistoryShape1> $messageHistory A list of messages to seed the conversation history before the assistant starts. Follows the same message format as the `ai_assistant_add_messages` command.
      * @param list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape> $participants a list of participants to add to the conversation when it starts
-     * @param bool $sendMessageHistoryUpdates when `true`, a webhook is sent each time the conversation message history is updated
+     * @param bool $sendMessageHistoryUpdates When `true`, a `call.ai_gather.message_history_updated` webhook carrying the full message history is sent each time the conversation message history is updated. The assistant's own `telephony_settings.send_message_history_updates` overrides this value when it is set.
      * @param TranscriptionConfig|TranscriptionConfigShape $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      * @param RequestOpts|null $requestOptions
      *
@@ -1884,7 +1885,7 @@ final class ActionsService implements ActionsContract
         ?string $clientState = null,
         ?string $commandID = null,
         \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine|string $transcriptionEngine = 'Google',
-        TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineParakeetConfig|TranscriptionEngineHumainConfig|TranscriptionEngineReson8Config|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config|null $transcriptionEngineConfig = null,
+        TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineParakeetConfig|TranscriptionEngineHumainConfig|TranscriptionEngineReson8Config|TranscriptionEngineCohereConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config|null $transcriptionEngineConfig = null,
         string $transcriptionTracks = 'inbound',
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartTranscriptionResponse {
