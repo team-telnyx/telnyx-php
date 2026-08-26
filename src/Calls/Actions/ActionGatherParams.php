@@ -83,7 +83,7 @@ final class ActionGatherParams implements BaseModel
     public ?int $minimumDigits;
 
     /**
-     * The digit used to terminate input if fewer than `maximum_digits` digits have been gathered.
+     * The digit used to terminate input if fewer than `maximum_digits` digits have been gathered. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      */
     #[Optional('terminating_digit')]
     public ?string $terminatingDigit;
@@ -217,7 +217,7 @@ final class ActionGatherParams implements BaseModel
     }
 
     /**
-     * The digit used to terminate input if fewer than `maximum_digits` digits have been gathered.
+     * The digit used to terminate input if fewer than `maximum_digits` digits have been gathered. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      */
     public function withTerminatingDigit(string $terminatingDigit): self
     {

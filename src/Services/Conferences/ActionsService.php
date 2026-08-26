@@ -148,7 +148,7 @@ final class ActionsService implements ActionsContract
      * @param string $mediaName the name of the media file uploaded to the Media Storage API to play as the gather prompt
      * @param int $minimumDigits minimum number of digits to gather
      * @param bool $stopPlaybackOnDtmf whether to stop the audio playback when a DTMF digit is received
-     * @param string $terminatingDigit digit that terminates gathering
+     * @param string $terminatingDigit Digit that terminates gathering. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      * @param int $timeoutMillis duration in milliseconds to wait for input before timing out
      * @param string $validDigits Digits that are valid for gathering. All other digits will be ignored.
      * @param RequestOpts|null $requestOptions

@@ -360,7 +360,7 @@ interface ActionsContract
      * @param int $interDigitTimeoutMillis the number of milliseconds to wait for input between digits
      * @param int $maximumDigits The maximum number of digits to fetch. This parameter has a maximum value of 128.
      * @param int $minimumDigits The minimum number of digits to fetch. This parameter has a minimum value of 1.
-     * @param string $terminatingDigit the digit used to terminate input if fewer than `maximum_digits` digits have been gathered
+     * @param string $terminatingDigit The digit used to terminate input if fewer than `maximum_digits` digits have been gathered. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      * @param int $timeoutMillis the number of milliseconds to wait to complete the request
      * @param string $validDigits a list of all digits accepted as valid
      * @param RequestOpts|null $requestOptions
@@ -449,7 +449,7 @@ interface ActionsContract
      * @param int $maximumTries the maximum number of times the file should be played if there is no input from the user on the call
      * @param string $mediaName The media_name of a file to be played back at the beginning of each prompt. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      * @param int $minimumDigits The minimum number of digits to fetch. This parameter has a minimum value of 1.
-     * @param string $terminatingDigit the digit used to terminate input if fewer than `maximum_digits` digits have been gathered
+     * @param string $terminatingDigit The digit used to terminate input if fewer than `maximum_digits` digits have been gathered. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      * @param int $timeoutMillis the number of milliseconds to wait for a DTMF response after file playback ends before a replaying the sound file
      * @param string $validDigits a list of all digits accepted as valid
      * @param RequestOpts|null $requestOptions
@@ -506,7 +506,7 @@ interface ActionsContract
      * @param int $minimumDigits The minimum number of digits to fetch. This parameter has a minimum value of 1.
      * @param PayloadType|value-of<PayloadType> $payloadType The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
      * @param ServiceLevel|value-of<ServiceLevel> $serviceLevel This parameter impacts speech quality, language options and payload types. When using `basic`, only the `en-US` language and payload type `text` are allowed.
-     * @param string $terminatingDigit the digit used to terminate input if fewer than `maximum_digits` digits have been gathered
+     * @param string $terminatingDigit The digit used to terminate input if fewer than `maximum_digits` digits have been gathered. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      * @param int $timeoutMillis the number of milliseconds to wait for a DTMF response after speak ends before a replaying the sound file
      * @param string $validDigits a list of all digits accepted as valid
      * @param VoiceSettingsShape1 $voiceSettings The settings associated with the voice selected
