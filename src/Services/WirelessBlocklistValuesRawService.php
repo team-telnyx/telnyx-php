@@ -29,7 +29,7 @@ final class WirelessBlocklistValuesRawService implements WirelessBlocklistValues
     /**
      * @api
      *
-     * Retrieve all wireless blocklist values for a given blocklist type.
+     * Retrieve all wireless blocklist values for a given blocklist type. The request returns `422` when `type` is missing or invalid.
      *
      * @param array{type: Type|value-of<Type>}|WirelessBlocklistValueListParams $params
      * @param RequestOpts|null $requestOptions

@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
 
 /**
- * Retrieve all wireless blocklist values for a given blocklist type.
+ * Retrieve all wireless blocklist values for a given blocklist type. The request returns `422` when `type` is missing or invalid.
  *
  * @see Telnyx\Services\WirelessBlocklistValuesService::list()
  *

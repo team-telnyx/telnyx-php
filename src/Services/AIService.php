@@ -23,6 +23,7 @@ use Telnyx\Services\AI\ConversationsService;
 use Telnyx\Services\AI\EmbeddingsService;
 use Telnyx\Services\AI\FineTuningService;
 use Telnyx\Services\AI\IntegrationsService;
+use Telnyx\Services\AI\KnowledgeService;
 use Telnyx\Services\AI\McpServersService;
 use Telnyx\Services\AI\MissionsService;
 use Telnyx\Services\AI\OpenAIService;
@@ -109,6 +110,11 @@ final class AIService implements AIContract
     public AnthropicService $anthropic;
 
     /**
+     * @api
+     */
+    public KnowledgeService $knowledge;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -128,6 +134,7 @@ final class AIService implements AIContract
         $this->openai = new OpenAIService($client);
         $this->tools = new ToolsService($client);
         $this->anthropic = new AnthropicService($client);
+        $this->knowledge = new KnowledgeService($client);
     }
 
     /**

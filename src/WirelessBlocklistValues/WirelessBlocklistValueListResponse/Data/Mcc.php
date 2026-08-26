@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type MccShape = array{code: string, name: string}
+ * @phpstan-type MccShape = array{mcc: string}
  */
 final class Mcc implements BaseModel
 {
@@ -20,26 +20,20 @@ final class Mcc implements BaseModel
      * Mobile Country Code.
      */
     #[Required]
-    public string $code;
-
-    /**
-     * The name of the country.
-     */
-    #[Required]
-    public string $name;
+    public string $mcc;
 
     /**
      * `new Mcc()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Mcc::with(code: ..., name: ...)
+     * Mcc::with(mcc: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Mcc)->withCode(...)->withName(...)
+     * (new Mcc)->withMcc(...)
      * ```
      */
     public function __construct()
@@ -52,12 +46,11 @@ final class Mcc implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $code, string $name): self
+    public static function with(string $mcc): self
     {
         $self = new self;
 
-        $self['code'] = $code;
-        $self['name'] = $name;
+        $self['mcc'] = $mcc;
 
         return $self;
     }
@@ -65,21 +58,10 @@ final class Mcc implements BaseModel
     /**
      * Mobile Country Code.
      */
-    public function withCode(string $code): self
+    public function withMcc(string $mcc): self
     {
         $self = clone $this;
-        $self['code'] = $code;
-
-        return $self;
-    }
-
-    /**
-     * The name of the country.
-     */
-    public function withName(string $name): self
-    {
-        $self = clone $this;
-        $self['name'] = $name;
+        $self['mcc'] = $mcc;
 
         return $self;
     }

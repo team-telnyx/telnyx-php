@@ -11,15 +11,14 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsRawContract;
-use Telnyx\WirelessBlocklists\WirelessBlocklist;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
-use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistListParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
+use Telnyx\WirelessBlocklists\WirelessWirelessBlocklist;
 
 /**
  * Wireless Blocklists operations.
@@ -133,15 +132,11 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      * Get all Wireless Blocklists belonging to the user.
      *
      * @param array{
-     *   filterName?: string,
-     *   filterType?: string,
-     *   filterValues?: string,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   filterName?: string, filterType?: string, pageNumber?: int, pageSize?: int
      * }|WirelessBlocklistListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<WirelessBlocklist>>
+     * @return BaseResponse<DefaultFlatPagination<WirelessWirelessBlocklist>>
      *
      * @throws APIException
      */
@@ -163,13 +158,12 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
                 [
                     'filterName' => 'filter[name]',
                     'filterType' => 'filter[type]',
-                    'filterValues' => 'filter[values]',
                     'pageNumber' => 'page[number]',
                     'pageSize' => 'page[size]',
                 ],
             ),
             options: $options,
-            convert: WirelessBlocklist::class,
+            convert: WirelessWirelessBlocklist::class,
             page: DefaultFlatPagination::class,
         );
     }
@@ -177,12 +171,12 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
     /**
      * @api
      *
-     * Permanently deletes the specified wireless blocklist from your account.
+     * Permanently deletes the specified wireless blocklist from your account. The request returns `422` when the wireless blocklist is assigned to a SIM Card Group.
      *
      * @param string $id identifies the wireless blocklist
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<WirelessBlocklistDeleteResponse>
+     * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
@@ -195,7 +189,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
             method: 'delete',
             path: ['wireless_blocklists/%1$s', $id],
             options: $requestOptions,
-            convert: WirelessBlocklistDeleteResponse::class,
+            convert: null,
         );
     }
 }
