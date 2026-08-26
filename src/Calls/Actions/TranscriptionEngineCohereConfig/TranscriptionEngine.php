@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineCohereConfig;
+namespace Telnyx\Calls\Actions\TranscriptionEngineCohereConfig;
 
 /**
  * Engine identifier for Cohere transcription service.
