@@ -8,11 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\WirelessBlocklists\WirelessBlocklist;
-use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
+use Telnyx\WirelessBlocklists\WirelessWirelessBlocklist;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -111,7 +110,7 @@ final class WirelessBlocklistsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(WirelessBlocklist::class, $item);
+            $this->assertInstanceOf(WirelessWirelessBlocklist::class, $item);
         }
     }
 
@@ -127,6 +126,6 @@ final class WirelessBlocklistsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(WirelessBlocklistDeleteResponse::class, $result);
+        $this->assertNull($result);
     }
 }

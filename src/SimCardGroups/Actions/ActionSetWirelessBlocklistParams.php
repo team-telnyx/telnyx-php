@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * This action will asynchronously assign a Wireless Blocklist to all the SIMs in the SIM card group.
+ * This action asynchronously assigns a Wireless Blocklist to all SIMs in the SIM Card Group. The request returns `404` when the SIM Card Group does not exist and `422` when the Wireless Blocklist does not exist.
  *
  * @see Telnyx\Services\SimCardGroups\ActionsService::setWirelessBlocklist()
  *

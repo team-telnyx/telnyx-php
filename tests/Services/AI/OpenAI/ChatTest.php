@@ -72,6 +72,7 @@ final class ChatTest extends TestCase
             model: 'model',
             n: 0,
             presencePenalty: 0,
+            reasoningEffort: 'none',
             responseFormat: ['type' => 'text'],
             seed: 0,
             serviceTier: 'service_tier',

@@ -28,4 +28,6 @@ enum TranscriptionEngine: string
     case HUMAIN = 'Humain';
 
     case RESON8 = 'Reson8';
+
+    case COHERE = 'Cohere';
 }

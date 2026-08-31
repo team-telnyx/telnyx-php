@@ -35,7 +35,7 @@ final class WirelessBlocklistValuesService implements WirelessBlocklistValuesCon
     /**
      * @api
      *
-     * Retrieve all wireless blocklist values for a given blocklist type.
+     * Retrieve all wireless blocklist values for a given blocklist type. The request returns `422` when `type` is missing or invalid.
      *
      * @param Type|value-of<Type> $type The Wireless Blocklist type for which to list possible values (e.g., `country`, `mcc`, `plmn`).
      * @param RequestOpts|null $requestOptions

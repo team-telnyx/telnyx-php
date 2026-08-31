@@ -119,7 +119,7 @@ final class ActionGatherDtmfAudioParams implements BaseModel
     public ?bool $stopPlaybackOnDtmf;
 
     /**
-     * Digit that terminates gathering.
+     * Digit that terminates gathering. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      */
     #[Optional('terminating_digit')]
     public ?string $terminatingDigit;
@@ -346,7 +346,7 @@ final class ActionGatherDtmfAudioParams implements BaseModel
     }
 
     /**
-     * Digit that terminates gathering.
+     * Digit that terminates gathering. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      */
     public function withTerminatingDigit(string $terminatingDigit): self
     {

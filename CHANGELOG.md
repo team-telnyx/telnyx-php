@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.101.0](https://github.com/team-telnyx/telnyx-php/compare/v7.100.0...v7.101.0) (2026-08-31)
+
+
+### Features
+
+* promote from staging 9e667d7 ([1456e40](https://github.com/team-telnyx/telnyx-php/commit/1456e40d4007991aae281445012bf4080f9f294d))
+
+
+### Bug Fixes
+
+* wait for authoritative release checks ([#379](https://github.com/team-telnyx/telnyx-php/issues/379)) ([159b4f6](https://github.com/team-telnyx/telnyx-php/commit/159b4f6c4a9e9057e406142dfdf3b617f6c2fb0a))
+
 ## [7.100.0](https://github.com/team-telnyx/telnyx-php/compare/v7.99.0...v7.100.0) (2026-08-21)
 
 

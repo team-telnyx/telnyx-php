@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * A JSON object representation of the action params.
  *
- * @phpstan-type SettingsShape = array{privateWirelessGatewayID?: string|null}
+ * @phpstan-type SettingsShape = array{
+ *   privateWirelessGatewayID?: string|null, wirelessBlocklistID?: string|null
+ * }
  */
 final class Settings implements BaseModel
 {
@@ -24,6 +26,12 @@ final class Settings implements BaseModel
     #[Optional('private_wireless_gateway_id')]
     public ?string $privateWirelessGatewayID;
 
+    /**
+     * The identification of the related Wireless Blocklist resource.
+     */
+    #[Optional('wireless_blocklist_id')]
+    public ?string $wirelessBlocklistID;
+
     public function __construct()
     {
         $this->initialize();
@@ -34,11 +42,14 @@ final class Settings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $privateWirelessGatewayID = null): self
-    {
+    public static function with(
+        ?string $privateWirelessGatewayID = null,
+        ?string $wirelessBlocklistID = null
+    ): self {
         $self = new self;
 
         null !== $privateWirelessGatewayID && $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
+        null !== $wirelessBlocklistID && $self['wirelessBlocklistID'] = $wirelessBlocklistID;
 
         return $self;
     }
@@ -51,6 +62,17 @@ final class Settings implements BaseModel
     ): self {
         $self = clone $this;
         $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
+
+        return $self;
+    }
+
+    /**
+     * The identification of the related Wireless Blocklist resource.
+     */
+    public function withWirelessBlocklistID(string $wirelessBlocklistID): self
+    {
+        $self = clone $this;
+        $self['wirelessBlocklistID'] = $wirelessBlocklistID;
 
         return $self;
     }

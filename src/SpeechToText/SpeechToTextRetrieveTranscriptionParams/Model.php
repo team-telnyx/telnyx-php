@@ -46,4 +46,6 @@ enum Model: string
     case HUMAIN_REALTIME = 'humain/realtime';
 
     case RESON8_TURNS = 'reson8/turns';
+
+    case COHERE_AR_STT = 'cohere/ar-stt';
 }

@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type PlmnShape = array{code: string, name: string}
+ * @phpstan-type PlmnShape = array{plmn: string}
  */
 final class Plmn implements BaseModel
 {
@@ -20,26 +20,20 @@ final class Plmn implements BaseModel
      * Public land mobile network code (MCC + MNC).
      */
     #[Required]
-    public string $code;
-
-    /**
-     * The name of the network.
-     */
-    #[Required]
-    public string $name;
+    public string $plmn;
 
     /**
      * `new Plmn()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Plmn::with(code: ..., name: ...)
+     * Plmn::with(plmn: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Plmn)->withCode(...)->withName(...)
+     * (new Plmn)->withPlmn(...)
      * ```
      */
     public function __construct()
@@ -52,12 +46,11 @@ final class Plmn implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $code, string $name): self
+    public static function with(string $plmn): self
     {
         $self = new self;
 
-        $self['code'] = $code;
-        $self['name'] = $name;
+        $self['plmn'] = $plmn;
 
         return $self;
     }
@@ -65,21 +58,10 @@ final class Plmn implements BaseModel
     /**
      * Public land mobile network code (MCC + MNC).
      */
-    public function withCode(string $code): self
+    public function withPlmn(string $plmn): self
     {
         $self = clone $this;
-        $self['code'] = $code;
-
-        return $self;
-    }
-
-    /**
-     * The name of the network.
-     */
-    public function withName(string $name): self
-    {
-        $self = clone $this;
-        $self['name'] = $name;
+        $self['plmn'] = $plmn;
 
         return $self;
     }

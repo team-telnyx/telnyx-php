@@ -8,14 +8,13 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\WirelessBlocklists\WirelessBlocklist;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams;
-use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistListParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
+use Telnyx\WirelessBlocklists\WirelessWirelessBlocklist;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -75,7 +74,7 @@ interface WirelessBlocklistsRawContract
      * @param array<string,mixed>|WirelessBlocklistListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<WirelessBlocklist>>
+     * @return BaseResponse<DefaultFlatPagination<WirelessWirelessBlocklist>>
      *
      * @throws APIException
      */
@@ -90,7 +89,7 @@ interface WirelessBlocklistsRawContract
      * @param string $id identifies the wireless blocklist
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<WirelessBlocklistDeleteResponse>
+     * @return BaseResponse<mixed>
      *
      * @throws APIException
      */

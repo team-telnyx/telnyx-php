@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type WirelessBlocklistShape from \Telnyx\WirelessBlocklists\WirelessBlocklist
+ * @phpstan-import-type WirelessWirelessBlocklistShape from \Telnyx\WirelessBlocklists\WirelessWirelessBlocklist
  *
  * @phpstan-type WirelessBlocklistNewResponseShape = array{
- *   data?: null|WirelessBlocklist|WirelessBlocklistShape
+ *   data?: null|WirelessWirelessBlocklist|WirelessWirelessBlocklistShape
  * }
  */
 final class WirelessBlocklistNewResponse implements BaseModel
@@ -21,7 +21,7 @@ final class WirelessBlocklistNewResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?WirelessBlocklist $data;
+    public ?WirelessWirelessBlocklist $data;
 
     public function __construct()
     {
@@ -33,10 +33,11 @@ final class WirelessBlocklistNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WirelessBlocklist|WirelessBlocklistShape|null $data
+     * @param WirelessWirelessBlocklist|WirelessWirelessBlocklistShape|null $data
      */
-    public static function with(WirelessBlocklist|array|null $data = null): self
-    {
+    public static function with(
+        WirelessWirelessBlocklist|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -45,9 +46,9 @@ final class WirelessBlocklistNewResponse implements BaseModel
     }
 
     /**
-     * @param WirelessBlocklist|WirelessBlocklistShape $data
+     * @param WirelessWirelessBlocklist|WirelessWirelessBlocklistShape $data
      */
-    public function withData(WirelessBlocklist|array $data): self
+    public function withData(WirelessWirelessBlocklist|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

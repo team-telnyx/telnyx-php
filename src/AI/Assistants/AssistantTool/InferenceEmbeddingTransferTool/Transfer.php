@@ -7,6 +7,7 @@ namespace Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\CustomHeader;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Targets;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\VoicemailDetection;
+use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\WarmTransferAcceptance;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -17,6 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type TargetsShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Targets
  * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\CustomHeader
  * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\VoicemailDetection
+ * @phpstan-import-type WarmTransferAcceptanceShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\WarmTransferAcceptance
  *
  * @phpstan-type TransferShape = array{
  *   from: string,
@@ -25,6 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   description?: string|null,
  *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
  *   warmMessageDelayMs?: int|null,
+ *   warmTransferAcceptance?: null|WarmTransferAcceptance|WarmTransferAcceptanceShape,
  *   warmTransferInstructions?: string|null,
  * }
  */
@@ -74,6 +77,12 @@ final class Transfer implements BaseModel
     public ?int $warmMessageDelayMs;
 
     /**
+     * Requires the transfer destination to accept the call before the caller is bridged. When enabled, the assistant speaks privately with the destination after they answer — delivering the warm transfer message and asking whether they take the call — while the caller keeps hearing ringback. The assistant then finalizes the transfer with the built-in `complete_transfer` tool: an accept bridges the calls, a decline hangs up the destination and returns the assistant to the caller with the reason the destination gave. Requires either `warm_transfer_instructions` or a `message` on every target, otherwise the assistant fails to save. Only available for calls started with `ai_assistant_start`; single-caller conversations only (a conference or additional invited participants fall back to a regular warm transfer).
+     */
+    #[Optional('warm_transfer_acceptance')]
+    public ?WarmTransferAcceptance $warmTransferAcceptance;
+
+    /**
      * Natural language instructions for your agent for how to provide context for the transfer recipient.
      */
     #[Optional('warm_transfer_instructions')]
@@ -106,6 +115,7 @@ final class Transfer implements BaseModel
      * @param TargetsShape $targets
      * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
      * @param VoicemailDetection|VoicemailDetectionShape|null $voicemailDetection
+     * @param WarmTransferAcceptance|WarmTransferAcceptanceShape|null $warmTransferAcceptance
      */
     public static function with(
         string $from,
@@ -114,6 +124,7 @@ final class Transfer implements BaseModel
         ?string $description = null,
         VoicemailDetection|array|null $voicemailDetection = null,
         ?int $warmMessageDelayMs = null,
+        WarmTransferAcceptance|array|null $warmTransferAcceptance = null,
         ?string $warmTransferInstructions = null,
     ): self {
         $self = new self;
@@ -125,6 +136,7 @@ final class Transfer implements BaseModel
         null !== $description && $self['description'] = $description;
         null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
         null !== $warmMessageDelayMs && $self['warmMessageDelayMs'] = $warmMessageDelayMs;
+        null !== $warmTransferAcceptance && $self['warmTransferAcceptance'] = $warmTransferAcceptance;
         null !== $warmTransferInstructions && $self['warmTransferInstructions'] = $warmTransferInstructions;
 
         return $self;
@@ -199,6 +211,20 @@ final class Transfer implements BaseModel
     {
         $self = clone $this;
         $self['warmMessageDelayMs'] = $warmMessageDelayMs;
+
+        return $self;
+    }
+
+    /**
+     * Requires the transfer destination to accept the call before the caller is bridged. When enabled, the assistant speaks privately with the destination after they answer — delivering the warm transfer message and asking whether they take the call — while the caller keeps hearing ringback. The assistant then finalizes the transfer with the built-in `complete_transfer` tool: an accept bridges the calls, a decline hangs up the destination and returns the assistant to the caller with the reason the destination gave. Requires either `warm_transfer_instructions` or a `message` on every target, otherwise the assistant fails to save. Only available for calls started with `ai_assistant_start`; single-caller conversations only (a conference or additional invited participants fall back to a regular warm transfer).
+     *
+     * @param WarmTransferAcceptance|WarmTransferAcceptanceShape $warmTransferAcceptance
+     */
+    public function withWarmTransferAcceptance(
+        WarmTransferAcceptance|array $warmTransferAcceptance
+    ): self {
+        $self = clone $this;
+        $self['warmTransferAcceptance'] = $warmTransferAcceptance;
 
         return $self;
     }

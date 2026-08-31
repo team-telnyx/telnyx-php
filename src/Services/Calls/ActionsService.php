@@ -107,6 +107,7 @@ use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAssemblyaiConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineCohereConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineHumainConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineParakeetConfig;
@@ -511,7 +512,7 @@ final class ActionsService implements ActionsContract
      * @param int $interDigitTimeoutMillis the number of milliseconds to wait for input between digits
      * @param int $maximumDigits The maximum number of digits to fetch. This parameter has a maximum value of 128.
      * @param int $minimumDigits The minimum number of digits to fetch. This parameter has a minimum value of 1.
-     * @param string $terminatingDigit the digit used to terminate input if fewer than `maximum_digits` digits have been gathered
+     * @param string $terminatingDigit The digit used to terminate input if fewer than `maximum_digits` digits have been gathered. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      * @param int $timeoutMillis the number of milliseconds to wait to complete the request
      * @param string $validDigits a list of all digits accepted as valid
      * @param RequestOpts|null $requestOptions
@@ -667,7 +668,7 @@ final class ActionsService implements ActionsContract
      * @param int $maximumTries the maximum number of times the file should be played if there is no input from the user on the call
      * @param string $mediaName The media_name of a file to be played back at the beginning of each prompt. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      * @param int $minimumDigits The minimum number of digits to fetch. This parameter has a minimum value of 1.
-     * @param string $terminatingDigit the digit used to terminate input if fewer than `maximum_digits` digits have been gathered
+     * @param string $terminatingDigit The digit used to terminate input if fewer than `maximum_digits` digits have been gathered. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      * @param int $timeoutMillis the number of milliseconds to wait for a DTMF response after file playback ends before a replaying the sound file
      * @param string $validDigits a list of all digits accepted as valid
      * @param RequestOpts|null $requestOptions
@@ -756,7 +757,7 @@ final class ActionsService implements ActionsContract
      * @param int $minimumDigits The minimum number of digits to fetch. This parameter has a minimum value of 1.
      * @param PayloadType|value-of<PayloadType> $payloadType The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
      * @param ServiceLevel|value-of<ServiceLevel> $serviceLevel This parameter impacts speech quality, language options and payload types. When using `basic`, only the `en-US` language and payload type `text` are allowed.
-     * @param string $terminatingDigit the digit used to terminate input if fewer than `maximum_digits` digits have been gathered
+     * @param string $terminatingDigit The digit used to terminate input if fewer than `maximum_digits` digits have been gathered. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      * @param int $timeoutMillis the number of milliseconds to wait for a DTMF response after speak ends before a replaying the sound file
      * @param string $validDigits a list of all digits accepted as valid
      * @param VoiceSettingsShape1 $voiceSettings The settings associated with the voice selected
@@ -1351,7 +1352,7 @@ final class ActionsService implements ActionsContract
      * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings Settings for handling user interruptions during assistant speech
      * @param list<MessageHistoryShape1> $messageHistory A list of messages to seed the conversation history before the assistant starts. Follows the same message format as the `ai_assistant_add_messages` command.
      * @param list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape> $participants a list of participants to add to the conversation when it starts
-     * @param bool $sendMessageHistoryUpdates when `true`, a webhook is sent each time the conversation message history is updated
+     * @param bool $sendMessageHistoryUpdates When `true`, a `call.ai_gather.message_history_updated` webhook carrying the full message history is sent each time the conversation message history is updated. The assistant's own `telephony_settings.send_message_history_updates` overrides this value when it is set.
      * @param TranscriptionConfig|TranscriptionConfigShape $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      * @param RequestOpts|null $requestOptions
      *
@@ -1884,7 +1885,7 @@ final class ActionsService implements ActionsContract
         ?string $clientState = null,
         ?string $commandID = null,
         \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine|string $transcriptionEngine = 'Google',
-        TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineParakeetConfig|TranscriptionEngineHumainConfig|TranscriptionEngineReson8Config|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config|null $transcriptionEngineConfig = null,
+        TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineParakeetConfig|TranscriptionEngineHumainConfig|TranscriptionEngineReson8Config|TranscriptionEngineCohereConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config|null $transcriptionEngineConfig = null,
         string $transcriptionTracks = 'inbound',
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartTranscriptionResponse {

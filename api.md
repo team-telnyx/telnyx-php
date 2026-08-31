@@ -280,7 +280,6 @@ Methods:
 - <code title="get /ai/collections">$client->ai->collections-><a href="./src/Services/AI/CollectionsService.php">list</a>(...$params)</code>
 - <code title="delete /ai/collections/{uuid}">$client->ai->collections-><a href="./src/Services/AI/CollectionsService.php">delete</a>(...$params)</code>
 - <code title="get /ai/collections/{uuid}">$client->ai->collections-><a href="./src/Services/AI/CollectionsService.php">retrieveByID</a>(...$params)</code>
-- <code title="get /ai/collections/{slug}/documents">$client->ai->collections-><a href="./src/Services/AI/CollectionsService.php">retrieveDocuments</a>(...$params)</code>
 
 ### Settings
 
@@ -522,6 +521,14 @@ Methods:
 Methods:
 
 - <code title="post /ai/anthropic/v1/messages">$client->ai->anthropic->v1-><a href="./src/Services/AI/Anthropic/V1Service.php">messages</a>(...$params)</code>
+
+## Knowledge
+
+### Collections
+
+Methods:
+
+- <code title="get /ai/knowledge/collections/{slug}/documents">$client->ai->knowledge->collections-><a href="./src/Services/AI/Knowledge/CollectionsService.php">retrieveDocuments</a>(...$params)</code>
 
 # AuditEvents
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Chat;
 
 use Telnyx\AI\Chat\ChatCompletionRequest\Message;
+use Telnyx\AI\Chat\ChatCompletionRequest\ReasoningEffort;
 use Telnyx\AI\Chat\ChatCompletionRequest\ResponseFormat;
 use Telnyx\AI\Chat\ChatCompletionRequest\Stop;
 use Telnyx\AI\Chat\ChatCompletionRequest\Tool;
@@ -39,6 +40,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   model?: string|null,
  *   n?: float|null,
  *   presencePenalty?: float|null,
+ *   reasoningEffort?: null|ReasoningEffort|value-of<ReasoningEffort>,
  *   responseFormat?: null|ResponseFormat|ResponseFormatShape,
  *   seed?: int|null,
  *   serviceTier?: string|null,
@@ -160,6 +162,14 @@ final class ChatCompletionRequest implements BaseModel
     public ?float $presencePenalty;
 
     /**
+     * Controls the reasoning effort for models that support it. When set, the model spends more or less compute on internal reasoning before generating its response. Supported values: none, minimal, low, medium, high, xhigh, max. Not all models support all values; unsupported values are rejected with a 400 error. When omitted, reasoning models use their default effort level.
+     *
+     * @var value-of<ReasoningEffort>|null $reasoningEffort
+     */
+    #[Optional('reasoning_effort', enum: ReasoningEffort::class)]
+    public ?string $reasoningEffort;
+
+    /**
      * Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
      */
     #[Optional('response_format')]
@@ -254,6 +264,7 @@ final class ChatCompletionRequest implements BaseModel
      * @param list<Message|MessageShape> $messages
      * @param list<string>|null $guidedChoice
      * @param array<string,mixed>|null $guidedJson
+     * @param ReasoningEffort|value-of<ReasoningEffort>|null $reasoningEffort
      * @param ResponseFormat|ResponseFormatShape|null $responseFormat
      * @param StopShape|null $stop
      * @param ToolChoice|value-of<ToolChoice>|null $toolChoice
@@ -276,6 +287,7 @@ final class ChatCompletionRequest implements BaseModel
         ?string $model = null,
         ?float $n = null,
         ?float $presencePenalty = null,
+        ReasoningEffort|string|null $reasoningEffort = null,
         ResponseFormat|array|null $responseFormat = null,
         ?int $seed = null,
         ?string $serviceTier = null,
@@ -307,6 +319,7 @@ final class ChatCompletionRequest implements BaseModel
         null !== $model && $self['model'] = $model;
         null !== $n && $self['n'] = $n;
         null !== $presencePenalty && $self['presencePenalty'] = $presencePenalty;
+        null !== $reasoningEffort && $self['reasoningEffort'] = $reasoningEffort;
         null !== $responseFormat && $self['responseFormat'] = $responseFormat;
         null !== $seed && $self['seed'] = $seed;
         null !== $serviceTier && $self['serviceTier'] = $serviceTier;
@@ -500,6 +513,20 @@ final class ChatCompletionRequest implements BaseModel
     {
         $self = clone $this;
         $self['presencePenalty'] = $presencePenalty;
+
+        return $self;
+    }
+
+    /**
+     * Controls the reasoning effort for models that support it. When set, the model spends more or less compute on internal reasoning before generating its response. Supported values: none, minimal, low, medium, high, xhigh, max. Not all models support all values; unsupported values are rejected with a 400 error. When omitted, reasoning models use their default effort level.
+     *
+     * @param ReasoningEffort|value-of<ReasoningEffort> $reasoningEffort
+     */
+    public function withReasoningEffort(
+        ReasoningEffort|string $reasoningEffort
+    ): self {
+        $self = clone $this;
+        $self['reasoningEffort'] = $reasoningEffort;
 
         return $self;
     }

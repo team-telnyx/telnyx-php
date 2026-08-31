@@ -10,12 +10,11 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsContract;
-use Telnyx\WirelessBlocklists\WirelessBlocklist;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
-use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
+use Telnyx\WirelessBlocklists\WirelessWirelessBlocklist;
 
 /**
  * Wireless Blocklists operations.
@@ -118,19 +117,17 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      *
      * @param string $filterName the name of the Wireless Blocklist
      * @param string $filterType when the Private Wireless Gateway was last updated
-     * @param string $filterValues values to filter on (inclusive)
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<WirelessBlocklist>
+     * @return DefaultFlatPagination<WirelessWirelessBlocklist>
      *
      * @throws APIException
      */
     public function list(
         ?string $filterName = null,
         ?string $filterType = null,
-        ?string $filterValues = null,
         int $pageNumber = 1,
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
@@ -139,7 +136,6 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
             [
                 'filterName' => $filterName,
                 'filterType' => $filterType,
-                'filterValues' => $filterValues,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
@@ -154,7 +150,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
     /**
      * @api
      *
-     * Permanently deletes the specified wireless blocklist from your account.
+     * Permanently deletes the specified wireless blocklist from your account. The request returns `422` when the wireless blocklist is assigned to a SIM Card Group.
      *
      * @param string $id identifies the wireless blocklist
      * @param RequestOpts|null $requestOptions
@@ -164,7 +160,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
     public function delete(
         string $id,
         RequestOptions|array|null $requestOptions = null
-    ): WirelessBlocklistDeleteResponse {
+    ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);
 

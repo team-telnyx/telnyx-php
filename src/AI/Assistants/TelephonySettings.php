@@ -23,6 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
  *   noiseSuppressionConfig?: null|NoiseSuppressionConfig|NoiseSuppressionConfigShape,
  *   recordingSettings?: null|RecordingSettings|RecordingSettingsShape,
+ *   sendMessageHistoryUpdates?: bool|null,
  *   supportsUnauthenticatedWebCalls?: bool|null,
  *   timeLimitSecs?: int|null,
  *   userIdleReplySecs?: int|null,
@@ -66,6 +67,12 @@ final class TelephonySettings implements BaseModel
      */
     #[Optional('recording_settings')]
     public ?RecordingSettings $recordingSettings;
+
+    /**
+     * Whether the assistant sends a `call.ai_gather.message_history_updated` webhook with the full message history every time the conversation history changes. Leave unset to inherit the `send_message_history_updates` value from the `ai_assistant_start` or `gather_using_ai` command that started the conversation. Setting it here is authoritative: `true` turns the webhooks on even when the start command did not request them, and `false` turns them off even when it did. Messages exchanged during a private warm transfer acceptance phase are never included.
+     */
+    #[Optional('send_message_history_updates')]
+    public ?bool $sendMessageHistoryUpdates;
 
     /**
      * When enabled, allows users to interact with your AI assistant directly from your website without requiring authentication. This is required for FE widgets that work with assistants that have telephony enabled.
@@ -118,6 +125,7 @@ final class TelephonySettings implements BaseModel
         NoiseSuppression|string|null $noiseSuppression = null,
         NoiseSuppressionConfig|array|null $noiseSuppressionConfig = null,
         RecordingSettings|array|null $recordingSettings = null,
+        ?bool $sendMessageHistoryUpdates = null,
         ?bool $supportsUnauthenticatedWebCalls = null,
         ?int $timeLimitSecs = null,
         ?int $userIdleReplySecs = null,
@@ -131,6 +139,7 @@ final class TelephonySettings implements BaseModel
         null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
         null !== $noiseSuppressionConfig && $self['noiseSuppressionConfig'] = $noiseSuppressionConfig;
         null !== $recordingSettings && $self['recordingSettings'] = $recordingSettings;
+        null !== $sendMessageHistoryUpdates && $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
         null !== $supportsUnauthenticatedWebCalls && $self['supportsUnauthenticatedWebCalls'] = $supportsUnauthenticatedWebCalls;
         null !== $timeLimitSecs && $self['timeLimitSecs'] = $timeLimitSecs;
         null !== $userIdleReplySecs && $self['userIdleReplySecs'] = $userIdleReplySecs;
@@ -200,6 +209,18 @@ final class TelephonySettings implements BaseModel
     ): self {
         $self = clone $this;
         $self['recordingSettings'] = $recordingSettings;
+
+        return $self;
+    }
+
+    /**
+     * Whether the assistant sends a `call.ai_gather.message_history_updated` webhook with the full message history every time the conversation history changes. Leave unset to inherit the `send_message_history_updates` value from the `ai_assistant_start` or `gather_using_ai` command that started the conversation. Setting it here is authoritative: `true` turns the webhooks on even when the start command did not request them, and `false` turns them off even when it did. Messages exchanged during a private warm transfer acceptance phase are never included.
+     */
+    public function withSendMessageHistoryUpdates(
+        bool $sendMessageHistoryUpdates
+    ): self {
+        $self = clone $this;
+        $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
 
         return $self;
     }

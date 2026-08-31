@@ -65,9 +65,9 @@ final class JobsService implements JobsContract
     /**
      * @api
      *
-     * Returns background jobs that operate on phone numbers. Results can be filtered by job type and sorted by creation time, and include pagination metadata.
+     * Returns background jobs that operate on phone numbers. Filter by job type, target phone numbers, or job status, and sort by creation time. Multiple phone-number or status values use OR semantics within that filter; different filter categories use AND semantics. Results include pagination metadata.
      *
-     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[phone_number], filter[phone_number][], filter[status][]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      * @param RequestOpts|null $requestOptions
      *

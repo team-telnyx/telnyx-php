@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Collections;
+namespace Telnyx\AI\Knowledge\Collections\CollectionGetDocumentsResponse;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CollectionGetDocumentsResponseShape = array{
+ * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   chunkIndex?: int|null,
  *   chunkTotal?: int|null,
@@ -25,9 +25,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   userID?: string|null,
  * }
  */
-final class CollectionGetDocumentsResponse implements BaseModel
+final class Data implements BaseModel
 {
-    /** @use SdkModel<CollectionGetDocumentsResponseShape> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Optional]

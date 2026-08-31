@@ -93,7 +93,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     public ?array $participants;
 
     /**
-     * When `true`, a webhook is sent each time the conversation message history is updated.
+     * When `true`, a `call.ai_gather.message_history_updated` webhook carrying the full message history is sent each time the conversation message history is updated. The assistant's own `telephony_settings.send_message_history_updates` overrides this value when it is set.
      */
     #[Optional('send_message_history_updates')]
     public ?bool $sendMessageHistoryUpdates;
@@ -233,7 +233,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     }
 
     /**
-     * When `true`, a webhook is sent each time the conversation message history is updated.
+     * When `true`, a `call.ai_gather.message_history_updated` webhook carrying the full message history is sent each time the conversation message history is updated. The assistant's own `telephony_settings.send_message_history_updates` overrides this value when it is set.
      */
     public function withSendMessageHistoryUpdates(
         bool $sendMessageHistoryUpdates

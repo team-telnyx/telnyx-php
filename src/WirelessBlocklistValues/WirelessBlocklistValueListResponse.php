@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WirelessBlocklistValues;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data;
@@ -13,24 +12,32 @@ use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data;
 /**
  * @phpstan-import-type DataVariants from \Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data
  * @phpstan-import-type DataShape from \Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data
- * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
  *
- * @phpstan-type WirelessBlocklistValueListResponseShape = array{
- *   data?: DataShape|null, meta?: null|PaginationMeta|PaginationMetaShape
- * }
+ * @phpstan-type WirelessBlocklistValueListResponseShape = array{data: DataShape}
  */
 final class WirelessBlocklistValueListResponse implements BaseModel
 {
     /** @use SdkModel<WirelessBlocklistValueListResponseShape> */
     use SdkModel;
 
-    /** @var DataVariants|null $data */
-    #[Optional(union: Data::class)]
-    public ?array $data;
+    /** @var DataVariants $data */
+    #[Required(union: Data::class)]
+    public array $data;
 
-    #[Optional]
-    public ?PaginationMeta $meta;
-
+    /**
+     * `new WirelessBlocklistValueListResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * WirelessBlocklistValueListResponse::with(data: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new WirelessBlocklistValueListResponse)->withData(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -41,17 +48,13 @@ final class WirelessBlocklistValueListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DataShape|null $data
-     * @param PaginationMeta|PaginationMetaShape|null $meta
+     * @param DataShape $data
      */
-    public static function with(
-        ?array $data = null,
-        PaginationMeta|array|null $meta = null
-    ): self {
+    public static function with(array $data): self
+    {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $meta && $self['meta'] = $meta;
+        $self['data'] = $data;
 
         return $self;
     }
@@ -63,17 +66,6 @@ final class WirelessBlocklistValueListResponse implements BaseModel
     {
         $self = clone $this;
         $self['data'] = $data;
-
-        return $self;
-    }
-
-    /**
-     * @param PaginationMeta|PaginationMetaShape $meta
-     */
-    public function withMeta(PaginationMeta|array $meta): self
-    {
-        $self = clone $this;
-        $self['meta'] = $meta;
 
         return $self;
     }

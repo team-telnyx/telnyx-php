@@ -36,6 +36,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   messages?: list<MessageShape>|null,
  *   method?: null|Method|value-of<Method>,
  *   pathParameters?: null|PathParameters|PathParametersShape,
+ *   presetBodyFields?: array<string,mixed>|null,
+ *   presetQueryParams?: array<string,mixed>|null,
  *   queryParameters?: null|QueryParameters|QueryParametersShape,
  *   storeFieldsAsVariables?: list<StoreFieldsAsVariable|StoreFieldsAsVariableShape>|null,
  *   timeoutMs?: int|null,
@@ -113,6 +115,22 @@ final class Webhook implements BaseModel
     public ?PathParameters $pathParameters;
 
     /**
+     * Body fields supplied by the assistant configuration rather than by the model. They are never advertised in the tool definition, so the LLM can neither see nor set them, and they take precedence over a `body_parameters` value of the same name. Values support mustache templating, so they can hold dynamic variables (`{{customer_id}}`) and integration secrets (`{{#integration_secret}}my-secret{{/integration_secret}}`). Not sent on `GET` requests, which carry no body.
+     *
+     * @var array<string,mixed>|null $presetBodyFields
+     */
+    #[Optional('preset_body_fields', map: 'mixed')]
+    public ?array $presetBodyFields;
+
+    /**
+     * Query string parameters supplied by the assistant configuration rather than by the model. They are never advertised in the tool definition, so the LLM can neither see nor set them, and they take precedence over a `query_parameters` value of the same name. Values support mustache templating, so they can hold dynamic variables (`{{telnyx_end_user_target}}`) and integration secrets (`{{#integration_secret}}my-secret{{/integration_secret}}`). Unlike values templated directly into the `url`, these are percent-encoded, so a value such as `+15551234567` survives the round trip.
+     *
+     * @var array<string,mixed>|null $presetQueryParams
+     */
+    #[Optional('preset_query_params', map: 'mixed')]
+    public ?array $presetQueryParams;
+
+    /**
      * The query parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the query of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
      */
     #[Optional('query_parameters')]
@@ -161,6 +179,8 @@ final class Webhook implements BaseModel
      * @param list<MessageShape>|null $messages
      * @param Method|value-of<Method>|null $method
      * @param PathParameters|PathParametersShape|null $pathParameters
+     * @param array<string,mixed>|null $presetBodyFields
+     * @param array<string,mixed>|null $presetQueryParams
      * @param QueryParameters|QueryParametersShape|null $queryParameters
      * @param list<StoreFieldsAsVariable|StoreFieldsAsVariableShape>|null $storeFieldsAsVariables
      */
@@ -175,6 +195,8 @@ final class Webhook implements BaseModel
         ?array $messages = null,
         Method|string|null $method = null,
         PathParameters|array|null $pathParameters = null,
+        ?array $presetBodyFields = null,
+        ?array $presetQueryParams = null,
         QueryParameters|array|null $queryParameters = null,
         ?array $storeFieldsAsVariables = null,
         ?int $timeoutMs = null,
@@ -192,6 +214,8 @@ final class Webhook implements BaseModel
         null !== $messages && $self['messages'] = $messages;
         null !== $method && $self['method'] = $method;
         null !== $pathParameters && $self['pathParameters'] = $pathParameters;
+        null !== $presetBodyFields && $self['presetBodyFields'] = $presetBodyFields;
+        null !== $presetQueryParams && $self['presetQueryParams'] = $presetQueryParams;
         null !== $queryParameters && $self['queryParameters'] = $queryParameters;
         null !== $storeFieldsAsVariables && $self['storeFieldsAsVariables'] = $storeFieldsAsVariables;
         null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
@@ -317,6 +341,32 @@ final class Webhook implements BaseModel
     ): self {
         $self = clone $this;
         $self['pathParameters'] = $pathParameters;
+
+        return $self;
+    }
+
+    /**
+     * Body fields supplied by the assistant configuration rather than by the model. They are never advertised in the tool definition, so the LLM can neither see nor set them, and they take precedence over a `body_parameters` value of the same name. Values support mustache templating, so they can hold dynamic variables (`{{customer_id}}`) and integration secrets (`{{#integration_secret}}my-secret{{/integration_secret}}`). Not sent on `GET` requests, which carry no body.
+     *
+     * @param array<string,mixed> $presetBodyFields
+     */
+    public function withPresetBodyFields(array $presetBodyFields): self
+    {
+        $self = clone $this;
+        $self['presetBodyFields'] = $presetBodyFields;
+
+        return $self;
+    }
+
+    /**
+     * Query string parameters supplied by the assistant configuration rather than by the model. They are never advertised in the tool definition, so the LLM can neither see nor set them, and they take precedence over a `query_parameters` value of the same name. Values support mustache templating, so they can hold dynamic variables (`{{telnyx_end_user_target}}`) and integration secrets (`{{#integration_secret}}my-secret{{/integration_secret}}`). Unlike values templated directly into the `url`, these are percent-encoded, so a value such as `+15551234567` survives the round trip.
+     *
+     * @param array<string,mixed> $presetQueryParams
+     */
+    public function withPresetQueryParams(array $presetQueryParams): self
+    {
+        $self = clone $this;
+        $self['presetQueryParams'] = $presetQueryParams;
 
         return $self;
     }
