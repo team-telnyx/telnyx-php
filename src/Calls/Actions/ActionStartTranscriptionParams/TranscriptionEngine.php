@@ -31,6 +31,8 @@ enum TranscriptionEngine: string
 
     case RESON8 = 'Reson8';
 
+    case COHERE = 'Cohere';
+
     case A = 'A';
 
     case B = 'B';

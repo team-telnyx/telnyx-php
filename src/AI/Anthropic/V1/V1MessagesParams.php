@@ -66,7 +66,7 @@ final class V1MessagesParams implements BaseModel
     public array $messages;
 
     /**
-     * The model to use for generating the response, for example `zai-org/GLM-5.2` or another model available from the Telnyx models endpoint.
+     * The model to use for generating the response, for example `zai-org/GLM-5.3-Flash` or another model available from the Telnyx models endpoint.
      */
     #[Required]
     public string $model;
@@ -297,7 +297,7 @@ final class V1MessagesParams implements BaseModel
     }
 
     /**
-     * The model to use for generating the response, for example `zai-org/GLM-5.2` or another model available from the Telnyx models endpoint.
+     * The model to use for generating the response, for example `zai-org/GLM-5.3-Flash` or another model available from the Telnyx models endpoint.
      */
     public function withModel(string $model): self
     {

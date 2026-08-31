@@ -7,9 +7,7 @@ namespace Telnyx\ServiceContracts\AI;
 use Telnyx\AI\Collections\Collection;
 use Telnyx\AI\Collections\CollectionCreateParams;
 use Telnyx\AI\Collections\CollectionEnvelope;
-use Telnyx\AI\Collections\CollectionGetDocumentsResponse;
 use Telnyx\AI\Collections\CollectionListParams;
-use Telnyx\AI\Collections\CollectionRetrieveDocumentsParams;
 use Telnyx\AI\Collections\CollectionUpdateParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -111,22 +109,5 @@ interface CollectionsRawContract
     public function retrieveByID(
         string $uuid,
         RequestOptions|array|null $requestOptions = null
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
-     * @param string $slug the collection's slug (unique within your organization)
-     * @param array<string,mixed>|CollectionRetrieveDocumentsParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<DefaultFlatPagination<CollectionGetDocumentsResponse>>
-     *
-     * @throws APIException
-     */
-    public function retrieveDocuments(
-        string $slug,
-        array|CollectionRetrieveDocumentsParams $params,
-        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

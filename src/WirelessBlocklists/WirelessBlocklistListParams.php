@@ -17,7 +17,6 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type WirelessBlocklistListParamsShape = array{
  *   filterName?: string|null,
  *   filterType?: string|null,
- *   filterValues?: string|null,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  * }
@@ -39,12 +38,6 @@ final class WirelessBlocklistListParams implements BaseModel
      */
     #[Optional]
     public ?string $filterType;
-
-    /**
-     * Values to filter on (inclusive).
-     */
-    #[Optional]
-    public ?string $filterValues;
 
     /**
      * The page number to load.
@@ -71,7 +64,6 @@ final class WirelessBlocklistListParams implements BaseModel
     public static function with(
         ?string $filterName = null,
         ?string $filterType = null,
-        ?string $filterValues = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
@@ -79,7 +71,6 @@ final class WirelessBlocklistListParams implements BaseModel
 
         null !== $filterName && $self['filterName'] = $filterName;
         null !== $filterType && $self['filterType'] = $filterType;
-        null !== $filterValues && $self['filterValues'] = $filterValues;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
 
@@ -104,17 +95,6 @@ final class WirelessBlocklistListParams implements BaseModel
     {
         $self = clone $this;
         $self['filterType'] = $filterType;
-
-        return $self;
-    }
-
-    /**
-     * Values to filter on (inclusive).
-     */
-    public function withFilterValues(string $filterValues): self
-    {
-        $self = clone $this;
-        $self['filterValues'] = $filterValues;
 
         return $self;
     }

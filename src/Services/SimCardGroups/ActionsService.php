@@ -120,7 +120,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * This action will asynchronously remove an existing Wireless Blocklist to all the SIMs in the SIM card group.
+     * This action asynchronously removes the Wireless Blocklist assigned to a SIM Card Group. The request returns `404` when the SIM Card Group does not exist and `422` when no Wireless Blocklist is assigned.
      *
      * @param string $id identifies the SIM group
      * @param RequestOpts|null $requestOptions
@@ -166,7 +166,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * This action will asynchronously assign a Wireless Blocklist to all the SIMs in the SIM card group.
+     * This action asynchronously assigns a Wireless Blocklist to all SIMs in the SIM Card Group. The request returns `404` when the SIM Card Group does not exist and `422` when the Wireless Blocklist does not exist.
      *
      * @param string $id identifies the SIM group
      * @param string $wirelessBlocklistID the identification of the related Wireless Blocklist resource

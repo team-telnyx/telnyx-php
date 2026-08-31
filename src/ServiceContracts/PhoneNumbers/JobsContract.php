@@ -40,7 +40,7 @@ interface JobsContract
     /**
      * @api
      *
-     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[phone_number], filter[phone_number][], filter[status][]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      * @param RequestOpts|null $requestOptions
      *

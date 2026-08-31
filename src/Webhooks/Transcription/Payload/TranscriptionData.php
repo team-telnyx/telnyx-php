@@ -23,9 +23,9 @@ final class TranscriptionData implements BaseModel
     use SdkModel;
 
     /**
-     * Speech recognition confidence level.
+     * Speech recognition confidence level. `cohere/ar-stt` returns `null` here rather than omitting the field.
      */
-    #[Optional]
+    #[Optional(nullable: true)]
     public ?float $confidence;
 
     /**
@@ -77,9 +77,9 @@ final class TranscriptionData implements BaseModel
     }
 
     /**
-     * Speech recognition confidence level.
+     * Speech recognition confidence level. `cohere/ar-stt` returns `null` here rather than omitting the field.
      */
-    public function withConfidence(float $confidence): self
+    public function withConfidence(?float $confidence): self
     {
         $self = clone $this;
         $self['confidence'] = $confidence;

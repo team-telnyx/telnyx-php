@@ -7,7 +7,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Collections\Collection;
 use Telnyx\AI\Collections\CollectionEnvelope;
-use Telnyx\AI\Collections\CollectionGetDocumentsResponse;
 use Telnyx\AI\Collections\Sources\SourceType;
 use Telnyx\Client;
 use Telnyx\Core\Util;
@@ -142,25 +141,5 @@ final class CollectionsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CollectionEnvelope::class, $result);
-    }
-
-    #[Test]
-    public function testRetrieveDocuments(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $page = $this->client->ai->collections->retrieveDocuments(
-            'support-transcripts'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(CollectionGetDocumentsResponse::class, $item);
-        }
     }
 }

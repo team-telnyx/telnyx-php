@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\OpenAI;
 
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Message;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ReasoningEffort;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Core\Exceptions\APIException;
@@ -38,6 +39,7 @@ interface ChatContract
      * @param string $model the language model to chat with
      * @param float $n this will return multiple choices for you instead of a single chat completion
      * @param float $presencePenalty higher values will penalize the model from repeating the same output tokens
+     * @param ReasoningEffort|value-of<ReasoningEffort> $reasoningEffort Controls the reasoning effort for models that support it. When set, the model spends more or less compute on internal reasoning before generating its response. Supported values: none, minimal, low, medium, high, xhigh, max. Not all models support all values; unsupported values are rejected with a 400 error. When omitted, reasoning models use their default effort level.
      * @param ResponseFormat|ResponseFormatShape $responseFormat Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
      * @param int $seed if specified, the system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result
      * @param string $serviceTier The service tier to use for this request. Supported values vary by model; use `GET /v2/ai/openai/models` and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
@@ -72,6 +74,7 @@ interface ChatContract
         string $model = 'meta-llama/Meta-Llama-3.1-8B-Instruct',
         ?float $n = null,
         float $presencePenalty = 0,
+        ReasoningEffort|string|null $reasoningEffort = null,
         ResponseFormat|array|null $responseFormat = null,
         ?int $seed = null,
         ?string $serviceTier = null,

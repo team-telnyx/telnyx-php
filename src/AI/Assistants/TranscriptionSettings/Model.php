@@ -17,6 +17,7 @@ namespace Telnyx\AI\Assistants\TranscriptionSettings;
  * - `nvidia/parakeet-v3` is a multilingual transcription model with automatic language detection.
  * - `humain/realtime` is a streaming model with native Arabic and Arabic/English code-switching support.
  * - `reson8/turns` is a turn-based streaming model covering 10 European languages with automatic language detection.
+ * - `cohere/ar-stt` is a non-streaming Arabic and English transcription model.
  */
 enum Model: string
 {
@@ -39,6 +40,8 @@ enum Model: string
     case HUMAIN_REALTIME = 'humain/realtime';
 
     case RESON8_TURNS = 'reson8/turns';
+
+    case COHERE_AR_STT = 'cohere/ar-stt';
 
     case DISTIL_WHISPER_DISTIL_LARGE_V2 = 'distil-whisper/distil-large-v2';
 

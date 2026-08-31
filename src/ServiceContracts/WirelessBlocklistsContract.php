@@ -7,12 +7,11 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\WirelessBlocklists\WirelessBlocklist;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
-use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
+use Telnyx\WirelessBlocklists\WirelessWirelessBlocklist;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -71,19 +70,17 @@ interface WirelessBlocklistsContract
      *
      * @param string $filterName the name of the Wireless Blocklist
      * @param string $filterType when the Private Wireless Gateway was last updated
-     * @param string $filterValues values to filter on (inclusive)
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<WirelessBlocklist>
+     * @return DefaultFlatPagination<WirelessWirelessBlocklist>
      *
      * @throws APIException
      */
     public function list(
         ?string $filterName = null,
         ?string $filterType = null,
-        ?string $filterValues = null,
         int $pageNumber = 1,
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
@@ -100,5 +97,5 @@ interface WirelessBlocklistsContract
     public function delete(
         string $id,
         RequestOptions|array|null $requestOptions = null
-    ): WirelessBlocklistDeleteResponse;
+    ): mixed;
 }

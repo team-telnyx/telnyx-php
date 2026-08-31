@@ -6,6 +6,7 @@ namespace Telnyx\Services\AI;
 
 use Telnyx\AI\ModelsResponse;
 use Telnyx\AI\OpenAI\OpenAICreateResponseParams;
+use Telnyx\AI\OpenAI\OpenAICreateResponseParams\Reasoning;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
@@ -14,6 +15,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\OpenAIRawContract;
 
 /**
+ * @phpstan-import-type ReasoningShape from \Telnyx\AI\OpenAI\OpenAICreateResponseParams\Reasoning
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class OpenAIRawService implements OpenAIRawContract
@@ -40,6 +42,7 @@ final class OpenAIRawService implements OpenAIRawContract
      *   input?: array<string,mixed>,
      *   instructions?: string,
      *   model?: string,
+     *   reasoning?: Reasoning|ReasoningShape,
      *   serviceTier?: string,
      *   stream?: bool,
      * }|OpenAICreateResponseParams $params

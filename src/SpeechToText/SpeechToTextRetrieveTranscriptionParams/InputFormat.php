@@ -12,4 +12,8 @@ enum InputFormat: string
     case MP3 = 'mp3';
 
     case WAV = 'wav';
+
+    case LINEAR16 = 'linear16';
+
+    case LINEAR32 = 'linear32';
 }

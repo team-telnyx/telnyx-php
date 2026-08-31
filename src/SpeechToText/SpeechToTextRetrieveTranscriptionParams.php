@@ -16,11 +16,11 @@ use Telnyx\SpeechToText\SpeechToTextRetrieveTranscriptionParams\TranscriptionEng
 /**
  * Open a WebSocket connection to stream audio and receive transcriptions in real-time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header.
  *
- * Supported engines: `Azure`, `Deepgram`, `Google`, `Telnyx`, `xAI`, `Speechmatics`, `Soniox`, `Parakeet`, `Humain`, `Reson8`.
+ * Supported engines: `Azure`, `Deepgram`, `Google`, `Telnyx`, `xAI`, `Speechmatics`, `Soniox`, `Parakeet`, `Humain`, `Reson8`, `Cohere`.
  *
  * **Connection flow:**
  * 1. Open WebSocket with query parameters specifying engine, input format, and language.
- * 2. Send binary audio frames (mp3/wav format).
+ * 2. Send binary audio frames (mp3, wav, linear16, or linear32 format, per `input_format`).
  * 3. Receive JSON transcript frames with `transcript`, `is_final`, and `confidence` fields.
  * 4. Close connection when done.
  *
@@ -36,6 +36,7 @@ use Telnyx\SpeechToText\SpeechToTextRetrieveTranscriptionParams\TranscriptionEng
  *   language?: string|null,
  *   model?: null|Model|value-of<Model>,
  *   redact?: string|null,
+ *   sampleRate?: int|null,
  * }
  */
 final class SpeechToTextRetrieveTranscriptionParams implements BaseModel
@@ -85,7 +86,7 @@ final class SpeechToTextRetrieveTranscriptionParams implements BaseModel
     public ?string $keywords;
 
     /**
-     * The language spoken in the audio stream.
+     * The language spoken in the audio stream. For `cohere/ar-stt`, this must be `ar` or `en` — unlike other engines, Cohere does not auto-detect the language, and rejects unsupported values including `auto`; omitting it defaults to `ar`.
      */
     #[Optional]
     public ?string $language;
@@ -103,6 +104,12 @@ final class SpeechToTextRetrieveTranscriptionParams implements BaseModel
      */
     #[Optional]
     public ?string $redact;
+
+    /**
+     * Audio sample rate in Hz. Required when `input_format` is a raw encoding (`linear16`, `linear32`) — those formats carry no header metadata. Ignored for container formats (`mp3`, `wav`), which self-describe their rate.
+     */
+    #[Optional]
+    public ?int $sampleRate;
 
     /**
      * `new SpeechToTextRetrieveTranscriptionParams()` is missing required properties by the API.
@@ -146,6 +153,7 @@ final class SpeechToTextRetrieveTranscriptionParams implements BaseModel
         ?string $language = null,
         Model|string|null $model = null,
         ?string $redact = null,
+        ?int $sampleRate = null,
     ): self {
         $self = new self;
 
@@ -159,6 +167,7 @@ final class SpeechToTextRetrieveTranscriptionParams implements BaseModel
         null !== $language && $self['language'] = $language;
         null !== $model && $self['model'] = $model;
         null !== $redact && $self['redact'] = $redact;
+        null !== $sampleRate && $self['sampleRate'] = $sampleRate;
 
         return $self;
     }
@@ -235,7 +244,7 @@ final class SpeechToTextRetrieveTranscriptionParams implements BaseModel
     }
 
     /**
-     * The language spoken in the audio stream.
+     * The language spoken in the audio stream. For `cohere/ar-stt`, this must be `ar` or `en` — unlike other engines, Cohere does not auto-detect the language, and rejects unsupported values including `auto`; omitting it defaults to `ar`.
      */
     public function withLanguage(string $language): self
     {
@@ -265,6 +274,17 @@ final class SpeechToTextRetrieveTranscriptionParams implements BaseModel
     {
         $self = clone $this;
         $self['redact'] = $redact;
+
+        return $self;
+    }
+
+    /**
+     * Audio sample rate in Hz. Required when `input_format` is a raw encoding (`linear16`, `linear32`) — those formats carry no header metadata. Ignored for container formats (`mp3`, `wav`), which self-describe their rate.
+     */
+    public function withSampleRate(int $sampleRate): self
+    {
+        $self = clone $this;
+        $self['sampleRate'] = $sampleRate;
 
         return $self;
     }
