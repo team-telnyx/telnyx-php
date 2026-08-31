@@ -37,7 +37,7 @@ final class V1Test extends TestCase
         $result = $this->client->ai->anthropic->v1->messages(
             maxTokens: 1024,
             messages: [['role' => 'bar', 'content' => 'bar']],
-            model: 'zai-org/GLM-5.2',
+            model: 'zai-org/GLM-5.3-Flash',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,7 +54,7 @@ final class V1Test extends TestCase
         $result = $this->client->ai->anthropic->v1->messages(
             maxTokens: 1024,
             messages: [['role' => 'bar', 'content' => 'bar']],
-            model: 'zai-org/GLM-5.2',
+            model: 'zai-org/GLM-5.3-Flash',
             apiKeyRef: 'api_key_ref',
             billingGroupID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             fallbackConfig: ['foo' => 'bar'],

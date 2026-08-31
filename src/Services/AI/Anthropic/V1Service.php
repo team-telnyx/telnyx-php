@@ -38,7 +38,7 @@ final class V1Service implements V1Contract
      *
      * @param int $maxTokens the maximum number of tokens to generate in the response
      * @param list<array<string,mixed>> $messages The messages to send to the model, following the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) format.
-     * @param string $model The model to use for generating the response, for example `zai-org/GLM-5.2` or another model available from the Telnyx models endpoint.
+     * @param string $model The model to use for generating the response, for example `zai-org/GLM-5.3-Flash` or another model available from the Telnyx models endpoint.
      * @param string $apiKeyRef If you are using an external inference provider, this field allows you to pass along a reference to your API key. After creating an [integration secret](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) for your API key, pass the secret's `identifier` in this field.
      * @param string $billingGroupID the billing group ID to associate with this request
      * @param array<string,mixed> $fallbackConfig configuration for model fallback behavior when the primary model is unavailable

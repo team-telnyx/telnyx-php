@@ -12,7 +12,7 @@ use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
 
 /**
- * Returns background jobs that operate on phone numbers. Results can be filtered by job type and sorted by creation time, and include pagination metadata.
+ * Returns background jobs that operate on phone numbers. Filter by job type, target phone numbers, or job status, and sort by creation time. Multiple phone-number or status values use OR semantics within that filter; different filter categories use AND semantics. Results include pagination metadata.
  *
  * @see Telnyx\Services\PhoneNumbers\JobsService::list()
  *
@@ -32,7 +32,7 @@ final class JobListParams implements BaseModel
     use SdkParams;
 
     /**
-     * Consolidated filter parameter (deepObject style). Originally: filter[type].
+     * Consolidated filter parameter (deepObject style). Originally: filter[type], filter[phone_number], filter[phone_number][], filter[status][].
      */
     #[Optional]
     public ?Filter $filter;
@@ -81,7 +81,7 @@ final class JobListParams implements BaseModel
     }
 
     /**
-     * Consolidated filter parameter (deepObject style). Originally: filter[type].
+     * Consolidated filter parameter (deepObject style). Originally: filter[type], filter[phone_number], filter[phone_number][], filter[status][].
      *
      * @param Filter|FilterShape $filter
      */
