@@ -63,7 +63,7 @@ final class OutboundVoiceProfile implements BaseModel
     public ?OutboundCallRecording $callRecording;
 
     /**
-     * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
+     * Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
      */
     #[Optional('calling_window')]
     public ?CallingWindow $callingWindow;
@@ -283,7 +283,7 @@ final class OutboundVoiceProfile implements BaseModel
     }
 
     /**
-     * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
+     * Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
      *
      * @param CallingWindow|CallingWindowShape $callingWindow
      */

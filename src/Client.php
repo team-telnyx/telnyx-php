@@ -56,6 +56,7 @@ use Telnyx\Services\EmailUnsubscribeGroupsService;
 use Telnyx\Services\EmailValidationsService;
 use Telnyx\Services\EnterprisesService;
 use Telnyx\Services\ExternalConnectionsService;
+use Telnyx\Services\ExternalRequirementsService;
 use Telnyx\Services\FaxApplicationsService;
 use Telnyx\Services\FaxesService;
 use Telnyx\Services\FqdnConnectionsService;
@@ -1118,6 +1119,11 @@ class Client extends BaseClient
      */
     public MeetingSessionsService $meetingSessions;
 
+    /**
+     * @api
+     */
+    public ExternalRequirementsService $externalRequirements;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1372,6 +1378,7 @@ class Client extends BaseClient
         $this->pricing = new PricingService($this);
         $this->webSearch = new WebSearchService($this);
         $this->meetingSessions = new MeetingSessionsService($this);
+        $this->externalRequirements = new ExternalRequirementsService($this);
     }
 
     /** @return array<string,string> */

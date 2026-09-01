@@ -22,7 +22,7 @@ final class ConnectionRtcpSettings implements BaseModel
     use SdkModel;
 
     /**
-     * BETA - Enable the capture and storage of RTCP messages to create QoS reports on the Telnyx Mission Control Portal.
+     * Enable the capture and storage of RTCP messages to create QoS reports on the Telnyx Mission Control Portal.
      */
     #[Optional('capture_enabled')]
     public ?bool $captureEnabled;
@@ -68,7 +68,7 @@ final class ConnectionRtcpSettings implements BaseModel
     }
 
     /**
-     * BETA - Enable the capture and storage of RTCP messages to create QoS reports on the Telnyx Mission Control Portal.
+     * Enable the capture and storage of RTCP messages to create QoS reports on the Telnyx Mission Control Portal.
      */
     public function withCaptureEnabled(bool $captureEnabled): self
     {
