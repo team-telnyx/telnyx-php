@@ -126,7 +126,7 @@ class GateConfig:
                 "default_branch": "master",
                 "staging_repository": "team-telnyx/telnyx-php-staging",
                 "release_files": {
-                    "CHANGELOG.md", "composer.json", "src/Version.php",
+                    "CHANGELOG.md", "src/Version.php",
                     ".release-please-manifest.json",
                 },
                 "checks": {
