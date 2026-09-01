@@ -157,7 +157,6 @@ use Telnyx\Services\SimCardOrderPreviewService;
 use Telnyx\Services\SimCardOrdersService;
 use Telnyx\Services\SimCardsService;
 use Telnyx\Services\SiprecConnectorsService;
-use Telnyx\Services\SipRegistrationStatusService;
 use Telnyx\Services\SpeechToTextService;
 use Telnyx\Services\StorageService;
 use Telnyx\Services\SubNumberOrdersReportService;
@@ -1042,11 +1041,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public SipRegistrationStatusService $sipRegistrationStatus;
-
-    /**
-     * @api
-     */
     public CallReasonsService $callReasons;
 
     /**
@@ -1173,7 +1167,7 @@ class Client extends BaseClient
             'Accept' => 'application/json',
             'User-Agent' => sprintf('telnyx/PHP %s', VERSION),
             'X-Stainless-Lang' => 'php',
-            'X-Stainless-Package-Version' => '8.2.0',
+            'X-Stainless-Package-Version' => '8.3.0',
             'X-Stainless-Arch' => Util::machtype(),
             'X-Stainless-OS' => Util::ostype(),
             'X-Stainless-Runtime' => php_sapi_name(),
@@ -1362,7 +1356,6 @@ class Client extends BaseClient
         $this->pronunciationDicts = new PronunciationDictsService($this);
         $this->uacConnections = new UacConnectionsService($this);
         $this->voiceSDKCallReports = new VoiceSDKCallReportsService($this);
-        $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
         $this->callReasons = new CallReasonsService($this);
         $this->dir = new DirService($this);
         $this->infringementClaims = new InfringementClaimsService($this);

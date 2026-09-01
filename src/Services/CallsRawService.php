@@ -104,6 +104,7 @@ final class CallsRawService implements CallsRawContract
      *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>,
      *   deepfakeDetection?: DeepfakeDetection|DeepfakeDetectionShape,
      *   dialogflowConfig?: DialogflowConfig|DialogflowConfigShape,
+     *   diversion?: string,
      *   enableDialogflow?: bool,
      *   fromDisplayName?: string,
      *   linkTo?: string,

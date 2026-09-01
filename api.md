@@ -2800,12 +2800,6 @@ Methods:
 - <code title="get /voice_sdk_call_reports/{call_id}">$client->voiceSDKCallReports-><a href="./src/Services/VoiceSDKCallReportsService.php">retrieve</a>(...$params)</code>
 - <code title="get /voice_sdk_call_reports">$client->voiceSDKCallReports-><a href="./src/Services/VoiceSDKCallReportsService.php">list</a>(...$params)</code>
 
-# SipRegistrationStatus
-
-Methods:
-
-- <code title="get /sip_registration_status">$client->sipRegistrationStatus-><a href="./src/Services/SipRegistrationStatusService.php">retrieve</a>(...$params)</code>
-
 # CallReasons
 
 Methods:

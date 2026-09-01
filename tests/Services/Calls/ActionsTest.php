@@ -1016,6 +1016,7 @@ final class ActionsTest extends TestCase
                 ['name' => 'head_1', 'value' => 'val_1'],
                 ['name' => 'head_2', 'value' => 'val_2'],
             ],
+            diversion: '+18005550101',
             earlyMedia: true,
             from: '+18005550101',
             fromDisplayName: 'Company Name',

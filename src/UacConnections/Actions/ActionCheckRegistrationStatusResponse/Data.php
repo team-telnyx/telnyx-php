@@ -29,19 +29,19 @@ final class Data implements BaseModel
     /**
      * The ip used during the SIP connection.
      */
-    #[Optional('ip_address')]
+    #[Optional('ip_address', nullable: true)]
     public ?string $ipAddress;
 
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Optional('last_registration')]
+    #[Optional('last_registration', nullable: true)]
     public ?string $lastRegistration;
 
     /**
      * The port of the SIP connection.
      */
-    #[Optional]
+    #[Optional(nullable: true)]
     public ?int $port;
 
     /**
@@ -53,7 +53,7 @@ final class Data implements BaseModel
     /**
      * The user name of the SIP connection.
      */
-    #[Optional('sip_username')]
+    #[Optional('sip_username', nullable: true)]
     public ?string $sipUsername;
 
     /**
@@ -67,13 +67,13 @@ final class Data implements BaseModel
     /**
      * The protocol of the SIP connection.
      */
-    #[Optional]
+    #[Optional(nullable: true)]
     public ?string $transport;
 
     /**
      * The user agent of the SIP connection.
      */
-    #[Optional('user_agent')]
+    #[Optional('user_agent', nullable: true)]
     public ?string $userAgent;
 
     public function __construct()
@@ -115,7 +115,7 @@ final class Data implements BaseModel
     /**
      * The ip used during the SIP connection.
      */
-    public function withIPAddress(string $ipAddress): self
+    public function withIPAddress(?string $ipAddress): self
     {
         $self = clone $this;
         $self['ipAddress'] = $ipAddress;
@@ -126,7 +126,7 @@ final class Data implements BaseModel
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    public function withLastRegistration(string $lastRegistration): self
+    public function withLastRegistration(?string $lastRegistration): self
     {
         $self = clone $this;
         $self['lastRegistration'] = $lastRegistration;
@@ -137,7 +137,7 @@ final class Data implements BaseModel
     /**
      * The port of the SIP connection.
      */
-    public function withPort(int $port): self
+    public function withPort(?int $port): self
     {
         $self = clone $this;
         $self['port'] = $port;
@@ -159,7 +159,7 @@ final class Data implements BaseModel
     /**
      * The user name of the SIP connection.
      */
-    public function withSipUsername(string $sipUsername): self
+    public function withSipUsername(?string $sipUsername): self
     {
         $self = clone $this;
         $self['sipUsername'] = $sipUsername;
@@ -183,7 +183,7 @@ final class Data implements BaseModel
     /**
      * The protocol of the SIP connection.
      */
-    public function withTransport(string $transport): self
+    public function withTransport(?string $transport): self
     {
         $self = clone $this;
         $self['transport'] = $transport;
@@ -194,7 +194,7 @@ final class Data implements BaseModel
     /**
      * The user agent of the SIP connection.
      */
-    public function withUserAgent(string $userAgent): self
+    public function withUserAgent(?string $userAgent): self
     {
         $self = clone $this;
         $self['userAgent'] = $userAgent;

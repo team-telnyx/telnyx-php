@@ -305,21 +305,33 @@ final class WebhooksTest extends TestCase
     }
 
     #[Test]
-    public function testUnwrap(): void
+    public function testUnwrapWithoutHeadersFailsClosed(): void
     {
+        // unwrap() without headers must fail closed instead of parsing unverified input
+        $this->expectException(WebhookException::class);
+        $this->expectExceptionMessage('Could not verify webhook event signature');
+
         $payload = '{"id":"0ccc7b54-4df3-4bca-a65a-3da1ecc777f0","event_type":"conference.floor.changed","payload":{"call_control_id":"v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg","call_leg_id":"428c31b6-7af4-4bcb-b7f5-5013ef9657c1","call_session_id":"428c31b6-7af4-4bcb-b7f5-5013ef9657c1","client_state":"aGF2ZSBhIG5pY2UgZGF5ID1d","conference_id":"428c31b6-abf3-3bc1-b7f4-5013ef9657c1","connection_id":"7267xxxxxxxxxxxxxx","occurred_at":"2018-02-02T22:25:27.521Z"},"record_type":"event"}';
         $this->client->webhooks->unwrap($payload);
-        // unwrap successful if not error thrown, increment assertion count to avoid risky test warning
-        $this->addToAssertionCount(1);
     }
 
     #[Test]
-    public function testUnwrapBadJson(): void
+    public function testUnwrapVerifiesBeforeParsingBadJson(): void
     {
-        $this->expectException(WebhookException::class);
-
         $badPayload = 'not a json string';
-        $this->client->webhooks->unwrap($badPayload);
+        $timestamp = time();
+        $signature = $this->signPayload($badPayload, (string) $timestamp);
+
+        /** @var array<string, list<string>> $headers */
+        $headers = [
+            'telnyx-signature-ed25519' => [$signature],
+            'telnyx-timestamp' => [(string) $timestamp],
+        ];
+
+        $this->expectException(WebhookException::class);
+        $this->expectExceptionMessage('Could not verify webhook event signature');
+        $this->expectExceptionMessage('Error parsing webhook body');
+        $this->client->webhooks->unwrap($badPayload, $headers, self::TEST_PUBLIC_KEY);
     }
 
     #[Test]
