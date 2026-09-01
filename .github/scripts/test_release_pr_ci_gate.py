@@ -34,6 +34,19 @@ class PHPReleasePRGateTests(unittest.TestCase):
         self.assertIn('--release-sha "$RELEASE_SHA"',w)
         self.assertNotIn('release-pr-auto-merge.yml',w)
 
+    def test_release_sync_preserves_generated_composer_state(self):
+        w=(ROOT/'.github/workflows/release-please.yml').read_text()
+        release_files = 'RELEASE_FILES=("CHANGELOG.md" "src/Version.php" ".release-please-manifest.json")'
+        reconcile_loop = 'for f in CHANGELOG.md src/Version.php .release-please-manifest.json; do'
+        self.assertIn(release_files, w)
+        self.assertGreaterEqual(w.count(reconcile_loop), 2)
+        self.assertNotIn('RELEASE_FILES=("CHANGELOG.md" "composer.json"', w)
+        self.assertNotIn('for f in CHANGELOG.md composer.json', w)
+        self.assertIn('git diff --quiet origin/next -- composer.json composer.lock', w)
+
+        from release_pr_auto_merge import GateConfig
+        self.assertNotIn('composer.json', GateConfig.for_repository('team-telnyx/telnyx-php').release_files)
+
     def test_readiness_remains_trusted_dry_run(self):
         w=(ROOT/'.github/workflows/release-pr-readiness.yml').read_text()
         self.assertIn('pull_request_target:',w)

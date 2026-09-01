@@ -88,7 +88,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          RELEASE_FILES=("CHANGELOG.md" "composer.json" "src/Version.php" ".release-please-manifest.json")
+          # composer.json and composer.lock are generated SDK state. Only release
+          # metadata may be restored from production while scanning next.
+          RELEASE_FILES=("CHANGELOG.md" "src/Version.php" ".release-please-manifest.json")
           git restore --source=refs/remotes/origin/release-base --staged --worktree -- "${RELEASE_FILES[@]}"
           SCAN_TREE=$(git write-tree)
           PROMOTE_SUBJECT=$(git log --format=%s --max-count=50 HEAD \
@@ -154,7 +156,7 @@ jobs:
           PR_NUM: ${{ steps.release-pr.outputs.pr_number }}
         run: |
           # release-please creates a PR with only version bumps (CHANGELOG,
-          # composer.json, Version.php, CHANGELOG.md, .release-please-manifest.json).
+          # Version.php and .release-please-manifest.json).
           # The actual SDK code changes are on `next` but NOT included in the
           # release PR. This step syncs `next` code into the release PR branch.
           #
@@ -195,7 +197,7 @@ jobs:
 
           # Save version-bump files from the release PR branch (release-please output)
           STASH_DIR=$(mktemp -d)
-          for f in CHANGELOG.md composer.json src/Version.php .release-please-manifest.json; do
+          for f in CHANGELOG.md src/Version.php .release-please-manifest.json; do
             if [ -f "$f" ]; then
               mkdir -p "$STASH_DIR/$(dirname "$f")"
               cp "$f" "$STASH_DIR/$f"
@@ -211,7 +213,7 @@ jobs:
           git clean -fdx
 
           # Restore version-bump files from the release PR branch
-          for f in CHANGELOG.md composer.json src/Version.php .release-please-manifest.json; do
+          for f in CHANGELOG.md src/Version.php .release-please-manifest.json; do
             if [ -f "$STASH_DIR/$f" ]; then
               mkdir -p "$(dirname "$f")"
               cp "$STASH_DIR/$f" "$f"
@@ -219,6 +221,14 @@ jobs:
             fi
           done
           rm -rf "$STASH_DIR"
+
+          # Runtime dependencies belong to the generated next tree. Fail closed
+          # if release reconciliation ever changes either Composer file.
+          if ! git diff --quiet origin/next -- composer.json composer.lock; then
+            echo "::error::Release synchronization changed generated Composer state"
+            git diff -- origin/next -- composer.json composer.lock
+            exit 1
+          fi
 
           # Commit if there are changes
           if git diff --cached --quiet; then
