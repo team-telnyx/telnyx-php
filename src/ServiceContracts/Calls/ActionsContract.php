@@ -1348,6 +1348,7 @@ interface ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP INVITE
+     * @param string $diversion The number the inbound call being transferred was originally received on, in +E164 format. Supplying it lets an unverified non-Telnyx `from` be used as the caller id, provided that number is still on an active inbound call to this `diversion` number for your account. The `diversion` number itself must be one you own or have verified.
      * @param bool $earlyMedia if set to false, early media will not be passed to the originating leg
      * @param string $from The `from` number to be used as the caller id presented to the destination (`to` number). The number should be in +E164 format. This attribute will default to the `to` number of the original call if omitted.
      * @param string $fromDisplayName The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
@@ -1394,6 +1395,7 @@ interface ActionsContract
         ?string $clientState = null,
         ?string $commandID = null,
         ?array $customHeaders = null,
+        ?string $diversion = null,
         bool $earlyMedia = true,
         ?string $from = null,
         ?string $fromDisplayName = null,

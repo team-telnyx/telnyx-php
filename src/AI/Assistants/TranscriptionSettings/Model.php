@@ -13,7 +13,7 @@ namespace Telnyx\AI\Assistants\TranscriptionSettings;
  * - `azure/fast` is a multilingual Azure transcription model.
  * - `assemblyai/universal-streaming` is a multilingual streaming model with configurable turn detection.
  * - `xai/grok-stt` is a multilingual Grok STT model.
- * - `soniox/stt-rt-v4` is a multilingual streaming model with automatic language detection and configurable endpointing.
+ * - `soniox/stt-rt-v4` and `soniox/stt-rt-v5` are multilingual streaming models with automatic language detection, configurable endpointing, term biasing (`context`), and `language_hints`.
  * - `nvidia/parakeet-v3` is a multilingual transcription model with automatic language detection.
  * - `humain/realtime` is a streaming model with native Arabic and Arabic/English code-switching support.
  * - `reson8/turns` is a turn-based streaming model covering 10 European languages with automatic language detection.
@@ -34,6 +34,8 @@ enum Model: string
     case XAI_GROK_STT = 'xai/grok-stt';
 
     case SONIOX_STT_RT_V4 = 'soniox/stt-rt-v4';
+
+    case SONIOX_STT_RT_V5 = 'soniox/stt-rt-v5';
 
     case NVIDIA_PARAKEET_V3 = 'nvidia/parakeet-v3';
 

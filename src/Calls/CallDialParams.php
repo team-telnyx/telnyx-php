@@ -83,6 +83,7 @@ use Telnyx\Core\Conversion\ListOf;
  *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
  *   deepfakeDetection?: null|DeepfakeDetection|DeepfakeDetectionShape,
  *   dialogflowConfig?: null|DialogflowConfig|DialogflowConfigShape,
+ *   diversion?: string|null,
  *   enableDialogflow?: bool|null,
  *   fromDisplayName?: string|null,
  *   linkTo?: string|null,
@@ -245,6 +246,12 @@ final class CallDialParams implements BaseModel
 
     #[Optional('dialogflow_config')]
     public ?DialogflowConfig $dialogflowConfig;
+
+    /**
+     * The number the inbound call being transferred was originally received on, in +E164 format. Supplying it lets an unverified non-Telnyx `from` be used as the caller id, provided that number is still on an active inbound call to this `diversion` number for your account. The `diversion` number itself must be one you own or have verified.
+     */
+    #[Optional]
+    public ?string $diversion;
 
     /**
      * Enables Dialogflow for the current call. The default value is false.
@@ -651,6 +658,7 @@ final class CallDialParams implements BaseModel
         ?array $customHeaders = null,
         DeepfakeDetection|array|null $deepfakeDetection = null,
         DialogflowConfig|array|null $dialogflowConfig = null,
+        ?string $diversion = null,
         ?bool $enableDialogflow = null,
         ?string $fromDisplayName = null,
         ?string $linkTo = null,
@@ -719,6 +727,7 @@ final class CallDialParams implements BaseModel
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
         null !== $deepfakeDetection && $self['deepfakeDetection'] = $deepfakeDetection;
         null !== $dialogflowConfig && $self['dialogflowConfig'] = $dialogflowConfig;
+        null !== $diversion && $self['diversion'] = $diversion;
         null !== $enableDialogflow && $self['enableDialogflow'] = $enableDialogflow;
         null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
         null !== $linkTo && $self['linkTo'] = $linkTo;
@@ -975,6 +984,17 @@ final class CallDialParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['dialogflowConfig'] = $dialogflowConfig;
+
+        return $self;
+    }
+
+    /**
+     * The number the inbound call being transferred was originally received on, in +E164 format. Supplying it lets an unverified non-Telnyx `from` be used as the caller id, provided that number is still on an active inbound call to this `diversion` number for your account. The `diversion` number itself must be one you own or have verified.
+     */
+    public function withDiversion(string $diversion): self
+    {
+        $self = clone $this;
+        $self['diversion'] = $diversion;
 
         return $self;
     }

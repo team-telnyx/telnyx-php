@@ -58,7 +58,7 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
     public ?OutboundCallRecording $callRecording;
 
     /**
-     * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile.
+     * Specifies the time window and call limits for calls made using this outbound voice profile.
      */
     #[Optional('calling_window')]
     public ?CallingWindow $callingWindow;
@@ -233,7 +233,7 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
     }
 
     /**
-     * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile.
+     * Specifies the time window and call limits for calls made using this outbound voice profile.
      *
      * @param CallingWindow|CallingWindowShape $callingWindow
      */

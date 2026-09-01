@@ -10,6 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TranscriptionSettingsConfigShape = array{
+ *   context?: string|null,
  *   eagerEotThreshold?: float|null,
  *   enableEndpointDetection?: bool|null,
  *   endOfTurnConfidenceThreshold?: float|null,
@@ -17,6 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   eotTimeoutMs?: int|null,
  *   interimResults?: bool|null,
  *   keyterm?: string|null,
+ *   languageHints?: list<string>|null,
  *   maxEndpointDelayMs?: int|null,
  *   maxTurnSilence?: int|null,
  *   minTurnSilence?: int|null,
@@ -30,13 +32,19 @@ final class TranscriptionSettingsConfig implements BaseModel
     use SdkModel;
 
     /**
+     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. A comma-separated list of terms to boost for recognition during transcription, for staff names, building names, or other domain-specific vocabulary. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to Soniox.
+     */
+    #[Optional]
+    public ?string $context;
+
+    /**
      * Available only for deepgram/flux. Confidence threshold for eager end of turn detection. Must be lower than or equal to eot_threshold. Setting this equal to eot_threshold effectively disables eager end of turn.
      */
     #[Optional('eager_eot_threshold')]
     public ?float $eagerEotThreshold;
 
     /**
-     * Available only for soniox/stt-rt-v4. When true, Soniox emits end-of-utterance events at the cadence configured by `max_endpoint_delay_ms`.
+     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. When true, Soniox emits end-of-utterance events at the cadence configured by `max_endpoint_delay_ms`.
      */
     #[Optional('enable_endpoint_detection')]
     public ?bool $enableEndpointDetection;
@@ -60,7 +68,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?int $eotTimeoutMs;
 
     /**
-     * Available only for soniox/stt-rt-v4. When true, Soniox streams interim (non-final) results in addition to finalized transcripts.
+     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. When true, Soniox streams interim (non-final) results in addition to finalized transcripts.
      */
     #[Optional('interim_results')]
     public ?bool $interimResults;
@@ -72,7 +80,15 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?string $keyterm;
 
     /**
-     * Available only for soniox/stt-rt-v4. Maximum silence (in milliseconds) before Soniox emits an end-of-utterance event. Only honored when `enable_endpoint_detection` is true.
+     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. A list of ISO 639-1 language codes (e.g. `["nl", "fr"]`) to pin recognition to multiple languages at once, overriding the single hint derived from `language`.
+     *
+     * @var list<string>|null $languageHints
+     */
+    #[Optional('language_hints', list: 'string')]
+    public ?array $languageHints;
+
+    /**
+     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. Maximum silence (in milliseconds) before Soniox emits an end-of-utterance event. Only honored when `enable_endpoint_detection` is true.
      */
     #[Optional('max_endpoint_delay_ms')]
     public ?int $maxEndpointDelayMs;
@@ -104,8 +120,11 @@ final class TranscriptionSettingsConfig implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<string>|null $languageHints
      */
     public static function with(
+        ?string $context = null,
         ?float $eagerEotThreshold = null,
         ?bool $enableEndpointDetection = null,
         ?float $endOfTurnConfidenceThreshold = null,
@@ -113,6 +132,7 @@ final class TranscriptionSettingsConfig implements BaseModel
         ?int $eotTimeoutMs = null,
         ?bool $interimResults = null,
         ?string $keyterm = null,
+        ?array $languageHints = null,
         ?int $maxEndpointDelayMs = null,
         ?int $maxTurnSilence = null,
         ?int $minTurnSilence = null,
@@ -121,6 +141,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $context && $self['context'] = $context;
         null !== $eagerEotThreshold && $self['eagerEotThreshold'] = $eagerEotThreshold;
         null !== $enableEndpointDetection && $self['enableEndpointDetection'] = $enableEndpointDetection;
         null !== $endOfTurnConfidenceThreshold && $self['endOfTurnConfidenceThreshold'] = $endOfTurnConfidenceThreshold;
@@ -128,11 +149,23 @@ final class TranscriptionSettingsConfig implements BaseModel
         null !== $eotTimeoutMs && $self['eotTimeoutMs'] = $eotTimeoutMs;
         null !== $interimResults && $self['interimResults'] = $interimResults;
         null !== $keyterm && $self['keyterm'] = $keyterm;
+        null !== $languageHints && $self['languageHints'] = $languageHints;
         null !== $maxEndpointDelayMs && $self['maxEndpointDelayMs'] = $maxEndpointDelayMs;
         null !== $maxTurnSilence && $self['maxTurnSilence'] = $maxTurnSilence;
         null !== $minTurnSilence && $self['minTurnSilence'] = $minTurnSilence;
         null !== $numerals && $self['numerals'] = $numerals;
         null !== $smartFormat && $self['smartFormat'] = $smartFormat;
+
+        return $self;
+    }
+
+    /**
+     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. A comma-separated list of terms to boost for recognition during transcription, for staff names, building names, or other domain-specific vocabulary. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to Soniox.
+     */
+    public function withContext(string $context): self
+    {
+        $self = clone $this;
+        $self['context'] = $context;
 
         return $self;
     }
@@ -149,7 +182,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for soniox/stt-rt-v4. When true, Soniox emits end-of-utterance events at the cadence configured by `max_endpoint_delay_ms`.
+     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. When true, Soniox emits end-of-utterance events at the cadence configured by `max_endpoint_delay_ms`.
      */
     public function withEnableEndpointDetection(
         bool $enableEndpointDetection
@@ -195,7 +228,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for soniox/stt-rt-v4. When true, Soniox streams interim (non-final) results in addition to finalized transcripts.
+     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. When true, Soniox streams interim (non-final) results in addition to finalized transcripts.
      */
     public function withInterimResults(bool $interimResults): self
     {
@@ -217,7 +250,20 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for soniox/stt-rt-v4. Maximum silence (in milliseconds) before Soniox emits an end-of-utterance event. Only honored when `enable_endpoint_detection` is true.
+     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. A list of ISO 639-1 language codes (e.g. `["nl", "fr"]`) to pin recognition to multiple languages at once, overriding the single hint derived from `language`.
+     *
+     * @param list<string> $languageHints
+     */
+    public function withLanguageHints(array $languageHints): self
+    {
+        $self = clone $this;
+        $self['languageHints'] = $languageHints;
+
+        return $self;
+    }
+
+    /**
+     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. Maximum silence (in milliseconds) before Soniox emits an end-of-utterance event. Only honored when `enable_endpoint_detection` is true.
      */
     public function withMaxEndpointDelayMs(int $maxEndpointDelayMs): self
     {
