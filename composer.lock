@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4bfd974d9aeb792e688bcbb4a8f7b76",
+    "content-hash": "3501940b7ec7217db21c7e0b8877eaac",
     "packages": [
         {
             "name": "evenement/evenement",
@@ -1018,51 +1018,6 @@
                 }
             ],
             "time": "2024-06-11T12:45:25+00:00"
-        },
-        {
-            "name": "standard-webhooks/standard-webhooks",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/standard-webhooks/standard-webhooks.git",
-                "reference": "a1773d7ffc577d730e2bf4d4bd740a82a42aa904"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/standard-webhooks/standard-webhooks/zipball/a1773d7ffc577d730e2bf4d4bd740a82a42aa904",
-                "reference": "a1773d7ffc577d730e2bf4d4bd740a82a42aa904",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.0 || ^10.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "StandardWebhooks\\": "libraries/php/src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Standard Webhooks - Open source tools and guidelines for sending webhooks easily, securely, and reliably",
-            "homepage": "https://www.standardwebhooks.com",
-            "keywords": [
-                "hmac",
-                "signature",
-                "standard-webhooks",
-                "verification",
-                "webhooks"
-            ],
-            "support": {
-                "issues": "https://github.com/standard-webhooks/standard-webhooks/issues",
-                "source": "https://github.com/standard-webhooks/standard-webhooks/tree/v1.0.2"
-            },
-            "time": "2026-02-18T19:02:27+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",

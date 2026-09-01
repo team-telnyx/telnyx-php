@@ -119,6 +119,7 @@ final class VersionsTest extends TestCase
                             'model' => 'deepgram/flux',
                             'region' => 'region',
                             'settings' => [
+                                'context' => 'context',
                                 'eagerEotThreshold' => 0.3,
                                 'enableEndpointDetection' => true,
                                 'endOfTurnConfidenceThreshold' => 0,
@@ -126,6 +127,7 @@ final class VersionsTest extends TestCase
                                 'eotTimeoutMs' => 500,
                                 'interimResults' => true,
                                 'keyterm' => 'keyterm',
+                                'languageHints' => ['string'],
                                 'maxEndpointDelayMs' => 500,
                                 'maxTurnSilence' => 100,
                                 'minTurnSilence' => 100,
@@ -177,6 +179,7 @@ final class VersionsTest extends TestCase
                             'model' => 'deepgram/flux',
                             'region' => 'region',
                             'settings' => [
+                                'context' => 'context',
                                 'eagerEotThreshold' => 0.3,
                                 'enableEndpointDetection' => true,
                                 'endOfTurnConfidenceThreshold' => 0,
@@ -184,6 +187,7 @@ final class VersionsTest extends TestCase
                                 'eotTimeoutMs' => 500,
                                 'interimResults' => true,
                                 'keyterm' => 'keyterm',
+                                'languageHints' => ['string'],
                                 'maxEndpointDelayMs' => 500,
                                 'maxTurnSilence' => 100,
                                 'minTurnSilence' => 100,
@@ -384,6 +388,7 @@ final class VersionsTest extends TestCase
                 'model' => 'deepgram/flux',
                 'region' => 'region',
                 'settings' => [
+                    'context' => 'context',
                     'eagerEotThreshold' => 0.3,
                     'enableEndpointDetection' => true,
                     'endOfTurnConfidenceThreshold' => 0,
@@ -391,6 +396,7 @@ final class VersionsTest extends TestCase
                     'eotTimeoutMs' => 500,
                     'interimResults' => true,
                     'keyterm' => 'keyterm',
+                    'languageHints' => ['string'],
                     'maxEndpointDelayMs' => 500,
                     'maxTurnSilence' => 100,
                     'minTurnSilence' => 100,

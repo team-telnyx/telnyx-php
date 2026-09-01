@@ -1,5 +1,18 @@
 # Changelog
 
+## [7.102.0](https://github.com/team-telnyx/telnyx-php/compare/v7.101.0...v7.102.0) (2026-09-01)
+
+
+### Features
+
+* promote from staging 6c22fbd ([8a846b3](https://github.com/team-telnyx/telnyx-php/commit/8a846b3962bb60a03ea38d48e0f97f5b90868f63))
+
+
+### Bug Fixes
+
+* **ci:** skip post-merge release readiness ([#380](https://github.com/team-telnyx/telnyx-php/issues/380)) ([54773cf](https://github.com/team-telnyx/telnyx-php/commit/54773cf3b4e39a9a047f8dc1fd41c7b6148046ba))
+* **release:** preserve generated Composer state ([#383](https://github.com/team-telnyx/telnyx-php/issues/383)) ([afd3b9e](https://github.com/team-telnyx/telnyx-php/commit/afd3b9e42449e53224f28fd6d56d10c1bf34d5bb))
+
 ## [7.101.0](https://github.com/team-telnyx/telnyx-php/compare/v7.100.0...v7.101.0) (2026-08-31)
 
 

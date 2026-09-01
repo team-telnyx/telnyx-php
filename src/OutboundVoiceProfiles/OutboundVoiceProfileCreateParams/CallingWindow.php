@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
+ * Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
  *
  * @phpstan-type CallingWindowShape = array{
  *   callsPerCld?: int|null, endTime?: string|null, startTime?: string|null
@@ -21,19 +21,19 @@ final class CallingWindow implements BaseModel
     use SdkModel;
 
     /**
-     * (BETA) The maximum number of calls that can be initiated to a single called party (CLD) within the calling window. A null value means no limit.
+     * The maximum number of calls that can be initiated to a single called party (CLD) within the calling window. A null value means no limit.
      */
     #[Optional('calls_per_cld')]
     public ?int $callsPerCld;
 
     /**
-     * (BETA) The UTC time of day (in HH:MM format, 24-hour clock) when calls are no longer allowed to start.
+     * The UTC time of day (in HH:MM format, 24-hour clock) when calls are no longer allowed to start.
      */
     #[Optional('end_time')]
     public ?string $endTime;
 
     /**
-     * (BETA) The UTC time of day (in HH:MM format, 24-hour clock) when calls are allowed to start.
+     * The UTC time of day (in HH:MM format, 24-hour clock) when calls are allowed to start.
      */
     #[Optional('start_time')]
     public ?string $startTime;
@@ -63,7 +63,7 @@ final class CallingWindow implements BaseModel
     }
 
     /**
-     * (BETA) The maximum number of calls that can be initiated to a single called party (CLD) within the calling window. A null value means no limit.
+     * The maximum number of calls that can be initiated to a single called party (CLD) within the calling window. A null value means no limit.
      */
     public function withCallsPerCld(int $callsPerCld): self
     {
@@ -74,7 +74,7 @@ final class CallingWindow implements BaseModel
     }
 
     /**
-     * (BETA) The UTC time of day (in HH:MM format, 24-hour clock) when calls are no longer allowed to start.
+     * The UTC time of day (in HH:MM format, 24-hour clock) when calls are no longer allowed to start.
      */
     public function withEndTime(string $endTime): self
     {
@@ -85,7 +85,7 @@ final class CallingWindow implements BaseModel
     }
 
     /**
-     * (BETA) The UTC time of day (in HH:MM format, 24-hour clock) when calls are allowed to start.
+     * The UTC time of day (in HH:MM format, 24-hour clock) when calls are allowed to start.
      */
     public function withStartTime(string $startTime): self
     {

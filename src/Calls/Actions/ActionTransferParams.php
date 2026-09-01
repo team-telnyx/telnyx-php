@@ -58,6 +58,7 @@ use Telnyx\Core\Conversion\ListOf;
  *   clientState?: string|null,
  *   commandID?: string|null,
  *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
+ *   diversion?: string|null,
  *   earlyMedia?: bool|null,
  *   from?: string|null,
  *   fromDisplayName?: string|null,
@@ -147,6 +148,12 @@ final class ActionTransferParams implements BaseModel
      */
     #[Optional('custom_headers', list: CustomSipHeader::class)]
     public ?array $customHeaders;
+
+    /**
+     * The number the inbound call being transferred was originally received on, in +E164 format. Supplying it lets an unverified non-Telnyx `from` be used as the caller id, provided that number is still on an active inbound call to this `diversion` number for your account. The `diversion` number itself must be one you own or have verified.
+     */
+    #[Optional]
+    public ?string $diversion;
 
     /**
      * If set to false, early media will not be passed to the originating leg.
@@ -428,6 +435,7 @@ final class ActionTransferParams implements BaseModel
         ?string $clientState = null,
         ?string $commandID = null,
         ?array $customHeaders = null,
+        ?string $diversion = null,
         ?bool $earlyMedia = null,
         ?string $from = null,
         ?string $fromDisplayName = null,
@@ -472,6 +480,7 @@ final class ActionTransferParams implements BaseModel
         null !== $clientState && $self['clientState'] = $clientState;
         null !== $commandID && $self['commandID'] = $commandID;
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $diversion && $self['diversion'] = $diversion;
         null !== $earlyMedia && $self['earlyMedia'] = $earlyMedia;
         null !== $from && $self['from'] = $from;
         null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
@@ -590,6 +599,17 @@ final class ActionTransferParams implements BaseModel
     {
         $self = clone $this;
         $self['customHeaders'] = $customHeaders;
+
+        return $self;
+    }
+
+    /**
+     * The number the inbound call being transferred was originally received on, in +E164 format. Supplying it lets an unverified non-Telnyx `from` be used as the caller id, provided that number is still on an active inbound call to this `diversion` number for your account. The `diversion` number itself must be one you own or have verified.
+     */
+    public function withDiversion(string $diversion): self
+    {
+        $self = clone $this;
+        $self['diversion'] = $diversion;
 
         return $self;
     }

@@ -1986,6 +1986,7 @@ final class ActionsRawService implements ActionsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>,
+     *   diversion?: string,
      *   earlyMedia?: bool,
      *   from?: string,
      *   fromDisplayName?: string,

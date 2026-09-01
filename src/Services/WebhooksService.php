@@ -130,7 +130,7 @@ final class WebhooksService implements WebhooksContract
      * @api
      *
      * Unwraps a webhook event from its JSON representation.
-     * If headers are provided, verifies the ED25519 signature first.
+     * Verifies the ED25519 signature before parsing.
      *
      * @param array<string,string|list<string>>|null $headers
      *
@@ -141,12 +141,10 @@ final class WebhooksService implements WebhooksContract
         ?array $headers = null,
         ?string $secret = null
     ): CallAIGatherEndedWebhookEvent|CallAIGatherMessageHistoryUpdatedWebhookEvent|CallAIGatherPartialResultsWebhookEvent|ArtifactCompletedWebhookEvent|ArtifactFailedWebhookEvent|CallAnsweredWebhookEvent|CallBridgedWebhookEvent|CallConversationEndedWebhookEvent|CallConversationInsightsGeneratedWebhookEvent|CallCostWebhookEvent|CallDeepfakeDetectionErrorWebhookEvent|CallDeepfakeDetectionResultWebhookEvent|CallDtmfReceivedWebhookEvent|CallEnqueuedWebhookEvent|CallForkStartedWebhookEvent|CallForkStoppedWebhookEvent|CallGatherEndedWebhookEvent|CallHangupWebhookEvent|CallHoldWebhookEvent|CallInitiatedWebhookEvent|CallLeftQueueWebhookEvent|CallMachineDetectionEndedWebhookEvent|CallMachineGreetingEndedWebhookEvent|CallMachinePremiumDetectionEndedWebhookEvent|CallMachinePremiumGreetingEndedWebhookEvent|CallPaymentCompletedWebhookEvent|CallPaymentProgressWebhookEvent|CallPlaybackEndedWebhookEvent|CallPlaybackStartedWebhookEvent|CallRecordingErrorWebhookEvent|CallRecordingSavedWebhookEvent|CallRecordingTranscriptionSavedWebhookEvent|CallReferCompletedWebhookEvent|CallReferFailedWebhookEvent|CallReferStartedWebhookEvent|CallSiprecFailedWebhookEvent|CallSiprecStartedWebhookEvent|CallSiprecStoppedWebhookEvent|CallSpeakEndedWebhookEvent|CallSpeakStartedWebhookEvent|CallStreamingFailedWebhookEvent|CallStreamingStartedWebhookEvent|CallStreamingStoppedWebhookEvent|CallUnholdWebhookEvent|CampaignStatusUpdate|ConferenceCreatedWebhookEvent|ConferenceEndedWebhookEvent|ConferenceFloorChanged|ConferenceParticipantJoinedWebhookEvent|ConferenceParticipantLeftWebhookEvent|ConferenceParticipantPlaybackEndedWebhookEvent|ConferenceParticipantPlaybackStartedWebhookEvent|ConferenceParticipantSpeakEndedWebhookEvent|ConferenceParticipantSpeakStartedWebhookEvent|ConferencePlaybackEndedWebhookEvent|ConferencePlaybackStartedWebhookEvent|ConferenceRecordingSavedWebhookEvent|ConferenceSpeakEndedWebhookEvent|ConferenceSpeakStartedWebhookEvent|DeliveryUpdateWebhookEvent|FaxDelivered|FaxFailed|FaxMediaProcessed|FaxQueued|FaxSendingStarted|HostedNumberOrderEventWebhookEvent|InboundMessageWebhookEvent|NumberOrderStatusUpdateWebhookEvent|RecordingAvailableWebhookEvent|ReplacedLinkClickWebhookEvent|SessionStatusChangedWebhookEvent|TranscriptCompletedWebhookEvent|TranscriptionWebhookEvent {
-        if (null !== $headers) {
-            try {
-                $this->doVerifySignature($body, $headers, $secret);
-            } catch (WebhookVerificationException $e) {
-                throw new WebhookException('Could not verify webhook event signature', previous: $e);
-            }
+        try {
+            $this->doVerifySignature($body, $headers ?? [], $secret);
+        } catch (WebhookVerificationException $e) {
+            throw new WebhookException('Could not verify webhook event signature', previous: $e);
         }
 
         try {

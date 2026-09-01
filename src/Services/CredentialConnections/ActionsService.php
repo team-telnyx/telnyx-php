@@ -33,7 +33,7 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
-     * Checks the registration_status for a credential connection, (`registration_status`) as well as the timestamp for the last SIP registration event (`registration_status_updated_at`)
+     * Returns the live SIP registration status for a credential connection. Reports whether the endpoint is currently registered (`status`) and the timestamp of the last SIP registration event (`last_registration`).
      *
      * @param string $id identifies the resource
      * @param RequestOpts|null $requestOptions

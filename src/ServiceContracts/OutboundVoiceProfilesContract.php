@@ -35,7 +35,7 @@ interface OutboundVoiceProfilesContract
      * @param string $name a user-supplied name to help with organization
      * @param string|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
      * @param OutboundCallRecording|OutboundCallRecordingShape $callRecording
-     * @param CallingWindow|CallingWindowShape $callingWindow (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
+     * @param CallingWindow|CallingWindowShape $callingWindow Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
      * @param int|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
      * @param string $dailySpendLimit the maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls
      * @param bool $dailySpendLimitEnabled specifies whether to enforce the daily_spend_limit on this outbound voice profile
@@ -88,7 +88,7 @@ interface OutboundVoiceProfilesContract
      * @param string $name a user-supplied name to help with organization
      * @param string|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
      * @param OutboundCallRecording|OutboundCallRecordingShape $callRecording
-     * @param \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow|CallingWindowShape1 $callingWindow (BETA) Specifies the time window and call limits for calls made using this outbound voice profile
+     * @param \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow|CallingWindowShape1 $callingWindow specifies the time window and call limits for calls made using this outbound voice profile
      * @param int|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
      * @param string $dailySpendLimit the maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls
      * @param bool $dailySpendLimitEnabled specifies whether to enforce the daily_spend_limit on this outbound voice profile

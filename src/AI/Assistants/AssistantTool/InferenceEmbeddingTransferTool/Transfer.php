@@ -25,6 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   targets: TargetsShape,
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
  *   description?: string|null,
+ *   diversion?: string|null,
  *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
  *   warmMessageDelayMs?: int|null,
  *   warmTransferAcceptance?: null|WarmTransferAcceptance|WarmTransferAcceptanceShape,
@@ -63,6 +64,12 @@ final class Transfer implements BaseModel
      */
     #[Optional]
     public ?string $description;
+
+    /**
+     * The number the inbound call was received on, forwarded so an unverified non-Telnyx `from` can be used as the caller id -- typically to transfer out as the original caller by pairing `from: "{{telnyx_end_user_target}}"` with `diversion: "{{telnyx_agent_target}}"`. The caller id is only accepted while that number is still on an active inbound call to this `diversion` number, and the `diversion` number must be one you own or have verified.
+     */
+    #[Optional]
+    public ?string $diversion;
 
     /**
      * Configuration for voicemail detection (AMD - Answering Machine Detection) on the transferred call. Allows the assistant to detect when a voicemail system answers the transferred call and take appropriate action.
@@ -122,6 +129,7 @@ final class Transfer implements BaseModel
         string|array $targets,
         ?array $customHeaders = null,
         ?string $description = null,
+        ?string $diversion = null,
         VoicemailDetection|array|null $voicemailDetection = null,
         ?int $warmMessageDelayMs = null,
         WarmTransferAcceptance|array|null $warmTransferAcceptance = null,
@@ -134,6 +142,7 @@ final class Transfer implements BaseModel
 
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
         null !== $description && $self['description'] = $description;
+        null !== $diversion && $self['diversion'] = $diversion;
         null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
         null !== $warmMessageDelayMs && $self['warmMessageDelayMs'] = $warmMessageDelayMs;
         null !== $warmTransferAcceptance && $self['warmTransferAcceptance'] = $warmTransferAcceptance;
@@ -186,6 +195,17 @@ final class Transfer implements BaseModel
     {
         $self = clone $this;
         $self['description'] = $description;
+
+        return $self;
+    }
+
+    /**
+     * The number the inbound call was received on, forwarded so an unverified non-Telnyx `from` can be used as the caller id -- typically to transfer out as the original caller by pairing `from: "{{telnyx_end_user_target}}"` with `diversion: "{{telnyx_agent_target}}"`. The caller id is only accepted while that number is still on an active inbound call to this `diversion` number, and the `diversion` number must be one you own or have verified.
+     */
+    public function withDiversion(string $diversion): self
+    {
+        $self = clone $this;
+        $self['diversion'] = $diversion;
 
         return $self;
     }

@@ -2800,12 +2800,6 @@ Methods:
 - <code title="get /voice_sdk_call_reports/{call_id}">$client->voiceSDKCallReports-><a href="./src/Services/VoiceSDKCallReportsService.php">retrieve</a>(...$params)</code>
 - <code title="get /voice_sdk_call_reports">$client->voiceSDKCallReports-><a href="./src/Services/VoiceSDKCallReportsService.php">list</a>(...$params)</code>
 
-# SipRegistrationStatus
-
-Methods:
-
-- <code title="get /sip_registration_status">$client->sipRegistrationStatus-><a href="./src/Services/SipRegistrationStatusService.php">retrieve</a>(...$params)</code>
-
 # CallReasons
 
 Methods:
@@ -3109,3 +3103,12 @@ Methods:
 - <code title="post /meeting_sessions/{id}/artifacts">$client->meetingSessions->artifacts-><a href="./src/Services/MeetingSessions/ArtifactsService.php">create</a>(...$params)</code>
 - <code title="get /meeting_sessions/{id}/artifacts/{artifact_id}">$client->meetingSessions->artifacts-><a href="./src/Services/MeetingSessions/ArtifactsService.php">retrieve</a>(...$params)</code>
 - <code title="get /meeting_sessions/{id}/artifacts">$client->meetingSessions->artifacts-><a href="./src/Services/MeetingSessions/ArtifactsService.php">list</a>(...$params)</code>
+
+# ExternalRequirements
+
+## SubNumberOrders
+
+Methods:
+
+- <code title="get /external_requirements/{regulatory_requirement_id}/sub_number_orders/{sub_number_order_id}">$client->externalRequirements->subNumberOrders-><a href="./src/Services/ExternalRequirements/SubNumberOrdersService.php">retrieve</a>(...$params)</code>
+- <code title="post /external_requirements/{regulatory_requirement_id}/sub_number_orders/{sub_number_order_id}">$client->externalRequirements->subNumberOrders-><a href="./src/Services/ExternalRequirements/SubNumberOrdersService.php">update</a>(...$params)</code>
