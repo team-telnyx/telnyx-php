@@ -208,13 +208,35 @@ final class Util
         parse_str($parsed['query'] ?? '', $q2);
 
         $mergedQuery = array_merge_recursive($q1, $q2, $query);
+        $parts = [];
 
-        /** @var array<string,mixed> */
-        $normalizedQuery = self::mapRecursive(
-            static fn ($v) => is_bool($v) || is_numeric($v) ? self::strVal($v) : $v,
-            value: $mergedQuery
-        );
-        $qs = http_build_query($normalizedQuery, encoding_type: PHP_QUERY_RFC3986);
+        /** @var \Closure(string,mixed):void $append */
+        $append = static function (string $key, mixed $value) use (&$append, &$parts): void {
+            if (is_null($value)) {
+                return;
+            }
+
+            if (is_array($value)) {
+                if (array_is_list($value)) {
+                    $parts[] = rawurlencode($key).'='.rawurlencode(implode(',', array_map(static fn ($item) => self::strVal($item), $value)));
+
+                    return;
+                }
+
+                foreach ($value as $nestedName => $nestedValue) {
+                    $append("{$key}[{$nestedName}]", $nestedValue);
+                }
+
+                return;
+            }
+
+            $parts[] = rawurlencode($key).'='.rawurlencode(self::strVal($value));
+        };
+
+        foreach ($mergedQuery as $key => $value) {
+            $append($key, $value);
+        }
+        $qs = implode('&', $parts);
 
         return $base->withQuery($qs);
     }

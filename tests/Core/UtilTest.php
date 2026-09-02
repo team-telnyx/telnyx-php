@@ -64,21 +64,10 @@ class UtilTest extends TestCase
                 ['dog' => 'dog'],
                 'http://localhost?dog=dog',
             ],
-            [
-                '',
-                ['dog' => ['dog']],
-                'http://localhost?dog[0]=dog',
-            ],
-            [
-                '',
-                ['dog' => [true, false]],
-                'http://localhost?dog[0]=true&dog[1]=false',
-            ],
-            [
-                '',
-                ['dog' => ['dog' => ['dog']]],
-                'http://localhost?dog[dog][0]=dog',
-            ],
+            ['', ['dimensions' => ['billing_group_id'], 'metrics' => ['cost']], 'http://localhost?dimensions=billing_group_id&metrics=cost'],
+            ['', ['dimensions' => ['billing_group_id', 'connection_id']], 'http://localhost?dimensions=billing_group_id%2Cconnection_id'],
+            ['', ['enabled' => [true, false]], 'http://localhost?enabled=true%2Cfalse'],
+            ['', ['filter' => ['status' => 'delivered']], 'http://localhost?filter[status]=delivered'],
         ];
 
         foreach ($cases as [$path, $query, $output]) {
