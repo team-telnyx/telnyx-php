@@ -8,7 +8,7 @@ use Telnyx\AlphanumericSenderIDs\AlphanumericSenderID;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\MessagingProfiles\MessagingProfile;
+use Telnyx\MessagingProfiles\MessagingMessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
@@ -83,7 +83,7 @@ interface MessagingProfilesRawContract
      * @param array<string,mixed>|MessagingProfileListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MessagingProfile>>
+     * @return BaseResponse<DefaultFlatPagination<MessagingMessagingProfile>>
      *
      * @throws APIException
      */

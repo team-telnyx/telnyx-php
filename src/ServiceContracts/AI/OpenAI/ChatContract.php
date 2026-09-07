@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\OpenAI;
 
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Message;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Mode;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ReasoningEffort;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Region;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Core\Exceptions\APIException;
@@ -36,10 +38,12 @@ interface ChatContract
      * @param bool $logprobs Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`.
      * @param int $maxTokens maximum number of completion tokens the model should generate
      * @param float $minP This is an alternative to `top_p` that [many prefer](https://github.com/huggingface/transformers/issues/27670). Must be in [0, 1].
+     * @param Mode|value-of<Mode> $mode How strictly `region` is applied. `preferred` (the default when `region` is set) tries that region first and falls back to another when the model cannot be served there, so a request that would have succeeded still succeeds. `strict` pins the request: it is served from that region or it fails with a 422, never redirected to another region. Requires `region`.
      * @param string $model the language model to chat with
      * @param float $n this will return multiple choices for you instead of a single chat completion
      * @param float $presencePenalty higher values will penalize the model from repeating the same output tokens
      * @param ReasoningEffort|value-of<ReasoningEffort> $reasoningEffort Controls the reasoning effort for models that support it. When set, the model spends more or less compute on internal reasoning before generating its response. Supported values: none, minimal, low, medium, high, xhigh, max. Not all models support all values; unsupported values are rejected with a 400 error. When omitted, reasoning models use their default effort level.
+     * @param Region|value-of<Region> $region Optional data-residency region the request should be served from, using the same vocabulary as your account's Data Locality setting. Behavior depends on `mode`. Supported for Telnyx-hosted models only: a request routed to an external provider never passes through Telnyx model routing, so a region cannot be enforced for it. Omit for today's latency-based routing.
      * @param ResponseFormat|ResponseFormatShape $responseFormat Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
      * @param int $seed if specified, the system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result
      * @param string $serviceTier The service tier to use for this request. Supported values vary by model; use `GET /v2/ai/openai/models` and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
@@ -71,10 +75,12 @@ interface ChatContract
         bool $logprobs = false,
         ?int $maxTokens = null,
         ?float $minP = null,
+        Mode|string $mode = 'preferred',
         string $model = 'meta-llama/Meta-Llama-3.1-8B-Instruct',
         ?float $n = null,
         float $presencePenalty = 0,
         ReasoningEffort|string|null $reasoningEffort = null,
+        Region|string|null $region = null,
         ResponseFormat|array|null $responseFormat = null,
         ?int $seed = null,
         ?string $serviceTier = null,

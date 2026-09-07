@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\AI\Chat;
 
 use Telnyx\AI\Chat\ChatCompletionRequest\Message;
+use Telnyx\AI\Chat\ChatCompletionRequest\Mode;
 use Telnyx\AI\Chat\ChatCompletionRequest\ReasoningEffort;
+use Telnyx\AI\Chat\ChatCompletionRequest\Region;
 use Telnyx\AI\Chat\ChatCompletionRequest\ResponseFormat;
 use Telnyx\AI\Chat\ChatCompletionRequest\Stop;
 use Telnyx\AI\Chat\ChatCompletionRequest\Tool;
@@ -37,10 +39,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *   logprobs?: bool|null,
  *   maxTokens?: int|null,
  *   minP?: float|null,
+ *   mode?: null|Mode|value-of<Mode>,
  *   model?: string|null,
  *   n?: float|null,
  *   presencePenalty?: float|null,
  *   reasoningEffort?: null|ReasoningEffort|value-of<ReasoningEffort>,
+ *   region?: null|Region|value-of<Region>,
  *   responseFormat?: null|ResponseFormat|ResponseFormatShape,
  *   seed?: int|null,
  *   serviceTier?: string|null,
@@ -144,6 +148,14 @@ final class ChatCompletionRequest implements BaseModel
     public ?float $minP;
 
     /**
+     * How strictly `region` is applied. `preferred` (the default when `region` is set) tries that region first and falls back to another when the model cannot be served there, so a request that would have succeeded still succeeds. `strict` pins the request: it is served from that region or it fails with a 422, never redirected to another region. Requires `region`.
+     *
+     * @var value-of<Mode>|null $mode
+     */
+    #[Optional(enum: Mode::class)]
+    public ?string $mode;
+
+    /**
      * The language model to chat with.
      */
     #[Optional]
@@ -168,6 +180,14 @@ final class ChatCompletionRequest implements BaseModel
      */
     #[Optional('reasoning_effort', enum: ReasoningEffort::class)]
     public ?string $reasoningEffort;
+
+    /**
+     * Optional data-residency region the request should be served from, using the same vocabulary as your account's Data Locality setting. Behavior depends on `mode`. Supported for Telnyx-hosted models only: a request routed to an external provider never passes through Telnyx model routing, so a region cannot be enforced for it. Omit for today's latency-based routing.
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Optional(enum: Region::class)]
+    public ?string $region;
 
     /**
      * Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
@@ -264,7 +284,9 @@ final class ChatCompletionRequest implements BaseModel
      * @param list<Message|MessageShape> $messages
      * @param list<string>|null $guidedChoice
      * @param array<string,mixed>|null $guidedJson
+     * @param Mode|value-of<Mode>|null $mode
      * @param ReasoningEffort|value-of<ReasoningEffort>|null $reasoningEffort
+     * @param Region|value-of<Region>|null $region
      * @param ResponseFormat|ResponseFormatShape|null $responseFormat
      * @param StopShape|null $stop
      * @param ToolChoice|value-of<ToolChoice>|null $toolChoice
@@ -284,10 +306,12 @@ final class ChatCompletionRequest implements BaseModel
         ?bool $logprobs = null,
         ?int $maxTokens = null,
         ?float $minP = null,
+        Mode|string|null $mode = null,
         ?string $model = null,
         ?float $n = null,
         ?float $presencePenalty = null,
         ReasoningEffort|string|null $reasoningEffort = null,
+        Region|string|null $region = null,
         ResponseFormat|array|null $responseFormat = null,
         ?int $seed = null,
         ?string $serviceTier = null,
@@ -316,10 +340,12 @@ final class ChatCompletionRequest implements BaseModel
         null !== $logprobs && $self['logprobs'] = $logprobs;
         null !== $maxTokens && $self['maxTokens'] = $maxTokens;
         null !== $minP && $self['minP'] = $minP;
+        null !== $mode && $self['mode'] = $mode;
         null !== $model && $self['model'] = $model;
         null !== $n && $self['n'] = $n;
         null !== $presencePenalty && $self['presencePenalty'] = $presencePenalty;
         null !== $reasoningEffort && $self['reasoningEffort'] = $reasoningEffort;
+        null !== $region && $self['region'] = $region;
         null !== $responseFormat && $self['responseFormat'] = $responseFormat;
         null !== $seed && $self['seed'] = $seed;
         null !== $serviceTier && $self['serviceTier'] = $serviceTier;
@@ -485,6 +511,19 @@ final class ChatCompletionRequest implements BaseModel
     }
 
     /**
+     * How strictly `region` is applied. `preferred` (the default when `region` is set) tries that region first and falls back to another when the model cannot be served there, so a request that would have succeeded still succeeds. `strict` pins the request: it is served from that region or it fails with a 422, never redirected to another region. Requires `region`.
+     *
+     * @param Mode|value-of<Mode> $mode
+     */
+    public function withMode(Mode|string $mode): self
+    {
+        $self = clone $this;
+        $self['mode'] = $mode;
+
+        return $self;
+    }
+
+    /**
      * The language model to chat with.
      */
     public function withModel(string $model): self
@@ -527,6 +566,19 @@ final class ChatCompletionRequest implements BaseModel
     ): self {
         $self = clone $this;
         $self['reasoningEffort'] = $reasoningEffort;
+
+        return $self;
+    }
+
+    /**
+     * Optional data-residency region the request should be served from, using the same vocabulary as your account's Data Locality setting. Behavior depends on `mode`. Supported for Telnyx-hosted models only: a request routed to an external provider never passes through Telnyx model routing, so a region cannot be enforced for it. Omit for today's latency-based routing.
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $self = clone $this;
+        $self['region'] = $region;
 
         return $self;
     }

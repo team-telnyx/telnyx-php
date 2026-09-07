@@ -8,7 +8,7 @@ use Telnyx\AlphanumericSenderIDs\AlphanumericSenderID;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingProfileMetrics\MessagingMetricsTimeFrame;
-use Telnyx\MessagingProfiles\MessagingProfile;
+use Telnyx\MessagingProfiles\MessagingMessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
@@ -118,6 +118,8 @@ interface MessagingProfilesContract
      * assigned to the messaging profile.
      *
      * To disable this feature, set the object field to `null`.
+     * @param bool $redactionEnabled Set to true to enable message content redaction on this profile, or false to disable it. Ignored if the organization is not on the redaction allowlist. See the [Message Redaction guide](/docs/messaging/messages/message-redaction) for what is redacted.
+     * @param int $redactionLevel The redaction level to apply when redaction is enabled. 1: redact message records and reporting only. 2 (default): also redact inbound webhook payloads. See the [Message Redaction guide](/docs/messaging/messages/message-redaction).
      * @param bool $smartEncoding Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
      * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings The URL shortener feature allows automatic replacement of URLs that were generated using
      * a public URL shortener service. Some examples include bit.do, bit.ly, goo.gl, ht.ly,
@@ -149,6 +151,8 @@ interface MessagingProfilesContract
         bool $mobileOnly = false,
         ?string $name = null,
         NumberPoolSettings|array|null $numberPoolSettings = null,
+        bool $redactionEnabled = false,
+        int $redactionLevel = 2,
         bool $smartEncoding = false,
         URLShortenerSettings|array|null $urlShortenerSettings = null,
         ?string $v1Secret = null,
@@ -167,7 +171,7 @@ interface MessagingProfilesContract
      * @param string $filterNameEq filter profiles by exact name match
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<MessagingProfile>
+     * @return DefaultFlatPagination<MessagingMessagingProfile>
      *
      * @throws APIException
      */

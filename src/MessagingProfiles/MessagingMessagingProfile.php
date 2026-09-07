@@ -6,32 +6,35 @@ namespace Telnyx\MessagingProfiles;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
+use Telnyx\MessagingProfiles\MessagingMessagingProfile\RecordType;
+use Telnyx\MessagingProfiles\MessagingMessagingProfile\WebhookAPIVersion;
 
 /**
- * Updates the supplied settings on the specified messaging profile. Settings omitted from the request remain unchanged.
- *
- * @see Telnyx\Services\MessagingProfilesService::update()
- *
  * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
  * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
  *
- * @phpstan-type MessagingProfileUpdateParamsShape = array{
+ * @phpstan-type MessagingMessagingProfileShape = array{
+ *   id?: string|null,
  *   aiAssistantID?: string|null,
  *   alphaSender?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   dailySpendLimit?: string|null,
  *   dailySpendLimitEnabled?: bool|null,
  *   enabled?: bool|null,
+ *   healthWebhookURL?: string|null,
  *   mmsFallBackToSMS?: bool|null,
  *   mmsTranscoding?: bool|null,
  *   mobileOnly?: bool|null,
  *   name?: string|null,
  *   numberPoolSettings?: null|NumberPoolSettings|NumberPoolSettingsShape,
+ *   organizationID?: string|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  *   redactionEnabled?: bool|null,
  *   redactionLevel?: int|null,
+ *   resourceGroupID?: string|null,
  *   smartEncoding?: bool|null,
+ *   updatedAt?: \DateTimeInterface|null,
  *   urlShortenerSettings?: null|URLShortenerSettings|URLShortenerSettingsShape,
  *   v1Secret?: string|null,
  *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
@@ -40,14 +43,19 @@ use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
  *   whitelistedDestinations?: list<string>|null,
  * }
  */
-final class MessagingProfileUpdateParams implements BaseModel
+final class MessagingMessagingProfile implements BaseModel
 {
-    /** @use SdkModel<MessagingProfileUpdateParamsShape> */
+    /** @use SdkModel<MessagingMessagingProfileShape> */
     use SdkModel;
-    use SdkParams;
 
     /**
-     * The ID of the AI assistant associated with this messaging profile.
+     * Identifies the type of resource.
+     */
+    #[Optional]
+    public ?string $id;
+
+    /**
+     * The AI assistant ID associated with this messaging profile.
      */
     #[Optional('ai_assistant_id', nullable: true)]
     public ?string $aiAssistantID;
@@ -57,6 +65,12 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     #[Optional('alpha_sender', nullable: true)]
     public ?string $alphaSender;
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     /**
      * The maximum amount of money (in USD) that can be spent by this profile before midnight UTC.
@@ -75,6 +89,12 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     #[Optional]
     public ?bool $enabled;
+
+    /**
+     * DEPRECATED: health check url service checking.
+     */
+    #[Optional('health_webhook_url', nullable: true)]
+    public ?string $healthWebhookURL;
 
     /**
      * enables SMS fallback for MMS messages.
@@ -111,22 +131,48 @@ final class MessagingProfileUpdateParams implements BaseModel
     public ?NumberPoolSettings $numberPoolSettings;
 
     /**
-     * Set to true to enable message content redaction on this profile, or false to disable it. Ignored if the organization is not on the redaction allowlist. See the [Message Redaction guide](/docs/messaging/messages/message-redaction) for what is redacted.
+     * The organization that owns this messaging profile.
+     */
+    #[Optional('organization_id')]
+    public ?string $organizationID;
+
+    /**
+     * Identifies the type of the resource.
+     *
+     * @var value-of<RecordType>|null $recordType
+     */
+    #[Optional('record_type', enum: RecordType::class)]
+    public ?string $recordType;
+
+    /**
+     * Indicates whether message content redaction is enabled for this profile. When enabled, message text, MMS media, and the counterparty phone number are redacted in message records and reporting. Requires organization activation — contact support to enable. The field is only present in responses for organizations with redaction access.
      */
     #[Optional('redaction_enabled')]
     public ?bool $redactionEnabled;
 
     /**
-     * The redaction level to apply when redaction is enabled. 1: redact message records and reporting only. 2 (default): also redact inbound webhook payloads. See the [Message Redaction guide](/docs/messaging/messages/message-redaction).
+     * Determines how much information is redacted for privacy or compliance purposes. Level 1: message records and reporting are redacted, but inbound webhook payloads are not. Level 2 (default): message records, reporting, and inbound webhook payloads are all redacted.
      */
     #[Optional('redaction_level')]
     public ?int $redactionLevel;
+
+    /**
+     * The resource group ID associated with this messaging profile.
+     */
+    #[Optional('resource_group_id', nullable: true)]
+    public ?string $resourceGroupID;
 
     /**
      * Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
      */
     #[Optional('smart_encoding')]
     public ?bool $smartEncoding;
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     /**
      * The URL shortener feature allows automatic replacement of URLs that were generated using
@@ -169,8 +215,6 @@ final class MessagingProfileUpdateParams implements BaseModel
     /**
      * Destinations to which the messaging profile is allowed to send. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
      *
-     * This field is required if the messaging profile doesn't have it defined yet.
-     *
      * @var list<string>|null $whitelistedDestinations
      */
     #[Optional('whitelisted_destinations', list: 'string')]
@@ -187,24 +231,32 @@ final class MessagingProfileUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
+     * @param RecordType|value-of<RecordType>|null $recordType
      * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
+        ?string $id = null,
         ?string $aiAssistantID = null,
         ?string $alphaSender = null,
+        ?\DateTimeInterface $createdAt = null,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
         ?bool $enabled = null,
+        ?string $healthWebhookURL = null,
         ?bool $mmsFallBackToSMS = null,
         ?bool $mmsTranscoding = null,
         ?bool $mobileOnly = null,
         ?string $name = null,
         NumberPoolSettings|array|null $numberPoolSettings = null,
+        ?string $organizationID = null,
+        RecordType|string|null $recordType = null,
         ?bool $redactionEnabled = null,
         ?int $redactionLevel = null,
+        ?string $resourceGroupID = null,
         ?bool $smartEncoding = null,
+        ?\DateTimeInterface $updatedAt = null,
         URLShortenerSettings|array|null $urlShortenerSettings = null,
         ?string $v1Secret = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
@@ -214,19 +266,26 @@ final class MessagingProfileUpdateParams implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $id && $self['id'] = $id;
         null !== $aiAssistantID && $self['aiAssistantID'] = $aiAssistantID;
         null !== $alphaSender && $self['alphaSender'] = $alphaSender;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
         null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
         null !== $enabled && $self['enabled'] = $enabled;
+        null !== $healthWebhookURL && $self['healthWebhookURL'] = $healthWebhookURL;
         null !== $mmsFallBackToSMS && $self['mmsFallBackToSMS'] = $mmsFallBackToSMS;
         null !== $mmsTranscoding && $self['mmsTranscoding'] = $mmsTranscoding;
         null !== $mobileOnly && $self['mobileOnly'] = $mobileOnly;
         null !== $name && $self['name'] = $name;
         null !== $numberPoolSettings && $self['numberPoolSettings'] = $numberPoolSettings;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
+        null !== $recordType && $self['recordType'] = $recordType;
         null !== $redactionEnabled && $self['redactionEnabled'] = $redactionEnabled;
         null !== $redactionLevel && $self['redactionLevel'] = $redactionLevel;
+        null !== $resourceGroupID && $self['resourceGroupID'] = $resourceGroupID;
         null !== $smartEncoding && $self['smartEncoding'] = $smartEncoding;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
         null !== $v1Secret && $self['v1Secret'] = $v1Secret;
         null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
@@ -238,7 +297,18 @@ final class MessagingProfileUpdateParams implements BaseModel
     }
 
     /**
-     * The ID of the AI assistant associated with this messaging profile.
+     * Identifies the type of resource.
+     */
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
+
+        return $self;
+    }
+
+    /**
+     * The AI assistant ID associated with this messaging profile.
      */
     public function withAIAssistantID(?string $aiAssistantID): self
     {
@@ -255,6 +325,17 @@ final class MessagingProfileUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['alphaSender'] = $alphaSender;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
         return $self;
     }
@@ -289,6 +370,17 @@ final class MessagingProfileUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['enabled'] = $enabled;
+
+        return $self;
+    }
+
+    /**
+     * DEPRECATED: health check url service checking.
+     */
+    public function withHealthWebhookURL(?string $healthWebhookURL): self
+    {
+        $self = clone $this;
+        $self['healthWebhookURL'] = $healthWebhookURL;
 
         return $self;
     }
@@ -356,7 +448,31 @@ final class MessagingProfileUpdateParams implements BaseModel
     }
 
     /**
-     * Set to true to enable message content redaction on this profile, or false to disable it. Ignored if the organization is not on the redaction allowlist. See the [Message Redaction guide](/docs/messaging/messages/message-redaction) for what is redacted.
+     * The organization that owns this messaging profile.
+     */
+    public function withOrganizationID(string $organizationID): self
+    {
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     *
+     * @param RecordType|value-of<RecordType> $recordType
+     */
+    public function withRecordType(RecordType|string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * Indicates whether message content redaction is enabled for this profile. When enabled, message text, MMS media, and the counterparty phone number are redacted in message records and reporting. Requires organization activation — contact support to enable. The field is only present in responses for organizations with redaction access.
      */
     public function withRedactionEnabled(bool $redactionEnabled): self
     {
@@ -367,12 +483,23 @@ final class MessagingProfileUpdateParams implements BaseModel
     }
 
     /**
-     * The redaction level to apply when redaction is enabled. 1: redact message records and reporting only. 2 (default): also redact inbound webhook payloads. See the [Message Redaction guide](/docs/messaging/messages/message-redaction).
+     * Determines how much information is redacted for privacy or compliance purposes. Level 1: message records and reporting are redacted, but inbound webhook payloads are not. Level 2 (default): message records, reporting, and inbound webhook payloads are all redacted.
      */
     public function withRedactionLevel(int $redactionLevel): self
     {
         $self = clone $this;
         $self['redactionLevel'] = $redactionLevel;
+
+        return $self;
+    }
+
+    /**
+     * The resource group ID associated with this messaging profile.
+     */
+    public function withResourceGroupID(?string $resourceGroupID): self
+    {
+        $self = clone $this;
+        $self['resourceGroupID'] = $resourceGroupID;
 
         return $self;
     }
@@ -384,6 +511,17 @@ final class MessagingProfileUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['smartEncoding'] = $smartEncoding;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
@@ -457,8 +595,6 @@ final class MessagingProfileUpdateParams implements BaseModel
 
     /**
      * Destinations to which the messaging profile is allowed to send. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
-     *
-     * This field is required if the messaging profile doesn't have it defined yet.
      *
      * @param list<string> $whitelistedDestinations
      */

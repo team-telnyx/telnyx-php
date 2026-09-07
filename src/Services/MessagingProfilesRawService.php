@@ -11,7 +11,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingProfileMetrics\MessagingMetricsTimeFrame;
-use Telnyx\MessagingProfiles\MessagingProfile;
+use Telnyx\MessagingProfiles\MessagingMessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
@@ -139,6 +139,8 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *   mobileOnly?: bool,
      *   name?: string,
      *   numberPoolSettings?: NumberPoolSettings|NumberPoolSettingsShape|null,
+     *   redactionEnabled?: bool,
+     *   redactionLevel?: int,
      *   smartEncoding?: bool,
      *   urlShortenerSettings?: URLShortenerSettings|URLShortenerSettingsShape|null,
      *   v1Secret?: string,
@@ -187,7 +189,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      * }|MessagingProfileListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MessagingProfile>>
+     * @return BaseResponse<DefaultFlatPagination<MessagingMessagingProfile>>
      *
      * @throws APIException
      */
@@ -214,7 +216,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
                 ],
             ),
             options: $options,
-            convert: MessagingProfile::class,
+            convert: MessagingMessagingProfile::class,
             page: DefaultFlatPagination::class,
         );
     }

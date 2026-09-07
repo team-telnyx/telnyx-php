@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\OpenAI;
 
+use Telnyx\AI\OpenAI\OpenAICreateResponseParams\Mode;
 use Telnyx\AI\OpenAI\OpenAICreateResponseParams\Reasoning;
+use Telnyx\AI\OpenAI\OpenAICreateResponseParams\Region;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -27,8 +29,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *   conversation?: string|null,
  *   input?: array<string,mixed>|null,
  *   instructions?: string|null,
+ *   mode?: null|Mode|value-of<Mode>,
  *   model?: string|null,
  *   reasoning?: null|Reasoning|ReasoningShape,
+ *   region?: null|Region|value-of<Region>,
  *   serviceTier?: string|null,
  *   stream?: bool|null,
  * }
@@ -60,6 +64,14 @@ final class OpenAICreateResponseParams implements BaseModel
     public ?string $instructions;
 
     /**
+     * How strictly `region` is applied. `preferred` (the default when `region` is set) tries that region first and falls back to another when the model cannot be served there, so a request that would have succeeded still succeeds. `strict` pins the request: it is served from that region or it fails with a 422, never redirected to another region. Requires `region`.
+     *
+     * @var value-of<Mode>|null $mode
+     */
+    #[Optional(enum: Mode::class)]
+    public ?string $mode;
+
+    /**
      * Model identifier to use for the response, for example `zai-org/GLM-5.1-FP8` or another model available from the Telnyx OpenAI-compatible models endpoint.
      */
     #[Optional]
@@ -67,6 +79,14 @@ final class OpenAICreateResponseParams implements BaseModel
 
     #[Optional]
     public ?Reasoning $reasoning;
+
+    /**
+     * Optional data-residency region the request should be served from, using the same vocabulary as your account's Data Locality setting. Behavior depends on `mode`. Supported for Telnyx-hosted models only: a request routed to an external provider never passes through Telnyx model routing, so a region cannot be enforced for it. Omit for today's latency-based routing.
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Optional(enum: Region::class)]
+    public ?string $region;
 
     /**
      * The service tier to use for this request. Supported values vary by model; use `GET /v2/ai/openai/models` and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
@@ -91,14 +111,18 @@ final class OpenAICreateResponseParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param array<string,mixed>|null $input
+     * @param Mode|value-of<Mode>|null $mode
      * @param Reasoning|ReasoningShape|null $reasoning
+     * @param Region|value-of<Region>|null $region
      */
     public static function with(
         ?string $conversation = null,
         ?array $input = null,
         ?string $instructions = null,
+        Mode|string|null $mode = null,
         ?string $model = null,
         Reasoning|array|null $reasoning = null,
+        Region|string|null $region = null,
         ?string $serviceTier = null,
         ?bool $stream = null,
     ): self {
@@ -107,8 +131,10 @@ final class OpenAICreateResponseParams implements BaseModel
         null !== $conversation && $self['conversation'] = $conversation;
         null !== $input && $self['input'] = $input;
         null !== $instructions && $self['instructions'] = $instructions;
+        null !== $mode && $self['mode'] = $mode;
         null !== $model && $self['model'] = $model;
         null !== $reasoning && $self['reasoning'] = $reasoning;
+        null !== $region && $self['region'] = $region;
         null !== $serviceTier && $self['serviceTier'] = $serviceTier;
         null !== $stream && $self['stream'] = $stream;
 
@@ -151,6 +177,19 @@ final class OpenAICreateResponseParams implements BaseModel
     }
 
     /**
+     * How strictly `region` is applied. `preferred` (the default when `region` is set) tries that region first and falls back to another when the model cannot be served there, so a request that would have succeeded still succeeds. `strict` pins the request: it is served from that region or it fails with a 422, never redirected to another region. Requires `region`.
+     *
+     * @param Mode|value-of<Mode> $mode
+     */
+    public function withMode(Mode|string $mode): self
+    {
+        $self = clone $this;
+        $self['mode'] = $mode;
+
+        return $self;
+    }
+
+    /**
      * Model identifier to use for the response, for example `zai-org/GLM-5.1-FP8` or another model available from the Telnyx OpenAI-compatible models endpoint.
      */
     public function withModel(string $model): self
@@ -168,6 +207,19 @@ final class OpenAICreateResponseParams implements BaseModel
     {
         $self = clone $this;
         $self['reasoning'] = $reasoning;
+
+        return $self;
+    }
+
+    /**
+     * Optional data-residency region the request should be served from, using the same vocabulary as your account's Data Locality setting. Behavior depends on `mode`. Supported for Telnyx-hosted models only: a request routed to an external provider never passes through Telnyx model routing, so a region cannot be enforced for it. Omit for today's latency-based routing.
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $self = clone $this;
+        $self['region'] = $region;
 
         return $self;
     }

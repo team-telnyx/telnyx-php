@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type MessagingProfileShape from \Telnyx\MessagingProfiles\MessagingProfile
+ * @phpstan-import-type MessagingMessagingProfileShape from \Telnyx\MessagingProfiles\MessagingMessagingProfile
  *
  * @phpstan-type MessagingProfileDeleteResponseShape = array{
- *   data?: null|MessagingProfile|MessagingProfileShape
+ *   data?: null|MessagingMessagingProfile|MessagingMessagingProfileShape
  * }
  */
 final class MessagingProfileDeleteResponse implements BaseModel
@@ -21,7 +21,7 @@ final class MessagingProfileDeleteResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?MessagingProfile $data;
+    public ?MessagingMessagingProfile $data;
 
     public function __construct()
     {
@@ -33,10 +33,11 @@ final class MessagingProfileDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MessagingProfile|MessagingProfileShape|null $data
+     * @param MessagingMessagingProfile|MessagingMessagingProfileShape|null $data
      */
-    public static function with(MessagingProfile|array|null $data = null): self
-    {
+    public static function with(
+        MessagingMessagingProfile|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -45,9 +46,9 @@ final class MessagingProfileDeleteResponse implements BaseModel
     }
 
     /**
-     * @param MessagingProfile|MessagingProfileShape $data
+     * @param MessagingMessagingProfile|MessagingMessagingProfileShape $data
      */
-    public function withData(MessagingProfile|array $data): self
+    public function withData(MessagingMessagingProfile|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

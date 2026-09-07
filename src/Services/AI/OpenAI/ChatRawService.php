@@ -6,7 +6,9 @@ namespace Telnyx\Services\AI\OpenAI;
 
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Message;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Mode;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ReasoningEffort;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Region;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Client;
@@ -50,10 +52,12 @@ final class ChatRawService implements ChatRawContract
      *   logprobs?: bool,
      *   maxTokens?: int,
      *   minP?: float,
+     *   mode?: Mode|value-of<Mode>,
      *   model?: string,
      *   n?: float,
      *   presencePenalty?: float,
      *   reasoningEffort?: ReasoningEffort|value-of<ReasoningEffort>,
+     *   region?: Region|value-of<Region>,
      *   responseFormat?: ResponseFormat|ResponseFormatShape,
      *   seed?: int,
      *   serviceTier?: string,
