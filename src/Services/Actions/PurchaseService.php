@@ -8,7 +8,7 @@ use Telnyx\Actions\Purchase\PurchaseCreateParams\Status;
 use Telnyx\Actions\Purchase\PurchaseNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\PurchaseContract;
 
@@ -57,15 +57,16 @@ final class PurchaseService implements PurchaseContract
         ?string $whitelabelName = null,
         RequestOptions|array|null $requestOptions = null,
     ): PurchaseNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'amount' => $amount,
-                'product' => $product,
-                'simCardGroupID' => $simCardGroupID,
+                'product' => $product ?? Omitted::VALUE,
+                'simCardGroupID' => $simCardGroupID ?? Omitted::VALUE,
                 'status' => $status,
-                'tags' => $tags,
-                'whitelabelName' => $whitelabelName,
+                'tags' => $tags ?? Omitted::VALUE,
+                'whitelabelName' => $whitelabelName ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

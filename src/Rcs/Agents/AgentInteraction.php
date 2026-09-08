@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Rcs\Agents\AgentInteraction\InteractionType;
 
 /**
@@ -59,13 +60,13 @@ final class AgentInteraction implements BaseModel
      */
     public static function with(
         InteractionType|string $interactionType,
-        ?string $description = null
+        string|Omitted|null $description = Omitted::VALUE,
     ): self {
         $self = new self;
 
         $self['interactionType'] = $interactionType;
 
-        null !== $description && $self['description'] = $description;
+        Omitted::VALUE !== $description && $self['description'] = $description;
 
         return $self;
     }

@@ -10,7 +10,7 @@ use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDGetResponse;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AlphanumericSenderIDsContract;
@@ -51,12 +51,13 @@ final class AlphanumericSenderIDsService implements AlphanumericSenderIDsContrac
         ?string $usLongCodeFallback = null,
         RequestOptions|array|null $requestOptions = null,
     ): AlphanumericSenderIDNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'alphanumericSenderID' => $alphanumericSenderID,
                 'messagingProfileID' => $messagingProfileID,
-                'usLongCodeFallback' => $usLongCodeFallback,
+                'usLongCodeFallback' => $usLongCodeFallback ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -105,12 +106,13 @@ final class AlphanumericSenderIDsService implements AlphanumericSenderIDsContrac
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterMessagingProfileID' => $filterMessagingProfileID,
+                'filterMessagingProfileID' => $filterMessagingProfileID ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -11,7 +11,7 @@ use Telnyx\AI\Collections\Sources\SourceRequest;
 use Telnyx\AI\Collections\Sources\SourceType;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Collections\SourcesContract;
 
@@ -54,8 +54,9 @@ final class SourcesService implements SourcesContract
         ?string $bucketID = null,
         RequestOptions|array|null $requestOptions = null,
     ): SourceNewResponse {
-        $params = Util::removeNulls(
-            ['sourceType' => $sourceType, 'bucketID' => $bucketID]
+        $params = array_filter(
+            ['sourceType' => $sourceType, 'bucketID' => $bucketID ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -100,7 +101,7 @@ final class SourcesService implements SourcesContract
         string $uuid,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['uuid' => $uuid]);
+        $params = ['uuid' => $uuid];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($sourceID, params: $params, requestOptions: $requestOptions);
@@ -124,7 +125,7 @@ final class SourcesService implements SourcesContract
         array $sources,
         RequestOptions|array|null $requestOptions = null,
     ): SourceReplaceResponse {
-        $params = Util::removeNulls(['sources' => $sources]);
+        $params = ['sources' => $sources];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->replace($uuid, params: $params, requestOptions: $requestOptions);

@@ -14,7 +14,7 @@ use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesContract;
@@ -58,12 +58,13 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
     ): UserBundleNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'idempotencyKey' => $idempotencyKey,
-                'items' => $items,
-                'authorizationBearer' => $authorizationBearer,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
+                'items' => $items ?? Omitted::VALUE,
+                'authorizationBearer' => $authorizationBearer ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -88,8 +89,9 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
     ): UserBundleGetResponse {
-        $params = Util::removeNulls(
-            ['authorizationBearer' => $authorizationBearer]
+        $params = array_filter(
+            ['authorizationBearer' => $authorizationBearer ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -120,13 +122,14 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'authorizationBearer' => $authorizationBearer,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'authorizationBearer' => $authorizationBearer ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -151,8 +154,9 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
     ): UserBundleDeactivateResponse {
-        $params = Util::removeNulls(
-            ['authorizationBearer' => $authorizationBearer]
+        $params = array_filter(
+            ['authorizationBearer' => $authorizationBearer ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -177,8 +181,9 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
     ): UserBundleListResourcesResponse {
-        $params = Util::removeNulls(
-            ['authorizationBearer' => $authorizationBearer]
+        $params = array_filter(
+            ['authorizationBearer' => $authorizationBearer ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -203,8 +208,12 @@ final class UserBundlesService implements UserBundlesContract
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
     ): UserBundleListUnusedResponse {
-        $params = Util::removeNulls(
-            ['filter' => $filter, 'authorizationBearer' => $authorizationBearer]
+        $params = array_filter(
+            [
+                'filter' => $filter ?? Omitted::VALUE,
+                'authorizationBearer' => $authorizationBearer ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

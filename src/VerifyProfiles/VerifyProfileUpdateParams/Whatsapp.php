@@ -7,6 +7,7 @@ namespace Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type WhatsappShape = array{
@@ -67,18 +68,18 @@ final class Whatsapp implements BaseModel
      * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
+        string|Omitted|null $senderPhoneNumber = Omitted::VALUE,
+        string|Omitted|null $templateID = Omitted::VALUE,
+        string|Omitted|null $wabaID = Omitted::VALUE,
         ?int $defaultVerificationTimeoutSecs = null,
-        ?string $senderPhoneNumber = null,
-        ?string $templateID = null,
-        ?string $wabaID = null,
         ?array $whitelistedDestinations = null,
     ): self {
         $self = new self;
 
         null !== $defaultVerificationTimeoutSecs && $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
-        null !== $senderPhoneNumber && $self['senderPhoneNumber'] = $senderPhoneNumber;
-        null !== $templateID && $self['templateID'] = $templateID;
-        null !== $wabaID && $self['wabaID'] = $wabaID;
+        Omitted::VALUE !== $senderPhoneNumber && $self['senderPhoneNumber'] = $senderPhoneNumber;
+        Omitted::VALUE !== $templateID && $self['templateID'] = $templateID;
+        Omitted::VALUE !== $wabaID && $self['wabaID'] = $wabaID;
         null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
         return $self;

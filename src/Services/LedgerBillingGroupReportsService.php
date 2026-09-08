@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportGetResponse;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Telnyx\RequestOptions;
@@ -48,7 +48,10 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
         ?int $year = null,
         RequestOptions|array|null $requestOptions = null,
     ): LedgerBillingGroupReportNewResponse {
-        $params = Util::removeNulls(['month' => $month, 'year' => $year]);
+        $params = array_filter(
+            ['month' => $month ?? Omitted::VALUE, 'year' => $year ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);

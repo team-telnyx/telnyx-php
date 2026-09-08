@@ -7,7 +7,7 @@ namespace Telnyx\Services\Storage\Buckets;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\FileParam;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\SslCertificateContract;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateDeleteResponse;
@@ -52,8 +52,12 @@ final class SslCertificateService implements SslCertificateContract
         string|FileParam|null $privateKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): SslCertificateNewResponse {
-        $params = Util::removeNulls(
-            ['certificate' => $certificate, 'privateKey' => $privateKey]
+        $params = array_filter(
+            [
+                'certificate' => $certificate ?? Omitted::VALUE,
+                'privateKey' => $privateKey ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

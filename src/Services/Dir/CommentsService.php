@@ -6,7 +6,7 @@ namespace Telnyx\Services\Dir;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\Comments\CommentNewResponse;
 use Telnyx\Dir\Comments\CommentType;
@@ -52,8 +52,12 @@ final class CommentsService implements CommentsContract
         ?string $parentCommentID = null,
         RequestOptions|array|null $requestOptions = null,
     ): CommentNewResponse {
-        $params = Util::removeNulls(
-            ['content' => $content, 'parentCommentID' => $parentCommentID]
+        $params = array_filter(
+            [
+                'content' => $content,
+                'parentCommentID' => $parentCommentID ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -84,12 +88,13 @@ final class CommentsService implements CommentsContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'commentType' => $commentType,
+                'commentType' => $commentType ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

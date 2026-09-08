@@ -7,6 +7,7 @@ namespace Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MessagingFeatureSet;
 
 /**
@@ -48,17 +49,17 @@ final class Features implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MessagingFeatureSet|MessagingFeatureSetShape|null $mms
-     * @param MessagingFeatureSet|MessagingFeatureSetShape|null $sms
+     * @param Omitted|MessagingFeatureSet|MessagingFeatureSetShape|null $mms
+     * @param Omitted|MessagingFeatureSet|MessagingFeatureSetShape|null $sms
      */
     public static function with(
-        MessagingFeatureSet|array|null $mms = null,
-        MessagingFeatureSet|array|null $sms = null,
+        Omitted|MessagingFeatureSet|array|null $mms = Omitted::VALUE,
+        Omitted|MessagingFeatureSet|array|null $sms = Omitted::VALUE,
     ): self {
         $self = new self;
 
-        null !== $mms && $self['mms'] = $mms;
-        null !== $sms && $self['sms'] = $sms;
+        Omitted::VALUE !== $mms && $self['mms'] = $mms;
+        Omitted::VALUE !== $sms && $self['sms'] = $sms;
 
         return $self;
     }

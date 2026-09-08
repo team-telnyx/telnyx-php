@@ -7,6 +7,7 @@ namespace Telnyx\MobilePhoneNumbers\MobilePhoneNumber;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type InboundShape = array{
@@ -41,13 +42,13 @@ final class Inbound implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $interceptionAppID = null,
-        ?string $interceptionAppName = null
+        string|Omitted|null $interceptionAppID = Omitted::VALUE,
+        string|Omitted|null $interceptionAppName = Omitted::VALUE,
     ): self {
         $self = new self;
 
-        null !== $interceptionAppID && $self['interceptionAppID'] = $interceptionAppID;
-        null !== $interceptionAppName && $self['interceptionAppName'] = $interceptionAppName;
+        Omitted::VALUE !== $interceptionAppID && $self['interceptionAppID'] = $interceptionAppID;
+        Omitted::VALUE !== $interceptionAppName && $self['interceptionAppName'] = $interceptionAppName;
 
         return $self;
     }

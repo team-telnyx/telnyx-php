@@ -7,6 +7,7 @@ namespace Telnyx\EmailMessages;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type AttachmentRequestShape = array{
@@ -63,8 +64,8 @@ final class AttachmentRequest implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        string|Omitted|null $contentID = Omitted::VALUE,
         ?string $content = null,
-        ?string $contentID = null,
         ?string $contentType = null,
         ?string $disposition = null,
         ?string $filename = null,
@@ -72,7 +73,7 @@ final class AttachmentRequest implements BaseModel
         $self = new self;
 
         null !== $content && $self['content'] = $content;
-        null !== $contentID && $self['contentID'] = $contentID;
+        Omitted::VALUE !== $contentID && $self['contentID'] = $contentID;
         null !== $contentType && $self['contentType'] = $contentType;
         null !== $disposition && $self['disposition'] = $disposition;
         null !== $filename && $self['filename'] = $filename;

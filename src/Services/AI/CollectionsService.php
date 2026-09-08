@@ -10,7 +10,7 @@ use Telnyx\AI\Collections\Settings\RetrievalSettingsWrapper;
 use Telnyx\AI\Collections\Sources\SourceRequest;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\CollectionsContract;
@@ -73,14 +73,15 @@ final class CollectionsService implements CollectionsContract
         ?array $sources = null,
         RequestOptions|array|null $requestOptions = null,
     ): CollectionEnvelope {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'name' => $name,
-                'description' => $description,
-                'settings' => $settings,
-                'slug' => $slug,
-                'sources' => $sources,
+                'description' => $description ?? Omitted::VALUE,
+                'settings' => $settings ?? Omitted::VALUE,
+                'slug' => $slug ?? Omitted::VALUE,
+                'sources' => $sources ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -125,8 +126,12 @@ final class CollectionsService implements CollectionsContract
         ?string $name = null,
         RequestOptions|array|null $requestOptions = null,
     ): CollectionEnvelope {
-        $params = Util::removeNulls(
-            ['description' => $description, 'name' => $name]
+        $params = array_filter(
+            [
+                'description' => $description ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -153,9 +158,7 @@ final class CollectionsService implements CollectionsContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

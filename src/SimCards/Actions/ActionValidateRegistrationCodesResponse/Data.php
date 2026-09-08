@@ -7,6 +7,7 @@ namespace Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type DataShape = array{
@@ -53,14 +54,14 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $invalidDetail = null,
+        string|Omitted|null $invalidDetail = Omitted::VALUE,
         ?string $recordType = null,
         ?string $registrationCode = null,
         ?bool $valid = null,
     ): self {
         $self = new self;
 
-        null !== $invalidDetail && $self['invalidDetail'] = $invalidDetail;
+        Omitted::VALUE !== $invalidDetail && $self['invalidDetail'] = $invalidDetail;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $registrationCode && $self['registrationCode'] = $registrationCode;
         null !== $valid && $self['valid'] = $valid;

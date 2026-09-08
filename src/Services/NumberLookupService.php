@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\NumberLookup\NumberLookupGetResponse;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
 use Telnyx\RequestOptions;
@@ -48,7 +48,10 @@ final class NumberLookupService implements NumberLookupContract
         Type|string|null $type = null,
         RequestOptions|array|null $requestOptions = null,
     ): NumberLookupGetResponse {
-        $params = Util::removeNulls(['type' => $type]);
+        $params = array_filter(
+            ['type' => $type ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($phoneNumber, params: $params, requestOptions: $requestOptions);

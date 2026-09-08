@@ -11,7 +11,7 @@ use Telnyx\AI\Audio\AudioTranscribeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\FileParam;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AudioContract;
 
@@ -59,16 +59,17 @@ final class AudioService implements AudioContract
         TimestampGranularities|string|null $timestampGranularities = null,
         RequestOptions|array|null $requestOptions = null,
     ): AudioTranscribeResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'model' => $model,
-                'file' => $file,
-                'fileURL' => $fileURL,
-                'language' => $language,
-                'modelConfig' => $modelConfig,
+                'file' => $file ?? Omitted::VALUE,
+                'fileURL' => $fileURL ?? Omitted::VALUE,
+                'language' => $language ?? Omitted::VALUE,
+                'modelConfig' => $modelConfig ?? Omitted::VALUE,
                 'responseFormat' => $responseFormat,
-                'timestampGranularities' => $timestampGranularities,
+                'timestampGranularities' => $timestampGranularities ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

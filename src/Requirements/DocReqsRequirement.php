@@ -7,6 +7,7 @@ namespace Telnyx\Requirements;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\DocReqsRequirementType;
 use Telnyx\Requirements\DocReqsRequirement\Action;
 use Telnyx\Requirements\DocReqsRequirement\PhoneNumberType;
@@ -127,12 +128,12 @@ final class DocReqsRequirement implements BaseModel
      * @param list<DocReqsRequirementType|DocReqsRequirementTypeShape>|null $requirementTypes
      */
     public static function with(
+        \DateTimeInterface|Omitted|null $effectiveEndAt = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $effectiveStartAt = Omitted::VALUE,
         ?string $id = null,
         Action|string|null $action = null,
         ?string $countryCode = null,
         ?string $createdAt = null,
-        ?\DateTimeInterface $effectiveEndAt = null,
-        ?\DateTimeInterface $effectiveStartAt = null,
         ?string $locality = null,
         PhoneNumberType|string|null $phoneNumberType = null,
         ?string $recordType = null,
@@ -146,8 +147,8 @@ final class DocReqsRequirement implements BaseModel
         null !== $action && $self['action'] = $action;
         null !== $countryCode && $self['countryCode'] = $countryCode;
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $effectiveEndAt && $self['effectiveEndAt'] = $effectiveEndAt;
-        null !== $effectiveStartAt && $self['effectiveStartAt'] = $effectiveStartAt;
+        Omitted::VALUE !== $effectiveEndAt && $self['effectiveEndAt'] = $effectiveEndAt;
+        Omitted::VALUE !== $effectiveStartAt && $self['effectiveStartAt'] = $effectiveStartAt;
         null !== $locality && $self['locality'] = $locality;
         null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
         null !== $recordType && $self['recordType'] = $recordType;

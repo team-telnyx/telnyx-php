@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlContract;
 use Telnyx\Services\Texml\AccountsService;
@@ -156,50 +156,51 @@ final class TexmlService implements TexmlContract
         Trim|string|null $trim = null,
         RequestOptions|array|null $requestOptions = null,
     ): TexmlInitiateAICallResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'aiAssistantID' => $aiAssistantID,
                 'from' => $from,
                 'to' => $to,
-                'aiAssistantDynamicVariables' => $aiAssistantDynamicVariables,
-                'aiAssistantVersion' => $aiAssistantVersion,
+                'aiAssistantDynamicVariables' => $aiAssistantDynamicVariables ?? Omitted::VALUE,
+                'aiAssistantVersion' => $aiAssistantVersion ?? Omitted::VALUE,
                 'asyncAmd' => $asyncAmd,
-                'asyncAmdStatusCallback' => $asyncAmdStatusCallback,
+                'asyncAmdStatusCallback' => $asyncAmdStatusCallback ?? Omitted::VALUE,
                 'asyncAmdStatusCallbackMethod' => $asyncAmdStatusCallbackMethod,
-                'callerID' => $callerID,
-                'conversationCallback' => $conversationCallback,
+                'callerID' => $callerID ?? Omitted::VALUE,
+                'conversationCallback' => $conversationCallback ?? Omitted::VALUE,
                 'conversationCallbackMethod' => $conversationCallbackMethod,
-                'conversationCallbacks' => $conversationCallbacks,
-                'customHeaders' => $customHeaders,
+                'conversationCallbacks' => $conversationCallbacks ?? Omitted::VALUE,
+                'customHeaders' => $customHeaders ?? Omitted::VALUE,
                 'detectionMode' => $detectionMode,
                 'machineDetection' => $machineDetection,
                 'machineDetectionBeepProfile' => $machineDetectionBeepProfile,
-                'machineDetectionPromptEndTimeout' => $machineDetectionPromptEndTimeout,
+                'machineDetectionPromptEndTimeout' => $machineDetectionPromptEndTimeout ?? Omitted::VALUE,
                 'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
                 'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
                 'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
                 'machineDetectionTimeout' => $machineDetectionTimeout,
-                'passports' => $passports,
-                'preferredCodecs' => $preferredCodecs,
-                'record' => $record,
-                'recordingChannels' => $recordingChannels,
-                'recordingStatusCallback' => $recordingStatusCallback,
-                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
-                'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
+                'passports' => $passports ?? Omitted::VALUE,
+                'preferredCodecs' => $preferredCodecs ?? Omitted::VALUE,
+                'record' => $record ?? Omitted::VALUE,
+                'recordingChannels' => $recordingChannels ?? Omitted::VALUE,
+                'recordingStatusCallback' => $recordingStatusCallback ?? Omitted::VALUE,
+                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent ?? Omitted::VALUE,
+                'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod ?? Omitted::VALUE,
                 'recordingTimeout' => $recordingTimeout,
-                'recordingTrack' => $recordingTrack,
+                'recordingTrack' => $recordingTrack ?? Omitted::VALUE,
                 'sendRecordingURL' => $sendRecordingURL,
-                'sipAuthPassword' => $sipAuthPassword,
-                'sipAuthUsername' => $sipAuthUsername,
+                'sipAuthPassword' => $sipAuthPassword ?? Omitted::VALUE,
+                'sipAuthUsername' => $sipAuthUsername ?? Omitted::VALUE,
                 'sipRegion' => $sipRegion,
-                'statusCallback' => $statusCallback,
+                'statusCallback' => $statusCallback ?? Omitted::VALUE,
                 'statusCallbackEvent' => $statusCallbackEvent,
                 'statusCallbackMethod' => $statusCallbackMethod,
-                'statusCallbacks' => $statusCallbacks,
+                'statusCallbacks' => $statusCallbacks ?? Omitted::VALUE,
                 'timeLimit' => $timeLimit,
                 'timeoutSeconds' => $timeoutSeconds,
-                'trim' => $trim,
+                'trim' => $trim ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -224,7 +225,7 @@ final class TexmlService implements TexmlContract
         string $value,
         RequestOptions|array|null $requestOptions = null,
     ): TexmlSecretsResponse {
-        $params = Util::removeNulls(['name' => $name, 'value' => $value]);
+        $params = ['name' => $name, 'value' => $value];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->secrets(params: $params, requestOptions: $requestOptions);

@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Rcs\Brands\BrandCreateParams\Contacts;
 use Telnyx\Rcs\Brands\BrandCreateParams\Identifiers;
 
@@ -134,7 +135,7 @@ final class BrandCreateParams implements BaseModel
         string $legalName,
         BrandOrganizationType|string $organizationType,
         string $websiteURL,
-        ?string $profileID = null,
+        string|Omitted|null $profileID = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -147,7 +148,7 @@ final class BrandCreateParams implements BaseModel
         $self['organizationType'] = $organizationType;
         $self['websiteURL'] = $websiteURL;
 
-        null !== $profileID && $self['profileID'] = $profileID;
+        Omitted::VALUE !== $profileID && $self['profileID'] = $profileID;
 
         return $self;
     }

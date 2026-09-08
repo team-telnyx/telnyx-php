@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\TermsOfService\Agreements\TosProductType;
 
 /**
@@ -102,8 +103,8 @@ final class Data implements BaseModel
         string $currentTermsVersion,
         bool $hasAgreed,
         TosProductType|string $productType,
-        ?\DateTimeInterface $agreedAt = null,
-        ?string $agreedVersion = null,
+        \DateTimeInterface|Omitted|null $agreedAt = Omitted::VALUE,
+        string|Omitted|null $agreedVersion = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -112,8 +113,8 @@ final class Data implements BaseModel
         $self['hasAgreed'] = $hasAgreed;
         $self['productType'] = $productType;
 
-        null !== $agreedAt && $self['agreedAt'] = $agreedAt;
-        null !== $agreedVersion && $self['agreedVersion'] = $agreedVersion;
+        Omitted::VALUE !== $agreedAt && $self['agreedAt'] = $agreedAt;
+        Omitted::VALUE !== $agreedVersion && $self['agreedVersion'] = $agreedVersion;
 
         return $self;
     }

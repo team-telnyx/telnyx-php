@@ -8,6 +8,7 @@ use Telnyx\BillingGroups\BillingGroup\RecordType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type BillingGroupShape = array{
@@ -82,9 +83,9 @@ final class BillingGroup implements BaseModel
      * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
+        \DateTimeInterface|Omitted|null $deletedAt = Omitted::VALUE,
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
-        ?\DateTimeInterface $deletedAt = null,
         ?string $name = null,
         ?string $organizationID = null,
         RecordType|string|null $recordType = null,
@@ -94,7 +95,7 @@ final class BillingGroup implements BaseModel
 
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $deletedAt && $self['deletedAt'] = $deletedAt;
+        Omitted::VALUE !== $deletedAt && $self['deletedAt'] = $deletedAt;
         null !== $name && $self['name'] = $name;
         null !== $organizationID && $self['organizationID'] = $organizationID;
         null !== $recordType && $self['recordType'] = $recordType;

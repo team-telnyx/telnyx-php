@@ -6,7 +6,7 @@ namespace Telnyx\Services\Rcs;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Rcs\Agents\AgentConfiguration;
 use Telnyx\Rcs\Agents\AgentLaunchParams\Campaign;
 use Telnyx\Rcs\Agents\AgentResponse;
@@ -56,8 +56,8 @@ final class AgentsService implements AgentsContract
      * @param string $displayName Body param
      * @param AgentUseCase|value-of<AgentUseCase> $useCase Body param
      * @param string $idempotencyKey Header param: A caller-generated key containing letters, numbers, underscores, or hyphens. Reuse the same key and request body when retrying the same logical agent creation.
-     * @param string|null $hostingRegion Body param
-     * @param string|null $profileID Body param: A Messaging Profile owned by the authenticated organization. When omitted, the agent inherits the brand profile.
+     * @param string|Omitted|null $hostingRegion Body param
+     * @param string|Omitted|null $profileID Body param: A Messaging Profile owned by the authenticated organization. When omitted, the agent inherits the brand profile.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -68,11 +68,11 @@ final class AgentsService implements AgentsContract
         string $displayName,
         AgentUseCase|string $useCase,
         string $idempotencyKey,
-        ?string $hostingRegion = null,
-        ?string $profileID = null,
+        string|Omitted|null $hostingRegion = Omitted::VALUE,
+        string|Omitted|null $profileID = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): AgentResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'brandID' => $brandID,
                 'configuration' => $configuration,
@@ -82,6 +82,7 @@ final class AgentsService implements AgentsContract
                 'hostingRegion' => $hostingRegion,
                 'profileID' => $profileID,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -131,14 +132,15 @@ final class AgentsService implements AgentsContract
         AgentUseCase|string|null $useCase = null,
         RequestOptions|array|null $requestOptions = null,
     ): AgentResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'configuration' => $configuration,
-                'displayName' => $displayName,
-                'hostingRegion' => $hostingRegion,
-                'profileID' => $profileID,
-                'useCase' => $useCase,
+                'configuration' => $configuration ?? Omitted::VALUE,
+                'displayName' => $displayName ?? Omitted::VALUE,
+                'hostingRegion' => $hostingRegion ?? Omitted::VALUE,
+                'profileID' => $profileID ?? Omitted::VALUE,
+                'useCase' => $useCase ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -163,7 +165,10 @@ final class AgentsService implements AgentsContract
         ?string $brandID = null,
         RequestOptions|array|null $requestOptions = null
     ): array {
-        $params = Util::removeNulls(['brandID' => $brandID]);
+        $params = array_filter(
+            ['brandID' => $brandID ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -189,9 +194,7 @@ final class AgentsService implements AgentsContract
         AgentTestingConfiguration|array $testing,
         RequestOptions|array|null $requestOptions = null,
     ): AgentResponse {
-        $params = Util::removeNulls(
-            ['campaign' => $campaign, 'testing' => $testing]
-        );
+        $params = ['campaign' => $campaign, 'testing' => $testing];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->launch($id, params: $params, requestOptions: $requestOptions);

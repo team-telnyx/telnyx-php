@@ -12,7 +12,7 @@ use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\OpenAI\ChatContract;
 
@@ -112,39 +112,40 @@ final class ChatService implements ChatContract
         bool $useBeamSearch = false,
         RequestOptions|array|null $requestOptions = null,
     ): array {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'messages' => $messages,
-                'apiKeyRef' => $apiKeyRef,
-                'bestOf' => $bestOf,
+                'apiKeyRef' => $apiKeyRef ?? Omitted::VALUE,
+                'bestOf' => $bestOf ?? Omitted::VALUE,
                 'earlyStopping' => $earlyStopping,
                 'enableThinking' => $enableThinking,
                 'frequencyPenalty' => $frequencyPenalty,
-                'guidedChoice' => $guidedChoice,
-                'guidedJson' => $guidedJson,
-                'guidedRegex' => $guidedRegex,
+                'guidedChoice' => $guidedChoice ?? Omitted::VALUE,
+                'guidedJson' => $guidedJson ?? Omitted::VALUE,
+                'guidedRegex' => $guidedRegex ?? Omitted::VALUE,
                 'lengthPenalty' => $lengthPenalty,
                 'logprobs' => $logprobs,
-                'maxTokens' => $maxTokens,
-                'minP' => $minP,
+                'maxTokens' => $maxTokens ?? Omitted::VALUE,
+                'minP' => $minP ?? Omitted::VALUE,
                 'mode' => $mode,
                 'model' => $model,
-                'n' => $n,
+                'n' => $n ?? Omitted::VALUE,
                 'presencePenalty' => $presencePenalty,
-                'reasoningEffort' => $reasoningEffort,
-                'region' => $region,
-                'responseFormat' => $responseFormat,
-                'seed' => $seed,
-                'serviceTier' => $serviceTier,
-                'stop' => $stop,
+                'reasoningEffort' => $reasoningEffort ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
+                'responseFormat' => $responseFormat ?? Omitted::VALUE,
+                'seed' => $seed ?? Omitted::VALUE,
+                'serviceTier' => $serviceTier ?? Omitted::VALUE,
+                'stop' => $stop ?? Omitted::VALUE,
                 'stream' => $stream,
                 'temperature' => $temperature,
-                'toolChoice' => $toolChoice,
-                'tools' => $tools,
-                'topLogprobs' => $topLogprobs,
-                'topP' => $topP,
+                'toolChoice' => $toolChoice ?? Omitted::VALUE,
+                'tools' => $tools ?? Omitted::VALUE,
+                'topLogprobs' => $topLogprobs ?? Omitted::VALUE,
+                'topP' => $topP ?? Omitted::VALUE,
                 'useBeamSearch' => $useBeamSearch,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

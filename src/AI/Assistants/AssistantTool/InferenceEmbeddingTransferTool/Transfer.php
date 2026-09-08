@@ -12,6 +12,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-import-type TargetsVariants from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Targets
@@ -127,11 +128,11 @@ final class Transfer implements BaseModel
     public static function with(
         string $from,
         string|array $targets,
+        int|Omitted|null $warmMessageDelayMs = Omitted::VALUE,
         ?array $customHeaders = null,
         ?string $description = null,
         ?string $diversion = null,
         VoicemailDetection|array|null $voicemailDetection = null,
-        ?int $warmMessageDelayMs = null,
         WarmTransferAcceptance|array|null $warmTransferAcceptance = null,
         ?string $warmTransferInstructions = null,
     ): self {
@@ -144,7 +145,7 @@ final class Transfer implements BaseModel
         null !== $description && $self['description'] = $description;
         null !== $diversion && $self['diversion'] = $diversion;
         null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
-        null !== $warmMessageDelayMs && $self['warmMessageDelayMs'] = $warmMessageDelayMs;
+        Omitted::VALUE !== $warmMessageDelayMs && $self['warmMessageDelayMs'] = $warmMessageDelayMs;
         null !== $warmTransferAcceptance && $self['warmTransferAcceptance'] = $warmTransferAcceptance;
         null !== $warmTransferInstructions && $self['warmTransferInstructions'] = $warmTransferInstructions;
 

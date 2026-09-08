@@ -6,7 +6,7 @@ namespace Telnyx\Services\Messaging10dlc;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Messaging10dlc\Campaign\CampaignSharingStatus;
 use Telnyx\Messaging10dlc\PartnerCampaigns\PartnerCampaignListParams\Sort;
 use Telnyx\Messaging10dlc\PartnerCampaigns\PartnerCampaignListSharedByMeResponse;
@@ -71,8 +71,12 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): TelnyxDownstreamCampaign {
-        $params = Util::removeNulls(
-            ['webhookFailoverURL' => $webhookFailoverURL, 'webhookURL' => $webhookURL]
+        $params = array_filter(
+            [
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -103,9 +107,9 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         Sort|string $sort = '-createdAt',
         RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2 {
-        $params = Util::removeNulls(
-            ['page' => $page, 'recordsPerPage' => $recordsPerPage, 'sort' => $sort]
-        );
+        $params = [
+            'page' => $page, 'recordsPerPage' => $recordsPerPage, 'sort' => $sort,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -135,9 +139,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
         int $recordsPerPage = 10,
         RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2 {
-        $params = Util::removeNulls(
-            ['page' => $page, 'recordsPerPage' => $recordsPerPage]
-        );
+        $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listSharedByMe(params: $params, requestOptions: $requestOptions);

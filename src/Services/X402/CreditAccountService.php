@@ -6,7 +6,7 @@ namespace Telnyx\Services\X402;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\X402\CreditAccountContract;
 use Telnyx\X402\CreditAccount\CreditAccountNewQuoteResponse;
@@ -46,7 +46,7 @@ final class CreditAccountService implements CreditAccountContract
         string $amountUsd,
         RequestOptions|array|null $requestOptions = null
     ): CreditAccountNewQuoteResponse {
-        $params = Util::removeNulls(['amountUsd' => $amountUsd]);
+        $params = ['amountUsd' => $amountUsd];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createQuote(params: $params, requestOptions: $requestOptions);
@@ -72,12 +72,13 @@ final class CreditAccountService implements CreditAccountContract
         ?string $headerPaymentSignature = null,
         RequestOptions|array|null $requestOptions = null,
     ): CreditAccountSettleResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'id' => $id,
-                'paymentSignature' => $paymentSignature,
-                'headerPaymentSignature' => $headerPaymentSignature,
+                'paymentSignature' => $paymentSignature ?? Omitted::VALUE,
+                'headerPaymentSignature' => $headerPaymentSignature ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

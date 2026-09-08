@@ -13,7 +13,7 @@ use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\AuthenticationProviders\Settings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersContract;
@@ -59,14 +59,15 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
         ?string $settingsURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): AuthenticationProviderNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'name' => $name,
                 'settings' => $settings,
                 'shortName' => $shortName,
                 'active' => $active,
-                'settingsURL' => $settingsURL,
+                'settingsURL' => $settingsURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -119,14 +120,15 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
         ?string $shortName = null,
         RequestOptions|array|null $requestOptions = null,
     ): AuthenticationProviderUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'active' => $active,
-                'name' => $name,
-                'settings' => $settings,
-                'settingsURL' => $settingsURL,
-                'shortName' => $shortName,
+                'name' => $name ?? Omitted::VALUE,
+                'settings' => $settings ?? Omitted::VALUE,
+                'settingsURL' => $settingsURL ?? Omitted::VALUE,
+                'shortName' => $shortName ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -163,8 +165,13 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
         Sort|string $sort = '-created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize, 'sort' => $sort]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

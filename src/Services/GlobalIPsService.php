@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\GlobalIPs\GlobalIP;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
@@ -53,8 +53,13 @@ final class GlobalIPsService implements GlobalIPsContract
         ?array $ports = null,
         RequestOptions|array|null $requestOptions = null,
     ): GlobalIPNewResponse {
-        $params = Util::removeNulls(
-            ['description' => $description, 'name' => $name, 'ports' => $ports]
+        $params = array_filter(
+            [
+                'description' => $description ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'ports' => $ports ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -99,8 +104,12 @@ final class GlobalIPsService implements GlobalIPsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

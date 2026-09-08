@@ -7,6 +7,7 @@ namespace Telnyx\LedgerBillingGroupReports;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\RecordType;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport\Status;
 
@@ -86,11 +87,11 @@ final class LedgerBillingGroupReport implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        string|Omitted|null $reportURL = Omitted::VALUE,
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $organizationID = null,
         RecordType|string|null $recordType = null,
-        ?string $reportURL = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
@@ -100,7 +101,7 @@ final class LedgerBillingGroupReport implements BaseModel
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $organizationID && $self['organizationID'] = $organizationID;
         null !== $recordType && $self['recordType'] = $recordType;
-        null !== $reportURL && $self['reportURL'] = $reportURL;
+        Omitted::VALUE !== $reportURL && $self['reportURL'] = $reportURL;
         null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 

@@ -28,7 +28,7 @@ use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
 use Telnyx\Services\AI\Assistants\CanaryDeploysService;
@@ -192,38 +192,39 @@ final class AssistantsService implements AssistantsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'instructions' => $instructions,
                 'name' => $name,
-                'conversationFlow' => $conversationFlow,
-                'description' => $description,
-                'dynamicVariables' => $dynamicVariables,
+                'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
+                'description' => $description ?? Omitted::VALUE,
+                'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,
-                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-                'enabledFeatures' => $enabledFeatures,
-                'externalLlm' => $externalLlm,
-                'fallbackConfig' => $fallbackConfig,
-                'greeting' => $greeting,
-                'insightSettings' => $insightSettings,
+                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL ?? Omitted::VALUE,
+                'enabledFeatures' => $enabledFeatures ?? Omitted::VALUE,
+                'externalLlm' => $externalLlm ?? Omitted::VALUE,
+                'fallbackConfig' => $fallbackConfig ?? Omitted::VALUE,
+                'greeting' => $greeting ?? Omitted::VALUE,
+                'insightSettings' => $insightSettings ?? Omitted::VALUE,
                 'integrations' => $integrations,
-                'interruptionSettings' => $interruptionSettings,
-                'llmAPIKeyRef' => $llmAPIKeyRef,
+                'interruptionSettings' => $interruptionSettings ?? Omitted::VALUE,
+                'llmAPIKeyRef' => $llmAPIKeyRef ?? Omitted::VALUE,
                 'mcpServers' => $mcpServers,
-                'messagingSettings' => $messagingSettings,
-                'model' => $model,
-                'observabilitySettings' => $observabilitySettings,
-                'postConversationSettings' => $postConversationSettings,
-                'privacySettings' => $privacySettings,
+                'messagingSettings' => $messagingSettings ?? Omitted::VALUE,
+                'model' => $model ?? Omitted::VALUE,
+                'observabilitySettings' => $observabilitySettings ?? Omitted::VALUE,
+                'postConversationSettings' => $postConversationSettings ?? Omitted::VALUE,
+                'privacySettings' => $privacySettings ?? Omitted::VALUE,
                 'tags' => $tags,
-                'telephonySettings' => $telephonySettings,
-                'toolIDs' => $toolIDs,
-                'tools' => $tools,
-                'transcription' => $transcription,
-                'voiceSettings' => $voiceSettings,
-                'widgetSettings' => $widgetSettings,
-                'idempotencyKey' => $idempotencyKey,
+                'telephonySettings' => $telephonySettings ?? Omitted::VALUE,
+                'toolIDs' => $toolIDs ?? Omitted::VALUE,
+                'tools' => $tools ?? Omitted::VALUE,
+                'transcription' => $transcription ?? Omitted::VALUE,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'widgetSettings' => $widgetSettings ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -254,13 +255,14 @@ final class AssistantsService implements AssistantsContract
         ?string $to = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'callControlID' => $callControlID,
+                'callControlID' => $callControlID ?? Omitted::VALUE,
                 'fetchDynamicVariablesFromWebhook' => $fetchDynamicVariablesFromWebhook,
-                'from' => $from,
-                'to' => $to,
+                'from' => $from ?? Omitted::VALUE,
+                'to' => $to ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -345,39 +347,40 @@ final class AssistantsService implements AssistantsContract
         WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'conversationFlow' => $conversationFlow,
-                'description' => $description,
-                'dynamicVariables' => $dynamicVariables,
+                'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
+                'description' => $description ?? Omitted::VALUE,
+                'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,
-                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-                'enabledFeatures' => $enabledFeatures,
-                'externalLlm' => $externalLlm,
-                'fallbackConfig' => $fallbackConfig,
-                'greeting' => $greeting,
-                'insightSettings' => $insightSettings,
-                'instructions' => $instructions,
+                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL ?? Omitted::VALUE,
+                'enabledFeatures' => $enabledFeatures ?? Omitted::VALUE,
+                'externalLlm' => $externalLlm ?? Omitted::VALUE,
+                'fallbackConfig' => $fallbackConfig ?? Omitted::VALUE,
+                'greeting' => $greeting ?? Omitted::VALUE,
+                'insightSettings' => $insightSettings ?? Omitted::VALUE,
+                'instructions' => $instructions ?? Omitted::VALUE,
                 'integrations' => $integrations,
-                'interruptionSettings' => $interruptionSettings,
-                'llmAPIKeyRef' => $llmAPIKeyRef,
+                'interruptionSettings' => $interruptionSettings ?? Omitted::VALUE,
+                'llmAPIKeyRef' => $llmAPIKeyRef ?? Omitted::VALUE,
                 'mcpServers' => $mcpServers,
-                'messagingSettings' => $messagingSettings,
-                'model' => $model,
-                'name' => $name,
-                'observabilitySettings' => $observabilitySettings,
-                'postConversationSettings' => $postConversationSettings,
-                'privacySettings' => $privacySettings,
+                'messagingSettings' => $messagingSettings ?? Omitted::VALUE,
+                'model' => $model ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'observabilitySettings' => $observabilitySettings ?? Omitted::VALUE,
+                'postConversationSettings' => $postConversationSettings ?? Omitted::VALUE,
+                'privacySettings' => $privacySettings ?? Omitted::VALUE,
                 'promoteToMain' => $promoteToMain,
                 'tags' => $tags,
-                'telephonySettings' => $telephonySettings,
-                'toolIDs' => $toolIDs,
-                'tools' => $tools,
-                'transcription' => $transcription,
+                'telephonySettings' => $telephonySettings ?? Omitted::VALUE,
+                'toolIDs' => $toolIDs ?? Omitted::VALUE,
+                'tools' => $tools ?? Omitted::VALUE,
+                'transcription' => $transcription ?? Omitted::VALUE,
                 'versionName' => $versionName,
-                'voiceSettings' => $voiceSettings,
-                'widgetSettings' => $widgetSettings,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'widgetSettings' => $widgetSettings ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -446,13 +449,14 @@ final class AssistantsService implements AssistantsContract
         bool $stream = false,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantChatResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'content' => $content,
                 'conversationID' => $conversationID,
-                'name' => $name,
+                'name' => $name ?? Omitted::VALUE,
                 'stream' => $stream,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -477,7 +481,10 @@ final class AssistantsService implements AssistantsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(['idempotencyKey' => $idempotencyKey]);
+        $params = array_filter(
+            ['idempotencyKey' => $idempotencyKey ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->clone($assistantID, params: $params, requestOptions: $requestOptions);
@@ -525,13 +532,14 @@ final class AssistantsService implements AssistantsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantsList {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'apiKeyRef' => $apiKeyRef,
                 'provider' => $provider,
-                'importIDs' => $importIDs,
-                'idempotencyKey' => $idempotencyKey,
+                'importIDs' => $importIDs ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -571,15 +579,16 @@ final class AssistantsService implements AssistantsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantSendSMSResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'from' => $from,
                 'to' => $to,
-                'conversationMetadata' => $conversationMetadata,
-                'shouldCreateConversation' => $shouldCreateConversation,
-                'text' => $text,
-                'idempotencyKey' => $idempotencyKey,
+                'conversationMetadata' => $conversationMetadata ?? Omitted::VALUE,
+                'shouldCreateConversation' => $shouldCreateConversation ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

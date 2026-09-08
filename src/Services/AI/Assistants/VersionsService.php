@@ -24,7 +24,7 @@ use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
 
@@ -82,8 +82,12 @@ final class VersionsService implements VersionsContract
         ?bool $includeMcpServers = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(
-            ['assistantID' => $assistantID, 'includeMcpServers' => $includeMcpServers]
+        $params = array_filter(
+            [
+                'assistantID' => $assistantID,
+                'includeMcpServers' => $includeMcpServers ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -170,39 +174,40 @@ final class VersionsService implements VersionsContract
         WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'assistantID' => $assistantID,
-                'conversationFlow' => $conversationFlow,
-                'description' => $description,
-                'dynamicVariables' => $dynamicVariables,
+                'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
+                'description' => $description ?? Omitted::VALUE,
+                'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,
-                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-                'enabledFeatures' => $enabledFeatures,
-                'externalLlm' => $externalLlm,
-                'fallbackConfig' => $fallbackConfig,
-                'greeting' => $greeting,
-                'insightSettings' => $insightSettings,
-                'instructions' => $instructions,
+                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL ?? Omitted::VALUE,
+                'enabledFeatures' => $enabledFeatures ?? Omitted::VALUE,
+                'externalLlm' => $externalLlm ?? Omitted::VALUE,
+                'fallbackConfig' => $fallbackConfig ?? Omitted::VALUE,
+                'greeting' => $greeting ?? Omitted::VALUE,
+                'insightSettings' => $insightSettings ?? Omitted::VALUE,
+                'instructions' => $instructions ?? Omitted::VALUE,
                 'integrations' => $integrations,
-                'interruptionSettings' => $interruptionSettings,
-                'llmAPIKeyRef' => $llmAPIKeyRef,
+                'interruptionSettings' => $interruptionSettings ?? Omitted::VALUE,
+                'llmAPIKeyRef' => $llmAPIKeyRef ?? Omitted::VALUE,
                 'mcpServers' => $mcpServers,
-                'messagingSettings' => $messagingSettings,
-                'model' => $model,
-                'name' => $name,
-                'observabilitySettings' => $observabilitySettings,
-                'postConversationSettings' => $postConversationSettings,
-                'privacySettings' => $privacySettings,
+                'messagingSettings' => $messagingSettings ?? Omitted::VALUE,
+                'model' => $model ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'observabilitySettings' => $observabilitySettings ?? Omitted::VALUE,
+                'postConversationSettings' => $postConversationSettings ?? Omitted::VALUE,
+                'privacySettings' => $privacySettings ?? Omitted::VALUE,
                 'tags' => $tags,
-                'telephonySettings' => $telephonySettings,
-                'toolIDs' => $toolIDs,
-                'tools' => $tools,
-                'transcription' => $transcription,
+                'telephonySettings' => $telephonySettings ?? Omitted::VALUE,
+                'toolIDs' => $toolIDs ?? Omitted::VALUE,
+                'tools' => $tools ?? Omitted::VALUE,
+                'transcription' => $transcription ?? Omitted::VALUE,
                 'versionName' => $versionName,
-                'voiceSettings' => $voiceSettings,
-                'widgetSettings' => $widgetSettings,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'widgetSettings' => $widgetSettings ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -247,7 +252,7 @@ final class VersionsService implements VersionsContract
         string $assistantID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['assistantID' => $assistantID]);
+        $params = ['assistantID' => $assistantID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($versionID, params: $params, requestOptions: $requestOptions);
@@ -271,7 +276,7 @@ final class VersionsService implements VersionsContract
         string $assistantID,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(['assistantID' => $assistantID]);
+        $params = ['assistantID' => $assistantID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->promote($versionID, params: $params, requestOptions: $requestOptions);

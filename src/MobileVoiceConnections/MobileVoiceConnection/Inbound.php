@@ -7,6 +7,7 @@ namespace Telnyx\MobileVoiceConnections\MobileVoiceConnection;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type InboundShape = array{channelLimit?: int|null}
@@ -29,11 +30,12 @@ final class Inbound implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $channelLimit = null): self
-    {
+    public static function with(
+        int|Omitted|null $channelLimit = Omitted::VALUE
+    ): self {
         $self = new self;
 
-        null !== $channelLimit && $self['channelLimit'] = $channelLimit;
+        Omitted::VALUE !== $channelLimit && $self['channelLimit'] = $channelLimit;
 
         return $self;
     }

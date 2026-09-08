@@ -6,7 +6,6 @@ namespace Telnyx\Services\EmailUnsubscribeGroups;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\EmailBlocks\EmailBlock;
 use Telnyx\EmailBlocks\EmailBlockResponse;
@@ -50,7 +49,7 @@ final class SuppressionsService implements SuppressionsContract
         string $to,
         RequestOptions|array|null $requestOptions = null
     ): EmailBlockResponse {
-        $params = Util::removeNulls(['to' => $to]);
+        $params = ['to' => $to];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);
@@ -84,9 +83,7 @@ final class SuppressionsService implements SuppressionsContract
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);
@@ -119,7 +116,7 @@ final class SuppressionsService implements SuppressionsContract
         string $id,
         RequestOptions|array|null $requestOptions = null
     ): mixed {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($email, params: $params, requestOptions: $requestOptions);

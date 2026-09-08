@@ -114,6 +114,10 @@ final class UnionOf implements Converter
             return $value::class;
         }
 
+        if ($value instanceof \stdClass) {
+            $value = get_object_vars($value);
+        }
+
         if (
             null !== $this->discriminator
             && is_array($value)

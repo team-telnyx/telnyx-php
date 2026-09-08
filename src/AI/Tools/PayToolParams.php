@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type PayToolParamsShape = array{
@@ -72,8 +73,8 @@ final class PayToolParams implements BaseModel
      */
     public static function with(
         string $connectorName,
+        string|Omitted|null $description = Omitted::VALUE,
         ?string $currency = null,
-        ?string $description = null,
         ?string $paymentMethod = null,
     ): self {
         $self = new self;
@@ -81,7 +82,7 @@ final class PayToolParams implements BaseModel
         $self['connectorName'] = $connectorName;
 
         null !== $currency && $self['currency'] = $currency;
-        null !== $description && $self['description'] = $description;
+        Omitted::VALUE !== $description && $self['description'] = $description;
         null !== $paymentMethod && $self['paymentMethod'] = $paymentMethod;
 
         return $self;

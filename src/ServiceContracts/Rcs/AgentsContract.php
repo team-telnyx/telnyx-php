@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Rcs;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\Rcs\Agents\AgentConfiguration;
 use Telnyx\Rcs\Agents\AgentLaunchParams\Campaign;
 use Telnyx\Rcs\Agents\AgentResponse;
@@ -29,8 +30,8 @@ interface AgentsContract
      * @param string $displayName Body param
      * @param AgentUseCase|value-of<AgentUseCase> $useCase Body param
      * @param string $idempotencyKey Header param: A caller-generated key containing letters, numbers, underscores, or hyphens. Reuse the same key and request body when retrying the same logical agent creation.
-     * @param string|null $hostingRegion Body param
-     * @param string|null $profileID Body param: A Messaging Profile owned by the authenticated organization. When omitted, the agent inherits the brand profile.
+     * @param string|Omitted|null $hostingRegion Body param
+     * @param string|Omitted|null $profileID Body param: A Messaging Profile owned by the authenticated organization. When omitted, the agent inherits the brand profile.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -41,8 +42,8 @@ interface AgentsContract
         string $displayName,
         AgentUseCase|string $useCase,
         string $idempotencyKey,
-        ?string $hostingRegion = null,
-        ?string $profileID = null,
+        string|Omitted|null $hostingRegion = Omitted::VALUE,
+        string|Omitted|null $profileID = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): AgentResponse;
 

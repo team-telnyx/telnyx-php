@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
@@ -118,12 +119,12 @@ final class ExternalConnectionCreateParams implements BaseModel
     public static function with(
         Outbound|array $outbound,
         ExternalSipConnection|string $externalSipConnection = 'zoom',
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         ?bool $active = null,
         Inbound|array|null $inbound = null,
         ?array $tags = null,
-        ?string $webhookEventFailoverURL = null,
         ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
     ): self {
         $self = new self;
 
@@ -133,9 +134,9 @@ final class ExternalConnectionCreateParams implements BaseModel
         null !== $active && $self['active'] = $active;
         null !== $inbound && $self['inbound'] = $inbound;
         null !== $tags && $self['tags'] = $tags;
-        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        Omitted::VALUE !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
         null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        Omitted::VALUE !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $self;
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\EmailUnsubscribeGroups\EmailUnsubscribeGroupDeleteParams\Force\ForceString;
 use Telnyx\EmailUnsubscribeGroups\UnsubscribeGroup;
@@ -26,7 +27,7 @@ interface EmailUnsubscribeGroupsContract
      */
     public function create(
         string $name,
-        ?string $description = null,
+        string|Omitted|null $description = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): UnsubscribeGroupResponse;
 
@@ -53,7 +54,7 @@ interface EmailUnsubscribeGroupsContract
      */
     public function update(
         string $id,
-        ?string $description = null,
+        string|Omitted|null $description = Omitted::VALUE,
         ?string $name = null,
         RequestOptions|array|null $requestOptions = null,
     ): UnsubscribeGroupResponse;

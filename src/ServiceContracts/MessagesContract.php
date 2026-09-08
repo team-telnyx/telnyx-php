@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetGroupMessagesResponse;
 use Telnyx\Messages\MessageGetResponse;
@@ -124,7 +125,7 @@ interface MessagesContract
      * @param string $messagingProfileID Unique identifier for a messaging profile.
      *
      * **Required if sending via number pool or with an alphanumeric sender ID.**
-     * @param \DateTimeInterface|null $sendAt ISO 8601 formatted date indicating when to send the message - accurate up till a minute
+     * @param \DateTimeInterface|Omitted|null $sendAt ISO 8601 formatted date indicating when to send the message - accurate up till a minute
      * @param string $subject Subject of multimedia message
      * @param string $text Message body (i.e., content) as a non-empty string.
      *
@@ -144,7 +145,7 @@ interface MessagesContract
         ?string $from = null,
         ?array $mediaURLs = null,
         ?string $messagingProfileID = null,
-        ?\DateTimeInterface $sendAt = null,
+        \DateTimeInterface|Omitted|null $sendAt = Omitted::VALUE,
         ?string $subject = null,
         ?string $text = null,
         \Telnyx\Messages\MessageSendParams\Type|string|null $type = null,
@@ -300,8 +301,8 @@ interface MessagesContract
      * @param string $text the message body
      * @param string $to Receiving address (+E.164 formatted phone number).
      * @param bool $useProfileWebhooks if true, use the messaging profile's webhook settings
-     * @param string|null $webhookFailoverURL failover callback URL for delivery status updates
-     * @param string|null $webhookURL callback URL for delivery status updates
+     * @param string|Omitted|null $webhookFailoverURL failover callback URL for delivery status updates
+     * @param string|Omitted|null $webhookURL callback URL for delivery status updates
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -312,8 +313,8 @@ interface MessagesContract
         string $text,
         string $to,
         ?bool $useProfileWebhooks = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
+        string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): MessageSendWithAlphanumericSenderResponse;
 

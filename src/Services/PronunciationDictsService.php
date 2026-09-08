@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PronunciationDicts\PronunciationDictData;
 use Telnyx\PronunciationDicts\PronunciationDictResponse;
@@ -59,7 +59,7 @@ final class PronunciationDictsService implements PronunciationDictsContract
         string $name,
         RequestOptions|array|null $requestOptions = null
     ): PronunciationDictResponse {
-        $params = Util::removeNulls(['items' => $items, 'name' => $name]);
+        $params = ['items' => $items, 'name' => $name];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -105,7 +105,10 @@ final class PronunciationDictsService implements PronunciationDictsContract
         ?string $name = null,
         RequestOptions|array|null $requestOptions = null,
     ): PronunciationDictResponse {
-        $params = Util::removeNulls(['items' => $items, 'name' => $name]);
+        $params = array_filter(
+            ['items' => $items ?? Omitted::VALUE, 'name' => $name ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -131,9 +134,7 @@ final class PronunciationDictsService implements PronunciationDictsContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

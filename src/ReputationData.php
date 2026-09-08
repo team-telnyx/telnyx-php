@@ -7,6 +7,7 @@ namespace Telnyx;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\ReputationData\SpamRisk;
 
 /**
@@ -66,26 +67,26 @@ final class ReputationData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SpamRisk|value-of<SpamRisk>|null $spamRisk
+     * @param Omitted|SpamRisk|value-of<SpamRisk>|null $spamRisk
      */
     public static function with(
-        ?int $connectionScore = null,
-        ?int $engagementScore = null,
-        ?\DateTimeInterface $lastRefreshedAt = null,
-        ?int $maturityScore = null,
-        ?int $sentimentScore = null,
-        ?string $spamCategory = null,
-        SpamRisk|string|null $spamRisk = null,
+        int|Omitted|null $connectionScore = Omitted::VALUE,
+        int|Omitted|null $engagementScore = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $lastRefreshedAt = Omitted::VALUE,
+        int|Omitted|null $maturityScore = Omitted::VALUE,
+        int|Omitted|null $sentimentScore = Omitted::VALUE,
+        string|Omitted|null $spamCategory = Omitted::VALUE,
+        Omitted|SpamRisk|string|null $spamRisk = Omitted::VALUE,
     ): self {
         $self = new self;
 
-        null !== $connectionScore && $self['connectionScore'] = $connectionScore;
-        null !== $engagementScore && $self['engagementScore'] = $engagementScore;
-        null !== $lastRefreshedAt && $self['lastRefreshedAt'] = $lastRefreshedAt;
-        null !== $maturityScore && $self['maturityScore'] = $maturityScore;
-        null !== $sentimentScore && $self['sentimentScore'] = $sentimentScore;
-        null !== $spamCategory && $self['spamCategory'] = $spamCategory;
-        null !== $spamRisk && $self['spamRisk'] = $spamRisk;
+        Omitted::VALUE !== $connectionScore && $self['connectionScore'] = $connectionScore;
+        Omitted::VALUE !== $engagementScore && $self['engagementScore'] = $engagementScore;
+        Omitted::VALUE !== $lastRefreshedAt && $self['lastRefreshedAt'] = $lastRefreshedAt;
+        Omitted::VALUE !== $maturityScore && $self['maturityScore'] = $maturityScore;
+        Omitted::VALUE !== $sentimentScore && $self['sentimentScore'] = $sentimentScore;
+        Omitted::VALUE !== $spamCategory && $self['spamCategory'] = $spamCategory;
+        Omitted::VALUE !== $spamRisk && $self['spamRisk'] = $spamRisk;
 
         return $self;
     }

@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailBlocks\EmailBlock\Reason;
 use Telnyx\EmailBlocks\EmailBlock\RecordType;
 use Telnyx\EmailBlocks\EmailBlock\Scope;
@@ -162,10 +163,10 @@ final class EmailBlock implements BaseModel
         Status|string $status,
         string $to,
         \DateTimeInterface $updatedAt,
-        ?string $domainID = null,
-        ?\DateTimeInterface $expiresAt = null,
-        ?string $from = null,
-        ?string $groupID = null,
+        string|Omitted|null $domainID = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $expiresAt = Omitted::VALUE,
+        string|Omitted|null $from = Omitted::VALUE,
+        string|Omitted|null $groupID = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -179,10 +180,10 @@ final class EmailBlock implements BaseModel
         $self['to'] = $to;
         $self['updatedAt'] = $updatedAt;
 
-        null !== $domainID && $self['domainID'] = $domainID;
-        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
-        null !== $from && $self['from'] = $from;
-        null !== $groupID && $self['groupID'] = $groupID;
+        Omitted::VALUE !== $domainID && $self['domainID'] = $domainID;
+        Omitted::VALUE !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        Omitted::VALUE !== $from && $self['from'] = $from;
+        Omitted::VALUE !== $groupID && $self['groupID'] = $groupID;
 
         return $self;
     }

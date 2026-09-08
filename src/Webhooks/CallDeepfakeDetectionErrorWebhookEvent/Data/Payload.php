@@ -7,6 +7,7 @@ namespace Telnyx\Webhooks\CallDeepfakeDetectionErrorWebhookEvent\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Webhooks\CallDeepfakeDetectionErrorWebhookEvent\Data\Payload\ErrorMessage;
 
 /**
@@ -75,10 +76,10 @@ final class Payload implements BaseModel
      * @param ErrorMessage|value-of<ErrorMessage>|null $errorMessage
      */
     public static function with(
+        string|Omitted|null $clientState = Omitted::VALUE,
         ?string $callControlID = null,
         ?string $callLegID = null,
         ?string $callSessionID = null,
-        ?string $clientState = null,
         ?string $connectionID = null,
         ErrorMessage|string|null $errorMessage = null,
     ): self {
@@ -87,7 +88,7 @@ final class Payload implements BaseModel
         null !== $callControlID && $self['callControlID'] = $callControlID;
         null !== $callLegID && $self['callLegID'] = $callLegID;
         null !== $callSessionID && $self['callSessionID'] = $callSessionID;
-        null !== $clientState && $self['clientState'] = $clientState;
+        Omitted::VALUE !== $clientState && $self['clientState'] = $clientState;
         null !== $connectionID && $self['connectionID'] = $connectionID;
         null !== $errorMessage && $self['errorMessage'] = $errorMessage;
 

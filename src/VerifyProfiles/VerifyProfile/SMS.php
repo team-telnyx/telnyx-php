@@ -7,6 +7,7 @@ namespace Telnyx\VerifyProfiles\VerifyProfile;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type SMSShape = array{
@@ -74,7 +75,7 @@ final class SMS implements BaseModel
      * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
-        ?string $alphaSender = null,
+        string|Omitted|null $alphaSender = Omitted::VALUE,
         ?string $appName = null,
         ?int $codeLength = null,
         ?int $defaultVerificationTimeoutSecs = null,
@@ -83,7 +84,7 @@ final class SMS implements BaseModel
     ): self {
         $self = new self;
 
-        null !== $alphaSender && $self['alphaSender'] = $alphaSender;
+        Omitted::VALUE !== $alphaSender && $self['alphaSender'] = $alphaSender;
         null !== $appName && $self['appName'] = $appName;
         null !== $codeLength && $self['codeLength'] = $codeLength;
         null !== $defaultVerificationTimeoutSecs && $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;

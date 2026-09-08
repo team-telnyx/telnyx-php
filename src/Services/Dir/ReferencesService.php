@@ -6,7 +6,7 @@ namespace Telnyx\Services\Dir;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Dir\References\ReferenceInput;
 use Telnyx\Dir\References\ReferenceList;
 use Telnyx\Dir\References\ReferenceUpdateParams\RefType;
@@ -63,12 +63,10 @@ final class ReferencesService implements ReferencesContract
         ReferenceInput|array $financialReference,
         RequestOptions|array|null $requestOptions = null,
     ): ReferenceList {
-        $params = Util::removeNulls(
-            [
-                'businessReferences' => $businessReferences,
-                'financialReference' => $financialReference,
-            ],
-        );
+        $params = [
+            'businessReferences' => $businessReferences,
+            'financialReference' => $financialReference,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($dirID, params: $params, requestOptions: $requestOptions);
@@ -88,10 +86,10 @@ final class ReferencesService implements ReferencesContract
      * @param RefType|value-of<RefType> $refType path param: Reference type to address
      * @param string $email body param: Reference contact email address
      * @param string $fullName body param: Full name of the reference contact
-     * @param string|null $jobTitle body param: Job title of the reference contact
-     * @param string|null $organization body param: Organization the reference contact belongs to
+     * @param string|Omitted|null $jobTitle body param: Job title of the reference contact
+     * @param string|Omitted|null $organization body param: Organization the reference contact belongs to
      * @param string $phoneE164 Body param: Reference phone number in E.164 format.
-     * @param string|null $relationshipToRegistrant body param: How the reference contact is related to the registering business
+     * @param string|Omitted|null $relationshipToRegistrant body param: How the reference contact is related to the registering business
      * @param string $timezone body param: IANA timezone id for the reference
      * @param RequestOpts|null $requestOptions
      *
@@ -103,25 +101,26 @@ final class ReferencesService implements ReferencesContract
         RefType|string $refType,
         ?string $email = null,
         ?string $fullName = null,
-        ?string $jobTitle = null,
-        ?string $organization = null,
+        string|Omitted|null $jobTitle = Omitted::VALUE,
+        string|Omitted|null $organization = Omitted::VALUE,
         ?string $phoneE164 = null,
-        ?string $relationshipToRegistrant = null,
+        string|Omitted|null $relationshipToRegistrant = Omitted::VALUE,
         ?string $timezone = null,
         RequestOptions|array|null $requestOptions = null,
     ): ReferenceUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'dirID' => $dirID,
                 'refType' => $refType,
-                'email' => $email,
-                'fullName' => $fullName,
+                'email' => $email ?? Omitted::VALUE,
+                'fullName' => $fullName ?? Omitted::VALUE,
                 'jobTitle' => $jobTitle,
                 'organization' => $organization,
-                'phoneE164' => $phoneE164,
+                'phoneE164' => $phoneE164 ?? Omitted::VALUE,
                 'relationshipToRegistrant' => $relationshipToRegistrant,
-                'timezone' => $timezone,
+                'timezone' => $timezone ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

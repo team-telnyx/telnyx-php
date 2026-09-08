@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\MapOf;
+use Telnyx\Core\Omitted;
 use Telnyx\SimCards\SimCard\CurrentBillingPeriodConsumedData;
 use Telnyx\SimCards\SimCard\CurrentDeviceLocation;
 use Telnyx\SimCards\SimCard\DataLimit;
@@ -252,11 +253,11 @@ final class SimCard implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $authorizedImeis
+     * @param list<string>|Omitted|null $authorizedImeis
+     * @param Omitted|EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esimInstallationStatus
      * @param CurrentBillingPeriodConsumedData|CurrentBillingPeriodConsumedDataShape|null $currentBillingPeriodConsumedData
      * @param CurrentDeviceLocation|CurrentDeviceLocationShape|null $currentDeviceLocation
      * @param DataLimit|DataLimitShape|null $dataLimit
-     * @param EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esimInstallationStatus
      * @param LiveDataSession|value-of<LiveDataSession>|null $liveDataSession
      * @param PinPukCodes|PinPukCodesShape|null $pinPukCodes
      * @param list<array<string,mixed>>|null $resourcesWithInProgressActions
@@ -265,9 +266,11 @@ final class SimCard implements BaseModel
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
+        array|Omitted|null $authorizedImeis = Omitted::VALUE,
+        string|Omitted|null $eid = Omitted::VALUE,
+        Omitted|EsimInstallationStatus|string|null $esimInstallationStatus = Omitted::VALUE,
         ?string $id = null,
         ?bool $actionsInProgress = null,
-        ?array $authorizedImeis = null,
         ?string $createdAt = null,
         CurrentBillingPeriodConsumedData|array|null $currentBillingPeriodConsumedData = null,
         CurrentDeviceLocation|array|null $currentDeviceLocation = null,
@@ -275,8 +278,6 @@ final class SimCard implements BaseModel
         ?string $currentMcc = null,
         ?string $currentMnc = null,
         DataLimit|array|null $dataLimit = null,
-        ?string $eid = null,
-        EsimInstallationStatus|string|null $esimInstallationStatus = null,
         ?string $iccid = null,
         ?string $imsi = null,
         ?string $ipv4 = null,
@@ -298,7 +299,7 @@ final class SimCard implements BaseModel
 
         null !== $id && $self['id'] = $id;
         null !== $actionsInProgress && $self['actionsInProgress'] = $actionsInProgress;
-        null !== $authorizedImeis && $self['authorizedImeis'] = $authorizedImeis;
+        Omitted::VALUE !== $authorizedImeis && $self['authorizedImeis'] = $authorizedImeis;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $currentBillingPeriodConsumedData && $self['currentBillingPeriodConsumedData'] = $currentBillingPeriodConsumedData;
         null !== $currentDeviceLocation && $self['currentDeviceLocation'] = $currentDeviceLocation;
@@ -306,8 +307,8 @@ final class SimCard implements BaseModel
         null !== $currentMcc && $self['currentMcc'] = $currentMcc;
         null !== $currentMnc && $self['currentMnc'] = $currentMnc;
         null !== $dataLimit && $self['dataLimit'] = $dataLimit;
-        null !== $eid && $self['eid'] = $eid;
-        null !== $esimInstallationStatus && $self['esimInstallationStatus'] = $esimInstallationStatus;
+        Omitted::VALUE !== $eid && $self['eid'] = $eid;
+        Omitted::VALUE !== $esimInstallationStatus && $self['esimInstallationStatus'] = $esimInstallationStatus;
         null !== $iccid && $self['iccid'] = $iccid;
         null !== $imsi && $self['imsi'] = $imsi;
         null !== $ipv4 && $self['ipv4'] = $ipv4;

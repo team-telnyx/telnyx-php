@@ -6,7 +6,6 @@ namespace Telnyx\Services\MeetingSessions;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\MeetingSessions\Artifacts\ArtifactCreateParams\Type;
 use Telnyx\MeetingSessions\Artifacts\ArtifactListResponse;
 use Telnyx\MeetingSessions\Artifacts\MeetingSessionArtifactResponse;
@@ -49,7 +48,7 @@ final class ArtifactsService implements ArtifactsContract
         Type|string $type,
         RequestOptions|array|null $requestOptions = null,
     ): MeetingSessionArtifactResponse {
-        $params = Util::removeNulls(['type' => $type]);
+        $params = ['type' => $type];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);
@@ -73,7 +72,7 @@ final class ArtifactsService implements ArtifactsContract
         string $id,
         RequestOptions|array|null $requestOptions = null,
     ): MeetingSessionArtifactResponse {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($artifactID, params: $params, requestOptions: $requestOptions);

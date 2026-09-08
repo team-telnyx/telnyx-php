@@ -8,7 +8,7 @@ use Telnyx\Client;
 use Telnyx\ConnectionJitterBuffer;
 use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
@@ -64,14 +64,14 @@ final class IPConnectionsService implements IPConnectionsContract
      *
      * @param bool $active Defaults to true
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-     * @param string|null $androidPushCredentialID The uuid of the push credential for Android
+     * @param string|Omitted|null $androidPushCredentialID The uuid of the push credential for Android
      * @param bool $callCostInWebhooks specifies if call cost webhooks should be sent for this connection
      * @param bool $defaultOnHoldComfortNoiseEnabled When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      * @param DtmfType|value-of<DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      * @param bool $encodeContactHeaderEnabled encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
+     * @param Omitted|EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      * @param Inbound|InboundShape $inbound
-     * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
+     * @param string|Omitted|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
@@ -81,9 +81,9 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param list<string> $tags tags associated with the connection
      * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol One of UDP, TLS, or TCP. Applies only to connections with IP authentication or FQDN authentication.
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -91,15 +91,15 @@ final class IPConnectionsService implements IPConnectionsContract
     public function create(
         ?bool $active = null,
         AnchorsiteOverride|string $anchorsiteOverride = 'Latency',
-        ?string $androidPushCredentialID = null,
+        string|Omitted|null $androidPushCredentialID = Omitted::VALUE,
         bool $callCostInWebhooks = false,
         ?string $connectionName = null,
         bool $defaultOnHoldComfortNoiseEnabled = true,
         DtmfType|string $dtmfType = 'RFC 2833',
         bool $encodeContactHeaderEnabled = false,
-        EncryptedMedia|string|null $encryptedMedia = null,
+        Omitted|EncryptedMedia|string|null $encryptedMedia = Omitted::VALUE,
         Inbound|array|null $inbound = null,
-        ?string $iosPushCredentialID = null,
+        string|Omitted|null $iosPushCredentialID = Omitted::VALUE,
         ConnectionJitterBuffer|array|null $jitterBuffer = null,
         ConnectionNoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
@@ -109,37 +109,38 @@ final class IPConnectionsService implements IPConnectionsContract
         ?array $tags = null,
         TransportProtocol|string $transportProtocol = 'UDP',
         WebhookAPIVersion|string $webhookAPIVersion = '1',
-        ?string $webhookEventFailoverURL = '',
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
         ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): IPConnectionNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'active' => $active,
+                'active' => $active ?? Omitted::VALUE,
                 'anchorsiteOverride' => $anchorsiteOverride,
                 'androidPushCredentialID' => $androidPushCredentialID,
                 'callCostInWebhooks' => $callCostInWebhooks,
-                'connectionName' => $connectionName,
+                'connectionName' => $connectionName ?? Omitted::VALUE,
                 'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
                 'dtmfType' => $dtmfType,
                 'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
                 'encryptedMedia' => $encryptedMedia,
-                'inbound' => $inbound,
+                'inbound' => $inbound ?? Omitted::VALUE,
                 'iosPushCredentialID' => $iosPushCredentialID,
-                'jitterBuffer' => $jitterBuffer,
-                'noiseSuppression' => $noiseSuppression,
-                'noiseSuppressionDetails' => $noiseSuppressionDetails,
+                'jitterBuffer' => $jitterBuffer ?? Omitted::VALUE,
+                'noiseSuppression' => $noiseSuppression ?? Omitted::VALUE,
+                'noiseSuppressionDetails' => $noiseSuppressionDetails ?? Omitted::VALUE,
                 'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
-                'outbound' => $outbound,
-                'rtcpSettings' => $rtcpSettings,
-                'tags' => $tags,
+                'outbound' => $outbound ?? Omitted::VALUE,
+                'rtcpSettings' => $rtcpSettings ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
                 'transportProtocol' => $transportProtocol,
                 'webhookAPIVersion' => $webhookAPIVersion,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookEventURL' => $webhookEventURL,
+                'webhookEventURL' => $webhookEventURL ?? Omitted::VALUE,
                 'webhookTimeoutSecs' => $webhookTimeoutSecs,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -176,15 +177,15 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param string $id identifies the type of resource
      * @param bool $active Defaults to true
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-     * @param string|null $androidPushCredentialID The uuid of the push credential for Android
+     * @param string|Omitted|null $androidPushCredentialID The uuid of the push credential for Android
      * @param bool $callCostInWebhooks specifies if call cost webhooks should be sent for this connection
      * @param bool $conversationPersistence Whether conversation persistence is enabled for this connection. When enabled, calls handled by the connection are transcribed, stored, and indexed. Defaults to false.
      * @param bool $defaultOnHoldComfortNoiseEnabled When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      * @param DtmfType|value-of<DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      * @param bool $encodeContactHeaderEnabled encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
+     * @param Omitted|EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      * @param InboundIP|InboundIPShape $inbound
-     * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
+     * @param string|Omitted|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
@@ -194,9 +195,9 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param list<string> $tags tags associated with the connection
      * @param \Telnyx\IPConnections\IPConnectionUpdateParams\TransportProtocol|value-of<\Telnyx\IPConnections\IPConnectionUpdateParams\TransportProtocol> $transportProtocol One of UDP, TLS, or TCP. Applies only to connections with IP authentication or FQDN authentication.
      * @param \Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion|value-of<\Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -205,16 +206,16 @@ final class IPConnectionsService implements IPConnectionsContract
         string $id,
         ?bool $active = null,
         AnchorsiteOverride|string $anchorsiteOverride = 'Latency',
-        ?string $androidPushCredentialID = null,
+        string|Omitted|null $androidPushCredentialID = Omitted::VALUE,
         bool $callCostInWebhooks = false,
         ?string $connectionName = null,
         ?bool $conversationPersistence = null,
         bool $defaultOnHoldComfortNoiseEnabled = true,
         DtmfType|string $dtmfType = 'RFC 2833',
         bool $encodeContactHeaderEnabled = false,
-        EncryptedMedia|string|null $encryptedMedia = null,
+        Omitted|EncryptedMedia|string|null $encryptedMedia = Omitted::VALUE,
         InboundIP|array|null $inbound = null,
-        ?string $iosPushCredentialID = null,
+        string|Omitted|null $iosPushCredentialID = Omitted::VALUE,
         ConnectionJitterBuffer|array|null $jitterBuffer = null,
         ConnectionNoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
@@ -224,38 +225,39 @@ final class IPConnectionsService implements IPConnectionsContract
         ?array $tags = null,
         \Telnyx\IPConnections\IPConnectionUpdateParams\TransportProtocol|string $transportProtocol = 'UDP',
         \Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion|string $webhookAPIVersion = '1',
-        ?string $webhookEventFailoverURL = '',
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
         ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): IPConnectionUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'active' => $active,
+                'active' => $active ?? Omitted::VALUE,
                 'anchorsiteOverride' => $anchorsiteOverride,
                 'androidPushCredentialID' => $androidPushCredentialID,
                 'callCostInWebhooks' => $callCostInWebhooks,
-                'connectionName' => $connectionName,
-                'conversationPersistence' => $conversationPersistence,
+                'connectionName' => $connectionName ?? Omitted::VALUE,
+                'conversationPersistence' => $conversationPersistence ?? Omitted::VALUE,
                 'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
                 'dtmfType' => $dtmfType,
                 'encodeContactHeaderEnabled' => $encodeContactHeaderEnabled,
                 'encryptedMedia' => $encryptedMedia,
-                'inbound' => $inbound,
+                'inbound' => $inbound ?? Omitted::VALUE,
                 'iosPushCredentialID' => $iosPushCredentialID,
-                'jitterBuffer' => $jitterBuffer,
-                'noiseSuppression' => $noiseSuppression,
-                'noiseSuppressionDetails' => $noiseSuppressionDetails,
+                'jitterBuffer' => $jitterBuffer ?? Omitted::VALUE,
+                'noiseSuppression' => $noiseSuppression ?? Omitted::VALUE,
+                'noiseSuppressionDetails' => $noiseSuppressionDetails ?? Omitted::VALUE,
                 'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
-                'outbound' => $outbound,
-                'rtcpSettings' => $rtcpSettings,
-                'tags' => $tags,
+                'outbound' => $outbound ?? Omitted::VALUE,
+                'rtcpSettings' => $rtcpSettings ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
                 'transportProtocol' => $transportProtocol,
                 'webhookAPIVersion' => $webhookAPIVersion,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookEventURL' => $webhookEventURL,
+                'webhookEventURL' => $webhookEventURL ?? Omitted::VALUE,
                 'webhookTimeoutSecs' => $webhookTimeoutSecs,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -295,13 +297,14 @@ final class IPConnectionsService implements IPConnectionsContract
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

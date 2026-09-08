@@ -7,6 +7,7 @@ namespace Telnyx\CountryCoverage;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\CountryCoverage\CountryCoverage\Local;
 use Telnyx\CountryCoverage\CountryCoverage\TollFree;
 
@@ -129,6 +130,7 @@ final class CountryCoverage implements BaseModel
      * @param TollFree|TollFreeShape|null $tollFree
      */
     public static function with(
+        string|Omitted|null $region = Omitted::VALUE,
         ?string $code = null,
         ?array $features = null,
         ?bool $internationalSMS = null,
@@ -140,7 +142,6 @@ final class CountryCoverage implements BaseModel
         ?bool $p2p = null,
         ?array $phoneNumberType = null,
         ?bool $quickship = null,
-        ?string $region = null,
         ?bool $reservable = null,
         ?array $sharedCost = null,
         TollFree|array|null $tollFree = null,
@@ -158,7 +159,7 @@ final class CountryCoverage implements BaseModel
         null !== $p2p && $self['p2p'] = $p2p;
         null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
         null !== $quickship && $self['quickship'] = $quickship;
-        null !== $region && $self['region'] = $region;
+        Omitted::VALUE !== $region && $self['region'] = $region;
         null !== $reservable && $self['reservable'] = $reservable;
         null !== $sharedCost && $self['sharedCost'] = $sharedCost;
         null !== $tollFree && $self['tollFree'] = $tollFree;

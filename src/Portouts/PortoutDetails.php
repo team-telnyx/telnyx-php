@@ -7,6 +7,7 @@ namespace Telnyx\Portouts;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Portouts\PortoutDetails\Status;
 
 /**
@@ -225,6 +226,7 @@ final class PortoutDetails implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        string|Omitted|null $reason = Omitted::VALUE,
         ?string $id = null,
         ?bool $alreadyPorted = null,
         ?string $authorizedName = null,
@@ -239,7 +241,6 @@ final class PortoutDetails implements BaseModel
         ?array $lsr = null,
         ?array $phoneNumbers = null,
         ?string $pon = null,
-        ?string $reason = null,
         ?string $recordType = null,
         ?int $rejectionCode = null,
         ?string $requestedFocDate = null,
@@ -269,7 +270,7 @@ final class PortoutDetails implements BaseModel
         null !== $lsr && $self['lsr'] = $lsr;
         null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
         null !== $pon && $self['pon'] = $pon;
-        null !== $reason && $self['reason'] = $reason;
+        Omitted::VALUE !== $reason && $self['reason'] = $reason;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $rejectionCode && $self['rejectionCode'] = $rejectionCode;
         null !== $requestedFocDate && $self['requestedFocDate'] = $requestedFocDate;

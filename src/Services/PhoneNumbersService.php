@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumbers\NumbersPhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
@@ -131,16 +131,17 @@ final class PhoneNumbersService implements PhoneNumbersContract
         ?array $tags = null,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'addressID' => $addressID,
-                'billingGroupID' => $billingGroupID,
-                'connectionID' => $connectionID,
-                'customerReference' => $customerReference,
-                'externalPin' => $externalPin,
-                'hdVoiceEnabled' => $hdVoiceEnabled,
-                'tags' => $tags,
+                'addressID' => $addressID ?? Omitted::VALUE,
+                'billingGroupID' => $billingGroupID ?? Omitted::VALUE,
+                'connectionID' => $connectionID ?? Omitted::VALUE,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'externalPin' => $externalPin ?? Omitted::VALUE,
+                'hdVoiceEnabled' => $hdVoiceEnabled ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -171,14 +172,15 @@ final class PhoneNumbersService implements PhoneNumbersContract
         Sort|string|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
+                'filter' => $filter ?? Omitted::VALUE,
                 'handleMessagingProfileError' => $handleMessagingProfileError,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -231,15 +233,16 @@ final class PhoneNumbersService implements PhoneNumbersContract
         \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort|string|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
+                'filter' => $filter ?? Omitted::VALUE,
                 'includeConnection' => $includeConnection,
                 'includeTags' => $includeTags,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -6,7 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\PortingOrders\Actions\ActionActivateResponse;
 use Telnyx\PortingOrders\Actions\ActionCancelResponse;
 use Telnyx\PortingOrders\Actions\ActionConfirmResponse;
@@ -113,8 +113,12 @@ final class ActionsService implements ActionsContract
         Permissions|string|null $permissions = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionShareResponse {
-        $params = Util::removeNulls(
-            ['expiresInSeconds' => $expiresInSeconds, 'permissions' => $permissions]
+        $params = array_filter(
+            [
+                'expiresInSeconds' => $expiresInSeconds ?? Omitted::VALUE,
+                'permissions' => $permissions ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

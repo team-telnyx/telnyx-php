@@ -7,6 +7,7 @@ namespace Telnyx\CustomerServiceRecords;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
 
@@ -96,16 +97,16 @@ final class CustomerServiceRecord implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Result|ResultShape|null $result
+     * @param Omitted|Result|ResultShape|null $result
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        string|Omitted|null $errorMessage = Omitted::VALUE,
+        Omitted|Result|array|null $result = Omitted::VALUE,
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
-        ?string $errorMessage = null,
         ?string $phoneNumber = null,
         ?string $recordType = null,
-        Result|array|null $result = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
         ?string $webhookURL = null,
@@ -114,10 +115,10 @@ final class CustomerServiceRecord implements BaseModel
 
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $errorMessage && $self['errorMessage'] = $errorMessage;
+        Omitted::VALUE !== $errorMessage && $self['errorMessage'] = $errorMessage;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $recordType && $self['recordType'] = $recordType;
-        null !== $result && $self['result'] = $result;
+        Omitted::VALUE !== $result && $self['result'] = $result;
         null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;

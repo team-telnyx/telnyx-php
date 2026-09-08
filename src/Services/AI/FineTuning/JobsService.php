@@ -9,7 +9,7 @@ use Telnyx\AI\FineTuning\Jobs\JobCreateParams\Hyperparameters;
 use Telnyx\AI\FineTuning\Jobs\JobListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\FineTuning\JobsContract;
 
@@ -54,13 +54,14 @@ final class JobsService implements JobsContract
         ?string $suffix = null,
         RequestOptions|array|null $requestOptions = null,
     ): FineTuningJob {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'model' => $model,
                 'trainingFile' => $trainingFile,
-                'hyperparameters' => $hyperparameters,
-                'suffix' => $suffix,
+                'hyperparameters' => $hyperparameters ?? Omitted::VALUE,
+                'suffix' => $suffix ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

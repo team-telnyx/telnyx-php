@@ -7,6 +7,7 @@ namespace Telnyx\Webhooks\CallConversationEnded;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Webhooks\CallConversationEnded\Payload\CallingPartyType;
 
 /**
@@ -152,6 +153,7 @@ final class Payload implements BaseModel
      * @param CallingPartyType|value-of<CallingPartyType>|null $callingPartyType
      */
     public static function with(
+        string|Omitted|null $reason = Omitted::VALUE,
         ?string $assistantID = null,
         ?string $callControlID = null,
         ?string $callLegID = null,
@@ -163,7 +165,6 @@ final class Payload implements BaseModel
         ?int $durationSec = null,
         ?string $from = null,
         ?string $llmModel = null,
-        ?string $reason = null,
         ?string $sttModel = null,
         ?string $to = null,
         ?string $ttsModelID = null,
@@ -183,7 +184,7 @@ final class Payload implements BaseModel
         null !== $durationSec && $self['durationSec'] = $durationSec;
         null !== $from && $self['from'] = $from;
         null !== $llmModel && $self['llmModel'] = $llmModel;
-        null !== $reason && $self['reason'] = $reason;
+        Omitted::VALUE !== $reason && $self['reason'] = $reason;
         null !== $sttModel && $self['sttModel'] = $sttModel;
         null !== $to && $self['to'] = $to;
         null !== $ttsModelID && $self['ttsModelID'] = $ttsModelID;

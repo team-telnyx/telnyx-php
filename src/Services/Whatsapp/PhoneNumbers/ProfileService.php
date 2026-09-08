@@ -6,7 +6,7 @@ namespace Telnyx\Services\Whatsapp\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbers\ProfileContract;
 use Telnyx\Services\Whatsapp\PhoneNumbers\Profile\PhotoService;
@@ -82,17 +82,18 @@ final class ProfileService implements ProfileContract
         ?string $website = null,
         RequestOptions|array|null $requestOptions = null,
     ): ProfileUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'about' => $about,
-                'address' => $address,
-                'category' => $category,
-                'description' => $description,
-                'displayName' => $displayName,
-                'email' => $email,
-                'profileID' => $profileID,
-                'website' => $website,
+                'about' => $about ?? Omitted::VALUE,
+                'address' => $address ?? Omitted::VALUE,
+                'category' => $category ?? Omitted::VALUE,
+                'description' => $description ?? Omitted::VALUE,
+                'displayName' => $displayName ?? Omitted::VALUE,
+                'email' => $email ?? Omitted::VALUE,
+                'profileID' => $profileID ?? Omitted::VALUE,
+                'website' => $website ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Starts a verification for the specified phone number and delivers its code in a voice call using the selected Verify profile. Returns the pending verification record.
@@ -88,8 +89,8 @@ final class VerificationTriggerCallParams implements BaseModel
     public static function with(
         string $phoneNumber,
         string $verifyProfileID,
-        ?string $customCode = null,
-        ?string $extension = null,
+        string|Omitted|null $customCode = Omitted::VALUE,
+        string|Omitted|null $extension = Omitted::VALUE,
         ?int $timeoutSecs = null,
     ): self {
         $self = new self;
@@ -97,8 +98,8 @@ final class VerificationTriggerCallParams implements BaseModel
         $self['phoneNumber'] = $phoneNumber;
         $self['verifyProfileID'] = $verifyProfileID;
 
-        null !== $customCode && $self['customCode'] = $customCode;
-        null !== $extension && $self['extension'] = $extension;
+        Omitted::VALUE !== $customCode && $self['customCode'] = $customCode;
+        Omitted::VALUE !== $extension && $self['extension'] = $extension;
         null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
 
         return $self;

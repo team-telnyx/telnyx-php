@@ -7,6 +7,7 @@ namespace Telnyx\Webhooks\Transcription\Payload;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Webhooks\Transcription\Payload\TranscriptionData\TranscriptionTrack;
 
 /**
@@ -61,14 +62,14 @@ final class TranscriptionData implements BaseModel
      * @param TranscriptionTrack|value-of<TranscriptionTrack>|null $transcriptionTrack
      */
     public static function with(
-        ?float $confidence = null,
+        float|Omitted|null $confidence = Omitted::VALUE,
         ?bool $isFinal = null,
         ?string $transcript = null,
         TranscriptionTrack|string|null $transcriptionTrack = null,
     ): self {
         $self = new self;
 
-        null !== $confidence && $self['confidence'] = $confidence;
+        Omitted::VALUE !== $confidence && $self['confidence'] = $confidence;
         null !== $isFinal && $self['isFinal'] = $isFinal;
         null !== $transcript && $self['transcript'] = $transcript;
         null !== $transcriptionTrack && $self['transcriptionTrack'] = $transcriptionTrack;

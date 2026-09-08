@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Fqdns\Fqdn;
 use Telnyx\Fqdns\FqdnDeleteResponse;
@@ -46,7 +46,7 @@ final class FqdnsService implements FqdnsContract
      * @param string $connectionID ID of the FQDN connection to which this IP should be attached
      * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      * @param string $fqdn FQDN represented by this resource
-     * @param int|null $port port to use when connecting to this FQDN
+     * @param int|Omitted|null $port port to use when connecting to this FQDN
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -55,16 +55,17 @@ final class FqdnsService implements FqdnsContract
         string $connectionID,
         string $dnsRecordType,
         string $fqdn,
-        ?int $port = 5060,
+        int|Omitted|null $port = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): FqdnNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'connectionID' => $connectionID,
                 'dnsRecordType' => $dnsRecordType,
                 'fqdn' => $fqdn,
                 'port' => $port,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -102,7 +103,7 @@ final class FqdnsService implements FqdnsContract
      * @param string $connectionID ID of the FQDN connection to which this IP should be attached
      * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      * @param string $fqdn FQDN represented by this resource
-     * @param int|null $port port to use when connecting to this FQDN
+     * @param int|Omitted|null $port port to use when connecting to this FQDN
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -112,16 +113,17 @@ final class FqdnsService implements FqdnsContract
         ?string $connectionID = null,
         ?string $dnsRecordType = null,
         ?string $fqdn = null,
-        ?int $port = 5060,
+        int|Omitted|null $port = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): FqdnUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'connectionID' => $connectionID,
-                'dnsRecordType' => $dnsRecordType,
-                'fqdn' => $fqdn,
+                'connectionID' => $connectionID ?? Omitted::VALUE,
+                'dnsRecordType' => $dnsRecordType ?? Omitted::VALUE,
+                'fqdn' => $fqdn ?? Omitted::VALUE,
                 'port' => $port,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -148,12 +150,13 @@ final class FqdnsService implements FqdnsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

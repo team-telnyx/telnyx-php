@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailDomains\EmailDomain\Dkim;
 use Telnyx\EmailDomains\EmailDomain\Inbound;
 use Telnyx\EmailDomains\EmailDomain\RecordType;
@@ -194,8 +195,8 @@ final class EmailDomain implements BaseModel
         bool $usableForInbound,
         bool $usableForSending,
         EmailDomainVerification|array $verification,
+        \DateTimeInterface|Omitted|null $verifiedAt = Omitted::VALUE,
         Reputation|array|null $reputation = null,
-        ?\DateTimeInterface $verifiedAt = null,
     ): self {
         $self = new self;
 
@@ -216,7 +217,7 @@ final class EmailDomain implements BaseModel
         $self['verification'] = $verification;
 
         null !== $reputation && $self['reputation'] = $reputation;
-        null !== $verifiedAt && $self['verifiedAt'] = $verifiedAt;
+        Omitted::VALUE !== $verifiedAt && $self['verifiedAt'] = $verifiedAt;
 
         return $self;
     }

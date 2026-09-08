@@ -9,7 +9,7 @@ use Telnyx\AI\AIRetrieveConversationHistoriesParams\Region;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIContract;
@@ -208,22 +208,23 @@ final class AIService implements AIContract
         Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'q' => $q,
-                'filterIngestedAtGte' => $filterIngestedAtGte,
-                'filterIngestedAtLte' => $filterIngestedAtLte,
-                'filterRecordCreatedAtGte' => $filterRecordCreatedAtGte,
-                'filterRecordCreatedAtLte' => $filterRecordCreatedAtLte,
-                'filterRecordID' => $filterRecordID,
-                'filterRegionIn' => $filterRegionIn,
-                'filterRetention' => $filterRetention,
-                'filterUserID' => $filterUserID,
+                'filterIngestedAtGte' => $filterIngestedAtGte ?? Omitted::VALUE,
+                'filterIngestedAtLte' => $filterIngestedAtLte ?? Omitted::VALUE,
+                'filterRecordCreatedAtGte' => $filterRecordCreatedAtGte ?? Omitted::VALUE,
+                'filterRecordCreatedAtLte' => $filterRecordCreatedAtLte ?? Omitted::VALUE,
+                'filterRecordID' => $filterRecordID ?? Omitted::VALUE,
+                'filterRegionIn' => $filterRegionIn ?? Omitted::VALUE,
+                'filterRetention' => $filterRetention ?? Omitted::VALUE,
+                'filterUserID' => $filterUserID ?? Omitted::VALUE,
                 'minScore' => $minScore,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'region' => $region,
+                'region' => $region ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -259,13 +260,14 @@ final class AIService implements AIContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): AISummarizeResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'bucket' => $bucket,
                 'filename' => $filename,
-                'systemPrompt' => $systemPrompt,
-                'idempotencyKey' => $idempotencyKey,
+                'systemPrompt' => $systemPrompt ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

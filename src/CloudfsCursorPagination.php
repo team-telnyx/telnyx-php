@@ -59,12 +59,15 @@ final class CloudfsCursorPagination implements BaseModel, BasePage
     ) {
         $this->initialize();
 
-        if (!is_array($this->parsedBody)) {
+        if (!is_array($this->parsedBody) && !($this->parsedBody instanceof \stdClass)) {
             return;
         }
 
         // @phpstan-ignore-next-line argument.type
-        self::__unserialize($this->parsedBody);
+        $page = Conversion::coerce(self::class, value: $this->parsedBody);
+        if ($page instanceof self) {
+            self::__unserialize($page->toProperties());
+        }
 
         if (is_array($items = $this->offsetGet('data'))) {
             $parsed = Conversion::coerce(new ListOf($convert), value: $items);

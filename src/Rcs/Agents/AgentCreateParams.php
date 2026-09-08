@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Creates an editable RCS agent draft under a brand. The `Idempotency-Key` is scoped to the authenticated organization. Reusing the key with the same request returns the original agent, while reusing it with a different request returns a conflict.
@@ -102,8 +103,8 @@ final class AgentCreateParams implements BaseModel
         string $displayName,
         AgentUseCase|string $useCase,
         string $idempotencyKey,
-        ?string $hostingRegion = null,
-        ?string $profileID = null,
+        string|Omitted|null $hostingRegion = Omitted::VALUE,
+        string|Omitted|null $profileID = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -113,8 +114,8 @@ final class AgentCreateParams implements BaseModel
         $self['useCase'] = $useCase;
         $self['idempotencyKey'] = $idempotencyKey;
 
-        null !== $hostingRegion && $self['hostingRegion'] = $hostingRegion;
-        null !== $profileID && $self['profileID'] = $profileID;
+        Omitted::VALUE !== $hostingRegion && $self['hostingRegion'] = $hostingRegion;
+        Omitted::VALUE !== $profileID && $self['profileID'] = $profileID;
 
         return $self;
     }

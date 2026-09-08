@@ -6,7 +6,7 @@ namespace Telnyx\Services\Rooms\Sessions;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
 use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\AllParticipants;
@@ -76,8 +76,12 @@ final class ActionsService implements ActionsContract
         AllParticipants|array|string|null $participants = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionKickResponse {
-        $params = Util::removeNulls(
-            ['exclude' => $exclude, 'participants' => $participants]
+        $params = array_filter(
+            [
+                'exclude' => $exclude ?? Omitted::VALUE,
+                'participants' => $participants ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -104,8 +108,12 @@ final class ActionsService implements ActionsContract
         \Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\AllParticipants|array|string|null $participants = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionMuteResponse {
-        $params = Util::removeNulls(
-            ['exclude' => $exclude, 'participants' => $participants]
+        $params = array_filter(
+            [
+                'exclude' => $exclude ?? Omitted::VALUE,
+                'participants' => $participants ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -132,8 +140,12 @@ final class ActionsService implements ActionsContract
         \Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\AllParticipants|array|string|null $participants = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionUnmuteResponse {
-        $params = Util::removeNulls(
-            ['exclude' => $exclude, 'participants' => $participants]
+        $params = array_filter(
+            [
+                'exclude' => $exclude ?? Omitted::VALUE,
+                'participants' => $participants ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

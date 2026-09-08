@@ -7,6 +7,7 @@ namespace Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type DataShape = array{
@@ -56,16 +57,16 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        \DateTimeInterface|Omitted|null $windowExpiresAt = Omitted::VALUE,
         ?\DateTimeInterface $lastUserMessageAt = null,
         ?bool $windowActive = null,
-        ?\DateTimeInterface $windowExpiresAt = null,
         ?string $windowType = null,
     ): self {
         $self = new self;
 
         null !== $lastUserMessageAt && $self['lastUserMessageAt'] = $lastUserMessageAt;
         null !== $windowActive && $self['windowActive'] = $windowActive;
-        null !== $windowExpiresAt && $self['windowExpiresAt'] = $windowExpiresAt;
+        Omitted::VALUE !== $windowExpiresAt && $self['windowExpiresAt'] = $windowExpiresAt;
         null !== $windowType && $self['windowType'] = $windowType;
 
         return $self;

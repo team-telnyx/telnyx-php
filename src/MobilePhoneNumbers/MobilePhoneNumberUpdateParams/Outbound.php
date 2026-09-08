@@ -7,6 +7,7 @@ namespace Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type OutboundShape = array{interceptionAppID?: string|null}
@@ -32,11 +33,12 @@ final class Outbound implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $interceptionAppID = null): self
-    {
+    public static function with(
+        string|Omitted|null $interceptionAppID = Omitted::VALUE
+    ): self {
         $self = new self;
 
-        null !== $interceptionAppID && $self['interceptionAppID'] = $interceptionAppID;
+        Omitted::VALUE !== $interceptionAppID && $self['interceptionAppID'] = $interceptionAppID;
 
         return $self;
     }

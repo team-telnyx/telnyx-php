@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\LimitBwKbps;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\Type;
 
@@ -80,16 +81,16 @@ final class TrafficPolicyProfileUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|LimitBwKbps|value-of<LimitBwKbps>|null $limitBwKbps
      * @param list<string>|null $domains
      * @param list<string>|null $ipRanges
-     * @param LimitBwKbps|value-of<LimitBwKbps>|null $limitBwKbps
      * @param list<string>|null $services
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
+        Omitted|LimitBwKbps|int|null $limitBwKbps = Omitted::VALUE,
         ?array $domains = null,
         ?array $ipRanges = null,
-        LimitBwKbps|int|null $limitBwKbps = null,
         ?array $services = null,
         Type|string|null $type = null,
     ): self {
@@ -97,7 +98,7 @@ final class TrafficPolicyProfileUpdateParams implements BaseModel
 
         null !== $domains && $self['domains'] = $domains;
         null !== $ipRanges && $self['ipRanges'] = $ipRanges;
-        null !== $limitBwKbps && $self['limitBwKbps'] = $limitBwKbps;
+        Omitted::VALUE !== $limitBwKbps && $self['limitBwKbps'] = $limitBwKbps;
         null !== $services && $self['services'] = $services;
         null !== $type && $self['type'] = $type;
 

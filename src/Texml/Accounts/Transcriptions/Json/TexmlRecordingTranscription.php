@@ -7,6 +7,7 @@ namespace Telnyx\Texml\Accounts\Transcriptions\Json;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Texml\Accounts\Transcriptions\Json\TexmlRecordingTranscription\Status;
 
 /**
@@ -98,12 +99,12 @@ final class TexmlRecordingTranscription implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        string|Omitted|null $duration = Omitted::VALUE,
         ?string $accountSid = null,
         ?string $apiVersion = null,
         ?string $callSid = null,
         ?\DateTimeInterface $dateCreated = null,
         ?\DateTimeInterface $dateUpdated = null,
-        ?string $duration = null,
         ?string $recordingSid = null,
         ?string $sid = null,
         Status|string|null $status = null,
@@ -117,7 +118,7 @@ final class TexmlRecordingTranscription implements BaseModel
         null !== $callSid && $self['callSid'] = $callSid;
         null !== $dateCreated && $self['dateCreated'] = $dateCreated;
         null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
-        null !== $duration && $self['duration'] = $duration;
+        Omitted::VALUE !== $duration && $self['duration'] = $duration;
         null !== $recordingSid && $self['recordingSid'] = $recordingSid;
         null !== $sid && $self['sid'] = $sid;
         null !== $status && $self['status'] = $status;

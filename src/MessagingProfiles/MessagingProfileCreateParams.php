@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 
 /**
@@ -195,51 +196,51 @@ final class MessagingProfileCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $whitelistedDestinations
-     * @param NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
-     * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
+     * @param Omitted|NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
+     * @param Omitted|URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
         string $name,
         array $whitelistedDestinations,
-        ?string $aiAssistantID = null,
-        ?string $alphaSender = null,
+        string|Omitted|null $aiAssistantID = Omitted::VALUE,
+        string|Omitted|null $alphaSender = Omitted::VALUE,
+        string|Omitted|null $healthWebhookURL = Omitted::VALUE,
+        Omitted|NumberPoolSettings|array|null $numberPoolSettings = Omitted::VALUE,
+        string|Omitted|null $resourceGroupID = Omitted::VALUE,
+        Omitted|URLShortenerSettings|array|null $urlShortenerSettings = Omitted::VALUE,
+        string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
         ?bool $enabled = null,
-        ?string $healthWebhookURL = null,
         ?bool $mmsFallBackToSMS = null,
         ?bool $mmsTranscoding = null,
         ?bool $mobileOnly = null,
-        NumberPoolSettings|array|null $numberPoolSettings = null,
-        ?string $resourceGroupID = null,
         ?bool $smartEncoding = null,
-        URLShortenerSettings|array|null $urlShortenerSettings = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
     ): self {
         $self = new self;
 
         $self['name'] = $name;
         $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        null !== $aiAssistantID && $self['aiAssistantID'] = $aiAssistantID;
-        null !== $alphaSender && $self['alphaSender'] = $alphaSender;
+        Omitted::VALUE !== $aiAssistantID && $self['aiAssistantID'] = $aiAssistantID;
+        Omitted::VALUE !== $alphaSender && $self['alphaSender'] = $alphaSender;
         null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
         null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
         null !== $enabled && $self['enabled'] = $enabled;
-        null !== $healthWebhookURL && $self['healthWebhookURL'] = $healthWebhookURL;
+        Omitted::VALUE !== $healthWebhookURL && $self['healthWebhookURL'] = $healthWebhookURL;
         null !== $mmsFallBackToSMS && $self['mmsFallBackToSMS'] = $mmsFallBackToSMS;
         null !== $mmsTranscoding && $self['mmsTranscoding'] = $mmsTranscoding;
         null !== $mobileOnly && $self['mobileOnly'] = $mobileOnly;
-        null !== $numberPoolSettings && $self['numberPoolSettings'] = $numberPoolSettings;
-        null !== $resourceGroupID && $self['resourceGroupID'] = $resourceGroupID;
+        Omitted::VALUE !== $numberPoolSettings && $self['numberPoolSettings'] = $numberPoolSettings;
+        Omitted::VALUE !== $resourceGroupID && $self['resourceGroupID'] = $resourceGroupID;
         null !== $smartEncoding && $self['smartEncoding'] = $smartEncoding;
-        null !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
+        Omitted::VALUE !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
         null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        Omitted::VALUE !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

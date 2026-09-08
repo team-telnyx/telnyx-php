@@ -6,7 +6,6 @@ namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\KvsContract;
@@ -54,7 +53,7 @@ final class KvsService implements KvsContract
         string $name,
         RequestOptions|array|null $requestOptions = null
     ): KvNamespaceResponseWrapper {
-        $params = Util::removeNulls(['name' => $name]);
+        $params = ['name' => $name];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -100,9 +99,7 @@ final class KvsService implements KvsContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

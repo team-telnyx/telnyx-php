@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Updates the details of the specified FQDN record and returns the updated FQDN.
@@ -62,17 +63,17 @@ final class FqdnUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        int|Omitted|null $port = Omitted::VALUE,
         ?string $connectionID = null,
         ?string $dnsRecordType = null,
         ?string $fqdn = null,
-        ?int $port = null,
     ): self {
         $self = new self;
 
         null !== $connectionID && $self['connectionID'] = $connectionID;
         null !== $dnsRecordType && $self['dnsRecordType'] = $dnsRecordType;
         null !== $fqdn && $self['fqdn'] = $fqdn;
-        null !== $port && $self['port'] = $port;
+        Omitted::VALUE !== $port && $self['port'] = $port;
 
         return $self;
     }

@@ -144,12 +144,18 @@ final class Util
             return $key($array);
         }
 
+        if ([] === $key) {
+            return $array;
+        }
+        if ($array instanceof \stdClass) {
+            $array = get_object_vars($array);
+        }
         if (is_array($array)) {
             if ((is_string($key) || is_int($key)) && array_key_exists($key, array: $array)) {
                 return $array[$key];
             }
 
-            if (is_array($key) && !empty($key)) {
+            if (is_array($key)) {
                 if (array_key_exists($fst = $key[0], array: $array)) {
                     return self::dig($array[$fst], key: array_slice($key, 1));
                 }
@@ -425,7 +431,7 @@ final class Util
 
     public static function decodeJson(string $json): mixed
     {
-        return json_decode($json, associative: true, flags: JSON_THROW_ON_ERROR);
+        return json_decode($json, associative: false, flags: JSON_THROW_ON_ERROR);
     }
 
     public static function decodeContent(ResponseInterface $rsp): mixed

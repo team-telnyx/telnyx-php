@@ -7,7 +7,7 @@ namespace Telnyx\Services\Storage\Kvs;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\FileParam;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\CursorFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Kvs\KeysContract;
@@ -49,7 +49,7 @@ final class KeysService implements KeysContract
         string $id,
         RequestOptions|array|null $requestOptions = null
     ): string {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($key, params: $params, requestOptions: $requestOptions);
@@ -77,7 +77,10 @@ final class KeysService implements KeysContract
         ?int $ttlSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['id' => $id, 'ttlSecs' => $ttlSecs]);
+        $params = array_filter(
+            ['id' => $id, 'ttlSecs' => $ttlSecs ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($key, $body, params: $params, requestOptions: $requestOptions);
@@ -107,8 +110,13 @@ final class KeysService implements KeysContract
         ?string $prefix = null,
         RequestOptions|array|null $requestOptions = null,
     ): CursorFlatPagination {
-        $params = Util::removeNulls(
-            ['cursor' => $cursor, 'limit' => $limit, 'prefix' => $prefix]
+        $params = array_filter(
+            [
+                'cursor' => $cursor ?? Omitted::VALUE,
+                'limit' => $limit,
+                'prefix' => $prefix ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -133,7 +141,7 @@ final class KeysService implements KeysContract
         string $id,
         RequestOptions|array|null $requestOptions = null
     ): mixed {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($key, params: $params, requestOptions: $requestOptions);

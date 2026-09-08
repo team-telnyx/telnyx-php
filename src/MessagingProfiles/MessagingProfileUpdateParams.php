@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
 
 /**
@@ -186,14 +187,18 @@ final class MessagingProfileUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
-     * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
+     * @param Omitted|NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
+     * @param Omitted|URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
-        ?string $aiAssistantID = null,
-        ?string $alphaSender = null,
+        string|Omitted|null $aiAssistantID = Omitted::VALUE,
+        string|Omitted|null $alphaSender = Omitted::VALUE,
+        Omitted|NumberPoolSettings|array|null $numberPoolSettings = Omitted::VALUE,
+        Omitted|URLShortenerSettings|array|null $urlShortenerSettings = Omitted::VALUE,
+        string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
         ?bool $enabled = null,
@@ -201,21 +206,17 @@ final class MessagingProfileUpdateParams implements BaseModel
         ?bool $mmsTranscoding = null,
         ?bool $mobileOnly = null,
         ?string $name = null,
-        NumberPoolSettings|array|null $numberPoolSettings = null,
         ?bool $redactionEnabled = null,
         ?int $redactionLevel = null,
         ?bool $smartEncoding = null,
-        URLShortenerSettings|array|null $urlShortenerSettings = null,
         ?string $v1Secret = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
         ?array $whitelistedDestinations = null,
     ): self {
         $self = new self;
 
-        null !== $aiAssistantID && $self['aiAssistantID'] = $aiAssistantID;
-        null !== $alphaSender && $self['alphaSender'] = $alphaSender;
+        Omitted::VALUE !== $aiAssistantID && $self['aiAssistantID'] = $aiAssistantID;
+        Omitted::VALUE !== $alphaSender && $self['alphaSender'] = $alphaSender;
         null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
         null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
         null !== $enabled && $self['enabled'] = $enabled;
@@ -223,15 +224,15 @@ final class MessagingProfileUpdateParams implements BaseModel
         null !== $mmsTranscoding && $self['mmsTranscoding'] = $mmsTranscoding;
         null !== $mobileOnly && $self['mobileOnly'] = $mobileOnly;
         null !== $name && $self['name'] = $name;
-        null !== $numberPoolSettings && $self['numberPoolSettings'] = $numberPoolSettings;
+        Omitted::VALUE !== $numberPoolSettings && $self['numberPoolSettings'] = $numberPoolSettings;
         null !== $redactionEnabled && $self['redactionEnabled'] = $redactionEnabled;
         null !== $redactionLevel && $self['redactionLevel'] = $redactionLevel;
         null !== $smartEncoding && $self['smartEncoding'] = $smartEncoding;
-        null !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
+        Omitted::VALUE !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
         null !== $v1Secret && $self['v1Secret'] = $v1Secret;
         null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        Omitted::VALUE !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
         null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
         return $self;

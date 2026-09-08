@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type PhysicalAddressShape = array{
@@ -89,7 +90,7 @@ final class PhysicalAddress implements BaseModel
         string $country,
         string $postalCode,
         string $streetAddress,
-        ?string $extendedAddress = null,
+        string|Omitted|null $extendedAddress = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -99,7 +100,7 @@ final class PhysicalAddress implements BaseModel
         $self['postalCode'] = $postalCode;
         $self['streetAddress'] = $streetAddress;
 
-        null !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
+        Omitted::VALUE !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
 
         return $self;
     }

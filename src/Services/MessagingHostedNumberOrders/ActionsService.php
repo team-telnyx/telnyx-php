@@ -7,7 +7,7 @@ namespace Telnyx\Services\MessagingHostedNumberOrders;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\FileParam;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumberOrders\ActionsContract;
@@ -50,7 +50,10 @@ final class ActionsService implements ActionsContract
         string|FileParam|null $loa = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionUploadFileResponse {
-        $params = Util::removeNulls(['bill' => $bill, 'loa' => $loa]);
+        $params = array_filter(
+            ['bill' => $bill ?? Omitted::VALUE, 'loa' => $loa ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->uploadFile($id, params: $params, requestOptions: $requestOptions);

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Telnyx;
 
 use Http\Discovery\Psr17FactoryDiscovery;
-use Http\Discovery\Psr18ClientDiscovery;
 use Telnyx\Core\BaseClient;
+use Telnyx\Core\Implementation\GuzzleHttpClient;
 use Telnyx\Core\Implementation\StreamingHttpClient;
 use Telnyx\Core\Util;
 use Telnyx\Services\AccessIPAddressService;
@@ -193,8 +193,8 @@ use Telnyx\Services\WirelessService;
 use Telnyx\Services\X402Service;
 
 /**
- * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
  */
 class Client extends BaseClient
 {
@@ -1151,13 +1151,13 @@ class Client extends BaseClient
                 uriFactory: Psr17FactoryDiscovery::findUriFactory(),
                 streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
                 requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
-                transporter: Psr18ClientDiscovery::find(),
             ),
             $requestOptions,
         );
 
+        $options->transporter ??= new GuzzleHttpClient;
+
         if (is_null($options->streamingTransporter)) {
-            assert(!is_null($options->transporter));
             $options->streamingTransporter = new StreamingHttpClient($options->transporter);
         }
 
@@ -1406,7 +1406,7 @@ class Client extends BaseClient
      * @param array<string,string|int|list<string|int>|null> $headers
      * @param RequestOpts|null $opts
      *
-     * @return array{NormalizedRequest, RequestOptions}
+     * @return array{NormalizedRequest, RequestOptions, NormalizedRequest}
      */
     protected function buildRequest(
         string $method,

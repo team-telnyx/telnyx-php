@@ -6,7 +6,7 @@ namespace Telnyx\Services\Messaging10dlc;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Messaging10dlc\Brand\AltBusinessIDType;
 use Telnyx\Messaging10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetResponse;
@@ -111,33 +111,34 @@ final class BrandService implements BrandContract
         ?string $website = null,
         RequestOptions|array|null $requestOptions = null,
     ): TelnyxBrand {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'country' => $country,
                 'displayName' => $displayName,
                 'email' => $email,
                 'entityType' => $entityType,
                 'vertical' => $vertical,
-                'businessContactEmail' => $businessContactEmail,
-                'city' => $city,
-                'companyName' => $companyName,
-                'ein' => $ein,
-                'firstName' => $firstName,
-                'ipAddress' => $ipAddress,
+                'businessContactEmail' => $businessContactEmail ?? Omitted::VALUE,
+                'city' => $city ?? Omitted::VALUE,
+                'companyName' => $companyName ?? Omitted::VALUE,
+                'ein' => $ein ?? Omitted::VALUE,
+                'firstName' => $firstName ?? Omitted::VALUE,
+                'ipAddress' => $ipAddress ?? Omitted::VALUE,
                 'isReseller' => $isReseller,
-                'lastName' => $lastName,
-                'mobilePhone' => $mobilePhone,
+                'lastName' => $lastName ?? Omitted::VALUE,
+                'mobilePhone' => $mobilePhone ?? Omitted::VALUE,
                 'mock' => $mock,
-                'phone' => $phone,
-                'postalCode' => $postalCode,
-                'state' => $state,
-                'stockExchange' => $stockExchange,
-                'stockSymbol' => $stockSymbol,
-                'street' => $street,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-                'website' => $website,
+                'phone' => $phone ?? Omitted::VALUE,
+                'postalCode' => $postalCode ?? Omitted::VALUE,
+                'state' => $state ?? Omitted::VALUE,
+                'stockExchange' => $stockExchange ?? Omitted::VALUE,
+                'stockSymbol' => $stockSymbol ?? Omitted::VALUE,
+                'street' => $street ?? Omitted::VALUE,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
+                'website' => $website ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -231,34 +232,35 @@ final class BrandService implements BrandContract
         ?string $website = null,
         RequestOptions|array|null $requestOptions = null,
     ): TelnyxBrand {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'country' => $country,
                 'displayName' => $displayName,
                 'email' => $email,
                 'entityType' => $entityType,
                 'vertical' => $vertical,
-                'altBusinessID' => $altBusinessID,
-                'altBusinessIDType' => $altBusinessIDType,
-                'businessContactEmail' => $businessContactEmail,
-                'city' => $city,
-                'companyName' => $companyName,
-                'ein' => $ein,
-                'firstName' => $firstName,
-                'identityStatus' => $identityStatus,
-                'ipAddress' => $ipAddress,
-                'isReseller' => $isReseller,
-                'lastName' => $lastName,
-                'phone' => $phone,
-                'postalCode' => $postalCode,
-                'state' => $state,
-                'stockExchange' => $stockExchange,
-                'stockSymbol' => $stockSymbol,
-                'street' => $street,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-                'website' => $website,
+                'altBusinessID' => $altBusinessID ?? Omitted::VALUE,
+                'altBusinessIDType' => $altBusinessIDType ?? Omitted::VALUE,
+                'businessContactEmail' => $businessContactEmail ?? Omitted::VALUE,
+                'city' => $city ?? Omitted::VALUE,
+                'companyName' => $companyName ?? Omitted::VALUE,
+                'ein' => $ein ?? Omitted::VALUE,
+                'firstName' => $firstName ?? Omitted::VALUE,
+                'identityStatus' => $identityStatus ?? Omitted::VALUE,
+                'ipAddress' => $ipAddress ?? Omitted::VALUE,
+                'isReseller' => $isReseller ?? Omitted::VALUE,
+                'lastName' => $lastName ?? Omitted::VALUE,
+                'phone' => $phone ?? Omitted::VALUE,
+                'postalCode' => $postalCode ?? Omitted::VALUE,
+                'state' => $state ?? Omitted::VALUE,
+                'stockExchange' => $stockExchange ?? Omitted::VALUE,
+                'stockSymbol' => $stockSymbol ?? Omitted::VALUE,
+                'street' => $street ?? Omitted::VALUE,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
+                'website' => $website ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -299,18 +301,19 @@ final class BrandService implements BrandContract
         ?string $tcrBrandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2 {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'brandID' => $brandID,
-                'country' => $country,
-                'displayName' => $displayName,
-                'entityType' => $entityType,
+                'brandID' => $brandID ?? Omitted::VALUE,
+                'country' => $country ?? Omitted::VALUE,
+                'displayName' => $displayName ?? Omitted::VALUE,
+                'entityType' => $entityType ?? Omitted::VALUE,
                 'page' => $page,
                 'recordsPerPage' => $recordsPerPage,
                 'sort' => $sort,
-                'state' => $state,
-                'tcrBrandID' => $tcrBrandID,
+                'state' => $state ?? Omitted::VALUE,
+                'tcrBrandID' => $tcrBrandID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -394,7 +397,10 @@ final class BrandService implements BrandContract
         ?string $brandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): BrandSMSOtpStatus {
-        $params = Util::removeNulls(['brandID' => $brandID]);
+        $params = array_filter(
+            ['brandID' => $brandID ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getSMSOtpByReference($referenceID, params: $params, requestOptions: $requestOptions);
@@ -499,9 +505,7 @@ final class BrandService implements BrandContract
         string $successSMS,
         RequestOptions|array|null $requestOptions = null,
     ): BrandTriggerSMSOtpResponse {
-        $params = Util::removeNulls(
-            ['pinSMS' => $pinSMS, 'successSMS' => $successSMS]
-        );
+        $params = ['pinSMS' => $pinSMS, 'successSMS' => $successSMS];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->triggerSMSOtp($brandID, params: $params, requestOptions: $requestOptions);
@@ -541,7 +545,7 @@ final class BrandService implements BrandContract
         string $otpPin,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['otpPin' => $otpPin]);
+        $params = ['otpPin' => $otpPin];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->verifySMSOtp($brandID, params: $params, requestOptions: $requestOptions);

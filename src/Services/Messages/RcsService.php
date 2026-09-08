@@ -6,7 +6,7 @@ namespace Telnyx\Services\Messages;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Messages\Rcs\RcGenerateDeeplinkResponse;
 use Telnyx\Messages\Rcs\RcSendParams\MmsFallback;
 use Telnyx\Messages\Rcs\RcSendParams\SMSFallback;
@@ -57,8 +57,12 @@ final class RcsService implements RcsContract
         ?string $phoneNumber = null,
         RequestOptions|array|null $requestOptions = null,
     ): RcGenerateDeeplinkResponse {
-        $params = Util::removeNulls(
-            ['body' => $body, 'phoneNumber' => $phoneNumber]
+        $params = array_filter(
+            [
+                'body' => $body ?? Omitted::VALUE,
+                'phoneNumber' => $phoneNumber ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -95,17 +99,18 @@ final class RcsService implements RcsContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): RcSendResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'agentID' => $agentID,
                 'agentMessage' => $agentMessage,
                 'messagingProfileID' => $messagingProfileID,
                 'to' => $to,
-                'mmsFallback' => $mmsFallback,
-                'smsFallback' => $smsFallback,
-                'type' => $type,
-                'webhookURL' => $webhookURL,
+                'mmsFallback' => $mmsFallback ?? Omitted::VALUE,
+                'smsFallback' => $smsFallback ?? Omitted::VALUE,
+                'type' => $type ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

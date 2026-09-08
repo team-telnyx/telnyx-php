@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\EmailDomains\DomainsTrackingSettings;
 use Telnyx\EmailDomains\EmailDmarcPolicy;
@@ -52,7 +52,7 @@ final class EmailDomainsService implements EmailDomainsContract
      *
      * Registers a domain for email sending and optional inbound delivery. The response includes the domain configuration and current verification state.
      *
-     * @param EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy DMARC policy for a sending domain. Drives the recommended _dmarc.<domain> TXT record. DMARC is advisory and never blocks sending. When omitted or null, the domain uses the advisory default (v=DMARC1; p=none; rua=mailto:dmarc@telnyx.com).
+     * @param Omitted|EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy DMARC policy for a sending domain. Drives the recommended _dmarc.<domain> TXT record. DMARC is advisory and never blocks sending. When omitted or null, the domain uses the advisory default (v=DMARC1; p=none; rua=mailto:dmarc@telnyx.com).
      * @param bool $inboundEnabled Enable inbound routing for this domain
      * @param DomainsTrackingSettings|DomainsTrackingSettingsShape $tracking
      * @param RequestOpts|null $requestOptions
@@ -61,18 +61,19 @@ final class EmailDomainsService implements EmailDomainsContract
      */
     public function create(
         string $domain,
-        EmailDmarcPolicy|array|null $dmarcPolicy = null,
+        Omitted|EmailDmarcPolicy|array|null $dmarcPolicy = Omitted::VALUE,
         bool $inboundEnabled = false,
         DomainsTrackingSettings|array|null $tracking = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailDomainResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'domain' => $domain,
                 'dmarcPolicy' => $dmarcPolicy,
                 'inboundEnabled' => $inboundEnabled,
-                'tracking' => $tracking,
+                'tracking' => $tracking ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -107,7 +108,7 @@ final class EmailDomainsService implements EmailDomainsContract
      * Updates mutable settings for an existing email domain, including inbound delivery and tracking configuration. Shared domains are read-only for non-owner accounts.
      *
      * @param string $id Email domain UUID
-     * @param EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy DMARC policy for a sending domain. Drives the recommended _dmarc.<domain> TXT record. DMARC is advisory and never blocks sending. When omitted or null, the domain uses the advisory default (v=DMARC1; p=none; rua=mailto:dmarc@telnyx.com).
+     * @param Omitted|EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy DMARC policy for a sending domain. Drives the recommended _dmarc.<domain> TXT record. DMARC is advisory and never blocks sending. When omitted or null, the domain uses the advisory default (v=DMARC1; p=none; rua=mailto:dmarc@telnyx.com).
      * @param bool $inboundEnabled Enable or disable inbound routing for this domain
      * @param DomainsTrackingSettings|DomainsTrackingSettingsShape $tracking
      * @param RequestOpts|null $requestOptions
@@ -116,17 +117,18 @@ final class EmailDomainsService implements EmailDomainsContract
      */
     public function update(
         string $id,
-        EmailDmarcPolicy|array|null $dmarcPolicy = null,
+        Omitted|EmailDmarcPolicy|array|null $dmarcPolicy = Omitted::VALUE,
         ?bool $inboundEnabled = null,
         DomainsTrackingSettings|array|null $tracking = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailDomainResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'dmarcPolicy' => $dmarcPolicy,
-                'inboundEnabled' => $inboundEnabled,
-                'tracking' => $tracking,
+                'inboundEnabled' => $inboundEnabled ?? Omitted::VALUE,
+                'tracking' => $tracking ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -171,20 +173,21 @@ final class EmailDomainsService implements EmailDomainsContract
         Sort|string|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterDomain' => $filterDomain,
-                'filterProfileID' => $filterProfileID,
-                'filterStatus' => $filterStatus,
-                'filterType' => $filterType,
-                'filterUsableForInbound' => $filterUsableForInbound,
-                'filterUsableForSending' => $filterUsableForSending,
-                'pageAfter' => $pageAfter,
-                'pageBefore' => $pageBefore,
+                'filterDomain' => $filterDomain ?? Omitted::VALUE,
+                'filterProfileID' => $filterProfileID ?? Omitted::VALUE,
+                'filterStatus' => $filterStatus ?? Omitted::VALUE,
+                'filterType' => $filterType ?? Omitted::VALUE,
+                'filterUsableForInbound' => $filterUsableForInbound ?? Omitted::VALUE,
+                'filterUsableForSending' => $filterUsableForSending ?? Omitted::VALUE,
+                'pageAfter' => $pageAfter ?? Omitted::VALUE,
+                'pageBefore' => $pageBefore ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'sort' => $sort,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -209,7 +212,7 @@ final class EmailDomainsService implements EmailDomainsContract
         bool $force = false,
         RequestOptions|array|null $requestOptions = null,
     ): EmailDomainResponse {
-        $params = Util::removeNulls(['force' => $force]);
+        $params = ['force' => $force];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);

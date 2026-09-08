@@ -7,6 +7,7 @@ namespace Telnyx;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MessagingHostedNumberOrder\Status;
 
 /**
@@ -65,8 +66,8 @@ final class MessagingHostedNumberOrder implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        string|Omitted|null $messagingProfileID = Omitted::VALUE,
         ?string $id = null,
-        ?string $messagingProfileID = null,
         ?array $phoneNumbers = null,
         ?string $recordType = null,
         Status|string|null $status = null,
@@ -74,7 +75,7 @@ final class MessagingHostedNumberOrder implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        Omitted::VALUE !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $status && $self['status'] = $status;

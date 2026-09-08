@@ -8,7 +8,7 @@ use Telnyx\AI\Anthropic\V1\V1MessagesParams\Mode;
 use Telnyx\AI\Anthropic\V1\V1MessagesParams\Region;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Anthropic\V1Contract;
 
@@ -91,31 +91,32 @@ final class V1Service implements V1Contract
         ?float $topP = null,
         RequestOptions|array|null $requestOptions = null,
     ): array {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'maxTokens' => $maxTokens,
                 'messages' => $messages,
                 'model' => $model,
-                'apiKeyRef' => $apiKeyRef,
-                'billingGroupID' => $billingGroupID,
-                'fallbackConfig' => $fallbackConfig,
-                'maxRetries' => $maxRetries,
-                'mcpServers' => $mcpServers,
-                'metadata' => $metadata,
+                'apiKeyRef' => $apiKeyRef ?? Omitted::VALUE,
+                'billingGroupID' => $billingGroupID ?? Omitted::VALUE,
+                'fallbackConfig' => $fallbackConfig ?? Omitted::VALUE,
+                'maxRetries' => $maxRetries ?? Omitted::VALUE,
+                'mcpServers' => $mcpServers ?? Omitted::VALUE,
+                'metadata' => $metadata ?? Omitted::VALUE,
                 'mode' => $mode,
-                'region' => $region,
-                'serviceTier' => $serviceTier,
-                'stopSequences' => $stopSequences,
+                'region' => $region ?? Omitted::VALUE,
+                'serviceTier' => $serviceTier ?? Omitted::VALUE,
+                'stopSequences' => $stopSequences ?? Omitted::VALUE,
                 'stream' => $stream,
-                'system' => $system,
-                'temperature' => $temperature,
-                'thinking' => $thinking,
+                'system' => $system ?? Omitted::VALUE,
+                'temperature' => $temperature ?? Omitted::VALUE,
+                'thinking' => $thinking ?? Omitted::VALUE,
                 'timeout' => $timeout,
-                'toolChoice' => $toolChoice,
-                'tools' => $tools,
-                'topK' => $topK,
-                'topP' => $topP,
+                'toolChoice' => $toolChoice ?? Omitted::VALUE,
+                'tools' => $tools ?? Omitted::VALUE,
+                'topK' => $topK ?? Omitted::VALUE,
+                'topP' => $topP ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

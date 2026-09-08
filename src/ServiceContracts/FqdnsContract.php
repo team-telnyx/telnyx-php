@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Fqdns\Fqdn;
 use Telnyx\Fqdns\FqdnDeleteResponse;
@@ -26,7 +27,7 @@ interface FqdnsContract
      * @param string $connectionID ID of the FQDN connection to which this IP should be attached
      * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      * @param string $fqdn FQDN represented by this resource
-     * @param int|null $port port to use when connecting to this FQDN
+     * @param int|Omitted|null $port port to use when connecting to this FQDN
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -35,7 +36,7 @@ interface FqdnsContract
         string $connectionID,
         string $dnsRecordType,
         string $fqdn,
-        ?int $port = 5060,
+        int|Omitted|null $port = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): FqdnNewResponse;
 
@@ -59,7 +60,7 @@ interface FqdnsContract
      * @param string $connectionID ID of the FQDN connection to which this IP should be attached
      * @param string $dnsRecordType The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      * @param string $fqdn FQDN represented by this resource
-     * @param int|null $port port to use when connecting to this FQDN
+     * @param int|Omitted|null $port port to use when connecting to this FQDN
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -69,7 +70,7 @@ interface FqdnsContract
         ?string $connectionID = null,
         ?string $dnsRecordType = null,
         ?string $fqdn = null,
-        ?int $port = 5060,
+        int|Omitted|null $port = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): FqdnUpdateResponse;
 

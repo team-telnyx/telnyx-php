@@ -9,7 +9,7 @@ use Telnyx\AI\OpenAI\Embeddings\EmbeddingListEmbeddingModelsResponse;
 use Telnyx\AI\OpenAI\Embeddings\EmbeddingNewEmbeddingsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\OpenAI\EmbeddingsContract;
 
@@ -56,14 +56,15 @@ final class EmbeddingsService implements EmbeddingsContract
         ?string $user = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmbeddingNewEmbeddingsResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'input' => $input,
                 'model' => $model,
-                'dimensions' => $dimensions,
+                'dimensions' => $dimensions ?? Omitted::VALUE,
                 'encodingFormat' => $encodingFormat,
-                'user' => $user,
+                'user' => $user ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

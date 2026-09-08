@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailCursorPagination;
 use Telnyx\EmailInboxes\Drafts\EmailAddress;
 use Telnyx\EmailInboxes\Drafts\EmailMessage;
@@ -68,7 +68,7 @@ final class EmailMessagesService implements EmailMessagesContract
      * @param list<AttachmentRequest|AttachmentRequestShape> $attachments Body param
      * @param list<EmailAddressInputShape> $bcc Body param
      * @param list<EmailAddressInputShape> $cc Body param
-     * @param string|null $forwardOfMessageID Body param: Telnyx message UUID of the message this send forwards. Forwarded
+     * @param string|Omitted|null $forwardOfMessageID Body param: Telnyx message UUID of the message this send forwards. Forwarded
      * messages start a NEW thread per RFC 5322 — NO `In-Reply-To` or
      * `References` headers are set on the outbound MIME. The id is
      * recorded in the message's metadata for EDR provenance only.
@@ -78,13 +78,13 @@ final class EmailMessagesService implements EmailMessagesContract
      * forward is pure metadata; it does not affect delivery). Cannot be
      * combined with `in_reply_to_message_id` (422).
      * @param string $fromName Body param: Optional display name for string `from`; overrides `from.name` when provided.
-     * @param string|null $groupID body param: Optional unsubscribe-group UUID used for group-scoped suppression checks and unsubscribe handling
+     * @param string|Omitted|null $groupID body param: Optional unsubscribe-group UUID used for group-scoped suppression checks and unsubscribe handling
      * @param array<string,string> $headers Body param: Custom email headers. Write-only; not returned in responses.
      * @param string $htmlBody Body param: HTML email body. Returned only by `GET /email_messages/{id}`; omitted from create and list responses.
      * @param bool $ignoreSuppression Body param: When true, allows delivery to recipients whose suppressions explicitly
      * permit an override. Hard bounces, spam complaints, and invalid-address
      * suppressions cannot be overridden. Requires the `email:override` API scope.
-     * @param string|null $inReplyToMessageID Body param: Telnyx message UUID of the message this send replies to. When provided,
+     * @param string|Omitted|null $inReplyToMessageID Body param: Telnyx message UUID of the message this send replies to. When provided,
      * the API sets RFC 5322 `In-Reply-To` and `References` headers on the
      * outbound MIME so the recipient's mailbox (Gmail/Outlook) threads it
      * correctly. The parent is looked up under the caller's account scope;
@@ -98,7 +98,7 @@ final class EmailMessagesService implements EmailMessagesContract
      * @param bool $inlineCss Body param
      * @param array<string,mixed> $metadata Body param: Custom metadata. Write-only; not returned in responses.
      * @param EmailAddressInputShape $replyTo Body param: Reply-to address. If provided as an object with a name, only the email is stored; the name is ignored.
-     * @param bool|null $replyToAll Body param: Indicates a reply-all intent. In Phase 1 (wire-only) this does not
+     * @param bool|Omitted|null $replyToAll Body param: Indicates a reply-all intent. In Phase 1 (wire-only) this does not
      * change the threading headers — recipient selection is customer-
      * controlled (`to`/`cc`), and a thread is not defined by its audience.
      * When the referenced message has no thread context, reply-all
@@ -108,7 +108,7 @@ final class EmailMessagesService implements EmailMessagesContract
      *
      * Only meaningful alongside `in_reply_to_message_id`.
      * @param bool $sandboxMode Body param
-     * @param \DateTimeInterface|null $scheduledAt Body param: Future ISO 8601 time to schedule sending. Invalid or past timestamps
+     * @param \DateTimeInterface|Omitted|null $scheduledAt Body param: Future ISO 8601 time to schedule sending. Invalid or past timestamps
      * are silently ignored and the email is sent immediately. The legacy
      * alias `send_at` is still accepted for backward compatibility; when
      * both are provided, `scheduled_at` wins.
@@ -130,19 +130,19 @@ final class EmailMessagesService implements EmailMessagesContract
         ?array $attachments = null,
         ?array $bcc = null,
         ?array $cc = null,
-        ?string $forwardOfMessageID = null,
+        string|Omitted|null $forwardOfMessageID = Omitted::VALUE,
         ?string $fromName = null,
-        ?string $groupID = null,
+        string|Omitted|null $groupID = Omitted::VALUE,
         ?array $headers = null,
         ?string $htmlBody = null,
         bool $ignoreSuppression = false,
-        ?string $inReplyToMessageID = null,
+        string|Omitted|null $inReplyToMessageID = Omitted::VALUE,
         bool $inlineCss = false,
         ?array $metadata = null,
         string|EmailAddress|array|null $replyTo = null,
-        ?bool $replyToAll = false,
+        bool|Omitted|null $replyToAll = Omitted::VALUE,
         bool $sandboxMode = false,
-        ?\DateTimeInterface $scheduledAt = null,
+        \DateTimeInterface|Omitted|null $scheduledAt = Omitted::VALUE,
         ?\DateTimeInterface $sendAt = null,
         ?string $subject = null,
         ?array $tags = null,
@@ -153,35 +153,36 @@ final class EmailMessagesService implements EmailMessagesContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailMessageResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'from' => $from,
                 'to' => $to,
-                'attachments' => $attachments,
-                'bcc' => $bcc,
-                'cc' => $cc,
+                'attachments' => $attachments ?? Omitted::VALUE,
+                'bcc' => $bcc ?? Omitted::VALUE,
+                'cc' => $cc ?? Omitted::VALUE,
                 'forwardOfMessageID' => $forwardOfMessageID,
-                'fromName' => $fromName,
+                'fromName' => $fromName ?? Omitted::VALUE,
                 'groupID' => $groupID,
-                'headers' => $headers,
-                'htmlBody' => $htmlBody,
+                'headers' => $headers ?? Omitted::VALUE,
+                'htmlBody' => $htmlBody ?? Omitted::VALUE,
                 'ignoreSuppression' => $ignoreSuppression,
                 'inReplyToMessageID' => $inReplyToMessageID,
                 'inlineCss' => $inlineCss,
-                'metadata' => $metadata,
-                'replyTo' => $replyTo,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'replyTo' => $replyTo ?? Omitted::VALUE,
                 'replyToAll' => $replyToAll,
                 'sandboxMode' => $sandboxMode,
                 'scheduledAt' => $scheduledAt,
-                'sendAt' => $sendAt,
-                'subject' => $subject,
-                'tags' => $tags,
-                'templateID' => $templateID,
+                'sendAt' => $sendAt ?? Omitted::VALUE,
+                'subject' => $subject ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
+                'templateID' => $templateID ?? Omitted::VALUE,
                 'templateVariables' => $templateVariables,
-                'textBody' => $textBody,
-                'trackingSettings' => $trackingSettings,
-                'idempotencyKey' => $idempotencyKey,
+                'textBody' => $textBody ?? Omitted::VALUE,
+                'trackingSettings' => $trackingSettings ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -230,8 +231,9 @@ final class EmailMessagesService implements EmailMessagesContract
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
     ): EmailCursorPagination {
-        $params = Util::removeNulls(
-            ['pageCursor' => $pageCursor, 'pageSize' => $pageSize]
+        $params = array_filter(
+            ['pageCursor' => $pageCursor ?? Omitted::VALUE, 'pageSize' => $pageSize],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -281,12 +283,13 @@ final class EmailMessagesService implements EmailMessagesContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailMessageBatchResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'messages' => $messages,
                 'sandboxMode' => $sandboxMode,
-                'idempotencyKey' => $idempotencyKey,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -313,7 +316,7 @@ final class EmailMessagesService implements EmailMessagesContract
         string $address,
         RequestOptions|array|null $requestOptions = null
     ): mixed {
-        $params = Util::removeNulls(['address' => $address]);
+        $params = ['address' => $address];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteAll(params: $params, requestOptions: $requestOptions);
@@ -362,8 +365,9 @@ final class EmailMessagesService implements EmailMessagesContract
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
     ): EmailCursorPagination {
-        $params = Util::removeNulls(
-            ['pageCursor' => $pageCursor, 'pageSize' => $pageSize]
+        $params = array_filter(
+            ['pageCursor' => $pageCursor ?? Omitted::VALUE, 'pageSize' => $pageSize],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

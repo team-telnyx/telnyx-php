@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechContract;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws;
@@ -104,25 +104,26 @@ final class TextToSpeechService implements TextToSpeechContract
         Xai|array|null $xai = null,
         RequestOptions|array|null $requestOptions = null,
     ): TextToSpeechGenerateSpeechResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'aws' => $aws,
-                'azure' => $azure,
+                'aws' => $aws ?? Omitted::VALUE,
+                'azure' => $azure ?? Omitted::VALUE,
                 'disableCache' => $disableCache,
-                'elevenlabs' => $elevenlabs,
-                'humain' => $humain,
-                'language' => $language,
-                'minimax' => $minimax,
+                'elevenlabs' => $elevenlabs ?? Omitted::VALUE,
+                'humain' => $humain ?? Omitted::VALUE,
+                'language' => $language ?? Omitted::VALUE,
+                'minimax' => $minimax ?? Omitted::VALUE,
                 'outputType' => $outputType,
-                'provider' => $provider,
-                'resemble' => $resemble,
-                'telnyx' => $telnyx,
-                'text' => $text,
-                'textType' => $textType,
-                'voice' => $voice,
-                'voiceSettings' => $voiceSettings,
-                'xai' => $xai,
+                'provider' => $provider ?? Omitted::VALUE,
+                'resemble' => $resemble ?? Omitted::VALUE,
+                'telnyx' => $telnyx ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'textType' => $textType ?? Omitted::VALUE,
+                'voice' => $voice ?? Omitted::VALUE,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'xai' => $xai ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -149,7 +150,13 @@ final class TextToSpeechService implements TextToSpeechContract
         \Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider|string|null $provider = null,
         RequestOptions|array|null $requestOptions = null,
     ): TextToSpeechListVoicesResponse {
-        $params = Util::removeNulls(['apiKey' => $apiKey, 'provider' => $provider]);
+        $params = array_filter(
+            [
+                'apiKey' => $apiKey ?? Omitted::VALUE,
+                'provider' => $provider ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listVoices(params: $params, requestOptions: $requestOptions);
@@ -196,16 +203,17 @@ final class TextToSpeechService implements TextToSpeechContract
         ?string $voiceID = null,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'audioFormat' => $audioFormat,
+                'audioFormat' => $audioFormat ?? Omitted::VALUE,
                 'disableCache' => $disableCache,
-                'modelID' => $modelID,
+                'modelID' => $modelID ?? Omitted::VALUE,
                 'provider' => $provider,
-                'socketID' => $socketID,
-                'voice' => $voice,
-                'voiceID' => $voiceID,
+                'socketID' => $socketID ?? Omitted::VALUE,
+                'voice' => $voice ?? Omitted::VALUE,
+                'voiceID' => $voiceID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

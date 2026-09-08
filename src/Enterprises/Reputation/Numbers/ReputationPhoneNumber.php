@@ -7,6 +7,7 @@ namespace Telnyx\Enterprises\Reputation\Numbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\ReputationData;
 
 /**
@@ -60,14 +61,14 @@ final class ReputationPhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReputationData|ReputationDataShape|null $reputationData
+     * @param Omitted|ReputationData|ReputationDataShape|null $reputationData
      */
     public static function with(
+        Omitted|ReputationData|array|null $reputationData = Omitted::VALUE,
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $enterpriseID = null,
         ?string $phoneNumber = null,
-        ReputationData|array|null $reputationData = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
         $self = new self;
@@ -76,7 +77,7 @@ final class ReputationPhoneNumber implements BaseModel
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $enterpriseID && $self['enterpriseID'] = $enterpriseID;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
-        null !== $reputationData && $self['reputationData'] = $reputationData;
+        Omitted::VALUE !== $reputationData && $self['reputationData'] = $reputationData;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;

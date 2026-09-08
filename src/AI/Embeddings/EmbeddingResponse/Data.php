@@ -7,6 +7,7 @@ namespace Telnyx\AI\Embeddings\EmbeddingResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type DataShape = array{
@@ -52,8 +53,8 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        string|Omitted|null $finishedAt = Omitted::VALUE,
         ?string $createdAt = null,
-        ?string $finishedAt = null,
         ?string $status = null,
         ?string $taskID = null,
         ?string $taskName = null,
@@ -62,7 +63,7 @@ final class Data implements BaseModel
         $self = new self;
 
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $finishedAt && $self['finishedAt'] = $finishedAt;
+        Omitted::VALUE !== $finishedAt && $self['finishedAt'] = $finishedAt;
         null !== $status && $self['status'] = $status;
         null !== $taskID && $self['taskID'] = $taskID;
         null !== $taskName && $self['taskName'] = $taskName;

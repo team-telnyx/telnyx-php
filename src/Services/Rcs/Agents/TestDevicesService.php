@@ -6,7 +6,6 @@ namespace Telnyx\Services\Rcs\Agents;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\Rcs\Agents\TestDevices\TestDeviceResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Rcs\Agents\TestDevicesContract;
@@ -46,7 +45,7 @@ final class TestDevicesService implements TestDevicesContract
         string $phoneNumber,
         RequestOptions|array|null $requestOptions = null,
     ): TestDeviceResponse {
-        $params = Util::removeNulls(['phoneNumber' => $phoneNumber]);
+        $params = ['phoneNumber' => $phoneNumber];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);
@@ -92,7 +91,7 @@ final class TestDevicesService implements TestDevicesContract
         string $id,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($testDeviceID, params: $params, requestOptions: $requestOptions);

@@ -7,6 +7,7 @@ namespace Telnyx\PortingOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\PortingOrders\PortingOrder\AdditionalStep;
 use Telnyx\PortingOrders\PortingOrder\PhoneNumberType;
 use Telnyx\PortingOrderStatus;
@@ -214,12 +215,12 @@ final class PortingOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|PortingOrderMisc|PortingOrderMiscShape|null $misc
      * @param PortingOrderActivationSettings|PortingOrderActivationSettingsShape|null $activationSettings
      * @param list<AdditionalStep|value-of<AdditionalStep>>|null $additionalSteps
      * @param PortingOrderDocuments|PortingOrderDocumentsShape|null $documents
      * @param PortingOrderEndUser|PortingOrderEndUserShape|null $endUser
      * @param PortingOrderMessaging|PortingOrderMessagingShape|null $messaging
-     * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
      * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape|null $phoneNumberConfiguration
      * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
      * @param list<PortingPhoneNumber|PortingPhoneNumberShape>|null $phoneNumbers
@@ -228,19 +229,21 @@ final class PortingOrder implements BaseModel
      * @param PortingOrderUserFeedback|PortingOrderUserFeedbackShape|null $userFeedback
      */
     public static function with(
+        string|Omitted|null $customerGroupReference = Omitted::VALUE,
+        string|Omitted|null $customerReference = Omitted::VALUE,
+        Omitted|PortingOrderMisc|array|null $misc = Omitted::VALUE,
+        string|Omitted|null $parentSupportKey = Omitted::VALUE,
+        string|Omitted|null $supportKey = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         ?string $id = null,
         PortingOrderActivationSettings|array|null $activationSettings = null,
         ?array $additionalSteps = null,
         ?\DateTimeInterface $createdAt = null,
-        ?string $customerGroupReference = null,
-        ?string $customerReference = null,
         ?string $description = null,
         PortingOrderDocuments|array|null $documents = null,
         PortingOrderEndUser|array|null $endUser = null,
         PortingOrderMessaging|array|null $messaging = null,
-        PortingOrderMisc|array|null $misc = null,
         ?string $oldServiceProviderOcn = null,
-        ?string $parentSupportKey = null,
         PortingOrderPhoneNumberConfiguration|array|null $phoneNumberConfiguration = null,
         PhoneNumberType|string|null $phoneNumberType = null,
         ?array $phoneNumbers = null,
@@ -249,11 +252,9 @@ final class PortingOrder implements BaseModel
         ?array $requirements = null,
         ?bool $requirementsMet = null,
         PortingOrderStatus|array|null $status = null,
-        ?string $supportKey = null,
         ?\DateTimeInterface $updatedAt = null,
         PortingOrderUserFeedback|array|null $userFeedback = null,
         ?string $userID = null,
-        ?string $webhookURL = null,
     ): self {
         $self = new self;
 
@@ -261,15 +262,15 @@ final class PortingOrder implements BaseModel
         null !== $activationSettings && $self['activationSettings'] = $activationSettings;
         null !== $additionalSteps && $self['additionalSteps'] = $additionalSteps;
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $customerGroupReference && $self['customerGroupReference'] = $customerGroupReference;
-        null !== $customerReference && $self['customerReference'] = $customerReference;
+        Omitted::VALUE !== $customerGroupReference && $self['customerGroupReference'] = $customerGroupReference;
+        Omitted::VALUE !== $customerReference && $self['customerReference'] = $customerReference;
         null !== $description && $self['description'] = $description;
         null !== $documents && $self['documents'] = $documents;
         null !== $endUser && $self['endUser'] = $endUser;
         null !== $messaging && $self['messaging'] = $messaging;
-        null !== $misc && $self['misc'] = $misc;
+        Omitted::VALUE !== $misc && $self['misc'] = $misc;
         null !== $oldServiceProviderOcn && $self['oldServiceProviderOcn'] = $oldServiceProviderOcn;
-        null !== $parentSupportKey && $self['parentSupportKey'] = $parentSupportKey;
+        Omitted::VALUE !== $parentSupportKey && $self['parentSupportKey'] = $parentSupportKey;
         null !== $phoneNumberConfiguration && $self['phoneNumberConfiguration'] = $phoneNumberConfiguration;
         null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
         null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
@@ -278,11 +279,11 @@ final class PortingOrder implements BaseModel
         null !== $requirements && $self['requirements'] = $requirements;
         null !== $requirementsMet && $self['requirementsMet'] = $requirementsMet;
         null !== $status && $self['status'] = $status;
-        null !== $supportKey && $self['supportKey'] = $supportKey;
+        Omitted::VALUE !== $supportKey && $self['supportKey'] = $supportKey;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $userFeedback && $self['userFeedback'] = $userFeedback;
         null !== $userID && $self['userID'] = $userID;
-        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

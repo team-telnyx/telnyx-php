@@ -10,7 +10,7 @@ use Telnyx\AI\OpenAI\OpenAICreateResponseParams\Reasoning;
 use Telnyx\AI\OpenAI\OpenAICreateResponseParams\Region;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\OpenAIContract;
 use Telnyx\Services\AI\OpenAI\ChatService;
@@ -85,18 +85,19 @@ final class OpenAIService implements OpenAIContract
         ?bool $stream = null,
         RequestOptions|array|null $requestOptions = null,
     ): array {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'conversation' => $conversation,
-                'input' => $input,
-                'instructions' => $instructions,
+                'conversation' => $conversation ?? Omitted::VALUE,
+                'input' => $input ?? Omitted::VALUE,
+                'instructions' => $instructions ?? Omitted::VALUE,
                 'mode' => $mode,
-                'model' => $model,
-                'reasoning' => $reasoning,
-                'region' => $region,
-                'serviceTier' => $serviceTier,
-                'stream' => $stream,
+                'model' => $model ?? Omitted::VALUE,
+                'reasoning' => $reasoning ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
+                'serviceTier' => $serviceTier ?? Omitted::VALUE,
+                'stream' => $stream ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersReportContract;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
@@ -57,15 +57,16 @@ final class SubNumberOrdersReportService implements SubNumberOrdersReportContrac
         Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): SubNumberOrdersReportNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'countryCode' => $countryCode,
-                'createdAtGt' => $createdAtGt,
-                'createdAtLt' => $createdAtLt,
-                'customerReference' => $customerReference,
-                'orderRequestID' => $orderRequestID,
-                'status' => $status,
+                'countryCode' => $countryCode ?? Omitted::VALUE,
+                'createdAtGt' => $createdAtGt ?? Omitted::VALUE,
+                'createdAtLt' => $createdAtLt ?? Omitted::VALUE,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'orderRequestID' => $orderRequestID ?? Omitted::VALUE,
+                'status' => $status ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -6,7 +6,7 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
@@ -55,13 +55,14 @@ final class NumberLookupService implements NumberLookupContract
         ?string $startDate = null,
         RequestOptions|array|null $requestOptions = null,
     ): NumberLookupNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'aggregationType' => $aggregationType,
-                'endDate' => $endDate,
-                'managedAccounts' => $managedAccounts,
-                'startDate' => $startDate,
+                'aggregationType' => $aggregationType ?? Omitted::VALUE,
+                'endDate' => $endDate ?? Omitted::VALUE,
+                'managedAccounts' => $managedAccounts ?? Omitted::VALUE,
+                'startDate' => $startDate ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -108,7 +109,13 @@ final class NumberLookupService implements NumberLookupContract
         ?int $perPage = null,
         RequestOptions|array|null $requestOptions = null,
     ): PerPagePagination {
-        $params = Util::removeNulls(['page' => $page, 'perPage' => $perPage]);
+        $params = array_filter(
+            [
+                'page' => $page ?? Omitted::VALUE,
+                'perPage' => $perPage ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\OAuthClients\OAuthClient;
 use Telnyx\OAuthClients\OAuthClientCreateParams\AllowedGrantType;
@@ -67,18 +67,19 @@ final class OAuthClientsService implements OAuthClientsContract
         ?string $tosUri = null,
         RequestOptions|array|null $requestOptions = null,
     ): OAuthClientNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'allowedGrantTypes' => $allowedGrantTypes,
                 'allowedScopes' => $allowedScopes,
                 'clientType' => $clientType,
                 'name' => $name,
-                'logoUri' => $logoUri,
-                'policyUri' => $policyUri,
+                'logoUri' => $logoUri ?? Omitted::VALUE,
+                'policyUri' => $policyUri ?? Omitted::VALUE,
                 'redirectUris' => $redirectUris,
                 'requirePkce' => $requirePkce,
-                'tosUri' => $tosUri,
+                'tosUri' => $tosUri ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -137,17 +138,18 @@ final class OAuthClientsService implements OAuthClientsContract
         ?string $tosUri = null,
         RequestOptions|array|null $requestOptions = null,
     ): OAuthClientUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'allowedGrantTypes' => $allowedGrantTypes,
-                'allowedScopes' => $allowedScopes,
-                'logoUri' => $logoUri,
-                'name' => $name,
-                'policyUri' => $policyUri,
-                'redirectUris' => $redirectUris,
-                'requirePkce' => $requirePkce,
-                'tosUri' => $tosUri,
+                'allowedGrantTypes' => $allowedGrantTypes ?? Omitted::VALUE,
+                'allowedScopes' => $allowedScopes ?? Omitted::VALUE,
+                'logoUri' => $logoUri ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'policyUri' => $policyUri ?? Omitted::VALUE,
+                'redirectUris' => $redirectUris ?? Omitted::VALUE,
+                'requirePkce' => $requirePkce ?? Omitted::VALUE,
+                'tosUri' => $tosUri ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -186,17 +188,18 @@ final class OAuthClientsService implements OAuthClientsContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterAllowedGrantTypesContains' => $filterAllowedGrantTypesContains,
-                'filterClientID' => $filterClientID,
-                'filterClientType' => $filterClientType,
-                'filterName' => $filterName,
-                'filterNameContains' => $filterNameContains,
-                'filterVerified' => $filterVerified,
+                'filterAllowedGrantTypesContains' => $filterAllowedGrantTypesContains ?? Omitted::VALUE,
+                'filterClientID' => $filterClientID ?? Omitted::VALUE,
+                'filterClientType' => $filterClientType ?? Omitted::VALUE,
+                'filterName' => $filterName ?? Omitted::VALUE,
+                'filterNameContains' => $filterNameContains ?? Omitted::VALUE,
+                'filterVerified' => $filterVerified ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

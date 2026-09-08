@@ -9,6 +9,7 @@ use Telnyx\AuditEvents\AuditEventListResponse\ChangeMadeBy;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-import-type ChangeShape from \Telnyx\AuditEvents\AuditEventListResponse\Change
@@ -105,15 +106,15 @@ final class AuditEventListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param list<Change|ChangeShape>|Omitted|null $changes
      * @param ChangeMadeBy|value-of<ChangeMadeBy>|null $changeMadeBy
-     * @param list<Change|ChangeShape>|null $changes
      */
     public static function with(
+        string|Omitted|null $alternateResourceID = Omitted::VALUE,
+        array|Omitted|null $changes = Omitted::VALUE,
         ?string $id = null,
-        ?string $alternateResourceID = null,
         ChangeMadeBy|string|null $changeMadeBy = null,
         ?string $changeType = null,
-        ?array $changes = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $organizationID = null,
         ?string $recordType = null,
@@ -123,10 +124,10 @@ final class AuditEventListResponse implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $alternateResourceID && $self['alternateResourceID'] = $alternateResourceID;
+        Omitted::VALUE !== $alternateResourceID && $self['alternateResourceID'] = $alternateResourceID;
         null !== $changeMadeBy && $self['changeMadeBy'] = $changeMadeBy;
         null !== $changeType && $self['changeType'] = $changeType;
-        null !== $changes && $self['changes'] = $changes;
+        Omitted::VALUE !== $changes && $self['changes'] = $changes;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $organizationID && $self['organizationID'] = $organizationID;
         null !== $recordType && $self['recordType'] = $recordType;

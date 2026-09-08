@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type BrandAddressShape = array{
@@ -86,7 +87,7 @@ final class BrandAddress implements BaseModel
         string $countryCode,
         string $line1,
         string $postalCode,
-        ?string $line2 = null,
+        string|Omitted|null $line2 = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -96,7 +97,7 @@ final class BrandAddress implements BaseModel
         $self['line1'] = $line1;
         $self['postalCode'] = $postalCode;
 
-        null !== $line2 && $self['line2'] = $line2;
+        Omitted::VALUE !== $line2 && $self['line2'] = $line2;
 
         return $self;
     }

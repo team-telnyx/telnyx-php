@@ -7,6 +7,7 @@ namespace Telnyx\SimCards\Actions;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\SimCards\Actions\WirelessSimCardAction\ActionType;
 use Telnyx\SimCards\Actions\WirelessSimCardAction\Status;
 
@@ -95,16 +96,16 @@ final class WirelessSimCardAction implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|array<string,mixed>|null $settings
      * @param ActionType|value-of<ActionType>|null $actionType
-     * @param array<string,mixed>|null $settings
      * @param Status|StatusShape|null $status
      */
     public static function with(
+        Omitted|array|null $settings = Omitted::VALUE,
         ?string $id = null,
         ActionType|string|null $actionType = null,
         ?string $createdAt = null,
         ?string $recordType = null,
-        ?array $settings = null,
         ?string $simCardID = null,
         Status|array|null $status = null,
         ?string $updatedAt = null,
@@ -115,7 +116,7 @@ final class WirelessSimCardAction implements BaseModel
         null !== $actionType && $self['actionType'] = $actionType;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $recordType && $self['recordType'] = $recordType;
-        null !== $settings && $self['settings'] = $settings;
+        Omitted::VALUE !== $settings && $self['settings'] = $settings;
         null !== $simCardID && $self['simCardID'] = $simCardID;
         null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
