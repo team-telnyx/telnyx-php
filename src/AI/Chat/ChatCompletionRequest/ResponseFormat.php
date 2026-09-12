@@ -4,68 +4,36 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Chat\ChatCompletionRequest;
 
-use Telnyx\AI\Chat\ChatCompletionRequest\ResponseFormat\Type;
-use Telnyx\Core\Attributes\Required;
-use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\AI\Chat\ChatCompletionRequest\ResponseFormat\ResponseFormatJsonObject;
+use Telnyx\AI\Chat\ChatCompletionRequest\ResponseFormat\ResponseFormatJsonSchemaParam;
+use Telnyx\AI\Chat\ChatCompletionRequest\ResponseFormat\ResponseFormatText;
+use Telnyx\Core\Concerns\SdkUnion;
+use Telnyx\Core\Conversion\Contracts\Converter;
+use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
- * Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
+ * Controls the format of the model output. `json_object` guarantees valid JSON output without defining a schema; `json_schema` constrains the output to the JSON schema you supply via the `json_schema` property and is the supported way to get guaranteed structured output on Telnyx-hosted models.
  *
- * @phpstan-type ResponseFormatShape = array{type: Type|value-of<Type>}
+ * @phpstan-import-type ResponseFormatTextShape from \Telnyx\AI\Chat\ChatCompletionRequest\ResponseFormat\ResponseFormatText
+ * @phpstan-import-type ResponseFormatJsonObjectShape from \Telnyx\AI\Chat\ChatCompletionRequest\ResponseFormat\ResponseFormatJsonObject
+ * @phpstan-import-type ResponseFormatJsonSchemaParamShape from \Telnyx\AI\Chat\ChatCompletionRequest\ResponseFormat\ResponseFormatJsonSchemaParam
+ *
+ * @phpstan-type ResponseFormatVariants = ResponseFormatText|ResponseFormatJsonObject|ResponseFormatJsonSchemaParam
+ * @phpstan-type ResponseFormatShape = ResponseFormatVariants|ResponseFormatTextShape|ResponseFormatJsonObjectShape|ResponseFormatJsonSchemaParamShape
  */
-final class ResponseFormat implements BaseModel
+final class ResponseFormat implements ConverterSource
 {
-    /** @use SdkModel<ResponseFormatShape> */
-    use SdkModel;
-
-    /** @var value-of<Type> $type */
-    #[Required(enum: Type::class)]
-    public string $type;
+    use SdkUnion;
 
     /**
-     * `new ResponseFormat()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * ResponseFormat::with(type: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new ResponseFormat)->withType(...)
-     * ```
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
-    public function __construct()
+    public static function variants(): array
     {
-        $this->initialize();
-    }
-
-    /**
-     * Construct an instance from the required parameters.
-     *
-     * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public static function with(Type|string $type): self
-    {
-        $self = new self;
-
-        $self['type'] = $type;
-
-        return $self;
-    }
-
-    /**
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $self = clone $this;
-        $self['type'] = $type;
-
-        return $self;
+        return [
+            ResponseFormatText::class,
+            ResponseFormatJsonObject::class,
+            ResponseFormatJsonSchemaParam::class,
+        ];
     }
 }

@@ -7,6 +7,7 @@ namespace Telnyx\Verifications;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Verifications\Verification\RecordType;
 use Telnyx\Verifications\Verification\Status;
 use Telnyx\Verifications\Verification\Type;
@@ -102,9 +103,9 @@ final class Verification implements BaseModel
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
+        string|Omitted|null $customCode = Omitted::VALUE,
         ?string $id = null,
         ?string $createdAt = null,
-        ?string $customCode = null,
         ?string $phoneNumber = null,
         RecordType|string|null $recordType = null,
         Status|string|null $status = null,
@@ -117,7 +118,7 @@ final class Verification implements BaseModel
 
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $customCode && $self['customCode'] = $customCode;
+        Omitted::VALUE !== $customCode && $self['customCode'] = $customCode;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $status && $self['status'] = $status;

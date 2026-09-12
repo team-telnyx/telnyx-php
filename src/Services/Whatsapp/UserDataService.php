@@ -6,7 +6,7 @@ namespace Telnyx\Services\Whatsapp;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\UserDataContract;
 use Telnyx\Whatsapp\UserData\UserDataGetResponse;
@@ -66,8 +66,12 @@ final class UserDataService implements UserDataContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): UserDataUpdateResponse {
-        $params = Util::removeNulls(
-            ['webhookFailoverURL' => $webhookFailoverURL, 'webhookURL' => $webhookURL]
+        $params = array_filter(
+            [
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

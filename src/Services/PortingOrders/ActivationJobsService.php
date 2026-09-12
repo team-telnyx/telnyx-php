@@ -6,7 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
@@ -50,7 +50,7 @@ final class ActivationJobsService implements ActivationJobsContract
         string $id,
         RequestOptions|array|null $requestOptions = null,
     ): ActivationJobGetResponse {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($activationJobID, params: $params, requestOptions: $requestOptions);
@@ -76,7 +76,10 @@ final class ActivationJobsService implements ActivationJobsContract
         ?\DateTimeInterface $activateAt = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActivationJobUpdateResponse {
-        $params = Util::removeNulls(['id' => $id, 'activateAt' => $activateAt]);
+        $params = array_filter(
+            ['id' => $id, 'activateAt' => $activateAt ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($activationJobID, params: $params, requestOptions: $requestOptions);
@@ -102,8 +105,12 @@ final class ActivationJobsService implements ActivationJobsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Rcs\Agents\AgentConsentConfiguration;
 use Telnyx\Rcs\Agents\AgentInteraction;
 
@@ -79,8 +80,8 @@ final class Campaign implements BaseModel
      */
     public static function with(
         string $companyOverview,
-        ?string $additionalInformation = null,
-        ?string $agentOverview = null,
+        string|Omitted|null $additionalInformation = Omitted::VALUE,
+        string|Omitted|null $agentOverview = Omitted::VALUE,
         AgentConsentConfiguration|array|null $consentSettings = null,
         ?array $interactions = null,
         ?array $messageExamples = null,
@@ -89,8 +90,8 @@ final class Campaign implements BaseModel
 
         $self['companyOverview'] = $companyOverview;
 
-        null !== $additionalInformation && $self['additionalInformation'] = $additionalInformation;
-        null !== $agentOverview && $self['agentOverview'] = $agentOverview;
+        Omitted::VALUE !== $additionalInformation && $self['additionalInformation'] = $additionalInformation;
+        Omitted::VALUE !== $agentOverview && $self['agentOverview'] = $agentOverview;
         null !== $consentSettings && $self['consentSettings'] = $consentSettings;
         null !== $interactions && $self['interactions'] = $interactions;
         null !== $messageExamples && $self['messageExamples'] = $messageExamples;

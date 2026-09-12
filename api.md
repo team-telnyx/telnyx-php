@@ -2590,6 +2590,7 @@ Methods:
 - <code title="get /whatsapp/phone_numbers">$client->whatsapp->phoneNumbers-><a href="./src/Services/Whatsapp/PhoneNumbersService.php">get</a>(...$params)</code>
 - <code title="post /v2/whatsapp/phone_numbers/{phone_number}/resend_verification">$client->whatsapp->phoneNumbers-><a href="./src/Services/Whatsapp/PhoneNumbersService.php">resendVerification</a>(...$params)</code>
 - <code title="get /v2/whatsapp/phone_numbers/{phone_number}/conversation_window">$client->whatsapp->phoneNumbers-><a href="./src/Services/Whatsapp/PhoneNumbersService.php">retrieveConversationWindow</a>(...$params)</code>
+- <code title="get /whatsapp/phone_numbers/{phone_number}">$client->whatsapp->phoneNumbers-><a href="./src/Services/Whatsapp/PhoneNumbersService.php">retrievePhoneNumber</a>(...$params)</code>
 - <code title="post /v2/whatsapp/phone_numbers/{phone_number}/verify">$client->whatsapp->phoneNumbers-><a href="./src/Services/Whatsapp/PhoneNumbersService.php">verify</a>(...$params)</code>
 
 ### CallingSettings
@@ -2644,6 +2645,13 @@ Methods:
 
 - <code title="post /v2/x402/credit_account/quote">$client->x402->creditAccount-><a href="./src/Services/X402/CreditAccountService.php">createQuote</a>(...$params)</code>
 - <code title="post /v2/x402/credit_account">$client->x402->creditAccount-><a href="./src/Services/X402/CreditAccountService.php">settle</a>(...$params)</code>
+
+### Payments
+
+Methods:
+
+- <code title="get /v2/x402/credit_account/payments/{id}">$client->x402->creditAccount->payments-><a href="./src/Services/X402/CreditAccount/PaymentsService.php">retrieve</a>(...$params)</code>
+- <code title="get /v2/x402/credit_account/payments">$client->x402->creditAccount->payments-><a href="./src/Services/X402/CreditAccount/PaymentsService.php">list</a>(...$params)</code>
 
 # VoiceClones
 
@@ -3112,3 +3120,14 @@ Methods:
 
 - <code title="get /external_requirements/{regulatory_requirement_id}/sub_number_orders/{sub_number_order_id}">$client->externalRequirements->subNumberOrders-><a href="./src/Services/ExternalRequirements/SubNumberOrdersService.php">retrieve</a>(...$params)</code>
 - <code title="post /external_requirements/{regulatory_requirement_id}/sub_number_orders/{sub_number_order_id}">$client->externalRequirements->subNumberOrders-><a href="./src/Services/ExternalRequirements/SubNumberOrdersService.php">update</a>(...$params)</code>
+
+# Compute
+
+## Funcs
+
+Methods:
+
+- <code title="get /compute/funcs/{id}/logs">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveLogs</a>(...$params)</code>
+- <code title="get /compute/funcs/{id}/metric_aggregates">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveMetricAggregates</a>(...$params)</code>
+- <code title="get /compute/funcs/{id}/revisions">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveRevisions</a>(...$params)</code>
+- <code title="get /compute/funcs/{id}/ship_inspection">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveShipInspection</a>(...$params)</code>

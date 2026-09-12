@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailCursorPagination;
 use Telnyx\EmailTemplates\EmailTemplate;
 use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
@@ -20,9 +21,9 @@ interface EmailTemplatesContract
      * @api
      *
      * @param string $name body param: Letters, numbers, spaces, hyphens, and underscores only
-     * @param string|null $htmlBody body param: Liquid template HTML body
-     * @param string|null $subject body param: Liquid template subject
-     * @param string|null $textBody body param: Liquid template text body
+     * @param string|Omitted|null $htmlBody body param: Liquid template HTML body
+     * @param string|Omitted|null $subject body param: Liquid template subject
+     * @param string|Omitted|null $textBody body param: Liquid template text body
      * @param list<string> $variables Body param: Template variables. Auto-extracted from subject/body fields when absent.
      * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
@@ -31,9 +32,9 @@ interface EmailTemplatesContract
      */
     public function create(
         string $name,
-        ?string $htmlBody = null,
-        ?string $subject = null,
-        ?string $textBody = null,
+        string|Omitted|null $htmlBody = Omitted::VALUE,
+        string|Omitted|null $subject = Omitted::VALUE,
+        string|Omitted|null $textBody = Omitted::VALUE,
         ?array $variables = null,
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
@@ -56,9 +57,9 @@ interface EmailTemplatesContract
      * @api
      *
      * @param string $id email template UUID
-     * @param string|null $htmlBody liquid template HTML body
-     * @param string|null $subject liquid template subject
-     * @param string|null $textBody liquid template text body
+     * @param string|Omitted|null $htmlBody liquid template HTML body
+     * @param string|Omitted|null $subject liquid template subject
+     * @param string|Omitted|null $textBody liquid template text body
      * @param list<string> $variables
      * @param RequestOpts|null $requestOptions
      *
@@ -66,10 +67,10 @@ interface EmailTemplatesContract
      */
     public function update(
         string $id,
-        ?string $htmlBody = null,
+        string|Omitted|null $htmlBody = Omitted::VALUE,
         ?string $name = null,
-        ?string $subject = null,
-        ?string $textBody = null,
+        string|Omitted|null $subject = Omitted::VALUE,
+        string|Omitted|null $textBody = Omitted::VALUE,
         ?array $variables = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailTemplateResponse;
@@ -123,9 +124,9 @@ interface EmailTemplatesContract
      * @api
      *
      * @param string $id email template UUID
-     * @param string|null $htmlBody liquid template HTML body
-     * @param string|null $subject liquid template subject
-     * @param string|null $textBody liquid template text body
+     * @param string|Omitted|null $htmlBody liquid template HTML body
+     * @param string|Omitted|null $subject liquid template subject
+     * @param string|Omitted|null $textBody liquid template text body
      * @param list<string> $variables
      * @param RequestOpts|null $requestOptions
      *
@@ -133,10 +134,10 @@ interface EmailTemplatesContract
      */
     public function replace(
         string $id,
-        ?string $htmlBody = null,
+        string|Omitted|null $htmlBody = Omitted::VALUE,
         ?string $name = null,
-        ?string $subject = null,
-        ?string $textBody = null,
+        string|Omitted|null $subject = Omitted::VALUE,
+        string|Omitted|null $textBody = Omitted::VALUE,
         ?array $variables = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailTemplateResponse;

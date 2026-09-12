@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Anthropic\V1;
 
+use Telnyx\AI\Anthropic\V1\V1MessagesParams\Mode;
+use Telnyx\AI\Anthropic\V1\V1MessagesParams\Region;
 use Telnyx\AI\Anthropic\V1\V1MessagesParams\System;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -32,6 +34,8 @@ use Telnyx\Core\Conversion\MapOf;
  *   maxRetries?: int|null,
  *   mcpServers?: list<array<string,mixed>>|null,
  *   metadata?: array<string,mixed>|null,
+ *   mode?: null|Mode|value-of<Mode>,
+ *   region?: null|Region|value-of<Region>,
  *   serviceTier?: string|null,
  *   stopSequences?: list<string>|null,
  *   stream?: bool|null,
@@ -112,6 +116,22 @@ final class V1MessagesParams implements BaseModel
      */
     #[Optional(map: 'mixed')]
     public ?array $metadata;
+
+    /**
+     * How strictly `region` is applied. `preferred` (the default when `region` is set) tries that region first and falls back to another when the model cannot be served there, so a request that would have succeeded still succeeds. `strict` pins the request: it is served from that region or it fails with a 422, never redirected to another region. Requires `region`.
+     *
+     * @var value-of<Mode>|null $mode
+     */
+    #[Optional(enum: Mode::class)]
+    public ?string $mode;
+
+    /**
+     * Optional data-residency region the request should be served from, using the same vocabulary as your account's Data Locality setting. Behavior depends on `mode`. Supported for Telnyx-hosted models only: a request routed to an external provider never passes through Telnyx model routing, so a region cannot be enforced for it. Omit for today's latency-based routing.
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Optional(enum: Region::class)]
+    public ?string $region;
 
     /**
      * The service tier to use for this request. Supported values vary by model; use the Telnyx models endpoint and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
@@ -217,6 +237,8 @@ final class V1MessagesParams implements BaseModel
      * @param array<string,mixed>|null $fallbackConfig
      * @param list<array<string,mixed>>|null $mcpServers
      * @param array<string,mixed>|null $metadata
+     * @param Mode|value-of<Mode>|null $mode
+     * @param Region|value-of<Region>|null $region
      * @param list<string>|null $stopSequences
      * @param SystemShape|null $system
      * @param array<string,mixed>|null $thinking
@@ -233,6 +255,8 @@ final class V1MessagesParams implements BaseModel
         ?int $maxRetries = null,
         ?array $mcpServers = null,
         ?array $metadata = null,
+        Mode|string|null $mode = null,
+        Region|string|null $region = null,
         ?string $serviceTier = null,
         ?array $stopSequences = null,
         ?bool $stream = null,
@@ -257,6 +281,8 @@ final class V1MessagesParams implements BaseModel
         null !== $maxRetries && $self['maxRetries'] = $maxRetries;
         null !== $mcpServers && $self['mcpServers'] = $mcpServers;
         null !== $metadata && $self['metadata'] = $metadata;
+        null !== $mode && $self['mode'] = $mode;
+        null !== $region && $self['region'] = $region;
         null !== $serviceTier && $self['serviceTier'] = $serviceTier;
         null !== $stopSequences && $self['stopSequences'] = $stopSequences;
         null !== $stream && $self['stream'] = $stream;
@@ -375,6 +401,32 @@ final class V1MessagesParams implements BaseModel
     {
         $self = clone $this;
         $self['metadata'] = $metadata;
+
+        return $self;
+    }
+
+    /**
+     * How strictly `region` is applied. `preferred` (the default when `region` is set) tries that region first and falls back to another when the model cannot be served there, so a request that would have succeeded still succeeds. `strict` pins the request: it is served from that region or it fails with a 422, never redirected to another region. Requires `region`.
+     *
+     * @param Mode|value-of<Mode> $mode
+     */
+    public function withMode(Mode|string $mode): self
+    {
+        $self = clone $this;
+        $self['mode'] = $mode;
+
+        return $self;
+    }
+
+    /**
+     * Optional data-residency region the request should be served from, using the same vocabulary as your account's Data Locality setting. Behavior depends on `mode`. Supported for Telnyx-hosted models only: a request routed to an external provider never passes through Telnyx model routing, so a region cannot be enforced for it. Omit for today's latency-based routing.
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $self = clone $this;
+        $self['region'] = $region;
 
         return $self;
     }

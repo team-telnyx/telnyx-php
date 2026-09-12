@@ -6,7 +6,6 @@ namespace Telnyx\Services\Storage\Cloudfs;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Cloudfs\ActionsContract;
 use Telnyx\Storage\Cloudfs\CloudfsFilesystemResponseWrapper;
@@ -47,7 +46,7 @@ final class ActionsService implements ActionsContract
         string $idempotencyKey,
         RequestOptions|array|null $requestOptions = null,
     ): CloudfsFilesystemResponseWrapper {
-        $params = Util::removeNulls(['idempotencyKey' => $idempotencyKey]);
+        $params = ['idempotencyKey' => $idempotencyKey];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->rotateMetaToken($id, params: $params, requestOptions: $requestOptions);

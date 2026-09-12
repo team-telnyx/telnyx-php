@@ -7,6 +7,7 @@ namespace Telnyx\Dir\PhoneNumbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type RejectionReasonShape = array{
@@ -47,16 +48,16 @@ final class RejectionReason implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        string|Omitted|null $message = Omitted::VALUE,
         ?string $code = null,
         ?string $detail = null,
-        ?string $message = null,
         ?string $title = null,
     ): self {
         $self = new self;
 
         null !== $code && $self['code'] = $code;
         null !== $detail && $self['detail'] = $detail;
-        null !== $message && $self['message'] = $message;
+        Omitted::VALUE !== $message && $self['message'] = $message;
         null !== $title && $self['title'] = $title;
 
         return $self;

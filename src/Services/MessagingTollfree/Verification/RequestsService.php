@@ -6,7 +6,7 @@ namespace Telnyx\Services\MessagingTollfree\Verification;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultPaginationForMessagingTollfree;
 use Telnyx\MessagingTollfree\Verification\Requests\MessagingTollFreeVerificationEntityType;
 use Telnyx\MessagingTollfree\Verification\Requests\MessagingTollFreeVerificationVerificationRequestEgress;
@@ -68,18 +68,18 @@ final class RequestsService implements RequestsContract
      * @param string $useCaseSummary Human-readable summary of the desired use-case
      * @param bool $ageGatedContent Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
      * @param string $businessAddr2 Line 2 of the business address
-     * @param string|null $businessRegistrationCountry ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
-     * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
-     * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
-     * @param string|null $campaignVerifyAuthorizationToken Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
-     * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
-     * @param MessagingTollFreeVerificationEntityType|value-of<MessagingTollFreeVerificationEntityType>|null $entityType Business entity classification
-     * @param string|null $helpMessageResponse The message returned when users text 'HELP'
-     * @param string|null $isvReseller ISV name
-     * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
-     * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
-     * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
-     * @param string|null $termsAndConditionURL URL pointing to the business's terms and conditions. Plain string, no URL format validation.
+     * @param string|Omitted|null $businessRegistrationCountry ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
+     * @param string|Omitted|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
+     * @param string|Omitted|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
+     * @param string|Omitted|null $campaignVerifyAuthorizationToken Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
+     * @param string|Omitted|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
+     * @param Omitted|MessagingTollFreeVerificationEntityType|value-of<MessagingTollFreeVerificationEntityType>|null $entityType Business entity classification
+     * @param string|Omitted|null $helpMessageResponse The message returned when users text 'HELP'
+     * @param string|Omitted|null $isvReseller ISV name
+     * @param string|Omitted|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
+     * @param string|Omitted|null $optInKeywords Keywords used to collect and process consumer opt-ins
+     * @param string|Omitted|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
+     * @param string|Omitted|null $termsAndConditionURL URL pointing to the business's terms and conditions. Plain string, no URL format validation.
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
      * @param RequestOpts|null $requestOptions
      *
@@ -106,22 +106,22 @@ final class RequestsService implements RequestsContract
         string $useCaseSummary,
         bool $ageGatedContent = false,
         ?string $businessAddr2 = null,
-        ?string $businessRegistrationCountry = null,
-        ?string $businessRegistrationNumber = null,
-        ?string $businessRegistrationType = null,
-        ?string $campaignVerifyAuthorizationToken = null,
-        ?string $doingBusinessAs = null,
-        MessagingTollFreeVerificationEntityType|string|null $entityType = null,
-        ?string $helpMessageResponse = null,
-        ?string $isvReseller = null,
-        ?string $optInConfirmationResponse = null,
-        ?string $optInKeywords = null,
-        ?string $privacyPolicyURL = null,
-        ?string $termsAndConditionURL = null,
+        string|Omitted|null $businessRegistrationCountry = Omitted::VALUE,
+        string|Omitted|null $businessRegistrationNumber = Omitted::VALUE,
+        string|Omitted|null $businessRegistrationType = Omitted::VALUE,
+        string|Omitted|null $campaignVerifyAuthorizationToken = Omitted::VALUE,
+        string|Omitted|null $doingBusinessAs = Omitted::VALUE,
+        Omitted|MessagingTollFreeVerificationEntityType|string|null $entityType = Omitted::VALUE,
+        string|Omitted|null $helpMessageResponse = Omitted::VALUE,
+        string|Omitted|null $isvReseller = Omitted::VALUE,
+        string|Omitted|null $optInConfirmationResponse = Omitted::VALUE,
+        string|Omitted|null $optInKeywords = Omitted::VALUE,
+        string|Omitted|null $privacyPolicyURL = Omitted::VALUE,
+        string|Omitted|null $termsAndConditionURL = Omitted::VALUE,
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessagingTollFreeVerificationVerificationRequestEgress {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'additionalInformation' => $additionalInformation,
                 'businessAddr1' => $businessAddr1,
@@ -142,7 +142,7 @@ final class RequestsService implements RequestsContract
                 'useCase' => $useCase,
                 'useCaseSummary' => $useCaseSummary,
                 'ageGatedContent' => $ageGatedContent,
-                'businessAddr2' => $businessAddr2,
+                'businessAddr2' => $businessAddr2 ?? Omitted::VALUE,
                 'businessRegistrationCountry' => $businessRegistrationCountry,
                 'businessRegistrationNumber' => $businessRegistrationNumber,
                 'businessRegistrationType' => $businessRegistrationType,
@@ -155,8 +155,9 @@ final class RequestsService implements RequestsContract
                 'optInKeywords' => $optInKeywords,
                 'privacyPolicyURL' => $privacyPolicyURL,
                 'termsAndConditionURL' => $termsAndConditionURL,
-                'webhookURL' => $webhookURL,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -211,18 +212,18 @@ final class RequestsService implements RequestsContract
      * @param string $useCaseSummary Human-readable summary of the desired use-case
      * @param bool $ageGatedContent Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
      * @param string $businessAddr2 Line 2 of the business address
-     * @param string|null $businessRegistrationCountry ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
-     * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
-     * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
-     * @param string|null $campaignVerifyAuthorizationToken Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
-     * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
-     * @param MessagingTollFreeVerificationEntityType|value-of<MessagingTollFreeVerificationEntityType>|null $entityType Business entity classification
-     * @param string|null $helpMessageResponse The message returned when users text 'HELP'
-     * @param string|null $isvReseller ISV name
-     * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
-     * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
-     * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
-     * @param string|null $termsAndConditionURL URL pointing to the business's terms and conditions. Plain string, no URL format validation.
+     * @param string|Omitted|null $businessRegistrationCountry ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
+     * @param string|Omitted|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
+     * @param string|Omitted|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
+     * @param string|Omitted|null $campaignVerifyAuthorizationToken Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
+     * @param string|Omitted|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
+     * @param Omitted|MessagingTollFreeVerificationEntityType|value-of<MessagingTollFreeVerificationEntityType>|null $entityType Business entity classification
+     * @param string|Omitted|null $helpMessageResponse The message returned when users text 'HELP'
+     * @param string|Omitted|null $isvReseller ISV name
+     * @param string|Omitted|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
+     * @param string|Omitted|null $optInKeywords Keywords used to collect and process consumer opt-ins
+     * @param string|Omitted|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
+     * @param string|Omitted|null $termsAndConditionURL URL pointing to the business's terms and conditions. Plain string, no URL format validation.
      * @param string $webhookURL URL that should receive webhooks relating to this verification request
      * @param RequestOpts|null $requestOptions
      *
@@ -250,22 +251,22 @@ final class RequestsService implements RequestsContract
         string $useCaseSummary,
         bool $ageGatedContent = false,
         ?string $businessAddr2 = null,
-        ?string $businessRegistrationCountry = null,
-        ?string $businessRegistrationNumber = null,
-        ?string $businessRegistrationType = null,
-        ?string $campaignVerifyAuthorizationToken = null,
-        ?string $doingBusinessAs = null,
-        MessagingTollFreeVerificationEntityType|string|null $entityType = null,
-        ?string $helpMessageResponse = null,
-        ?string $isvReseller = null,
-        ?string $optInConfirmationResponse = null,
-        ?string $optInKeywords = null,
-        ?string $privacyPolicyURL = null,
-        ?string $termsAndConditionURL = null,
+        string|Omitted|null $businessRegistrationCountry = Omitted::VALUE,
+        string|Omitted|null $businessRegistrationNumber = Omitted::VALUE,
+        string|Omitted|null $businessRegistrationType = Omitted::VALUE,
+        string|Omitted|null $campaignVerifyAuthorizationToken = Omitted::VALUE,
+        string|Omitted|null $doingBusinessAs = Omitted::VALUE,
+        Omitted|MessagingTollFreeVerificationEntityType|string|null $entityType = Omitted::VALUE,
+        string|Omitted|null $helpMessageResponse = Omitted::VALUE,
+        string|Omitted|null $isvReseller = Omitted::VALUE,
+        string|Omitted|null $optInConfirmationResponse = Omitted::VALUE,
+        string|Omitted|null $optInKeywords = Omitted::VALUE,
+        string|Omitted|null $privacyPolicyURL = Omitted::VALUE,
+        string|Omitted|null $termsAndConditionURL = Omitted::VALUE,
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessagingTollFreeVerificationVerificationRequestEgress {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'additionalInformation' => $additionalInformation,
                 'businessAddr1' => $businessAddr1,
@@ -286,7 +287,7 @@ final class RequestsService implements RequestsContract
                 'useCase' => $useCase,
                 'useCaseSummary' => $useCaseSummary,
                 'ageGatedContent' => $ageGatedContent,
-                'businessAddr2' => $businessAddr2,
+                'businessAddr2' => $businessAddr2 ?? Omitted::VALUE,
                 'businessRegistrationCountry' => $businessRegistrationCountry,
                 'businessRegistrationNumber' => $businessRegistrationNumber,
                 'businessRegistrationType' => $businessRegistrationType,
@@ -299,8 +300,9 @@ final class RequestsService implements RequestsContract
                 'optInKeywords' => $optInKeywords,
                 'privacyPolicyURL' => $privacyPolicyURL,
                 'termsAndConditionURL' => $termsAndConditionURL,
-                'webhookURL' => $webhookURL,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -340,16 +342,17 @@ final class RequestsService implements RequestsContract
         TfVerificationStatus|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultPaginationForMessagingTollfree {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'page' => $page,
                 'pageSize' => $pageSize,
-                'businessName' => $businessName,
-                'dateEnd' => $dateEnd,
-                'dateStart' => $dateStart,
-                'phoneNumber' => $phoneNumber,
-                'status' => $status,
+                'businessName' => $businessName ?? Omitted::VALUE,
+                'dateEnd' => $dateEnd ?? Omitted::VALUE,
+                'dateStart' => $dateStart ?? Omitted::VALUE,
+                'phoneNumber' => $phoneNumber ?? Omitted::VALUE,
+                'status' => $status ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -404,9 +407,7 @@ final class RequestsService implements RequestsContract
         int $pageSize,
         RequestOptions|array|null $requestOptions = null,
     ): RequestGetStatusHistoryResponse {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveStatusHistory($id, params: $params, requestOptions: $requestOptions);

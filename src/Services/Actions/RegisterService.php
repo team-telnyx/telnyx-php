@@ -8,7 +8,7 @@ use Telnyx\Actions\Register\RegisterCreateParams\Status;
 use Telnyx\Actions\Register\RegisterNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\RegisterContract;
 
@@ -53,13 +53,14 @@ final class RegisterService implements RegisterContract
         ?array $tags = null,
         RequestOptions|array|null $requestOptions = null,
     ): RegisterNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'registrationCodes' => $registrationCodes,
-                'simCardGroupID' => $simCardGroupID,
+                'simCardGroupID' => $simCardGroupID ?? Omitted::VALUE,
                 'status' => $status,
-                'tags' => $tags,
+                'tags' => $tags ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

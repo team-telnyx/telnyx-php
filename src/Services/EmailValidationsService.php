@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailValidations\EmailValidationNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailValidationsContract;
@@ -54,8 +54,11 @@ final class EmailValidationsService implements EmailValidationsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailValidationNewResponse {
-        $params = Util::removeNulls(
-            ['email' => $email, 'idempotencyKey' => $idempotencyKey]
+        $params = array_filter(
+            [
+                'email' => $email, 'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

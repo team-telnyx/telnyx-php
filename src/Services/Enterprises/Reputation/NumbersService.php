@@ -6,7 +6,7 @@ namespace Telnyx\Services\Enterprises\Reputation;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
@@ -53,9 +53,7 @@ final class NumbersService implements NumbersContract
         bool $fresh = false,
         RequestOptions|array|null $requestOptions = null,
     ): ReputationPhoneNumberWithReputation {
-        $params = Util::removeNulls(
-            ['enterpriseID' => $enterpriseID, 'fresh' => $fresh]
-        );
+        $params = ['enterpriseID' => $enterpriseID, 'fresh' => $fresh];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($phoneNumber, params: $params, requestOptions: $requestOptions);
@@ -87,13 +85,14 @@ final class NumbersService implements NumbersContract
         int $pageSize = 10,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterPhoneNumberContains' => $filterPhoneNumberContains,
-                'filterPhoneNumberEq' => $filterPhoneNumberEq,
+                'filterPhoneNumberContains' => $filterPhoneNumberContains ?? Omitted::VALUE,
+                'filterPhoneNumberEq' => $filterPhoneNumberEq ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -122,7 +121,7 @@ final class NumbersService implements NumbersContract
         array $phoneNumbers,
         RequestOptions|array|null $requestOptions = null,
     ): ReputationPhoneNumberList {
-        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
+        $params = ['phoneNumbers' => $phoneNumbers];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->associate($enterpriseID, params: $params, requestOptions: $requestOptions);
@@ -146,7 +145,7 @@ final class NumbersService implements NumbersContract
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['enterpriseID' => $enterpriseID]);
+        $params = ['enterpriseID' => $enterpriseID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->disassociate($phoneNumber, params: $params, requestOptions: $requestOptions);
@@ -172,7 +171,7 @@ final class NumbersService implements NumbersContract
         array $phoneNumbers,
         RequestOptions|array|null $requestOptions = null,
     ): NumberRefreshResponse {
-        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
+        $params = ['phoneNumbers' => $phoneNumbers];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->refresh($enterpriseID, params: $params, requestOptions: $requestOptions);

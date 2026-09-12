@@ -6,7 +6,6 @@ namespace Telnyx\Services\Storage\Buckets;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\UsageContract;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
@@ -50,7 +49,7 @@ final class UsageService implements UsageContract
         Filter|array $filter,
         RequestOptions|array|null $requestOptions = null,
     ): UsageGetAPIUsageResponse {
-        $params = Util::removeNulls(['filter' => $filter]);
+        $params = ['filter' => $filter];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getAPIUsage($bucketName, params: $params, requestOptions: $requestOptions);

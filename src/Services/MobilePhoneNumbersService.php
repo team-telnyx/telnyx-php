@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumber;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
@@ -95,8 +95,8 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
         CallRecording|array|null $callRecording = null,
         ?bool $callerIDNameEnabled = null,
         CnamListing|array|null $cnamListing = null,
-        ?string $connectionID = null,
-        ?string $customerReference = null,
+        string|Omitted|null $connectionID = Omitted::VALUE,
+        string|Omitted|null $customerReference = Omitted::VALUE,
         Inbound|array|null $inbound = null,
         InboundCallScreening|string|null $inboundCallScreening = null,
         ?bool $noiseSuppression = null,
@@ -104,20 +104,21 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
         ?array $tags = null,
         RequestOptions|array|null $requestOptions = null,
     ): MobilePhoneNumberUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'callForwarding' => $callForwarding,
-                'callRecording' => $callRecording,
-                'callerIDNameEnabled' => $callerIDNameEnabled,
-                'cnamListing' => $cnamListing,
+                'callForwarding' => $callForwarding ?? Omitted::VALUE,
+                'callRecording' => $callRecording ?? Omitted::VALUE,
+                'callerIDNameEnabled' => $callerIDNameEnabled ?? Omitted::VALUE,
+                'cnamListing' => $cnamListing ?? Omitted::VALUE,
                 'connectionID' => $connectionID,
                 'customerReference' => $customerReference,
-                'inbound' => $inbound,
-                'inboundCallScreening' => $inboundCallScreening,
-                'noiseSuppression' => $noiseSuppression,
-                'outbound' => $outbound,
-                'tags' => $tags,
+                'inbound' => $inbound ?? Omitted::VALUE,
+                'inboundCallScreening' => $inboundCallScreening ?? Omitted::VALUE,
+                'noiseSuppression' => $noiseSuppression ?? Omitted::VALUE,
+                'outbound' => $outbound ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -144,8 +145,12 @@ final class MobilePhoneNumbersService implements MobilePhoneNumbersContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

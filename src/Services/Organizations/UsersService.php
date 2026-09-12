@@ -6,7 +6,7 @@ namespace Telnyx\Services\Organizations;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Organizations\Users\OrganizationUser;
 use Telnyx\Organizations\Users\UserGetGroupsReportParams\Accept;
@@ -59,7 +59,7 @@ final class UsersService implements UsersContract
         bool $includeGroups = false,
         RequestOptions|array|null $requestOptions = null,
     ): UserGetResponse {
-        $params = Util::removeNulls(['includeGroups' => $includeGroups]);
+        $params = ['includeGroups' => $includeGroups];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -91,14 +91,15 @@ final class UsersService implements UsersContract
         int $pageSize = 250,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterEmail' => $filterEmail,
-                'filterUserStatus' => $filterUserStatus,
+                'filterEmail' => $filterEmail ?? Omitted::VALUE,
+                'filterUserStatus' => $filterUserStatus ?? Omitted::VALUE,
                 'includeGroups' => $includeGroups,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -121,7 +122,7 @@ final class UsersService implements UsersContract
         Accept|string $accept = 'application/json',
         RequestOptions|array|null $requestOptions = null,
     ): UserGetGroupsReportResponse {
-        $params = Util::removeNulls(['accept' => $accept]);
+        $params = ['accept' => $accept];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getGroupsReport(params: $params, requestOptions: $requestOptions);

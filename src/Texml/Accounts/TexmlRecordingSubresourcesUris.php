@@ -7,6 +7,7 @@ namespace Telnyx\Texml\Accounts;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Subresources details for a recording if available.
@@ -33,11 +34,12 @@ final class TexmlRecordingSubresourcesUris implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $transcriptions = null): self
-    {
+    public static function with(
+        string|Omitted|null $transcriptions = Omitted::VALUE
+    ): self {
         $self = new self;
 
-        null !== $transcriptions && $self['transcriptions'] = $transcriptions;
+        Omitted::VALUE !== $transcriptions && $self['transcriptions'] = $transcriptions;
 
         return $self;
     }

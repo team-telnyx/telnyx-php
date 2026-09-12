@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifyProfilesContract;
@@ -76,19 +76,20 @@ final class VerifyProfilesService implements VerifyProfilesContract
         Whatsapp|array|null $whatsapp = null,
         RequestOptions|array|null $requestOptions = null,
     ): VerifyProfileData {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'name' => $name,
-                'call' => $call,
-                'dailySpendLimit' => $dailySpendLimit,
+                'call' => $call ?? Omitted::VALUE,
+                'dailySpendLimit' => $dailySpendLimit ?? Omitted::VALUE,
                 'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
-                'flashcall' => $flashcall,
-                'language' => $language,
-                'sms' => $sms,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-                'whatsapp' => $whatsapp,
+                'flashcall' => $flashcall ?? Omitted::VALUE,
+                'language' => $language ?? Omitted::VALUE,
+                'sms' => $sms ?? Omitted::VALUE,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
+                'whatsapp' => $whatsapp ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -145,18 +146,19 @@ final class VerifyProfilesService implements VerifyProfilesContract
         \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Whatsapp|array|null $whatsapp = null,
         RequestOptions|array|null $requestOptions = null,
     ): VerifyProfileData {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'call' => $call,
-                'dailySpendLimit' => $dailySpendLimit,
-                'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
-                'language' => $language,
-                'name' => $name,
-                'sms' => $sms,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
-                'whatsapp' => $whatsapp,
+                'call' => $call ?? Omitted::VALUE,
+                'dailySpendLimit' => $dailySpendLimit ?? Omitted::VALUE,
+                'dailySpendLimitEnabled' => $dailySpendLimitEnabled ?? Omitted::VALUE,
+                'language' => $language ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'sms' => $sms ?? Omitted::VALUE,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
+                'whatsapp' => $whatsapp ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -183,12 +185,13 @@ final class VerifyProfilesService implements VerifyProfilesContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -231,7 +234,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
         string $text,
         RequestOptions|array|null $requestOptions = null
     ): MessageTemplate {
-        $params = Util::removeNulls(['text' => $text]);
+        $params = ['text' => $text];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createTemplate(params: $params, requestOptions: $requestOptions);
@@ -273,7 +276,7 @@ final class VerifyProfilesService implements VerifyProfilesContract
         string $text,
         RequestOptions|array|null $requestOptions = null,
     ): MessageTemplate {
-        $params = Util::removeNulls(['text' => $text]);
+        $params = ['text' => $text];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateTemplate($templateID, params: $params, requestOptions: $requestOptions);

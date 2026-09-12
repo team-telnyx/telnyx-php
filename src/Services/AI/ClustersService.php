@@ -9,7 +9,7 @@ use Telnyx\AI\Clusters\ClusterGetResponse;
 use Telnyx\AI\Clusters\ClusterListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersContract;
@@ -52,9 +52,9 @@ final class ClustersService implements ClustersContract
         int $topNNodes = 0,
         RequestOptions|array|null $requestOptions = null,
     ): ClusterGetResponse {
-        $params = Util::removeNulls(
-            ['showSubclusters' => $showSubclusters, 'topNNodes' => $topNNodes]
-        );
+        $params = [
+            'showSubclusters' => $showSubclusters, 'topNNodes' => $topNNodes,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($taskID, params: $params, requestOptions: $requestOptions);
@@ -78,8 +78,12 @@ final class ClustersService implements ClustersContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -130,14 +134,15 @@ final class ClustersService implements ClustersContract
         ?string $prefix = null,
         RequestOptions|array|null $requestOptions = null,
     ): ClusterComputeResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'bucket' => $bucket,
-                'files' => $files,
+                'files' => $files ?? Omitted::VALUE,
                 'minClusterSize' => $minClusterSize,
                 'minSubclusterSize' => $minSubclusterSize,
-                'prefix' => $prefix,
+                'prefix' => $prefix ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -162,7 +167,10 @@ final class ClustersService implements ClustersContract
         ?int $clusterID = null,
         RequestOptions|array|null $requestOptions = null,
     ): string {
-        $params = Util::removeNulls(['clusterID' => $clusterID]);
+        $params = array_filter(
+            ['clusterID' => $clusterID ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->fetchGraph($taskID, params: $params, requestOptions: $requestOptions);

@@ -6,7 +6,7 @@ namespace Telnyx\Services\Whatsapp\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbers\ConversationalComponentsContract;
 use Telnyx\Whatsapp\PhoneNumbers\ConversationalComponents\ConversationalComponentListResponse;
@@ -72,8 +72,12 @@ final class ConversationalComponentsService implements ConversationalComponentsC
         ?array $iceBreakers = null,
         RequestOptions|array|null $requestOptions = null,
     ): ConversationalComponentPatchAllResponse {
-        $params = Util::removeNulls(
-            ['commands' => $commands, 'iceBreakers' => $iceBreakers]
+        $params = array_filter(
+            [
+                'commands' => $commands ?? Omitted::VALUE,
+                'iceBreakers' => $iceBreakers ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

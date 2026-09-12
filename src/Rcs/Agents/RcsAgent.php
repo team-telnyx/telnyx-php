@@ -7,6 +7,7 @@ namespace Telnyx\Rcs\Agents;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type RcsAgentShape = array{
@@ -91,15 +92,15 @@ final class RcsAgent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        string|Omitted|null $profileID = Omitted::VALUE,
+        string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         ?string $agentID = null,
         ?string $agentName = null,
         ?\DateTimeInterface $createdAt = null,
         ?bool $enabled = null,
-        ?string $profileID = null,
         ?\DateTimeInterface $updatedAt = null,
         ?string $userID = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
     ): self {
         $self = new self;
 
@@ -107,11 +108,11 @@ final class RcsAgent implements BaseModel
         null !== $agentName && $self['agentName'] = $agentName;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $enabled && $self['enabled'] = $enabled;
-        null !== $profileID && $self['profileID'] = $profileID;
+        Omitted::VALUE !== $profileID && $self['profileID'] = $profileID;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $userID && $self['userID'] = $userID;
-        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        Omitted::VALUE !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

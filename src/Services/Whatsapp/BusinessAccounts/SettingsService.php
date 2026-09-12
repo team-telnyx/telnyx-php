@@ -6,7 +6,7 @@ namespace Telnyx\Services\Whatsapp\BusinessAccounts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\BusinessAccounts\SettingsContract;
 use Telnyx\Whatsapp\BusinessAccounts\Settings\SettingGetResponse;
@@ -77,15 +77,16 @@ final class SettingsService implements SettingsContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): SettingUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'name' => $name,
-                'timezone' => $timezone,
-                'webhookEnabled' => $webhookEnabled,
-                'webhookEvents' => $webhookEvents,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
+                'name' => $name ?? Omitted::VALUE,
+                'timezone' => $timezone ?? Omitted::VALUE,
+                'webhookEnabled' => $webhookEnabled ?? Omitted::VALUE,
+                'webhookEvents' => $webhookEvents ?? Omitted::VALUE,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

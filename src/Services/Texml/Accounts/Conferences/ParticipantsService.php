@@ -6,7 +6,7 @@ namespace Telnyx\Services\Texml\Accounts\Conferences;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Conferences\ParticipantsContract;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse;
@@ -68,9 +68,7 @@ final class ParticipantsService implements ParticipantsContract
         string $conferenceSid,
         RequestOptions|array|null $requestOptions = null,
     ): ParticipantResource {
-        $params = Util::removeNulls(
-            ['accountSid' => $accountSid, 'conferenceSid' => $conferenceSid]
-        );
+        $params = ['accountSid' => $accountSid, 'conferenceSid' => $conferenceSid];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($callSidOrParticipantLabel, params: $params, requestOptions: $requestOptions);
@@ -118,22 +116,23 @@ final class ParticipantsService implements ParticipantsContract
         ?string $waitURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): ParticipantResource {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'accountSid' => $accountSid,
                 'conferenceSid' => $conferenceSid,
-                'announceMethod' => $announceMethod,
-                'announceURL' => $announceURL,
-                'beepOnExit' => $beepOnExit,
-                'callSidToCoach' => $callSidToCoach,
-                'coaching' => $coaching,
-                'endConferenceOnExit' => $endConferenceOnExit,
-                'hold' => $hold,
-                'holdMethod' => $holdMethod,
-                'holdURL' => $holdURL,
-                'muted' => $muted,
-                'waitURL' => $waitURL,
+                'announceMethod' => $announceMethod ?? Omitted::VALUE,
+                'announceURL' => $announceURL ?? Omitted::VALUE,
+                'beepOnExit' => $beepOnExit ?? Omitted::VALUE,
+                'callSidToCoach' => $callSidToCoach ?? Omitted::VALUE,
+                'coaching' => $coaching ?? Omitted::VALUE,
+                'endConferenceOnExit' => $endConferenceOnExit ?? Omitted::VALUE,
+                'hold' => $hold ?? Omitted::VALUE,
+                'holdMethod' => $holdMethod ?? Omitted::VALUE,
+                'holdURL' => $holdURL ?? Omitted::VALUE,
+                'muted' => $muted ?? Omitted::VALUE,
+                'waitURL' => $waitURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -160,9 +159,7 @@ final class ParticipantsService implements ParticipantsContract
         string $conferenceSid,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(
-            ['accountSid' => $accountSid, 'conferenceSid' => $conferenceSid]
-        );
+        $params = ['accountSid' => $accountSid, 'conferenceSid' => $conferenceSid];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($callSidOrParticipantLabel, params: $params, requestOptions: $requestOptions);
@@ -284,59 +281,60 @@ final class ParticipantsService implements ParticipantsContract
         ?string $waitURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): ParticipantParticipantsResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'accountSid' => $accountSid,
-                'amdStatusCallback' => $amdStatusCallback,
-                'amdStatusCallbackMethod' => $amdStatusCallbackMethod,
-                'applicationSid' => $applicationSid,
-                'beep' => $beep,
-                'callerID' => $callerID,
-                'callSidToCoach' => $callSidToCoach,
+                'amdStatusCallback' => $amdStatusCallback ?? Omitted::VALUE,
+                'amdStatusCallbackMethod' => $amdStatusCallbackMethod ?? Omitted::VALUE,
+                'applicationSid' => $applicationSid ?? Omitted::VALUE,
+                'beep' => $beep ?? Omitted::VALUE,
+                'callerID' => $callerID ?? Omitted::VALUE,
+                'callSidToCoach' => $callSidToCoach ?? Omitted::VALUE,
                 'cancelPlaybackOnDetectMessageEnd' => $cancelPlaybackOnDetectMessageEnd,
                 'cancelPlaybackOnMachineDetection' => $cancelPlaybackOnMachineDetection,
-                'coaching' => $coaching,
-                'conferenceRecord' => $conferenceRecord,
-                'conferenceRecordingStatusCallback' => $conferenceRecordingStatusCallback,
-                'conferenceRecordingStatusCallbackEvent' => $conferenceRecordingStatusCallbackEvent,
-                'conferenceRecordingStatusCallbackMethod' => $conferenceRecordingStatusCallbackMethod,
+                'coaching' => $coaching ?? Omitted::VALUE,
+                'conferenceRecord' => $conferenceRecord ?? Omitted::VALUE,
+                'conferenceRecordingStatusCallback' => $conferenceRecordingStatusCallback ?? Omitted::VALUE,
+                'conferenceRecordingStatusCallbackEvent' => $conferenceRecordingStatusCallbackEvent ?? Omitted::VALUE,
+                'conferenceRecordingStatusCallbackMethod' => $conferenceRecordingStatusCallbackMethod ?? Omitted::VALUE,
                 'conferenceRecordingTimeout' => $conferenceRecordingTimeout,
-                'conferenceStatusCallback' => $conferenceStatusCallback,
-                'conferenceStatusCallbackEvent' => $conferenceStatusCallbackEvent,
-                'conferenceStatusCallbackMethod' => $conferenceStatusCallbackMethod,
-                'conferenceTrim' => $conferenceTrim,
-                'customHeaders' => $customHeaders,
+                'conferenceStatusCallback' => $conferenceStatusCallback ?? Omitted::VALUE,
+                'conferenceStatusCallbackEvent' => $conferenceStatusCallbackEvent ?? Omitted::VALUE,
+                'conferenceStatusCallbackMethod' => $conferenceStatusCallbackMethod ?? Omitted::VALUE,
+                'conferenceTrim' => $conferenceTrim ?? Omitted::VALUE,
+                'customHeaders' => $customHeaders ?? Omitted::VALUE,
                 'earlyMedia' => $earlyMedia,
-                'endConferenceOnExit' => $endConferenceOnExit,
-                'from' => $from,
-                'label' => $label,
-                'machineDetection' => $machineDetection,
+                'endConferenceOnExit' => $endConferenceOnExit ?? Omitted::VALUE,
+                'from' => $from ?? Omitted::VALUE,
+                'label' => $label ?? Omitted::VALUE,
+                'machineDetection' => $machineDetection ?? Omitted::VALUE,
                 'machineDetectionBeepProfile' => $machineDetectionBeepProfile,
                 'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
                 'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
                 'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
-                'machineDetectionTimeout' => $machineDetectionTimeout,
-                'maxParticipants' => $maxParticipants,
-                'muted' => $muted,
-                'preferredCodecs' => $preferredCodecs,
-                'record' => $record,
-                'recordingChannels' => $recordingChannels,
-                'recordingStatusCallback' => $recordingStatusCallback,
-                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
-                'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
-                'recordingTrack' => $recordingTrack,
-                'sipAuthPassword' => $sipAuthPassword,
-                'sipAuthUsername' => $sipAuthUsername,
-                'startConferenceOnEnter' => $startConferenceOnEnter,
-                'statusCallback' => $statusCallback,
-                'statusCallbackEvent' => $statusCallbackEvent,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'timeLimit' => $timeLimit,
-                'timeoutSeconds' => $timeoutSeconds,
-                'to' => $to,
-                'trim' => $trim,
-                'waitURL' => $waitURL,
+                'machineDetectionTimeout' => $machineDetectionTimeout ?? Omitted::VALUE,
+                'maxParticipants' => $maxParticipants ?? Omitted::VALUE,
+                'muted' => $muted ?? Omitted::VALUE,
+                'preferredCodecs' => $preferredCodecs ?? Omitted::VALUE,
+                'record' => $record ?? Omitted::VALUE,
+                'recordingChannels' => $recordingChannels ?? Omitted::VALUE,
+                'recordingStatusCallback' => $recordingStatusCallback ?? Omitted::VALUE,
+                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent ?? Omitted::VALUE,
+                'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod ?? Omitted::VALUE,
+                'recordingTrack' => $recordingTrack ?? Omitted::VALUE,
+                'sipAuthPassword' => $sipAuthPassword ?? Omitted::VALUE,
+                'sipAuthUsername' => $sipAuthUsername ?? Omitted::VALUE,
+                'startConferenceOnEnter' => $startConferenceOnEnter ?? Omitted::VALUE,
+                'statusCallback' => $statusCallback ?? Omitted::VALUE,
+                'statusCallbackEvent' => $statusCallbackEvent ?? Omitted::VALUE,
+                'statusCallbackMethod' => $statusCallbackMethod ?? Omitted::VALUE,
+                'timeLimit' => $timeLimit ?? Omitted::VALUE,
+                'timeoutSeconds' => $timeoutSeconds ?? Omitted::VALUE,
+                'to' => $to ?? Omitted::VALUE,
+                'trim' => $trim ?? Omitted::VALUE,
+                'waitURL' => $waitURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -361,7 +359,7 @@ final class ParticipantsService implements ParticipantsContract
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
     ): ParticipantGetParticipantsResponse {
-        $params = Util::removeNulls(['accountSid' => $accountSid]);
+        $params = ['accountSid' => $accountSid];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveParticipants($conferenceSid, params: $params, requestOptions: $requestOptions);

@@ -9,6 +9,7 @@ use Telnyx\AuditEvents\AuditEventListResponse\Change\To;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Details of the changes made to a resource.
@@ -59,19 +60,19 @@ final class Change implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FromShape|null $from
-     * @param ToShape|null $to
+     * @param FromShape|Omitted|null $from
+     * @param ToShape|Omitted|null $to
      */
     public static function with(
+        Omitted|string|float|bool|array|null $from = Omitted::VALUE,
+        Omitted|string|float|bool|array|null $to = Omitted::VALUE,
         ?string $field = null,
-        string|float|bool|array|null $from = null,
-        string|float|bool|array|null $to = null,
     ): self {
         $self = new self;
 
         null !== $field && $self['field'] = $field;
-        null !== $from && $self['from'] = $from;
-        null !== $to && $self['to'] = $to;
+        Omitted::VALUE !== $from && $self['from'] = $from;
+        Omitted::VALUE !== $to && $self['to'] = $to;
 
         return $self;
     }

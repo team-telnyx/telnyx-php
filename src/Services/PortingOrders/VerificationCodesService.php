@@ -6,7 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\VerificationCodes\PortingVerificationCode;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
@@ -62,13 +62,14 @@ final class VerificationCodesService implements VerificationCodesContract
         Sort|array|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -95,11 +96,12 @@ final class VerificationCodesService implements VerificationCodesContract
         VerificationMethod|string|null $verificationMethod = null,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'phoneNumbers' => $phoneNumbers,
-                'verificationMethod' => $verificationMethod,
+                'phoneNumbers' => $phoneNumbers ?? Omitted::VALUE,
+                'verificationMethod' => $verificationMethod ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -124,7 +126,10 @@ final class VerificationCodesService implements VerificationCodesContract
         ?array $verificationCodes = null,
         RequestOptions|array|null $requestOptions = null,
     ): VerificationCodeVerifyResponse {
-        $params = Util::removeNulls(['verificationCodes' => $verificationCodes]);
+        $params = array_filter(
+            ['verificationCodes' => $verificationCodes ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->verify($id, params: $params, requestOptions: $requestOptions);

@@ -7,6 +7,7 @@ namespace Telnyx\PhoneNumbers\Voicemail\VoicemailCreateParams;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailCreateParams\Greeting\Mode;
 
 /**
@@ -48,12 +49,12 @@ final class Greeting implements BaseModel
      * @param Mode|value-of<Mode>|null $mode
      */
     public static function with(
-        ?string $mediaName = null,
+        string|Omitted|null $mediaName = Omitted::VALUE,
         Mode|string|null $mode = null
     ): self {
         $self = new self;
 
-        null !== $mediaName && $self['mediaName'] = $mediaName;
+        Omitted::VALUE !== $mediaName && $self['mediaName'] = $mediaName;
         null !== $mode && $self['mode'] = $mode;
 
         return $self;

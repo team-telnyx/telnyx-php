@@ -46,7 +46,10 @@ final class ModelOf implements Converter
             return $value;
         }
 
-        if (!is_array($value) || (!empty($value) && array_is_list($value))) {
+        $val = $value instanceof \stdClass ? get_object_vars($value) : $value;
+        // Preserve the original object when its properties have the shape of a
+        // nonempty list, matching the array rejection boundary without losing JSON identity.
+        if (!is_array($val) || (!empty($val) && array_is_list($val))) {
             ++$state->no;
 
             return $value;
@@ -54,7 +57,6 @@ final class ModelOf implements Converter
 
         ++$state->yes;
 
-        $val = [...$value];
         $acc = [];
 
         foreach ($this->properties as $name => $info) {

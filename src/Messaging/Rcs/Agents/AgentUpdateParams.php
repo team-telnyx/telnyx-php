@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Updates the supplied configuration fields on the specified RCS agent.
@@ -55,15 +56,15 @@ final class AgentUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $profileID = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
+        string|Omitted|null $profileID = Omitted::VALUE,
+        string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
     ): self {
         $self = new self;
 
-        null !== $profileID && $self['profileID'] = $profileID;
-        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        Omitted::VALUE !== $profileID && $self['profileID'] = $profileID;
+        Omitted::VALUE !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

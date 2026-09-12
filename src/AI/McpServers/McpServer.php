@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type McpServerShape = array{
@@ -76,7 +77,7 @@ final class McpServer implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $allowedTools
+     * @param list<string>|Omitted|null $allowedTools
      */
     public static function with(
         string $id,
@@ -84,8 +85,8 @@ final class McpServer implements BaseModel
         string $name,
         string $type,
         string $url,
-        ?array $allowedTools = null,
-        ?string $apiKeyRef = null,
+        array|Omitted|null $allowedTools = Omitted::VALUE,
+        string|Omitted|null $apiKeyRef = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -95,8 +96,8 @@ final class McpServer implements BaseModel
         $self['type'] = $type;
         $self['url'] = $url;
 
-        null !== $allowedTools && $self['allowedTools'] = $allowedTools;
-        null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
+        Omitted::VALUE !== $allowedTools && $self['allowedTools'] = $allowedTools;
+        Omitted::VALUE !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
 
         return $self;
     }

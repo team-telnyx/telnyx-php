@@ -6,7 +6,7 @@ namespace Telnyx\Services\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingGetResponse;
@@ -72,21 +72,22 @@ final class MessagingService implements MessagingContract
         ?string $timezone = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessagingNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'endTime' => $endTime,
                 'startTime' => $startTime,
-                'connections' => $connections,
-                'directions' => $directions,
-                'filters' => $filters,
-                'includeMessageBody' => $includeMessageBody,
-                'managedAccounts' => $managedAccounts,
-                'profiles' => $profiles,
-                'recordTypes' => $recordTypes,
-                'reportName' => $reportName,
-                'selectAllManagedAccounts' => $selectAllManagedAccounts,
-                'timezone' => $timezone,
+                'connections' => $connections ?? Omitted::VALUE,
+                'directions' => $directions ?? Omitted::VALUE,
+                'filters' => $filters ?? Omitted::VALUE,
+                'includeMessageBody' => $includeMessageBody ?? Omitted::VALUE,
+                'managedAccounts' => $managedAccounts ?? Omitted::VALUE,
+                'profiles' => $profiles ?? Omitted::VALUE,
+                'recordTypes' => $recordTypes ?? Omitted::VALUE,
+                'reportName' => $reportName ?? Omitted::VALUE,
+                'selectAllManagedAccounts' => $selectAllManagedAccounts ?? Omitted::VALUE,
+                'timezone' => $timezone ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

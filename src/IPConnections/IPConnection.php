@@ -9,6 +9,7 @@ use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
@@ -240,9 +241,9 @@ final class IPConnection implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
      * @param DtmfType|value-of<DtmfType>|null $dtmfType
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param InboundIP|InboundIPShape|null $inbound
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape|null $jitterBuffer
      * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression>|null $noiseSuppression
@@ -254,10 +255,14 @@ final class IPConnection implements BaseModel
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
+        string|Omitted|null $androidPushCredentialID = Omitted::VALUE,
+        Omitted|EncryptedMedia|string|null $encryptedMedia = Omitted::VALUE,
+        string|Omitted|null $iosPushCredentialID = Omitted::VALUE,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         ?string $id = null,
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsiteOverride = null,
-        ?string $androidPushCredentialID = null,
         ?bool $callCostInWebhooks = null,
         ?string $connectionName = null,
         ?bool $conversationPersistence = null,
@@ -265,9 +270,7 @@ final class IPConnection implements BaseModel
         ?bool $defaultOnHoldComfortNoiseEnabled = null,
         DtmfType|string|null $dtmfType = null,
         ?bool $encodeContactHeaderEnabled = null,
-        EncryptedMedia|string|null $encryptedMedia = null,
         InboundIP|array|null $inbound = null,
-        ?string $iosPushCredentialID = null,
         ConnectionJitterBuffer|array|null $jitterBuffer = null,
         ConnectionNoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
@@ -279,16 +282,14 @@ final class IPConnection implements BaseModel
         TransportProtocol|string|null $transportProtocol = null,
         ?string $updatedAt = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
         ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
     ): self {
         $self = new self;
 
         null !== $id && $self['id'] = $id;
         null !== $active && $self['active'] = $active;
         null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $androidPushCredentialID && $self['androidPushCredentialID'] = $androidPushCredentialID;
+        Omitted::VALUE !== $androidPushCredentialID && $self['androidPushCredentialID'] = $androidPushCredentialID;
         null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
         null !== $connectionName && $self['connectionName'] = $connectionName;
         null !== $conversationPersistence && $self['conversationPersistence'] = $conversationPersistence;
@@ -296,9 +297,9 @@ final class IPConnection implements BaseModel
         null !== $defaultOnHoldComfortNoiseEnabled && $self['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
         null !== $dtmfType && $self['dtmfType'] = $dtmfType;
         null !== $encodeContactHeaderEnabled && $self['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
-        null !== $encryptedMedia && $self['encryptedMedia'] = $encryptedMedia;
+        Omitted::VALUE !== $encryptedMedia && $self['encryptedMedia'] = $encryptedMedia;
         null !== $inbound && $self['inbound'] = $inbound;
-        null !== $iosPushCredentialID && $self['iosPushCredentialID'] = $iosPushCredentialID;
+        Omitted::VALUE !== $iosPushCredentialID && $self['iosPushCredentialID'] = $iosPushCredentialID;
         null !== $jitterBuffer && $self['jitterBuffer'] = $jitterBuffer;
         null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
         null !== $noiseSuppressionDetails && $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
@@ -310,9 +311,9 @@ final class IPConnection implements BaseModel
         null !== $transportProtocol && $self['transportProtocol'] = $transportProtocol;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        Omitted::VALUE !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
         null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        Omitted::VALUE !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $self;
     }

@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Slim list-endpoint shape. Omits per-number results and webhook URLs to keep responses small.
@@ -103,8 +104,8 @@ final class RemediationListResponse implements BaseModel
         int $phoneNumbersCount,
         RemediationStatus|string $status,
         \DateTimeInterface $updatedAt,
-        ?\DateTimeInterface $tier1CompletedAt = null,
-        ?\DateTimeInterface $tier2CompletedAt = null,
+        \DateTimeInterface|Omitted|null $tier1CompletedAt = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $tier2CompletedAt = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -115,8 +116,8 @@ final class RemediationListResponse implements BaseModel
         $self['status'] = $status;
         $self['updatedAt'] = $updatedAt;
 
-        null !== $tier1CompletedAt && $self['tier1CompletedAt'] = $tier1CompletedAt;
-        null !== $tier2CompletedAt && $self['tier2CompletedAt'] = $tier2CompletedAt;
+        Omitted::VALUE !== $tier1CompletedAt && $self['tier1CompletedAt'] = $tier1CompletedAt;
+        Omitted::VALUE !== $tier2CompletedAt && $self['tier2CompletedAt'] = $tier2CompletedAt;
 
         return $self;
     }

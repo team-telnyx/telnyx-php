@@ -7,6 +7,7 @@ namespace Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding\ForwardingType;
 
 /**
@@ -41,18 +42,18 @@ final class CallForwarding implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ForwardingType|value-of<ForwardingType>|null $forwardingType
+     * @param Omitted|ForwardingType|value-of<ForwardingType>|null $forwardingType
      */
     public static function with(
+        Omitted|ForwardingType|string|null $forwardingType = Omitted::VALUE,
+        string|Omitted|null $forwardsTo = Omitted::VALUE,
         ?bool $callForwardingEnabled = null,
-        ForwardingType|string|null $forwardingType = null,
-        ?string $forwardsTo = null,
     ): self {
         $self = new self;
 
         null !== $callForwardingEnabled && $self['callForwardingEnabled'] = $callForwardingEnabled;
-        null !== $forwardingType && $self['forwardingType'] = $forwardingType;
-        null !== $forwardsTo && $self['forwardsTo'] = $forwardsTo;
+        Omitted::VALUE !== $forwardingType && $self['forwardingType'] = $forwardingType;
+        Omitted::VALUE !== $forwardsTo && $self['forwardsTo'] = $forwardsTo;
 
         return $self;
     }

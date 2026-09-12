@@ -6,7 +6,7 @@ namespace Telnyx\Services\Messaging10dlc;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileAssignResponse;
 use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse;
 use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetStatusResponse;
@@ -52,12 +52,13 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         ?string $tcrCampaignID = null,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberAssignmentByProfileAssignResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'messagingProfileID' => $messagingProfileID,
-                'campaignID' => $campaignID,
-                'tcrCampaignID' => $tcrCampaignID,
+                'campaignID' => $campaignID ?? Omitted::VALUE,
+                'tcrCampaignID' => $tcrCampaignID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -84,9 +85,7 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         int $recordsPerPage = 20,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberAssignmentByProfileListPhoneNumberStatusResponse {
-        $params = Util::removeNulls(
-            ['page' => $page, 'recordsPerPage' => $recordsPerPage]
-        );
+        $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listPhoneNumberStatus($taskID, params: $params, requestOptions: $requestOptions);
@@ -112,9 +111,7 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
         int $recordsPerPage = 20,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse {
-        $params = Util::removeNulls(
-            ['page' => $page, 'recordsPerPage' => $recordsPerPage]
-        );
+        $params = ['page' => $page, 'recordsPerPage' => $recordsPerPage];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrievePhoneNumberStatus($taskID, params: $params, requestOptions: $requestOptions);

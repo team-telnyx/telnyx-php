@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\DefaultFlatPagination;
@@ -91,7 +91,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         VoiceMethod|string $voiceMethod = 'post',
         RequestOptions|array|null $requestOptions = null,
     ): TexmlApplicationNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'friendlyName' => $friendlyName,
                 'voiceURL' => $voiceURL,
@@ -101,14 +101,15 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
                 'dtmfType' => $dtmfType,
                 'firstCommandTimeout' => $firstCommandTimeout,
                 'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
-                'statusCallback' => $statusCallback,
+                'inbound' => $inbound ?? Omitted::VALUE,
+                'outbound' => $outbound ?? Omitted::VALUE,
+                'statusCallback' => $statusCallback ?? Omitted::VALUE,
                 'statusCallbackMethod' => $statusCallbackMethod,
-                'tags' => $tags,
-                'voiceFallbackURL' => $voiceFallbackURL,
+                'tags' => $tags ?? Omitted::VALUE,
+                'voiceFallbackURL' => $voiceFallbackURL ?? Omitted::VALUE,
                 'voiceMethod' => $voiceMethod,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -181,7 +182,7 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         \Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod|string $voiceMethod = 'post',
         RequestOptions|array|null $requestOptions = null,
     ): TexmlApplicationUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'friendlyName' => $friendlyName,
                 'voiceURL' => $voiceURL,
@@ -191,14 +192,15 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
                 'dtmfType' => $dtmfType,
                 'firstCommandTimeout' => $firstCommandTimeout,
                 'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
-                'statusCallback' => $statusCallback,
+                'inbound' => $inbound ?? Omitted::VALUE,
+                'outbound' => $outbound ?? Omitted::VALUE,
+                'statusCallback' => $statusCallback ?? Omitted::VALUE,
                 'statusCallbackMethod' => $statusCallbackMethod,
-                'tags' => $tags,
-                'voiceFallbackURL' => $voiceFallbackURL,
+                'tags' => $tags ?? Omitted::VALUE,
+                'voiceFallbackURL' => $voiceFallbackURL ?? Omitted::VALUE,
                 'voiceMethod' => $voiceMethod,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -238,13 +240,14 @@ final class TexmlApplicationsService implements TexmlApplicationsContract
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

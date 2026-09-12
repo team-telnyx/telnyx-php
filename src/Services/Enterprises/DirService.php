@@ -6,7 +6,7 @@ namespace Telnyx\Services\Enterprises;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\Dir;
 use Telnyx\Dir\DirStatus;
@@ -83,7 +83,7 @@ final class DirService implements DirContract
         bool $reselling = false,
         RequestOptions|array|null $requestOptions = null,
     ): DirWrapped {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'authorizerEmail' => $authorizerEmail,
                 'authorizerName' => $authorizerName,
@@ -92,10 +92,11 @@ final class DirService implements DirContract
                 'certifyIPOwnership' => $certifyIPOwnership,
                 'certifyNoShaftContent' => $certifyNoShaftContent,
                 'displayName' => $displayName,
-                'documents' => $documents,
-                'logoURL' => $logoURL,
+                'documents' => $documents ?? Omitted::VALUE,
+                'logoURL' => $logoURL ?? Omitted::VALUE,
                 'reselling' => $reselling,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -138,18 +139,19 @@ final class DirService implements DirContract
         Sort|string $sort = '-created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterCallReasonContains' => $filterCallReasonContains,
-                'filterDisplayNameContains' => $filterDisplayNameContains,
-                'filterExpiringAtGte' => $filterExpiringAtGte,
-                'filterExpiringAtLte' => $filterExpiringAtLte,
-                'filterExpiringWithinDays' => $filterExpiringWithinDays,
-                'filterStatus' => $filterStatus,
+                'filterCallReasonContains' => $filterCallReasonContains ?? Omitted::VALUE,
+                'filterDisplayNameContains' => $filterDisplayNameContains ?? Omitted::VALUE,
+                'filterExpiringAtGte' => $filterExpiringAtGte ?? Omitted::VALUE,
+                'filterExpiringAtLte' => $filterExpiringAtLte ?? Omitted::VALUE,
+                'filterExpiringWithinDays' => $filterExpiringWithinDays ?? Omitted::VALUE,
+                'filterStatus' => $filterStatus ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

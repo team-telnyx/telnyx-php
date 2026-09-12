@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Threads\InboundThread;
 use Telnyx\EmailThreads\EmailThreadGetResponse;
@@ -57,12 +57,13 @@ final class EmailThreadsService implements EmailThreadsContract
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
     ): EmailThreadGetResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'inboxID' => $inboxID,
-                'pageAfter' => $pageAfter,
+                'pageAfter' => $pageAfter ?? Omitted::VALUE,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -103,13 +104,14 @@ final class EmailThreadsService implements EmailThreadsContract
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
     ): EmailBracketCursorPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterInboxID' => $filterInboxID,
-                'filterLabel' => $filterLabel,
-                'pageAfter' => $pageAfter,
+                'filterInboxID' => $filterInboxID ?? Omitted::VALUE,
+                'filterLabel' => $filterLabel ?? Omitted::VALUE,
+                'pageAfter' => $pageAfter ?? Omitted::VALUE,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

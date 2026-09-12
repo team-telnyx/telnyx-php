@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Dir\References\ReferenceUpdateParams\RefType;
 
 /**
@@ -114,12 +115,12 @@ final class ReferenceUpdateParams implements BaseModel
     public static function with(
         string $dirID,
         RefType|string $refType,
+        string|Omitted|null $jobTitle = Omitted::VALUE,
+        string|Omitted|null $organization = Omitted::VALUE,
+        string|Omitted|null $relationshipToRegistrant = Omitted::VALUE,
         ?string $email = null,
         ?string $fullName = null,
-        ?string $jobTitle = null,
-        ?string $organization = null,
         ?string $phoneE164 = null,
-        ?string $relationshipToRegistrant = null,
         ?string $timezone = null,
     ): self {
         $self = new self;
@@ -129,10 +130,10 @@ final class ReferenceUpdateParams implements BaseModel
 
         null !== $email && $self['email'] = $email;
         null !== $fullName && $self['fullName'] = $fullName;
-        null !== $jobTitle && $self['jobTitle'] = $jobTitle;
-        null !== $organization && $self['organization'] = $organization;
+        Omitted::VALUE !== $jobTitle && $self['jobTitle'] = $jobTitle;
+        Omitted::VALUE !== $organization && $self['organization'] = $organization;
         null !== $phoneE164 && $self['phoneE164'] = $phoneE164;
-        null !== $relationshipToRegistrant && $self['relationshipToRegistrant'] = $relationshipToRegistrant;
+        Omitted::VALUE !== $relationshipToRegistrant && $self['relationshipToRegistrant'] = $relationshipToRegistrant;
         null !== $timezone && $self['timezone'] = $timezone;
 
         return $self;

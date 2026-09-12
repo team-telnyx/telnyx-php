@@ -6,7 +6,7 @@ namespace Telnyx\Services\MeetingSessions;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\MeetingSessions\Actions\ActionAcceptedResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MeetingSessions\ActionsContract;
@@ -47,7 +47,7 @@ final class ActionsService implements ActionsContract
         string $text,
         RequestOptions|array|null $requestOptions = null
     ): ActionAcceptedResponse {
-        $params = Util::removeNulls(['text' => $text]);
+        $params = ['text' => $text];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendChat($id, params: $params, requestOptions: $requestOptions);
@@ -75,8 +75,13 @@ final class ActionsService implements ActionsContract
         ?string $voice = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionAcceptedResponse {
-        $params = Util::removeNulls(
-            ['text' => $text, 'interrupt' => $interrupt, 'voice' => $voice]
+        $params = array_filter(
+            [
+                'text' => $text,
+                'interrupt' => $interrupt ?? Omitted::VALUE,
+                'voice' => $voice ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

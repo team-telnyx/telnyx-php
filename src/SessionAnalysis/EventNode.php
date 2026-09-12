@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\SessionAnalysis\EventNode\Cost;
 use Telnyx\SessionAnalysis\EventNode\Links;
 use Telnyx\SessionAnalysis\EventNode\Relationship;
@@ -122,7 +123,7 @@ final class EventNode implements BaseModel
      * @param Cost|CostShape $cost
      * @param Links|LinksShape $links
      * @param array<string,mixed> $record
-     * @param Relationship|RelationshipShape|null $relationship
+     * @param Omitted|Relationship|RelationshipShape|null $relationship
      */
     public static function with(
         string $id,
@@ -132,7 +133,7 @@ final class EventNode implements BaseModel
         Links|array $links,
         string $product,
         array $record,
-        Relationship|array|null $relationship = null,
+        Omitted|Relationship|array|null $relationship = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -144,7 +145,7 @@ final class EventNode implements BaseModel
         $self['product'] = $product;
         $self['record'] = $record;
 
-        null !== $relationship && $self['relationship'] = $relationship;
+        Omitted::VALUE !== $relationship && $self['relationship'] = $relationship;
 
         return $self;
     }

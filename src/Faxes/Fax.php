@@ -7,6 +7,7 @@ namespace Telnyx\Faxes;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Faxes\Fax\Direction;
 use Telnyx\Faxes\Fax\RecordType;
 use Telnyx\Faxes\Fax\Status;
@@ -191,15 +192,15 @@ final class Fax implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        string|Omitted|null $failureReason = Omitted::VALUE,
+        string|Omitted|null $internalFailureReason = Omitted::VALUE,
         ?string $id = null,
         ?string $clientState = null,
         ?string $connectionID = null,
         ?\DateTimeInterface $createdAt = null,
         Direction|string|null $direction = null,
-        ?string $failureReason = null,
         ?string $from = null,
         ?string $fromDisplayName = null,
-        ?string $internalFailureReason = null,
         ?string $mediaName = null,
         ?string $mediaURL = null,
         ?string $previewURL = null,
@@ -220,10 +221,10 @@ final class Fax implements BaseModel
         null !== $connectionID && $self['connectionID'] = $connectionID;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $direction && $self['direction'] = $direction;
-        null !== $failureReason && $self['failureReason'] = $failureReason;
+        Omitted::VALUE !== $failureReason && $self['failureReason'] = $failureReason;
         null !== $from && $self['from'] = $from;
         null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
-        null !== $internalFailureReason && $self['internalFailureReason'] = $internalFailureReason;
+        Omitted::VALUE !== $internalFailureReason && $self['internalFailureReason'] = $internalFailureReason;
         null !== $mediaName && $self['mediaName'] = $mediaName;
         null !== $mediaURL && $self['mediaURL'] = $mediaURL;
         null !== $previewURL && $self['previewURL'] = $previewURL;

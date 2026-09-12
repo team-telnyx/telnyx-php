@@ -11,10 +11,11 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingProfileMetrics\MessagingMetricsTimeFrame;
-use Telnyx\MessagingProfiles\MessagingProfile;
+use Telnyx\MessagingProfiles\MessagingMessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
+use Telnyx\MessagingProfiles\MessagingProfileFeatures;
 use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsParams;
@@ -35,6 +36,7 @@ use Telnyx\ShortCode;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\MessagingProfiles\MessagingProfileListParams\Filter
+ * @phpstan-import-type MessagingProfileFeaturesShape from \Telnyx\MessagingProfiles\MessagingProfileFeatures
  * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
  * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -60,6 +62,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *   dailySpendLimit?: string,
      *   dailySpendLimitEnabled?: bool,
      *   enabled?: bool,
+     *   features?: MessagingProfileFeatures|MessagingProfileFeaturesShape|null,
      *   healthWebhookURL?: string|null,
      *   mmsFallBackToSMS?: bool,
      *   mmsTranscoding?: bool,
@@ -134,11 +137,14 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *   dailySpendLimit?: string,
      *   dailySpendLimitEnabled?: bool,
      *   enabled?: bool,
+     *   features?: MessagingProfileFeatures|MessagingProfileFeaturesShape|null,
      *   mmsFallBackToSMS?: bool,
      *   mmsTranscoding?: bool,
      *   mobileOnly?: bool,
      *   name?: string,
      *   numberPoolSettings?: NumberPoolSettings|NumberPoolSettingsShape|null,
+     *   redactionEnabled?: bool,
+     *   redactionLevel?: int,
      *   smartEncoding?: bool,
      *   urlShortenerSettings?: URLShortenerSettings|URLShortenerSettingsShape|null,
      *   v1Secret?: string,
@@ -187,7 +193,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      * }|MessagingProfileListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MessagingProfile>>
+     * @return BaseResponse<DefaultFlatPagination<MessagingMessagingProfile>>
      *
      * @throws APIException
      */
@@ -214,7 +220,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
                 ],
             ),
             options: $options,
-            convert: MessagingProfile::class,
+            convert: MessagingMessagingProfile::class,
             page: DefaultFlatPagination::class,
         );
     }

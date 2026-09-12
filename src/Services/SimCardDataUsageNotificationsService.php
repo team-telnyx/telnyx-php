@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardDataUsageNotificationsContract;
@@ -55,9 +55,7 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         Threshold|array $threshold,
         RequestOptions|array|null $requestOptions = null,
     ): SimCardDataUsageNotificationNewResponse {
-        $params = Util::removeNulls(
-            ['simCardID' => $simCardID, 'threshold' => $threshold]
-        );
+        $params = ['simCardID' => $simCardID, 'threshold' => $threshold];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -103,8 +101,12 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold|array|null $threshold = null,
         RequestOptions|array|null $requestOptions = null,
     ): SimCardDataUsageNotificationUpdateResponse {
-        $params = Util::removeNulls(
-            ['simCardID' => $simCardID, 'threshold' => $threshold]
+        $params = array_filter(
+            [
+                'simCardID' => $simCardID ?? Omitted::VALUE,
+                'threshold' => $threshold ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -133,12 +135,13 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterSimCardID' => $filterSimCardID,
+                'filterSimCardID' => $filterSimCardID ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

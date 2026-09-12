@@ -7,6 +7,7 @@ namespace Telnyx\PortingOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\PortingPhoneNumbers\PortingOrderActivationStatus;
 
 /**
@@ -62,20 +63,20 @@ final class PortingOrderActivationSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderActivationStatus|value-of<PortingOrderActivationStatus>|null $activationStatus
+     * @param Omitted|PortingOrderActivationStatus|value-of<PortingOrderActivationStatus>|null $activationStatus
      */
     public static function with(
-        PortingOrderActivationStatus|string|null $activationStatus = null,
+        Omitted|PortingOrderActivationStatus|string|null $activationStatus = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $focDatetimeActual = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $focDatetimeRequested = Omitted::VALUE,
         ?bool $fastPortEligible = null,
-        ?\DateTimeInterface $focDatetimeActual = null,
-        ?\DateTimeInterface $focDatetimeRequested = null,
     ): self {
         $self = new self;
 
-        null !== $activationStatus && $self['activationStatus'] = $activationStatus;
+        Omitted::VALUE !== $activationStatus && $self['activationStatus'] = $activationStatus;
         null !== $fastPortEligible && $self['fastPortEligible'] = $fastPortEligible;
-        null !== $focDatetimeActual && $self['focDatetimeActual'] = $focDatetimeActual;
-        null !== $focDatetimeRequested && $self['focDatetimeRequested'] = $focDatetimeRequested;
+        Omitted::VALUE !== $focDatetimeActual && $self['focDatetimeActual'] = $focDatetimeActual;
+        Omitted::VALUE !== $focDatetimeRequested && $self['focDatetimeRequested'] = $focDatetimeRequested;
 
         return $self;
     }

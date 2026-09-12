@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\NotificationProfiles\NotificationProfile;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
@@ -50,7 +50,10 @@ final class NotificationProfilesService implements NotificationProfilesContract
         ?string $name = null,
         RequestOptions|array|null $requestOptions = null
     ): NotificationProfileNewResponse {
-        $params = Util::removeNulls(['name' => $name]);
+        $params = array_filter(
+            ['name' => $name ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -94,7 +97,10 @@ final class NotificationProfilesService implements NotificationProfilesContract
         ?string $name = null,
         RequestOptions|array|null $requestOptions = null,
     ): NotificationProfileUpdateResponse {
-        $params = Util::removeNulls(['name' => $name]);
+        $params = array_filter(
+            ['name' => $name ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($notificationProfileID, params: $params, requestOptions: $requestOptions);
@@ -118,8 +124,12 @@ final class NotificationProfilesService implements NotificationProfilesContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -7,6 +7,7 @@ namespace Telnyx\PortingOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type PortingOrderEndUserAdminShape = array{
@@ -77,23 +78,23 @@ final class PortingOrderEndUserAdmin implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $accountNumber = null,
-        ?string $authPersonName = null,
-        ?string $billingPhoneNumber = null,
-        ?string $businessIdentifier = null,
-        ?string $entityName = null,
-        ?string $pinPasscode = null,
-        ?string $taxIdentifier = null,
+        string|Omitted|null $accountNumber = Omitted::VALUE,
+        string|Omitted|null $authPersonName = Omitted::VALUE,
+        string|Omitted|null $billingPhoneNumber = Omitted::VALUE,
+        string|Omitted|null $businessIdentifier = Omitted::VALUE,
+        string|Omitted|null $entityName = Omitted::VALUE,
+        string|Omitted|null $pinPasscode = Omitted::VALUE,
+        string|Omitted|null $taxIdentifier = Omitted::VALUE,
     ): self {
         $self = new self;
 
-        null !== $accountNumber && $self['accountNumber'] = $accountNumber;
-        null !== $authPersonName && $self['authPersonName'] = $authPersonName;
-        null !== $billingPhoneNumber && $self['billingPhoneNumber'] = $billingPhoneNumber;
-        null !== $businessIdentifier && $self['businessIdentifier'] = $businessIdentifier;
-        null !== $entityName && $self['entityName'] = $entityName;
-        null !== $pinPasscode && $self['pinPasscode'] = $pinPasscode;
-        null !== $taxIdentifier && $self['taxIdentifier'] = $taxIdentifier;
+        Omitted::VALUE !== $accountNumber && $self['accountNumber'] = $accountNumber;
+        Omitted::VALUE !== $authPersonName && $self['authPersonName'] = $authPersonName;
+        Omitted::VALUE !== $billingPhoneNumber && $self['billingPhoneNumber'] = $billingPhoneNumber;
+        Omitted::VALUE !== $businessIdentifier && $self['businessIdentifier'] = $businessIdentifier;
+        Omitted::VALUE !== $entityName && $self['entityName'] = $entityName;
+        Omitted::VALUE !== $pinPasscode && $self['pinPasscode'] = $pinPasscode;
+        Omitted::VALUE !== $taxIdentifier && $self['taxIdentifier'] = $taxIdentifier;
 
         return $self;
     }

@@ -10,7 +10,7 @@ use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsContract;
@@ -75,20 +75,21 @@ final class ScheduledEventsService implements ScheduledEventsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'scheduledAtFixedDatetime' => $scheduledAtFixedDatetime,
                 'telnyxAgentTarget' => $telnyxAgentTarget,
                 'telnyxConversationChannel' => $telnyxConversationChannel,
                 'telnyxEndUserTarget' => $telnyxEndUserTarget,
-                'callSettings' => $callSettings,
-                'conversationMetadata' => $conversationMetadata,
-                'dynamicVariables' => $dynamicVariables,
+                'callSettings' => $callSettings ?? Omitted::VALUE,
+                'conversationMetadata' => $conversationMetadata ?? Omitted::VALUE,
+                'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'maxRetriesClientErrors' => $maxRetriesClientErrors,
-                'retryIntervalSecs' => $retryIntervalSecs,
-                'text' => $text,
-                'idempotencyKey' => $idempotencyKey,
+                'retryIntervalSecs' => $retryIntervalSecs ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -113,7 +114,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
         string $assistantID,
         RequestOptions|array|null $requestOptions = null,
     ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse {
-        $params = Util::removeNulls(['assistantID' => $assistantID]);
+        $params = ['assistantID' => $assistantID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($eventID, params: $params, requestOptions: $requestOptions);
@@ -145,14 +146,15 @@ final class ScheduledEventsService implements ScheduledEventsContract
         ?\DateTimeInterface $toDate = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'conversationChannel' => $conversationChannel,
-                'fromDate' => $fromDate,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'toDate' => $toDate,
+                'conversationChannel' => $conversationChannel ?? Omitted::VALUE,
+                'fromDate' => $fromDate ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'toDate' => $toDate ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -177,7 +179,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
         string $assistantID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['assistantID' => $assistantID]);
+        $params = ['assistantID' => $assistantID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($eventID, params: $params, requestOptions: $requestOptions);

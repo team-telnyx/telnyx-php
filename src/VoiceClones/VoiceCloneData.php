@@ -7,6 +7,7 @@ namespace Telnyx\VoiceClones;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\VoiceClones\VoiceCloneData\Gender;
 use Telnyx\VoiceClones\VoiceCloneData\ModelID;
 use Telnyx\VoiceClones\VoiceCloneData\Provider;
@@ -151,7 +152,7 @@ final class VoiceCloneData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Gender|value-of<Gender>|null $gender
+     * @param Omitted|Gender|value-of<Gender>|null $gender
      * @param ModelID|value-of<ModelID>|null $modelID
      * @param Provider|value-of<Provider>|null $provider
      * @param list<string>|null $providerSupportedModels
@@ -159,19 +160,19 @@ final class VoiceCloneData implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        Omitted|Gender|string|null $gender = Omitted::VALUE,
+        string|Omitted|null $label = Omitted::VALUE,
+        string|Omitted|null $language = Omitted::VALUE,
+        string|Omitted|null $providerVoiceID = Omitted::VALUE,
+        string|Omitted|null $sourceVoiceDesignID = Omitted::VALUE,
+        int|Omitted|null $sourceVoiceDesignVersion = Omitted::VALUE,
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
-        Gender|string|null $gender = null,
-        ?string $label = null,
-        ?string $language = null,
         ModelID|string|null $modelID = null,
         ?string $name = null,
         Provider|string|null $provider = null,
         ?array $providerSupportedModels = null,
-        ?string $providerVoiceID = null,
         RecordType|string|null $recordType = null,
-        ?string $sourceVoiceDesignID = null,
-        ?int $sourceVoiceDesignVersion = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
@@ -179,17 +180,17 @@ final class VoiceCloneData implements BaseModel
 
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $gender && $self['gender'] = $gender;
-        null !== $label && $self['label'] = $label;
-        null !== $language && $self['language'] = $language;
+        Omitted::VALUE !== $gender && $self['gender'] = $gender;
+        Omitted::VALUE !== $label && $self['label'] = $label;
+        Omitted::VALUE !== $language && $self['language'] = $language;
         null !== $modelID && $self['modelID'] = $modelID;
         null !== $name && $self['name'] = $name;
         null !== $provider && $self['provider'] = $provider;
         null !== $providerSupportedModels && $self['providerSupportedModels'] = $providerSupportedModels;
-        null !== $providerVoiceID && $self['providerVoiceID'] = $providerVoiceID;
+        Omitted::VALUE !== $providerVoiceID && $self['providerVoiceID'] = $providerVoiceID;
         null !== $recordType && $self['recordType'] = $recordType;
-        null !== $sourceVoiceDesignID && $self['sourceVoiceDesignID'] = $sourceVoiceDesignID;
-        null !== $sourceVoiceDesignVersion && $self['sourceVoiceDesignVersion'] = $sourceVoiceDesignVersion;
+        Omitted::VALUE !== $sourceVoiceDesignID && $self['sourceVoiceDesignID'] = $sourceVoiceDesignID;
+        Omitted::VALUE !== $sourceVoiceDesignVersion && $self['sourceVoiceDesignVersion'] = $sourceVoiceDesignVersion;
         null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 

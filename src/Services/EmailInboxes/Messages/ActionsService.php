@@ -6,7 +6,7 @@ namespace Telnyx\Services\EmailInboxes\Messages;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\EmailInboxes\Messages\Actions\ActionForwardParams\To\InboxRecipientAddress;
 use Telnyx\RequestOptions;
@@ -67,15 +67,16 @@ final class ActionsService implements ActionsContract
         ?string $text = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailMessageResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'inboxID' => $inboxID,
                 'to' => $to,
-                'bcc' => $bcc,
-                'cc' => $cc,
-                'html' => $html,
-                'text' => $text,
+                'bcc' => $bcc ?? Omitted::VALUE,
+                'cc' => $cc ?? Omitted::VALUE,
+                'html' => $html ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -110,8 +111,13 @@ final class ActionsService implements ActionsContract
         ?string $text = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailMessageResponse {
-        $params = Util::removeNulls(
-            ['inboxID' => $inboxID, 'html' => $html, 'text' => $text]
+        $params = array_filter(
+            [
+                'inboxID' => $inboxID,
+                'html' => $html ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -148,8 +154,13 @@ final class ActionsService implements ActionsContract
         ?string $text = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailMessageResponse {
-        $params = Util::removeNulls(
-            ['inboxID' => $inboxID, 'html' => $html, 'text' => $text]
+        $params = array_filter(
+            [
+                'inboxID' => $inboxID,
+                'html' => $html ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

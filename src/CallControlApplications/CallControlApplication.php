@@ -11,6 +11,7 @@ use Telnyx\CallControlApplications\CallControlApplication\WebhookAPIVersion;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-import-type CallControlApplicationInboundShape from \Telnyx\CallControlApplications\CallControlApplicationInbound
@@ -170,6 +171,8 @@ final class CallControlApplication implements BaseModel
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         ?string $id = null,
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsiteOverride = null,
@@ -186,9 +189,7 @@ final class CallControlApplication implements BaseModel
         ?array $tags = null,
         ?string $updatedAt = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
         ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
     ): self {
         $self = new self;
 
@@ -208,9 +209,9 @@ final class CallControlApplication implements BaseModel
         null !== $tags && $self['tags'] = $tags;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        Omitted::VALUE !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
         null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        Omitted::VALUE !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $self;
     }

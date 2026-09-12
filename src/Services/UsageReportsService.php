@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UsageReportsContract;
@@ -73,22 +73,23 @@ final class UsageReportsService implements UsageReportsContract
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'dimensions' => $dimensions,
                 'metrics' => $metrics,
                 'product' => $product,
-                'dateRange' => $dateRange,
-                'endDate' => $endDate,
-                'filter' => $filter,
-                'format' => $format,
-                'managedAccounts' => $managedAccounts,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
-                'startDate' => $startDate,
-                'authorizationBearer' => $authorizationBearer,
+                'dateRange' => $dateRange ?? Omitted::VALUE,
+                'endDate' => $endDate ?? Omitted::VALUE,
+                'filter' => $filter ?? Omitted::VALUE,
+                'format' => $format ?? Omitted::VALUE,
+                'managedAccounts' => $managedAccounts ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
+                'startDate' => $startDate ?? Omitted::VALUE,
+                'authorizationBearer' => $authorizationBearer ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -113,8 +114,12 @@ final class UsageReportsService implements UsageReportsContract
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
     ): UsageReportGetOptionsResponse {
-        $params = Util::removeNulls(
-            ['product' => $product, 'authorizationBearer' => $authorizationBearer]
+        $params = array_filter(
+            [
+                'product' => $product ?? Omitted::VALUE,
+                'authorizationBearer' => $authorizationBearer ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

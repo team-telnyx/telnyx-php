@@ -8,7 +8,7 @@ use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AvailablePhoneNumbersContract;
 
@@ -47,7 +47,10 @@ final class AvailablePhoneNumbersService implements AvailablePhoneNumbersContrac
         Filter|array|null $filter = null,
         RequestOptions|array|null $requestOptions = null,
     ): AvailablePhoneNumberListResponse {
-        $params = Util::removeNulls(['filter' => $filter]);
+        $params = array_filter(
+            ['filter' => $filter ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

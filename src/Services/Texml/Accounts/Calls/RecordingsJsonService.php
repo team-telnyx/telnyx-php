@@ -6,7 +6,7 @@ namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsJsonContract;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingChannels;
@@ -65,17 +65,18 @@ final class RecordingsJsonService implements RecordingsJsonContract
         bool $sendRecordingURL = true,
         RequestOptions|array|null $requestOptions = null,
     ): TexmlCreateCallRecordingResponseBody {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'accountSid' => $accountSid,
                 'playBeep' => $playBeep,
                 'recordingChannels' => $recordingChannels,
-                'recordingStatusCallback' => $recordingStatusCallback,
-                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent,
+                'recordingStatusCallback' => $recordingStatusCallback ?? Omitted::VALUE,
+                'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent ?? Omitted::VALUE,
                 'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,
-                'recordingTrack' => $recordingTrack,
+                'recordingTrack' => $recordingTrack ?? Omitted::VALUE,
                 'sendRecordingURL' => $sendRecordingURL,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -100,7 +101,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
     ): TexmlGetCallRecordingsResponseBody {
-        $params = Util::removeNulls(['accountSid' => $accountSid]);
+        $params = ['accountSid' => $accountSid];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveRecordingsJson($callSid, params: $params, requestOptions: $requestOptions);

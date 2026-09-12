@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\OpenAI;
 
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Message;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Mode;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ReasoningEffort;
-use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Region;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat\ResponseFormatJsonObject;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat\ResponseFormatJsonSchemaParam;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat\ResponseFormatText;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -29,18 +33,17 @@ interface ChatContract
      * @param bool $earlyStopping This is used with `use_beam_search`. If `true`, generation stops as soon as there are `best_of` complete candidates; if `false`, a heuristic is applied and the generation stops when is it very unlikely to find better candidates.
      * @param bool $enableThinking Whether to enable the thinking/reasoning phase for models that support it (e.g., QwQ, Qwen3). When set to false, the model will skip the internal reasoning step and respond directly, which can reduce latency. Defaults to true.
      * @param float $frequencyPenalty higher values will penalize the model from repeating the same output tokens
-     * @param list<string> $guidedChoice if specified, the output will be exactly one of the choices
-     * @param array<string,mixed> $guidedJson Must be a valid JSON schema. If specified, the output will follow the JSON schema.
-     * @param string $guidedRegex if specified, the output will follow the regex pattern
      * @param float $lengthPenalty this is used with `use_beam_search` to prefer shorter or longer completions
      * @param bool $logprobs Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`.
      * @param int $maxTokens maximum number of completion tokens the model should generate
      * @param float $minP This is an alternative to `top_p` that [many prefer](https://github.com/huggingface/transformers/issues/27670). Must be in [0, 1].
+     * @param Mode|value-of<Mode> $mode How strictly `region` is applied. `preferred` (the default when `region` is set) tries that region first and falls back to another when the model cannot be served there, so a request that would have succeeded still succeeds. `strict` pins the request: it is served from that region or it fails with a 422, never redirected to another region. Requires `region`.
      * @param string $model the language model to chat with
      * @param float $n this will return multiple choices for you instead of a single chat completion
      * @param float $presencePenalty higher values will penalize the model from repeating the same output tokens
      * @param ReasoningEffort|value-of<ReasoningEffort> $reasoningEffort Controls the reasoning effort for models that support it. When set, the model spends more or less compute on internal reasoning before generating its response. Supported values: none, minimal, low, medium, high, xhigh, max. Not all models support all values; unsupported values are rejected with a 400 error. When omitted, reasoning models use their default effort level.
-     * @param ResponseFormat|ResponseFormatShape $responseFormat Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
+     * @param Region|value-of<Region> $region Optional data-residency region the request should be served from, using the same vocabulary as your account's Data Locality setting. Behavior depends on `mode`. Supported for Telnyx-hosted models only: a request routed to an external provider never passes through Telnyx model routing, so a region cannot be enforced for it. Omit for today's latency-based routing.
+     * @param ResponseFormatShape $responseFormat Controls the format of the model output. `json_object` guarantees valid JSON output without defining a schema; `json_schema` constrains the output to the JSON schema you supply via the `json_schema` property and is the supported way to get guaranteed structured output on Telnyx-hosted models.
      * @param int $seed if specified, the system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result
      * @param string $serviceTier The service tier to use for this request. Supported values vary by model; use `GET /v2/ai/openai/models` and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
      * @param StopShape $stop Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
@@ -64,18 +67,17 @@ interface ChatContract
         bool $earlyStopping = false,
         bool $enableThinking = true,
         float $frequencyPenalty = 0,
-        ?array $guidedChoice = null,
-        ?array $guidedJson = null,
-        ?string $guidedRegex = null,
         float $lengthPenalty = 1,
         bool $logprobs = false,
         ?int $maxTokens = null,
         ?float $minP = null,
+        Mode|string $mode = 'preferred',
         string $model = 'meta-llama/Meta-Llama-3.1-8B-Instruct',
         ?float $n = null,
         float $presencePenalty = 0,
         ReasoningEffort|string|null $reasoningEffort = null,
-        ResponseFormat|array|null $responseFormat = null,
+        Region|string|null $region = null,
+        ResponseFormatText|array|ResponseFormatJsonObject|ResponseFormatJsonSchemaParam|null $responseFormat = null,
         ?int $seed = null,
         ?string $serviceTier = null,
         string|array|null $stop = null,

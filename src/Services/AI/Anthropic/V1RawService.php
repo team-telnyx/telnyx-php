@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\Anthropic;
 
 use Telnyx\AI\Anthropic\V1\V1MessagesParams;
+use Telnyx\AI\Anthropic\V1\V1MessagesParams\Mode;
+use Telnyx\AI\Anthropic\V1\V1MessagesParams\Region;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
@@ -41,6 +43,8 @@ final class V1RawService implements V1RawContract
      *   maxRetries?: int,
      *   mcpServers?: list<array<string,mixed>>,
      *   metadata?: array<string,mixed>,
+     *   mode?: Mode|value-of<Mode>,
+     *   region?: Region|value-of<Region>,
      *   serviceTier?: string,
      *   stopSequences?: list<string>,
      *   stream?: bool,

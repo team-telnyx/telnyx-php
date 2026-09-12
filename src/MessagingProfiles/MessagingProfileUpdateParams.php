@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
 
 /**
@@ -15,6 +16,7 @@ use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
  *
  * @see Telnyx\Services\MessagingProfilesService::update()
  *
+ * @phpstan-import-type MessagingProfileFeaturesShape from \Telnyx\MessagingProfiles\MessagingProfileFeatures
  * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
  * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
  *
@@ -24,11 +26,14 @@ use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
  *   dailySpendLimit?: string|null,
  *   dailySpendLimitEnabled?: bool|null,
  *   enabled?: bool|null,
+ *   features?: null|MessagingProfileFeatures|MessagingProfileFeaturesShape,
  *   mmsFallBackToSMS?: bool|null,
  *   mmsTranscoding?: bool|null,
  *   mobileOnly?: bool|null,
  *   name?: string|null,
  *   numberPoolSettings?: null|NumberPoolSettings|NumberPoolSettingsShape,
+ *   redactionEnabled?: bool|null,
+ *   redactionLevel?: int|null,
  *   smartEncoding?: bool|null,
  *   urlShortenerSettings?: null|URLShortenerSettings|URLShortenerSettingsShape,
  *   v1Secret?: string|null,
@@ -75,6 +80,12 @@ final class MessagingProfileUpdateParams implements BaseModel
     public ?bool $enabled;
 
     /**
+     * Telnyx product features the messaging customer can enable on the messaging profile. Keys map to individual feature flags; unknown keys are accepted and preserved for forward compatibility with rolling deployments.
+     */
+    #[Optional(nullable: true)]
+    public ?MessagingProfileFeatures $features;
+
+    /**
      * enables SMS fallback for MMS messages.
      */
     #[Optional('mms_fall_back_to_sms')]
@@ -107,6 +118,18 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     #[Optional('number_pool_settings', nullable: true)]
     public ?NumberPoolSettings $numberPoolSettings;
+
+    /**
+     * Set to true to enable message content redaction on this profile, or false to disable it. Ignored if the organization is not on the redaction allowlist. See the [Message Redaction guide](/docs/messaging/messages/message-redaction) for what is redacted.
+     */
+    #[Optional('redaction_enabled')]
+    public ?bool $redactionEnabled;
+
+    /**
+     * The redaction level to apply when redaction is enabled. 1: redact message records and reporting only. 2 (default): also redact inbound webhook payloads. See the [Message Redaction guide](/docs/messaging/messages/message-redaction).
+     */
+    #[Optional('redaction_level')]
+    public ?int $redactionLevel;
 
     /**
      * Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
@@ -172,14 +195,20 @@ final class MessagingProfileUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
-     * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
+     * @param Omitted|MessagingProfileFeatures|MessagingProfileFeaturesShape|null $features
+     * @param Omitted|NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
+     * @param Omitted|URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
-        ?string $aiAssistantID = null,
-        ?string $alphaSender = null,
+        string|Omitted|null $aiAssistantID = Omitted::VALUE,
+        string|Omitted|null $alphaSender = Omitted::VALUE,
+        Omitted|MessagingProfileFeatures|array|null $features = Omitted::VALUE,
+        Omitted|NumberPoolSettings|array|null $numberPoolSettings = Omitted::VALUE,
+        Omitted|URLShortenerSettings|array|null $urlShortenerSettings = Omitted::VALUE,
+        string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
         ?bool $enabled = null,
@@ -187,33 +216,34 @@ final class MessagingProfileUpdateParams implements BaseModel
         ?bool $mmsTranscoding = null,
         ?bool $mobileOnly = null,
         ?string $name = null,
-        NumberPoolSettings|array|null $numberPoolSettings = null,
+        ?bool $redactionEnabled = null,
+        ?int $redactionLevel = null,
         ?bool $smartEncoding = null,
-        URLShortenerSettings|array|null $urlShortenerSettings = null,
         ?string $v1Secret = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
         ?array $whitelistedDestinations = null,
     ): self {
         $self = new self;
 
-        null !== $aiAssistantID && $self['aiAssistantID'] = $aiAssistantID;
-        null !== $alphaSender && $self['alphaSender'] = $alphaSender;
+        Omitted::VALUE !== $aiAssistantID && $self['aiAssistantID'] = $aiAssistantID;
+        Omitted::VALUE !== $alphaSender && $self['alphaSender'] = $alphaSender;
         null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
         null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
         null !== $enabled && $self['enabled'] = $enabled;
+        Omitted::VALUE !== $features && $self['features'] = $features;
         null !== $mmsFallBackToSMS && $self['mmsFallBackToSMS'] = $mmsFallBackToSMS;
         null !== $mmsTranscoding && $self['mmsTranscoding'] = $mmsTranscoding;
         null !== $mobileOnly && $self['mobileOnly'] = $mobileOnly;
         null !== $name && $self['name'] = $name;
-        null !== $numberPoolSettings && $self['numberPoolSettings'] = $numberPoolSettings;
+        Omitted::VALUE !== $numberPoolSettings && $self['numberPoolSettings'] = $numberPoolSettings;
+        null !== $redactionEnabled && $self['redactionEnabled'] = $redactionEnabled;
+        null !== $redactionLevel && $self['redactionLevel'] = $redactionLevel;
         null !== $smartEncoding && $self['smartEncoding'] = $smartEncoding;
-        null !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
+        Omitted::VALUE !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
         null !== $v1Secret && $self['v1Secret'] = $v1Secret;
         null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        Omitted::VALUE !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
         null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
         return $self;
@@ -276,6 +306,20 @@ final class MessagingProfileUpdateParams implements BaseModel
     }
 
     /**
+     * Telnyx product features the messaging customer can enable on the messaging profile. Keys map to individual feature flags; unknown keys are accepted and preserved for forward compatibility with rolling deployments.
+     *
+     * @param MessagingProfileFeatures|MessagingProfileFeaturesShape|null $features
+     */
+    public function withFeatures(
+        MessagingProfileFeatures|array|null $features
+    ): self {
+        $self = clone $this;
+        $self['features'] = $features;
+
+        return $self;
+    }
+
+    /**
      * enables SMS fallback for MMS messages.
      */
     public function withMmsFallBackToSMS(bool $mmsFallBackToSMS): self
@@ -333,6 +377,28 @@ final class MessagingProfileUpdateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['numberPoolSettings'] = $numberPoolSettings;
+
+        return $self;
+    }
+
+    /**
+     * Set to true to enable message content redaction on this profile, or false to disable it. Ignored if the organization is not on the redaction allowlist. See the [Message Redaction guide](/docs/messaging/messages/message-redaction) for what is redacted.
+     */
+    public function withRedactionEnabled(bool $redactionEnabled): self
+    {
+        $self = clone $this;
+        $self['redactionEnabled'] = $redactionEnabled;
+
+        return $self;
+    }
+
+    /**
+     * The redaction level to apply when redaction is enabled. 1: redact message records and reporting only. 2 (default): also redact inbound webhook payloads. See the [Message Redaction guide](/docs/messaging/messages/message-redaction).
+     */
+    public function withRedactionLevel(int $redactionLevel): self
+    {
+        $self = clone $this;
+        $self['redactionLevel'] = $redactionLevel;
 
         return $self;
     }

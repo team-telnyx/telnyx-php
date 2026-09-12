@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\EmailBlocks\EmailBlock;
 use Telnyx\EmailBlocks\EmailBlockGetEventsResponse;
@@ -22,17 +23,17 @@ interface EmailBlocksContract
      * @api
      *
      * @param string $to recipient address (normalized: trim + lower-case)
-     * @param string|null $domainID `null` ⇒ account scope
-     * @param string|null $from Sender address (normalized). `null` ⇒ account/domain scope.
+     * @param string|Omitted|null $domainID `null` ⇒ account scope
+     * @param string|Omitted|null $from Sender address (normalized). `null` ⇒ account/domain scope.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $to,
-        ?string $domainID = null,
-        ?\DateTimeInterface $expiresAt = null,
-        ?string $from = null,
+        string|Omitted|null $domainID = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $expiresAt = Omitted::VALUE,
+        string|Omitted|null $from = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): EmailBlockResponse;
 

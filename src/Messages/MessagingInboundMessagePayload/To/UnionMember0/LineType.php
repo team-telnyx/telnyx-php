@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Messages\MessagingInboundMessagePayload\To;
+namespace Telnyx\Messages\MessagingInboundMessagePayload\To\UnionMember0;
 
 /**
  * The line-type of the receiver.

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Pricing;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Pricing\Products\ProductGetResponse;
 use Telnyx\Pricing\Products\ProductListResponse;
@@ -19,7 +20,7 @@ interface ProductsContract
      * @api
      *
      * @param string $slug product slug from the catalog listing
-     * @param string|null $filterCountryISO Two-letter ISO 3166-1 alpha-2 country code (uppercase, e.g. US) to filter pricing to a single country.
+     * @param string|Omitted|null $filterCountryISO Two-letter ISO 3166-1 alpha-2 country code (uppercase, e.g. US) to filter pricing to a single country.
      * @param int $pageNumber page number (1-based)
      * @param int $pageSize number of items per page (max 100)
      * @param RequestOpts|null $requestOptions
@@ -30,7 +31,7 @@ interface ProductsContract
      */
     public function retrieve(
         string $slug,
-        ?string $filterCountryISO = null,
+        string|Omitted|null $filterCountryISO = Omitted::VALUE,
         int $pageNumber = 1,
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,

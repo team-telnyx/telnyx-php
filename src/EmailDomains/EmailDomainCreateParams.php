@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Registers a domain for email sending and optional inbound delivery. The response includes the domain configuration and current verification state.
@@ -73,12 +74,12 @@ final class EmailDomainCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy
+     * @param Omitted|EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy
      * @param DomainsTrackingSettings|DomainsTrackingSettingsShape|null $tracking
      */
     public static function with(
         string $domain,
-        EmailDmarcPolicy|array|null $dmarcPolicy = null,
+        Omitted|EmailDmarcPolicy|array|null $dmarcPolicy = Omitted::VALUE,
         ?bool $inboundEnabled = null,
         DomainsTrackingSettings|array|null $tracking = null,
     ): self {
@@ -86,7 +87,7 @@ final class EmailDomainCreateParams implements BaseModel
 
         $self['domain'] = $domain;
 
-        null !== $dmarcPolicy && $self['dmarcPolicy'] = $dmarcPolicy;
+        Omitted::VALUE !== $dmarcPolicy && $self['dmarcPolicy'] = $dmarcPolicy;
         null !== $inboundEnabled && $self['inboundEnabled'] = $inboundEnabled;
         null !== $tracking && $self['tracking'] = $tracking;
 

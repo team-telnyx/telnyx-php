@@ -61,6 +61,8 @@ final class V1Test extends TestCase
             maxRetries: 0,
             mcpServers: [['foo' => 'bar']],
             metadata: ['foo' => 'bar'],
+            mode: 'preferred',
+            region: 'USA',
             serviceTier: 'service_tier',
             stopSequences: ['string'],
             stream: true,

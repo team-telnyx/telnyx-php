@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\InboundChannels\InboundChannelListResponse;
 use Telnyx\InboundChannels\InboundChannelUpdateResponse;
 use Telnyx\RequestOptions;
@@ -46,7 +45,7 @@ final class InboundChannelsService implements InboundChannelsContract
         int $channels,
         RequestOptions|array|null $requestOptions = null
     ): InboundChannelUpdateResponse {
-        $params = Util::removeNulls(['channels' => $channels]);
+        $params = ['channels' => $channels];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update(params: $params, requestOptions: $requestOptions);

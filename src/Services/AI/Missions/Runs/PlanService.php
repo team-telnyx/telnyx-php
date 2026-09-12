@@ -11,7 +11,7 @@ use Telnyx\AI\Missions\Runs\Plan\PlanStepsCreatedResponse;
 use Telnyx\AI\Missions\Runs\Plan\StepStatus;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Missions\Runs\PlanContract;
 
@@ -52,7 +52,7 @@ final class PlanService implements PlanContract
         array $steps,
         RequestOptions|array|null $requestOptions = null,
     ): PlanStepsCreatedResponse {
-        $params = Util::removeNulls(['missionID' => $missionID, 'steps' => $steps]);
+        $params = ['missionID' => $missionID, 'steps' => $steps];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($runID, params: $params, requestOptions: $requestOptions);
@@ -76,7 +76,7 @@ final class PlanService implements PlanContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): PlanGetResponse {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($runID, params: $params, requestOptions: $requestOptions);
@@ -102,7 +102,7 @@ final class PlanService implements PlanContract
         array $steps,
         RequestOptions|array|null $requestOptions = null,
     ): PlanStepsCreatedResponse {
-        $params = Util::removeNulls(['missionID' => $missionID, 'steps' => $steps]);
+        $params = ['missionID' => $missionID, 'steps' => $steps];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->addStepsToPlan($runID, params: $params, requestOptions: $requestOptions);
@@ -128,7 +128,7 @@ final class PlanService implements PlanContract
         string $runID,
         RequestOptions|array|null $requestOptions = null,
     ): PlanStepResponse {
-        $params = Util::removeNulls(['missionID' => $missionID, 'runID' => $runID]);
+        $params = ['missionID' => $missionID, 'runID' => $runID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getStepDetails($stepID, params: $params, requestOptions: $requestOptions);
@@ -158,13 +158,14 @@ final class PlanService implements PlanContract
         StepStatus|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): PlanStepResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'missionID' => $missionID,
                 'runID' => $runID,
-                'metadata' => $metadata,
-                'status' => $status,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'status' => $status ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Returns pricing entries for a single product. Most products return standard rate entries with fields like rate, unit, country_iso, direction, and tiers. Inference products return model-specific fields (model, input_rate, output_rate, cached_input_rate) with tiered pricing. Some products use rate decks (pricing_type: rate_deck) where rates are determined dynamically.
@@ -53,13 +54,13 @@ final class ProductRetrieveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $filterCountryISO = null,
+        string|Omitted|null $filterCountryISO = Omitted::VALUE,
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
         $self = new self;
 
-        null !== $filterCountryISO && $self['filterCountryISO'] = $filterCountryISO;
+        Omitted::VALUE !== $filterCountryISO && $self['filterCountryISO'] = $filterCountryISO;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
 

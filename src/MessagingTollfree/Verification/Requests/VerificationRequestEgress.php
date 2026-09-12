@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * A verification request as it comes out of the database.
@@ -285,12 +286,12 @@ final class VerificationRequestEgress implements BaseModel
         UseCaseCategories|string $useCase,
         string $useCaseSummary,
         string $verificationRequestID,
+        string|Omitted|null $campaignVerifyAuthorizationToken = Omitted::VALUE,
         ?bool $ageGatedContent = null,
         ?string $businessAddr2 = null,
         ?string $businessRegistrationCountry = null,
         ?string $businessRegistrationNumber = null,
         ?string $businessRegistrationType = null,
-        ?string $campaignVerifyAuthorizationToken = null,
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
@@ -330,7 +331,7 @@ final class VerificationRequestEgress implements BaseModel
         null !== $businessRegistrationCountry && $self['businessRegistrationCountry'] = $businessRegistrationCountry;
         null !== $businessRegistrationNumber && $self['businessRegistrationNumber'] = $businessRegistrationNumber;
         null !== $businessRegistrationType && $self['businessRegistrationType'] = $businessRegistrationType;
-        null !== $campaignVerifyAuthorizationToken && $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
+        Omitted::VALUE !== $campaignVerifyAuthorizationToken && $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
         null !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
         null !== $entityType && $self['entityType'] = $entityType;
         null !== $helpMessageResponse && $self['helpMessageResponse'] = $helpMessageResponse;

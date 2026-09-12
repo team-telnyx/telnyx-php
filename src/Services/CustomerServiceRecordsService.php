@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
@@ -59,12 +59,13 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): CustomerServiceRecordNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'phoneNumber' => $phoneNumber,
-                'additionalData' => $additionalData,
-                'webhookURL' => $webhookURL,
+                'additionalData' => $additionalData ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -113,13 +114,14 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
         Sort|array|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -142,7 +144,7 @@ final class CustomerServiceRecordsService implements CustomerServiceRecordsContr
         array $phoneNumbers,
         RequestOptions|array|null $requestOptions = null
     ): CustomerServiceRecordVerifyPhoneNumberCoverageResponse {
-        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
+        $params = ['phoneNumbers' => $phoneNumbers];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->verifyPhoneNumberCoverage(params: $params, requestOptions: $requestOptions);

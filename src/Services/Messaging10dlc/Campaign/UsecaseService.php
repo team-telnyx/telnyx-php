@@ -6,7 +6,6 @@ namespace Telnyx\Services\Messaging10dlc\Campaign;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\Messaging10dlc\Campaign\Usecase\UsecaseGetCostResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\Campaign\UsecaseContract;
@@ -45,7 +44,7 @@ final class UsecaseService implements UsecaseContract
         string $usecase,
         RequestOptions|array|null $requestOptions = null
     ): UsecaseGetCostResponse {
-        $params = Util::removeNulls(['usecase' => $usecase]);
+        $params = ['usecase' => $usecase];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getCost(params: $params, requestOptions: $requestOptions);

@@ -6,7 +6,7 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
@@ -61,16 +61,17 @@ final class VoiceService implements VoiceContract
         ?bool $selectAllManagedAccounts = null,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'endTime' => $endTime,
                 'startTime' => $startTime,
-                'aggregationType' => $aggregationType,
-                'connections' => $connections,
-                'managedAccounts' => $managedAccounts,
-                'productBreakdown' => $productBreakdown,
-                'selectAllManagedAccounts' => $selectAllManagedAccounts,
+                'aggregationType' => $aggregationType ?? Omitted::VALUE,
+                'connections' => $connections ?? Omitted::VALUE,
+                'managedAccounts' => $managedAccounts ?? Omitted::VALUE,
+                'productBreakdown' => $productBreakdown ?? Omitted::VALUE,
+                'selectAllManagedAccounts' => $selectAllManagedAccounts ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -117,7 +118,7 @@ final class VoiceService implements VoiceContract
         int $perPage = 20,
         RequestOptions|array|null $requestOptions = null,
     ): PerPagePagination {
-        $params = Util::removeNulls(['page' => $page, 'perPage' => $perPage]);
+        $params = ['page' => $page, 'perPage' => $perPage];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

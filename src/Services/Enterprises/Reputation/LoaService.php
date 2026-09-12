@@ -6,7 +6,7 @@ namespace Telnyx\Services\Enterprises\Reputation;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
 use Telnyx\Enterprises\Reputation\Loa\AgentInput;
 use Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Signature;
@@ -51,7 +51,7 @@ final class LoaService implements LoaContract
         string $loaDocumentID,
         RequestOptions|array|null $requestOptions = null,
     ): EnterpriseReputationPublicWrapped {
-        $params = Util::removeNulls(['loaDocumentID' => $loaDocumentID]);
+        $params = ['loaDocumentID' => $loaDocumentID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($enterpriseID, params: $params, requestOptions: $requestOptions);
@@ -77,7 +77,13 @@ final class LoaService implements LoaContract
         Signature|array|null $signature = null,
         RequestOptions|array|null $requestOptions = null,
     ): string {
-        $params = Util::removeNulls(['agent' => $agent, 'signature' => $signature]);
+        $params = array_filter(
+            [
+                'agent' => $agent ?? Omitted::VALUE,
+                'signature' => $signature ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->render($enterpriseID, params: $params, requestOptions: $requestOptions);

@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
@@ -53,10 +53,10 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * Creates a new outbound voice profile defining calling permissions, destinations, and limits for outbound calls, and returns the created profile.
      *
      * @param string $name a user-supplied name to help with organization
-     * @param string|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
+     * @param string|Omitted|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
      * @param OutboundCallRecording|OutboundCallRecordingShape $callRecording
      * @param CallingWindow|CallingWindowShape $callingWindow Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
-     * @param int|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
+     * @param int|Omitted|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
      * @param string $dailySpendLimit the maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls
      * @param bool $dailySpendLimitEnabled specifies whether to enforce the daily_spend_limit on this outbound voice profile
      * @param bool $enabled Specifies whether the outbound voice profile can be used. Disabled profiles will result in outbound calls being blocked for the associated Connections.
@@ -72,10 +72,10 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      */
     public function create(
         string $name,
-        ?string $billingGroupID = null,
+        string|Omitted|null $billingGroupID = Omitted::VALUE,
         OutboundCallRecording|array|null $callRecording = null,
         CallingWindow|array|null $callingWindow = null,
-        ?int $concurrentCallLimit = null,
+        int|Omitted|null $concurrentCallLimit = Omitted::VALUE,
         ?string $dailySpendLimit = null,
         bool $dailySpendLimitEnabled = false,
         bool $enabled = true,
@@ -87,23 +87,24 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
         array $whitelistedDestinations = ['US', 'CA'],
         RequestOptions|array|null $requestOptions = null,
     ): OutboundVoiceProfileNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'name' => $name,
                 'billingGroupID' => $billingGroupID,
-                'callRecording' => $callRecording,
-                'callingWindow' => $callingWindow,
+                'callRecording' => $callRecording ?? Omitted::VALUE,
+                'callingWindow' => $callingWindow ?? Omitted::VALUE,
                 'concurrentCallLimit' => $concurrentCallLimit,
-                'dailySpendLimit' => $dailySpendLimit,
+                'dailySpendLimit' => $dailySpendLimit ?? Omitted::VALUE,
                 'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
                 'enabled' => $enabled,
-                'maxDestinationRate' => $maxDestinationRate,
+                'maxDestinationRate' => $maxDestinationRate ?? Omitted::VALUE,
                 'servicePlan' => $servicePlan,
-                'tags' => $tags,
+                'tags' => $tags ?? Omitted::VALUE,
                 'trafficType' => $trafficType,
                 'usagePaymentMethod' => $usagePaymentMethod,
                 'whitelistedDestinations' => $whitelistedDestinations,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -139,10 +140,10 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * @param string $id identifies the resource
      * @param string $name a user-supplied name to help with organization
-     * @param string|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
+     * @param string|Omitted|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
      * @param OutboundCallRecording|OutboundCallRecordingShape $callRecording
      * @param \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow|CallingWindowShape1 $callingWindow specifies the time window and call limits for calls made using this outbound voice profile
-     * @param int|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
+     * @param int|Omitted|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
      * @param string $dailySpendLimit the maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls
      * @param bool $dailySpendLimitEnabled specifies whether to enforce the daily_spend_limit on this outbound voice profile
      * @param bool $enabled Specifies whether the outbound voice profile can be used. Disabled profiles will result in outbound calls being blocked for the associated Connections.
@@ -159,10 +160,10 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
     public function update(
         string $id,
         string $name,
-        ?string $billingGroupID = null,
+        string|Omitted|null $billingGroupID = Omitted::VALUE,
         OutboundCallRecording|array|null $callRecording = null,
         \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow|array|null $callingWindow = null,
-        ?int $concurrentCallLimit = null,
+        int|Omitted|null $concurrentCallLimit = Omitted::VALUE,
         ?string $dailySpendLimit = null,
         bool $dailySpendLimitEnabled = false,
         bool $enabled = true,
@@ -174,23 +175,24 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
         array $whitelistedDestinations = ['US', 'CA'],
         RequestOptions|array|null $requestOptions = null,
     ): OutboundVoiceProfileUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'name' => $name,
                 'billingGroupID' => $billingGroupID,
-                'callRecording' => $callRecording,
-                'callingWindow' => $callingWindow,
+                'callRecording' => $callRecording ?? Omitted::VALUE,
+                'callingWindow' => $callingWindow ?? Omitted::VALUE,
                 'concurrentCallLimit' => $concurrentCallLimit,
-                'dailySpendLimit' => $dailySpendLimit,
+                'dailySpendLimit' => $dailySpendLimit ?? Omitted::VALUE,
                 'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
                 'enabled' => $enabled,
-                'maxDestinationRate' => $maxDestinationRate,
+                'maxDestinationRate' => $maxDestinationRate ?? Omitted::VALUE,
                 'servicePlan' => $servicePlan,
-                'tags' => $tags,
+                'tags' => $tags ?? Omitted::VALUE,
                 'trafficType' => $trafficType,
                 'usagePaymentMethod' => $usagePaymentMethod,
                 'whitelistedDestinations' => $whitelistedDestinations,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -230,13 +232,14 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
         Sort|string $sort = '-created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

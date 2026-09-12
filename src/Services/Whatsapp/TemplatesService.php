@@ -6,7 +6,7 @@ namespace Telnyx\Services\Whatsapp;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\TemplatesContract;
@@ -58,15 +58,13 @@ final class TemplatesService implements TemplatesContract
         string $wabaID,
         RequestOptions|array|null $requestOptions = null,
     ): TemplateNewResponse {
-        $params = Util::removeNulls(
-            [
-                'category' => $category,
-                'components' => $components,
-                'language' => $language,
-                'name' => $name,
-                'wabaID' => $wabaID,
-            ],
-        );
+        $params = [
+            'category' => $category,
+            'components' => $components,
+            'language' => $language,
+            'name' => $name,
+            'wabaID' => $wabaID,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -98,15 +96,16 @@ final class TemplatesService implements TemplatesContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterCategory' => $filterCategory,
-                'filterSearch' => $filterSearch,
-                'filterStatus' => $filterStatus,
-                'filterWabaID' => $filterWabaID,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filterCategory' => $filterCategory ?? Omitted::VALUE,
+                'filterSearch' => $filterSearch ?? Omitted::VALUE,
+                'filterStatus' => $filterStatus ?? Omitted::VALUE,
+                'filterWabaID' => $filterWabaID ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

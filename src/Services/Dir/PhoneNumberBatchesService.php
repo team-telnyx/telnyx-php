@@ -6,7 +6,7 @@ namespace Telnyx\Services\Dir;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\PhoneNumberBatches\DirPhoneNumberStatus;
 use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatch;
@@ -50,7 +50,7 @@ final class PhoneNumberBatchesService implements PhoneNumberBatchesContract
         string $dirID,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberBatchGetResponse {
-        $params = Util::removeNulls(['dirID' => $dirID]);
+        $params = ['dirID' => $dirID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($batchID, params: $params, requestOptions: $requestOptions);
@@ -80,12 +80,13 @@ final class PhoneNumberBatchesService implements PhoneNumberBatchesContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterStatus' => $filterStatus,
+                'filterStatus' => $filterStatus ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

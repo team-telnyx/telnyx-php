@@ -6,7 +6,6 @@ namespace Telnyx\Services\Dir;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\Dir\VerifyEmail\EmailVerificationStatusWrapped;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Dir\VerifyEmailContract;
@@ -91,7 +90,7 @@ final class VerifyEmailService implements VerifyEmailContract
         string $code,
         RequestOptions|array|null $requestOptions = null,
     ): EmailVerificationStatusWrapped {
-        $params = Util::removeNulls(['code' => $code]);
+        $params = ['code' => $code];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->confirm($dirID, params: $params, requestOptions: $requestOptions);

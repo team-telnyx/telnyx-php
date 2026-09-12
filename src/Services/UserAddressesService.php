@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserAddressesContract;
@@ -77,7 +77,7 @@ final class UserAddressesService implements UserAddressesContract
         bool $skipAddressVerification = false,
         RequestOptions|array|null $requestOptions = null,
     ): UserAddressNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'businessName' => $businessName,
                 'countryCode' => $countryCode,
@@ -85,15 +85,16 @@ final class UserAddressesService implements UserAddressesContract
                 'lastName' => $lastName,
                 'locality' => $locality,
                 'streetAddress' => $streetAddress,
-                'administrativeArea' => $administrativeArea,
-                'borough' => $borough,
-                'customerReference' => $customerReference,
-                'extendedAddress' => $extendedAddress,
-                'neighborhood' => $neighborhood,
-                'phoneNumber' => $phoneNumber,
-                'postalCode' => $postalCode,
+                'administrativeArea' => $administrativeArea ?? Omitted::VALUE,
+                'borough' => $borough ?? Omitted::VALUE,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'extendedAddress' => $extendedAddress ?? Omitted::VALUE,
+                'neighborhood' => $neighborhood ?? Omitted::VALUE,
+                'phoneNumber' => $phoneNumber ?? Omitted::VALUE,
+                'postalCode' => $postalCode ?? Omitted::VALUE,
                 'skipAddressVerification' => $skipAddressVerification,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -153,13 +154,14 @@ final class UserAddressesService implements UserAddressesContract
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

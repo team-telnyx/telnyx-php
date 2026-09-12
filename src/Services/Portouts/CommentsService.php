@@ -6,7 +6,7 @@ namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Portouts\Comments\CommentListResponse;
 use Telnyx\Portouts\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
@@ -48,7 +48,10 @@ final class CommentsService implements CommentsContract
         ?string $body = null,
         RequestOptions|array|null $requestOptions = null,
     ): CommentNewResponse {
-        $params = Util::removeNulls(['body' => $body]);
+        $params = array_filter(
+            ['body' => $body ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);

@@ -6,7 +6,7 @@ namespace Telnyx\Services\EmailInboxes;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailBracketCursorPagination;
 use Telnyx\EmailInboxes\Drafts\DraftListParams\FilterStatus;
 use Telnyx\EmailInboxes\Drafts\EmailDraft;
@@ -81,25 +81,26 @@ final class DraftsService implements DraftsContract
         ?array $to = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailDraftResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'attachments' => $attachments,
-                'bcc' => $bcc,
-                'cc' => $cc,
-                'fromEmail' => $fromEmail,
-                'fromName' => $fromName,
-                'headers' => $headers,
-                'html' => $html,
-                'htmlBody' => $htmlBody,
-                'labels' => $labels,
-                'metadata' => $metadata,
-                'replyTo' => $replyTo,
-                'subject' => $subject,
-                'tags' => $tags,
-                'text' => $text,
-                'textBody' => $textBody,
-                'to' => $to,
+                'attachments' => $attachments ?? Omitted::VALUE,
+                'bcc' => $bcc ?? Omitted::VALUE,
+                'cc' => $cc ?? Omitted::VALUE,
+                'fromEmail' => $fromEmail ?? Omitted::VALUE,
+                'fromName' => $fromName ?? Omitted::VALUE,
+                'headers' => $headers ?? Omitted::VALUE,
+                'html' => $html ?? Omitted::VALUE,
+                'htmlBody' => $htmlBody ?? Omitted::VALUE,
+                'labels' => $labels ?? Omitted::VALUE,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'replyTo' => $replyTo ?? Omitted::VALUE,
+                'subject' => $subject ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'textBody' => $textBody ?? Omitted::VALUE,
+                'to' => $to ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -125,7 +126,7 @@ final class DraftsService implements DraftsContract
         string $inboxID,
         RequestOptions|array|null $requestOptions = null,
     ): EmailDraftResponse {
-        $params = Util::removeNulls(['inboxID' => $inboxID]);
+        $params = ['inboxID' => $inboxID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($draftID, params: $params, requestOptions: $requestOptions);
@@ -187,26 +188,27 @@ final class DraftsService implements DraftsContract
         ?array $to = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailDraftResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'inboxID' => $inboxID,
-                'attachments' => $attachments,
-                'bcc' => $bcc,
-                'cc' => $cc,
-                'fromEmail' => $fromEmail,
-                'fromName' => $fromName,
-                'headers' => $headers,
-                'html' => $html,
-                'htmlBody' => $htmlBody,
-                'labels' => $labels,
-                'metadata' => $metadata,
-                'replyTo' => $replyTo,
-                'subject' => $subject,
-                'tags' => $tags,
-                'text' => $text,
-                'textBody' => $textBody,
-                'to' => $to,
+                'attachments' => $attachments ?? Omitted::VALUE,
+                'bcc' => $bcc ?? Omitted::VALUE,
+                'cc' => $cc ?? Omitted::VALUE,
+                'fromEmail' => $fromEmail ?? Omitted::VALUE,
+                'fromName' => $fromName ?? Omitted::VALUE,
+                'headers' => $headers ?? Omitted::VALUE,
+                'html' => $html ?? Omitted::VALUE,
+                'htmlBody' => $htmlBody ?? Omitted::VALUE,
+                'labels' => $labels ?? Omitted::VALUE,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'replyTo' => $replyTo ?? Omitted::VALUE,
+                'subject' => $subject ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'textBody' => $textBody ?? Omitted::VALUE,
+                'to' => $to ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -238,12 +240,13 @@ final class DraftsService implements DraftsContract
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
     ): EmailBracketCursorPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterStatus' => $filterStatus,
-                'pageAfter' => $pageAfter,
+                'filterStatus' => $filterStatus ?? Omitted::VALUE,
+                'pageAfter' => $pageAfter ?? Omitted::VALUE,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -269,7 +272,7 @@ final class DraftsService implements DraftsContract
         string $inboxID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['inboxID' => $inboxID]);
+        $params = ['inboxID' => $inboxID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($draftID, params: $params, requestOptions: $requestOptions);
@@ -325,26 +328,27 @@ final class DraftsService implements DraftsContract
         ?array $to = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailDraftResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'inboxID' => $inboxID,
-                'attachments' => $attachments,
-                'bcc' => $bcc,
-                'cc' => $cc,
-                'fromEmail' => $fromEmail,
-                'fromName' => $fromName,
-                'headers' => $headers,
-                'html' => $html,
-                'htmlBody' => $htmlBody,
-                'labels' => $labels,
-                'metadata' => $metadata,
-                'replyTo' => $replyTo,
-                'subject' => $subject,
-                'tags' => $tags,
-                'text' => $text,
-                'textBody' => $textBody,
-                'to' => $to,
+                'attachments' => $attachments ?? Omitted::VALUE,
+                'bcc' => $bcc ?? Omitted::VALUE,
+                'cc' => $cc ?? Omitted::VALUE,
+                'fromEmail' => $fromEmail ?? Omitted::VALUE,
+                'fromName' => $fromName ?? Omitted::VALUE,
+                'headers' => $headers ?? Omitted::VALUE,
+                'html' => $html ?? Omitted::VALUE,
+                'htmlBody' => $htmlBody ?? Omitted::VALUE,
+                'labels' => $labels ?? Omitted::VALUE,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'replyTo' => $replyTo ?? Omitted::VALUE,
+                'subject' => $subject ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'textBody' => $textBody ?? Omitted::VALUE,
+                'to' => $to ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -377,7 +381,7 @@ final class DraftsService implements DraftsContract
         string $inboxID,
         RequestOptions|array|null $requestOptions = null,
     ): EmailMessageResponse {
-        $params = Util::removeNulls(['inboxID' => $inboxID]);
+        $params = ['inboxID' => $inboxID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->send($draftID, params: $params, requestOptions: $requestOptions);
