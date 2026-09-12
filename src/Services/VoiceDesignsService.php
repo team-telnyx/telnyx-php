@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceDesignsContract;
@@ -70,20 +70,21 @@ final class VoiceDesignsService implements VoiceDesignsContract
         ?string $voiceDesignID = null,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceDesignResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'prompt' => $prompt,
                 'text' => $text,
                 'language' => $language,
-                'maxNewTokens' => $maxNewTokens,
-                'name' => $name,
+                'maxNewTokens' => $maxNewTokens ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
                 'provider' => $provider,
-                'repetitionPenalty' => $repetitionPenalty,
-                'temperature' => $temperature,
-                'topK' => $topK,
-                'topP' => $topP,
-                'voiceDesignID' => $voiceDesignID,
+                'repetitionPenalty' => $repetitionPenalty ?? Omitted::VALUE,
+                'temperature' => $temperature ?? Omitted::VALUE,
+                'topK' => $topK ?? Omitted::VALUE,
+                'topP' => $topP ?? Omitted::VALUE,
+                'voiceDesignID' => $voiceDesignID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -108,7 +109,10 @@ final class VoiceDesignsService implements VoiceDesignsContract
         ?int $version = null,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceDesignResponse {
-        $params = Util::removeNulls(['version' => $version]);
+        $params = array_filter(
+            ['version' => $version ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -138,13 +142,14 @@ final class VoiceDesignsService implements VoiceDesignsContract
         Sort|string $sort = '-created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterName' => $filterName,
+                'filterName' => $filterName ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -189,7 +194,7 @@ final class VoiceDesignsService implements VoiceDesignsContract
         string $id,
         RequestOptions|array|null $requestOptions = null
     ): mixed {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteVersion($version, params: $params, requestOptions: $requestOptions);
@@ -213,7 +218,10 @@ final class VoiceDesignsService implements VoiceDesignsContract
         ?int $version = null,
         RequestOptions|array|null $requestOptions = null,
     ): string {
-        $params = Util::removeNulls(['version' => $version]);
+        $params = array_filter(
+            ['version' => $version ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->downloadSample($id, params: $params, requestOptions: $requestOptions);
@@ -237,7 +245,7 @@ final class VoiceDesignsService implements VoiceDesignsContract
         string $name,
         RequestOptions|array|null $requestOptions = null
     ): VoiceDesignRenameResponse {
-        $params = Util::removeNulls(['name' => $name]);
+        $params = ['name' => $name];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->rename($id, params: $params, requestOptions: $requestOptions);

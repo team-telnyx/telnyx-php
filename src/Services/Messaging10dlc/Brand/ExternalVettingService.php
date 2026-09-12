@@ -6,7 +6,7 @@ namespace Telnyx\Services\Messaging10dlc\Brand;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVetting;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\Brand\ExternalVettingContract;
@@ -75,12 +75,13 @@ final class ExternalVettingService implements ExternalVettingContract
         ?string $vettingToken = null,
         RequestOptions|array|null $requestOptions = null,
     ): ExternalVetting {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'evpID' => $evpID,
                 'vettingID' => $vettingID,
-                'vettingToken' => $vettingToken,
+                'vettingToken' => $vettingToken ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -109,9 +110,7 @@ final class ExternalVettingService implements ExternalVettingContract
         string $vettingClass,
         RequestOptions|array|null $requestOptions = null,
     ): ExternalVetting {
-        $params = Util::removeNulls(
-            ['evpID' => $evpID, 'vettingClass' => $vettingClass]
-        );
+        $params = ['evpID' => $evpID, 'vettingClass' => $vettingClass];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->order($brandID, params: $params, requestOptions: $requestOptions);

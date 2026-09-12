@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\ExternalConnections\ExternalConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection;
@@ -36,9 +37,9 @@ interface ExternalConnectionsContract
      * @param bool $active specifies whether the connection can be used
      * @param Inbound|InboundShape $inbound
      * @param list<string> $tags tags associated with the connection
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -49,9 +50,9 @@ interface ExternalConnectionsContract
         bool $active = true,
         Inbound|array|null $inbound = null,
         ?array $tags = null,
-        ?string $webhookEventFailoverURL = '',
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
         ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): ExternalConnectionNewResponse;
 
@@ -76,9 +77,9 @@ interface ExternalConnectionsContract
      * @param bool $active specifies whether the connection can be used
      * @param \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound|InboundShape1 $inbound
      * @param list<string> $tags tags associated with the connection
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -89,9 +90,9 @@ interface ExternalConnectionsContract
         bool $active = true,
         \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound|array|null $inbound = null,
         ?array $tags = null,
-        ?string $webhookEventFailoverURL = '',
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
         ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): ExternalConnectionUpdateResponse;
 

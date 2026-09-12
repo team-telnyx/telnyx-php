@@ -6,7 +6,7 @@ namespace Telnyx\Services\Enterprises;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
 use Telnyx\Enterprises\Reputation\ReputationCheckFrequency;
 use Telnyx\RequestOptions;
@@ -123,8 +123,12 @@ final class ReputationService implements ReputationContract
         ReputationCheckFrequency|string|null $checkFrequency = null,
         RequestOptions|array|null $requestOptions = null,
     ): EnterpriseReputationPublicWrapped {
-        $params = Util::removeNulls(
-            ['loaDocumentID' => $loaDocumentID, 'checkFrequency' => $checkFrequency]
+        $params = array_filter(
+            [
+                'loaDocumentID' => $loaDocumentID,
+                'checkFrequency' => $checkFrequency ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -151,7 +155,7 @@ final class ReputationService implements ReputationContract
         ReputationCheckFrequency|string $checkFrequency,
         RequestOptions|array|null $requestOptions = null,
     ): EnterpriseReputationPublicWrapped {
-        $params = Util::removeNulls(['checkFrequency' => $checkFrequency]);
+        $params = ['checkFrequency' => $checkFrequency];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateFrequency($enterpriseID, params: $params, requestOptions: $requestOptions);

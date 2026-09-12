@@ -6,7 +6,7 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse;
@@ -50,7 +50,7 @@ final class CivicAddressesService implements CivicAddressesContract
         string $id,
         RequestOptions|array|null $requestOptions = null,
     ): CivicAddressGetResponse {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($addressID, params: $params, requestOptions: $requestOptions);
@@ -74,7 +74,10 @@ final class CivicAddressesService implements CivicAddressesContract
         Filter|array|null $filter = null,
         RequestOptions|array|null $requestOptions = null,
     ): CivicAddressListResponse {
-        $params = Util::removeNulls(['filter' => $filter]);
+        $params = array_filter(
+            ['filter' => $filter ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);

@@ -6,7 +6,6 @@ namespace Telnyx\Services\Recordings;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\Recordings\Actions\ActionDeleteResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Recordings\ActionsContract;
@@ -45,7 +44,7 @@ final class ActionsService implements ActionsContract
         array $ids,
         RequestOptions|array|null $requestOptions = null
     ): ActionDeleteResponse {
-        $params = Util::removeNulls(['ids' => $ids]);
+        $params = ['ids' => $ids];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete(params: $params, requestOptions: $requestOptions);

@@ -6,7 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter;
@@ -55,8 +55,9 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
         ?array $additionalDocuments = null,
         RequestOptions|array|null $requestOptions = null,
     ): AdditionalDocumentNewResponse {
-        $params = Util::removeNulls(
-            ['additionalDocuments' => $additionalDocuments]
+        $params = array_filter(
+            ['additionalDocuments' => $additionalDocuments ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -87,13 +88,14 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
         Sort|array|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -118,7 +120,7 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
         string $id,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($additionalDocumentID, params: $params, requestOptions: $requestOptions);

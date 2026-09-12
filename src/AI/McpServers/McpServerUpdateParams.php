@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Updates the specified MCP server's configuration and returns the updated server.
@@ -62,12 +63,12 @@ final class McpServerUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $allowedTools
+     * @param list<string>|Omitted|null $allowedTools
      */
     public static function with(
+        array|Omitted|null $allowedTools = Omitted::VALUE,
+        string|Omitted|null $apiKeyRef = Omitted::VALUE,
         ?string $id = null,
-        ?array $allowedTools = null,
-        ?string $apiKeyRef = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $name = null,
         ?string $type = null,
@@ -76,8 +77,8 @@ final class McpServerUpdateParams implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $allowedTools && $self['allowedTools'] = $allowedTools;
-        null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
+        Omitted::VALUE !== $allowedTools && $self['allowedTools'] = $allowedTools;
+        Omitted::VALUE !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $name && $self['name'] = $name;
         null !== $type && $self['type'] = $type;

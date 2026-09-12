@@ -7,6 +7,7 @@ namespace Telnyx\X402\CreditAccount\CreditAccountSettleResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\X402\CreditAccount\CreditAccountSettleResponse\Data\RecordType;
 use Telnyx\X402\CreditAccount\CreditAccountSettleResponse\Data\Status;
 
@@ -89,6 +90,7 @@ final class Data implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        string|Omitted|null $txHash = Omitted::VALUE,
         ?string $id = null,
         ?string $amount = null,
         ?\DateTimeInterface $createdAt = null,
@@ -96,7 +98,6 @@ final class Data implements BaseModel
         ?string $quoteID = null,
         RecordType|string|null $recordType = null,
         Status|string|null $status = null,
-        ?string $txHash = null,
     ): self {
         $self = new self;
 
@@ -107,7 +108,7 @@ final class Data implements BaseModel
         null !== $quoteID && $self['quoteID'] = $quoteID;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $status && $self['status'] = $status;
-        null !== $txHash && $self['txHash'] = $txHash;
+        Omitted::VALUE !== $txHash && $self['txHash'] = $txHash;
 
         return $self;
     }

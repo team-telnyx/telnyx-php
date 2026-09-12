@@ -7,7 +7,7 @@ namespace Telnyx\Services\AI\Assistants;
 use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsContract;
 
@@ -47,7 +47,7 @@ final class ToolsService implements ToolsContract
         string $assistantID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['assistantID' => $assistantID]);
+        $params = ['assistantID' => $assistantID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->add($toolID, params: $params, requestOptions: $requestOptions);
@@ -71,7 +71,7 @@ final class ToolsService implements ToolsContract
         string $assistantID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['assistantID' => $assistantID]);
+        $params = ['assistantID' => $assistantID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->remove($toolID, params: $params, requestOptions: $requestOptions);
@@ -99,12 +99,13 @@ final class ToolsService implements ToolsContract
         ?array $dynamicVariables = null,
         RequestOptions|array|null $requestOptions = null,
     ): ToolTestResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'assistantID' => $assistantID,
-                'arguments' => $arguments,
-                'dynamicVariables' => $dynamicVariables,
+                'arguments' => $arguments ?? Omitted::VALUE,
+                'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

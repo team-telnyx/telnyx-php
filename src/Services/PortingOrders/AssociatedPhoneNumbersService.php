@@ -6,7 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\Action;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange;
@@ -59,9 +59,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
         PhoneNumberRange|array $phoneNumberRange,
         RequestOptions|array|null $requestOptions = null,
     ): AssociatedPhoneNumberNewResponse {
-        $params = Util::removeNulls(
-            ['action' => $action, 'phoneNumberRange' => $phoneNumberRange]
-        );
+        $params = ['action' => $action, 'phoneNumberRange' => $phoneNumberRange];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($portingOrderID, params: $params, requestOptions: $requestOptions);
@@ -91,13 +89,14 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
         Sort|array|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -122,7 +121,7 @@ final class AssociatedPhoneNumbersService implements AssociatedPhoneNumbersContr
         string $portingOrderID,
         RequestOptions|array|null $requestOptions = null,
     ): AssociatedPhoneNumberDeleteResponse {
-        $params = Util::removeNulls(['portingOrderID' => $portingOrderID]);
+        $params = ['portingOrderID' => $portingOrderID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);

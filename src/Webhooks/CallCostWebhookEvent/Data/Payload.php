@@ -7,6 +7,7 @@ namespace Telnyx\Webhooks\CallCostWebhookEvent\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Webhooks\CallCostWebhookEvent\Data\Payload\CostPart;
 use Telnyx\Webhooks\CallCostWebhookEvent\Data\Payload\Status;
 
@@ -116,8 +117,9 @@ final class Payload implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
-        ?int $billedDurationSecs = null,
-        ?string $billingGroupID = null,
+        int|Omitted|null $billedDurationSecs = Omitted::VALUE,
+        string|Omitted|null $billingGroupID = Omitted::VALUE,
+        string|Omitted|null $totalCost = Omitted::VALUE,
         ?string $callControlID = null,
         ?string $callLegID = null,
         ?string $callSessionID = null,
@@ -126,12 +128,11 @@ final class Payload implements BaseModel
         ?array $costParts = null,
         ?\DateTimeInterface $occurredAt = null,
         Status|string|null $status = null,
-        ?string $totalCost = null,
     ): self {
         $self = new self;
 
-        null !== $billedDurationSecs && $self['billedDurationSecs'] = $billedDurationSecs;
-        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        Omitted::VALUE !== $billedDurationSecs && $self['billedDurationSecs'] = $billedDurationSecs;
+        Omitted::VALUE !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
         null !== $callControlID && $self['callControlID'] = $callControlID;
         null !== $callLegID && $self['callLegID'] = $callLegID;
         null !== $callSessionID && $self['callSessionID'] = $callSessionID;
@@ -140,7 +141,7 @@ final class Payload implements BaseModel
         null !== $costParts && $self['costParts'] = $costParts;
         null !== $occurredAt && $self['occurredAt'] = $occurredAt;
         null !== $status && $self['status'] = $status;
-        null !== $totalCost && $self['totalCost'] = $totalCost;
+        Omitted::VALUE !== $totalCost && $self['totalCost'] = $totalCost;
 
         return $self;
     }

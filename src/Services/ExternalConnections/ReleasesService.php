@@ -6,7 +6,7 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\ExternalConnections\Releases\Release;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
@@ -51,7 +51,7 @@ final class ReleasesService implements ReleasesContract
         string $id,
         RequestOptions|array|null $requestOptions = null,
     ): ReleaseGetResponse {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($releaseID, params: $params, requestOptions: $requestOptions);
@@ -79,12 +79,13 @@ final class ReleasesService implements ReleasesContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

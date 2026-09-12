@@ -7,6 +7,7 @@ namespace Telnyx\TrafficPolicyProfiles;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfile\Type;
 
 /**
@@ -102,11 +103,11 @@ final class TrafficPolicyProfile implements BaseModel
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
+        int|Omitted|null $limitBwKbps = Omitted::VALUE,
         ?string $id = null,
         ?string $createdAt = null,
         ?array $domains = null,
         ?array $ipRanges = null,
-        ?int $limitBwKbps = null,
         ?string $recordType = null,
         ?array $services = null,
         Type|string|null $type = null,
@@ -118,7 +119,7 @@ final class TrafficPolicyProfile implements BaseModel
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $domains && $self['domains'] = $domains;
         null !== $ipRanges && $self['ipRanges'] = $ipRanges;
-        null !== $limitBwKbps && $self['limitBwKbps'] = $limitBwKbps;
+        Omitted::VALUE !== $limitBwKbps && $self['limitBwKbps'] = $limitBwKbps;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $services && $self['services'] = $services;
         null !== $type && $self['type'] = $type;

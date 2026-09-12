@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\PhoneNumbers\NumbersPhoneNumberDetailed\EmergencyStatus;
 use Telnyx\PhoneNumbers\NumbersPhoneNumberDetailed\InboundCallScreening;
 use Telnyx\PhoneNumbers\NumbersPhoneNumberDetailed\PhoneNumberType;
@@ -296,9 +297,9 @@ final class NumbersPhoneNumberDetailed implements BaseModel
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
      * @param Status|value-of<Status> $status
      * @param list<string> $tags
+     * @param Omitted|SourceType|value-of<SourceType>|null $sourceType
      * @param EmergencyStatus|value-of<EmergencyStatus>|null $emergencyStatus
      * @param InboundCallScreening|value-of<InboundCallScreening>|null $inboundCallScreening
-     * @param SourceType|value-of<SourceType>|null $sourceType
      */
     public static function with(
         string $id,
@@ -312,23 +313,23 @@ final class NumbersPhoneNumberDetailed implements BaseModel
         string $recordType,
         Status|string $status,
         array $tags,
-        ?\DateTimeInterface $activatedAt = null,
-        ?string $billingGroupID = null,
+        \DateTimeInterface|Omitted|null $activatedAt = Omitted::VALUE,
+        string|Omitted|null $billingGroupID = Omitted::VALUE,
+        string|Omitted|null $connectionID = Omitted::VALUE,
+        string|Omitted|null $connectionName = Omitted::VALUE,
+        string|Omitted|null $customerReference = Omitted::VALUE,
+        string|Omitted|null $emergencyAddressID = Omitted::VALUE,
+        string|Omitted|null $messagingProfileID = Omitted::VALUE,
+        string|Omitted|null $messagingProfileName = Omitted::VALUE,
+        Omitted|SourceType|string|null $sourceType = Omitted::VALUE,
         ?bool $callForwardingEnabled = null,
         ?bool $callRecordingEnabled = null,
         ?bool $callerIDNameEnabled = null,
         ?bool $cnamListingEnabled = null,
-        ?string $connectionID = null,
-        ?string $connectionName = null,
-        ?string $customerReference = null,
-        ?string $emergencyAddressID = null,
         ?bool $emergencyEnabled = null,
         EmergencyStatus|string|null $emergencyStatus = null,
         ?bool $hdVoiceEnabled = null,
         InboundCallScreening|string|null $inboundCallScreening = null,
-        ?string $messagingProfileID = null,
-        ?string $messagingProfileName = null,
-        SourceType|string|null $sourceType = null,
         ?bool $t38FaxGatewayEnabled = null,
         ?string $updatedAt = null,
     ): self {
@@ -346,23 +347,23 @@ final class NumbersPhoneNumberDetailed implements BaseModel
         $self['status'] = $status;
         $self['tags'] = $tags;
 
-        null !== $activatedAt && $self['activatedAt'] = $activatedAt;
-        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        Omitted::VALUE !== $activatedAt && $self['activatedAt'] = $activatedAt;
+        Omitted::VALUE !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
         null !== $callForwardingEnabled && $self['callForwardingEnabled'] = $callForwardingEnabled;
         null !== $callRecordingEnabled && $self['callRecordingEnabled'] = $callRecordingEnabled;
         null !== $callerIDNameEnabled && $self['callerIDNameEnabled'] = $callerIDNameEnabled;
         null !== $cnamListingEnabled && $self['cnamListingEnabled'] = $cnamListingEnabled;
-        null !== $connectionID && $self['connectionID'] = $connectionID;
-        null !== $connectionName && $self['connectionName'] = $connectionName;
-        null !== $customerReference && $self['customerReference'] = $customerReference;
-        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
+        Omitted::VALUE !== $connectionID && $self['connectionID'] = $connectionID;
+        Omitted::VALUE !== $connectionName && $self['connectionName'] = $connectionName;
+        Omitted::VALUE !== $customerReference && $self['customerReference'] = $customerReference;
+        Omitted::VALUE !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
         null !== $emergencyEnabled && $self['emergencyEnabled'] = $emergencyEnabled;
         null !== $emergencyStatus && $self['emergencyStatus'] = $emergencyStatus;
         null !== $hdVoiceEnabled && $self['hdVoiceEnabled'] = $hdVoiceEnabled;
         null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
-        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
-        null !== $messagingProfileName && $self['messagingProfileName'] = $messagingProfileName;
-        null !== $sourceType && $self['sourceType'] = $sourceType;
+        Omitted::VALUE !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        Omitted::VALUE !== $messagingProfileName && $self['messagingProfileName'] = $messagingProfileName;
+        Omitted::VALUE !== $sourceType && $self['sourceType'] = $sourceType;
         null !== $t38FaxGatewayEnabled && $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 

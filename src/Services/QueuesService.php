@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Queues\Queue;
 use Telnyx\Queues\QueueGetResponse;
@@ -58,9 +57,7 @@ final class QueuesService implements QueuesContract
         int $maxSize = 300,
         RequestOptions|array|null $requestOptions = null,
     ): QueueNewResponse {
-        $params = Util::removeNulls(
-            ['queueName' => $queueName, 'maxSize' => $maxSize]
-        );
+        $params = ['queueName' => $queueName, 'maxSize' => $maxSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -104,7 +101,7 @@ final class QueuesService implements QueuesContract
         int $maxSize,
         RequestOptions|array|null $requestOptions = null,
     ): QueueUpdateResponse {
-        $params = Util::removeNulls(['maxSize' => $maxSize]);
+        $params = ['maxSize' => $maxSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($queueName, params: $params, requestOptions: $requestOptions);
@@ -130,9 +127,7 @@ final class QueuesService implements QueuesContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

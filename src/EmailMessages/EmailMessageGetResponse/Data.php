@@ -13,11 +13,13 @@ use Telnyx\EmailInboxes\Drafts\EmailMessage\Attachment;
 use Telnyx\EmailInboxes\Drafts\EmailMessage\RecordType;
 use Telnyx\EmailInboxes\Drafts\EmailMessage\Status;
 use Telnyx\EmailMessages\MessageEvent;
+use Telnyx\EmailMessages\SuppressedRecipient;
 
 /**
  * @phpstan-import-type AttachmentShape from \Telnyx\EmailInboxes\Drafts\EmailMessage\Attachment
  * @phpstan-import-type EmailAddressShape from \Telnyx\EmailInboxes\Drafts\EmailAddress
  * @phpstan-import-type MessageEventShape from \Telnyx\EmailMessages\MessageEvent
+ * @phpstan-import-type SuppressedRecipientShape from \Telnyx\EmailMessages\SuppressedRecipient
  *
  * @phpstan-type DataShape = array{
  *   id: string,
@@ -38,6 +40,7 @@ use Telnyx\EmailMessages\MessageEvent;
  *   recipientStatuses?: array<string,int>|null,
  *   sandbox?: bool|null,
  *   scheduledAt?: \DateTimeInterface|null,
+ *   suppressed?: list<SuppressedRecipient|SuppressedRecipientShape>|null,
  *   htmlBody: string|null,
  *   textBody: string|null,
  * }
@@ -130,6 +133,14 @@ final class Data implements BaseModel
     public ?\DateTimeInterface $scheduledAt;
 
     /**
+     * Recipients excluded from delivery by suppression checks, with reasons. On batch items, present when that item had suppressed recipients; all other recipients of the item still receive the message. For single sends this information appears at the top level of the response instead (see EmailMessageResponse.suppressed).
+     *
+     * @var list<SuppressedRecipient>|null $suppressed
+     */
+    #[Optional(list: SuppressedRecipient::class)]
+    public ?array $suppressed;
+
+    /**
      * HTML body submitted for the message.
      */
     #[Required('html_body')]
@@ -208,6 +219,7 @@ final class Data implements BaseModel
      * @param list<EmailAddress|EmailAddressShape> $to
      * @param array<string,mixed> $templateVariables
      * @param array<string,int>|null $recipientStatuses
+     * @param list<SuppressedRecipient|SuppressedRecipientShape>|null $suppressed
      */
     public static function with(
         string $id,
@@ -230,6 +242,7 @@ final class Data implements BaseModel
         ?array $recipientStatuses = null,
         ?bool $sandbox = null,
         ?\DateTimeInterface $scheduledAt = null,
+        ?array $suppressed = null,
     ): self {
         $self = new self;
 
@@ -254,6 +267,7 @@ final class Data implements BaseModel
         null !== $recipientStatuses && $self['recipientStatuses'] = $recipientStatuses;
         null !== $sandbox && $self['sandbox'] = $sandbox;
         null !== $scheduledAt && $self['scheduledAt'] = $scheduledAt;
+        null !== $suppressed && $self['suppressed'] = $suppressed;
 
         return $self;
     }
@@ -443,6 +457,19 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['scheduledAt'] = $scheduledAt;
+
+        return $self;
+    }
+
+    /**
+     * Recipients excluded from delivery by suppression checks, with reasons. On batch items, present when that item had suppressed recipients; all other recipients of the item still receive the message. For single sends this information appears at the top level of the response instead (see EmailMessageResponse.suppressed).
+     *
+     * @param list<SuppressedRecipient|SuppressedRecipientShape> $suppressed
+     */
+    public function withSuppressed(array $suppressed): self
+    {
+        $self = clone $this;
+        $self['suppressed'] = $suppressed;
 
         return $self;
     }

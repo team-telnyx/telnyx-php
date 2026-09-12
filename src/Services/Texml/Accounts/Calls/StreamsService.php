@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\StreamsContract;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams\Status;
@@ -52,9 +51,9 @@ final class StreamsService implements StreamsContract
         Status|string $status = 'stopped',
         RequestOptions|array|null $requestOptions = null,
     ): StreamStreamingSidJsonResponse {
-        $params = Util::removeNulls(
-            ['accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status]
-        );
+        $params = [
+            'accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->streamingSidJson($streamingSid, params: $params, requestOptions: $requestOptions);

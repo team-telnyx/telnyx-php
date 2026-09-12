@@ -8,7 +8,7 @@ use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroup;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
@@ -77,8 +77,13 @@ final class InsightGroupsService implements InsightGroupsContract
         ?string $webhook = null,
         RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateGroupDetail {
-        $params = Util::removeNulls(
-            ['description' => $description, 'name' => $name, 'webhook' => $webhook]
+        $params = array_filter(
+            [
+                'description' => $description ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'webhook' => $webhook ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -127,13 +132,14 @@ final class InsightGroupsService implements InsightGroupsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateGroupDetail {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'name' => $name,
-                'description' => $description,
+                'description' => $description ?? Omitted::VALUE,
                 'webhook' => $webhook,
-                'idempotencyKey' => $idempotencyKey,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -158,8 +164,12 @@ final class InsightGroupsService implements InsightGroupsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TermsOfServiceContract;
 use Telnyx\Services\TermsOfService\AgreementsService;
@@ -68,7 +68,10 @@ final class TermsOfServiceService implements TermsOfServiceContract
         TosProductType|string|null $productType = null,
         RequestOptions|array|null $requestOptions = null,
     ): TermsOfServiceGetInfoResponse {
-        $params = Util::removeNulls(['productType' => $productType]);
+        $params = array_filter(
+            ['productType' => $productType ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveInfo(params: $params, requestOptions: $requestOptions);
@@ -92,7 +95,10 @@ final class TermsOfServiceService implements TermsOfServiceContract
         TosProductType|string|null $productType = null,
         RequestOptions|array|null $requestOptions = null,
     ): TermsOfServiceGetStatusResponse {
-        $params = Util::removeNulls(['productType' => $productType]);
+        $params = array_filter(
+            ['productType' => $productType ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveStatus(params: $params, requestOptions: $requestOptions);

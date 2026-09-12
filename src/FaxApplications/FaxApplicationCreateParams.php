@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
@@ -125,13 +126,13 @@ final class FaxApplicationCreateParams implements BaseModel
     public static function with(
         string $applicationName,
         string $webhookEventURL,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsiteOverride = null,
         Inbound|array|null $inbound = null,
         Outbound|array|null $outbound = null,
         ?array $tags = null,
-        ?string $webhookEventFailoverURL = null,
-        ?int $webhookTimeoutSecs = null,
     ): self {
         $self = new self;
 
@@ -143,8 +144,8 @@ final class FaxApplicationCreateParams implements BaseModel
         null !== $inbound && $self['inbound'] = $inbound;
         null !== $outbound && $self['outbound'] = $outbound;
         null !== $tags && $self['tags'] = $tags;
-        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        Omitted::VALUE !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        Omitted::VALUE !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $self;
     }

@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Dir\Document;
 use Telnyx\InfringementClaims\InfringementClaimWrapped;
 use Telnyx\RequestOptions;
@@ -78,8 +78,12 @@ final class InfringementClaimsService implements InfringementClaimsContract
         ?array $documents = null,
         RequestOptions|array|null $requestOptions = null,
     ): InfringementClaimWrapped {
-        $params = Util::removeNulls(
-            ['contestNotes' => $contestNotes, 'documents' => $documents]
+        $params = array_filter(
+            [
+                'contestNotes' => $contestNotes,
+                'documents' => $documents ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

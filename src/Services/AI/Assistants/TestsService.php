@@ -9,7 +9,7 @@ use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
 use Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsContract;
@@ -80,18 +80,19 @@ final class TestsService implements TestsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantTest {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'destination' => $destination,
                 'instructions' => $instructions,
                 'name' => $name,
                 'rubric' => $rubric,
-                'description' => $description,
-                'maxDurationSeconds' => $maxDurationSeconds,
-                'telnyxConversationChannel' => $telnyxConversationChannel,
-                'testSuite' => $testSuite,
-                'idempotencyKey' => $idempotencyKey,
+                'description' => $description ?? Omitted::VALUE,
+                'maxDurationSeconds' => $maxDurationSeconds ?? Omitted::VALUE,
+                'telnyxConversationChannel' => $telnyxConversationChannel ?? Omitted::VALUE,
+                'testSuite' => $testSuite ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -150,17 +151,18 @@ final class TestsService implements TestsContract
         ?string $testSuite = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantTest {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'description' => $description,
-                'destination' => $destination,
-                'instructions' => $instructions,
-                'maxDurationSeconds' => $maxDurationSeconds,
-                'name' => $name,
-                'rubric' => $rubric,
-                'telnyxConversationChannel' => $telnyxConversationChannel,
-                'testSuite' => $testSuite,
+                'description' => $description ?? Omitted::VALUE,
+                'destination' => $destination ?? Omitted::VALUE,
+                'instructions' => $instructions ?? Omitted::VALUE,
+                'maxDurationSeconds' => $maxDurationSeconds ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'rubric' => $rubric ?? Omitted::VALUE,
+                'telnyxConversationChannel' => $telnyxConversationChannel ?? Omitted::VALUE,
+                'testSuite' => $testSuite ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -191,14 +193,15 @@ final class TestsService implements TestsContract
         ?string $testSuite = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'destination' => $destination,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'telnyxConversationChannel' => $telnyxConversationChannel,
-                'testSuite' => $testSuite,
+                'destination' => $destination ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'telnyxConversationChannel' => $telnyxConversationChannel ?? Omitted::VALUE,
+                'testSuite' => $testSuite ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

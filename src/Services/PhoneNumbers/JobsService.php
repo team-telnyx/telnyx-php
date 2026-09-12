@@ -6,7 +6,7 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
@@ -82,13 +82,14 @@ final class JobsService implements JobsContract
         Sort|string|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -111,7 +112,7 @@ final class JobsService implements JobsContract
         array $phoneNumbers,
         RequestOptions|array|null $requestOptions = null
     ): JobDeleteBatchResponse {
-        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
+        $params = ['phoneNumbers' => $phoneNumbers];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteBatch(params: $params, requestOptions: $requestOptions);
@@ -151,19 +152,20 @@ final class JobsService implements JobsContract
         UpdateVoiceSettings|array|null $voice = null,
         RequestOptions|array|null $requestOptions = null,
     ): JobUpdateBatchResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'phoneNumbers' => $phoneNumbers,
-                'filter' => $filter,
-                'billingGroupID' => $billingGroupID,
-                'connectionID' => $connectionID,
-                'customerReference' => $customerReference,
-                'deletionLockEnabled' => $deletionLockEnabled,
-                'externalPin' => $externalPin,
-                'hdVoiceEnabled' => $hdVoiceEnabled,
-                'tags' => $tags,
-                'voice' => $voice,
+                'filter' => $filter ?? Omitted::VALUE,
+                'billingGroupID' => $billingGroupID ?? Omitted::VALUE,
+                'connectionID' => $connectionID ?? Omitted::VALUE,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'deletionLockEnabled' => $deletionLockEnabled ?? Omitted::VALUE,
+                'externalPin' => $externalPin ?? Omitted::VALUE,
+                'hdVoiceEnabled' => $hdVoiceEnabled ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
+                'voice' => $voice ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -179,7 +181,7 @@ final class JobsService implements JobsContract
      *
      * @param bool $emergencyEnabled indicates whether to enable or disable emergency services on the numbers
      * @param list<string> $phoneNumbers
-     * @param string|null $emergencyAddressID Identifies the address to be used with emergency services. Required if emergency_enabled is true, must be null or omitted if emergency_enabled is false.
+     * @param string|Omitted|null $emergencyAddressID Identifies the address to be used with emergency services. Required if emergency_enabled is true, must be null or omitted if emergency_enabled is false.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -187,15 +189,16 @@ final class JobsService implements JobsContract
     public function updateEmergencySettingsBatch(
         bool $emergencyEnabled,
         array $phoneNumbers,
-        ?string $emergencyAddressID = null,
+        string|Omitted|null $emergencyAddressID = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): JobUpdateEmergencySettingsBatchResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'emergencyEnabled' => $emergencyEnabled,
                 'phoneNumbers' => $phoneNumbers,
                 'emergencyAddressID' => $emergencyAddressID,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

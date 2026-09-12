@@ -7,6 +7,7 @@ namespace Telnyx\AI\Assistants\AssistantTool\SendMessageTool;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type SendMessageShape = array{messageTemplate?: string|null}
@@ -32,11 +33,12 @@ final class SendMessage implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $messageTemplate = null): self
-    {
+    public static function with(
+        string|Omitted|null $messageTemplate = Omitted::VALUE
+    ): self {
         $self = new self;
 
-        null !== $messageTemplate && $self['messageTemplate'] = $messageTemplate;
+        Omitted::VALUE !== $messageTemplate && $self['messageTemplate'] = $messageTemplate;
 
         return $self;
     }

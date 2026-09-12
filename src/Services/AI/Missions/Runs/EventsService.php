@@ -9,7 +9,7 @@ use Telnyx\AI\Missions\Runs\Events\EventResponse;
 use Telnyx\AI\Missions\Runs\Events\EventType;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Missions\Runs\EventsContract;
@@ -60,15 +60,16 @@ final class EventsService implements EventsContract
         ?string $type = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'missionID' => $missionID,
-                'agentID' => $agentID,
+                'agentID' => $agentID ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'stepID' => $stepID,
-                'type' => $type,
+                'stepID' => $stepID ?? Omitted::VALUE,
+                'type' => $type ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -95,7 +96,7 @@ final class EventsService implements EventsContract
         string $runID,
         RequestOptions|array|null $requestOptions = null,
     ): EventResponse {
-        $params = Util::removeNulls(['missionID' => $missionID, 'runID' => $runID]);
+        $params = ['missionID' => $missionID, 'runID' => $runID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getEventDetails($eventID, params: $params, requestOptions: $requestOptions);
@@ -131,16 +132,17 @@ final class EventsService implements EventsContract
         ?string $stepID = null,
         RequestOptions|array|null $requestOptions = null,
     ): EventResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'missionID' => $missionID,
                 'summary' => $summary,
                 'type' => $type,
-                'agentID' => $agentID,
-                'idempotencyKey' => $idempotencyKey,
-                'payload' => $payload,
-                'stepID' => $stepID,
+                'agentID' => $agentID ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
+                'payload' => $payload ?? Omitted::VALUE,
+                'stepID' => $stepID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

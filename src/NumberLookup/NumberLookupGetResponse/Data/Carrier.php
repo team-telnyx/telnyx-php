@@ -7,6 +7,7 @@ namespace Telnyx\NumberLookup\NumberLookupGetResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier\Type;
 
 /**
@@ -75,7 +76,7 @@ final class Carrier implements BaseModel
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
-        ?string $errorCode = null,
+        string|Omitted|null $errorCode = Omitted::VALUE,
         ?string $mobileCountryCode = null,
         ?string $mobileNetworkCode = null,
         ?string $name = null,
@@ -84,7 +85,7 @@ final class Carrier implements BaseModel
     ): self {
         $self = new self;
 
-        null !== $errorCode && $self['errorCode'] = $errorCode;
+        Omitted::VALUE !== $errorCode && $self['errorCode'] = $errorCode;
         null !== $mobileCountryCode && $self['mobileCountryCode'] = $mobileCountryCode;
         null !== $mobileNetworkCode && $self['mobileNetworkCode'] = $mobileNetworkCode;
         null !== $name && $self['name'] = $name;

@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementGroups\RequirementGroup;
 use Telnyx\RequirementGroups\RequirementGroupCreateParams\Action;
@@ -59,14 +59,15 @@ final class RequirementGroupsService implements RequirementGroupsContract
         ?array $regulatoryRequirements = null,
         RequestOptions|array|null $requestOptions = null,
     ): RequirementGroup {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'action' => $action,
                 'countryCode' => $countryCode,
                 'phoneNumberType' => $phoneNumberType,
-                'customerReference' => $customerReference,
-                'regulatoryRequirements' => $regulatoryRequirements,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'regulatoryRequirements' => $regulatoryRequirements ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -113,11 +114,12 @@ final class RequirementGroupsService implements RequirementGroupsContract
         ?array $regulatoryRequirements = null,
         RequestOptions|array|null $requestOptions = null,
     ): RequirementGroup {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'customerReference' => $customerReference,
-                'regulatoryRequirements' => $regulatoryRequirements,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'regulatoryRequirements' => $regulatoryRequirements ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -142,7 +144,10 @@ final class RequirementGroupsService implements RequirementGroupsContract
         Filter|array|null $filter = null,
         RequestOptions|array|null $requestOptions = null,
     ): array {
-        $params = Util::removeNulls(['filter' => $filter]);
+        $params = array_filter(
+            ['filter' => $filter ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

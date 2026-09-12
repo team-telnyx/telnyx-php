@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\NumberBlockOrders\NumberBlockOrder;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
@@ -56,14 +56,15 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
         ?string $messagingProfileID = null,
         RequestOptions|array|null $requestOptions = null,
     ): NumberBlockOrderNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'range' => $range,
                 'startingNumber' => $startingNumber,
-                'connectionID' => $connectionID,
-                'customerReference' => $customerReference,
-                'messagingProfileID' => $messagingProfileID,
+                'connectionID' => $connectionID ?? Omitted::VALUE,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'messagingProfileID' => $messagingProfileID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -110,12 +111,13 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

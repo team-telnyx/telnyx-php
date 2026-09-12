@@ -6,7 +6,7 @@ namespace Telnyx\Services\Texml;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\AccountsContract;
 use Telnyx\Services\Texml\Accounts\CallsService;
@@ -87,8 +87,13 @@ final class AccountsService implements AccountsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): TexmlGetCallRecordingsResponseBody {
-        $params = Util::removeNulls(
-            ['dateCreated' => $dateCreated, 'page' => $page, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'dateCreated' => $dateCreated ?? Omitted::VALUE,
+                'page' => $page ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -115,8 +120,12 @@ final class AccountsService implements AccountsContract
         ?string $pageToken = null,
         RequestOptions|array|null $requestOptions = null,
     ): AccountGetTranscriptionsJsonResponse {
-        $params = Util::removeNulls(
-            ['pageSize' => $pageSize, 'pageToken' => $pageToken]
+        $params = array_filter(
+            [
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'pageToken' => $pageToken ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

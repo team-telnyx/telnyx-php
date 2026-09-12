@@ -6,7 +6,7 @@ namespace Telnyx\Services\Pricing;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Pricing\Products\ProductGetResponse;
 use Telnyx\Pricing\Products\ProductListResponse;
@@ -39,7 +39,7 @@ final class ProductsService implements ProductsContract
      * Returns pricing entries for a single product. Most products return standard rate entries with fields like rate, unit, country_iso, direction, and tiers. Inference products return model-specific fields (model, input_rate, output_rate, cached_input_rate) with tiered pricing. Some products use rate decks (pricing_type: rate_deck) where rates are determined dynamically.
      *
      * @param string $slug product slug from the catalog listing
-     * @param string|null $filterCountryISO Two-letter ISO 3166-1 alpha-2 country code (uppercase, e.g. US) to filter pricing to a single country.
+     * @param string|Omitted|null $filterCountryISO Two-letter ISO 3166-1 alpha-2 country code (uppercase, e.g. US) to filter pricing to a single country.
      * @param int $pageNumber page number (1-based)
      * @param int $pageSize number of items per page (max 100)
      * @param RequestOpts|null $requestOptions
@@ -50,17 +50,18 @@ final class ProductsService implements ProductsContract
      */
     public function retrieve(
         string $slug,
-        ?string $filterCountryISO = null,
+        string|Omitted|null $filterCountryISO = Omitted::VALUE,
         int $pageNumber = 1,
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'filterCountryISO' => $filterCountryISO,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -87,9 +88,7 @@ final class ProductsService implements ProductsContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

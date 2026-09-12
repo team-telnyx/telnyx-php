@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\OAuthGrants\OAuthGrant\RecordType;
 
 /**
@@ -105,7 +106,7 @@ final class OAuthGrant implements BaseModel
         \DateTimeInterface $createdAt,
         RecordType|string $recordType,
         array $scopes,
-        ?\DateTimeInterface $lastUsedAt = null,
+        \DateTimeInterface|Omitted|null $lastUsedAt = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -115,7 +116,7 @@ final class OAuthGrant implements BaseModel
         $self['recordType'] = $recordType;
         $self['scopes'] = $scopes;
 
-        null !== $lastUsedAt && $self['lastUsedAt'] = $lastUsedAt;
+        Omitted::VALUE !== $lastUsedAt && $self['lastUsedAt'] = $lastUsedAt;
 
         return $self;
     }

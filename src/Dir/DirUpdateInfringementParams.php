@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Push a fix for a DIR that is `suspended` with an open infringement claim back into vetting. `POST /dir/{dir_id}/submit` is blocked while a claim is open, so this is the customer-callable path to update the DIR's content and re-certify before Telnyx adjudicates the claim. All four certification booleans must be `true`. Optional content fields (`display_name`, `logo_url`, `call_reasons`, `documents`) update the DIR; documents are append-only.
@@ -121,8 +122,8 @@ final class DirUpdateInfringementParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $callReasons
-     * @param list<Document|DocumentShape>|null $documents
+     * @param list<string>|Omitted|null $callReasons
+     * @param list<Document|DocumentShape>|Omitted|null $documents
      */
     public static function with(
         bool $certifyBrandIsAccurate,
@@ -130,10 +131,10 @@ final class DirUpdateInfringementParams implements BaseModel
         bool $certifyNoInfringement,
         bool $certifyNoShaftContent,
         string $infringementResolutionNotes,
-        ?array $callReasons = null,
-        ?string $displayName = null,
-        ?array $documents = null,
-        ?string $logoURL = null,
+        array|Omitted|null $callReasons = Omitted::VALUE,
+        string|Omitted|null $displayName = Omitted::VALUE,
+        array|Omitted|null $documents = Omitted::VALUE,
+        string|Omitted|null $logoURL = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -143,10 +144,10 @@ final class DirUpdateInfringementParams implements BaseModel
         $self['certifyNoShaftContent'] = $certifyNoShaftContent;
         $self['infringementResolutionNotes'] = $infringementResolutionNotes;
 
-        null !== $callReasons && $self['callReasons'] = $callReasons;
-        null !== $displayName && $self['displayName'] = $displayName;
-        null !== $documents && $self['documents'] = $documents;
-        null !== $logoURL && $self['logoURL'] = $logoURL;
+        Omitted::VALUE !== $callReasons && $self['callReasons'] = $callReasons;
+        Omitted::VALUE !== $displayName && $self['displayName'] = $displayName;
+        Omitted::VALUE !== $documents && $self['documents'] = $documents;
+        Omitted::VALUE !== $logoURL && $self['logoURL'] = $logoURL;
 
         return $self;
     }

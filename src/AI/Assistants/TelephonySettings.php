@@ -20,6 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type TelephonySettingsShape = array{
  *   defaultTexmlAppID?: string|null,
  *   disableDtmf?: bool|null,
+ *   fallbackDestination?: string|null,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
  *   noiseSuppressionConfig?: null|NoiseSuppressionConfig|NoiseSuppressionConfigShape,
  *   recordingSettings?: null|RecordingSettings|RecordingSettingsShape,
@@ -47,6 +48,12 @@ final class TelephonySettings implements BaseModel
      */
     #[Optional('disable_dtmf')]
     public ?bool $disableDtmf;
+
+    /**
+     * Destination number or SIP URI to transfer the caller to when the AI conversation ends abnormally, for example because of an assistant-side error, so the caller is not left in dead air. This only fires for abnormal ends: it does not fire when the conversation ends on purpose (the caller hung up, the assistant completed normally, the caller hung up after a relay handoff, or voicemail was detected), and it does not fire when the assistant already transferred or bridged the call.
+     */
+    #[Optional('fallback_destination')]
+    public ?string $fallbackDestination;
 
     /**
      * The noise suppression engine to use. Use 'disabled' to turn off noise suppression.
@@ -122,6 +129,7 @@ final class TelephonySettings implements BaseModel
     public static function with(
         ?string $defaultTexmlAppID = null,
         ?bool $disableDtmf = null,
+        ?string $fallbackDestination = null,
         NoiseSuppression|string|null $noiseSuppression = null,
         NoiseSuppressionConfig|array|null $noiseSuppressionConfig = null,
         RecordingSettings|array|null $recordingSettings = null,
@@ -136,6 +144,7 @@ final class TelephonySettings implements BaseModel
 
         null !== $defaultTexmlAppID && $self['defaultTexmlAppID'] = $defaultTexmlAppID;
         null !== $disableDtmf && $self['disableDtmf'] = $disableDtmf;
+        null !== $fallbackDestination && $self['fallbackDestination'] = $fallbackDestination;
         null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
         null !== $noiseSuppressionConfig && $self['noiseSuppressionConfig'] = $noiseSuppressionConfig;
         null !== $recordingSettings && $self['recordingSettings'] = $recordingSettings;
@@ -167,6 +176,17 @@ final class TelephonySettings implements BaseModel
     {
         $self = clone $this;
         $self['disableDtmf'] = $disableDtmf;
+
+        return $self;
+    }
+
+    /**
+     * Destination number or SIP URI to transfer the caller to when the AI conversation ends abnormally, for example because of an assistant-side error, so the caller is not left in dead air. This only fires for abnormal ends: it does not fire when the conversation ends on purpose (the caller hung up, the assistant completed normally, the caller hung up after a relay handoff, or voicemail was detected), and it does not fire when the assistant already transferred or bridged the call.
+     */
+    public function withFallbackDestination(string $fallbackDestination): self
+    {
+        $self = clone $this;
+        $self['fallbackDestination'] = $fallbackDestination;
 
         return $self;
     }

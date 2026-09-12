@@ -6,7 +6,6 @@ namespace Telnyx\Services\Rooms;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Actions\ActionGenerateJoinClientTokenResponse;
 use Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse;
@@ -50,12 +49,10 @@ final class ActionsService implements ActionsContract
         int $tokenTtlSecs = 600,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGenerateJoinClientTokenResponse {
-        $params = Util::removeNulls(
-            [
-                'refreshTokenTtlSecs' => $refreshTokenTtlSecs,
-                'tokenTtlSecs' => $tokenTtlSecs,
-            ],
-        );
+        $params = [
+            'refreshTokenTtlSecs' => $refreshTokenTtlSecs,
+            'tokenTtlSecs' => $tokenTtlSecs,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->generateJoinClientToken($roomID, params: $params, requestOptions: $requestOptions);
@@ -80,9 +77,9 @@ final class ActionsService implements ActionsContract
         int $tokenTtlSecs = 600,
         RequestOptions|array|null $requestOptions = null,
     ): ActionRefreshClientTokenResponse {
-        $params = Util::removeNulls(
-            ['refreshToken' => $refreshToken, 'tokenTtlSecs' => $tokenTtlSecs]
-        );
+        $params = [
+            'refreshToken' => $refreshToken, 'tokenTtlSecs' => $tokenTtlSecs,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->refreshClientToken($roomID, params: $params, requestOptions: $requestOptions);

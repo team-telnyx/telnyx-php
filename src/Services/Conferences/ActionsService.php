@@ -35,7 +35,7 @@ use Telnyx\Conferences\Actions\ActionUpdateParams\SupervisorRole;
 use Telnyx\Conferences\Actions\ActionUpdateResponse;
 use Telnyx\Conferences\Actions\ConferenceRegion;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\RequestOptions;
@@ -89,14 +89,15 @@ final class ActionsService implements ActionsContract
         ?array $whisperCallControlIDs = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'callControlID' => $callControlID,
                 'supervisorRole' => $supervisorRole,
-                'commandID' => $commandID,
-                'region' => $region,
-                'whisperCallControlIDs' => $whisperCallControlIDs,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
+                'whisperCallControlIDs' => $whisperCallControlIDs ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -121,7 +122,10 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionEndConferenceResponse {
-        $params = Util::removeNulls(['commandID' => $commandID]);
+        $params = array_filter(
+            ['commandID' => $commandID ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->endConference($id, params: $params, requestOptions: $requestOptions);
@@ -175,25 +179,26 @@ final class ActionsService implements ActionsContract
         string $validDigits = '0123456789#*',
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherDtmfAudioResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'callControlID' => $callControlID,
-                'audioURL' => $audioURL,
-                'clientState' => $clientState,
-                'gatherID' => $gatherID,
-                'initialTimeoutMillis' => $initialTimeoutMillis,
+                'audioURL' => $audioURL ?? Omitted::VALUE,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'gatherID' => $gatherID ?? Omitted::VALUE,
+                'initialTimeoutMillis' => $initialTimeoutMillis ?? Omitted::VALUE,
                 'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
-                'invalidAudioURL' => $invalidAudioURL,
-                'invalidMediaName' => $invalidMediaName,
+                'invalidAudioURL' => $invalidAudioURL ?? Omitted::VALUE,
+                'invalidMediaName' => $invalidMediaName ?? Omitted::VALUE,
                 'maximumDigits' => $maximumDigits,
                 'maximumTries' => $maximumTries,
-                'mediaName' => $mediaName,
+                'mediaName' => $mediaName ?? Omitted::VALUE,
                 'minimumDigits' => $minimumDigits,
                 'stopPlaybackOnDtmf' => $stopPlaybackOnDtmf,
                 'terminatingDigit' => $terminatingDigit,
                 'timeoutMillis' => $timeoutMillis,
                 'validDigits' => $validDigits,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -224,13 +229,14 @@ final class ActionsService implements ActionsContract
         ConferenceRegion|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionHoldResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'audioURL' => $audioURL,
-                'callControlIDs' => $callControlIDs,
-                'mediaName' => $mediaName,
-                'region' => $region,
+                'audioURL' => $audioURL ?? Omitted::VALUE,
+                'callControlIDs' => $callControlIDs ?? Omitted::VALUE,
+                'mediaName' => $mediaName ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -286,23 +292,24 @@ final class ActionsService implements ActionsContract
         ?array $whisperCallControlIDs = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionJoinResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'callControlID' => $callControlID,
-                'beepEnabled' => $beepEnabled,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'endConferenceOnExit' => $endConferenceOnExit,
-                'hold' => $hold,
-                'holdAudioURL' => $holdAudioURL,
-                'holdMediaName' => $holdMediaName,
-                'mute' => $mute,
-                'region' => $region,
-                'softEndConferenceOnExit' => $softEndConferenceOnExit,
-                'startConferenceOnEnter' => $startConferenceOnEnter,
-                'supervisorRole' => $supervisorRole,
-                'whisperCallControlIDs' => $whisperCallControlIDs,
+                'beepEnabled' => $beepEnabled ?? Omitted::VALUE,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'endConferenceOnExit' => $endConferenceOnExit ?? Omitted::VALUE,
+                'hold' => $hold ?? Omitted::VALUE,
+                'holdAudioURL' => $holdAudioURL ?? Omitted::VALUE,
+                'holdMediaName' => $holdMediaName ?? Omitted::VALUE,
+                'mute' => $mute ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
+                'softEndConferenceOnExit' => $softEndConferenceOnExit ?? Omitted::VALUE,
+                'startConferenceOnEnter' => $startConferenceOnEnter ?? Omitted::VALUE,
+                'supervisorRole' => $supervisorRole ?? Omitted::VALUE,
+                'whisperCallControlIDs' => $whisperCallControlIDs ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -337,13 +344,14 @@ final class ActionsService implements ActionsContract
         ConferenceRegion|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionLeaveResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'callControlID' => $callControlID,
-                'beepEnabled' => $beepEnabled,
-                'commandID' => $commandID,
-                'region' => $region,
+                'beepEnabled' => $beepEnabled ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -370,8 +378,12 @@ final class ActionsService implements ActionsContract
         ConferenceRegion|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionMuteResponse {
-        $params = Util::removeNulls(
-            ['callControlIDs' => $callControlIDs, 'region' => $region]
+        $params = array_filter(
+            [
+                'callControlIDs' => $callControlIDs ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -404,14 +416,15 @@ final class ActionsService implements ActionsContract
         ConferenceRegion|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionPlayResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'audioURL' => $audioURL,
-                'callControlIDs' => $callControlIDs,
-                'loop' => $loop,
-                'mediaName' => $mediaName,
-                'region' => $region,
+                'audioURL' => $audioURL ?? Omitted::VALUE,
+                'callControlIDs' => $callControlIDs ?? Omitted::VALUE,
+                'loop' => $loop ?? Omitted::VALUE,
+                'mediaName' => $mediaName ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -440,12 +453,13 @@ final class ActionsService implements ActionsContract
         ConferenceRegion|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionRecordPauseResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'commandID' => $commandID,
-                'recordingID' => $recordingID,
-                'region' => $region,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'recordingID' => $recordingID ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -474,12 +488,13 @@ final class ActionsService implements ActionsContract
         ConferenceRegion|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionRecordResumeResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'commandID' => $commandID,
-                'recordingID' => $recordingID,
-                'region' => $region,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'recordingID' => $recordingID ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -520,16 +535,17 @@ final class ActionsService implements ActionsContract
         Trim|string|null $trim = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionRecordStartResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'format' => $format,
                 'channels' => $channels,
-                'commandID' => $commandID,
-                'customFileName' => $customFileName,
-                'playBeep' => $playBeep,
-                'region' => $region,
-                'trim' => $trim,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'customFileName' => $customFileName ?? Omitted::VALUE,
+                'playBeep' => $playBeep ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
+                'trim' => $trim ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -564,13 +580,14 @@ final class ActionsService implements ActionsContract
         ConferenceRegion|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionRecordStopResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'recordingID' => $recordingID,
-                'region' => $region,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'recordingID' => $recordingID ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -601,13 +618,14 @@ final class ActionsService implements ActionsContract
         int $durationMillis = 250,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSendDtmfResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'digits' => $digits,
-                'callControlIDs' => $callControlIDs,
-                'clientState' => $clientState,
+                'callControlIDs' => $callControlIDs ?? Omitted::VALUE,
+                'clientState' => $clientState ?? Omitted::VALUE,
                 'durationMillis' => $durationMillis,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -662,17 +680,18 @@ final class ActionsService implements ActionsContract
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'payload' => $payload,
                 'voice' => $voice,
-                'callControlIDs' => $callControlIDs,
-                'commandID' => $commandID,
-                'language' => $language,
+                'callControlIDs' => $callControlIDs ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'language' => $language ?? Omitted::VALUE,
                 'payloadType' => $payloadType,
-                'region' => $region,
-                'voiceSettings' => $voiceSettings,
+                'region' => $region ?? Omitted::VALUE,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -699,8 +718,12 @@ final class ActionsService implements ActionsContract
         ConferenceRegion|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStopResponse {
-        $params = Util::removeNulls(
-            ['callControlIDs' => $callControlIDs, 'region' => $region]
+        $params = array_filter(
+            [
+                'callControlIDs' => $callControlIDs ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -727,8 +750,12 @@ final class ActionsService implements ActionsContract
         ConferenceRegion|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionUnholdResponse {
-        $params = Util::removeNulls(
-            ['callControlIDs' => $callControlIDs, 'region' => $region]
+        $params = array_filter(
+            [
+                'callControlIDs' => $callControlIDs,
+                'region' => $region ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -755,8 +782,12 @@ final class ActionsService implements ActionsContract
         ConferenceRegion|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionUnmuteResponse {
-        $params = Util::removeNulls(
-            ['callControlIDs' => $callControlIDs, 'region' => $region]
+        $params = array_filter(
+            [
+                'callControlIDs' => $callControlIDs ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

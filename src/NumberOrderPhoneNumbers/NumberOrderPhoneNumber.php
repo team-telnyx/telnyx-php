@@ -7,6 +7,7 @@ namespace Telnyx\NumberOrderPhoneNumbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\PhoneNumberType;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\RequirementsStatus;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber\Status;
@@ -119,8 +120,8 @@ final class NumberOrderPhoneNumber implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        string|Omitted|null $bundleID = Omitted::VALUE,
         ?string $id = null,
-        ?string $bundleID = null,
         ?string $countryCode = null,
         ?\DateTimeInterface $deadline = null,
         ?bool $isBlockNumber = null,
@@ -138,7 +139,7 @@ final class NumberOrderPhoneNumber implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $bundleID && $self['bundleID'] = $bundleID;
+        Omitted::VALUE !== $bundleID && $self['bundleID'] = $bundleID;
         null !== $countryCode && $self['countryCode'] = $countryCode;
         null !== $deadline && $self['deadline'] = $deadline;
         null !== $isBlockNumber && $self['isBlockNumber'] = $isBlockNumber;

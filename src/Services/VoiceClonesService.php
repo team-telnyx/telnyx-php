@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceClonesContract;
@@ -57,7 +57,7 @@ final class VoiceClonesService implements VoiceClonesContract
         TelnyxDesignClone|array|MinimaxDesignClone $voiceCloneRequest,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneResponse {
-        $params = Util::removeNulls(['voiceCloneRequest' => $voiceCloneRequest]);
+        $params = ['voiceCloneRequest' => $voiceCloneRequest];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -85,8 +85,13 @@ final class VoiceClonesService implements VoiceClonesContract
         ?string $language = null,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneResponse {
-        $params = Util::removeNulls(
-            ['name' => $name, 'gender' => $gender, 'language' => $language]
+        $params = array_filter(
+            [
+                'name' => $name,
+                'gender' => $gender ?? Omitted::VALUE,
+                'language' => $language ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -119,14 +124,15 @@ final class VoiceClonesService implements VoiceClonesContract
         Sort|string $sort = '-created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterName' => $filterName,
-                'filterProvider' => $filterProvider,
+                'filterName' => $filterName ?? Omitted::VALUE,
+                'filterProvider' => $filterProvider ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -169,9 +175,7 @@ final class VoiceClonesService implements VoiceClonesContract
         TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $voiceCloneUploadRequest,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneResponse {
-        $params = Util::removeNulls(
-            ['voiceCloneUploadRequest' => $voiceCloneUploadRequest]
-        );
+        $params = ['voiceCloneUploadRequest' => $voiceCloneUploadRequest];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createFromUpload(params: $params, requestOptions: $requestOptions);

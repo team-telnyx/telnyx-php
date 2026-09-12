@@ -7,6 +7,7 @@ namespace Telnyx\VoiceDesigns;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\VoiceDesigns\VoiceDesignSummaryData\Provider;
 use Telnyx\VoiceDesigns\VoiceDesignSummaryData\RecordType;
 
@@ -86,15 +87,15 @@ final class VoiceDesignSummaryData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Provider|value-of<Provider>|null $provider
+     * @param Omitted|Provider|value-of<Provider>|null $provider
      * @param list<string>|null $providerSupportedModels
      * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
+        Omitted|Provider|string|null $provider = Omitted::VALUE,
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $name = null,
-        Provider|string|null $provider = null,
         ?array $providerSupportedModels = null,
         RecordType|string|null $recordType = null,
         ?\DateTimeInterface $updatedAt = null,
@@ -104,7 +105,7 @@ final class VoiceDesignSummaryData implements BaseModel
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $name && $self['name'] = $name;
-        null !== $provider && $self['provider'] = $provider;
+        Omitted::VALUE !== $provider && $self['provider'] = $provider;
         null !== $providerSupportedModels && $self['providerSupportedModels'] = $providerSupportedModels;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;

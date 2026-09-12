@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\Dir;
 use Telnyx\Dir\DirListDocumentTypesResponse;
@@ -130,19 +130,20 @@ final class DirService implements DirContract
         ?bool $reselling = null,
         RequestOptions|array|null $requestOptions = null,
     ): DirWrapped {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'authorizerEmail' => $authorizerEmail,
-                'authorizerName' => $authorizerName,
-                'callReasons' => $callReasons,
-                'certifyBrandIsAccurate' => $certifyBrandIsAccurate,
-                'certifyIPOwnership' => $certifyIPOwnership,
-                'certifyNoShaftContent' => $certifyNoShaftContent,
-                'displayName' => $displayName,
-                'documents' => $documents,
-                'logoURL' => $logoURL,
-                'reselling' => $reselling,
+                'authorizerEmail' => $authorizerEmail ?? Omitted::VALUE,
+                'authorizerName' => $authorizerName ?? Omitted::VALUE,
+                'callReasons' => $callReasons ?? Omitted::VALUE,
+                'certifyBrandIsAccurate' => $certifyBrandIsAccurate ?? Omitted::VALUE,
+                'certifyIPOwnership' => $certifyIPOwnership ?? Omitted::VALUE,
+                'certifyNoShaftContent' => $certifyNoShaftContent ?? Omitted::VALUE,
+                'displayName' => $displayName ?? Omitted::VALUE,
+                'documents' => $documents ?? Omitted::VALUE,
+                'logoURL' => $logoURL ?? Omitted::VALUE,
+                'reselling' => $reselling ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -183,18 +184,19 @@ final class DirService implements DirContract
         Sort|string $sort = '-created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterCallReasonContains' => $filterCallReasonContains,
-                'filterDisplayNameContains' => $filterDisplayNameContains,
-                'filterEnterpriseID' => $filterEnterpriseID,
-                'filterExpiringAtGte' => $filterExpiringAtGte,
-                'filterExpiringAtLte' => $filterExpiringAtLte,
-                'filterStatus' => $filterStatus,
+                'filterCallReasonContains' => $filterCallReasonContains ?? Omitted::VALUE,
+                'filterDisplayNameContains' => $filterDisplayNameContains ?? Omitted::VALUE,
+                'filterEnterpriseID' => $filterEnterpriseID ?? Omitted::VALUE,
+                'filterExpiringAtGte' => $filterExpiringAtGte ?? Omitted::VALUE,
+                'filterExpiringAtLte' => $filterExpiringAtLte ?? Omitted::VALUE,
+                'filterStatus' => $filterStatus ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -261,9 +263,7 @@ final class DirService implements DirContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listInfringementClaims($dirID, params: $params, requestOptions: $requestOptions);
@@ -295,12 +295,13 @@ final class DirService implements DirContract
         Signature|array|null $signature = null,
         RequestOptions|array|null $requestOptions = null,
     ): string {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'phoneNumbers' => $phoneNumbers,
-                'agent' => $agent,
-                'signature' => $signature,
+                'agent' => $agent ?? Omitted::VALUE,
+                'signature' => $signature ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -342,9 +343,9 @@ final class DirService implements DirContract
      * @param bool $certifyNoInfringement must be `true`
      * @param bool $certifyNoShaftContent must be `true`
      * @param string $infringementResolutionNotes explanation of how the infringement concern was addressed
-     * @param list<string>|null $callReasons
-     * @param list<Document|DocumentShape>|null $documents Append-only supporting documents to attach while resolving the claim (e.g. authorization or licensing proof).
-     * @param string|null $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
+     * @param list<string>|Omitted|null $callReasons
+     * @param list<Document|DocumentShape>|Omitted|null $documents Append-only supporting documents to attach while resolving the claim (e.g. authorization or licensing proof).
+     * @param string|Omitted|null $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -356,13 +357,13 @@ final class DirService implements DirContract
         bool $certifyNoInfringement,
         bool $certifyNoShaftContent,
         string $infringementResolutionNotes,
-        ?array $callReasons = null,
-        ?string $displayName = null,
-        ?array $documents = null,
-        ?string $logoURL = null,
+        array|Omitted|null $callReasons = Omitted::VALUE,
+        string|Omitted|null $displayName = Omitted::VALUE,
+        array|Omitted|null $documents = Omitted::VALUE,
+        string|Omitted|null $logoURL = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): DirWrapped {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'certifyBrandIsAccurate' => $certifyBrandIsAccurate,
                 'certifyIPOwnership' => $certifyIPOwnership,
@@ -374,6 +375,7 @@ final class DirService implements DirContract
                 'documents' => $documents,
                 'logoURL' => $logoURL,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

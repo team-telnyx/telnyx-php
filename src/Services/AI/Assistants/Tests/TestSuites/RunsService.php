@@ -7,7 +7,7 @@ namespace Telnyx\Services\AI\Assistants\Tests\TestSuites;
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuites\RunsContract;
@@ -54,13 +54,14 @@ final class RunsService implements RunsContract
         ?string $testSuiteRunID = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'status' => $status,
-                'testSuiteRunID' => $testSuiteRunID,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'status' => $status ?? Omitted::VALUE,
+                'testSuiteRunID' => $testSuiteRunID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -89,11 +90,12 @@ final class RunsService implements RunsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): array {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'destinationVersionID' => $destinationVersionID,
-                'idempotencyKey' => $idempotencyKey,
+                'destinationVersionID' => $destinationVersionID ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

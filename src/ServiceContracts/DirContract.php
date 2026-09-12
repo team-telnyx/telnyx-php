@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\Dir;
 use Telnyx\Dir\DirListDocumentTypesResponse;
@@ -186,9 +187,9 @@ interface DirContract
      * @param bool $certifyNoInfringement must be `true`
      * @param bool $certifyNoShaftContent must be `true`
      * @param string $infringementResolutionNotes explanation of how the infringement concern was addressed
-     * @param list<string>|null $callReasons
-     * @param list<Document|DocumentShape>|null $documents Append-only supporting documents to attach while resolving the claim (e.g. authorization or licensing proof).
-     * @param string|null $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
+     * @param list<string>|Omitted|null $callReasons
+     * @param list<Document|DocumentShape>|Omitted|null $documents Append-only supporting documents to attach while resolving the claim (e.g. authorization or licensing proof).
+     * @param string|Omitted|null $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -200,10 +201,10 @@ interface DirContract
         bool $certifyNoInfringement,
         bool $certifyNoShaftContent,
         string $infringementResolutionNotes,
-        ?array $callReasons = null,
-        ?string $displayName = null,
-        ?array $documents = null,
-        ?string $logoURL = null,
+        array|Omitted|null $callReasons = Omitted::VALUE,
+        string|Omitted|null $displayName = Omitted::VALUE,
+        array|Omitted|null $documents = Omitted::VALUE,
+        string|Omitted|null $logoURL = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): DirWrapped;
 }

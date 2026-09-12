@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\EmailDomains\DomainsTrackingSettings;
 use Telnyx\EmailDomains\EmailDmarcPolicy;
@@ -27,7 +28,7 @@ interface EmailDomainsContract
     /**
      * @api
      *
-     * @param EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy DMARC policy for a sending domain. Drives the recommended _dmarc.<domain> TXT record. DMARC is advisory and never blocks sending. When omitted or null, the domain uses the advisory default (v=DMARC1; p=none; rua=mailto:dmarc@telnyx.com).
+     * @param Omitted|EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy DMARC policy for a sending domain. Drives the recommended _dmarc.<domain> TXT record. DMARC is advisory and never blocks sending. When omitted or null, the domain uses the advisory default (v=DMARC1; p=none; rua=mailto:dmarc@telnyx.com).
      * @param bool $inboundEnabled Enable inbound routing for this domain
      * @param DomainsTrackingSettings|DomainsTrackingSettingsShape $tracking
      * @param RequestOpts|null $requestOptions
@@ -36,7 +37,7 @@ interface EmailDomainsContract
      */
     public function create(
         string $domain,
-        EmailDmarcPolicy|array|null $dmarcPolicy = null,
+        Omitted|EmailDmarcPolicy|array|null $dmarcPolicy = Omitted::VALUE,
         bool $inboundEnabled = false,
         DomainsTrackingSettings|array|null $tracking = null,
         RequestOptions|array|null $requestOptions = null,
@@ -59,7 +60,7 @@ interface EmailDomainsContract
      * @api
      *
      * @param string $id Email domain UUID
-     * @param EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy DMARC policy for a sending domain. Drives the recommended _dmarc.<domain> TXT record. DMARC is advisory and never blocks sending. When omitted or null, the domain uses the advisory default (v=DMARC1; p=none; rua=mailto:dmarc@telnyx.com).
+     * @param Omitted|EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy DMARC policy for a sending domain. Drives the recommended _dmarc.<domain> TXT record. DMARC is advisory and never blocks sending. When omitted or null, the domain uses the advisory default (v=DMARC1; p=none; rua=mailto:dmarc@telnyx.com).
      * @param bool $inboundEnabled Enable or disable inbound routing for this domain
      * @param DomainsTrackingSettings|DomainsTrackingSettingsShape $tracking
      * @param RequestOpts|null $requestOptions
@@ -68,7 +69,7 @@ interface EmailDomainsContract
      */
     public function update(
         string $id,
-        EmailDmarcPolicy|array|null $dmarcPolicy = null,
+        Omitted|EmailDmarcPolicy|array|null $dmarcPolicy = Omitted::VALUE,
         ?bool $inboundEnabled = null,
         DomainsTrackingSettings|array|null $tracking = null,
         RequestOptions|array|null $requestOptions = null,

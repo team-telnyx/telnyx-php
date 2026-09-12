@@ -6,7 +6,7 @@ namespace Telnyx\Services\Messaging10dlc;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaign;
 use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Filter;
 use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Sort;
@@ -51,9 +51,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         string $phoneNumber,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberCampaign {
-        $params = Util::removeNulls(
-            ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber]
-        );
+        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -99,9 +97,7 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         string $phoneNumber,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberCampaign {
-        $params = Util::removeNulls(
-            ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber]
-        );
+        $params = ['campaignID' => $campaignID, 'phoneNumber' => $phoneNumber];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($campaignPhoneNumber, params: $params, requestOptions: $requestOptions);
@@ -131,13 +127,14 @@ final class PhoneNumberCampaignsService implements PhoneNumberCampaignsContract
         Sort|string $sort = '-createdAt',
         RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2 {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
+                'filter' => $filter ?? Omitted::VALUE,
                 'page' => $page,
                 'recordsPerPage' => $recordsPerPage,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

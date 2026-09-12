@@ -14,7 +14,7 @@ use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Conferences\ConferenceParticipantResource;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConferencesContract;
@@ -93,21 +93,22 @@ final class ConferencesService implements ConferencesContract
         ?bool $startConferenceOnCreate = null,
         RequestOptions|array|null $requestOptions = null,
     ): ConferenceNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'callControlID' => $callControlID,
                 'name' => $name,
                 'beepEnabled' => $beepEnabled,
-                'clientState' => $clientState,
+                'clientState' => $clientState ?? Omitted::VALUE,
                 'comfortNoise' => $comfortNoise,
-                'commandID' => $commandID,
-                'durationMinutes' => $durationMinutes,
-                'holdAudioURL' => $holdAudioURL,
-                'holdMediaName' => $holdMediaName,
-                'maxParticipants' => $maxParticipants,
-                'region' => $region,
-                'startConferenceOnCreate' => $startConferenceOnCreate,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'durationMinutes' => $durationMinutes ?? Omitted::VALUE,
+                'holdAudioURL' => $holdAudioURL ?? Omitted::VALUE,
+                'holdMediaName' => $holdMediaName ?? Omitted::VALUE,
+                'maxParticipants' => $maxParticipants ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
+                'startConferenceOnCreate' => $startConferenceOnCreate ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -132,7 +133,10 @@ final class ConferencesService implements ConferencesContract
         \Telnyx\Conferences\ConferenceRetrieveParams\Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ConferenceGetResponse {
-        $params = Util::removeNulls(['region' => $region]);
+        $params = array_filter(
+            ['region' => $region ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -160,13 +164,14 @@ final class ConferencesService implements ConferencesContract
         \Telnyx\Conferences\ConferenceListParams\Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'region' => $region,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -197,13 +202,14 @@ final class ConferencesService implements ConferencesContract
         \Telnyx\Conferences\ConferenceListParticipantsParams\Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'region' => $region,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'region' => $region ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -228,7 +234,7 @@ final class ConferencesService implements ConferencesContract
         string $id,
         RequestOptions|array|null $requestOptions = null,
     ): ConferenceParticipantResource {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveParticipant($participantID, params: $params, requestOptions: $requestOptions);
@@ -258,13 +264,14 @@ final class ConferencesService implements ConferencesContract
         ?bool $softEndConferenceOnExit = null,
         RequestOptions|array|null $requestOptions = null,
     ): ConferenceParticipantResource {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'id' => $id,
-                'beepEnabled' => $beepEnabled,
-                'endConferenceOnExit' => $endConferenceOnExit,
-                'softEndConferenceOnExit' => $softEndConferenceOnExit,
+                'beepEnabled' => $beepEnabled ?? Omitted::VALUE,
+                'endConferenceOnExit' => $endConferenceOnExit ?? Omitted::VALUE,
+                'softEndConferenceOnExit' => $softEndConferenceOnExit ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -6,7 +6,7 @@ namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\SqldbsContract;
@@ -56,7 +56,7 @@ final class SqldbsService implements SqldbsContract
         string $name,
         RequestOptions|array|null $requestOptions = null
     ): SqlDatabaseResponseWrapper {
-        $params = Util::removeNulls(['name' => $name]);
+        $params = ['name' => $name];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -108,14 +108,15 @@ final class SqldbsService implements SqldbsContract
         Sort|string $sort = '-created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterName' => $filterName,
-                'filterStatus' => $filterStatus,
+                'filterName' => $filterName ?? Omitted::VALUE,
+                'filterStatus' => $filterStatus ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -140,7 +141,7 @@ final class SqldbsService implements SqldbsContract
         bool $force = false,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['force' => $force]);
+        $params = ['force' => $force];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);

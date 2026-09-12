@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerificationsContract;
 use Telnyx\Services\Verifications\ActionsService;
@@ -73,8 +73,8 @@ final class VerificationsService implements VerificationsContract
      *
      * @param string $phoneNumber +E164 formatted phone number
      * @param string $verifyProfileID the identifier of the associated Verify profile
-     * @param string|null $customCode Send a self-generated numeric code to the end-user
-     * @param string|null $extension Optional extension to dial after call is answered using DTMF digits. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
+     * @param string|Omitted|null $customCode Send a self-generated numeric code to the end-user
+     * @param string|Omitted|null $extension Optional extension to dial after call is answered using DTMF digits. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
      * @param int $timeoutSecs the number of seconds the verification code is valid for
      * @param RequestOpts|null $requestOptions
      *
@@ -83,19 +83,20 @@ final class VerificationsService implements VerificationsContract
     public function triggerCall(
         string $phoneNumber,
         string $verifyProfileID,
-        ?string $customCode = null,
-        ?string $extension = null,
+        string|Omitted|null $customCode = Omitted::VALUE,
+        string|Omitted|null $extension = Omitted::VALUE,
         ?int $timeoutSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): CreateVerificationResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'phoneNumber' => $phoneNumber,
                 'verifyProfileID' => $verifyProfileID,
                 'customCode' => $customCode,
                 'extension' => $extension,
-                'timeoutSecs' => $timeoutSecs,
+                'timeoutSecs' => $timeoutSecs ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -122,12 +123,13 @@ final class VerificationsService implements VerificationsContract
         ?int $timeoutSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): CreateVerificationResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'phoneNumber' => $phoneNumber,
                 'verifyProfileID' => $verifyProfileID,
-                'timeoutSecs' => $timeoutSecs,
+                'timeoutSecs' => $timeoutSecs ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -143,7 +145,7 @@ final class VerificationsService implements VerificationsContract
      *
      * @param string $phoneNumber +E164 formatted phone number
      * @param string $verifyProfileID the identifier of the associated Verify profile
-     * @param string|null $customCode Send a self-generated numeric code to the end-user
+     * @param string|Omitted|null $customCode Send a self-generated numeric code to the end-user
      * @param int $timeoutSecs the number of seconds the verification code is valid for
      * @param RequestOpts|null $requestOptions
      *
@@ -152,17 +154,18 @@ final class VerificationsService implements VerificationsContract
     public function triggerSMS(
         string $phoneNumber,
         string $verifyProfileID,
-        ?string $customCode = null,
+        string|Omitted|null $customCode = Omitted::VALUE,
         ?int $timeoutSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): CreateVerificationResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'phoneNumber' => $phoneNumber,
                 'verifyProfileID' => $verifyProfileID,
                 'customCode' => $customCode,
-                'timeoutSecs' => $timeoutSecs,
+                'timeoutSecs' => $timeoutSecs ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -178,7 +181,7 @@ final class VerificationsService implements VerificationsContract
      *
      * @param string $phoneNumber +E164 formatted phone number
      * @param string $verifyProfileID the identifier of the associated Verify profile
-     * @param string|null $customCode Send a self-generated numeric code to the end-user
+     * @param string|Omitted|null $customCode Send a self-generated numeric code to the end-user
      * @param int $timeoutSecs the number of seconds the verification code is valid for
      * @param RequestOpts|null $requestOptions
      *
@@ -187,17 +190,18 @@ final class VerificationsService implements VerificationsContract
     public function triggerWhatsappVerification(
         string $phoneNumber,
         string $verifyProfileID,
-        ?string $customCode = null,
+        string|Omitted|null $customCode = Omitted::VALUE,
         ?int $timeoutSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): CreateVerificationResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'phoneNumber' => $phoneNumber,
                 'verifyProfileID' => $verifyProfileID,
                 'customCode' => $customCode,
-                'timeoutSecs' => $timeoutSecs,
+                'timeoutSecs' => $timeoutSecs ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

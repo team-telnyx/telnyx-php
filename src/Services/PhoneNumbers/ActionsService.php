@@ -6,7 +6,7 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusResponse;
 use Telnyx\PhoneNumbers\Actions\ActionEnableEmergencyResponse;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse;
@@ -49,7 +49,10 @@ final class ActionsService implements ActionsContract
         ?string $bundleID,
         RequestOptions|array|null $requestOptions = null,
     ): ActionChangeBundleStatusResponse {
-        $params = Util::removeNulls(['bundleID' => $bundleID]);
+        $params = array_filter(
+            ['bundleID' => $bundleID ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->changeBundleStatus($id, params: $params, requestOptions: $requestOptions);
@@ -75,12 +78,10 @@ final class ActionsService implements ActionsContract
         bool $emergencyEnabled,
         RequestOptions|array|null $requestOptions = null,
     ): ActionEnableEmergencyResponse {
-        $params = Util::removeNulls(
-            [
-                'emergencyAddressID' => $emergencyAddressID,
-                'emergencyEnabled' => $emergencyEnabled,
-            ],
-        );
+        $params = [
+            'emergencyAddressID' => $emergencyAddressID,
+            'emergencyEnabled' => $emergencyEnabled,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->enableEmergency($id, params: $params, requestOptions: $requestOptions);
@@ -102,7 +103,7 @@ final class ActionsService implements ActionsContract
         array $phoneNumbers,
         RequestOptions|array|null $requestOptions = null
     ): ActionVerifyOwnershipResponse {
-        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
+        $params = ['phoneNumbers' => $phoneNumbers];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->verifyOwnership(params: $params, requestOptions: $requestOptions);

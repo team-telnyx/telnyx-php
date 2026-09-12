@@ -6,7 +6,7 @@ namespace Telnyx\Services\Enterprises\Reputation;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationListResponse;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationRequestWrapped;
@@ -58,13 +58,14 @@ final class RemediationService implements RemediationContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): RemediationRequestWrapped {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'callPurpose' => $callPurpose,
                 'phoneNumbers' => $phoneNumbers,
-                'contactEmail' => $contactEmail,
-                'webhookURL' => $webhookURL,
+                'contactEmail' => $contactEmail ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -89,7 +90,7 @@ final class RemediationService implements RemediationContract
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null,
     ): RemediationRequestWrapped {
-        $params = Util::removeNulls(['enterpriseID' => $enterpriseID]);
+        $params = ['enterpriseID' => $enterpriseID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($remediationID, params: $params, requestOptions: $requestOptions);
@@ -123,14 +124,15 @@ final class RemediationService implements RemediationContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterCreatedAtGte' => $filterCreatedAtGte,
-                'filterCreatedAtLte' => $filterCreatedAtLte,
-                'filterStatus' => $filterStatus,
+                'filterCreatedAtGte' => $filterCreatedAtGte ?? Omitted::VALUE,
+                'filterCreatedAtLte' => $filterCreatedAtLte ?? Omitted::VALUE,
+                'filterStatus' => $filterStatus ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

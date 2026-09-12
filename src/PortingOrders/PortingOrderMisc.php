@@ -7,6 +7,7 @@ namespace Telnyx\PortingOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\PortingOrders\PortingOrderMisc\RemainingNumbersAction;
 
 /**
@@ -57,18 +58,18 @@ final class PortingOrderMisc implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RemainingNumbersAction|value-of<RemainingNumbersAction>|null $remainingNumbersAction
+     * @param Omitted|RemainingNumbersAction|value-of<RemainingNumbersAction>|null $remainingNumbersAction
      * @param PortingOrderType|value-of<PortingOrderType>|null $type
      */
     public static function with(
-        ?string $newBillingPhoneNumber = null,
-        RemainingNumbersAction|string|null $remainingNumbersAction = null,
+        string|Omitted|null $newBillingPhoneNumber = Omitted::VALUE,
+        Omitted|RemainingNumbersAction|string|null $remainingNumbersAction = Omitted::VALUE,
         PortingOrderType|string|null $type = null,
     ): self {
         $self = new self;
 
-        null !== $newBillingPhoneNumber && $self['newBillingPhoneNumber'] = $newBillingPhoneNumber;
-        null !== $remainingNumbersAction && $self['remainingNumbersAction'] = $remainingNumbersAction;
+        Omitted::VALUE !== $newBillingPhoneNumber && $self['newBillingPhoneNumber'] = $newBillingPhoneNumber;
+        Omitted::VALUE !== $remainingNumbersAction && $self['remainingNumbersAction'] = $remainingNumbersAction;
         null !== $type && $self['type'] = $type;
 
         return $self;

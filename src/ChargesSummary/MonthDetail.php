@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type MonthDetailShape = array{
@@ -64,14 +65,14 @@ final class MonthDetail implements BaseModel
     public static function with(
         string $mrc,
         int $quantity,
-        ?string $otc = null
+        string|Omitted|null $otc = Omitted::VALUE
     ): self {
         $self = new self;
 
         $self['mrc'] = $mrc;
         $self['quantity'] = $quantity;
 
-        null !== $otc && $self['otc'] = $otc;
+        Omitted::VALUE !== $otc && $self['otc'] = $otc;
 
         return $self;
     }

@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailBlocks\EmailBlockGetEventsResponse\EventType;
 use Telnyx\EmailBlocks\EmailBlockGetEventsResponse\RecordType;
 
@@ -113,7 +114,7 @@ final class EmailBlockGetEventsResponse implements BaseModel
      *
      * @param EventType|value-of<EventType> $eventType
      * @param RecordType|value-of<RecordType> $recordType
-     * @param array<string,mixed>|null $meta
+     * @param Omitted|array<string,mixed>|null $meta
      */
     public static function with(
         string $id,
@@ -123,7 +124,7 @@ final class EmailBlockGetEventsResponse implements BaseModel
         string $reason,
         RecordType|string $recordType,
         string $source,
-        ?array $meta = null,
+        Omitted|array|null $meta = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -135,7 +136,7 @@ final class EmailBlockGetEventsResponse implements BaseModel
         $self['recordType'] = $recordType;
         $self['source'] = $source;
 
-        null !== $meta && $self['meta'] = $meta;
+        Omitted::VALUE !== $meta && $self['meta'] = $meta;
 
         return $self;
     }

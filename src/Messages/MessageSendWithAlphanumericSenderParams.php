@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Send an SMS message using an alphanumeric sender ID. This is SMS only.
@@ -108,9 +109,9 @@ final class MessageSendWithAlphanumericSenderParams implements BaseModel
         string $messagingProfileID,
         string $text,
         string $to,
+        string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         ?bool $useProfileWebhooks = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
     ): self {
         $self = new self;
 
@@ -120,8 +121,8 @@ final class MessageSendWithAlphanumericSenderParams implements BaseModel
         $self['to'] = $to;
 
         null !== $useProfileWebhooks && $self['useProfileWebhooks'] = $useProfileWebhooks;
-        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        Omitted::VALUE !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

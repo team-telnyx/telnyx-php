@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumber;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberGetResponse;
@@ -61,8 +62,8 @@ interface MobilePhoneNumbersContract
         CallRecording|array|null $callRecording = null,
         ?bool $callerIDNameEnabled = null,
         CnamListing|array|null $cnamListing = null,
-        ?string $connectionID = null,
-        ?string $customerReference = null,
+        string|Omitted|null $connectionID = Omitted::VALUE,
+        string|Omitted|null $customerReference = Omitted::VALUE,
         Inbound|array|null $inbound = null,
         InboundCallScreening|string|null $inboundCallScreening = null,
         ?bool $noiseSuppression = null,

@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Updates mutable settings for an existing email domain, including inbound delivery and tracking configuration. Shared domains are read-only for non-owner accounts.
@@ -54,17 +55,17 @@ final class EmailDomainUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy
+     * @param Omitted|EmailDmarcPolicy|EmailDmarcPolicyShape|null $dmarcPolicy
      * @param DomainsTrackingSettings|DomainsTrackingSettingsShape|null $tracking
      */
     public static function with(
-        EmailDmarcPolicy|array|null $dmarcPolicy = null,
+        Omitted|EmailDmarcPolicy|array|null $dmarcPolicy = Omitted::VALUE,
         ?bool $inboundEnabled = null,
         DomainsTrackingSettings|array|null $tracking = null,
     ): self {
         $self = new self;
 
-        null !== $dmarcPolicy && $self['dmarcPolicy'] = $dmarcPolicy;
+        Omitted::VALUE !== $dmarcPolicy && $self['dmarcPolicy'] = $dmarcPolicy;
         null !== $inboundEnabled && $self['inboundEnabled'] = $inboundEnabled;
         null !== $tracking && $self['tracking'] = $tracking;
 

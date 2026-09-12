@@ -8,6 +8,7 @@ use Telnyx\Connections\Connection\WebhookAPIVersion;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 
 /**
@@ -121,6 +122,8 @@ final class Connection implements BaseModel
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookEventURL = Omitted::VALUE,
         ?string $id = null,
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsiteOverride = null,
@@ -131,8 +134,6 @@ final class Connection implements BaseModel
         ?array $tags = null,
         ?string $updatedAt = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
     ): self {
         $self = new self;
 
@@ -146,8 +147,8 @@ final class Connection implements BaseModel
         null !== $tags && $self['tags'] = $tags;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        Omitted::VALUE !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        Omitted::VALUE !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
 
         return $self;
     }

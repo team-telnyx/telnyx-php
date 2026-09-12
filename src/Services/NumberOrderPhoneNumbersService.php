@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberGetResponse;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter;
 use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListResponse;
@@ -70,7 +70,10 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
         Filter|array|null $filter = null,
         RequestOptions|array|null $requestOptions = null,
     ): NumberOrderPhoneNumberListResponse {
-        $params = Util::removeNulls(['filter' => $filter]);
+        $params = array_filter(
+            ['filter' => $filter ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -94,7 +97,7 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
         string $requirementGroupID,
         RequestOptions|array|null $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementGroupResponse {
-        $params = Util::removeNulls(['requirementGroupID' => $requirementGroupID]);
+        $params = ['requirementGroupID' => $requirementGroupID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateRequirementGroup($id, params: $params, requestOptions: $requestOptions);
@@ -118,8 +121,9 @@ final class NumberOrderPhoneNumbersService implements NumberOrderPhoneNumbersCon
         ?array $regulatoryRequirements = null,
         RequestOptions|array|null $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementsResponse {
-        $params = Util::removeNulls(
-            ['regulatoryRequirements' => $regulatoryRequirements]
+        $params = array_filter(
+            ['regulatoryRequirements' => $regulatoryRequirements ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-import-type AgentConsentConfigurationShape from \Telnyx\Rcs\Agents\AgentConsentConfiguration
@@ -71,15 +72,15 @@ final class AgentCampaignConfiguration implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AgentConsentConfiguration|AgentConsentConfigurationShape|null $consentSettings
+     * @param Omitted|AgentConsentConfiguration|AgentConsentConfigurationShape|null $consentSettings
      * @param list<AgentInteraction|AgentInteractionShape>|null $interactions
      * @param list<string>|null $messageExamples
      */
     public static function with(
         string $companyOverview,
-        ?string $additionalInformation = null,
-        ?string $agentOverview = null,
-        AgentConsentConfiguration|array|null $consentSettings = null,
+        string|Omitted|null $additionalInformation = Omitted::VALUE,
+        string|Omitted|null $agentOverview = Omitted::VALUE,
+        Omitted|AgentConsentConfiguration|array|null $consentSettings = Omitted::VALUE,
         ?array $interactions = null,
         ?array $messageExamples = null,
     ): self {
@@ -87,9 +88,9 @@ final class AgentCampaignConfiguration implements BaseModel
 
         $self['companyOverview'] = $companyOverview;
 
-        null !== $additionalInformation && $self['additionalInformation'] = $additionalInformation;
-        null !== $agentOverview && $self['agentOverview'] = $agentOverview;
-        null !== $consentSettings && $self['consentSettings'] = $consentSettings;
+        Omitted::VALUE !== $additionalInformation && $self['additionalInformation'] = $additionalInformation;
+        Omitted::VALUE !== $agentOverview && $self['agentOverview'] = $agentOverview;
+        Omitted::VALUE !== $consentSettings && $self['consentSettings'] = $consentSettings;
         null !== $interactions && $self['interactions'] = $interactions;
         null !== $messageExamples && $self['messageExamples'] = $messageExamples;
 

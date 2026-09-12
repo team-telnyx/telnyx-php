@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\FileParam;
+use Telnyx\Core\Omitted;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone\Gender;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone\ModelID;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone\Provider;
@@ -119,7 +120,7 @@ final class MinimaxClone implements BaseModel
      *
      * @param Gender|value-of<Gender> $gender
      * @param Provider|value-of<Provider> $provider
-     * @param ModelID|value-of<ModelID>|null $modelID
+     * @param Omitted|ModelID|value-of<ModelID>|null $modelID
      */
     public static function with(
         string|FileParam $audioFile,
@@ -127,8 +128,8 @@ final class MinimaxClone implements BaseModel
         string $language,
         string $name,
         Provider|string $provider,
+        Omitted|ModelID|string|null $modelID = Omitted::VALUE,
         ?string $label = null,
-        ModelID|string|null $modelID = null,
         ?string $refText = null,
     ): self {
         $self = new self;
@@ -140,7 +141,7 @@ final class MinimaxClone implements BaseModel
         $self['provider'] = $provider;
 
         null !== $label && $self['label'] = $label;
-        null !== $modelID && $self['modelID'] = $modelID;
+        Omitted::VALUE !== $modelID && $self['modelID'] = $modelID;
         null !== $refText && $self['refText'] = $refText;
 
         return $self;

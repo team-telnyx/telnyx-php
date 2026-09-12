@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Documents\DocServiceDocument;
 use Telnyx\Documents\DocumentDeleteResponse;
@@ -82,8 +82,12 @@ final class DocumentsService implements DocumentsContract
         ?string $filename = null,
         RequestOptions|array|null $requestOptions = null,
     ): DocumentUpdateResponse {
-        $params = Util::removeNulls(
-            ['customerReference' => $customerReference, 'filename' => $filename]
+        $params = array_filter(
+            [
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'filename' => $filename ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -112,13 +116,14 @@ final class DocumentsService implements DocumentsContract
         ?array $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -201,7 +206,7 @@ final class DocumentsService implements DocumentsContract
         Document|array $document,
         RequestOptions|array|null $requestOptions = null
     ): DocumentUploadResponse {
-        $params = Util::removeNulls(['document' => $document]);
+        $params = ['document' => $document];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->upload(params: $params, requestOptions: $requestOptions);
@@ -223,7 +228,7 @@ final class DocumentsService implements DocumentsContract
         \Telnyx\Documents\DocumentUploadJsonParams\Document|array $document,
         RequestOptions|array|null $requestOptions = null,
     ): DocumentUploadJsonResponse {
-        $params = Util::removeNulls(['document' => $document]);
+        $params = ['document' => $document];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->uploadJson(params: $params, requestOptions: $requestOptions);

@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentPhoneContactRequirement;
 use Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentProfileContactRequirement;
 use Telnyx\Rcs\Agents\AgentConfiguration\Basics\AgentWebhookContactRequirement;
@@ -68,20 +69,20 @@ final class AgentConfiguration implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param BasicsShape $basics
-     * @param AgentCampaignConfiguration|AgentCampaignConfigurationShape|null $campaign
-     * @param AgentTestingConfiguration|AgentTestingConfigurationShape|null $testing
+     * @param Omitted|AgentCampaignConfiguration|AgentCampaignConfigurationShape|null $campaign
+     * @param Omitted|AgentTestingConfiguration|AgentTestingConfigurationShape|null $testing
      */
     public static function with(
         AgentPhoneContactRequirement|array|AgentWebhookContactRequirement|AgentProfileContactRequirement $basics,
-        AgentCampaignConfiguration|array|null $campaign = null,
-        AgentTestingConfiguration|array|null $testing = null,
+        Omitted|AgentCampaignConfiguration|array|null $campaign = Omitted::VALUE,
+        Omitted|AgentTestingConfiguration|array|null $testing = Omitted::VALUE,
     ): self {
         $self = new self;
 
         $self['basics'] = $basics;
 
-        null !== $campaign && $self['campaign'] = $campaign;
-        null !== $testing && $self['testing'] = $testing;
+        Omitted::VALUE !== $campaign && $self['campaign'] = $campaign;
+        Omitted::VALUE !== $testing && $self['testing'] = $testing;
 
         return $self;
     }

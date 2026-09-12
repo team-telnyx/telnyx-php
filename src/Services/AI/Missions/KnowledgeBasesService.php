@@ -6,7 +6,6 @@ namespace Telnyx\Services\AI\Missions;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Missions\KnowledgeBasesContract;
 
@@ -64,7 +63,7 @@ final class KnowledgeBasesService implements KnowledgeBasesContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteKnowledgeBase($knowledgeBaseID, params: $params, requestOptions: $requestOptions);
@@ -88,7 +87,7 @@ final class KnowledgeBasesService implements KnowledgeBasesContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getKnowledgeBase($knowledgeBaseID, params: $params, requestOptions: $requestOptions);
@@ -132,7 +131,7 @@ final class KnowledgeBasesService implements KnowledgeBasesContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateKnowledgeBase($knowledgeBaseID, params: $params, requestOptions: $requestOptions);

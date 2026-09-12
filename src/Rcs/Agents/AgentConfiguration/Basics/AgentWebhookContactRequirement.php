@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Rcs\Agents\AgentEmailContact;
 use Telnyx\Rcs\Agents\AgentPhoneContact;
 use Telnyx\Rcs\Agents\AgentWebsiteContact;
@@ -86,17 +87,17 @@ final class AgentWebhookContactRequirement implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AgentWebsiteContact|AgentWebsiteContactShape $website
-     * @param AgentEmailContact|AgentEmailContactShape|null $email
-     * @param AgentPhoneContact|AgentPhoneContactShape|null $phoneNumber
+     * @param Omitted|AgentEmailContact|AgentEmailContactShape|null $email
+     * @param Omitted|AgentPhoneContact|AgentPhoneContactShape|null $phoneNumber
      */
     public static function with(
         AgentWebsiteContact|array $website,
+        Omitted|AgentEmailContact|array|null $email = Omitted::VALUE,
+        Omitted|AgentPhoneContact|array|null $phoneNumber = Omitted::VALUE,
         ?string $brandColor = null,
         ?string $description = null,
-        AgentEmailContact|array|null $email = null,
         ?string $heroURL = null,
         ?string $logoURL = null,
-        AgentPhoneContact|array|null $phoneNumber = null,
         ?string $privacyPolicyURL = null,
         ?string $termsAndConditionsURL = null,
     ): self {
@@ -106,10 +107,10 @@ final class AgentWebhookContactRequirement implements BaseModel
 
         null !== $brandColor && $self['brandColor'] = $brandColor;
         null !== $description && $self['description'] = $description;
-        null !== $email && $self['email'] = $email;
+        Omitted::VALUE !== $email && $self['email'] = $email;
         null !== $heroURL && $self['heroURL'] = $heroURL;
         null !== $logoURL && $self['logoURL'] = $logoURL;
-        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        Omitted::VALUE !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $privacyPolicyURL && $self['privacyPolicyURL'] = $privacyPolicyURL;
         null !== $termsAndConditionsURL && $self['termsAndConditionsURL'] = $termsAndConditionsURL;
 

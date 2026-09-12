@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\MapOf;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailInboxes\Drafts\EmailDraft\RecordType;
 use Telnyx\EmailInboxes\Drafts\EmailDraft\Status;
 
@@ -208,24 +209,24 @@ final class EmailDraft implements BaseModel
         string $inboxID,
         RecordType|string $recordType,
         Status|string $status,
+        string|Omitted|null $from = Omitted::VALUE,
+        string|Omitted|null $fromName = Omitted::VALUE,
+        string|Omitted|null $htmlBody = Omitted::VALUE,
+        string|Omitted|null $replyTo = Omitted::VALUE,
+        string|Omitted|null $replyToMessageID = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $sentAt = Omitted::VALUE,
+        string|Omitted|null $sentMessageID = Omitted::VALUE,
+        string|Omitted|null $subject = Omitted::VALUE,
+        string|Omitted|null $textBody = Omitted::VALUE,
+        string|Omitted|null $threadID = Omitted::VALUE,
         ?array $attachments = null,
         ?array $bcc = null,
         ?array $cc = null,
         ?\DateTimeInterface $createdAt = null,
-        ?string $from = null,
-        ?string $fromName = null,
         ?array $headers = null,
-        ?string $htmlBody = null,
         ?array $labels = null,
         ?array $metadata = null,
-        ?string $replyTo = null,
-        ?string $replyToMessageID = null,
-        ?\DateTimeInterface $sentAt = null,
-        ?string $sentMessageID = null,
-        ?string $subject = null,
         ?array $tags = null,
-        ?string $textBody = null,
-        ?string $threadID = null,
         ?array $to = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
@@ -240,20 +241,20 @@ final class EmailDraft implements BaseModel
         null !== $bcc && $self['bcc'] = $bcc;
         null !== $cc && $self['cc'] = $cc;
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $from && $self['from'] = $from;
-        null !== $fromName && $self['fromName'] = $fromName;
+        Omitted::VALUE !== $from && $self['from'] = $from;
+        Omitted::VALUE !== $fromName && $self['fromName'] = $fromName;
         null !== $headers && $self['headers'] = $headers;
-        null !== $htmlBody && $self['htmlBody'] = $htmlBody;
+        Omitted::VALUE !== $htmlBody && $self['htmlBody'] = $htmlBody;
         null !== $labels && $self['labels'] = $labels;
         null !== $metadata && $self['metadata'] = $metadata;
-        null !== $replyTo && $self['replyTo'] = $replyTo;
-        null !== $replyToMessageID && $self['replyToMessageID'] = $replyToMessageID;
-        null !== $sentAt && $self['sentAt'] = $sentAt;
-        null !== $sentMessageID && $self['sentMessageID'] = $sentMessageID;
-        null !== $subject && $self['subject'] = $subject;
+        Omitted::VALUE !== $replyTo && $self['replyTo'] = $replyTo;
+        Omitted::VALUE !== $replyToMessageID && $self['replyToMessageID'] = $replyToMessageID;
+        Omitted::VALUE !== $sentAt && $self['sentAt'] = $sentAt;
+        Omitted::VALUE !== $sentMessageID && $self['sentMessageID'] = $sentMessageID;
+        Omitted::VALUE !== $subject && $self['subject'] = $subject;
         null !== $tags && $self['tags'] = $tags;
-        null !== $textBody && $self['textBody'] = $textBody;
-        null !== $threadID && $self['threadID'] = $threadID;
+        Omitted::VALUE !== $textBody && $self['textBody'] = $textBody;
+        Omitted::VALUE !== $threadID && $self['threadID'] = $threadID;
         null !== $to && $self['to'] = $to;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 

@@ -6,7 +6,7 @@ namespace Telnyx\Services\MessagingProfiles;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
@@ -57,13 +57,14 @@ final class AutorespConfigsService implements AutorespConfigsContract
         ?string $respText = null,
         RequestOptions|array|null $requestOptions = null,
     ): AutoRespConfigResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'countryCode' => $countryCode,
                 'keywords' => $keywords,
                 'op' => $op,
-                'respText' => $respText,
+                'respText' => $respText ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -88,7 +89,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
         string $profileID,
         RequestOptions|array|null $requestOptions = null,
     ): AutoRespConfigResponse {
-        $params = Util::removeNulls(['profileID' => $profileID]);
+        $params = ['profileID' => $profileID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($autorespCfgID, params: $params, requestOptions: $requestOptions);
@@ -120,14 +121,15 @@ final class AutorespConfigsService implements AutorespConfigsContract
         ?string $respText = null,
         RequestOptions|array|null $requestOptions = null,
     ): AutoRespConfigResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'profileID' => $profileID,
                 'countryCode' => $countryCode,
                 'keywords' => $keywords,
                 'op' => $op,
-                'respText' => $respText,
+                'respText' => $respText ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -156,12 +158,13 @@ final class AutorespConfigsService implements AutorespConfigsContract
         UpdatedAt|array|null $updatedAt = null,
         RequestOptions|array|null $requestOptions = null,
     ): AutorespConfigListResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'countryCode' => $countryCode,
-                'createdAt' => $createdAt,
-                'updatedAt' => $updatedAt,
+                'countryCode' => $countryCode ?? Omitted::VALUE,
+                'createdAt' => $createdAt ?? Omitted::VALUE,
+                'updatedAt' => $updatedAt ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -186,7 +189,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
         string $profileID,
         RequestOptions|array|null $requestOptions = null,
     ): string {
-        $params = Util::removeNulls(['profileID' => $profileID]);
+        $params = ['profileID' => $profileID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($autorespCfgID, params: $params, requestOptions: $requestOptions);

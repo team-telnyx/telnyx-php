@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Rcs\Brands\BrandContact\ContactType;
 
 /**
@@ -83,7 +84,7 @@ final class Brand implements BaseModel
         string $firstName,
         string $lastName,
         string $phoneNumber,
-        ?string $title = null,
+        string|Omitted|null $title = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -93,7 +94,7 @@ final class Brand implements BaseModel
         $self['lastName'] = $lastName;
         $self['phoneNumber'] = $phoneNumber;
 
-        null !== $title && $self['title'] = $title;
+        Omitted::VALUE !== $title && $self['title'] = $title;
 
         return $self;
     }

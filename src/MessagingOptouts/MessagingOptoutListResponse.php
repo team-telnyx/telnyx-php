@@ -7,6 +7,7 @@ namespace Telnyx\MessagingOptouts;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type MessagingOptoutListResponseShape = array{
@@ -63,18 +64,18 @@ final class MessagingOptoutListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        string|Omitted|null $keyword = Omitted::VALUE,
+        string|Omitted|null $messagingProfileID = Omitted::VALUE,
         ?\DateTimeInterface $createdAt = null,
         ?string $from = null,
-        ?string $keyword = null,
-        ?string $messagingProfileID = null,
         ?string $to = null,
     ): self {
         $self = new self;
 
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $from && $self['from'] = $from;
-        null !== $keyword && $self['keyword'] = $keyword;
-        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        Omitted::VALUE !== $keyword && $self['keyword'] = $keyword;
+        Omitted::VALUE !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         null !== $to && $self['to'] = $to;
 
         return $self;

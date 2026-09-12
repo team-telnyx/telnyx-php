@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\EmailMessages\EmailMessageBatchParams\Message;
 
 /**
- * Creates up to 50 email messages in a single request.
+ * Creates up to 1,000 email messages in a single request. Each message is validated and sent independently; per-message failures do not affect other messages in the batch. All responses use 207 Multi-Status.
  *
  * @see Telnyx\Services\EmailMessagesService::batch()
  *
@@ -30,7 +30,11 @@ final class EmailMessageBatchParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<Message> $messages */
+    /**
+     * Array of email messages to send. Up to 1,000 messages per batch request. Each message is validated and sent independently; per-message failures do not affect other messages in the batch.
+     *
+     * @var list<Message> $messages
+     */
     #[Required(list: Message::class)]
     public array $messages;
 
@@ -85,6 +89,8 @@ final class EmailMessageBatchParams implements BaseModel
     }
 
     /**
+     * Array of email messages to send. Up to 1,000 messages per batch request. Each message is validated and sent independently; per-message failures do not affect other messages in the batch.
+     *
      * @param list<Message|MessageShape> $messages
      */
     public function withMessages(array $messages): self

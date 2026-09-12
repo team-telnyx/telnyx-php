@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
+use Telnyx\AI\Assistants\AssistantA2AAgent;
 use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCloneParams;
@@ -44,6 +45,7 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
  * Configure AI assistant specifications.
  *
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
+ * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
@@ -78,6 +80,7 @@ final class AssistantsRawService implements AssistantsRawContract
      * @param array{
      *   instructions: string,
      *   name: string,
+     *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>,
      *   conversationFlow?: ConversationFlowReq|ConversationFlowReqShape,
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
@@ -190,6 +193,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * @param string $assistantID unique identifier of the assistant
      * @param array{
+     *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>,
      *   conversationFlow?: ConversationFlowReq|ConversationFlowReqShape,
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,

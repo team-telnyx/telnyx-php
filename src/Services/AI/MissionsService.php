@@ -10,7 +10,7 @@ use Telnyx\AI\Missions\MissionResponse;
 use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\MissionsContract;
@@ -81,15 +81,16 @@ final class MissionsService implements MissionsContract
         ?string $model = null,
         RequestOptions|array|null $requestOptions = null,
     ): MissionResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'name' => $name,
-                'description' => $description,
-                'executionMode' => $executionMode,
-                'instructions' => $instructions,
-                'metadata' => $metadata,
-                'model' => $model,
+                'description' => $description ?? Omitted::VALUE,
+                'executionMode' => $executionMode ?? Omitted::VALUE,
+                'instructions' => $instructions ?? Omitted::VALUE,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'model' => $model ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -136,9 +137,7 @@ final class MissionsService implements MissionsContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -206,8 +205,13 @@ final class MissionsService implements MissionsContract
         ?string $type = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize, 'type' => $type]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'type' => $type ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -238,15 +242,16 @@ final class MissionsService implements MissionsContract
         ?string $name = null,
         RequestOptions|array|null $requestOptions = null,
     ): MissionResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'description' => $description,
-                'executionMode' => $executionMode,
-                'instructions' => $instructions,
-                'metadata' => $metadata,
-                'model' => $model,
-                'name' => $name,
+                'description' => $description ?? Omitted::VALUE,
+                'executionMode' => $executionMode ?? Omitted::VALUE,
+                'instructions' => $instructions ?? Omitted::VALUE,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'model' => $model ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

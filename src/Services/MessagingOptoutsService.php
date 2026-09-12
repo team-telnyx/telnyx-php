@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter;
@@ -58,14 +58,15 @@ final class MessagingOptoutsService implements MessagingOptoutsContract
         ?string $redactionEnabled = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'createdAt' => $createdAt,
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'redactionEnabled' => $redactionEnabled,
+                'createdAt' => $createdAt ?? Omitted::VALUE,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'redactionEnabled' => $redactionEnabled ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

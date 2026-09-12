@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
@@ -63,14 +63,15 @@ final class NumberOrdersService implements NumberOrdersContract
         ?array $phoneNumbers = null,
         RequestOptions|array|null $requestOptions = null,
     ): NumberOrderNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'billingGroupID' => $billingGroupID,
-                'connectionID' => $connectionID,
-                'customerReference' => $customerReference,
-                'messagingProfileID' => $messagingProfileID,
-                'phoneNumbers' => $phoneNumbers,
+                'billingGroupID' => $billingGroupID ?? Omitted::VALUE,
+                'connectionID' => $connectionID ?? Omitted::VALUE,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'messagingProfileID' => $messagingProfileID ?? Omitted::VALUE,
+                'phoneNumbers' => $phoneNumbers ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -117,11 +118,12 @@ final class NumberOrdersService implements NumberOrdersContract
         ?array $regulatoryRequirements = null,
         RequestOptions|array|null $requestOptions = null,
     ): NumberOrderUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'customerReference' => $customerReference,
-                'regulatoryRequirements' => $regulatoryRequirements,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'regulatoryRequirements' => $regulatoryRequirements ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -148,12 +150,13 @@ final class NumberOrdersService implements NumberOrdersContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

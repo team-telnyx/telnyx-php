@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Messages\MessageSendParams\Encoding;
 use Telnyx\Messages\MessageSendParams\Type;
 
@@ -165,12 +166,12 @@ final class MessageSendParams implements BaseModel
      */
     public static function with(
         string $to,
+        \DateTimeInterface|Omitted|null $sendAt = Omitted::VALUE,
         ?bool $autoDetect = null,
         Encoding|string|null $encoding = null,
         ?string $from = null,
         ?array $mediaURLs = null,
         ?string $messagingProfileID = null,
-        ?\DateTimeInterface $sendAt = null,
         ?string $subject = null,
         ?string $text = null,
         Type|string|null $type = null,
@@ -187,7 +188,7 @@ final class MessageSendParams implements BaseModel
         null !== $from && $self['from'] = $from;
         null !== $mediaURLs && $self['mediaURLs'] = $mediaURLs;
         null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
-        null !== $sendAt && $self['sendAt'] = $sendAt;
+        Omitted::VALUE !== $sendAt && $self['sendAt'] = $sendAt;
         null !== $subject && $self['subject'] = $subject;
         null !== $text && $self['text'] = $text;
         null !== $type && $self['type'] = $type;

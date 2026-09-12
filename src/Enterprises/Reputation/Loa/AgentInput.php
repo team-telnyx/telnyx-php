@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
@@ -124,8 +125,8 @@ final class AgentInput implements BaseModel
         string $legalName,
         string $postalCode,
         string $streetAddress,
-        ?string $dba = null,
-        ?string $extendedAddress = null,
+        string|Omitted|null $dba = Omitted::VALUE,
+        string|Omitted|null $extendedAddress = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -140,8 +141,8 @@ final class AgentInput implements BaseModel
         $self['postalCode'] = $postalCode;
         $self['streetAddress'] = $streetAddress;
 
-        null !== $dba && $self['dba'] = $dba;
-        null !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
+        Omitted::VALUE !== $dba && $self['dba'] = $dba;
+        Omitted::VALUE !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
 
         return $self;
     }
