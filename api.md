@@ -2646,6 +2646,13 @@ Methods:
 - <code title="post /v2/x402/credit_account/quote">$client->x402->creditAccount-><a href="./src/Services/X402/CreditAccountService.php">createQuote</a>(...$params)</code>
 - <code title="post /v2/x402/credit_account">$client->x402->creditAccount-><a href="./src/Services/X402/CreditAccountService.php">settle</a>(...$params)</code>
 
+### Payments
+
+Methods:
+
+- <code title="get /v2/x402/credit_account/payments/{id}">$client->x402->creditAccount->payments-><a href="./src/Services/X402/CreditAccount/PaymentsService.php">retrieve</a>(...$params)</code>
+- <code title="get /v2/x402/credit_account/payments">$client->x402->creditAccount->payments-><a href="./src/Services/X402/CreditAccount/PaymentsService.php">list</a>(...$params)</code>
+
 # VoiceClones
 
 Methods:

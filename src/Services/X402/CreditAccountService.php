@@ -9,6 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\X402\CreditAccountContract;
+use Telnyx\Services\X402\CreditAccount\PaymentsService;
 use Telnyx\X402\CreditAccount\CreditAccountNewQuoteResponse;
 use Telnyx\X402\CreditAccount\CreditAccountSettleResponse;
 
@@ -25,11 +26,17 @@ final class CreditAccountService implements CreditAccountContract
     public CreditAccountRawService $raw;
 
     /**
+     * @api
+     */
+    public PaymentsService $payments;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new CreditAccountRawService($client);
+        $this->payments = new PaymentsService($client);
     }
 
     /**
