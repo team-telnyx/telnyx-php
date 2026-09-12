@@ -167,7 +167,7 @@ interface EmailMessagesContract
     /**
      * @api
      *
-     * @param list<Message|MessageShape> $messages Body param
+     * @param list<Message|MessageShape> $messages Body param: Array of email messages to send. Up to 1,000 messages per batch request. Each message is validated and sent independently; per-message failures do not affect other messages in the batch.
      * @param bool $sandboxMode Body param: Applies sandbox mode to all messages in the batch. Overrides any per-message sandbox_mode in the messages array.
      * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions

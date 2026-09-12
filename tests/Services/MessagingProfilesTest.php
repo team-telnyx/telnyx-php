@@ -68,6 +68,7 @@ final class MessagingProfilesTest extends TestCase
             dailySpendLimit: '269125115713',
             dailySpendLimitEnabled: true,
             enabled: true,
+            features: ['aiOptOutDetectionEnabled' => true],
             healthWebhookURL: 'health_webhook_url',
             mmsFallBackToSMS: true,
             mmsTranscoding: true,

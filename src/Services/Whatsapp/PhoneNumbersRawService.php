@@ -13,6 +13,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbersRawContract;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetParams;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetPhoneNumberResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
@@ -202,6 +203,31 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
             ),
             options: $options,
             convert: PhoneNumberGetConversationWindowResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Returns one WhatsApp phone number linked to the authenticated Telnyx account. For a coexistence number in the `syncing` state, the response includes `sync_progress`.
+     *
+     * @param string $phoneNumber Phone number (E.164 format)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<PhoneNumberGetPhoneNumberResponse>
+     *
+     * @throws APIException
+     */
+    public function retrievePhoneNumber(
+        string $phoneNumber,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['whatsapp/phone_numbers/%1$s', $phoneNumber],
+            options: $requestOptions,
+            convert: PhoneNumberGetPhoneNumberResponse::class,
         );
     }
 

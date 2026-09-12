@@ -220,7 +220,7 @@ final class FqdnConnection implements BaseModel
     public ?OutboundFqdn $outbound;
 
     /**
-     * The password for the FQDN connection.
+     * The password for the FQDN connection. For primary accounts created on or after September 8, 2026, this password is returned as `********`. The password is returned in full on create, and on update only when that update changed the password. Accounts created before September 8, 2026 are unaffected.
      */
     #[Optional]
     public ?string $password;
@@ -739,7 +739,7 @@ final class FqdnConnection implements BaseModel
     }
 
     /**
-     * The password for the FQDN connection.
+     * The password for the FQDN connection. For primary accounts created on or after September 8, 2026, this password is returned as `********`. The password is returned in full on create, and on update only when that update changed the password. Accounts created before September 8, 2026 are unaffected.
      */
     public function withPassword(string $password): self
     {

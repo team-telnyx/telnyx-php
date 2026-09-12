@@ -32,6 +32,7 @@ use Telnyx\Services\ChannelZonesService;
 use Telnyx\Services\ChargesBreakdownService;
 use Telnyx\Services\ChargesSummaryService;
 use Telnyx\Services\CommentsService;
+use Telnyx\Services\ComputeService;
 use Telnyx\Services\ConferencesService;
 use Telnyx\Services\ConnectionsService;
 use Telnyx\Services\CountryCoverageService;
@@ -1118,6 +1119,11 @@ class Client extends BaseClient
      */
     public ExternalRequirementsService $externalRequirements;
 
+    /**
+     * @api
+     */
+    public ComputeService $compute;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1372,6 +1378,7 @@ class Client extends BaseClient
         $this->webSearch = new WebSearchService($this);
         $this->meetingSessions = new MeetingSessionsService($this);
         $this->externalRequirements = new ExternalRequirementsService($this);
+        $this->compute = new ComputeService($this);
     }
 
     /** @return array<string,string> */

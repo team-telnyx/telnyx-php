@@ -17,6 +17,8 @@ enum Code: string
 
     case SERVICE_UNAVAILABLE = 'service_unavailable';
 
+    case UNPROCESSABLE_ENTITY = 'unprocessable_entity';
+
     case VALIDATION_ERROR = 'validation_error';
 
     case RECIPIENT_SUPPRESSED = 'recipient_suppressed';

@@ -16,6 +16,7 @@ use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
  *
  * @see Telnyx\Services\MessagingProfilesService::update()
  *
+ * @phpstan-import-type MessagingProfileFeaturesShape from \Telnyx\MessagingProfiles\MessagingProfileFeatures
  * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
  * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
  *
@@ -25,6 +26,7 @@ use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
  *   dailySpendLimit?: string|null,
  *   dailySpendLimitEnabled?: bool|null,
  *   enabled?: bool|null,
+ *   features?: null|MessagingProfileFeatures|MessagingProfileFeaturesShape,
  *   mmsFallBackToSMS?: bool|null,
  *   mmsTranscoding?: bool|null,
  *   mobileOnly?: bool|null,
@@ -76,6 +78,12 @@ final class MessagingProfileUpdateParams implements BaseModel
      */
     #[Optional]
     public ?bool $enabled;
+
+    /**
+     * Telnyx product features the messaging customer can enable on the messaging profile. Keys map to individual feature flags; unknown keys are accepted and preserved for forward compatibility with rolling deployments.
+     */
+    #[Optional(nullable: true)]
+    public ?MessagingProfileFeatures $features;
 
     /**
      * enables SMS fallback for MMS messages.
@@ -187,6 +195,7 @@ final class MessagingProfileUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|MessagingProfileFeatures|MessagingProfileFeaturesShape|null $features
      * @param Omitted|NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
      * @param Omitted|URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
@@ -195,6 +204,7 @@ final class MessagingProfileUpdateParams implements BaseModel
     public static function with(
         string|Omitted|null $aiAssistantID = Omitted::VALUE,
         string|Omitted|null $alphaSender = Omitted::VALUE,
+        Omitted|MessagingProfileFeatures|array|null $features = Omitted::VALUE,
         Omitted|NumberPoolSettings|array|null $numberPoolSettings = Omitted::VALUE,
         Omitted|URLShortenerSettings|array|null $urlShortenerSettings = Omitted::VALUE,
         string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
@@ -220,6 +230,7 @@ final class MessagingProfileUpdateParams implements BaseModel
         null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
         null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
         null !== $enabled && $self['enabled'] = $enabled;
+        Omitted::VALUE !== $features && $self['features'] = $features;
         null !== $mmsFallBackToSMS && $self['mmsFallBackToSMS'] = $mmsFallBackToSMS;
         null !== $mmsTranscoding && $self['mmsTranscoding'] = $mmsTranscoding;
         null !== $mobileOnly && $self['mobileOnly'] = $mobileOnly;
@@ -290,6 +301,20 @@ final class MessagingProfileUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['enabled'] = $enabled;
+
+        return $self;
+    }
+
+    /**
+     * Telnyx product features the messaging customer can enable on the messaging profile. Keys map to individual feature flags; unknown keys are accepted and preserved for forward compatibility with rolling deployments.
+     *
+     * @param MessagingProfileFeatures|MessagingProfileFeaturesShape|null $features
+     */
+    public function withFeatures(
+        MessagingProfileFeatures|array|null $features
+    ): self {
+        $self = clone $this;
+        $self['features'] = $features;
 
         return $self;
     }

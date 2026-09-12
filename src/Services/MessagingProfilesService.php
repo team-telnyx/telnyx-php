@@ -13,6 +13,7 @@ use Telnyx\MessagingProfileMetrics\MessagingMetricsTimeFrame;
 use Telnyx\MessagingProfiles\MessagingMessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
+use Telnyx\MessagingProfiles\MessagingProfileFeatures;
 use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
@@ -29,6 +30,7 @@ use Telnyx\ShortCode;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\MessagingProfiles\MessagingProfileListParams\Filter
+ * @phpstan-import-type MessagingProfileFeaturesShape from \Telnyx\MessagingProfiles\MessagingProfileFeatures
  * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
  * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -72,6 +74,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param string $dailySpendLimit the maximum amount of money (in USD) that can be spent by this profile before midnight UTC
      * @param bool $dailySpendLimitEnabled whether to enforce the value configured by `daily_spend_limit`
      * @param bool $enabled specifies whether the messaging profile is enabled or not
+     * @param Omitted|MessagingProfileFeatures|MessagingProfileFeaturesShape|null $features Telnyx product features the messaging customer can enable on the messaging profile. Keys map to individual feature flags; unknown keys are accepted and preserved for forward compatibility with rolling deployments.
      * @param string|Omitted|null $healthWebhookURL a URL to receive health check webhooks for numbers in this profile
      * @param bool $mmsFallBackToSMS enables SMS fallback for MMS messages
      * @param bool $mmsTranscoding enables automated resizing of MMS media
@@ -105,6 +108,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
         bool $enabled = true,
+        Omitted|MessagingProfileFeatures|array|null $features = Omitted::VALUE,
         string|Omitted|null $healthWebhookURL = Omitted::VALUE,
         bool $mmsFallBackToSMS = false,
         bool $mmsTranscoding = false,
@@ -127,6 +131,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
                 'dailySpendLimit' => $dailySpendLimit ?? Omitted::VALUE,
                 'dailySpendLimitEnabled' => $dailySpendLimitEnabled ?? Omitted::VALUE,
                 'enabled' => $enabled,
+                'features' => $features,
                 'healthWebhookURL' => $healthWebhookURL,
                 'mmsFallBackToSMS' => $mmsFallBackToSMS,
                 'mmsTranscoding' => $mmsTranscoding,
@@ -179,6 +184,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param string $dailySpendLimit the maximum amount of money (in USD) that can be spent by this profile before midnight UTC
      * @param bool $dailySpendLimitEnabled whether to enforce the value configured by `daily_spend_limit`
      * @param bool $enabled specifies whether the messaging profile is enabled or not
+     * @param Omitted|MessagingProfileFeatures|MessagingProfileFeaturesShape|null $features Telnyx product features the messaging customer can enable on the messaging profile. Keys map to individual feature flags; unknown keys are accepted and preserved for forward compatibility with rolling deployments.
      * @param bool $mmsFallBackToSMS enables SMS fallback for MMS messages
      * @param bool $mmsTranscoding enables automated resizing of MMS media
      * @param bool $mobileOnly send messages only to mobile phone numbers
@@ -216,6 +222,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
         ?bool $enabled = null,
+        Omitted|MessagingProfileFeatures|array|null $features = Omitted::VALUE,
         bool $mmsFallBackToSMS = false,
         bool $mmsTranscoding = false,
         bool $mobileOnly = false,
@@ -239,6 +246,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
                 'dailySpendLimit' => $dailySpendLimit ?? Omitted::VALUE,
                 'dailySpendLimitEnabled' => $dailySpendLimitEnabled ?? Omitted::VALUE,
                 'enabled' => $enabled ?? Omitted::VALUE,
+                'features' => $features,
                 'mmsFallBackToSMS' => $mmsFallBackToSMS,
                 'mmsTranscoding' => $mmsTranscoding,
                 'mobileOnly' => $mobileOnly,

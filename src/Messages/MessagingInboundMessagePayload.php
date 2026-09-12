@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
+use Telnyx\Messages\MessagingInboundMessagePayload\Body;
 use Telnyx\Messages\MessagingInboundMessagePayload\Cc;
 use Telnyx\Messages\MessagingInboundMessagePayload\Cost;
 use Telnyx\Messages\MessagingInboundMessagePayload\CostBreakdown;
@@ -19,6 +20,8 @@ use Telnyx\Messages\MessagingInboundMessagePayload\To;
 use Telnyx\Messages\MessagingInboundMessagePayload\Type;
 
 /**
+ * @phpstan-import-type ToVariants from \Telnyx\Messages\MessagingInboundMessagePayload\To
+ * @phpstan-import-type BodyShape from \Telnyx\Messages\MessagingInboundMessagePayload\Body
  * @phpstan-import-type CcShape from \Telnyx\Messages\MessagingInboundMessagePayload\Cc
  * @phpstan-import-type CostShape from \Telnyx\Messages\MessagingInboundMessagePayload\Cost
  * @phpstan-import-type CostBreakdownShape from \Telnyx\Messages\MessagingInboundMessagePayload\CostBreakdown
@@ -29,6 +32,7 @@ use Telnyx\Messages\MessagingInboundMessagePayload\Type;
  *
  * @phpstan-type MessagingInboundMessagePayloadShape = array{
  *   id?: string|null,
+ *   body?: null|Body|BodyShape,
  *   cc?: list<Cc|CcShape>|null,
  *   completedAt?: \DateTimeInterface|null,
  *   cost?: null|Cost|CostShape,
@@ -51,7 +55,7 @@ use Telnyx\Messages\MessagingInboundMessagePayload\Type;
  *   tcrCampaignID?: string|null,
  *   tcrCampaignRegistered?: string|null,
  *   text?: string|null,
- *   to?: list<To|ToShape>|null,
+ *   to?: ToShape|null,
  *   type?: null|Type|value-of<Type>,
  *   validUntil?: \DateTimeInterface|null,
  *   webhookFailoverURL?: string|null,
@@ -68,6 +72,12 @@ final class MessagingInboundMessagePayload implements BaseModel
      */
     #[Optional]
     public ?string $id;
+
+    /**
+     * WhatsApp message body. For message edits and revocations, inspect `type` and the corresponding `edit` or `revoke` object.
+     */
+    #[Optional]
+    public ?Body $body;
 
     /** @var list<Cc>|null $cc */
     #[Optional(list: Cc::class)]
@@ -201,12 +211,16 @@ final class MessagingInboundMessagePayload implements BaseModel
     #[Optional]
     public ?string $text;
 
-    /** @var list<To>|null $to */
-    #[Optional(list: To::class)]
-    public ?array $to;
+    /**
+     * Receiving address. SMS and MMS webhooks use an array of recipients. WhatsApp webhooks use one E.164 phone number.
+     *
+     * @var ToVariants|null $to
+     */
+    #[Optional(union: To::class)]
+    public string|array|null $to;
 
     /**
-     * The type of message. This value can be either 'sms' or 'mms'.
+     * The messaging channel used for the message.
      *
      * @var value-of<Type>|null $type
      */
@@ -243,6 +257,7 @@ final class MessagingInboundMessagePayload implements BaseModel
      *
      * @param Omitted|Cost|CostShape|null $cost
      * @param Omitted|CostBreakdown|CostBreakdownShape|null $costBreakdown
+     * @param Body|BodyShape|null $body
      * @param list<Cc|CcShape>|null $cc
      * @param Direction|value-of<Direction>|null $direction
      * @param list<MessagingError0b38e7044b|MessagingError0b38e7044bShape>|null $errors
@@ -250,7 +265,7 @@ final class MessagingInboundMessagePayload implements BaseModel
      * @param list<Media|MediaShape>|null $media
      * @param RecordType|value-of<RecordType>|null $recordType
      * @param list<string>|null $tags
-     * @param list<To|ToShape>|null $to
+     * @param ToShape|null $to
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
@@ -265,6 +280,7 @@ final class MessagingInboundMessagePayload implements BaseModel
         string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
         string|Omitted|null $webhookURL = Omitted::VALUE,
         ?string $id = null,
+        Body|array|null $body = null,
         ?array $cc = null,
         Direction|string|null $direction = null,
         ?string $encoding = null,
@@ -280,12 +296,13 @@ final class MessagingInboundMessagePayload implements BaseModel
         ?array $tags = null,
         ?bool $tcrCampaignBillable = null,
         ?string $text = null,
-        ?array $to = null,
+        string|array|null $to = null,
         Type|string|null $type = null,
     ): self {
         $self = new self;
 
         null !== $id && $self['id'] = $id;
+        null !== $body && $self['body'] = $body;
         null !== $cc && $self['cc'] = $cc;
         Omitted::VALUE !== $completedAt && $self['completedAt'] = $completedAt;
         Omitted::VALUE !== $cost && $self['cost'] = $cost;
@@ -324,6 +341,19 @@ final class MessagingInboundMessagePayload implements BaseModel
     {
         $self = clone $this;
         $self['id'] = $id;
+
+        return $self;
+    }
+
+    /**
+     * WhatsApp message body. For message edits and revocations, inspect `type` and the corresponding `edit` or `revoke` object.
+     *
+     * @param Body|BodyShape $body
+     */
+    public function withBody(Body|array $body): self
+    {
+        $self = clone $this;
+        $self['body'] = $body;
 
         return $self;
     }
@@ -585,9 +615,11 @@ final class MessagingInboundMessagePayload implements BaseModel
     }
 
     /**
-     * @param list<To|ToShape> $to
+     * Receiving address. SMS and MMS webhooks use an array of recipients. WhatsApp webhooks use one E.164 phone number.
+     *
+     * @param ToShape $to
      */
-    public function withTo(array $to): self
+    public function withTo(string|array $to): self
     {
         $self = clone $this;
         $self['to'] = $to;
@@ -596,7 +628,7 @@ final class MessagingInboundMessagePayload implements BaseModel
     }
 
     /**
-     * The type of message. This value can be either 'sms' or 'mms'.
+     * The messaging channel used for the message.
      *
      * @param Type|value-of<Type> $type
      */

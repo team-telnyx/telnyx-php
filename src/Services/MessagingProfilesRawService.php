@@ -15,6 +15,7 @@ use Telnyx\MessagingProfiles\MessagingMessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
+use Telnyx\MessagingProfiles\MessagingProfileFeatures;
 use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsParams;
@@ -35,6 +36,7 @@ use Telnyx\ShortCode;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\MessagingProfiles\MessagingProfileListParams\Filter
+ * @phpstan-import-type MessagingProfileFeaturesShape from \Telnyx\MessagingProfiles\MessagingProfileFeatures
  * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
  * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -60,6 +62,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *   dailySpendLimit?: string,
      *   dailySpendLimitEnabled?: bool,
      *   enabled?: bool,
+     *   features?: MessagingProfileFeatures|MessagingProfileFeaturesShape|null,
      *   healthWebhookURL?: string|null,
      *   mmsFallBackToSMS?: bool,
      *   mmsTranscoding?: bool,
@@ -134,6 +137,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *   dailySpendLimit?: string,
      *   dailySpendLimitEnabled?: bool,
      *   enabled?: bool,
+     *   features?: MessagingProfileFeatures|MessagingProfileFeaturesShape|null,
      *   mmsFallBackToSMS?: bool,
      *   mmsTranscoding?: bool,
      *   mobileOnly?: bool,

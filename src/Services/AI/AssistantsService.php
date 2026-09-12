@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
+use Telnyx\AI\Assistants\AssistantA2AAgent;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
@@ -43,6 +44,7 @@ use Telnyx\Services\AI\Assistants\VersionsService;
  * Configure AI assistant specifications.
  *
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
+ * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
@@ -125,6 +127,7 @@ final class AssistantsService implements AssistantsContract
      *
      * @param string $instructions Body param: System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param string $name Body param
+     * @param list<AssistantA2AAgent|AssistantA2AAgentShape> $a2aAgents Body param: A2A agents this assistant can delegate to. Tools are not stored here: at the start of every conversation each agent's card is fetched and one tool is derived per skill the card advertises, named `a2a_<name>_<skill_id>`. The following limits are not enforced when the assistant is saved, and anything past them is dropped when the conversation starts: 64 agents per assistant, 64 skills per card, 128 derived tools per assistant, and a 6 second budget for all card fetches combined. An agent whose card cannot be fetched costs the assistant that capability for the conversation; it does not fail the call.
      * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow Body param: Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -163,6 +166,7 @@ final class AssistantsService implements AssistantsContract
     public function create(
         string $instructions,
         string $name,
+        array $a2aAgents = [],
         ConversationFlowReq|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
@@ -196,6 +200,7 @@ final class AssistantsService implements AssistantsContract
             [
                 'instructions' => $instructions,
                 'name' => $name,
+                'a2aAgents' => $a2aAgents,
                 'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
                 'description' => $description ?? Omitted::VALUE,
                 'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
@@ -277,6 +282,7 @@ final class AssistantsService implements AssistantsContract
      * Updates the specified AI assistant's attributes and returns the updated assistant. The request can also control how the change is promoted across assistant versions.
      *
      * @param string $assistantID unique identifier of the assistant
+     * @param list<AssistantA2AAgent|AssistantA2AAgentShape> $a2aAgents A2A agents this assistant can delegate to. Tools are not stored here: at the start of every conversation each agent's card is fetched and one tool is derived per skill the card advertises, named `a2a_<name>_<skill_id>`. The following limits are not enforced when the assistant is saved, and anything past them is dropped when the conversation starts: 64 agents per assistant, 64 skills per card, 128 derived tools per assistant, and a 6 second budget for all card fetches combined. An agent whose card cannot be fetched costs the assistant that capability for the conversation; it does not fail the call. Omit this field to leave the assistant's agents unchanged; send an empty array to remove them all.
      * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -315,6 +321,7 @@ final class AssistantsService implements AssistantsContract
      */
     public function update(
         string $assistantID,
+        ?array $a2aAgents = null,
         ConversationFlowReq|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
@@ -349,6 +356,7 @@ final class AssistantsService implements AssistantsContract
     ): InferenceEmbedding {
         $params = array_filter(
             [
+                'a2aAgents' => $a2aAgents ?? Omitted::VALUE,
                 'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
                 'description' => $description ?? Omitted::VALUE,
                 'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,

@@ -8,7 +8,9 @@ use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Message;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Mode;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ReasoningEffort;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Region;
-use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat\ResponseFormatJsonObject;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat\ResponseFormatJsonSchemaParam;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat\ResponseFormatText;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Stop;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Tool;
 use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ToolChoice;
@@ -23,6 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\OpenAI\ChatService::createCompletion()
  *
+ * @phpstan-import-type ResponseFormatVariants from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat
  * @phpstan-import-type StopVariants from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Stop
  * @phpstan-import-type ToolVariants from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Tool
  * @phpstan-import-type MessageShape from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Message
@@ -37,9 +40,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *   earlyStopping?: bool|null,
  *   enableThinking?: bool|null,
  *   frequencyPenalty?: float|null,
- *   guidedChoice?: list<string>|null,
- *   guidedJson?: array<string,mixed>|null,
- *   guidedRegex?: string|null,
  *   lengthPenalty?: float|null,
  *   logprobs?: bool|null,
  *   maxTokens?: int|null,
@@ -50,7 +50,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   presencePenalty?: float|null,
  *   reasoningEffort?: null|ReasoningEffort|value-of<ReasoningEffort>,
  *   region?: null|Region|value-of<Region>,
- *   responseFormat?: null|ResponseFormat|ResponseFormatShape,
+ *   responseFormat?: ResponseFormatShape|null,
  *   seed?: int|null,
  *   serviceTier?: string|null,
  *   stop?: StopShape|null,
@@ -106,28 +106,6 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     #[Optional('frequency_penalty')]
     public ?float $frequencyPenalty;
-
-    /**
-     * If specified, the output will be exactly one of the choices.
-     *
-     * @var list<string>|null $guidedChoice
-     */
-    #[Optional('guided_choice', list: 'string')]
-    public ?array $guidedChoice;
-
-    /**
-     * Must be a valid JSON schema. If specified, the output will follow the JSON schema.
-     *
-     * @var array<string,mixed>|null $guidedJson
-     */
-    #[Optional('guided_json', map: 'mixed')]
-    public ?array $guidedJson;
-
-    /**
-     * If specified, the output will follow the regex pattern.
-     */
-    #[Optional('guided_regex')]
-    public ?string $guidedRegex;
 
     /**
      * This is used with `use_beam_search` to prefer shorter or longer completions.
@@ -196,10 +174,12 @@ final class ChatCreateCompletionParams implements BaseModel
     public ?string $region;
 
     /**
-     * Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
+     * Controls the format of the model output. `json_object` guarantees valid JSON output without defining a schema; `json_schema` constrains the output to the JSON schema you supply via the `json_schema` property and is the supported way to get guaranteed structured output on Telnyx-hosted models.
+     *
+     * @var ResponseFormatVariants|null $responseFormat
      */
     #[Optional('response_format')]
-    public ?ResponseFormat $responseFormat;
+    public ResponseFormatText|ResponseFormatJsonObject|ResponseFormatJsonSchemaParam|null $responseFormat;
 
     /**
      * If specified, the system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.
@@ -288,12 +268,10 @@ final class ChatCreateCompletionParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Message|MessageShape> $messages
-     * @param list<string>|null $guidedChoice
-     * @param array<string,mixed>|null $guidedJson
      * @param Mode|value-of<Mode>|null $mode
      * @param ReasoningEffort|value-of<ReasoningEffort>|null $reasoningEffort
      * @param Region|value-of<Region>|null $region
-     * @param ResponseFormat|ResponseFormatShape|null $responseFormat
+     * @param ResponseFormatShape|null $responseFormat
      * @param StopShape|null $stop
      * @param ToolChoice|value-of<ToolChoice>|null $toolChoice
      * @param list<ToolShape>|null $tools
@@ -305,9 +283,6 @@ final class ChatCreateCompletionParams implements BaseModel
         ?bool $earlyStopping = null,
         ?bool $enableThinking = null,
         ?float $frequencyPenalty = null,
-        ?array $guidedChoice = null,
-        ?array $guidedJson = null,
-        ?string $guidedRegex = null,
         ?float $lengthPenalty = null,
         ?bool $logprobs = null,
         ?int $maxTokens = null,
@@ -318,7 +293,7 @@ final class ChatCreateCompletionParams implements BaseModel
         ?float $presencePenalty = null,
         ReasoningEffort|string|null $reasoningEffort = null,
         Region|string|null $region = null,
-        ResponseFormat|array|null $responseFormat = null,
+        ResponseFormatText|array|ResponseFormatJsonObject|ResponseFormatJsonSchemaParam|null $responseFormat = null,
         ?int $seed = null,
         ?string $serviceTier = null,
         string|array|null $stop = null,
@@ -339,9 +314,6 @@ final class ChatCreateCompletionParams implements BaseModel
         null !== $earlyStopping && $self['earlyStopping'] = $earlyStopping;
         null !== $enableThinking && $self['enableThinking'] = $enableThinking;
         null !== $frequencyPenalty && $self['frequencyPenalty'] = $frequencyPenalty;
-        null !== $guidedChoice && $self['guidedChoice'] = $guidedChoice;
-        null !== $guidedJson && $self['guidedJson'] = $guidedJson;
-        null !== $guidedRegex && $self['guidedRegex'] = $guidedRegex;
         null !== $lengthPenalty && $self['lengthPenalty'] = $lengthPenalty;
         null !== $logprobs && $self['logprobs'] = $logprobs;
         null !== $maxTokens && $self['maxTokens'] = $maxTokens;
@@ -431,43 +403,6 @@ final class ChatCreateCompletionParams implements BaseModel
     {
         $self = clone $this;
         $self['frequencyPenalty'] = $frequencyPenalty;
-
-        return $self;
-    }
-
-    /**
-     * If specified, the output will be exactly one of the choices.
-     *
-     * @param list<string> $guidedChoice
-     */
-    public function withGuidedChoice(array $guidedChoice): self
-    {
-        $self = clone $this;
-        $self['guidedChoice'] = $guidedChoice;
-
-        return $self;
-    }
-
-    /**
-     * Must be a valid JSON schema. If specified, the output will follow the JSON schema.
-     *
-     * @param array<string,mixed> $guidedJson
-     */
-    public function withGuidedJson(array $guidedJson): self
-    {
-        $self = clone $this;
-        $self['guidedJson'] = $guidedJson;
-
-        return $self;
-    }
-
-    /**
-     * If specified, the output will follow the regex pattern.
-     */
-    public function withGuidedRegex(string $guidedRegex): self
-    {
-        $self = clone $this;
-        $self['guidedRegex'] = $guidedRegex;
 
         return $self;
     }
@@ -590,12 +525,12 @@ final class ChatCreateCompletionParams implements BaseModel
     }
 
     /**
-     * Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
+     * Controls the format of the model output. `json_object` guarantees valid JSON output without defining a schema; `json_schema` constrains the output to the JSON schema you supply via the `json_schema` property and is the supported way to get guaranteed structured output on Telnyx-hosted models.
      *
-     * @param ResponseFormat|ResponseFormatShape $responseFormat
+     * @param ResponseFormatShape $responseFormat
      */
     public function withResponseFormat(
-        ResponseFormat|array $responseFormat
+        ResponseFormatText|array|ResponseFormatJsonObject|ResponseFormatJsonSchemaParam $responseFormat,
     ): self {
         $self = clone $this;
         $self['responseFormat'] = $responseFormat;
