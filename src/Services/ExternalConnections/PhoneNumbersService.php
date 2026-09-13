@@ -6,7 +6,7 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
@@ -52,7 +52,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         string $id,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberGetResponse {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($phoneNumberID, params: $params, requestOptions: $requestOptions);
@@ -78,7 +78,10 @@ final class PhoneNumbersService implements PhoneNumbersContract
         ?string $locationID = null,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberUpdateResponse {
-        $params = Util::removeNulls(['id' => $id, 'locationID' => $locationID]);
+        $params = array_filter(
+            ['id' => $id, 'locationID' => $locationID ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($phoneNumberID, params: $params, requestOptions: $requestOptions);
@@ -106,12 +109,13 @@ final class PhoneNumbersService implements PhoneNumbersContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

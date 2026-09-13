@@ -12,7 +12,7 @@ use Telnyx\AI\Embeddings\EmbeddingResponse;
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsContract;
 use Telnyx\Services\AI\Embeddings\BucketsService;
@@ -86,15 +86,16 @@ final class EmbeddingsService implements EmbeddingsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmbeddingResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'bucketName' => $bucketName,
                 'documentChunkOverlapSize' => $documentChunkOverlapSize,
                 'documentChunkSize' => $documentChunkSize,
                 'embeddingModel' => $embeddingModel,
                 'loader' => $loader,
-                'idempotencyKey' => $idempotencyKey,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -142,7 +143,7 @@ final class EmbeddingsService implements EmbeddingsContract
         array $status = ['processing', 'queued'],
         RequestOptions|array|null $requestOptions = null,
     ): EmbeddingListResponse {
-        $params = Util::removeNulls(['status' => $status]);
+        $params = ['status' => $status];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -173,13 +174,9 @@ final class EmbeddingsService implements EmbeddingsContract
         int $numOfDocs = 3,
         RequestOptions|array|null $requestOptions = null,
     ): EmbeddingSimilaritySearchResponse {
-        $params = Util::removeNulls(
-            [
-                'bucketName' => $bucketName,
-                'query' => $query,
-                'numOfDocs' => $numOfDocs,
-            ],
-        );
+        $params = [
+            'bucketName' => $bucketName, 'query' => $query, 'numOfDocs' => $numOfDocs,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->similaritySearch(params: $params, requestOptions: $requestOptions);
@@ -205,12 +202,13 @@ final class EmbeddingsService implements EmbeddingsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmbeddingResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'bucketName' => $bucketName,
                 'url' => $url,
-                'idempotencyKey' => $idempotencyKey,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

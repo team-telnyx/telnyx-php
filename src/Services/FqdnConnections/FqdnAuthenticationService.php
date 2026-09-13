@@ -6,7 +6,7 @@ namespace Telnyx\Services\FqdnConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\FqdnConnections\FqdnAuthentication\FqdnAuthenticationListResponse;
 use Telnyx\FqdnConnections\FqdnAuthentication\FqdnAuthenticationPatchAllParams\FqdnOutboundAuthentication;
 use Telnyx\FqdnConnections\FqdnAuthentication\FqdnAuthenticationPatchAllParams\IPAuthenticationMethod;
@@ -86,18 +86,19 @@ final class FqdnAuthenticationService implements FqdnAuthenticationContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): FqdnAuthenticationPatchAllResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'failoverURL' => $failoverURL,
-                'fqdnOutboundAuthentication' => $fqdnOutboundAuthentication,
-                'ipAuthenticationMethod' => $ipAuthenticationMethod,
-                'password' => $password,
-                'txtName' => $txtName,
-                'txtTtl' => $txtTtl,
-                'txtValue' => $txtValue,
-                'userName' => $userName,
-                'webhookURL' => $webhookURL,
+                'failoverURL' => $failoverURL ?? Omitted::VALUE,
+                'fqdnOutboundAuthentication' => $fqdnOutboundAuthentication ?? Omitted::VALUE,
+                'ipAuthenticationMethod' => $ipAuthenticationMethod ?? Omitted::VALUE,
+                'password' => $password ?? Omitted::VALUE,
+                'txtName' => $txtName ?? Omitted::VALUE,
+                'txtTtl' => $txtTtl ?? Omitted::VALUE,
+                'txtValue' => $txtValue ?? Omitted::VALUE,
+                'userName' => $userName ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

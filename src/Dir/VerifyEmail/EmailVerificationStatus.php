@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Dir\VerifyEmail\EmailVerificationStatus\RecordType;
 use Telnyx\Dir\VerifyEmail\EmailVerificationStatus\Status;
 
@@ -95,8 +96,8 @@ final class EmailVerificationStatus implements BaseModel
         bool $emailVerified,
         RecordType|string $recordType,
         Status|string $status,
-        ?\DateTimeInterface $expiresAt = null,
-        ?int $sendsRemainingToday = null,
+        \DateTimeInterface|Omitted|null $expiresAt = Omitted::VALUE,
+        int|Omitted|null $sendsRemainingToday = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -104,8 +105,8 @@ final class EmailVerificationStatus implements BaseModel
         $self['recordType'] = $recordType;
         $self['status'] = $status;
 
-        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
-        null !== $sendsRemainingToday && $self['sendsRemainingToday'] = $sendsRemainingToday;
+        Omitted::VALUE !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        Omitted::VALUE !== $sendsRemainingToday && $self['sendsRemainingToday'] = $sendsRemainingToday;
 
         return $self;
     }

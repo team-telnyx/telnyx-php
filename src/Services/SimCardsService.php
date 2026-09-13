@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardsContract;
@@ -71,12 +71,10 @@ final class SimCardsService implements SimCardsContract
         bool $includeSimCardGroup = false,
         RequestOptions|array|null $requestOptions = null,
     ): SimCardGetResponse {
-        $params = Util::removeNulls(
-            [
-                'includePinPukCodes' => $includePinPukCodes,
-                'includeSimCardGroup' => $includeSimCardGroup,
-            ],
-        );
+        $params = [
+            'includePinPukCodes' => $includePinPukCodes,
+            'includeSimCardGroup' => $includeSimCardGroup,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -90,7 +88,7 @@ final class SimCardsService implements SimCardsContract
      * Updates the specified SIM card's attributes and returns the updated SIM card.
      *
      * @param string $simCardID identifies the SIM
-     * @param list<string>|null $authorizedImeis list of IMEIs authorized to use a given SIM card
+     * @param list<string>|Omitted|null $authorizedImeis list of IMEIs authorized to use a given SIM card
      * @param DataLimit|DataLimitShape $dataLimit the SIM card individual data limit configuration
      * @param string $simCardGroupID The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      * @param SimCardStatus|SimCardStatusShape $status
@@ -101,21 +99,22 @@ final class SimCardsService implements SimCardsContract
      */
     public function update(
         string $simCardID,
-        ?array $authorizedImeis = null,
+        array|Omitted|null $authorizedImeis = Omitted::VALUE,
         DataLimit|array|null $dataLimit = null,
         ?string $simCardGroupID = null,
         SimCardStatus|array|null $status = null,
         ?array $tags = null,
         RequestOptions|array|null $requestOptions = null,
     ): SimCardUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'authorizedImeis' => $authorizedImeis,
-                'dataLimit' => $dataLimit,
-                'simCardGroupID' => $simCardGroupID,
-                'status' => $status,
-                'tags' => $tags,
+                'dataLimit' => $dataLimit ?? Omitted::VALUE,
+                'simCardGroupID' => $simCardGroupID ?? Omitted::VALUE,
+                'status' => $status ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -148,15 +147,16 @@ final class SimCardsService implements SimCardsContract
         Sort|string|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'filterSimCardGroupID' => $filterSimCardGroupID,
+                'filter' => $filter ?? Omitted::VALUE,
+                'filterSimCardGroupID' => $filterSimCardGroupID ?? Omitted::VALUE,
                 'includeSimCardGroup' => $includeSimCardGroup,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -183,7 +183,7 @@ final class SimCardsService implements SimCardsContract
         bool $reportLost = false,
         RequestOptions|array|null $requestOptions = null,
     ): SimCardDeleteResponse {
-        $params = Util::removeNulls(['reportLost' => $reportLost]);
+        $params = ['reportLost' => $reportLost];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);
@@ -272,9 +272,7 @@ final class SimCardsService implements SimCardsContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listWirelessConnectivityLogs($id, params: $params, requestOptions: $requestOptions);

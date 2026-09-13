@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Creates a Liquid email template. Variables are auto-extracted when omitted.
@@ -93,9 +94,9 @@ final class EmailTemplateCreateParams implements BaseModel
      */
     public static function with(
         string $name,
-        ?string $htmlBody = null,
-        ?string $subject = null,
-        ?string $textBody = null,
+        string|Omitted|null $htmlBody = Omitted::VALUE,
+        string|Omitted|null $subject = Omitted::VALUE,
+        string|Omitted|null $textBody = Omitted::VALUE,
         ?array $variables = null,
         ?string $idempotencyKey = null,
     ): self {
@@ -103,9 +104,9 @@ final class EmailTemplateCreateParams implements BaseModel
 
         $self['name'] = $name;
 
-        null !== $htmlBody && $self['htmlBody'] = $htmlBody;
-        null !== $subject && $self['subject'] = $subject;
-        null !== $textBody && $self['textBody'] = $textBody;
+        Omitted::VALUE !== $htmlBody && $self['htmlBody'] = $htmlBody;
+        Omitted::VALUE !== $subject && $self['subject'] = $subject;
+        Omitted::VALUE !== $textBody && $self['textBody'] = $textBody;
         null !== $variables && $self['variables'] = $variables;
         null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 

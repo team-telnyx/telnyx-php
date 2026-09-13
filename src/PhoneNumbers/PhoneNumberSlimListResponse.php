@@ -7,6 +7,7 @@ namespace Telnyx\PhoneNumbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse\EmergencyStatus;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse\InboundCallScreening;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse\PhoneNumberType;
@@ -214,8 +215,8 @@ final class PhoneNumberSlimListResponse implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        \DateTimeInterface|Omitted|null $activatedAt = Omitted::VALUE,
         ?string $id = null,
-        ?\DateTimeInterface $activatedAt = null,
         ?string $billingGroupID = null,
         ?bool $callForwardingEnabled = null,
         ?bool $callRecordingEnabled = null,
@@ -242,7 +243,7 @@ final class PhoneNumberSlimListResponse implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $activatedAt && $self['activatedAt'] = $activatedAt;
+        Omitted::VALUE !== $activatedAt && $self['activatedAt'] = $activatedAt;
         null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
         null !== $callForwardingEnabled && $self['callForwardingEnabled'] = $callForwardingEnabled;
         null !== $callRecordingEnabled && $self['callRecordingEnabled'] = $callRecordingEnabled;

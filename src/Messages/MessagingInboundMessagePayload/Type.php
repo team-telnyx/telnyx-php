@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\Messages\MessagingInboundMessagePayload;
 
 /**
- * The type of message. This value can be either 'sms' or 'mms'.
+ * The messaging channel used for the message.
  */
 enum Type: string
 {
     case SMS = 'SMS';
 
     case MMS = 'MMS';
+
+    case WHATSAPP = 'WHATSAPP';
 }

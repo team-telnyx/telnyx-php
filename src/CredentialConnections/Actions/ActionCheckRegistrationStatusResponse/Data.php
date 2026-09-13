@@ -7,6 +7,7 @@ namespace Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResp
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\Data\Status;
 
 /**
@@ -89,25 +90,25 @@ final class Data implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
-        ?string $ipAddress = null,
-        ?string $lastRegistration = null,
-        ?int $port = null,
+        string|Omitted|null $ipAddress = Omitted::VALUE,
+        string|Omitted|null $lastRegistration = Omitted::VALUE,
+        int|Omitted|null $port = Omitted::VALUE,
+        string|Omitted|null $sipUsername = Omitted::VALUE,
+        string|Omitted|null $transport = Omitted::VALUE,
+        string|Omitted|null $userAgent = Omitted::VALUE,
         ?string $recordType = null,
-        ?string $sipUsername = null,
         Status|string|null $status = null,
-        ?string $transport = null,
-        ?string $userAgent = null,
     ): self {
         $self = new self;
 
-        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
-        null !== $lastRegistration && $self['lastRegistration'] = $lastRegistration;
-        null !== $port && $self['port'] = $port;
+        Omitted::VALUE !== $ipAddress && $self['ipAddress'] = $ipAddress;
+        Omitted::VALUE !== $lastRegistration && $self['lastRegistration'] = $lastRegistration;
+        Omitted::VALUE !== $port && $self['port'] = $port;
         null !== $recordType && $self['recordType'] = $recordType;
-        null !== $sipUsername && $self['sipUsername'] = $sipUsername;
+        Omitted::VALUE !== $sipUsername && $self['sipUsername'] = $sipUsername;
         null !== $status && $self['status'] = $status;
-        null !== $transport && $self['transport'] = $transport;
-        null !== $userAgent && $self['userAgent'] = $userAgent;
+        Omitted::VALUE !== $transport && $self['transport'] = $transport;
+        Omitted::VALUE !== $userAgent && $self['userAgent'] = $userAgent;
 
         return $self;
     }

@@ -7,6 +7,7 @@ namespace Telnyx\OAuth\OAuthGetResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\OAuth\OAuthGetResponse\Data\RequestedScope;
 
 /**
@@ -87,24 +88,24 @@ final class Data implements BaseModel
      * @param list<RequestedScope|RequestedScopeShape>|null $requestedScopes
      */
     public static function with(
+        string|Omitted|null $logoUri = Omitted::VALUE,
+        string|Omitted|null $policyUri = Omitted::VALUE,
+        string|Omitted|null $tosUri = Omitted::VALUE,
         ?string $clientID = null,
-        ?string $logoUri = null,
         ?string $name = null,
-        ?string $policyUri = null,
         ?string $redirectUri = null,
         ?array $requestedScopes = null,
-        ?string $tosUri = null,
         ?bool $verified = null,
     ): self {
         $self = new self;
 
         null !== $clientID && $self['clientID'] = $clientID;
-        null !== $logoUri && $self['logoUri'] = $logoUri;
+        Omitted::VALUE !== $logoUri && $self['logoUri'] = $logoUri;
         null !== $name && $self['name'] = $name;
-        null !== $policyUri && $self['policyUri'] = $policyUri;
+        Omitted::VALUE !== $policyUri && $self['policyUri'] = $policyUri;
         null !== $redirectUri && $self['redirectUri'] = $redirectUri;
         null !== $requestedScopes && $self['requestedScopes'] = $requestedScopes;
-        null !== $tosUri && $self['tosUri'] = $tosUri;
+        Omitted::VALUE !== $tosUri && $self['tosUri'] = $tosUri;
         null !== $verified && $self['verified'] = $verified;
 
         return $self;

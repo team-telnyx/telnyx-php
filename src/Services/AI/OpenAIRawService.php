@@ -6,7 +6,9 @@ namespace Telnyx\Services\AI;
 
 use Telnyx\AI\ModelsResponse;
 use Telnyx\AI\OpenAI\OpenAICreateResponseParams;
+use Telnyx\AI\OpenAI\OpenAICreateResponseParams\Mode;
 use Telnyx\AI\OpenAI\OpenAICreateResponseParams\Reasoning;
+use Telnyx\AI\OpenAI\OpenAICreateResponseParams\Region;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
@@ -41,8 +43,10 @@ final class OpenAIRawService implements OpenAIRawContract
      *   conversation?: string,
      *   input?: array<string,mixed>,
      *   instructions?: string,
+     *   mode?: Mode|value-of<Mode>,
      *   model?: string,
      *   reasoning?: Reasoning|ReasoningShape,
+     *   region?: Region|value-of<Region>,
      *   serviceTier?: string,
      *   stream?: bool,
      * }|OpenAICreateResponseParams $params

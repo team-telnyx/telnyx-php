@@ -7,6 +7,7 @@ namespace Telnyx\UacConnections;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\UacConnections\UacExternalSettings\Transport;
 
 /**
@@ -54,7 +55,7 @@ final class UacExternalSettings implements BaseModel
     public ?string $outboundProxy;
 
     /**
-     * The SIP password used for digest authentication with the external SIP peer.
+     * The SIP password used for digest authentication with the external SIP peer. For primary accounts created on or after September 8, 2026, this password is returned as `********`. The password is returned in full on create, and on update only when that update changed the password. Accounts created before September 8, 2026 are unaffected.
      */
     #[Optional]
     public ?string $password;
@@ -95,29 +96,29 @@ final class UacExternalSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Transport|value-of<Transport>|null $transport
+     * @param Omitted|Transport|value-of<Transport>|null $transport
      */
     public static function with(
-        ?string $authUsername = null,
-        ?int $expirationSec = null,
-        ?string $fromUser = null,
-        ?string $outboundProxy = null,
+        string|Omitted|null $authUsername = Omitted::VALUE,
+        int|Omitted|null $expirationSec = Omitted::VALUE,
+        string|Omitted|null $fromUser = Omitted::VALUE,
+        string|Omitted|null $outboundProxy = Omitted::VALUE,
+        Omitted|Transport|string|null $transport = Omitted::VALUE,
+        string|Omitted|null $userAgent = Omitted::VALUE,
         ?string $password = null,
         ?string $proxy = null,
-        Transport|string|null $transport = null,
-        ?string $userAgent = null,
         ?string $username = null,
     ): self {
         $self = new self;
 
-        null !== $authUsername && $self['authUsername'] = $authUsername;
-        null !== $expirationSec && $self['expirationSec'] = $expirationSec;
-        null !== $fromUser && $self['fromUser'] = $fromUser;
-        null !== $outboundProxy && $self['outboundProxy'] = $outboundProxy;
+        Omitted::VALUE !== $authUsername && $self['authUsername'] = $authUsername;
+        Omitted::VALUE !== $expirationSec && $self['expirationSec'] = $expirationSec;
+        Omitted::VALUE !== $fromUser && $self['fromUser'] = $fromUser;
+        Omitted::VALUE !== $outboundProxy && $self['outboundProxy'] = $outboundProxy;
         null !== $password && $self['password'] = $password;
         null !== $proxy && $self['proxy'] = $proxy;
-        null !== $transport && $self['transport'] = $transport;
-        null !== $userAgent && $self['userAgent'] = $userAgent;
+        Omitted::VALUE !== $transport && $self['transport'] = $transport;
+        Omitted::VALUE !== $userAgent && $self['userAgent'] = $userAgent;
         null !== $username && $self['username'] = $username;
 
         return $self;
@@ -168,7 +169,7 @@ final class UacExternalSettings implements BaseModel
     }
 
     /**
-     * The SIP password used for digest authentication with the external SIP peer.
+     * The SIP password used for digest authentication with the external SIP peer. For primary accounts created on or after September 8, 2026, this password is returned as `********`. The password is returned in full on create, and on update only when that update changed the password. Accounts created before September 8, 2026 are unaffected.
      */
     public function withPassword(string $password): self
     {

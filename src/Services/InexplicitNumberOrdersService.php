@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup;
 use Telnyx\InexplicitNumberOrders\InexplicitNumberOrderGetResponse;
@@ -58,14 +58,15 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
         ?string $messagingProfileID = null,
         RequestOptions|array|null $requestOptions = null,
     ): InexplicitNumberOrderNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'orderingGroups' => $orderingGroups,
-                'billingGroupID' => $billingGroupID,
-                'connectionID' => $connectionID,
-                'customerReference' => $customerReference,
-                'messagingProfileID' => $messagingProfileID,
+                'billingGroupID' => $billingGroupID ?? Omitted::VALUE,
+                'connectionID' => $connectionID ?? Omitted::VALUE,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'messagingProfileID' => $messagingProfileID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -112,9 +113,7 @@ final class InexplicitNumberOrdersService implements InexplicitNumberOrdersContr
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPaginationForInexplicitNumberOrders {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

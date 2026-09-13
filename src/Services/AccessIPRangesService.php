@@ -8,7 +8,7 @@ use Telnyx\AccessIPRanges\AccessIPRange;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPRangesContract;
@@ -48,8 +48,12 @@ final class AccessIPRangesService implements AccessIPRangesContract
         ?string $description = null,
         RequestOptions|array|null $requestOptions = null,
     ): AccessIPRange {
-        $params = Util::removeNulls(
-            ['cidrBlock' => $cidrBlock, 'description' => $description]
+        $params = array_filter(
+            [
+                'cidrBlock' => $cidrBlock,
+                'description' => $description ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -76,12 +80,13 @@ final class AccessIPRangesService implements AccessIPRangesContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

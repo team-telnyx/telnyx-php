@@ -7,6 +7,7 @@ namespace Telnyx\Webhooks\CallDeepfakeDetectionResultWebhookEvent\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Webhooks\CallDeepfakeDetectionResultWebhookEvent\Data\Payload\Result;
 
 /**
@@ -89,25 +90,25 @@ final class Payload implements BaseModel
      * @param Result|value-of<Result>|null $result
      */
     public static function with(
+        string|Omitted|null $clientState = Omitted::VALUE,
+        float|Omitted|null $consistency = Omitted::VALUE,
+        float|Omitted|null $score = Omitted::VALUE,
         ?string $callControlID = null,
         ?string $callLegID = null,
         ?string $callSessionID = null,
-        ?string $clientState = null,
         ?string $connectionID = null,
-        ?float $consistency = null,
         Result|string|null $result = null,
-        ?float $score = null,
     ): self {
         $self = new self;
 
         null !== $callControlID && $self['callControlID'] = $callControlID;
         null !== $callLegID && $self['callLegID'] = $callLegID;
         null !== $callSessionID && $self['callSessionID'] = $callSessionID;
-        null !== $clientState && $self['clientState'] = $clientState;
+        Omitted::VALUE !== $clientState && $self['clientState'] = $clientState;
         null !== $connectionID && $self['connectionID'] = $connectionID;
-        null !== $consistency && $self['consistency'] = $consistency;
+        Omitted::VALUE !== $consistency && $self['consistency'] = $consistency;
         null !== $result && $self['result'] = $result;
-        null !== $score && $self['score'] = $score;
+        Omitted::VALUE !== $score && $self['score'] = $score;
 
         return $self;
     }

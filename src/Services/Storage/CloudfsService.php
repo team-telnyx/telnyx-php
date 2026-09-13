@@ -7,7 +7,7 @@ namespace Telnyx\Services\Storage;
 use Telnyx\Client;
 use Telnyx\CloudfsCursorPagination;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\CloudfsContract;
 use Telnyx\Services\Storage\Cloudfs\ActionsService;
@@ -62,13 +62,9 @@ final class CloudfsService implements CloudfsContract
         string $idempotencyKey,
         RequestOptions|array|null $requestOptions = null,
     ): CloudfsFilesystemResponseWrapper {
-        $params = Util::removeNulls(
-            [
-                'name' => $name,
-                'region' => $region,
-                'idempotencyKey' => $idempotencyKey,
-            ],
-        );
+        $params = [
+            'name' => $name, 'region' => $region, 'idempotencyKey' => $idempotencyKey,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -112,7 +108,10 @@ final class CloudfsService implements CloudfsContract
         ?string $name = null,
         RequestOptions|array|null $requestOptions = null,
     ): CloudfsFilesystemDetailResponseWrapper {
-        $params = Util::removeNulls(['name' => $name]);
+        $params = array_filter(
+            ['name' => $name ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -148,16 +147,17 @@ final class CloudfsService implements CloudfsContract
         Sort|string $sort = '-created_at',
         RequestOptions|array|null $requestOptions = null,
     ): CloudfsCursorPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterName' => $filterName,
-                'filterRegion' => $filterRegion,
-                'filterStatus' => $filterStatus,
-                'pageAfter' => $pageAfter,
-                'pageBefore' => $pageBefore,
+                'filterName' => $filterName ?? Omitted::VALUE,
+                'filterRegion' => $filterRegion ?? Omitted::VALUE,
+                'filterStatus' => $filterStatus ?? Omitted::VALUE,
+                'pageAfter' => $pageAfter ?? Omitted::VALUE,
+                'pageBefore' => $pageBefore ?? Omitted::VALUE,
                 'pageLimit' => $pageLimit,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

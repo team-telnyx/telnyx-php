@@ -18,7 +18,7 @@ use Telnyx\CallControlApplications\CallControlApplicationOutbound;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsContract;
@@ -63,8 +63,8 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * @param CallControlApplicationOutbound|CallControlApplicationOutboundShape $outbound
      * @param bool $redactDtmfDebugLogging when enabled, DTMF digits entered by users will be redacted in debug logs to protect PII data entered through IVR interactions
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -82,11 +82,11 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         CallControlApplicationOutbound|array|null $outbound = null,
         bool $redactDtmfDebugLogging = false,
         WebhookAPIVersion|string $webhookAPIVersion = '1',
-        ?string $webhookEventFailoverURL = '',
-        ?int $webhookTimeoutSecs = null,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): CallControlApplicationNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'applicationName' => $applicationName,
                 'webhookEventURL' => $webhookEventURL,
@@ -96,13 +96,14 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
                 'dtmfType' => $dtmfType,
                 'firstCommandTimeout' => $firstCommandTimeout,
                 'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
+                'inbound' => $inbound ?? Omitted::VALUE,
+                'outbound' => $outbound ?? Omitted::VALUE,
                 'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
                 'webhookAPIVersion' => $webhookAPIVersion,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
                 'webhookTimeoutSecs' => $webhookTimeoutSecs,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -150,8 +151,8 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
      * @param bool $redactDtmfDebugLogging when enabled, DTMF digits entered by users will be redacted in debug logs to protect PII data entered through IVR interactions
      * @param list<string> $tags tags assigned to the Call Control Application
      * @param \Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion|value-of<\Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -171,11 +172,11 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         bool $redactDtmfDebugLogging = false,
         ?array $tags = null,
         \Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion|string $webhookAPIVersion = '1',
-        ?string $webhookEventFailoverURL = '',
-        ?int $webhookTimeoutSecs = null,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): CallControlApplicationUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'applicationName' => $applicationName,
                 'webhookEventURL' => $webhookEventURL,
@@ -185,14 +186,15 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
                 'dtmfType' => $dtmfType,
                 'firstCommandTimeout' => $firstCommandTimeout,
                 'firstCommandTimeoutSecs' => $firstCommandTimeoutSecs,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
+                'inbound' => $inbound ?? Omitted::VALUE,
+                'outbound' => $outbound ?? Omitted::VALUE,
                 'redactDtmfDebugLogging' => $redactDtmfDebugLogging,
-                'tags' => $tags,
+                'tags' => $tags ?? Omitted::VALUE,
                 'webhookAPIVersion' => $webhookAPIVersion,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
                 'webhookTimeoutSecs' => $webhookTimeoutSecs,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -232,13 +234,14 @@ final class CallControlApplicationsService implements CallControlApplicationsCon
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

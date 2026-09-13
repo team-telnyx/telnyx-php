@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type AgentTestingConfigurationShape = array{
@@ -57,15 +58,15 @@ final class AgentTestingConfiguration implements BaseModel
      */
     public static function with(
         string $testURL,
-        ?string $additionalInformation = null,
-        ?string $messageID = null,
+        string|Omitted|null $additionalInformation = Omitted::VALUE,
+        string|Omitted|null $messageID = Omitted::VALUE,
     ): self {
         $self = new self;
 
         $self['testURL'] = $testURL;
 
-        null !== $additionalInformation && $self['additionalInformation'] = $additionalInformation;
-        null !== $messageID && $self['messageID'] = $messageID;
+        Omitted::VALUE !== $additionalInformation && $self['additionalInformation'] = $additionalInformation;
+        Omitted::VALUE !== $messageID && $self['messageID'] = $messageID;
 
         return $self;
     }

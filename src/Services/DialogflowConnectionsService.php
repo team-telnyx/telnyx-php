@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
 use Telnyx\DialogflowConnections\DialogflowConnectionResponse;
 use Telnyx\RequestOptions;
@@ -56,14 +56,15 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         ?string $location = null,
         RequestOptions|array|null $requestOptions = null,
     ): DialogflowConnectionResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'serviceAccount' => $serviceAccount,
-                'conversationProfileID' => $conversationProfileID,
+                'conversationProfileID' => $conversationProfileID ?? Omitted::VALUE,
                 'dialogflowAPI' => $dialogflowAPI,
-                'environment' => $environment,
-                'location' => $location,
+                'environment' => $environment ?? Omitted::VALUE,
+                'location' => $location ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -116,14 +117,15 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         ?string $location = null,
         RequestOptions|array|null $requestOptions = null,
     ): DialogflowConnectionResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'serviceAccount' => $serviceAccount,
-                'conversationProfileID' => $conversationProfileID,
+                'conversationProfileID' => $conversationProfileID ?? Omitted::VALUE,
                 'dialogflowAPI' => $dialogflowAPI,
-                'environment' => $environment,
-                'location' => $location,
+                'environment' => $environment ?? Omitted::VALUE,
+                'location' => $location ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

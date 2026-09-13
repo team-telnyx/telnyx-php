@@ -6,7 +6,7 @@ namespace Telnyx\Services\Reputation;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
@@ -49,7 +49,7 @@ final class NumbersService implements NumbersContract
         bool $fresh = false,
         RequestOptions|array|null $requestOptions = null,
     ): ReputationPhoneNumberWithReputation {
-        $params = Util::removeNulls(['fresh' => $fresh]);
+        $params = ['fresh' => $fresh];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($phoneNumber, params: $params, requestOptions: $requestOptions);
@@ -81,14 +81,15 @@ final class NumbersService implements NumbersContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterEnterpriseID' => $filterEnterpriseID,
-                'filterPhoneNumberContains' => $filterPhoneNumberContains,
-                'filterPhoneNumberEq' => $filterPhoneNumberEq,
+                'filterEnterpriseID' => $filterEnterpriseID ?? Omitted::VALUE,
+                'filterPhoneNumberContains' => $filterPhoneNumberContains ?? Omitted::VALUE,
+                'filterPhoneNumberEq' => $filterPhoneNumberEq ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

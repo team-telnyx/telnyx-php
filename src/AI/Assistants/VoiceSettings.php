@@ -13,6 +13,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-import-type BackgroundAudioVariants from \Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio
@@ -133,15 +134,15 @@ final class VoiceSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|LanguageBoost|value-of<LanguageBoost>|null $languageBoost
      * @param BackgroundAudioShape|null $backgroundAudio
-     * @param LanguageBoost|value-of<LanguageBoost>|null $languageBoost
      */
     public static function with(
         string $voice,
+        Omitted|LanguageBoost|string|null $languageBoost = Omitted::VALUE,
         ?string $apiKeyRef = null,
         PredefinedMedia|array|MediaURL|MediaName|null $backgroundAudio = null,
         ?bool $expressiveMode = null,
-        LanguageBoost|string|null $languageBoost = null,
         ?float $similarityBoost = null,
         ?float $speed = null,
         ?float $style = null,
@@ -156,7 +157,7 @@ final class VoiceSettings implements BaseModel
         null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
         null !== $backgroundAudio && $self['backgroundAudio'] = $backgroundAudio;
         null !== $expressiveMode && $self['expressiveMode'] = $expressiveMode;
-        null !== $languageBoost && $self['languageBoost'] = $languageBoost;
+        Omitted::VALUE !== $languageBoost && $self['languageBoost'] = $languageBoost;
         null !== $similarityBoost && $self['similarityBoost'] = $similarityBoost;
         null !== $speed && $self['speed'] = $speed;
         null !== $style && $self['style'] = $style;

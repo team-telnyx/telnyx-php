@@ -6,7 +6,7 @@ namespace Telnyx\Services\EmailInboxes;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailInboxes\Filters\FilterAddParams\Type;
 use Telnyx\EmailInboxes\Filters\FilterAddResponse;
 use Telnyx\EmailInboxes\Filters\FilterDeleteAllResponse;
@@ -76,7 +76,7 @@ final class FiltersService implements FiltersContract
         Type|string $type,
         RequestOptions|array|null $requestOptions = null,
     ): FilterAddResponse {
-        $params = Util::removeNulls(['entries' => $entries, 'type' => $type]);
+        $params = ['entries' => $entries, 'type' => $type];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->add($inboxID, params: $params, requestOptions: $requestOptions);
@@ -104,7 +104,7 @@ final class FiltersService implements FiltersContract
         \Telnyx\EmailInboxes\Filters\FilterDeleteAllParams\Type|string $type,
         RequestOptions|array|null $requestOptions = null,
     ): FilterDeleteAllResponse {
-        $params = Util::removeNulls(['entries' => $entries, 'type' => $type]);
+        $params = ['entries' => $entries, 'type' => $type];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteAll($inboxID, params: $params, requestOptions: $requestOptions);
@@ -131,8 +131,12 @@ final class FiltersService implements FiltersContract
         ?array $blocklist = null,
         RequestOptions|array|null $requestOptions = null,
     ): FilterReplaceResponse {
-        $params = Util::removeNulls(
-            ['allowlist' => $allowlist, 'blocklist' => $blocklist]
+        $params = array_filter(
+            [
+                'allowlist' => $allowlist ?? Omitted::VALUE,
+                'blocklist' => $blocklist ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

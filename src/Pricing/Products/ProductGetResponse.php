@@ -7,6 +7,7 @@ namespace Telnyx\Pricing\Products;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * A single pricing entry. Standard products include rate, unit, currency, type, country_iso, direction, and tiers. Inference products include model, input_rate, output_rate, cached_input_rate, and their respective tier arrays. Rate-deck products include pricing_type and note fields with null rate and empty tiers.
@@ -162,27 +163,27 @@ final class ProductGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param RateShape|Omitted|null $rate
      * @param list<PricingTier|PricingTierShape>|null $cachedInputTiers
      * @param list<PricingTier|PricingTierShape>|null $inputTiers
      * @param list<PricingTier|PricingTierShape>|null $outputTiers
-     * @param RateShape|null $rate
      * @param list<PricingTier|PricingTierShape>|null $tiers
      */
     public static function with(
+        string|Omitted|null $countryISO = Omitted::VALUE,
+        string|Omitted|null $direction = Omitted::VALUE,
+        string|Omitted|null $note = Omitted::VALUE,
+        string|Omitted|null $pricingType = Omitted::VALUE,
+        Omitted|float|string|null $rate = Omitted::VALUE,
         ?string $cachedInputRate = null,
         ?array $cachedInputTiers = null,
-        ?string $countryISO = null,
         ?string $currency = null,
-        ?string $direction = null,
         ?string $inputRate = null,
         ?array $inputTiers = null,
         ?string $model = null,
         ?string $name = null,
-        ?string $note = null,
         ?string $outputRate = null,
         ?array $outputTiers = null,
-        ?string $pricingType = null,
-        float|string|null $rate = null,
         ?array $tiers = null,
         ?string $type = null,
         ?string $unit = null,
@@ -191,18 +192,18 @@ final class ProductGetResponse implements BaseModel
 
         null !== $cachedInputRate && $self['cachedInputRate'] = $cachedInputRate;
         null !== $cachedInputTiers && $self['cachedInputTiers'] = $cachedInputTiers;
-        null !== $countryISO && $self['countryISO'] = $countryISO;
+        Omitted::VALUE !== $countryISO && $self['countryISO'] = $countryISO;
         null !== $currency && $self['currency'] = $currency;
-        null !== $direction && $self['direction'] = $direction;
+        Omitted::VALUE !== $direction && $self['direction'] = $direction;
         null !== $inputRate && $self['inputRate'] = $inputRate;
         null !== $inputTiers && $self['inputTiers'] = $inputTiers;
         null !== $model && $self['model'] = $model;
         null !== $name && $self['name'] = $name;
-        null !== $note && $self['note'] = $note;
+        Omitted::VALUE !== $note && $self['note'] = $note;
         null !== $outputRate && $self['outputRate'] = $outputRate;
         null !== $outputTiers && $self['outputTiers'] = $outputTiers;
-        null !== $pricingType && $self['pricingType'] = $pricingType;
-        null !== $rate && $self['rate'] = $rate;
+        Omitted::VALUE !== $pricingType && $self['pricingType'] = $pricingType;
+        Omitted::VALUE !== $rate && $self['rate'] = $rate;
         null !== $tiers && $self['tiers'] = $tiers;
         null !== $type && $self['type'] = $type;
         null !== $unit && $self['unit'] = $unit;

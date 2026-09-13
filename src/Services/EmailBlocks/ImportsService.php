@@ -7,7 +7,6 @@ namespace Telnyx\Services\EmailBlocks;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\FileParam;
-use Telnyx\Core\Util;
 use Telnyx\EmailBlocks\Imports\EmailBlockImportResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailBlocks\ImportsContract;
@@ -58,9 +57,7 @@ final class ImportsService implements ImportsContract
         int $blockTtlDays = 30,
         RequestOptions|array|null $requestOptions = null,
     ): EmailBlockImportResponse {
-        $params = Util::removeNulls(
-            ['file' => $file, 'blockTtlDays' => $blockTtlDays]
-        );
+        $params = ['file' => $file, 'blockTtlDays' => $blockTtlDays];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);

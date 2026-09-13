@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingHostedNumbers\MessagingHostedNumberDeleteResponse;
 use Telnyx\MessagingHostedNumbers\MessagingHostedNumberGetResponse;
@@ -81,12 +81,13 @@ final class MessagingHostedNumbersService implements MessagingHostedNumbersContr
         ?array $tags = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessagingHostedNumberUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'messagingProduct' => $messagingProduct,
-                'messagingProfileID' => $messagingProfileID,
-                'tags' => $tags,
+                'messagingProduct' => $messagingProduct ?? Omitted::VALUE,
+                'messagingProfileID' => $messagingProfileID ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -121,15 +122,16 @@ final class MessagingHostedNumbersService implements MessagingHostedNumbersContr
         SortPhoneNumber|string|null $sortPhoneNumber = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterMessagingProfileID' => $filterMessagingProfileID,
-                'filterPhoneNumber' => $filterPhoneNumber,
-                'filterPhoneNumberContains' => $filterPhoneNumberContains,
+                'filterMessagingProfileID' => $filterMessagingProfileID ?? Omitted::VALUE,
+                'filterPhoneNumber' => $filterPhoneNumber ?? Omitted::VALUE,
+                'filterPhoneNumberContains' => $filterPhoneNumberContains ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'sortPhoneNumber' => $sortPhoneNumber,
+                'sortPhoneNumber' => $sortPhoneNumber ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

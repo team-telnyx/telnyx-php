@@ -6,7 +6,7 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
@@ -99,18 +99,19 @@ final class VoiceService implements VoiceContract
         UsagePaymentMethod|string $usagePaymentMethod = 'pay-per-minute',
         RequestOptions|array|null $requestOptions = null,
     ): VoiceUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'callForwarding' => $callForwarding,
-                'callRecording' => $callRecording,
+                'callForwarding' => $callForwarding ?? Omitted::VALUE,
+                'callRecording' => $callRecording ?? Omitted::VALUE,
                 'callerIDNameEnabled' => $callerIDNameEnabled,
-                'cnamListing' => $cnamListing,
+                'cnamListing' => $cnamListing ?? Omitted::VALUE,
                 'inboundCallScreening' => $inboundCallScreening,
-                'mediaFeatures' => $mediaFeatures,
+                'mediaFeatures' => $mediaFeatures ?? Omitted::VALUE,
                 'techPrefixEnabled' => $techPrefixEnabled,
-                'translatedNumber' => $translatedNumber,
+                'translatedNumber' => $translatedNumber ?? Omitted::VALUE,
                 'usagePaymentMethod' => $usagePaymentMethod,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -139,13 +140,14 @@ final class VoiceService implements VoiceContract
         Sort|string|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

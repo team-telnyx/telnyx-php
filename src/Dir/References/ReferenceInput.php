@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * One reference supplied at submit. The reference type is implied by the field that carries it (business_references vs financial_reference).
@@ -102,9 +103,9 @@ final class ReferenceInput implements BaseModel
         string $fullName,
         string $phoneE164,
         string $timezone,
-        ?string $jobTitle = null,
-        ?string $organization = null,
-        ?string $relationshipToRegistrant = null,
+        string|Omitted|null $jobTitle = Omitted::VALUE,
+        string|Omitted|null $organization = Omitted::VALUE,
+        string|Omitted|null $relationshipToRegistrant = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -113,9 +114,9 @@ final class ReferenceInput implements BaseModel
         $self['phoneE164'] = $phoneE164;
         $self['timezone'] = $timezone;
 
-        null !== $jobTitle && $self['jobTitle'] = $jobTitle;
-        null !== $organization && $self['organization'] = $organization;
-        null !== $relationshipToRegistrant && $self['relationshipToRegistrant'] = $relationshipToRegistrant;
+        Omitted::VALUE !== $jobTitle && $self['jobTitle'] = $jobTitle;
+        Omitted::VALUE !== $organization && $self['organization'] = $organization;
+        Omitted::VALUE !== $relationshipToRegistrant && $self['relationshipToRegistrant'] = $relationshipToRegistrant;
 
         return $self;
     }

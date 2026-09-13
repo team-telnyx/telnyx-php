@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetPhoneNumberResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Tests\UnsupportedMockTests;
@@ -126,6 +127,21 @@ final class PhoneNumbersTest extends TestCase
             PhoneNumberGetConversationWindowResponse::class,
             $result
         );
+    }
+
+    #[Test]
+    public function testRetrievePhoneNumber(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->whatsapp->phoneNumbers->retrievePhoneNumber(
+            'phone_number'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberGetPhoneNumberResponse::class, $result);
     }
 
     #[Test]

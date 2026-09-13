@@ -9,7 +9,7 @@ use Telnyx\AI\Tools\SharedToolResponse;
 use Telnyx\AI\Tools\UpdateDynamicVariablesToolParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ToolsContract;
@@ -72,21 +72,22 @@ final class ToolsService implements ToolsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): SharedToolResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'displayName' => $displayName,
                 'type' => $type,
-                'clientSideTool' => $clientSideTool,
-                'function' => $function,
-                'handoff' => $handoff,
-                'invite' => $invite,
-                'pay' => $pay,
-                'retrieval' => $retrieval,
+                'clientSideTool' => $clientSideTool ?? Omitted::VALUE,
+                'function' => $function ?? Omitted::VALUE,
+                'handoff' => $handoff ?? Omitted::VALUE,
+                'invite' => $invite ?? Omitted::VALUE,
+                'pay' => $pay ?? Omitted::VALUE,
+                'retrieval' => $retrieval ?? Omitted::VALUE,
                 'timeoutMs' => $timeoutMs,
-                'updateDynamicVariables' => $updateDynamicVariables,
-                'webhook' => $webhook,
-                'idempotencyKey' => $idempotencyKey,
+                'updateDynamicVariables' => $updateDynamicVariables ?? Omitted::VALUE,
+                'webhook' => $webhook ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -148,20 +149,21 @@ final class ToolsService implements ToolsContract
         ?array $webhook = null,
         RequestOptions|array|null $requestOptions = null,
     ): SharedToolResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientSideTool' => $clientSideTool,
-                'displayName' => $displayName,
-                'function' => $function,
-                'handoff' => $handoff,
-                'invite' => $invite,
-                'pay' => $pay,
-                'retrieval' => $retrieval,
-                'timeoutMs' => $timeoutMs,
-                'type' => $type,
-                'updateDynamicVariables' => $updateDynamicVariables,
-                'webhook' => $webhook,
+                'clientSideTool' => $clientSideTool ?? Omitted::VALUE,
+                'displayName' => $displayName ?? Omitted::VALUE,
+                'function' => $function ?? Omitted::VALUE,
+                'handoff' => $handoff ?? Omitted::VALUE,
+                'invite' => $invite ?? Omitted::VALUE,
+                'pay' => $pay ?? Omitted::VALUE,
+                'retrieval' => $retrieval ?? Omitted::VALUE,
+                'timeoutMs' => $timeoutMs ?? Omitted::VALUE,
+                'type' => $type ?? Omitted::VALUE,
+                'updateDynamicVariables' => $updateDynamicVariables ?? Omitted::VALUE,
+                'webhook' => $webhook ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -192,13 +194,14 @@ final class ToolsService implements ToolsContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterName' => $filterName,
-                'filterType' => $filterType,
+                'filterName' => $filterName ?? Omitted::VALUE,
+                'filterType' => $filterType ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailCursorPagination;
 use Telnyx\EmailEvents\EmailEventGetStatsResponse;
 use Telnyx\EmailEvents\EmailEventListResponse;
@@ -60,15 +60,16 @@ final class EmailEventsService implements EmailEventsContract
         ?\DateTimeInterface $to = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailCursorPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'emailID' => $emailID,
-                'eventType' => $eventType,
-                'from' => $from,
-                'pageCursor' => $pageCursor,
+                'emailID' => $emailID ?? Omitted::VALUE,
+                'eventType' => $eventType ?? Omitted::VALUE,
+                'from' => $from ?? Omitted::VALUE,
+                'pageCursor' => $pageCursor ?? Omitted::VALUE,
                 'pageSize' => $pageSize,
-                'to' => $to,
+                'to' => $to ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -93,7 +94,10 @@ final class EmailEventsService implements EmailEventsContract
         ?\DateTimeInterface $to = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailEventGetStatsResponse {
-        $params = Util::removeNulls(['from' => $from, 'to' => $to]);
+        $params = array_filter(
+            ['from' => $from ?? Omitted::VALUE, 'to' => $to ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveStats(params: $params, requestOptions: $requestOptions);

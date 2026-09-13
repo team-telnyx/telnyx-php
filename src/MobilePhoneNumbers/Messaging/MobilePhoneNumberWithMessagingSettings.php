@@ -7,6 +7,7 @@ namespace Telnyx\MobilePhoneNumbers\Messaging;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MobilePhoneNumbers\Messaging\MobilePhoneNumberWithMessagingSettings\Features;
 use Telnyx\MobilePhoneNumbers\Messaging\MobilePhoneNumberWithMessagingSettings\RecordType;
 use Telnyx\MobilePhoneNumbers\Messaging\MobilePhoneNumberWithMessagingSettings\Type;
@@ -132,12 +133,12 @@ final class MobilePhoneNumberWithMessagingSettings implements BaseModel
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
+        string|Omitted|null $messagingProfileID = Omitted::VALUE,
         ?string $id = null,
         ?string $countryCode = null,
         ?\DateTimeInterface $createdAt = null,
         Features|array|null $features = null,
         ?string $messagingProduct = null,
-        ?string $messagingProfileID = null,
         ?string $organizationID = null,
         ?string $phoneNumber = null,
         RecordType|string|null $recordType = null,
@@ -153,7 +154,7 @@ final class MobilePhoneNumberWithMessagingSettings implements BaseModel
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $features && $self['features'] = $features;
         null !== $messagingProduct && $self['messagingProduct'] = $messagingProduct;
-        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        Omitted::VALUE !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         null !== $organizationID && $self['organizationID'] = $organizationID;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $recordType && $self['recordType'] = $recordType;

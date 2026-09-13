@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsContract;
@@ -81,24 +81,25 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         ?string $secondaryTelnyxIP = null,
         RequestOptions|array|null $requestOptions = null,
     ): VirtualCrossConnectNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'regionCode' => $regionCode,
-                'bandwidthMbps' => $bandwidthMbps,
-                'bgpAsn' => $bgpAsn,
-                'cloudProvider' => $cloudProvider,
-                'cloudProviderRegion' => $cloudProviderRegion,
-                'name' => $name,
-                'networkID' => $networkID,
-                'primaryBgpKey' => $primaryBgpKey,
-                'primaryCloudAccountID' => $primaryCloudAccountID,
-                'primaryCloudIP' => $primaryCloudIP,
-                'primaryTelnyxIP' => $primaryTelnyxIP,
-                'secondaryBgpKey' => $secondaryBgpKey,
-                'secondaryCloudAccountID' => $secondaryCloudAccountID,
-                'secondaryCloudIP' => $secondaryCloudIP,
-                'secondaryTelnyxIP' => $secondaryTelnyxIP,
+                'bandwidthMbps' => $bandwidthMbps ?? Omitted::VALUE,
+                'bgpAsn' => $bgpAsn ?? Omitted::VALUE,
+                'cloudProvider' => $cloudProvider ?? Omitted::VALUE,
+                'cloudProviderRegion' => $cloudProviderRegion ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'networkID' => $networkID ?? Omitted::VALUE,
+                'primaryBgpKey' => $primaryBgpKey ?? Omitted::VALUE,
+                'primaryCloudAccountID' => $primaryCloudAccountID ?? Omitted::VALUE,
+                'primaryCloudIP' => $primaryCloudIP ?? Omitted::VALUE,
+                'primaryTelnyxIP' => $primaryTelnyxIP ?? Omitted::VALUE,
+                'secondaryBgpKey' => $secondaryBgpKey ?? Omitted::VALUE,
+                'secondaryCloudAccountID' => $secondaryCloudAccountID ?? Omitted::VALUE,
+                'secondaryCloudIP' => $secondaryCloudIP ?? Omitted::VALUE,
+                'secondaryTelnyxIP' => $secondaryTelnyxIP ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -153,15 +154,16 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         ?bool $secondaryRoutingAnnouncement = null,
         RequestOptions|array|null $requestOptions = null,
     ): VirtualCrossConnectUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'primaryCloudIP' => $primaryCloudIP,
-                'primaryEnabled' => $primaryEnabled,
-                'primaryRoutingAnnouncement' => $primaryRoutingAnnouncement,
-                'secondaryCloudIP' => $secondaryCloudIP,
-                'secondaryEnabled' => $secondaryEnabled,
-                'secondaryRoutingAnnouncement' => $secondaryRoutingAnnouncement,
+                'primaryCloudIP' => $primaryCloudIP ?? Omitted::VALUE,
+                'primaryEnabled' => $primaryEnabled ?? Omitted::VALUE,
+                'primaryRoutingAnnouncement' => $primaryRoutingAnnouncement ?? Omitted::VALUE,
+                'secondaryCloudIP' => $secondaryCloudIP ?? Omitted::VALUE,
+                'secondaryEnabled' => $secondaryEnabled ?? Omitted::VALUE,
+                'secondaryRoutingAnnouncement' => $secondaryRoutingAnnouncement ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -188,12 +190,13 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

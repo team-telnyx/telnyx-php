@@ -8,7 +8,7 @@ use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse;
 use Telnyx\Addresses\Actions\ActionValidateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Addresses\ActionsContract;
 
@@ -48,7 +48,10 @@ final class ActionsService implements ActionsContract
         ?string $id = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionAcceptSuggestionsResponse {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = array_filter(
+            ['id' => $id ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->acceptSuggestions($addressUuid, params: $params, requestOptions: $requestOptions);
@@ -80,15 +83,16 @@ final class ActionsService implements ActionsContract
         ?string $locality = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionValidateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'countryCode' => $countryCode,
                 'postalCode' => $postalCode,
                 'streetAddress' => $streetAddress,
-                'administrativeArea' => $administrativeArea,
-                'extendedAddress' => $extendedAddress,
-                'locality' => $locality,
+                'administrativeArea' => $administrativeArea ?? Omitted::VALUE,
+                'extendedAddress' => $extendedAddress ?? Omitted::VALUE,
+                'locality' => $locality ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Rcs\Agents\AgentEmailContact;
 use Telnyx\Rcs\Agents\AgentPhoneContact;
 use Telnyx\Rcs\Agents\AgentWebsiteContact;
@@ -86,19 +87,19 @@ final class AgentProfileContactRequirement implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AgentEmailContact|AgentEmailContactShape $email
-     * @param AgentPhoneContact|AgentPhoneContactShape|null $phoneNumber
-     * @param AgentWebsiteContact|AgentWebsiteContactShape|null $website
+     * @param Omitted|AgentPhoneContact|AgentPhoneContactShape|null $phoneNumber
+     * @param Omitted|AgentWebsiteContact|AgentWebsiteContactShape|null $website
      */
     public static function with(
         AgentEmailContact|array $email,
+        Omitted|AgentPhoneContact|array|null $phoneNumber = Omitted::VALUE,
+        Omitted|AgentWebsiteContact|array|null $website = Omitted::VALUE,
         ?string $brandColor = null,
         ?string $description = null,
         ?string $heroURL = null,
         ?string $logoURL = null,
-        AgentPhoneContact|array|null $phoneNumber = null,
         ?string $privacyPolicyURL = null,
         ?string $termsAndConditionsURL = null,
-        AgentWebsiteContact|array|null $website = null,
     ): self {
         $self = new self;
 
@@ -108,10 +109,10 @@ final class AgentProfileContactRequirement implements BaseModel
         null !== $description && $self['description'] = $description;
         null !== $heroURL && $self['heroURL'] = $heroURL;
         null !== $logoURL && $self['logoURL'] = $logoURL;
-        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        Omitted::VALUE !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $privacyPolicyURL && $self['privacyPolicyURL'] = $privacyPolicyURL;
         null !== $termsAndConditionsURL && $self['termsAndConditionsURL'] = $termsAndConditionsURL;
-        null !== $website && $self['website'] = $website;
+        Omitted::VALUE !== $website && $self['website'] = $website;
 
         return $self;
     }

@@ -7,6 +7,7 @@ namespace Telnyx\EmailDomains;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailDomains\EmailDmarcPolicy\P;
 use Telnyx\EmailDomains\EmailDmarcPolicy\Sp;
 
@@ -63,21 +64,21 @@ final class EmailDmarcPolicy implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|Sp|value-of<Sp>|null $sp
      * @param P|value-of<P>|null $p
-     * @param Sp|value-of<Sp>|null $sp
      */
     public static function with(
+        string|Omitted|null $rua = Omitted::VALUE,
+        Omitted|Sp|string|null $sp = Omitted::VALUE,
         P|string|null $p = null,
         ?int $pct = null,
-        ?string $rua = null,
-        Sp|string|null $sp = null,
     ): self {
         $self = new self;
 
         null !== $p && $self['p'] = $p;
         null !== $pct && $self['pct'] = $pct;
-        null !== $rua && $self['rua'] = $rua;
-        null !== $sp && $self['sp'] = $sp;
+        Omitted::VALUE !== $rua && $self['rua'] = $rua;
+        Omitted::VALUE !== $sp && $self['sp'] = $sp;
 
         return $self;
     }

@@ -7,6 +7,7 @@ namespace Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type CnamListingShape = array{
@@ -35,12 +36,12 @@ final class CnamListing implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $cnamListingDetails = null,
-        ?bool $cnamListingEnabled = null
+        string|Omitted|null $cnamListingDetails = Omitted::VALUE,
+        ?bool $cnamListingEnabled = null,
     ): self {
         $self = new self;
 
-        null !== $cnamListingDetails && $self['cnamListingDetails'] = $cnamListingDetails;
+        Omitted::VALUE !== $cnamListingDetails && $self['cnamListingDetails'] = $cnamListingDetails;
         null !== $cnamListingEnabled && $self['cnamListingEnabled'] = $cnamListingEnabled;
 
         return $self;

@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
@@ -62,7 +62,7 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
         ?string $streetSuffix = null,
         RequestOptions|array|null $requestOptions = null,
     ): DynamicEmergencyAddressNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'administrativeArea' => $administrativeArea,
                 'countryCode' => $countryCode,
@@ -70,12 +70,13 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
                 'locality' => $locality,
                 'postalCode' => $postalCode,
                 'streetName' => $streetName,
-                'extendedAddress' => $extendedAddress,
-                'houseSuffix' => $houseSuffix,
-                'streetPostDirectional' => $streetPostDirectional,
-                'streetPreDirectional' => $streetPreDirectional,
-                'streetSuffix' => $streetSuffix,
+                'extendedAddress' => $extendedAddress ?? Omitted::VALUE,
+                'houseSuffix' => $houseSuffix ?? Omitted::VALUE,
+                'streetPostDirectional' => $streetPostDirectional ?? Omitted::VALUE,
+                'streetPreDirectional' => $streetPreDirectional ?? Omitted::VALUE,
+                'streetSuffix' => $streetSuffix ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -122,12 +123,13 @@ final class DynamicEmergencyAddressesService implements DynamicEmergencyAddresse
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

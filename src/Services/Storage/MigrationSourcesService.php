@@ -6,7 +6,7 @@ namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\MigrationSourcesContract;
 use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\Provider;
@@ -57,13 +57,14 @@ final class MigrationSourcesService implements MigrationSourcesContract
         ?string $sourceRegion = null,
         RequestOptions|array|null $requestOptions = null,
     ): MigrationSourceNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'bucketName' => $bucketName,
                 'provider' => $provider,
                 'providerAuth' => $providerAuth,
-                'sourceRegion' => $sourceRegion,
+                'sourceRegion' => $sourceRegion ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

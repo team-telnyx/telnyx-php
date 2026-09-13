@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Telnyx;
 
 use Http\Discovery\Psr17FactoryDiscovery;
-use Http\Discovery\Psr18ClientDiscovery;
 use Telnyx\Core\BaseClient;
+use Telnyx\Core\Implementation\GuzzleHttpClient;
 use Telnyx\Core\Implementation\StreamingHttpClient;
 use Telnyx\Core\Util;
 use Telnyx\Services\AccessIPAddressService;
@@ -32,6 +32,7 @@ use Telnyx\Services\ChannelZonesService;
 use Telnyx\Services\ChargesBreakdownService;
 use Telnyx\Services\ChargesSummaryService;
 use Telnyx\Services\CommentsService;
+use Telnyx\Services\ComputeService;
 use Telnyx\Services\ConferencesService;
 use Telnyx\Services\ConnectionsService;
 use Telnyx\Services\CountryCoverageService;
@@ -193,8 +194,8 @@ use Telnyx\Services\WirelessService;
 use Telnyx\Services\X402Service;
 
 /**
- * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
  */
 class Client extends BaseClient
 {
@@ -1118,6 +1119,11 @@ class Client extends BaseClient
      */
     public ExternalRequirementsService $externalRequirements;
 
+    /**
+     * @api
+     */
+    public ComputeService $compute;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1151,13 +1157,13 @@ class Client extends BaseClient
                 uriFactory: Psr17FactoryDiscovery::findUriFactory(),
                 streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
                 requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
-                transporter: Psr18ClientDiscovery::find(),
             ),
             $requestOptions,
         );
 
+        $options->transporter ??= new GuzzleHttpClient;
+
         if (is_null($options->streamingTransporter)) {
-            assert(!is_null($options->transporter));
             $options->streamingTransporter = new StreamingHttpClient($options->transporter);
         }
 
@@ -1167,7 +1173,7 @@ class Client extends BaseClient
             'Accept' => 'application/json',
             'User-Agent' => sprintf('telnyx/PHP %s', VERSION),
             'X-Stainless-Lang' => 'php',
-            'X-Stainless-Package-Version' => '8.3.0',
+            'X-Stainless-Package-Version' => '8.6.0',
             'X-Stainless-Arch' => Util::machtype(),
             'X-Stainless-OS' => Util::ostype(),
             'X-Stainless-Runtime' => php_sapi_name(),
@@ -1372,6 +1378,7 @@ class Client extends BaseClient
         $this->webSearch = new WebSearchService($this);
         $this->meetingSessions = new MeetingSessionsService($this);
         $this->externalRequirements = new ExternalRequirementsService($this);
+        $this->compute = new ComputeService($this);
     }
 
     /** @return array<string,string> */
@@ -1406,7 +1413,7 @@ class Client extends BaseClient
      * @param array<string,string|int|list<string|int>|null> $headers
      * @param RequestOpts|null $opts
      *
-     * @return array{NormalizedRequest, RequestOptions}
+     * @return array{NormalizedRequest, RequestOptions, NormalizedRequest}
      */
     protected function buildRequest(
         string $method,

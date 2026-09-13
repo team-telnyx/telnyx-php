@@ -7,6 +7,7 @@ namespace Telnyx\PortingOrders\ActionRequirements;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\PortingOrders\ActionRequirements\PortingActionRequirement\RecordType;
 use Telnyx\PortingOrders\ActionRequirements\PortingActionRequirement\Status;
 
@@ -107,10 +108,10 @@ final class PortingActionRequirement implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        string|Omitted|null $actionURL = Omitted::VALUE,
+        string|Omitted|null $cancelReason = Omitted::VALUE,
         ?string $id = null,
         ?string $actionType = null,
-        ?string $actionURL = null,
-        ?string $cancelReason = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $portingOrderID = null,
         RecordType|string|null $recordType = null,
@@ -122,8 +123,8 @@ final class PortingActionRequirement implements BaseModel
 
         null !== $id && $self['id'] = $id;
         null !== $actionType && $self['actionType'] = $actionType;
-        null !== $actionURL && $self['actionURL'] = $actionURL;
-        null !== $cancelReason && $self['cancelReason'] = $cancelReason;
+        Omitted::VALUE !== $actionURL && $self['actionURL'] = $actionURL;
+        Omitted::VALUE !== $cancelReason && $self['cancelReason'] = $cancelReason;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
         null !== $recordType && $self['recordType'] = $recordType;

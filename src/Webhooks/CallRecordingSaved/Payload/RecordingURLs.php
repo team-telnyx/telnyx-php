@@ -7,6 +7,7 @@ namespace Telnyx\Webhooks\CallRecordingSaved\Payload;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Recording URLs in requested format. These URLs are valid for 10 minutes. After 10 minutes, you may retrieve recordings via API using Reports -> Call Recordings documentation, or via Mission Control under Reporting -> Recordings.
@@ -40,12 +41,14 @@ final class RecordingURLs implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $mp3 = null, ?string $wav = null): self
-    {
+    public static function with(
+        string|Omitted|null $mp3 = Omitted::VALUE,
+        string|Omitted|null $wav = Omitted::VALUE,
+    ): self {
         $self = new self;
 
-        null !== $mp3 && $self['mp3'] = $mp3;
-        null !== $wav && $self['wav'] = $wav;
+        Omitted::VALUE !== $mp3 && $self['mp3'] = $mp3;
+        Omitted::VALUE !== $wav && $self['wav'] = $wav;
 
         return $self;
     }

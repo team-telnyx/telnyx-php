@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Creates a new FQDN record and attaches it to the specified connection.
@@ -80,7 +81,7 @@ final class FqdnCreateParams implements BaseModel
         string $connectionID,
         string $dnsRecordType,
         string $fqdn,
-        ?int $port = null
+        int|Omitted|null $port = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -88,7 +89,7 @@ final class FqdnCreateParams implements BaseModel
         $self['dnsRecordType'] = $dnsRecordType;
         $self['fqdn'] = $fqdn;
 
-        null !== $port && $self['port'] = $port;
+        Omitted::VALUE !== $port && $self['port'] = $port;
 
         return $self;
     }

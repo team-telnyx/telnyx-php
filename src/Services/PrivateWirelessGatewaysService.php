@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGateway;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
@@ -53,8 +53,13 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
         ?string $regionCode = null,
         RequestOptions|array|null $requestOptions = null,
     ): PrivateWirelessGatewayNewResponse {
-        $params = Util::removeNulls(
-            ['name' => $name, 'networkID' => $networkID, 'regionCode' => $regionCode]
+        $params = array_filter(
+            [
+                'name' => $name,
+                'networkID' => $networkID,
+                'regionCode' => $regionCode ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -111,16 +116,17 @@ final class PrivateWirelessGatewaysService implements PrivateWirelessGatewaysCon
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterCreatedAt' => $filterCreatedAt,
-                'filterIPRange' => $filterIPRange,
-                'filterName' => $filterName,
-                'filterRegionCode' => $filterRegionCode,
-                'filterUpdatedAt' => $filterUpdatedAt,
+                'filterCreatedAt' => $filterCreatedAt ?? Omitted::VALUE,
+                'filterIPRange' => $filterIPRange ?? Omitted::VALUE,
+                'filterName' => $filterName ?? Omitted::VALUE,
+                'filterRegionCode' => $filterRegionCode ?? Omitted::VALUE,
+                'filterUpdatedAt' => $filterUpdatedAt ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

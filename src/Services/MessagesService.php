@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetGroupMessagesResponse;
 use Telnyx\Messages\MessageGetResponse;
@@ -158,21 +158,22 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessageScheduleResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'to' => $to,
                 'autoDetect' => $autoDetect,
-                'from' => $from,
-                'mediaURLs' => $mediaURLs,
-                'messagingProfileID' => $messagingProfileID,
-                'sendAt' => $sendAt,
-                'subject' => $subject,
-                'text' => $text,
-                'type' => $type,
+                'from' => $from ?? Omitted::VALUE,
+                'mediaURLs' => $mediaURLs ?? Omitted::VALUE,
+                'messagingProfileID' => $messagingProfileID ?? Omitted::VALUE,
+                'sendAt' => $sendAt ?? Omitted::VALUE,
+                'subject' => $subject ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'type' => $type ?? Omitted::VALUE,
                 'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -202,7 +203,7 @@ final class MessagesService implements MessagesContract
      * @param string $messagingProfileID Unique identifier for a messaging profile.
      *
      * **Required if sending via number pool or with an alphanumeric sender ID.**
-     * @param \DateTimeInterface|null $sendAt ISO 8601 formatted date indicating when to send the message - accurate up till a minute
+     * @param \DateTimeInterface|Omitted|null $sendAt ISO 8601 formatted date indicating when to send the message - accurate up till a minute
      * @param string $subject Subject of multimedia message
      * @param string $text Message body (i.e., content) as a non-empty string.
      *
@@ -222,7 +223,7 @@ final class MessagesService implements MessagesContract
         ?string $from = null,
         ?array $mediaURLs = null,
         ?string $messagingProfileID = null,
-        ?\DateTimeInterface $sendAt = null,
+        \DateTimeInterface|Omitted|null $sendAt = Omitted::VALUE,
         ?string $subject = null,
         ?string $text = null,
         \Telnyx\Messages\MessageSendParams\Type|string|null $type = null,
@@ -231,22 +232,23 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessageSendResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'to' => $to,
                 'autoDetect' => $autoDetect,
                 'encoding' => $encoding,
-                'from' => $from,
-                'mediaURLs' => $mediaURLs,
-                'messagingProfileID' => $messagingProfileID,
+                'from' => $from ?? Omitted::VALUE,
+                'mediaURLs' => $mediaURLs ?? Omitted::VALUE,
+                'messagingProfileID' => $messagingProfileID ?? Omitted::VALUE,
                 'sendAt' => $sendAt,
-                'subject' => $subject,
-                'text' => $text,
-                'type' => $type,
+                'subject' => $subject ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'type' => $type ?? Omitted::VALUE,
                 'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -283,17 +285,18 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessageSendGroupMmsResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'from' => $from,
                 'to' => $to,
-                'mediaURLs' => $mediaURLs,
-                'subject' => $subject,
-                'text' => $text,
+                'mediaURLs' => $mediaURLs ?? Omitted::VALUE,
+                'subject' => $subject ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
                 'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -340,20 +343,21 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessageSendLongCodeResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'from' => $from,
                 'to' => $to,
                 'autoDetect' => $autoDetect,
                 'encoding' => $encoding,
-                'mediaURLs' => $mediaURLs,
-                'subject' => $subject,
-                'text' => $text,
-                'type' => $type,
+                'mediaURLs' => $mediaURLs ?? Omitted::VALUE,
+                'subject' => $subject ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'type' => $type ?? Omitted::VALUE,
                 'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -400,20 +404,21 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessageSendNumberPoolResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'messagingProfileID' => $messagingProfileID,
                 'to' => $to,
                 'autoDetect' => $autoDetect,
                 'encoding' => $encoding,
-                'mediaURLs' => $mediaURLs,
-                'subject' => $subject,
-                'text' => $text,
-                'type' => $type,
+                'mediaURLs' => $mediaURLs ?? Omitted::VALUE,
+                'subject' => $subject ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'type' => $type ?? Omitted::VALUE,
                 'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -460,20 +465,21 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessageSendShortCodeResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'from' => $from,
                 'to' => $to,
                 'autoDetect' => $autoDetect,
                 'encoding' => $encoding,
-                'mediaURLs' => $mediaURLs,
-                'subject' => $subject,
-                'text' => $text,
-                'type' => $type,
+                'mediaURLs' => $mediaURLs ?? Omitted::VALUE,
+                'subject' => $subject ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'type' => $type ?? Omitted::VALUE,
                 'useProfileWebhooks' => $useProfileWebhooks,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -492,8 +498,8 @@ final class MessagesService implements MessagesContract
      * @param string $text the message body
      * @param string $to Receiving address (+E.164 formatted phone number).
      * @param bool $useProfileWebhooks if true, use the messaging profile's webhook settings
-     * @param string|null $webhookFailoverURL failover callback URL for delivery status updates
-     * @param string|null $webhookURL callback URL for delivery status updates
+     * @param string|Omitted|null $webhookFailoverURL failover callback URL for delivery status updates
+     * @param string|Omitted|null $webhookURL callback URL for delivery status updates
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -504,20 +510,21 @@ final class MessagesService implements MessagesContract
         string $text,
         string $to,
         ?bool $useProfileWebhooks = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
+        string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): MessageSendWithAlphanumericSenderResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'from' => $from,
                 'messagingProfileID' => $messagingProfileID,
                 'text' => $text,
                 'to' => $to,
-                'useProfileWebhooks' => $useProfileWebhooks,
+                'useProfileWebhooks' => $useProfileWebhooks ?? Omitted::VALUE,
                 'webhookFailoverURL' => $webhookFailoverURL,
                 'webhookURL' => $webhookURL,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -550,15 +557,16 @@ final class MessagesService implements MessagesContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessageWhatsappResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'from' => $from,
                 'to' => $to,
                 'whatsappMessage' => $whatsappMessage,
-                'messagingProfileID' => $messagingProfileID,
-                'type' => $type,
-                'webhookURL' => $webhookURL,
+                'messagingProfileID' => $messagingProfileID ?? Omitted::VALUE,
+                'type' => $type ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

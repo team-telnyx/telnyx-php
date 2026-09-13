@@ -7,6 +7,7 @@ namespace Telnyx\InfringementClaims;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Dir\Document;
 use Telnyx\InfringementClaims\InfringementClaim\ClaimType;
 use Telnyx\InfringementClaims\InfringementClaim\ContestHistory;
@@ -136,14 +137,17 @@ final class InfringementClaim implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|Resolution|value-of<Resolution>|null $resolution
      * @param ClaimType|value-of<ClaimType>|null $claimType
      * @param list<Document|DocumentShape>|null $contestDocuments
      * @param list<ContestHistory|ContestHistoryShape>|null $contestHistory
      * @param Dir|DirShape|null $dir
-     * @param Resolution|value-of<Resolution>|null $resolution
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        Omitted|Resolution|string|null $resolution = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $resolutionDate = Omitted::VALUE,
+        string|Omitted|null $resolutionNotes = Omitted::VALUE,
         ?string $id = null,
         ?\DateTimeInterface $claimDate = null,
         ?string $claimDescription = null,
@@ -156,9 +160,6 @@ final class InfringementClaim implements BaseModel
         Dir|array|null $dir = null,
         ?string $dirID = null,
         ?string $enterpriseID = null,
-        Resolution|string|null $resolution = null,
-        ?\DateTimeInterface $resolutionDate = null,
-        ?string $resolutionNotes = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
@@ -176,9 +177,9 @@ final class InfringementClaim implements BaseModel
         null !== $dir && $self['dir'] = $dir;
         null !== $dirID && $self['dirID'] = $dirID;
         null !== $enterpriseID && $self['enterpriseID'] = $enterpriseID;
-        null !== $resolution && $self['resolution'] = $resolution;
-        null !== $resolutionDate && $self['resolutionDate'] = $resolutionDate;
-        null !== $resolutionNotes && $self['resolutionNotes'] = $resolutionNotes;
+        Omitted::VALUE !== $resolution && $self['resolution'] = $resolution;
+        Omitted::VALUE !== $resolutionDate && $self['resolutionDate'] = $resolutionDate;
+        Omitted::VALUE !== $resolutionNotes && $self['resolutionNotes'] = $resolutionNotes;
         null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 

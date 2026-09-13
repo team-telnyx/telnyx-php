@@ -7,6 +7,7 @@ namespace Telnyx\PortingOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Can be specified directly or via the `requirement_group_id` parameter.
@@ -43,13 +44,13 @@ final class PortingOrderDocuments implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $invoice = null,
-        ?string $loa = null
+        string|Omitted|null $invoice = Omitted::VALUE,
+        string|Omitted|null $loa = Omitted::VALUE,
     ): self {
         $self = new self;
 
-        null !== $invoice && $self['invoice'] = $invoice;
-        null !== $loa && $self['loa'] = $loa;
+        Omitted::VALUE !== $invoice && $self['invoice'] = $invoice;
+        Omitted::VALUE !== $loa && $self['loa'] = $loa;
 
         return $self;
     }

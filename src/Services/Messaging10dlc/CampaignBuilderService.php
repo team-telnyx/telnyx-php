@@ -6,7 +6,7 @@ namespace Telnyx\Services\Messaging10dlc;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Messaging10dlc\Campaign\TelnyxCampaignCsp;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\CampaignBuilderContract;
@@ -120,44 +120,45 @@ final class CampaignBuilderService implements CampaignBuilderContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): TelnyxCampaignCsp {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'brandID' => $brandID,
                 'description' => $description,
                 'usecase' => $usecase,
-                'ageGated' => $ageGated,
-                'autoRenewal' => $autoRenewal,
-                'directLending' => $directLending,
-                'embeddedLink' => $embeddedLink,
-                'embeddedLinkSample' => $embeddedLinkSample,
-                'embeddedPhone' => $embeddedPhone,
-                'helpKeywords' => $helpKeywords,
-                'helpMessage' => $helpMessage,
-                'messageFlow' => $messageFlow,
-                'mnoIDs' => $mnoIDs,
-                'numberPool' => $numberPool,
-                'optinKeywords' => $optinKeywords,
-                'optinMessage' => $optinMessage,
-                'optoutKeywords' => $optoutKeywords,
-                'optoutMessage' => $optoutMessage,
-                'privacyPolicyLink' => $privacyPolicyLink,
-                'referenceID' => $referenceID,
-                'resellerID' => $resellerID,
-                'sample1' => $sample1,
-                'sample2' => $sample2,
-                'sample3' => $sample3,
-                'sample4' => $sample4,
-                'sample5' => $sample5,
-                'subscriberHelp' => $subscriberHelp,
-                'subscriberOptin' => $subscriberOptin,
-                'subscriberOptout' => $subscriberOptout,
-                'subUsecases' => $subUsecases,
-                'tag' => $tag,
-                'termsAndConditions' => $termsAndConditions,
-                'termsAndConditionsLink' => $termsAndConditionsLink,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
+                'ageGated' => $ageGated ?? Omitted::VALUE,
+                'autoRenewal' => $autoRenewal ?? Omitted::VALUE,
+                'directLending' => $directLending ?? Omitted::VALUE,
+                'embeddedLink' => $embeddedLink ?? Omitted::VALUE,
+                'embeddedLinkSample' => $embeddedLinkSample ?? Omitted::VALUE,
+                'embeddedPhone' => $embeddedPhone ?? Omitted::VALUE,
+                'helpKeywords' => $helpKeywords ?? Omitted::VALUE,
+                'helpMessage' => $helpMessage ?? Omitted::VALUE,
+                'messageFlow' => $messageFlow ?? Omitted::VALUE,
+                'mnoIDs' => $mnoIDs ?? Omitted::VALUE,
+                'numberPool' => $numberPool ?? Omitted::VALUE,
+                'optinKeywords' => $optinKeywords ?? Omitted::VALUE,
+                'optinMessage' => $optinMessage ?? Omitted::VALUE,
+                'optoutKeywords' => $optoutKeywords ?? Omitted::VALUE,
+                'optoutMessage' => $optoutMessage ?? Omitted::VALUE,
+                'privacyPolicyLink' => $privacyPolicyLink ?? Omitted::VALUE,
+                'referenceID' => $referenceID ?? Omitted::VALUE,
+                'resellerID' => $resellerID ?? Omitted::VALUE,
+                'sample1' => $sample1 ?? Omitted::VALUE,
+                'sample2' => $sample2 ?? Omitted::VALUE,
+                'sample3' => $sample3 ?? Omitted::VALUE,
+                'sample4' => $sample4 ?? Omitted::VALUE,
+                'sample5' => $sample5 ?? Omitted::VALUE,
+                'subscriberHelp' => $subscriberHelp ?? Omitted::VALUE,
+                'subscriberOptin' => $subscriberOptin ?? Omitted::VALUE,
+                'subscriberOptout' => $subscriberOptout ?? Omitted::VALUE,
+                'subUsecases' => $subUsecases ?? Omitted::VALUE,
+                'tag' => $tag ?? Omitted::VALUE,
+                'termsAndConditions' => $termsAndConditions ?? Omitted::VALUE,
+                'termsAndConditionsLink' => $termsAndConditionsLink ?? Omitted::VALUE,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

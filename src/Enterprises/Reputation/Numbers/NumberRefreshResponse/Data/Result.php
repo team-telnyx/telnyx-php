@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type ResultShape = array{
@@ -58,14 +59,14 @@ final class Result implements BaseModel
     public static function with(
         string $phoneNumber,
         bool $success,
-        ?string $error = null
+        string|Omitted|null $error = Omitted::VALUE,
     ): self {
         $self = new self;
 
         $self['phoneNumber'] = $phoneNumber;
         $self['success'] = $success;
 
-        null !== $error && $self['error'] = $error;
+        Omitted::VALUE !== $error && $self['error'] = $error;
 
         return $self;
     }

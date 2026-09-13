@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Creates an account-owned unsubscribe group for associating email categories with separate recipient suppression lists.
@@ -55,13 +56,15 @@ final class EmailUnsubscribeGroupCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $name, ?string $description = null): self
-    {
+    public static function with(
+        string $name,
+        string|Omitted|null $description = Omitted::VALUE
+    ): self {
         $self = new self;
 
         $self['name'] = $name;
 
-        null !== $description && $self['description'] = $description;
+        Omitted::VALUE !== $description && $self['description'] = $description;
 
         return $self;
     }

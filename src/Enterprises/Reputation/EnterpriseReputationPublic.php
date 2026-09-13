@@ -7,6 +7,7 @@ namespace Telnyx\Enterprises\Reputation;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Enterprises\Reputation\EnterpriseReputationPublic\LoaStatus;
 use Telnyx\Enterprises\Reputation\EnterpriseReputationPublic\Status;
 
@@ -84,18 +85,18 @@ final class EnterpriseReputationPublic implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param list<string>|Omitted|null $rejectionReasons
      * @param ReputationCheckFrequency|value-of<ReputationCheckFrequency>|null $checkFrequency
      * @param LoaStatus|value-of<LoaStatus>|null $loaStatus
-     * @param list<string>|null $rejectionReasons
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        string|Omitted|null $loaDocumentID = Omitted::VALUE,
+        array|Omitted|null $rejectionReasons = Omitted::VALUE,
         ReputationCheckFrequency|string|null $checkFrequency = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $enterpriseID = null,
-        ?string $loaDocumentID = null,
         LoaStatus|string|null $loaStatus = null,
-        ?array $rejectionReasons = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
@@ -104,9 +105,9 @@ final class EnterpriseReputationPublic implements BaseModel
         null !== $checkFrequency && $self['checkFrequency'] = $checkFrequency;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $enterpriseID && $self['enterpriseID'] = $enterpriseID;
-        null !== $loaDocumentID && $self['loaDocumentID'] = $loaDocumentID;
+        Omitted::VALUE !== $loaDocumentID && $self['loaDocumentID'] = $loaDocumentID;
         null !== $loaStatus && $self['loaStatus'] = $loaStatus;
-        null !== $rejectionReasons && $self['rejectionReasons'] = $rejectionReasons;
+        Omitted::VALUE !== $rejectionReasons && $self['rejectionReasons'] = $rejectionReasons;
         null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 

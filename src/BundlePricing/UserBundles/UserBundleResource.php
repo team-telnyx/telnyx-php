@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type UserBundleResourceShape = array{
@@ -88,7 +89,7 @@ final class UserBundleResource implements BaseModel
         string $createdAt,
         string $resource,
         string $resourceType,
-        ?string $updatedAt = null,
+        string|Omitted|null $updatedAt = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -97,7 +98,7 @@ final class UserBundleResource implements BaseModel
         $self['resource'] = $resource;
         $self['resourceType'] = $resourceType;
 
-        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        Omitted::VALUE !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
     }

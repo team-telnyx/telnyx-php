@@ -6,7 +6,7 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
@@ -56,15 +56,16 @@ final class MessagingService implements MessagingContract
         ?\DateTimeInterface $startTime = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessagingNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'aggregationType' => $aggregationType,
-                'endTime' => $endTime,
-                'managedAccounts' => $managedAccounts,
-                'profiles' => $profiles,
-                'selectAllManagedAccounts' => $selectAllManagedAccounts,
-                'startTime' => $startTime,
+                'endTime' => $endTime ?? Omitted::VALUE,
+                'managedAccounts' => $managedAccounts ?? Omitted::VALUE,
+                'profiles' => $profiles ?? Omitted::VALUE,
+                'selectAllManagedAccounts' => $selectAllManagedAccounts ?? Omitted::VALUE,
+                'startTime' => $startTime ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -111,7 +112,7 @@ final class MessagingService implements MessagingContract
         int $perPage = 20,
         RequestOptions|array|null $requestOptions = null,
     ): PerPagePagination {
-        $params = Util::removeNulls(['page' => $page, 'perPage' => $perPage]);
+        $params = ['page' => $page, 'perPage' => $perPage];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

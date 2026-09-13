@@ -8,7 +8,7 @@ use Telnyx\AI\Collections\Settings\RetrievalSettings;
 use Telnyx\AI\Collections\Settings\SettingsEnvelope;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Collections\SettingsContract;
 
@@ -49,7 +49,10 @@ final class SettingsService implements SettingsContract
         RetrievalSettings|array|null $retrieval = null,
         RequestOptions|array|null $requestOptions = null,
     ): SettingsEnvelope {
-        $params = Util::removeNulls(['retrieval' => $retrieval]);
+        $params = array_filter(
+            ['retrieval' => $retrieval ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($uuid, params: $params, requestOptions: $requestOptions);
@@ -93,7 +96,10 @@ final class SettingsService implements SettingsContract
         RetrievalSettings|array|null $retrieval = null,
         RequestOptions|array|null $requestOptions = null,
     ): SettingsEnvelope {
-        $params = Util::removeNulls(['retrieval' => $retrieval]);
+        $params = array_filter(
+            ['retrieval' => $retrieval ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->patchAll($uuid, params: $params, requestOptions: $requestOptions);

@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailMessages\Recipients\EmailRecipient\Kind;
 use Telnyx\EmailMessages\Recipients\EmailRecipient\RecordType;
 use Telnyx\EmailMessages\Recipients\EmailRecipient\Status;
@@ -145,11 +146,11 @@ final class EmailRecipient implements BaseModel
         string $messageID,
         RecordType|string $recordType,
         Status|string $status,
-        ?\DateTimeInterface $deliveredAt = null,
-        ?\DateTimeInterface $failedAt = null,
-        ?\DateTimeInterface $sentAt = null,
-        ?int $smtpCode = null,
-        ?string $smtpResponse = null,
+        \DateTimeInterface|Omitted|null $deliveredAt = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $failedAt = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $sentAt = Omitted::VALUE,
+        int|Omitted|null $smtpCode = Omitted::VALUE,
+        string|Omitted|null $smtpResponse = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -161,11 +162,11 @@ final class EmailRecipient implements BaseModel
         $self['recordType'] = $recordType;
         $self['status'] = $status;
 
-        null !== $deliveredAt && $self['deliveredAt'] = $deliveredAt;
-        null !== $failedAt && $self['failedAt'] = $failedAt;
-        null !== $sentAt && $self['sentAt'] = $sentAt;
-        null !== $smtpCode && $self['smtpCode'] = $smtpCode;
-        null !== $smtpResponse && $self['smtpResponse'] = $smtpResponse;
+        Omitted::VALUE !== $deliveredAt && $self['deliveredAt'] = $deliveredAt;
+        Omitted::VALUE !== $failedAt && $self['failedAt'] = $failedAt;
+        Omitted::VALUE !== $sentAt && $self['sentAt'] = $sentAt;
+        Omitted::VALUE !== $smtpCode && $self['smtpCode'] = $smtpCode;
+        Omitted::VALUE !== $smtpResponse && $self['smtpResponse'] = $smtpResponse;
 
         return $self;
     }

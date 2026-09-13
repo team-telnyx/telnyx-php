@@ -6,7 +6,7 @@ namespace Telnyx\Services\EmailMessages;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailCursorPagination;
 use Telnyx\EmailMessages\Recipients\EmailRecipient;
 use Telnyx\EmailMessages\Recipients\RecipientGetResponse;
@@ -53,7 +53,7 @@ final class RecipientsService implements RecipientsContract
         string $emailID,
         RequestOptions|array|null $requestOptions = null,
     ): RecipientGetResponse {
-        $params = Util::removeNulls(['emailID' => $emailID]);
+        $params = ['emailID' => $emailID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($recipientID, params: $params, requestOptions: $requestOptions);
@@ -88,13 +88,14 @@ final class RecipientsService implements RecipientsContract
         Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailCursorPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'kind' => $kind,
-                'pageCursor' => $pageCursor,
+                'kind' => $kind ?? Omitted::VALUE,
+                'pageCursor' => $pageCursor ?? Omitted::VALUE,
                 'pageSize' => $pageSize,
-                'status' => $status,
+                'status' => $status ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -8,7 +8,7 @@ use Telnyx\AI\Conversations\Insights\InsightTemplate;
 use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightsContract;
@@ -57,14 +57,15 @@ final class InsightsService implements InsightsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateDetail {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'instructions' => $instructions,
                 'name' => $name,
-                'jsonSchema' => $jsonSchema,
+                'jsonSchema' => $jsonSchema ?? Omitted::VALUE,
                 'webhook' => $webhook,
-                'idempotencyKey' => $idempotencyKey,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -112,13 +113,14 @@ final class InsightsService implements InsightsContract
         ?string $webhook = null,
         RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateDetail {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'instructions' => $instructions,
-                'jsonSchema' => $jsonSchema,
-                'name' => $name,
-                'webhook' => $webhook,
+                'instructions' => $instructions ?? Omitted::VALUE,
+                'jsonSchema' => $jsonSchema ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'webhook' => $webhook ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -143,8 +145,12 @@ final class InsightsService implements InsightsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

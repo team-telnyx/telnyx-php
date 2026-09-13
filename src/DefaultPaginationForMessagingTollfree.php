@@ -59,12 +59,15 @@ final class DefaultPaginationForMessagingTollfree implements BaseModel, BasePage
     ) {
         $this->initialize();
 
-        if (!is_array($this->parsedBody)) {
+        if (!is_array($this->parsedBody) && !($this->parsedBody instanceof \stdClass)) {
             return;
         }
 
         // @phpstan-ignore-next-line argument.type
-        self::__unserialize($this->parsedBody);
+        $page = Conversion::coerce(self::class, value: $this->parsedBody);
+        if ($page instanceof self) {
+            self::__unserialize($page->toProperties());
+        }
 
         if (is_array($items = $this->offsetGet('records'))) {
             $parsed = Conversion::coerce(new ListOf($convert), value: $items);
@@ -102,10 +105,8 @@ final class DefaultPaginationForMessagingTollfree implements BaseModel, BasePage
             return null;
         }
 
-        $nextRequest = array_merge_recursive(
-            $this->requestInfo,
-            ['query' => $curr + 1]
-        );
+        $nextRequest = $this->requestInfo;
+        $nextRequest['query']['page'] = $curr + 1;
 
         // @phpstan-ignore-next-line return.type
         return [$nextRequest, $this->options];

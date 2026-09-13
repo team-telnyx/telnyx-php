@@ -1,0 +1,80 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\Compute\Funcs;
+
+use Telnyx\Compute\Funcs\FuncGetRevisionsResponse\Data;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Concerns\SdkModel;
+use Telnyx\Core\Contracts\BaseModel;
+
+/**
+ * @phpstan-import-type DataShape from \Telnyx\Compute\Funcs\FuncGetRevisionsResponse\Data
+ * @phpstan-import-type FunctionsObservabilityPaginationMetaShape from \Telnyx\Compute\Funcs\FunctionsObservabilityPaginationMeta
+ *
+ * @phpstan-type FuncGetRevisionsResponseShape = array{
+ *   data?: list<Data|DataShape>|null,
+ *   meta?: null|FunctionsObservabilityPaginationMeta|FunctionsObservabilityPaginationMetaShape,
+ * }
+ */
+final class FuncGetRevisionsResponse implements BaseModel
+{
+    /** @use SdkModel<FuncGetRevisionsResponseShape> */
+    use SdkModel;
+
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
+    public ?array $data;
+
+    #[Optional]
+    public ?FunctionsObservabilityPaginationMeta $meta;
+
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<Data|DataShape>|null $data
+     * @param FunctionsObservabilityPaginationMeta|FunctionsObservabilityPaginationMetaShape|null $meta
+     */
+    public static function with(
+        ?array $data = null,
+        FunctionsObservabilityPaginationMeta|array|null $meta = null
+    ): self {
+        $self = new self;
+
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
+
+        return $self;
+    }
+
+    /**
+     * @param list<Data|DataShape> $data
+     */
+    public function withData(array $data): self
+    {
+        $self = clone $this;
+        $self['data'] = $data;
+
+        return $self;
+    }
+
+    /**
+     * @param FunctionsObservabilityPaginationMeta|FunctionsObservabilityPaginationMetaShape $meta
+     */
+    public function withMeta(
+        FunctionsObservabilityPaginationMeta|array $meta
+    ): self {
+        $self = clone $this;
+        $self['meta'] = $meta;
+
+        return $self;
+    }
+}

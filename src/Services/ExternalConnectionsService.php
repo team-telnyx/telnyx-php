@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\ExternalConnections\ExternalConnection;
 use Telnyx\ExternalConnections\ExternalConnectionCreateParams\ExternalSipConnection;
@@ -91,9 +91,9 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * @param bool $active specifies whether the connection can be used
      * @param Inbound|InboundShape $inbound
      * @param list<string> $tags tags associated with the connection
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -104,22 +104,23 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         bool $active = true,
         Inbound|array|null $inbound = null,
         ?array $tags = null,
-        ?string $webhookEventFailoverURL = '',
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
         ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): ExternalConnectionNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'externalSipConnection' => $externalSipConnection,
                 'outbound' => $outbound,
                 'active' => $active,
-                'inbound' => $inbound,
-                'tags' => $tags,
+                'inbound' => $inbound ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookEventURL' => $webhookEventURL,
+                'webhookEventURL' => $webhookEventURL ?? Omitted::VALUE,
                 'webhookTimeoutSecs' => $webhookTimeoutSecs,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -158,9 +159,9 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
      * @param bool $active specifies whether the connection can be used
      * @param \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound|InboundShape1 $inbound
      * @param list<string> $tags tags associated with the connection
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -171,21 +172,22 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         bool $active = true,
         \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Inbound|array|null $inbound = null,
         ?array $tags = null,
-        ?string $webhookEventFailoverURL = '',
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
         ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): ExternalConnectionUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'outbound' => $outbound,
                 'active' => $active,
-                'inbound' => $inbound,
-                'tags' => $tags,
+                'inbound' => $inbound ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookEventURL' => $webhookEventURL,
+                'webhookEventURL' => $webhookEventURL ?? Omitted::VALUE,
                 'webhookTimeoutSecs' => $webhookTimeoutSecs,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -212,12 +214,13 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -264,9 +267,9 @@ final class ExternalConnectionsService implements ExternalConnectionsContract
         string $staticEmergencyAddressID,
         RequestOptions|array|null $requestOptions = null,
     ): ExternalConnectionUpdateLocationResponse {
-        $params = Util::removeNulls(
-            ['id' => $id, 'staticEmergencyAddressID' => $staticEmergencyAddressID]
-        );
+        $params = [
+            'id' => $id, 'staticEmergencyAddressID' => $staticEmergencyAddressID,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateLocation($locationID, params: $params, requestOptions: $requestOptions);

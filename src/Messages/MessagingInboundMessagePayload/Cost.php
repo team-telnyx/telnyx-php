@@ -7,6 +7,7 @@ namespace Telnyx\Messages\MessagingInboundMessagePayload;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type CostShape = array{amount?: string|null, currency?: string|null}
@@ -19,13 +20,13 @@ final class Cost implements BaseModel
     /**
      * The amount deducted from your account.
      */
-    #[Optional]
+    #[Optional(nullable: true)]
     public ?string $amount;
 
     /**
      * The ISO 4217 currency identifier.
      */
-    #[Optional]
+    #[Optional(nullable: true)]
     public ?string $currency;
 
     public function __construct()
@@ -39,13 +40,13 @@ final class Cost implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $amount = null,
-        ?string $currency = null
+        string|Omitted|null $amount = Omitted::VALUE,
+        string|Omitted|null $currency = Omitted::VALUE,
     ): self {
         $self = new self;
 
-        null !== $amount && $self['amount'] = $amount;
-        null !== $currency && $self['currency'] = $currency;
+        Omitted::VALUE !== $amount && $self['amount'] = $amount;
+        Omitted::VALUE !== $currency && $self['currency'] = $currency;
 
         return $self;
     }
@@ -53,7 +54,7 @@ final class Cost implements BaseModel
     /**
      * The amount deducted from your account.
      */
-    public function withAmount(string $amount): self
+    public function withAmount(?string $amount): self
     {
         $self = clone $this;
         $self['amount'] = $amount;
@@ -64,7 +65,7 @@ final class Cost implements BaseModel
     /**
      * The ISO 4217 currency identifier.
      */
-    public function withCurrency(string $currency): self
+    public function withCurrency(?string $currency): self
     {
         $self = clone $this;
         $self['currency'] = $currency;

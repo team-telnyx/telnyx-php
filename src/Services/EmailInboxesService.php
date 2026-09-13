@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailCursorPagination;
 use Telnyx\EmailInboxes\EmailInbox;
 use Telnyx\EmailInboxes\EmailInboxResponse;
@@ -79,8 +79,12 @@ final class EmailInboxesService implements EmailInboxesContract
         ?string $username = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailInboxResponse {
-        $params = Util::removeNulls(
-            ['domainID' => $domainID, 'username' => $username]
+        $params = array_filter(
+            [
+                'domainID' => $domainID ?? Omitted::VALUE,
+                'username' => $username ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -127,8 +131,9 @@ final class EmailInboxesService implements EmailInboxesContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): EmailCursorPagination {
-        $params = Util::removeNulls(
-            ['pageCursor' => $pageCursor, 'pageSize' => $pageSize]
+        $params = array_filter(
+            ['pageCursor' => $pageCursor ?? Omitted::VALUE, 'pageSize' => $pageSize],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

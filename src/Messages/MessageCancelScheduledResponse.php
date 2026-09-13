@@ -7,6 +7,7 @@ namespace Telnyx\Messages;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Messages\MessageCancelScheduledResponse\Cc;
 use Telnyx\Messages\MessageCancelScheduledResponse\Cost;
 use Telnyx\Messages\MessageCancelScheduledResponse\CostBreakdown;
@@ -247,9 +248,9 @@ final class MessageCancelScheduledResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|Cost|CostShape|null $cost
+     * @param Omitted|CostBreakdown|CostBreakdownShape|null $costBreakdown
      * @param list<Cc|CcShape>|null $cc
-     * @param Cost|CostShape|null $cost
-     * @param CostBreakdown|CostBreakdownShape|null $costBreakdown
      * @param Direction|value-of<Direction>|null $direction
      * @param list<MessagingError0b38e7044b|MessagingError0b38e7044bShape>|null $errors
      * @param From|FromShape|null $from
@@ -260,11 +261,18 @@ final class MessageCancelScheduledResponse implements BaseModel
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
+        \DateTimeInterface|Omitted|null $completedAt = Omitted::VALUE,
+        Omitted|Cost|array|null $cost = Omitted::VALUE,
+        Omitted|CostBreakdown|array|null $costBreakdown = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $sentAt = Omitted::VALUE,
+        string|Omitted|null $subject = Omitted::VALUE,
+        string|Omitted|null $tcrCampaignID = Omitted::VALUE,
+        string|Omitted|null $tcrCampaignRegistered = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $validUntil = Omitted::VALUE,
+        string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         ?string $id = null,
         ?array $cc = null,
-        ?\DateTimeInterface $completedAt = null,
-        Cost|array|null $cost = null,
-        CostBreakdown|array|null $costBreakdown = null,
         Direction|string|null $direction = null,
         ?string $encoding = null,
         ?array $errors = null,
@@ -276,27 +284,20 @@ final class MessageCancelScheduledResponse implements BaseModel
         ?int $parts = null,
         ?\DateTimeInterface $receivedAt = null,
         RecordType|string|null $recordType = null,
-        ?\DateTimeInterface $sentAt = null,
         ?bool $smartEncodingApplied = null,
-        ?string $subject = null,
         ?array $tags = null,
         ?bool $tcrCampaignBillable = null,
-        ?string $tcrCampaignID = null,
-        ?string $tcrCampaignRegistered = null,
         ?string $text = null,
         ?array $to = null,
         Type|string|null $type = null,
-        ?\DateTimeInterface $validUntil = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
     ): self {
         $self = new self;
 
         null !== $id && $self['id'] = $id;
         null !== $cc && $self['cc'] = $cc;
-        null !== $completedAt && $self['completedAt'] = $completedAt;
-        null !== $cost && $self['cost'] = $cost;
-        null !== $costBreakdown && $self['costBreakdown'] = $costBreakdown;
+        Omitted::VALUE !== $completedAt && $self['completedAt'] = $completedAt;
+        Omitted::VALUE !== $cost && $self['cost'] = $cost;
+        Omitted::VALUE !== $costBreakdown && $self['costBreakdown'] = $costBreakdown;
         null !== $direction && $self['direction'] = $direction;
         null !== $encoding && $self['encoding'] = $encoding;
         null !== $errors && $self['errors'] = $errors;
@@ -308,19 +309,19 @@ final class MessageCancelScheduledResponse implements BaseModel
         null !== $parts && $self['parts'] = $parts;
         null !== $receivedAt && $self['receivedAt'] = $receivedAt;
         null !== $recordType && $self['recordType'] = $recordType;
-        null !== $sentAt && $self['sentAt'] = $sentAt;
+        Omitted::VALUE !== $sentAt && $self['sentAt'] = $sentAt;
         null !== $smartEncodingApplied && $self['smartEncodingApplied'] = $smartEncodingApplied;
-        null !== $subject && $self['subject'] = $subject;
+        Omitted::VALUE !== $subject && $self['subject'] = $subject;
         null !== $tags && $self['tags'] = $tags;
         null !== $tcrCampaignBillable && $self['tcrCampaignBillable'] = $tcrCampaignBillable;
-        null !== $tcrCampaignID && $self['tcrCampaignID'] = $tcrCampaignID;
-        null !== $tcrCampaignRegistered && $self['tcrCampaignRegistered'] = $tcrCampaignRegistered;
+        Omitted::VALUE !== $tcrCampaignID && $self['tcrCampaignID'] = $tcrCampaignID;
+        Omitted::VALUE !== $tcrCampaignRegistered && $self['tcrCampaignRegistered'] = $tcrCampaignRegistered;
         null !== $text && $self['text'] = $text;
         null !== $to && $self['to'] = $to;
         null !== $type && $self['type'] = $type;
-        null !== $validUntil && $self['validUntil'] = $validUntil;
-        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
-        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        Omitted::VALUE !== $validUntil && $self['validUntil'] = $validUntil;
+        Omitted::VALUE !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

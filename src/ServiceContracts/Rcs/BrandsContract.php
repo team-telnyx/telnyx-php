@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Rcs;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\Rcs\Brands\BrandAddress;
 use Telnyx\Rcs\Brands\BrandCreateParams\Contacts;
 use Telnyx\Rcs\Brands\BrandCreateParams\Identifiers;
@@ -31,7 +32,7 @@ interface BrandsContract
      * @param Identifiers|IdentifiersShape $identifiers Named business identifiers. Use the `ein` key for the required EIN and `stock_symbol` for a public-profit brand's stock symbol.
      * @param BrandLegalEntityType|value-of<BrandLegalEntityType> $legalEntityType
      * @param BrandOrganizationType|value-of<BrandOrganizationType> $organizationType
-     * @param string|null $profileID A Messaging Profile owned by the authenticated organization. Agents inherit this value when they do not provide their own profile.
+     * @param string|Omitted|null $profileID A Messaging Profile owned by the authenticated organization. Agents inherit this value when they do not provide their own profile.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -45,7 +46,7 @@ interface BrandsContract
         string $legalName,
         BrandOrganizationType|string $organizationType,
         string $websiteURL,
-        ?string $profileID = null,
+        string|Omitted|null $profileID = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): BrandResponse;
 

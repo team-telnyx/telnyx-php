@@ -6,7 +6,7 @@ namespace Telnyx\Services\AI\Assistants;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\InstructionsContract;
 
@@ -42,23 +42,24 @@ final class InstructionsService implements InstructionsContract
      * The response is streamed as `text/plain` using chunked transfer encoding; consume the body incrementally to render the enhanced instructions as they arrive.
      *
      * @param string $assistantID unique identifier of the assistant
-     * @param string|null $enhancementPrompt Optional guidance describing how the instructions should be enhanced. When provided, the LLM applies these requested changes in addition to fixing any identified issues.
-     * @param string|null $instructions The instructions to enhance. When omitted, the assistant's existing instructions are used.
+     * @param string|Omitted|null $enhancementPrompt Optional guidance describing how the instructions should be enhanced. When provided, the LLM applies these requested changes in addition to fixing any identified issues.
+     * @param string|Omitted|null $instructions The instructions to enhance. When omitted, the assistant's existing instructions are used.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function enhance(
         string $assistantID,
-        ?string $enhancementPrompt = null,
-        ?string $instructions = null,
+        string|Omitted|null $enhancementPrompt = Omitted::VALUE,
+        string|Omitted|null $instructions = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): string {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'enhancementPrompt' => $enhancementPrompt,
                 'instructions' => $instructions,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

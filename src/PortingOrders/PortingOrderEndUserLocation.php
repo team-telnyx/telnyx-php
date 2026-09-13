@@ -7,6 +7,7 @@ namespace Telnyx\PortingOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type PortingOrderEndUserLocationShape = array{
@@ -70,21 +71,21 @@ final class PortingOrderEndUserLocation implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $administrativeArea = null,
-        ?string $countryCode = null,
-        ?string $extendedAddress = null,
-        ?string $locality = null,
-        ?string $postalCode = null,
-        ?string $streetAddress = null,
+        string|Omitted|null $administrativeArea = Omitted::VALUE,
+        string|Omitted|null $countryCode = Omitted::VALUE,
+        string|Omitted|null $extendedAddress = Omitted::VALUE,
+        string|Omitted|null $locality = Omitted::VALUE,
+        string|Omitted|null $postalCode = Omitted::VALUE,
+        string|Omitted|null $streetAddress = Omitted::VALUE,
     ): self {
         $self = new self;
 
-        null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
-        null !== $countryCode && $self['countryCode'] = $countryCode;
-        null !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
-        null !== $locality && $self['locality'] = $locality;
-        null !== $postalCode && $self['postalCode'] = $postalCode;
-        null !== $streetAddress && $self['streetAddress'] = $streetAddress;
+        Omitted::VALUE !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        Omitted::VALUE !== $countryCode && $self['countryCode'] = $countryCode;
+        Omitted::VALUE !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
+        Omitted::VALUE !== $locality && $self['locality'] = $locality;
+        Omitted::VALUE !== $postalCode && $self['postalCode'] = $postalCode;
+        Omitted::VALUE !== $streetAddress && $self['streetAddress'] = $streetAddress;
 
         return $self;
     }

@@ -9,7 +9,7 @@ use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Filter;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesContract;
@@ -49,8 +49,9 @@ final class BillingBundlesService implements BillingBundlesContract
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
     ): BillingBundleGetResponse {
-        $params = Util::removeNulls(
-            ['authorizationBearer' => $authorizationBearer]
+        $params = array_filter(
+            ['authorizationBearer' => $authorizationBearer ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -81,13 +82,14 @@ final class BillingBundlesService implements BillingBundlesContract
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'authorizationBearer' => $authorizationBearer,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'authorizationBearer' => $authorizationBearer ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

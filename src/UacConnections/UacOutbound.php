@@ -7,6 +7,7 @@ namespace Telnyx\UacConnections;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\UacConnections\UacOutbound\AniOverrideType;
 use Telnyx\UacConnections\UacOutbound\T38ReinviteSource;
 
@@ -100,9 +101,9 @@ final class UacOutbound implements BaseModel
      * @param T38ReinviteSource|value-of<T38ReinviteSource>|null $t38ReinviteSource
      */
     public static function with(
+        bool|Omitted|null $callParkingEnabled = Omitted::VALUE,
         ?string $aniOverride = null,
         AniOverrideType|string|null $aniOverrideType = null,
-        ?bool $callParkingEnabled = null,
         ?int $channelLimit = null,
         ?bool $generateRingbackTone = null,
         ?bool $instantRingbackEnabled = null,
@@ -114,7 +115,7 @@ final class UacOutbound implements BaseModel
 
         null !== $aniOverride && $self['aniOverride'] = $aniOverride;
         null !== $aniOverrideType && $self['aniOverrideType'] = $aniOverrideType;
-        null !== $callParkingEnabled && $self['callParkingEnabled'] = $callParkingEnabled;
+        Omitted::VALUE !== $callParkingEnabled && $self['callParkingEnabled'] = $callParkingEnabled;
         null !== $channelLimit && $self['channelLimit'] = $channelLimit;
         null !== $generateRingbackTone && $self['generateRingbackTone'] = $generateRingbackTone;
         null !== $instantRingbackEnabled && $self['instantRingbackEnabled'] = $instantRingbackEnabled;

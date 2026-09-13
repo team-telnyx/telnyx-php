@@ -7,6 +7,7 @@ namespace Telnyx\Webhooks\HostedNumberOrderEventWebhookEvent\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Webhooks\HostedNumberOrderEventWebhookEvent\Data\Payload\Decision;
 use Telnyx\Webhooks\HostedNumberOrderEventWebhookEvent\Data\Payload\Number;
 use Telnyx\Webhooks\HostedNumberOrderEventWebhookEvent\Data\Payload\OrderStatus;
@@ -90,7 +91,7 @@ final class Payload implements BaseModel
      * @param OrderStatus|value-of<OrderStatus>|null $orderStatus
      */
     public static function with(
-        ?int $approvalDeadline = null,
+        int|Omitted|null $approvalDeadline = Omitted::VALUE,
         Decision|string|null $decision = null,
         ?array $numbers = null,
         ?string $orderID = null,
@@ -100,7 +101,7 @@ final class Payload implements BaseModel
     ): self {
         $self = new self;
 
-        null !== $approvalDeadline && $self['approvalDeadline'] = $approvalDeadline;
+        Omitted::VALUE !== $approvalDeadline && $self['approvalDeadline'] = $approvalDeadline;
         null !== $decision && $self['decision'] = $decision;
         null !== $numbers && $self['numbers'] = $numbers;
         null !== $orderID && $self['orderID'] = $orderID;

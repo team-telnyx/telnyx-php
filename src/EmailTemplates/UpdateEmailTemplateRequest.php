@@ -7,6 +7,7 @@ namespace Telnyx\EmailTemplates;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type UpdateEmailTemplateRequestShape = array{
@@ -60,18 +61,18 @@ final class UpdateEmailTemplateRequest implements BaseModel
      * @param list<string>|null $variables
      */
     public static function with(
-        ?string $htmlBody = null,
+        string|Omitted|null $htmlBody = Omitted::VALUE,
+        string|Omitted|null $subject = Omitted::VALUE,
+        string|Omitted|null $textBody = Omitted::VALUE,
         ?string $name = null,
-        ?string $subject = null,
-        ?string $textBody = null,
         ?array $variables = null,
     ): self {
         $self = new self;
 
-        null !== $htmlBody && $self['htmlBody'] = $htmlBody;
+        Omitted::VALUE !== $htmlBody && $self['htmlBody'] = $htmlBody;
         null !== $name && $self['name'] = $name;
-        null !== $subject && $self['subject'] = $subject;
-        null !== $textBody && $self['textBody'] = $textBody;
+        Omitted::VALUE !== $subject && $self['subject'] = $subject;
+        Omitted::VALUE !== $textBody && $self['textBody'] = $textBody;
         null !== $variables && $self['variables'] = $variables;
 
         return $self;

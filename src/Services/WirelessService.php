@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessContract;
 use Telnyx\Services\Wireless\DetailRecordsReportsService;
@@ -52,7 +51,7 @@ final class WirelessService implements WirelessContract
         string $product,
         RequestOptions|array|null $requestOptions = null
     ): WirelessGetRegionsResponse {
-        $params = Util::removeNulls(['product' => $product]);
+        $params = ['product' => $product];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveRegions(params: $params, requestOptions: $requestOptions);

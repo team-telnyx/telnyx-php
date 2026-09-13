@@ -7,7 +7,7 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\McpServers\McpServer;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\McpServersContract;
@@ -38,8 +38,8 @@ final class McpServersService implements McpServersContract
      * @param string $name Body param
      * @param string $type Body param
      * @param string $url Body param
-     * @param list<string>|null $allowedTools Body param
-     * @param string|null $apiKeyRef Body param
+     * @param list<string>|Omitted|null $allowedTools Body param
+     * @param string|Omitted|null $apiKeyRef Body param
      * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
@@ -49,20 +49,21 @@ final class McpServersService implements McpServersContract
         string $name,
         string $type,
         string $url,
-        ?array $allowedTools = null,
-        ?string $apiKeyRef = null,
+        array|Omitted|null $allowedTools = Omitted::VALUE,
+        string|Omitted|null $apiKeyRef = Omitted::VALUE,
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): McpServer {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'name' => $name,
                 'type' => $type,
                 'url' => $url,
                 'allowedTools' => $allowedTools,
                 'apiKeyRef' => $apiKeyRef,
-                'idempotencyKey' => $idempotencyKey,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -97,7 +98,7 @@ final class McpServersService implements McpServersContract
      * Updates the specified MCP server's configuration and returns the updated server.
      *
      * @param string $mcpServerID unique identifier of the mcp server
-     * @param list<string>|null $allowedTools
+     * @param list<string>|Omitted|null $allowedTools
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -105,24 +106,25 @@ final class McpServersService implements McpServersContract
     public function update(
         string $mcpServerID,
         ?string $id = null,
-        ?array $allowedTools = null,
-        ?string $apiKeyRef = null,
+        array|Omitted|null $allowedTools = Omitted::VALUE,
+        string|Omitted|null $apiKeyRef = Omitted::VALUE,
         ?\DateTimeInterface $createdAt = null,
         ?string $name = null,
         ?string $type = null,
         ?string $url = null,
         RequestOptions|array|null $requestOptions = null,
     ): McpServer {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'id' => $id,
+                'id' => $id ?? Omitted::VALUE,
                 'allowedTools' => $allowedTools,
                 'apiKeyRef' => $apiKeyRef,
-                'createdAt' => $createdAt,
-                'name' => $name,
-                'type' => $type,
-                'url' => $url,
+                'createdAt' => $createdAt ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'type' => $type ?? Omitted::VALUE,
+                'url' => $url ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -153,13 +155,14 @@ final class McpServersService implements McpServersContract
         ?string $url = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPaginationTopLevelArray {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'type' => $type,
-                'url' => $url,
+                'type' => $type ?? Omitted::VALUE,
+                'url' => $url ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

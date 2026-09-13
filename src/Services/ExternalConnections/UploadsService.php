@@ -6,7 +6,7 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\ExternalConnections\Uploads\Upload;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
@@ -65,14 +65,15 @@ final class UploadsService implements UploadsContract
         Usage|string|null $usage = null,
         RequestOptions|array|null $requestOptions = null,
     ): UploadNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'numberIDs' => $numberIDs,
-                'additionalUsages' => $additionalUsages,
-                'civicAddressID' => $civicAddressID,
-                'locationID' => $locationID,
-                'usage' => $usage,
+                'additionalUsages' => $additionalUsages ?? Omitted::VALUE,
+                'civicAddressID' => $civicAddressID ?? Omitted::VALUE,
+                'locationID' => $locationID ?? Omitted::VALUE,
+                'usage' => $usage ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -97,7 +98,7 @@ final class UploadsService implements UploadsContract
         string $id,
         RequestOptions|array|null $requestOptions = null,
     ): UploadGetResponse {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($ticketID, params: $params, requestOptions: $requestOptions);
@@ -125,12 +126,13 @@ final class UploadsService implements UploadsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -195,7 +197,7 @@ final class UploadsService implements UploadsContract
         string $id,
         RequestOptions|array|null $requestOptions = null,
     ): UploadRetryResponse {
-        $params = Util::removeNulls(['id' => $id]);
+        $params = ['id' => $id];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retry($ticketID, params: $params, requestOptions: $requestOptions);

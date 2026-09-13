@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\OAuth\OAuthGetJwksResponse;
 use Telnyx\OAuth\OAuthGetResponse;
 use Telnyx\OAuth\OAuthGrantsResponse;
@@ -74,9 +74,7 @@ final class OAuthService implements OAuthContract
         string $consentToken,
         RequestOptions|array|null $requestOptions = null,
     ): OAuthGrantsResponse {
-        $params = Util::removeNulls(
-            ['allowed' => $allowed, 'consentToken' => $consentToken]
-        );
+        $params = ['allowed' => $allowed, 'consentToken' => $consentToken];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->grants(params: $params, requestOptions: $requestOptions);
@@ -98,7 +96,7 @@ final class OAuthService implements OAuthContract
         string $token,
         RequestOptions|array|null $requestOptions = null
     ): OAuthIntrospectResponse {
-        $params = Util::removeNulls(['token' => $token]);
+        $params = ['token' => $token];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->introspect(params: $params, requestOptions: $requestOptions);
@@ -136,18 +134,19 @@ final class OAuthService implements OAuthContract
         ?string $tosUri = null,
         RequestOptions|array|null $requestOptions = null,
     ): OAuthRegisterResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientName' => $clientName,
+                'clientName' => $clientName ?? Omitted::VALUE,
                 'grantTypes' => $grantTypes,
-                'logoUri' => $logoUri,
-                'policyUri' => $policyUri,
-                'redirectUris' => $redirectUris,
+                'logoUri' => $logoUri ?? Omitted::VALUE,
+                'policyUri' => $policyUri ?? Omitted::VALUE,
+                'redirectUris' => $redirectUris ?? Omitted::VALUE,
                 'responseTypes' => $responseTypes,
-                'scope' => $scope,
+                'scope' => $scope ?? Omitted::VALUE,
                 'tokenEndpointAuthMethod' => $tokenEndpointAuthMethod,
-                'tosUri' => $tosUri,
+                'tosUri' => $tosUri ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -182,16 +181,17 @@ final class OAuthService implements OAuthContract
         ?string $state = null,
         RequestOptions|array|null $requestOptions = null,
     ): string {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'clientID' => $clientID,
                 'redirectUri' => $redirectUri,
                 'responseType' => $responseType,
-                'codeChallenge' => $codeChallenge,
-                'codeChallengeMethod' => $codeChallengeMethod,
-                'scope' => $scope,
-                'state' => $state,
+                'codeChallenge' => $codeChallenge ?? Omitted::VALUE,
+                'codeChallengeMethod' => $codeChallengeMethod ?? Omitted::VALUE,
+                'scope' => $scope ?? Omitted::VALUE,
+                'state' => $state ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -246,17 +246,18 @@ final class OAuthService implements OAuthContract
         ?string $scope = null,
         RequestOptions|array|null $requestOptions = null,
     ): OAuthTokenResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'grantType' => $grantType,
-                'clientID' => $clientID,
-                'clientSecret' => $clientSecret,
-                'code' => $code,
-                'codeVerifier' => $codeVerifier,
-                'redirectUri' => $redirectUri,
-                'refreshToken' => $refreshToken,
-                'scope' => $scope,
+                'clientID' => $clientID ?? Omitted::VALUE,
+                'clientSecret' => $clientSecret ?? Omitted::VALUE,
+                'code' => $code ?? Omitted::VALUE,
+                'codeVerifier' => $codeVerifier ?? Omitted::VALUE,
+                'redirectUri' => $redirectUri ?? Omitted::VALUE,
+                'refreshToken' => $refreshToken ?? Omitted::VALUE,
+                'scope' => $scope ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

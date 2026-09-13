@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Updates one or more fields of the specified email template and returns the updated template.
@@ -66,18 +67,18 @@ final class EmailTemplateUpdateParams implements BaseModel
      * @param list<string>|null $variables
      */
     public static function with(
-        ?string $htmlBody = null,
+        string|Omitted|null $htmlBody = Omitted::VALUE,
+        string|Omitted|null $subject = Omitted::VALUE,
+        string|Omitted|null $textBody = Omitted::VALUE,
         ?string $name = null,
-        ?string $subject = null,
-        ?string $textBody = null,
         ?array $variables = null,
     ): self {
         $self = new self;
 
-        null !== $htmlBody && $self['htmlBody'] = $htmlBody;
+        Omitted::VALUE !== $htmlBody && $self['htmlBody'] = $htmlBody;
         null !== $name && $self['name'] = $name;
-        null !== $subject && $self['subject'] = $subject;
-        null !== $textBody && $self['textBody'] = $textBody;
+        Omitted::VALUE !== $subject && $self['subject'] = $subject;
+        Omitted::VALUE !== $textBody && $self['textBody'] = $textBody;
         null !== $variables && $self['variables'] = $variables;
 
         return $self;

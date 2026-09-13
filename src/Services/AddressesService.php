@@ -12,7 +12,7 @@ use Telnyx\Addresses\AddressListParams\Sort;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AddressesContract;
@@ -87,7 +87,7 @@ final class AddressesService implements AddressesContract
         bool $validateAddress = true,
         RequestOptions|array|null $requestOptions = null,
     ): AddressNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'businessName' => $businessName,
                 'countryCode' => $countryCode,
@@ -96,15 +96,16 @@ final class AddressesService implements AddressesContract
                 'locality' => $locality,
                 'streetAddress' => $streetAddress,
                 'addressBook' => $addressBook,
-                'administrativeArea' => $administrativeArea,
-                'borough' => $borough,
-                'customerReference' => $customerReference,
-                'extendedAddress' => $extendedAddress,
-                'neighborhood' => $neighborhood,
-                'phoneNumber' => $phoneNumber,
-                'postalCode' => $postalCode,
+                'administrativeArea' => $administrativeArea ?? Omitted::VALUE,
+                'borough' => $borough ?? Omitted::VALUE,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'extendedAddress' => $extendedAddress ?? Omitted::VALUE,
+                'neighborhood' => $neighborhood ?? Omitted::VALUE,
+                'phoneNumber' => $phoneNumber ?? Omitted::VALUE,
+                'postalCode' => $postalCode ?? Omitted::VALUE,
                 'validateAddress' => $validateAddress,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -164,13 +165,14 @@ final class AddressesService implements AddressesContract
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -7,6 +7,7 @@ namespace Telnyx\MobilePhoneNumbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumber\CallForwarding;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumber\CallRecording;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumber\CnamListing;
@@ -189,29 +190,29 @@ final class MobilePhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|InboundCallScreening|value-of<InboundCallScreening>|null $inboundCallScreening
      * @param CallForwarding|CallForwardingShape|null $callForwarding
      * @param CallRecording|CallRecordingShape|null $callRecording
      * @param CnamListing|CnamListingShape|null $cnamListing
      * @param Inbound|InboundShape|null $inbound
-     * @param InboundCallScreening|value-of<InboundCallScreening>|null $inboundCallScreening
      * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
      * @param Outbound|OutboundShape|null $outbound
      * @param list<string>|null $tags
      */
     public static function with(
+        string|Omitted|null $connectionID = Omitted::VALUE,
+        string|Omitted|null $connectionName = Omitted::VALUE,
+        string|Omitted|null $connectionType = Omitted::VALUE,
+        string|Omitted|null $customerReference = Omitted::VALUE,
+        Omitted|InboundCallScreening|string|null $inboundCallScreening = Omitted::VALUE,
         ?string $id = null,
         CallForwarding|array|null $callForwarding = null,
         CallRecording|array|null $callRecording = null,
         ?bool $callerIDNameEnabled = null,
         CnamListing|array|null $cnamListing = null,
-        ?string $connectionID = null,
-        ?string $connectionName = null,
-        ?string $connectionType = null,
         ?string $countryISOAlpha2 = null,
         ?\DateTimeInterface $createdAt = null,
-        ?string $customerReference = null,
         Inbound|array|null $inbound = null,
-        InboundCallScreening|string|null $inboundCallScreening = null,
         ?bool $mobileVoiceEnabled = null,
         NoiseSuppression|string|null $noiseSuppression = null,
         Outbound|array|null $outbound = null,
@@ -229,14 +230,14 @@ final class MobilePhoneNumber implements BaseModel
         null !== $callRecording && $self['callRecording'] = $callRecording;
         null !== $callerIDNameEnabled && $self['callerIDNameEnabled'] = $callerIDNameEnabled;
         null !== $cnamListing && $self['cnamListing'] = $cnamListing;
-        null !== $connectionID && $self['connectionID'] = $connectionID;
-        null !== $connectionName && $self['connectionName'] = $connectionName;
-        null !== $connectionType && $self['connectionType'] = $connectionType;
+        Omitted::VALUE !== $connectionID && $self['connectionID'] = $connectionID;
+        Omitted::VALUE !== $connectionName && $self['connectionName'] = $connectionName;
+        Omitted::VALUE !== $connectionType && $self['connectionType'] = $connectionType;
         null !== $countryISOAlpha2 && $self['countryISOAlpha2'] = $countryISOAlpha2;
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $customerReference && $self['customerReference'] = $customerReference;
+        Omitted::VALUE !== $customerReference && $self['customerReference'] = $customerReference;
         null !== $inbound && $self['inbound'] = $inbound;
-        null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
+        Omitted::VALUE !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
         null !== $mobileVoiceEnabled && $self['mobileVoiceEnabled'] = $mobileVoiceEnabled;
         null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
         null !== $outbound && $self['outbound'] = $outbound;

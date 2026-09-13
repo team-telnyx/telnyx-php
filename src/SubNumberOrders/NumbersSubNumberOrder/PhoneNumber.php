@@ -7,6 +7,7 @@ namespace Telnyx\SubNumberOrders\NumbersSubNumberOrder;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\SubNumberOrders\NumbersSubNumberOrder\PhoneNumber\RegulatoryRequirement;
 
 /**
@@ -74,8 +75,8 @@ final class PhoneNumber implements BaseModel
      * @param list<RegulatoryRequirement|RegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(
+        string|Omitted|null $bundleID = Omitted::VALUE,
         ?string $id = null,
-        ?string $bundleID = null,
         ?string $countryCode = null,
         ?string $phoneNumber = null,
         ?string $phoneNumberType = null,
@@ -88,7 +89,7 @@ final class PhoneNumber implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $bundleID && $self['bundleID'] = $bundleID;
+        Omitted::VALUE !== $bundleID && $self['bundleID'] = $bundleID;
         null !== $countryCode && $self['countryCode'] = $countryCode;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;

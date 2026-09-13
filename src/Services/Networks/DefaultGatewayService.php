@@ -6,7 +6,7 @@ namespace Telnyx\Services\Networks;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayDeleteResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayGetResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse;
@@ -49,7 +49,10 @@ final class DefaultGatewayService implements DefaultGatewayContract
         ?string $wireguardPeerID = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultGatewayNewResponse {
-        $params = Util::removeNulls(['wireguardPeerID' => $wireguardPeerID]);
+        $params = array_filter(
+            ['wireguardPeerID' => $wireguardPeerID ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($networkIdentifier, params: $params, requestOptions: $requestOptions);

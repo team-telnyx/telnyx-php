@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Rcs\Agents\AgentConsentConfiguration\OptInMethod;
 
 /**
@@ -113,9 +114,9 @@ final class AgentConsentConfiguration implements BaseModel
         string $optInMessage,
         array $optInMethods,
         string $optOutResponse,
-        ?string $callToActionMediaURL = null,
-        ?string $callToActionURL = null,
-        ?string $doubleOptInMessage = null,
+        string|Omitted|null $callToActionMediaURL = Omitted::VALUE,
+        string|Omitted|null $callToActionURL = Omitted::VALUE,
+        string|Omitted|null $doubleOptInMessage = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -126,9 +127,9 @@ final class AgentConsentConfiguration implements BaseModel
         $self['optInMethods'] = $optInMethods;
         $self['optOutResponse'] = $optOutResponse;
 
-        null !== $callToActionMediaURL && $self['callToActionMediaURL'] = $callToActionMediaURL;
-        null !== $callToActionURL && $self['callToActionURL'] = $callToActionURL;
-        null !== $doubleOptInMessage && $self['doubleOptInMessage'] = $doubleOptInMessage;
+        Omitted::VALUE !== $callToActionMediaURL && $self['callToActionMediaURL'] = $callToActionMediaURL;
+        Omitted::VALUE !== $callToActionURL && $self['callToActionURL'] = $callToActionURL;
+        Omitted::VALUE !== $doubleOptInMessage && $self['doubleOptInMessage'] = $doubleOptInMessage;
 
         return $self;
     }

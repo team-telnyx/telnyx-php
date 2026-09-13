@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Partial update (only `name` / `description`). `PUT` is not routed.
@@ -41,12 +42,12 @@ final class EmailUnsubscribeGroupUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $description = null,
+        string|Omitted|null $description = Omitted::VALUE,
         ?string $name = null
     ): self {
         $self = new self;
 
-        null !== $description && $self['description'] = $description;
+        Omitted::VALUE !== $description && $self['description'] = $description;
         null !== $name && $self['name'] = $name;
 
         return $self;

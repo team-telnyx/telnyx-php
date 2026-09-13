@@ -8,7 +8,7 @@ use Telnyx\AI\Conversations\ConversationInsights\ConversationInsightGetAggregate
 use Telnyx\AI\Conversations\ConversationInsights\ConversationInsightRetrieveAggregatesParams\Metadata;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\ConversationInsightsContract;
 
@@ -61,14 +61,15 @@ final class ConversationInsightsService implements ConversationInsightsContract
         ?array $show = null,
         RequestOptions|array|null $requestOptions = null,
     ): ConversationInsightGetAggregatesResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'createdAt' => $createdAt,
-                'groupBy' => $groupBy,
-                'insightID' => $insightID,
-                'metadata' => $metadata,
-                'show' => $show,
+                'createdAt' => $createdAt ?? Omitted::VALUE,
+                'groupBy' => $groupBy ?? Omitted::VALUE,
+                'insightID' => $insightID ?? Omitted::VALUE,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'show' => $show ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

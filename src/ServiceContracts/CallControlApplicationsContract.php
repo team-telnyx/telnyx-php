@@ -17,6 +17,7 @@ use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationOutbound;
 use Telnyx\CallControlApplications\CallControlApplicationUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
@@ -43,8 +44,8 @@ interface CallControlApplicationsContract
      * @param CallControlApplicationOutbound|CallControlApplicationOutboundShape $outbound
      * @param bool $redactDtmfDebugLogging when enabled, DTMF digits entered by users will be redacted in debug logs to protect PII data entered through IVR interactions
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -62,8 +63,8 @@ interface CallControlApplicationsContract
         CallControlApplicationOutbound|array|null $outbound = null,
         bool $redactDtmfDebugLogging = false,
         WebhookAPIVersion|string $webhookAPIVersion = '1',
-        ?string $webhookEventFailoverURL = '',
-        ?int $webhookTimeoutSecs = null,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): CallControlApplicationNewResponse;
 
@@ -97,8 +98,8 @@ interface CallControlApplicationsContract
      * @param bool $redactDtmfDebugLogging when enabled, DTMF digits entered by users will be redacted in debug logs to protect PII data entered through IVR interactions
      * @param list<string> $tags tags assigned to the Call Control Application
      * @param \Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion|value-of<\Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -118,8 +119,8 @@ interface CallControlApplicationsContract
         bool $redactDtmfDebugLogging = false,
         ?array $tags = null,
         \Telnyx\CallControlApplications\CallControlApplicationUpdateParams\WebhookAPIVersion|string $webhookAPIVersion = '1',
-        ?string $webhookEventFailoverURL = '',
-        ?int $webhookTimeoutSecs = null,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): CallControlApplicationUpdateResponse;
 

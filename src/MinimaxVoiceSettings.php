@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MinimaxVoiceSettings\LanguageBoost;
 use Telnyx\MinimaxVoiceSettings\Type;
 
@@ -84,11 +85,11 @@ final class MinimaxVoiceSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Type|value-of<Type> $type
-     * @param LanguageBoost|value-of<LanguageBoost>|null $languageBoost
+     * @param Omitted|LanguageBoost|value-of<LanguageBoost>|null $languageBoost
      */
     public static function with(
         Type|string $type,
-        LanguageBoost|string|null $languageBoost = null,
+        Omitted|LanguageBoost|string|null $languageBoost = Omitted::VALUE,
         ?int $pitch = null,
         ?float $speed = null,
         ?float $vol = null,
@@ -97,7 +98,7 @@ final class MinimaxVoiceSettings implements BaseModel
 
         $self['type'] = $type;
 
-        null !== $languageBoost && $self['languageBoost'] = $languageBoost;
+        Omitted::VALUE !== $languageBoost && $self['languageBoost'] = $languageBoost;
         null !== $pitch && $self['pitch'] = $pitch;
         null !== $speed && $self['speed'] = $speed;
         null !== $vol && $self['vol'] = $vol;

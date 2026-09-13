@@ -7,6 +7,7 @@ namespace Telnyx\PortingOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type PortingOrderUserFeedbackShape = array{
@@ -41,13 +42,13 @@ final class PortingOrderUserFeedback implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $userComment = null,
-        ?int $userRating = null
+        string|Omitted|null $userComment = Omitted::VALUE,
+        int|Omitted|null $userRating = Omitted::VALUE,
     ): self {
         $self = new self;
 
-        null !== $userComment && $self['userComment'] = $userComment;
-        null !== $userRating && $self['userRating'] = $userRating;
+        Omitted::VALUE !== $userComment && $self['userComment'] = $userComment;
+        Omitted::VALUE !== $userRating && $self['userRating'] = $userRating;
 
         return $self;
     }

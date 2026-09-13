@@ -11,6 +11,7 @@ use Psr\Http\Message\UriInterface;
 use Telnyx\Core\Contracts\BasePage;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Contracts\BaseStream;
+use Telnyx\Core\Contracts\TimeoutAwareClient;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Exceptions\APIConnectionException;
@@ -71,7 +72,7 @@ abstract class BaseClient
         ?string $stream = null,
         RequestOptions|array|null $options = [],
     ): BaseResponse {
-        [$req, $opts] = $this->buildRequest(
+        [$req, $opts, $requestInfo] = $this->buildRequest(
             method: $method,
             // @phpstan-ignore argument.type
             path: $path,
@@ -93,7 +94,7 @@ abstract class BaseClient
         $rsp = $this->sendRequest($opts, req: $request, data: $data, redirectCount: 0, retryCount: 0);
 
         // @phpstan-ignore-next-line argument.type
-        return new RawResponse(client: $this, request: $request, response: $rsp, options: $opts, requestInfo: $req, unwrap: $unwrap, stream: $stream, page: $page, convert: $convert ?? 'null');
+        return new RawResponse(client: $this, request: $request, response: $rsp, options: $opts, requestInfo: $requestInfo, unwrap: $unwrap, stream: $stream, page: $page, convert: $convert ?? 'null');
     }
 
     /**
@@ -114,7 +115,7 @@ abstract class BaseClient
      * @param array<string,string|int|list<string|int>|null> $headers
      * @param RequestOpts|null $opts
      *
-     * @return array{NormalizedRequest, RequestOptions}
+     * @return array{NormalizedRequest, RequestOptions, NormalizedRequest}
      */
     protected function buildRequest(
         string $method,
@@ -148,7 +149,11 @@ abstract class BaseClient
 
         $req = ['method' => strtoupper($method), 'path' => $uri, 'query' => $mergedQuery, 'headers' => $mergedHeaders, 'body' => $body];
 
-        return [$req, $options];
+        // Retain inputs for pagination, not the already merged wire URI/query.
+        // Rebuilding these inputs applies base/path queries and extra options exactly once.
+        $replay = ['method' => strtoupper($method), 'path' => $parsedPath, 'query' => $query, 'headers' => $mergedHeaders, 'body' => $body];
+
+        return [$req, $options, $replay];
     }
 
     protected function transformRequest(
@@ -235,6 +240,9 @@ abstract class BaseClient
         int $retryCount,
         int $redirectCount,
     ): ResponseInterface {
+        if ($opts->timeout < 0 || !is_finite($opts->timeout)) {
+            throw new \InvalidArgumentException('Timeout must be finite non-negative seconds.');
+        }
         assert(null !== $opts->streamFactory && null !== $opts->transporter);
 
         /** @var RequestInterface */
@@ -249,7 +257,9 @@ abstract class BaseClient
         $err = null;
 
         try {
-            $rsp = $transporter->sendRequest($req);
+            $rsp = $transporter instanceof TimeoutAwareClient
+                ? $transporter->sendRequestWithTimeout($req, $opts->timeout)
+                : $transporter->sendRequest($req);
         } catch (ClientExceptionInterface $e) {
             $err = $e;
         }

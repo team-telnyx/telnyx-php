@@ -30,6 +30,8 @@ trait ArrayOf
     public function coerce(mixed $value, CoerceState $state): mixed
     {
         if (!is_array($value)) {
+            ++$state->no;
+
             return $value;
         }
         ++$state->yes;

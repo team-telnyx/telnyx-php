@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\WebSearch\WebSearchContentsParams\Format;
 use Telnyx\WebSearch\WebSearchContentsResponse;
@@ -49,7 +50,7 @@ interface WebSearchContract
      * @param list<string> $urls list of URLs to retrieve content from (max 20 for public API)
      * @param int $crawlTimeout timeout for crawling each URL, in seconds (1-60)
      * @param list<Format|value-of<Format>> $formats Content formats to return. If omitted, `html` and `metadata` are returned by default. Retrieval is best-effort per URL: a format field appears only when that content could be produced, and a freshly crawled page may also include `html` even when not requested.
-     * @param int|null $maxAge Maximum age of cached content in seconds. `null` means no limit.
+     * @param int|Omitted|null $maxAge Maximum age of cached content in seconds. `null` means no limit.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -58,7 +59,7 @@ interface WebSearchContract
         array $urls,
         ?int $crawlTimeout = null,
         ?array $formats = null,
-        ?int $maxAge = null,
+        int|Omitted|null $maxAge = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): WebSearchContentsResponse;
 }

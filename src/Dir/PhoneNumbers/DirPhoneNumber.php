@@ -7,6 +7,7 @@ namespace Telnyx\Dir\PhoneNumbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Dir\PhoneNumberBatches\DirPhoneNumberStatus;
 
 /**
@@ -97,35 +98,35 @@ final class DirPhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RejectionReason|RejectionReasonShape|null $rejectionReason
+     * @param Omitted|RejectionReason|RejectionReasonShape|null $rejectionReason
      * @param DirPhoneNumberStatus|value-of<DirPhoneNumberStatus>|null $status
      */
     public static function with(
+        string|Omitted|null $batchID = Omitted::VALUE,
+        string|Omitted|null $loaDocumentID = Omitted::VALUE,
+        Omitted|RejectionReason|array|null $rejectionReason = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $verifiedAt = Omitted::VALUE,
         ?string $id = null,
-        ?string $batchID = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $dirID = null,
         ?string $enterpriseID = null,
-        ?string $loaDocumentID = null,
         ?string $phoneNumber = null,
-        RejectionReason|array|null $rejectionReason = null,
         DirPhoneNumberStatus|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
-        ?\DateTimeInterface $verifiedAt = null,
     ): self {
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $batchID && $self['batchID'] = $batchID;
+        Omitted::VALUE !== $batchID && $self['batchID'] = $batchID;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $dirID && $self['dirID'] = $dirID;
         null !== $enterpriseID && $self['enterpriseID'] = $enterpriseID;
-        null !== $loaDocumentID && $self['loaDocumentID'] = $loaDocumentID;
+        Omitted::VALUE !== $loaDocumentID && $self['loaDocumentID'] = $loaDocumentID;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
-        null !== $rejectionReason && $self['rejectionReason'] = $rejectionReason;
+        Omitted::VALUE !== $rejectionReason && $self['rejectionReason'] = $rejectionReason;
         null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
-        null !== $verifiedAt && $self['verifiedAt'] = $verifiedAt;
+        Omitted::VALUE !== $verifiedAt && $self['verifiedAt'] = $verifiedAt;
 
         return $self;
     }

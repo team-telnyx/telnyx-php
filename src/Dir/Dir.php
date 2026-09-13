@@ -7,6 +7,7 @@ namespace Telnyx\Dir;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Dir\Dir\CallReason;
 use Telnyx\Dir\PhoneNumbers\RejectionReason;
 
@@ -134,55 +135,55 @@ final class Dir implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param list<Document|DocumentShape>|Omitted|null $documents
+     * @param list<RejectionReason|RejectionReasonShape>|Omitted|null $rejectionReasons
      * @param list<CallReason|CallReasonShape>|null $callReasons
-     * @param list<Document|DocumentShape>|null $documents
-     * @param list<RejectionReason|RejectionReasonShape>|null $rejectionReasons
      * @param DirStatus|value-of<DirStatus>|null $status
      */
     public static function with(
+        string|Omitted|null $authorizerEmail = Omitted::VALUE,
+        string|Omitted|null $authorizerName = Omitted::VALUE,
+        array|Omitted|null $documents = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $expiringAt = Omitted::VALUE,
+        string|Omitted|null $logoURL = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $rejectedAt = Omitted::VALUE,
+        array|Omitted|null $rejectionReasons = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $submittedAt = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $verifiedAt = Omitted::VALUE,
         ?string $id = null,
-        ?string $authorizerEmail = null,
-        ?string $authorizerName = null,
         ?array $callReasons = null,
         ?bool $certifyBrandIsAccurate = null,
         ?bool $certifyIPOwnership = null,
         ?bool $certifyNoShaftContent = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $displayName = null,
-        ?array $documents = null,
         ?string $enterpriseID = null,
-        ?\DateTimeInterface $expiringAt = null,
-        ?string $logoURL = null,
-        ?\DateTimeInterface $rejectedAt = null,
-        ?array $rejectionReasons = null,
         ?bool $reselling = null,
         DirStatus|string|null $status = null,
-        ?\DateTimeInterface $submittedAt = null,
         ?\DateTimeInterface $updatedAt = null,
-        ?\DateTimeInterface $verifiedAt = null,
     ): self {
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $authorizerEmail && $self['authorizerEmail'] = $authorizerEmail;
-        null !== $authorizerName && $self['authorizerName'] = $authorizerName;
+        Omitted::VALUE !== $authorizerEmail && $self['authorizerEmail'] = $authorizerEmail;
+        Omitted::VALUE !== $authorizerName && $self['authorizerName'] = $authorizerName;
         null !== $callReasons && $self['callReasons'] = $callReasons;
         null !== $certifyBrandIsAccurate && $self['certifyBrandIsAccurate'] = $certifyBrandIsAccurate;
         null !== $certifyIPOwnership && $self['certifyIPOwnership'] = $certifyIPOwnership;
         null !== $certifyNoShaftContent && $self['certifyNoShaftContent'] = $certifyNoShaftContent;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $displayName && $self['displayName'] = $displayName;
-        null !== $documents && $self['documents'] = $documents;
+        Omitted::VALUE !== $documents && $self['documents'] = $documents;
         null !== $enterpriseID && $self['enterpriseID'] = $enterpriseID;
-        null !== $expiringAt && $self['expiringAt'] = $expiringAt;
-        null !== $logoURL && $self['logoURL'] = $logoURL;
-        null !== $rejectedAt && $self['rejectedAt'] = $rejectedAt;
-        null !== $rejectionReasons && $self['rejectionReasons'] = $rejectionReasons;
+        Omitted::VALUE !== $expiringAt && $self['expiringAt'] = $expiringAt;
+        Omitted::VALUE !== $logoURL && $self['logoURL'] = $logoURL;
+        Omitted::VALUE !== $rejectedAt && $self['rejectedAt'] = $rejectedAt;
+        Omitted::VALUE !== $rejectionReasons && $self['rejectionReasons'] = $rejectionReasons;
         null !== $reselling && $self['reselling'] = $reselling;
         null !== $status && $self['status'] = $status;
-        null !== $submittedAt && $self['submittedAt'] = $submittedAt;
+        Omitted::VALUE !== $submittedAt && $self['submittedAt'] = $submittedAt;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
-        null !== $verifiedAt && $self['verifiedAt'] = $verifiedAt;
+        Omitted::VALUE !== $verifiedAt && $self['verifiedAt'] = $verifiedAt;
 
         return $self;
     }

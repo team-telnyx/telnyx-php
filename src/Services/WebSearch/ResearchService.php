@@ -6,7 +6,7 @@ namespace Telnyx\Services\WebSearch;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebSearch\ResearchContract;
 use Telnyx\WebSearch\Research\ResearchCreateParams\ResearchEffort;
@@ -61,13 +61,14 @@ final class ResearchService implements ResearchContract
         ResearchEffort|string|null $researchEffort = null,
         RequestOptions|array|null $requestOptions = null,
     ): ResearchNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'query' => $query,
-                'background' => $background,
-                'maxSources' => $maxSources,
-                'researchEffort' => $researchEffort,
+                'background' => $background ?? Omitted::VALUE,
+                'maxSources' => $maxSources ?? Omitted::VALUE,
+                'researchEffort' => $researchEffort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -11,7 +11,7 @@ use Telnyx\AI\Conversations\ConversationListResponse;
 use Telnyx\AI\Conversations\ConversationUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ConversationsContract;
 use Telnyx\Services\AI\Conversations\ConversationInsightsService;
@@ -83,12 +83,13 @@ final class ConversationsService implements ConversationsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): Conversation {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'metadata' => $metadata,
-                'name' => $name,
-                'idempotencyKey' => $idempotencyKey,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -133,7 +134,10 @@ final class ConversationsService implements ConversationsContract
         ?array $metadata = null,
         RequestOptions|array|null $requestOptions = null,
     ): ConversationUpdateResponse {
-        $params = Util::removeNulls(['metadata' => $metadata]);
+        $params = array_filter(
+            ['metadata' => $metadata ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($conversationID, params: $params, requestOptions: $requestOptions);
@@ -177,21 +181,22 @@ final class ConversationsService implements ConversationsContract
         ?string $order = null,
         RequestOptions|array|null $requestOptions = null,
     ): ConversationListResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'id' => $id,
-                'createdAt' => $createdAt,
-                'lastMessageAt' => $lastMessageAt,
-                'limit' => $limit,
-                'metadataAssistantID' => $metadataAssistantID,
-                'metadataCallControlID' => $metadataCallControlID,
-                'metadataTelnyxAgentTarget' => $metadataTelnyxAgentTarget,
-                'metadataTelnyxConversationChannel' => $metadataTelnyxConversationChannel,
-                'metadataTelnyxEndUserTarget' => $metadataTelnyxEndUserTarget,
-                'name' => $name,
-                'or' => $or,
-                'order' => $order,
+                'id' => $id ?? Omitted::VALUE,
+                'createdAt' => $createdAt ?? Omitted::VALUE,
+                'lastMessageAt' => $lastMessageAt ?? Omitted::VALUE,
+                'limit' => $limit ?? Omitted::VALUE,
+                'metadataAssistantID' => $metadataAssistantID ?? Omitted::VALUE,
+                'metadataCallControlID' => $metadataCallControlID ?? Omitted::VALUE,
+                'metadataTelnyxAgentTarget' => $metadataTelnyxAgentTarget ?? Omitted::VALUE,
+                'metadataTelnyxConversationChannel' => $metadataTelnyxConversationChannel ?? Omitted::VALUE,
+                'metadataTelnyxEndUserTarget' => $metadataTelnyxEndUserTarget ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'or' => $or ?? Omitted::VALUE,
+                'order' => $order ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -252,18 +257,19 @@ final class ConversationsService implements ConversationsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'role' => $role,
                 'content' => $content,
-                'metadata' => $metadata,
-                'name' => $name,
-                'sentAt' => $sentAt,
-                'toolCallID' => $toolCallID,
-                'toolCalls' => $toolCalls,
-                'toolChoice' => $toolChoice,
-                'idempotencyKey' => $idempotencyKey,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'sentAt' => $sentAt ?? Omitted::VALUE,
+                'toolCallID' => $toolCallID ?? Omitted::VALUE,
+                'toolCalls' => $toolCalls ?? Omitted::VALUE,
+                'toolChoice' => $toolChoice ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

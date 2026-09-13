@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailInboxes\Drafts\EmailAddress;
 
 /**
@@ -279,22 +280,22 @@ final class EmailMessageCreateParams implements BaseModel
     public static function with(
         string|EmailAddress|array $from,
         array $to,
+        string|Omitted|null $forwardOfMessageID = Omitted::VALUE,
+        string|Omitted|null $groupID = Omitted::VALUE,
+        string|Omitted|null $inReplyToMessageID = Omitted::VALUE,
+        bool|Omitted|null $replyToAll = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $scheduledAt = Omitted::VALUE,
         ?array $attachments = null,
         ?array $bcc = null,
         ?array $cc = null,
-        ?string $forwardOfMessageID = null,
         ?string $fromName = null,
-        ?string $groupID = null,
         ?array $headers = null,
         ?string $htmlBody = null,
         ?bool $ignoreSuppression = null,
-        ?string $inReplyToMessageID = null,
         ?bool $inlineCss = null,
         ?array $metadata = null,
         string|EmailAddress|array|null $replyTo = null,
-        ?bool $replyToAll = null,
         ?bool $sandboxMode = null,
-        ?\DateTimeInterface $scheduledAt = null,
         ?\DateTimeInterface $sendAt = null,
         ?string $subject = null,
         ?array $tags = null,
@@ -312,19 +313,19 @@ final class EmailMessageCreateParams implements BaseModel
         null !== $attachments && $self['attachments'] = $attachments;
         null !== $bcc && $self['bcc'] = $bcc;
         null !== $cc && $self['cc'] = $cc;
-        null !== $forwardOfMessageID && $self['forwardOfMessageID'] = $forwardOfMessageID;
+        Omitted::VALUE !== $forwardOfMessageID && $self['forwardOfMessageID'] = $forwardOfMessageID;
         null !== $fromName && $self['fromName'] = $fromName;
-        null !== $groupID && $self['groupID'] = $groupID;
+        Omitted::VALUE !== $groupID && $self['groupID'] = $groupID;
         null !== $headers && $self['headers'] = $headers;
         null !== $htmlBody && $self['htmlBody'] = $htmlBody;
         null !== $ignoreSuppression && $self['ignoreSuppression'] = $ignoreSuppression;
-        null !== $inReplyToMessageID && $self['inReplyToMessageID'] = $inReplyToMessageID;
+        Omitted::VALUE !== $inReplyToMessageID && $self['inReplyToMessageID'] = $inReplyToMessageID;
         null !== $inlineCss && $self['inlineCss'] = $inlineCss;
         null !== $metadata && $self['metadata'] = $metadata;
         null !== $replyTo && $self['replyTo'] = $replyTo;
-        null !== $replyToAll && $self['replyToAll'] = $replyToAll;
+        Omitted::VALUE !== $replyToAll && $self['replyToAll'] = $replyToAll;
         null !== $sandboxMode && $self['sandboxMode'] = $sandboxMode;
-        null !== $scheduledAt && $self['scheduledAt'] = $scheduledAt;
+        Omitted::VALUE !== $scheduledAt && $self['scheduledAt'] = $scheduledAt;
         null !== $sendAt && $self['sendAt'] = $sendAt;
         null !== $subject && $self['subject'] = $subject;
         null !== $tags && $self['tags'] = $tags;

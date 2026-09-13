@@ -208,7 +208,7 @@ final class EmailMessagesRawService implements EmailMessagesRawContract
     /**
      * @api
      *
-     * Creates up to 50 email messages in a single request.
+     * Creates up to 1,000 email messages in a single request. Each message is validated and sent independently; per-message failures do not affect other messages in the batch. All responses use 207 Multi-Status.
      *
      * @param array{
      *   messages: list<Message|MessageShape>,

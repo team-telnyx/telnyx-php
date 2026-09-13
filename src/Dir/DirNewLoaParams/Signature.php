@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
@@ -59,13 +60,13 @@ final class Signature implements BaseModel
      */
     public static function with(
         string $imageBase64,
-        ?string $signerName = null
+        string|Omitted|null $signerName = Omitted::VALUE
     ): self {
         $self = new self;
 
         $self['imageBase64'] = $imageBase64;
 
-        null !== $signerName && $self['signerName'] = $signerName;
+        Omitted::VALUE !== $signerName && $self['signerName'] = $signerName;
 
         return $self;
     }

@@ -6,7 +6,6 @@ namespace Telnyx\Services\Texml\Accounts\Recordings;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Recordings\JsonContract;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody;
@@ -47,7 +46,7 @@ final class JsonService implements JsonContract
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['accountSid' => $accountSid]);
+        $params = ['accountSid' => $accountSid];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteRecordingSidJson($recordingSid, params: $params, requestOptions: $requestOptions);
@@ -71,7 +70,7 @@ final class JsonService implements JsonContract
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
     ): TexmlGetCallRecordingResponseBody {
-        $params = Util::removeNulls(['accountSid' => $accountSid]);
+        $params = ['accountSid' => $accountSid];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveRecordingSidJson($recordingSid, params: $params, requestOptions: $requestOptions);

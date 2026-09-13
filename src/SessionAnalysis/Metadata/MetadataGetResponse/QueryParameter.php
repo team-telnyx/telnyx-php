@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type QueryParameterShape = array{
@@ -67,15 +68,15 @@ final class QueryParameter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $enumValues
+     * @param list<string>|Omitted|null $enumValues
      */
     public static function with(
         string $default,
         string $description,
         string $type,
-        ?array $enumValues = null,
-        ?int $max = null,
-        ?int $min = null,
+        array|Omitted|null $enumValues = Omitted::VALUE,
+        int|Omitted|null $max = Omitted::VALUE,
+        int|Omitted|null $min = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -83,9 +84,9 @@ final class QueryParameter implements BaseModel
         $self['description'] = $description;
         $self['type'] = $type;
 
-        null !== $enumValues && $self['enumValues'] = $enumValues;
-        null !== $max && $self['max'] = $max;
-        null !== $min && $self['min'] = $min;
+        Omitted::VALUE !== $enumValues && $self['enumValues'] = $enumValues;
+        Omitted::VALUE !== $max && $self['max'] = $max;
+        Omitted::VALUE !== $min && $self['min'] = $min;
 
         return $self;
     }

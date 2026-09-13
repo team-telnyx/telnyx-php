@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbersContract;
@@ -59,12 +59,13 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
         ?string $extension = null,
         RequestOptions|array|null $requestOptions = null,
     ): VerifiedNumberNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'phoneNumber' => $phoneNumber,
                 'verificationMethod' => $verificationMethod,
-                'extension' => $extension,
+                'extension' => $extension ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -109,8 +110,12 @@ final class VerifiedNumbersService implements VerifiedNumbersContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

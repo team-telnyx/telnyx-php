@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Enterprises\EnterpriseUpdateParams\Industry;
 
 /**
@@ -120,12 +121,14 @@ final class EnterpriseUpdateParams implements BaseModel
      * @param PhysicalAddress|PhysicalAddressShape|null $organizationPhysicalAddress
      */
     public static function with(
+        string|Omitted|null $corporateRegistrationNumber = Omitted::VALUE,
+        string|Omitted|null $dunBradstreetNumber = Omitted::VALUE,
+        string|Omitted|null $primaryBusinessDomainSicCode = Omitted::VALUE,
+        string|Omitted|null $professionalLicenseNumber = Omitted::VALUE,
         PhysicalAddress|array|null $billingAddress = null,
         BillingContact|array|null $billingContact = null,
-        ?string $corporateRegistrationNumber = null,
         ?string $customerReference = null,
         ?string $doingBusinessAs = null,
-        ?string $dunBradstreetNumber = null,
         ?string $fein = null,
         Industry|string|null $industry = null,
         ?string $jurisdictionOfIncorporation = null,
@@ -134,18 +137,16 @@ final class EnterpriseUpdateParams implements BaseModel
         OrganizationContact|array|null $organizationContact = null,
         ?string $organizationLegalType = null,
         PhysicalAddress|array|null $organizationPhysicalAddress = null,
-        ?string $primaryBusinessDomainSicCode = null,
-        ?string $professionalLicenseNumber = null,
         ?string $website = null,
     ): self {
         $self = new self;
 
         null !== $billingAddress && $self['billingAddress'] = $billingAddress;
         null !== $billingContact && $self['billingContact'] = $billingContact;
-        null !== $corporateRegistrationNumber && $self['corporateRegistrationNumber'] = $corporateRegistrationNumber;
+        Omitted::VALUE !== $corporateRegistrationNumber && $self['corporateRegistrationNumber'] = $corporateRegistrationNumber;
         null !== $customerReference && $self['customerReference'] = $customerReference;
         null !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
-        null !== $dunBradstreetNumber && $self['dunBradstreetNumber'] = $dunBradstreetNumber;
+        Omitted::VALUE !== $dunBradstreetNumber && $self['dunBradstreetNumber'] = $dunBradstreetNumber;
         null !== $fein && $self['fein'] = $fein;
         null !== $industry && $self['industry'] = $industry;
         null !== $jurisdictionOfIncorporation && $self['jurisdictionOfIncorporation'] = $jurisdictionOfIncorporation;
@@ -154,8 +155,8 @@ final class EnterpriseUpdateParams implements BaseModel
         null !== $organizationContact && $self['organizationContact'] = $organizationContact;
         null !== $organizationLegalType && $self['organizationLegalType'] = $organizationLegalType;
         null !== $organizationPhysicalAddress && $self['organizationPhysicalAddress'] = $organizationPhysicalAddress;
-        null !== $primaryBusinessDomainSicCode && $self['primaryBusinessDomainSicCode'] = $primaryBusinessDomainSicCode;
-        null !== $professionalLicenseNumber && $self['professionalLicenseNumber'] = $professionalLicenseNumber;
+        Omitted::VALUE !== $primaryBusinessDomainSicCode && $self['primaryBusinessDomainSicCode'] = $primaryBusinessDomainSicCode;
+        Omitted::VALUE !== $professionalLicenseNumber && $self['professionalLicenseNumber'] = $professionalLicenseNumber;
         null !== $website && $self['website'] = $website;
 
         return $self;

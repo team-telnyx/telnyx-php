@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\ConnectionJitterBuffer;
 use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
@@ -45,14 +46,14 @@ interface CredentialConnectionsContract
      * @param string $userName The user name to be used as part of the credentials. Must be 4-32 characters long and alphanumeric values only (no spaces or special characters).
      * @param bool $active Defaults to true
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-     * @param string|null $androidPushCredentialID The uuid of the push credential for Android
+     * @param string|Omitted|null $androidPushCredentialID The uuid of the push credential for Android
      * @param bool $callCostInWebhooks specifies if call cost webhooks should be sent for this connection
      * @param bool $defaultOnHoldComfortNoiseEnabled When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      * @param DtmfType|value-of<DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      * @param bool $encodeContactHeaderEnabled encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
+     * @param Omitted|EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      * @param CredentialInbound|CredentialInboundShape $inbound
-     * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
+     * @param string|Omitted|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
@@ -62,9 +63,9 @@ interface CredentialConnectionsContract
      * @param SipUriCallingPreference|value-of<SipUriCallingPreference> $sipUriCallingPreference This feature enables inbound SIP URI calls to your Credential Auth Connection. If enabled for all (unrestricted) then anyone who calls the SIP URI <your-username>@telnyx.com will be connected to your Connection. You can also choose to allow only calls that are originated on any Connections under your account (internal).
      * @param list<string> $tags tags associated with the connection
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion Determines which webhook format will be used, Telnyx API v1, v2 or texml. Note - texml can only be set when the outbound object parameter call_parking_enabled is included and set to true.
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -75,14 +76,14 @@ interface CredentialConnectionsContract
         string $userName,
         ?bool $active = null,
         AnchorsiteOverride|string $anchorsiteOverride = 'Latency',
-        ?string $androidPushCredentialID = null,
+        string|Omitted|null $androidPushCredentialID = Omitted::VALUE,
         bool $callCostInWebhooks = false,
         bool $defaultOnHoldComfortNoiseEnabled = false,
         DtmfType|string $dtmfType = 'RFC 2833',
         bool $encodeContactHeaderEnabled = false,
-        EncryptedMedia|string|null $encryptedMedia = null,
+        Omitted|EncryptedMedia|string|null $encryptedMedia = Omitted::VALUE,
         CredentialInbound|array|null $inbound = null,
-        ?string $iosPushCredentialID = null,
+        string|Omitted|null $iosPushCredentialID = Omitted::VALUE,
         ConnectionJitterBuffer|array|null $jitterBuffer = null,
         ConnectionNoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
@@ -92,9 +93,9 @@ interface CredentialConnectionsContract
         SipUriCallingPreference|string|null $sipUriCallingPreference = null,
         ?array $tags = null,
         WebhookAPIVersion|string $webhookAPIVersion = '1',
-        ?string $webhookEventFailoverURL = '',
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
         ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): CredentialConnectionNewResponse;
 
@@ -117,16 +118,16 @@ interface CredentialConnectionsContract
      * @param string $id identifies the resource
      * @param bool $active Defaults to true
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-     * @param string|null $androidPushCredentialID The uuid of the push credential for Android
+     * @param string|Omitted|null $androidPushCredentialID The uuid of the push credential for Android
      * @param bool $callCostInWebhooks specifies if call cost webhooks should be sent for this connection
      * @param string $connectionName a user-assigned name to help manage the connection
      * @param bool $conversationPersistence Whether conversation persistence is enabled for this connection. When enabled, calls handled by the connection are transcribed, stored, and indexed. Defaults to false.
      * @param bool $defaultOnHoldComfortNoiseEnabled When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      * @param DtmfType|value-of<DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      * @param bool $encodeContactHeaderEnabled encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
+     * @param Omitted|EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      * @param CredentialInbound|CredentialInboundShape $inbound
-     * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
+     * @param string|Omitted|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
@@ -138,9 +139,9 @@ interface CredentialConnectionsContract
      * @param list<string> $tags tags associated with the connection
      * @param string $userName The user name to be used as part of the credentials. Must be 4-32 characters long and alphanumeric values only (no spaces or special characters).
      * @param \Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVersion|value-of<\Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVersion> $webhookAPIVersion determines which webhook format will be used, Telnyx API v1 or v2
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -149,16 +150,16 @@ interface CredentialConnectionsContract
         string $id,
         ?bool $active = null,
         AnchorsiteOverride|string $anchorsiteOverride = 'Latency',
-        ?string $androidPushCredentialID = null,
+        string|Omitted|null $androidPushCredentialID = Omitted::VALUE,
         bool $callCostInWebhooks = false,
         ?string $connectionName = null,
         ?bool $conversationPersistence = null,
         bool $defaultOnHoldComfortNoiseEnabled = false,
         DtmfType|string $dtmfType = 'RFC 2833',
         bool $encodeContactHeaderEnabled = false,
-        EncryptedMedia|string|null $encryptedMedia = null,
+        Omitted|EncryptedMedia|string|null $encryptedMedia = Omitted::VALUE,
         CredentialInbound|array|null $inbound = null,
-        ?string $iosPushCredentialID = null,
+        string|Omitted|null $iosPushCredentialID = Omitted::VALUE,
         ConnectionJitterBuffer|array|null $jitterBuffer = null,
         ConnectionNoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
@@ -170,9 +171,9 @@ interface CredentialConnectionsContract
         ?array $tags = null,
         ?string $userName = null,
         \Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVersion|string $webhookAPIVersion = '1',
-        ?string $webhookEventFailoverURL = '',
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
         ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): CredentialConnectionUpdateResponse;
 

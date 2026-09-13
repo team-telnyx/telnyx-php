@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnection;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Inbound;
@@ -43,9 +44,9 @@ interface MobileVoiceConnectionsContract
         Outbound|array|null $outbound = null,
         ?array $tags = null,
         WebhookAPIVersion|string $webhookAPIVersion = '2',
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookEventURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): MobileVoiceConnectionNewResponse;
 
@@ -82,8 +83,8 @@ interface MobileVoiceConnectionsContract
         \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Outbound|array|null $outbound = null,
         ?array $tags = null,
         \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookEventURL = Omitted::VALUE,
         ?int $webhookTimeoutSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): MobileVoiceConnectionUpdateResponse;

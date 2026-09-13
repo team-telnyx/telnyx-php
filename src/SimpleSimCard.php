@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\MapOf;
+use Telnyx\Core\Omitted;
 use Telnyx\SimpleSimCard\CurrentBillingPeriodConsumedData;
 use Telnyx\SimpleSimCard\DataLimit;
 use Telnyx\SimpleSimCard\EsimInstallationStatus;
@@ -186,24 +187,24 @@ final class SimpleSimCard implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $authorizedImeis
+     * @param list<string>|Omitted|null $authorizedImeis
+     * @param Omitted|EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esimInstallationStatus
      * @param CurrentBillingPeriodConsumedData|CurrentBillingPeriodConsumedDataShape|null $currentBillingPeriodConsumedData
      * @param DataLimit|DataLimitShape|null $dataLimit
-     * @param EsimInstallationStatus|value-of<EsimInstallationStatus>|null $esimInstallationStatus
      * @param list<array<string,mixed>>|null $resourcesWithInProgressActions
      * @param SimCardStatus|SimCardStatusShape|null $status
      * @param list<string>|null $tags
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
+        array|Omitted|null $authorizedImeis = Omitted::VALUE,
+        string|Omitted|null $eid = Omitted::VALUE,
+        Omitted|EsimInstallationStatus|string|null $esimInstallationStatus = Omitted::VALUE,
         ?string $id = null,
         ?bool $actionsInProgress = null,
-        ?array $authorizedImeis = null,
         ?string $createdAt = null,
         CurrentBillingPeriodConsumedData|array|null $currentBillingPeriodConsumedData = null,
         DataLimit|array|null $dataLimit = null,
-        ?string $eid = null,
-        EsimInstallationStatus|string|null $esimInstallationStatus = null,
         ?string $iccid = null,
         ?string $imsi = null,
         ?string $msisdn = null,
@@ -221,12 +222,12 @@ final class SimpleSimCard implements BaseModel
 
         null !== $id && $self['id'] = $id;
         null !== $actionsInProgress && $self['actionsInProgress'] = $actionsInProgress;
-        null !== $authorizedImeis && $self['authorizedImeis'] = $authorizedImeis;
+        Omitted::VALUE !== $authorizedImeis && $self['authorizedImeis'] = $authorizedImeis;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $currentBillingPeriodConsumedData && $self['currentBillingPeriodConsumedData'] = $currentBillingPeriodConsumedData;
         null !== $dataLimit && $self['dataLimit'] = $dataLimit;
-        null !== $eid && $self['eid'] = $eid;
-        null !== $esimInstallationStatus && $self['esimInstallationStatus'] = $esimInstallationStatus;
+        Omitted::VALUE !== $eid && $self['eid'] = $eid;
+        Omitted::VALUE !== $esimInstallationStatus && $self['esimInstallationStatus'] = $esimInstallationStatus;
         null !== $iccid && $self['iccid'] = $iccid;
         null !== $imsi && $self['imsi'] = $imsi;
         null !== $msisdn && $self['msisdn'] = $msisdn;

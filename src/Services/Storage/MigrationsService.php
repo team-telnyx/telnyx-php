@@ -6,7 +6,7 @@ namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\MigrationsContract;
 use Telnyx\Services\Storage\Migrations\ActionsService;
@@ -60,13 +60,14 @@ final class MigrationsService implements MigrationsContract
         ?bool $refresh = null,
         RequestOptions|array|null $requestOptions = null,
     ): MigrationNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'sourceID' => $sourceID,
                 'targetBucketName' => $targetBucketName,
                 'targetRegion' => $targetRegion,
-                'refresh' => $refresh,
+                'refresh' => $refresh ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -52,7 +52,7 @@ final class CreditAccountRawService implements CreditAccountRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'v2/x402/credit_account/quote',
+            path: 'x402/credit_account/quote',
             body: (object) $parsed,
             options: $options,
             convert: CreditAccountNewQuoteResponse::class,
@@ -86,7 +86,7 @@ final class CreditAccountRawService implements CreditAccountRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'v2/x402/credit_account',
+            path: 'x402/credit_account',
             headers: Util::array_transform_keys(
                 array_intersect_key($parsed, array_flip(array_keys($header_params))),
                 $header_params,

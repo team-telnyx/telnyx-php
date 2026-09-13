@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Full detail of a remediation request, returned on submit and GET by id.
@@ -133,7 +134,7 @@ final class RemediationRequest implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RemediationStatus|value-of<RemediationStatus> $status
-     * @param RemediationPerNumberResults|RemediationPerNumberResultsShape|null $results
+     * @param Omitted|RemediationPerNumberResults|RemediationPerNumberResultsShape|null $results
      */
     public static function with(
         string $id,
@@ -144,11 +145,11 @@ final class RemediationRequest implements BaseModel
         int $phoneNumbersSubmitted,
         RemediationStatus|string $status,
         \DateTimeInterface $updatedAt,
-        ?string $contactEmail = null,
-        RemediationPerNumberResults|array|null $results = null,
-        ?\DateTimeInterface $tier1CompletedAt = null,
-        ?\DateTimeInterface $tier2CompletedAt = null,
-        ?string $webhookURL = null,
+        string|Omitted|null $contactEmail = Omitted::VALUE,
+        Omitted|RemediationPerNumberResults|array|null $results = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $tier1CompletedAt = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $tier2CompletedAt = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -161,11 +162,11 @@ final class RemediationRequest implements BaseModel
         $self['status'] = $status;
         $self['updatedAt'] = $updatedAt;
 
-        null !== $contactEmail && $self['contactEmail'] = $contactEmail;
-        null !== $results && $self['results'] = $results;
-        null !== $tier1CompletedAt && $self['tier1CompletedAt'] = $tier1CompletedAt;
-        null !== $tier2CompletedAt && $self['tier2CompletedAt'] = $tier2CompletedAt;
-        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        Omitted::VALUE !== $contactEmail && $self['contactEmail'] = $contactEmail;
+        Omitted::VALUE !== $results && $self['results'] = $results;
+        Omitted::VALUE !== $tier1CompletedAt && $self['tier1CompletedAt'] = $tier1CompletedAt;
+        Omitted::VALUE !== $tier2CompletedAt && $self['tier2CompletedAt'] = $tier2CompletedAt;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

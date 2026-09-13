@@ -7,6 +7,7 @@ namespace Telnyx\Portouts\Events\WebhookPortoutStatusChanged;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Portouts\Events\WebhookPortoutStatusChanged\Payload\Status;
 
 /**
@@ -101,11 +102,11 @@ final class Payload implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        string|Omitted|null $rejectionReason = Omitted::VALUE,
         ?string $id = null,
         ?string $attemptedPin = null,
         ?string $carrierName = null,
         ?array $phoneNumbers = null,
-        ?string $rejectionReason = null,
         ?string $spid = null,
         Status|string|null $status = null,
         ?string $subscriberName = null,
@@ -117,7 +118,7 @@ final class Payload implements BaseModel
         null !== $attemptedPin && $self['attemptedPin'] = $attemptedPin;
         null !== $carrierName && $self['carrierName'] = $carrierName;
         null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
-        null !== $rejectionReason && $self['rejectionReason'] = $rejectionReason;
+        Omitted::VALUE !== $rejectionReason && $self['rejectionReason'] = $rejectionReason;
         null !== $spid && $self['spid'] = $spid;
         null !== $status && $self['status'] = $status;
         null !== $subscriberName && $self['subscriberName'] = $subscriberName;

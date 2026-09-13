@@ -6,7 +6,7 @@ namespace Telnyx\Services\SimCards;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCards\ActionsContract;
@@ -82,12 +82,13 @@ final class ActionsService implements ActionsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -112,7 +113,7 @@ final class ActionsService implements ActionsContract
         string $simCardGroupID,
         RequestOptions|array|null $requestOptions = null
     ): ActionBulkDisableVoiceResponse {
-        $params = Util::removeNulls(['simCardGroupID' => $simCardGroupID]);
+        $params = ['simCardGroupID' => $simCardGroupID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bulkDisableVoice(params: $params, requestOptions: $requestOptions);
@@ -138,8 +139,12 @@ final class ActionsService implements ActionsContract
         ?string $connectionID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionBulkEnableVoiceResponse {
-        $params = Util::removeNulls(
-            ['simCardGroupID' => $simCardGroupID, 'connectionID' => $connectionID]
+        $params = array_filter(
+            [
+                'simCardGroupID' => $simCardGroupID,
+                'connectionID' => $connectionID ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -163,7 +168,7 @@ final class ActionsService implements ActionsContract
         array $simCardIDs,
         RequestOptions|array|null $requestOptions = null
     ): ActionBulkSetPublicIPsResponse {
-        $params = Util::removeNulls(['simCardIDs' => $simCardIDs]);
+        $params = ['simCardIDs' => $simCardIDs];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bulkSetPublicIPs(params: $params, requestOptions: $requestOptions);
@@ -252,7 +257,10 @@ final class ActionsService implements ActionsContract
         ?string $connectionID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionEnableVoiceResponse {
-        $params = Util::removeNulls(['connectionID' => $connectionID]);
+        $params = array_filter(
+            ['connectionID' => $connectionID ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->enableVoice($id, params: $params, requestOptions: $requestOptions);
@@ -299,7 +307,10 @@ final class ActionsService implements ActionsContract
         ?string $regionCode = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSetPublicIPResponse {
-        $params = Util::removeNulls(['regionCode' => $regionCode]);
+        $params = array_filter(
+            ['regionCode' => $regionCode ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->setPublicIP($id, params: $params, requestOptions: $requestOptions);
@@ -343,7 +354,10 @@ final class ActionsService implements ActionsContract
         ?array $registrationCodes = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionValidateRegistrationCodesResponse {
-        $params = Util::removeNulls(['registrationCodes' => $registrationCodes]);
+        $params = array_filter(
+            ['registrationCodes' => $registrationCodes ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->validateRegistrationCodes(params: $params, requestOptions: $requestOptions);

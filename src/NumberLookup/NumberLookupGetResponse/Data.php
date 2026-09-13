@@ -7,6 +7,7 @@ namespace Telnyx\NumberLookup\NumberLookupGetResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerName;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability;
@@ -86,10 +87,10 @@ final class Data implements BaseModel
      * @param Portability|PortabilityShape|null $portability
      */
     public static function with(
+        string|Omitted|null $fraud = Omitted::VALUE,
         CallerName|array|null $callerName = null,
         Carrier|array|null $carrier = null,
         ?string $countryCode = null,
-        ?string $fraud = null,
         ?string $nationalFormat = null,
         ?string $phoneNumber = null,
         Portability|array|null $portability = null,
@@ -100,7 +101,7 @@ final class Data implements BaseModel
         null !== $callerName && $self['callerName'] = $callerName;
         null !== $carrier && $self['carrier'] = $carrier;
         null !== $countryCode && $self['countryCode'] = $countryCode;
-        null !== $fraud && $self['fraud'] = $fraud;
+        Omitted::VALUE !== $fraud && $self['fraud'] = $fraud;
         null !== $nationalFormat && $self['nationalFormat'] = $nationalFormat;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $portability && $self['portability'] = $portability;

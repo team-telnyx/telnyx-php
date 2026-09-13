@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\MessagingProfileMetrics\MessagingMetricsTimeFrame;
 use Telnyx\MessagingProfileMetrics\MessagingProfileMetricListResponse;
 use Telnyx\RequestOptions;
@@ -44,7 +43,7 @@ final class MessagingProfileMetricsService implements MessagingProfileMetricsCon
         MessagingMetricsTimeFrame|string $timeFrame = '24h',
         RequestOptions|array|null $requestOptions = null,
     ): MessagingProfileMetricListResponse {
-        $params = Util::removeNulls(['timeFrame' => $timeFrame]);
+        $params = ['timeFrame' => $timeFrame];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

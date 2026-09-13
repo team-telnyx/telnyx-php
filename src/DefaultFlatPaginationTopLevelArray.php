@@ -56,7 +56,7 @@ final class DefaultFlatPaginationTopLevelArray implements BaseModel, BasePage
     ) {
         $this->initialize();
 
-        if (!is_array($this->parsedBody)) {
+        if (!is_array($this->parsedBody) && !($this->parsedBody instanceof \stdClass)) {
             return;
         }
 
@@ -94,10 +94,8 @@ final class DefaultFlatPaginationTopLevelArray implements BaseModel, BasePage
             return null;
         }
 
-        $nextRequest = array_merge_recursive(
-            $this->requestInfo,
-            ['query' => $curr + 1]
-        );
+        $nextRequest = $this->requestInfo;
+        $nextRequest['query']['page[number]'] = $curr + 1;
 
         // @phpstan-ignore-next-line return.type
         return [$nextRequest, $this->options];

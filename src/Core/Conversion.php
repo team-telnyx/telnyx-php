@@ -44,7 +44,7 @@ final class Conversion
 
             $acc = get_object_vars($value);
 
-            return empty($acc) ? (object) $acc : self::dump_unknown($acc, state: $state);
+            return (object) self::dump_unknown($acc, state: $state);
         }
 
         return $value;

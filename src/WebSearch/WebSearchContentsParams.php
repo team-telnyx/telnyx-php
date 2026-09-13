@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\WebSearch\WebSearchContentsParams\Format;
 
 /**
@@ -86,9 +87,9 @@ final class WebSearchContentsParams implements BaseModel
      */
     public static function with(
         array $urls,
+        int|Omitted|null $maxAge = Omitted::VALUE,
         ?int $crawlTimeout = null,
         ?array $formats = null,
-        ?int $maxAge = null,
     ): self {
         $self = new self;
 
@@ -96,7 +97,7 @@ final class WebSearchContentsParams implements BaseModel
 
         null !== $crawlTimeout && $self['crawlTimeout'] = $crawlTimeout;
         null !== $formats && $self['formats'] = $formats;
-        null !== $maxAge && $self['maxAge'] = $maxAge;
+        Omitted::VALUE !== $maxAge && $self['maxAge'] = $maxAge;
 
         return $self;
     }

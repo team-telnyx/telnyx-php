@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\EmailBlocks\EmailBlock;
 use Telnyx\EmailBlocks\EmailBlockGetEventsResponse;
@@ -58,26 +58,27 @@ final class EmailBlocksService implements EmailBlocksContract
      * suppression endpoint or the internal create surface for those.
      *
      * @param string $to recipient address (normalized: trim + lower-case)
-     * @param string|null $domainID `null` ⇒ account scope
-     * @param string|null $from Sender address (normalized). `null` ⇒ account/domain scope.
+     * @param string|Omitted|null $domainID `null` ⇒ account scope
+     * @param string|Omitted|null $from Sender address (normalized). `null` ⇒ account/domain scope.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $to,
-        ?string $domainID = null,
-        ?\DateTimeInterface $expiresAt = null,
-        ?string $from = null,
+        string|Omitted|null $domainID = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $expiresAt = Omitted::VALUE,
+        string|Omitted|null $from = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): EmailBlockResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'to' => $to,
                 'domainID' => $domainID,
                 'expiresAt' => $expiresAt,
                 'from' => $from,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -149,18 +150,19 @@ final class EmailBlocksService implements EmailBlocksContract
         Sort|string $sort = '-created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterCreatedAfter' => $filterCreatedAfter,
-                'filterCreatedBefore' => $filterCreatedBefore,
-                'filterDomainID' => $filterDomainID,
-                'filterReason' => $filterReason,
-                'pageAfter' => $pageAfter,
-                'pageBefore' => $pageBefore,
+                'filterCreatedAfter' => $filterCreatedAfter ?? Omitted::VALUE,
+                'filterCreatedBefore' => $filterCreatedBefore ?? Omitted::VALUE,
+                'filterDomainID' => $filterDomainID ?? Omitted::VALUE,
+                'filterReason' => $filterReason ?? Omitted::VALUE,
+                'pageAfter' => $pageAfter ?? Omitted::VALUE,
+                'pageBefore' => $pageBefore ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -215,9 +217,7 @@ final class EmailBlocksService implements EmailBlocksContract
         int $pageSize = 50,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveEvents($id, params: $params, requestOptions: $requestOptions);
@@ -264,16 +264,17 @@ final class EmailBlocksService implements EmailBlocksContract
         \Telnyx\EmailBlocks\EmailBlockRetrieveExportParams\Sort|string $sort = '-created_at',
         RequestOptions|array|null $requestOptions = null,
     ): string {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterCreatedAfter' => $filterCreatedAfter,
-                'filterCreatedBefore' => $filterCreatedBefore,
-                'filterDomainID' => $filterDomainID,
-                'filterReason' => $filterReason,
+                'filterCreatedAfter' => $filterCreatedAfter ?? Omitted::VALUE,
+                'filterCreatedBefore' => $filterCreatedBefore ?? Omitted::VALUE,
+                'filterDomainID' => $filterDomainID ?? Omitted::VALUE,
+                'filterReason' => $filterReason ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

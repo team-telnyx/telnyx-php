@@ -7,7 +7,6 @@ namespace Telnyx\Services;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesSummaryContract;
 
@@ -45,9 +44,7 @@ final class ChargesSummaryService implements ChargesSummaryContract
         string $startDate,
         RequestOptions|array|null $requestOptions = null,
     ): ChargesSummaryGetResponse {
-        $params = Util::removeNulls(
-            ['endDate' => $endDate, 'startDate' => $startDate]
-        );
+        $params = ['endDate' => $endDate, 'startDate' => $startDate];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve(params: $params, requestOptions: $requestOptions);
