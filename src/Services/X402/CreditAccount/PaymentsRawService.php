@@ -47,7 +47,7 @@ final class PaymentsRawService implements PaymentsRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
-            path: ['v2/x402/credit_account/payments/%1$s', $id],
+            path: ['x402/credit_account/payments/%1$s', $id],
             options: $requestOptions,
             convert: PaymentGetResponse::class,
         );
@@ -77,7 +77,7 @@ final class PaymentsRawService implements PaymentsRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
-            path: 'v2/x402/credit_account/payments',
+            path: 'x402/credit_account/payments',
             query: Util::array_transform_keys(
                 $parsed,
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
