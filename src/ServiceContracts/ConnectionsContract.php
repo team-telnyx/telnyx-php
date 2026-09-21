@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Connections\Connection;
+use Telnyx\Connections\ConnectionGetCountResponse;
 use Telnyx\Connections\ConnectionGetResponse;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Connections\ConnectionListParams\Filter;
@@ -78,4 +79,15 @@ interface ConnectionsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
+
+    /**
+     * @api
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveCount(
+        RequestOptions|array|null $requestOptions = null
+    ): ConnectionGetCountResponse;
 }

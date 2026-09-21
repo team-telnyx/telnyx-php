@@ -9,4 +9,6 @@ enum Status: string
     case RECEIVED = 'received';
 
     case DELIVERED = 'delivered';
+
+    case WEBHOOK_DELIVERED = 'webhook_delivered';
 }

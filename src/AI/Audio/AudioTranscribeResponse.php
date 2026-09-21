@@ -5,23 +5,22 @@ declare(strict_types=1);
 namespace Telnyx\AI\Audio;
 
 use Telnyx\AI\Audio\AudioTranscribeResponse\Segment;
-use Telnyx\AI\Audio\AudioTranscribeResponse\Word;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Response fields vary by model. `distil-whisper/distil-large-v2` returns `text`, `duration`, and `segments` in `verbose_json` mode. `openai/whisper-large-v3-turbo` returns `text` only. `deepgram/nova-3` returns `text` and, depending on `model_config`, may include `words` with per-word timestamps and speaker labels.
+ * Response fields vary by model. `distil-whisper/distil-large-v2` returns `text`, `duration`, and `segments` in `verbose_json` mode. `openai/whisper-large-v3-turbo` returns `text` only. The `deepgram/*` models return `text` and, depending on `model_config`, may include `words` with per-word timestamps and speaker labels.
  *
  * @phpstan-import-type SegmentShape from \Telnyx\AI\Audio\AudioTranscribeResponse\Segment
- * @phpstan-import-type WordShape from \Telnyx\AI\Audio\AudioTranscribeResponse\Word
+ * @phpstan-import-type AudioTranscriptionResponseWordShape from \Telnyx\AI\Audio\AudioTranscriptionResponseWord
  *
  * @phpstan-type AudioTranscribeResponseShape = array{
  *   text: string,
  *   duration?: float|null,
  *   segments?: list<Segment|SegmentShape>|null,
- *   words?: list<Word|WordShape>|null,
+ *   words?: list<AudioTranscriptionResponseWord|AudioTranscriptionResponseWordShape>|null,
  * }
  */
 final class AudioTranscribeResponse implements BaseModel
@@ -36,13 +35,13 @@ final class AudioTranscribeResponse implements BaseModel
     public string $text;
 
     /**
-     * The duration of the audio file in seconds. Returned by `distil-whisper/distil-large-v2` and `deepgram/nova-3` when `response_format` is `verbose_json`. Not returned by `openai/whisper-large-v3-turbo`.
+     * The duration of the audio file in seconds. Returned by `distil-whisper/distil-large-v2` and the `deepgram/*` models when `response_format` is `verbose_json`. Not returned by `openai/whisper-large-v3-turbo`.
      */
     #[Optional]
     public ?float $duration;
 
     /**
-     * Segments of the transcribed text and their corresponding details. Returned by `distil-whisper/distil-large-v2` when `response_format` is `verbose_json`. Not returned by `openai/whisper-large-v3-turbo`.
+     * Segments of the transcribed text and their corresponding details. Returned by `distil-whisper/distil-large-v2` and the `deepgram/*` models when `response_format` is `verbose_json`; Deepgram segments also carry nested `words` and `speakers`. Not returned by `openai/whisper-large-v3-turbo`.
      *
      * @var list<Segment>|null $segments
      */
@@ -50,11 +49,11 @@ final class AudioTranscribeResponse implements BaseModel
     public ?array $segments;
 
     /**
-     * Word-level timestamps and optional speaker labels. Only returned by `deepgram/nova-3` when word-level output is enabled via `model_config`.
+     * Word-level timestamps and optional speaker labels. Only returned by the `deepgram/*` models when word-level output is enabled via `model_config`.
      *
-     * @var list<Word>|null $words
+     * @var list<AudioTranscriptionResponseWord>|null $words
      */
-    #[Optional(list: Word::class)]
+    #[Optional(list: AudioTranscriptionResponseWord::class)]
     public ?array $words;
 
     /**
@@ -82,7 +81,7 @@ final class AudioTranscribeResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Segment|SegmentShape>|null $segments
-     * @param list<Word|WordShape>|null $words
+     * @param list<AudioTranscriptionResponseWord|AudioTranscriptionResponseWordShape>|null $words
      */
     public static function with(
         string $text,
@@ -113,7 +112,7 @@ final class AudioTranscribeResponse implements BaseModel
     }
 
     /**
-     * The duration of the audio file in seconds. Returned by `distil-whisper/distil-large-v2` and `deepgram/nova-3` when `response_format` is `verbose_json`. Not returned by `openai/whisper-large-v3-turbo`.
+     * The duration of the audio file in seconds. Returned by `distil-whisper/distil-large-v2` and the `deepgram/*` models when `response_format` is `verbose_json`. Not returned by `openai/whisper-large-v3-turbo`.
      */
     public function withDuration(float $duration): self
     {
@@ -124,7 +123,7 @@ final class AudioTranscribeResponse implements BaseModel
     }
 
     /**
-     * Segments of the transcribed text and their corresponding details. Returned by `distil-whisper/distil-large-v2` when `response_format` is `verbose_json`. Not returned by `openai/whisper-large-v3-turbo`.
+     * Segments of the transcribed text and their corresponding details. Returned by `distil-whisper/distil-large-v2` and the `deepgram/*` models when `response_format` is `verbose_json`; Deepgram segments also carry nested `words` and `speakers`. Not returned by `openai/whisper-large-v3-turbo`.
      *
      * @param list<Segment|SegmentShape> $segments
      */
@@ -137,9 +136,9 @@ final class AudioTranscribeResponse implements BaseModel
     }
 
     /**
-     * Word-level timestamps and optional speaker labels. Only returned by `deepgram/nova-3` when word-level output is enabled via `model_config`.
+     * Word-level timestamps and optional speaker labels. Only returned by the `deepgram/*` models when word-level output is enabled via `model_config`.
      *
-     * @param list<Word|WordShape> $words
+     * @param list<AudioTranscriptionResponseWord|AudioTranscriptionResponseWordShape> $words
      */
     public function withWords(array $words): self
     {

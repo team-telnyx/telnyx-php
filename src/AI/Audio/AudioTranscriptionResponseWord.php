@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Audio\AudioTranscribeResponse;
+namespace Telnyx\AI\Audio;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -10,19 +10,21 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Word-level timing detail. Only present when using `deepgram/nova-3` with `model_config` options that enable word timestamps.
+ * Word-level timing detail. Only present when using a `deepgram/*` model with `model_config` options that enable word timestamps.
  *
- * @phpstan-type WordShape = array{
+ * @phpstan-type AudioTranscriptionResponseWordShape = array{
  *   end: float,
  *   start: float,
  *   word: string,
  *   confidence?: float|null,
+ *   punctuatedWord?: string|null,
  *   speaker?: int|null,
+ *   speakerConfidence?: float|null,
  * }
  */
-final class Word implements BaseModel
+final class AudioTranscriptionResponseWord implements BaseModel
 {
-    /** @use SdkModel<WordShape> */
+    /** @use SdkModel<AudioTranscriptionResponseWordShape> */
     use SdkModel;
 
     /**
@@ -50,23 +52,38 @@ final class Word implements BaseModel
     public ?float $confidence;
 
     /**
+     * The transcribed word with punctuation and capitalisation applied. Only present when `punctuate` or `smart_format` is enabled via `model_config`.
+     */
+    #[Optional('punctuated_word')]
+    public ?string $punctuatedWord;
+
+    /**
      * Speaker index. Only present when diarization is enabled via `model_config`.
      */
     #[Optional]
     public ?int $speaker;
 
     /**
-     * `new Word()` is missing required properties by the API.
+     * Confidence score for the speaker assignment (0.0 to 1.0). Only present when diarization is enabled via `model_config`.
+     */
+    #[Optional('speaker_confidence')]
+    public ?float $speakerConfidence;
+
+    /**
+     * `new AudioTranscriptionResponseWord()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Word::with(end: ..., start: ..., word: ...)
+     * AudioTranscriptionResponseWord::with(end: ..., start: ..., word: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Word)->withEnd(...)->withStart(...)->withWord(...)
+     * (new AudioTranscriptionResponseWord)
+     *   ->withEnd(...)
+     *   ->withStart(...)
+     *   ->withWord(...)
      * ```
      */
     public function __construct()
@@ -84,7 +101,9 @@ final class Word implements BaseModel
         float $start,
         string $word,
         ?float $confidence = null,
+        ?string $punctuatedWord = null,
         ?int $speaker = null,
+        ?float $speakerConfidence = null,
     ): self {
         $self = new self;
 
@@ -93,7 +112,9 @@ final class Word implements BaseModel
         $self['word'] = $word;
 
         null !== $confidence && $self['confidence'] = $confidence;
+        null !== $punctuatedWord && $self['punctuatedWord'] = $punctuatedWord;
         null !== $speaker && $self['speaker'] = $speaker;
+        null !== $speakerConfidence && $self['speakerConfidence'] = $speakerConfidence;
 
         return $self;
     }
@@ -143,12 +164,34 @@ final class Word implements BaseModel
     }
 
     /**
+     * The transcribed word with punctuation and capitalisation applied. Only present when `punctuate` or `smart_format` is enabled via `model_config`.
+     */
+    public function withPunctuatedWord(string $punctuatedWord): self
+    {
+        $self = clone $this;
+        $self['punctuatedWord'] = $punctuatedWord;
+
+        return $self;
+    }
+
+    /**
      * Speaker index. Only present when diarization is enabled via `model_config`.
      */
     public function withSpeaker(int $speaker): self
     {
         $self = clone $this;
         $self['speaker'] = $speaker;
+
+        return $self;
+    }
+
+    /**
+     * Confidence score for the speaker assignment (0.0 to 1.0). Only present when diarization is enabled via `model_config`.
+     */
+    public function withSpeakerConfidence(float $speakerConfidence): self
+    {
+        $self = clone $this;
+        $self['speakerConfidence'] = $speakerConfidence;
 
         return $self;
     }

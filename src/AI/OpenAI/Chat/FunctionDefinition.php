@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Chat\ChatCompletionRequest\Tool\ChatCompletionToolParam;
+namespace Telnyx\AI\OpenAI\Chat;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;

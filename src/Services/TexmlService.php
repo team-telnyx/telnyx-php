@@ -10,6 +10,7 @@ use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlContract;
 use Telnyx\Services\Texml\AccountsService;
+use Telnyx\Services\Texml\CallsService;
 use Telnyx\Texml\TexmlInitiateAICallParams\AsyncAmdStatusCallbackMethod;
 use Telnyx\Texml\TexmlInitiateAICallParams\ConversationCallbackMethod;
 use Telnyx\Texml\TexmlInitiateAICallParams\CustomHeader;
@@ -41,6 +42,11 @@ final class TexmlService implements TexmlContract
     /**
      * @api
      */
+    public CallsService $calls;
+
+    /**
+     * @api
+     */
     public AccountsService $accounts;
 
     /**
@@ -49,6 +55,7 @@ final class TexmlService implements TexmlContract
     public function __construct(private Client $client)
     {
         $this->raw = new TexmlRawService($client);
+        $this->calls = new CallsService($client);
         $this->accounts = new AccountsService($client);
     }
 

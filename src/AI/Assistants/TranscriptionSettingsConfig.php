@@ -50,7 +50,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?bool $enableEndpointDetection;
 
     /**
-     * Available only for assemblyai/universal-streaming. Confidence level required to trigger an end of turn. Higher values require more certainty before ending a turn.
+     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Confidence level required to trigger an end of turn. Higher values require more certainty before ending a turn.
      */
     #[Optional('end_of_turn_confidence_threshold')]
     public ?float $endOfTurnConfidenceThreshold;
@@ -94,13 +94,13 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?int $maxEndpointDelayMs;
 
     /**
-     * Available only for assemblyai/universal-streaming. Maximum duration of silence in milliseconds before forcing an end of turn.
+     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Maximum duration of silence in milliseconds before forcing an end of turn.
      */
     #[Optional('max_turn_silence')]
     public ?int $maxTurnSilence;
 
     /**
-     * Available only for assemblyai/universal-streaming. Minimum duration of silence in milliseconds before a turn can end. Must be less than or equal to max_turn_silence.
+     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Minimum duration of silence in milliseconds before a turn can end. Must be less than or equal to max_turn_silence.
      */
     #[Optional('min_turn_silence')]
     public ?int $minTurnSilence;
@@ -194,7 +194,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for assemblyai/universal-streaming. Confidence level required to trigger an end of turn. Higher values require more certainty before ending a turn.
+     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Confidence level required to trigger an end of turn. Higher values require more certainty before ending a turn.
      */
     public function withEndOfTurnConfidenceThreshold(
         float $endOfTurnConfidenceThreshold
@@ -274,7 +274,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for assemblyai/universal-streaming. Maximum duration of silence in milliseconds before forcing an end of turn.
+     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Maximum duration of silence in milliseconds before forcing an end of turn.
      */
     public function withMaxTurnSilence(int $maxTurnSilence): self
     {
@@ -285,7 +285,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for assemblyai/universal-streaming. Minimum duration of silence in milliseconds before a turn can end. Must be less than or equal to max_turn_silence.
+     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Minimum duration of silence in milliseconds before a turn can end. Must be less than or equal to max_turn_silence.
      */
     public function withMinTurnSilence(int $minTurnSilence): self
     {

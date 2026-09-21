@@ -20,4 +20,6 @@ enum LineType: string
     case PRE_PAID_WIRELESS = 'Pre-Paid Wireless';
 
     case EMPTY = '';
+
+    case LONG_CODE = 'long_code';
 }

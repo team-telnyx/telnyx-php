@@ -22,6 +22,9 @@ use Telnyx\Services\AvailablePhoneNumberBlocksService;
 use Telnyx\Services\AvailablePhoneNumbersService;
 use Telnyx\Services\BalanceService;
 use Telnyx\Services\BillingGroupsService;
+use Telnyx\Services\BotChallengeService;
+use Telnyx\Services\BotSessionsService;
+use Telnyx\Services\BotSignupService;
 use Telnyx\Services\BulkSimCardActionsService;
 use Telnyx\Services\BundlePricingService;
 use Telnyx\Services\CallControlApplicationsService;
@@ -103,6 +106,7 @@ use Telnyx\Services\MobilePushCredentialsService;
 use Telnyx\Services\MobileVoiceConnectionsService;
 use Telnyx\Services\NetworkCoverageService;
 use Telnyx\Services\NetworksService;
+use Telnyx\Services\NoiseSuppressionEnginesService;
 use Telnyx\Services\NotificationChannelsService;
 use Telnyx\Services\NotificationEventConditionsService;
 use Telnyx\Services\NotificationEventsService;
@@ -1124,6 +1128,26 @@ class Client extends BaseClient
      */
     public ComputeService $compute;
 
+    /**
+     * @api
+     */
+    public NoiseSuppressionEnginesService $noiseSuppressionEngines;
+
+    /**
+     * @api
+     */
+    public BotChallengeService $botChallenge;
+
+    /**
+     * @api
+     */
+    public BotSessionsService $botSessions;
+
+    /**
+     * @api
+     */
+    public BotSignupService $botSignup;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1379,6 +1403,10 @@ class Client extends BaseClient
         $this->meetingSessions = new MeetingSessionsService($this);
         $this->externalRequirements = new ExternalRequirementsService($this);
         $this->compute = new ComputeService($this);
+        $this->noiseSuppressionEngines = new NoiseSuppressionEnginesService($this);
+        $this->botChallenge = new BotChallengeService($this);
+        $this->botSessions = new BotSessionsService($this);
+        $this->botSignup = new BotSignupService($this);
     }
 
     /** @return array<string,string> */

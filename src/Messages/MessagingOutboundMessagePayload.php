@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
+use Telnyx\Messages\MessagingOutboundMessagePayload\Body;
 use Telnyx\Messages\MessagingOutboundMessagePayload\Cc;
 use Telnyx\Messages\MessagingOutboundMessagePayload\Cost;
 use Telnyx\Messages\MessagingOutboundMessagePayload\CostBreakdown;
@@ -19,6 +20,7 @@ use Telnyx\Messages\MessagingOutboundMessagePayload\To;
 use Telnyx\Messages\MessagingOutboundMessagePayload\Type;
 
 /**
+ * @phpstan-import-type BodyShape from \Telnyx\Messages\MessagingOutboundMessagePayload\Body
  * @phpstan-import-type CcShape from \Telnyx\Messages\MessagingOutboundMessagePayload\Cc
  * @phpstan-import-type CostShape from \Telnyx\Messages\MessagingOutboundMessagePayload\Cost
  * @phpstan-import-type CostBreakdownShape from \Telnyx\Messages\MessagingOutboundMessagePayload\CostBreakdown
@@ -29,6 +31,7 @@ use Telnyx\Messages\MessagingOutboundMessagePayload\Type;
  *
  * @phpstan-type MessagingOutboundMessagePayloadShape = array{
  *   id?: string|null,
+ *   body?: null|Body|BodyShape,
  *   cc?: list<Cc|CcShape>|null,
  *   completedAt?: \DateTimeInterface|null,
  *   cost?: null|Cost|CostShape,
@@ -70,6 +73,12 @@ final class MessagingOutboundMessagePayload implements BaseModel
      */
     #[Optional]
     public ?string $id;
+
+    /**
+     * RCS webhook message body. Text messages use the text property.
+     */
+    #[Optional]
+    public ?Body $body;
 
     /** @var list<Cc>|null $cc */
     #[Optional(list: Cc::class)]
@@ -257,6 +266,7 @@ final class MessagingOutboundMessagePayload implements BaseModel
      *
      * @param Omitted|Cost|CostShape|null $cost
      * @param Omitted|CostBreakdown|CostBreakdownShape|null $costBreakdown
+     * @param Body|BodyShape|null $body
      * @param list<Cc|CcShape>|null $cc
      * @param Direction|value-of<Direction>|null $direction
      * @param list<MessagingError0b38e7044b|MessagingError0b38e7044bShape>|null $errors
@@ -280,6 +290,7 @@ final class MessagingOutboundMessagePayload implements BaseModel
         string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
         string|Omitted|null $webhookURL = Omitted::VALUE,
         ?string $id = null,
+        Body|array|null $body = null,
         ?array $cc = null,
         Direction|string|null $direction = null,
         ?string $encoding = null,
@@ -302,6 +313,7 @@ final class MessagingOutboundMessagePayload implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
+        null !== $body && $self['body'] = $body;
         null !== $cc && $self['cc'] = $cc;
         Omitted::VALUE !== $completedAt && $self['completedAt'] = $completedAt;
         Omitted::VALUE !== $cost && $self['cost'] = $cost;
@@ -342,6 +354,19 @@ final class MessagingOutboundMessagePayload implements BaseModel
     {
         $self = clone $this;
         $self['id'] = $id;
+
+        return $self;
+    }
+
+    /**
+     * RCS webhook message body. Text messages use the text property.
+     *
+     * @param Body|BodyShape $body
+     */
+    public function withBody(Body|array $body): self
+    {
+        $self = clone $this;
+        $self['body'] = $body;
 
         return $self;
     }

@@ -738,6 +738,7 @@ Methods:
 - <code title="get /connections/{id}">$client->connections-><a href="./src/Services/ConnectionsService.php">retrieve</a>(...$params)</code>
 - <code title="get /connections">$client->connections-><a href="./src/Services/ConnectionsService.php">list</a>(...$params)</code>
 - <code title="get /connections/{connection_id}/active_calls">$client->connections-><a href="./src/Services/ConnectionsService.php">listActiveCalls</a>(...$params)</code>
+- <code title="get /connections/count">$client->connections-><a href="./src/Services/ConnectionsService.php">retrieveCount</a>()</code>
 
 # CountryCoverage
 
@@ -2108,6 +2109,12 @@ Methods:
 - <code title="post /texml/ai_calls/{connection_id}">$client->texml-><a href="./src/Services/TexmlService.php">initiateAICall</a>(...$params)</code>
 - <code title="post /texml/secrets">$client->texml-><a href="./src/Services/TexmlService.php">secrets</a>(...$params)</code>
 
+## Calls
+
+Methods:
+
+- <code title="post /texml/calls/{connection_id}">$client->texml->calls-><a href="./src/Services/Texml/CallsService.php">create</a>(...$params)</code>
+
 ## Accounts
 
 Methods:
@@ -3131,3 +3138,28 @@ Methods:
 - <code title="get /compute/funcs/{id}/metric_aggregates">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveMetricAggregates</a>(...$params)</code>
 - <code title="get /compute/funcs/{id}/revisions">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveRevisions</a>(...$params)</code>
 - <code title="get /compute/funcs/{id}/ship_inspection">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveShipInspection</a>(...$params)</code>
+
+# NoiseSuppressionEngines
+
+Methods:
+
+- <code title="get /noise_suppression_engines">$client->noiseSuppressionEngines-><a href="./src/Services/NoiseSuppressionEnginesService.php">list</a>()</code>
+
+# BotChallenge
+
+Methods:
+
+- <code title="post /v2/bot_challenge">$client->botChallenge-><a href="./src/Services/BotChallengeService.php">create</a>(...$params)</code>
+
+# BotSessions
+
+Methods:
+
+- <code title="get /v2/bot_sessions">$client->botSessions-><a href="./src/Services/BotSessionsService.php">list</a>(...$params)</code>
+
+# BotSignup
+
+Methods:
+
+- <code title="post /v2/bot_signup">$client->botSignup-><a href="./src/Services/BotSignupService.php">create</a>(...$params)</code>
+- <code title="post /v2/bot_signup/resend_magic_link">$client->botSignup-><a href="./src/Services/BotSignupService.php">resendMagicLink</a>(...$params)</code>

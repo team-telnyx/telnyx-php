@@ -74,7 +74,7 @@ final class MessagingInboundMessagePayload implements BaseModel
     public ?string $id;
 
     /**
-     * WhatsApp message body. For message edits and revocations, inspect `type` and the corresponding `edit` or `revoke` object.
+     * Message body for RCS and WhatsApp. RCS messages contain text, user_file, location, or suggestion_response. For WhatsApp edits and revocations, inspect type and the corresponding edit or revoke object.
      */
     #[Optional]
     public ?Body $body;
@@ -212,7 +212,7 @@ final class MessagingInboundMessagePayload implements BaseModel
     public ?string $text;
 
     /**
-     * Receiving address. SMS and MMS webhooks use an array of recipients. WhatsApp webhooks use one E.164 phone number.
+     * Receiving address. SMS, MMS and RCS webhooks use an array of recipients. RCS recipients are identified by agent_id and agent_name. WhatsApp webhooks use one E.164 phone number.
      *
      * @var ToVariants|null $to
      */
@@ -346,7 +346,7 @@ final class MessagingInboundMessagePayload implements BaseModel
     }
 
     /**
-     * WhatsApp message body. For message edits and revocations, inspect `type` and the corresponding `edit` or `revoke` object.
+     * Message body for RCS and WhatsApp. RCS messages contain text, user_file, location, or suggestion_response. For WhatsApp edits and revocations, inspect type and the corresponding edit or revoke object.
      *
      * @param Body|BodyShape $body
      */
@@ -615,7 +615,7 @@ final class MessagingInboundMessagePayload implements BaseModel
     }
 
     /**
-     * Receiving address. SMS and MMS webhooks use an array of recipients. WhatsApp webhooks use one E.164 phone number.
+     * Receiving address. SMS, MMS and RCS webhooks use an array of recipients. RCS recipients are identified by agent_id and agent_name. WhatsApp webhooks use one E.164 phone number.
      *
      * @param ToShape $to
      */

@@ -7,6 +7,7 @@ namespace Telnyx\AI\Assistants;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
@@ -16,6 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type InferenceEmbeddingInterruptionSettingsShape = array{
  *   disableGreetingInterruption?: bool|null,
  *   enable?: bool|null,
+ *   interruptPredictionThreshold?: float|null,
  *   startSpeakingPlan?: null|StartSpeakingPlan|StartSpeakingPlanShape,
  * }
  */
@@ -37,6 +39,12 @@ final class InferenceEmbeddingInterruptionSettings implements BaseModel
     public ?bool $enable;
 
     /**
+     * Interrupt-prediction sensitivity, from 0.0 to 1.0. Set to null or 0.0 to disable interrupt prediction.
+     */
+    #[Optional('interrupt_prediction_threshold', nullable: true)]
+    public ?float $interruptPredictionThreshold;
+
+    /**
      * Controls when the assistant starts speaking after the user stops. These thresholds primarily apply to non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn detection is driven by the transcription end-of-turn settings under `transcription.settings` instead.
      */
     #[Optional('start_speaking_plan')]
@@ -55,6 +63,7 @@ final class InferenceEmbeddingInterruptionSettings implements BaseModel
      * @param StartSpeakingPlan|StartSpeakingPlanShape|null $startSpeakingPlan
      */
     public static function with(
+        float|Omitted|null $interruptPredictionThreshold = Omitted::VALUE,
         ?bool $disableGreetingInterruption = null,
         ?bool $enable = null,
         StartSpeakingPlan|array|null $startSpeakingPlan = null,
@@ -63,6 +72,7 @@ final class InferenceEmbeddingInterruptionSettings implements BaseModel
 
         null !== $disableGreetingInterruption && $self['disableGreetingInterruption'] = $disableGreetingInterruption;
         null !== $enable && $self['enable'] = $enable;
+        Omitted::VALUE !== $interruptPredictionThreshold && $self['interruptPredictionThreshold'] = $interruptPredictionThreshold;
         null !== $startSpeakingPlan && $self['startSpeakingPlan'] = $startSpeakingPlan;
 
         return $self;
@@ -87,6 +97,18 @@ final class InferenceEmbeddingInterruptionSettings implements BaseModel
     {
         $self = clone $this;
         $self['enable'] = $enable;
+
+        return $self;
+    }
+
+    /**
+     * Interrupt-prediction sensitivity, from 0.0 to 1.0. Set to null or 0.0 to disable interrupt prediction.
+     */
+    public function withInterruptPredictionThreshold(
+        ?float $interruptPredictionThreshold
+    ): self {
+        $self = clone $this;
+        $self['interruptPredictionThreshold'] = $interruptPredictionThreshold;
 
         return $self;
     }

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\InboundMessageWebhookEvent;
+namespace Telnyx\Webhooks;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessagingInboundMessagePayload;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\RecordType;
+use Telnyx\Webhooks\MessagingInboundMessage\EventType;
+use Telnyx\Webhooks\MessagingInboundMessage\RecordType;
 
 /**
  * @phpstan-import-type MessagingInboundMessagePayloadShape from \Telnyx\Messages\MessagingInboundMessagePayload
  *
- * @phpstan-type DataShape = array{
+ * @phpstan-type MessagingInboundMessageShape = array{
  *   id?: string|null,
  *   eventType?: null|EventType|value-of<EventType>,
  *   occurredAt?: \DateTimeInterface|null,
@@ -22,9 +22,9 @@ use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\RecordType;
  *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
-final class Data implements BaseModel
+final class MessagingInboundMessage implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<MessagingInboundMessageShape> */
     use SdkModel;
 
     /**

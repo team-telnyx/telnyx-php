@@ -11,6 +11,8 @@ use Telnyx\Messages\MessagingOutboundMessagePayload\From\LineType;
 
 /**
  * @phpstan-type FromShape = array{
+ *   agentID?: string|null,
+ *   agentName?: string|null,
  *   carrier?: string|null,
  *   lineType?: null|LineType|value-of<LineType>,
  *   phoneNumber?: string|null,
@@ -20,6 +22,18 @@ final class From implements BaseModel
 {
     /** @use SdkModel<FromShape> */
     use SdkModel;
+
+    /**
+     * RCS agent identifier.
+     */
+    #[Optional('agent_id')]
+    public ?string $agentID;
+
+    /**
+     * RCS agent name.
+     */
+    #[Optional('agent_name')]
+    public ?string $agentName;
 
     /**
      * The carrier of the receiver.
@@ -54,15 +68,41 @@ final class From implements BaseModel
      * @param LineType|value-of<LineType>|null $lineType
      */
     public static function with(
+        ?string $agentID = null,
+        ?string $agentName = null,
         ?string $carrier = null,
         LineType|string|null $lineType = null,
         ?string $phoneNumber = null,
     ): self {
         $self = new self;
 
+        null !== $agentID && $self['agentID'] = $agentID;
+        null !== $agentName && $self['agentName'] = $agentName;
         null !== $carrier && $self['carrier'] = $carrier;
         null !== $lineType && $self['lineType'] = $lineType;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+
+        return $self;
+    }
+
+    /**
+     * RCS agent identifier.
+     */
+    public function withAgentID(string $agentID): self
+    {
+        $self = clone $this;
+        $self['agentID'] = $agentID;
+
+        return $self;
+    }
+
+    /**
+     * RCS agent name.
+     */
+    public function withAgentName(string $agentName): self
+    {
+        $self = clone $this;
+        $self['agentName'] = $agentName;
 
         return $self;
     }

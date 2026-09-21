@@ -4,13 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Audio\AudioTranscribeResponse;
 
+use Telnyx\AI\Audio\AudioTranscriptionResponseWord;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AudioTranscriptionResponseWordShape from \Telnyx\AI\Audio\AudioTranscriptionResponseWord
+ *
  * @phpstan-type SegmentShape = array{
- *   id: float, end: float, start: float, text: string
+ *   id: float,
+ *   end: float,
+ *   start: float,
+ *   text: string,
+ *   speakers?: list<int>|null,
+ *   words?: list<AudioTranscriptionResponseWord|AudioTranscriptionResponseWordShape>|null,
  * }
  */
 final class Segment implements BaseModel
@@ -43,6 +52,22 @@ final class Segment implements BaseModel
     public string $text;
 
     /**
+     * Speaker indices heard in this segment. Returned by the `deepgram/*` models when `diarize` is enabled via `model_config`.
+     *
+     * @var list<int>|null $speakers
+     */
+    #[Optional(list: 'int')]
+    public ?array $speakers;
+
+    /**
+     * Word-level timing detail for this segment. Returned by the `deepgram/*` models when word-level output is enabled via `model_config`.
+     *
+     * @var list<AudioTranscriptionResponseWord>|null $words
+     */
+    #[Optional(list: AudioTranscriptionResponseWord::class)]
+    public ?array $words;
+
+    /**
      * `new Segment()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -65,12 +90,17 @@ final class Segment implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<int>|null $speakers
+     * @param list<AudioTranscriptionResponseWord|AudioTranscriptionResponseWordShape>|null $words
      */
     public static function with(
         float $id,
         float $end,
         float $start,
-        string $text
+        string $text,
+        ?array $speakers = null,
+        ?array $words = null,
     ): self {
         $self = new self;
 
@@ -78,6 +108,9 @@ final class Segment implements BaseModel
         $self['end'] = $end;
         $self['start'] = $start;
         $self['text'] = $text;
+
+        null !== $speakers && $self['speakers'] = $speakers;
+        null !== $words && $self['words'] = $words;
 
         return $self;
     }
@@ -122,6 +155,32 @@ final class Segment implements BaseModel
     {
         $self = clone $this;
         $self['text'] = $text;
+
+        return $self;
+    }
+
+    /**
+     * Speaker indices heard in this segment. Returned by the `deepgram/*` models when `diarize` is enabled via `model_config`.
+     *
+     * @param list<int> $speakers
+     */
+    public function withSpeakers(array $speakers): self
+    {
+        $self = clone $this;
+        $self['speakers'] = $speakers;
+
+        return $self;
+    }
+
+    /**
+     * Word-level timing detail for this segment. Returned by the `deepgram/*` models when word-level output is enabled via `model_config`.
+     *
+     * @param list<AudioTranscriptionResponseWord|AudioTranscriptionResponseWordShape> $words
+     */
+    public function withWords(array $words): self
+    {
+        $self = clone $this;
+        $self['words'] = $words;
 
         return $self;
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool;
 
 use Telnyx\AI\Assistants\AssistantTool\SendMessageTool\SendMessage;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,7 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type SendMessageShape from \Telnyx\AI\Assistants\AssistantTool\SendMessageTool\SendMessage
  *
  * @phpstan-type SendMessageToolShape = array{
- *   sendMessage: SendMessage|SendMessageShape, type: 'send_message'
+ *   sendMessage: SendMessage|SendMessageShape,
+ *   type: 'send_message',
+ *   shared?: bool|null,
  * }
  */
 final class SendMessageTool implements BaseModel
@@ -29,6 +32,12 @@ final class SendMessageTool implements BaseModel
 
     #[Required('send_message')]
     public SendMessage $sendMessage;
+
+    /**
+     * Whether this tool comes from the shared Tools Library. Responses merge shared tools into `tools` with `shared: true`; inline tools carry `shared: false`. Read-only: set by the server, not accepted in requests. When updating an assistant, omit `shared: true` tools from the request `tools` array and manage them through `tool_ids` instead — re-sending their definitions creates an inline duplicate (rejected with error code 10015 when the type allows only one instance per assistant).
+     */
+    #[Optional]
+    public ?bool $shared;
 
     /**
      * `new SendMessageTool()` is missing required properties by the API.
@@ -56,11 +65,15 @@ final class SendMessageTool implements BaseModel
      *
      * @param SendMessage|SendMessageShape $sendMessage
      */
-    public static function with(SendMessage|array $sendMessage): self
-    {
+    public static function with(
+        SendMessage|array $sendMessage,
+        ?bool $shared = null
+    ): self {
         $self = new self;
 
         $self['sendMessage'] = $sendMessage;
+
+        null !== $shared && $self['shared'] = $shared;
 
         return $self;
     }
@@ -83,6 +96,17 @@ final class SendMessageTool implements BaseModel
     {
         $self = clone $this;
         $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
+     * Whether this tool comes from the shared Tools Library. Responses merge shared tools into `tools` with `shared: true`; inline tools carry `shared: false`. Read-only: set by the server, not accepted in requests. When updating an assistant, omit `shared: true` tools from the request `tools` array and manage them through `tool_ids` instead — re-sending their definitions creates an inline duplicate (rejected with error code 10015 when the type allows only one instance per assistant).
+     */
+    public function withShared(bool $shared): self
+    {
+        $self = clone $this;
+        $self['shared'] = $shared;
 
         return $self;
     }

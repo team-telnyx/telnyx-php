@@ -56,7 +56,7 @@ final class TelephonySettings implements BaseModel
     public ?string $fallbackDestination;
 
     /**
-     * The noise suppression engine to use. Use 'disabled' to turn off noise suppression.
+     * The noise suppression engine to use. 'aicoustics' is STT-optimized and recommended for AI assistants (configure through noise_suppression_config). Use 'disabled' to turn off noise suppression.
      *
      * @var value-of<NoiseSuppression>|null $noiseSuppression
      */
@@ -64,7 +64,7 @@ final class TelephonySettings implements BaseModel
     public ?string $noiseSuppression;
 
     /**
-     * Configuration for noise suppression. Only applicable when noise_suppression is 'deepfilternet'.
+     * Configuration for noise suppression. Applicable fields depend on the engine: 'attenuation_limit' and 'mode' only when noise_suppression is 'deepfilternet'; 'family', 'size' and 'enhancement_level' only when noise_suppression is 'aicoustics'.
      */
     #[Optional('noise_suppression_config')]
     public ?NoiseSuppressionConfig $noiseSuppressionConfig;
@@ -192,7 +192,7 @@ final class TelephonySettings implements BaseModel
     }
 
     /**
-     * The noise suppression engine to use. Use 'disabled' to turn off noise suppression.
+     * The noise suppression engine to use. 'aicoustics' is STT-optimized and recommended for AI assistants (configure through noise_suppression_config). Use 'disabled' to turn off noise suppression.
      *
      * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression
      */
@@ -206,7 +206,7 @@ final class TelephonySettings implements BaseModel
     }
 
     /**
-     * Configuration for noise suppression. Only applicable when noise_suppression is 'deepfilternet'.
+     * Configuration for noise suppression. Applicable fields depend on the engine: 'attenuation_limit' and 'mode' only when noise_suppression is 'deepfilternet'; 'family', 'size' and 'enhancement_level' only when noise_suppression is 'aicoustics'.
      *
      * @param NoiseSuppressionConfig|NoiseSuppressionConfigShape $noiseSuppressionConfig
      */

@@ -12,4 +12,6 @@ enum EventType: string
     case MESSAGE_SENT = 'message.sent';
 
     case MESSAGE_FINALIZED = 'message.finalized';
+
+    case MESSAGE_READ = 'message.read';
 }
