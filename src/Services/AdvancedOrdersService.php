@@ -10,7 +10,7 @@ use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\PhoneNumberType;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AdvancedOrdersContract;
 
@@ -55,17 +55,18 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
         ?string $requirementGroupID = null,
         RequestOptions|array|null $requestOptions = null,
     ): AdvancedOrder {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'areaCode' => $areaCode,
                 'comments' => $comments,
                 'countryCode' => $countryCode,
                 'customerReference' => $customerReference,
-                'features' => $features,
+                'features' => $features ?? Omitted::VALUE,
                 'phoneNumberType' => $phoneNumberType,
                 'quantity' => $quantity,
-                'requirementGroupID' => $requirementGroupID,
+                'requirementGroupID' => $requirementGroupID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -137,17 +138,18 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
         ?string $requirementGroupID = null,
         RequestOptions|array|null $requestOptions = null,
     ): AdvancedOrder {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'areaCode' => $areaCode,
                 'comments' => $comments,
                 'countryCode' => $countryCode,
                 'customerReference' => $customerReference,
-                'features' => $features,
+                'features' => $features ?? Omitted::VALUE,
                 'phoneNumberType' => $phoneNumberType,
                 'quantity' => $quantity,
-                'requirementGroupID' => $requirementGroupID,
+                'requirementGroupID' => $requirementGroupID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

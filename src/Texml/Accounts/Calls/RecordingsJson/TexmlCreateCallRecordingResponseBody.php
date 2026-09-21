@@ -7,6 +7,7 @@ namespace Telnyx\Texml\Accounts\Calls\RecordingsJson;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlCreateCallRecordingResponseBody\Track;
 
 /**
@@ -119,16 +120,16 @@ final class TexmlCreateCallRecordingResponseBody implements BaseModel
      * @param Track|value-of<Track>|null $track
      */
     public static function with(
+        string|Omitted|null $conferenceSid = Omitted::VALUE,
+        string|Omitted|null $duration = Omitted::VALUE,
+        string|Omitted|null $errorCode = Omitted::VALUE,
+        string|Omitted|null $price = Omitted::VALUE,
+        string|Omitted|null $priceUnit = Omitted::VALUE,
         ?string $accountSid = null,
         ?string $callSid = null,
         TwimlRecordingChannels|int|null $channels = null,
-        ?string $conferenceSid = null,
         ?\DateTimeInterface $dateCreated = null,
         ?\DateTimeInterface $dateUpdated = null,
-        ?string $duration = null,
-        ?string $errorCode = null,
-        ?string $price = null,
-        ?string $priceUnit = null,
         ?string $sid = null,
         RecordingSource|string|null $source = null,
         ?\DateTimeInterface $startTime = null,
@@ -140,13 +141,13 @@ final class TexmlCreateCallRecordingResponseBody implements BaseModel
         null !== $accountSid && $self['accountSid'] = $accountSid;
         null !== $callSid && $self['callSid'] = $callSid;
         null !== $channels && $self['channels'] = $channels;
-        null !== $conferenceSid && $self['conferenceSid'] = $conferenceSid;
+        Omitted::VALUE !== $conferenceSid && $self['conferenceSid'] = $conferenceSid;
         null !== $dateCreated && $self['dateCreated'] = $dateCreated;
         null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
-        null !== $duration && $self['duration'] = $duration;
-        null !== $errorCode && $self['errorCode'] = $errorCode;
-        null !== $price && $self['price'] = $price;
-        null !== $priceUnit && $self['priceUnit'] = $priceUnit;
+        Omitted::VALUE !== $duration && $self['duration'] = $duration;
+        Omitted::VALUE !== $errorCode && $self['errorCode'] = $errorCode;
+        Omitted::VALUE !== $price && $self['price'] = $price;
+        Omitted::VALUE !== $priceUnit && $self['priceUnit'] = $priceUnit;
         null !== $sid && $self['sid'] = $sid;
         null !== $source && $self['source'] = $source;
         null !== $startTime && $self['startTime'] = $startTime;

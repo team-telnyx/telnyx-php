@@ -7,7 +7,6 @@ namespace Telnyx\Services\AI\Assistants;
 use Telnyx\AI\Assistants\Tags\TagsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TagsContract;
 
@@ -64,7 +63,7 @@ final class TagsService implements TagsContract
         string $tag,
         RequestOptions|array|null $requestOptions = null,
     ): TagsResponse {
-        $params = Util::removeNulls(['tag' => $tag]);
+        $params = ['tag' => $tag];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->add($assistantID, params: $params, requestOptions: $requestOptions);
@@ -88,7 +87,7 @@ final class TagsService implements TagsContract
         string $assistantID,
         RequestOptions|array|null $requestOptions = null,
     ): TagsResponse {
-        $params = Util::removeNulls(['assistantID' => $assistantID]);
+        $params = ['assistantID' => $assistantID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->remove($tag, params: $params, requestOptions: $requestOptions);

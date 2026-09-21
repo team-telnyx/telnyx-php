@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\WebSearch\Research\ResearchCitation;
 use Telnyx\WebSearch\Research\ResearchGetResponse\Data\Status;
 
@@ -91,9 +92,9 @@ final class Data implements BaseModel
     public static function with(
         Status|string $status,
         string $taskID,
+        string|Omitted|null $error = Omitted::VALUE,
         ?string $answer = null,
         ?array $citations = null,
-        ?string $error = null,
     ): self {
         $self = new self;
 
@@ -102,7 +103,7 @@ final class Data implements BaseModel
 
         null !== $answer && $self['answer'] = $answer;
         null !== $citations && $self['citations'] = $citations;
-        null !== $error && $self['error'] = $error;
+        Omitted::VALUE !== $error && $self['error'] = $error;
 
         return $self;
     }

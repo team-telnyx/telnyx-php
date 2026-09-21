@@ -7,6 +7,7 @@ namespace Telnyx\Messages\OutboundMessagePayload;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type MediaShape = array{
@@ -56,16 +57,16 @@ final class Media implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $contentType = null,
-        ?string $sha256 = null,
-        ?int $size = null,
+        string|Omitted|null $contentType = Omitted::VALUE,
+        string|Omitted|null $sha256 = Omitted::VALUE,
+        int|Omitted|null $size = Omitted::VALUE,
         ?string $url = null,
     ): self {
         $self = new self;
 
-        null !== $contentType && $self['contentType'] = $contentType;
-        null !== $sha256 && $self['sha256'] = $sha256;
-        null !== $size && $self['size'] = $size;
+        Omitted::VALUE !== $contentType && $self['contentType'] = $contentType;
+        Omitted::VALUE !== $sha256 && $self['sha256'] = $sha256;
+        Omitted::VALUE !== $size && $self['size'] = $size;
         null !== $url && $self['url'] = $url;
 
         return $self;

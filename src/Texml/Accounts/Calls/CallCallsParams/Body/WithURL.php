@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithURL\AsyncAmdStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithURL\CustomHeader;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithURL\DeepfakeDetection;
@@ -442,6 +443,7 @@ final class WithURL implements BaseModel
      */
     public static function with(
         string $url,
+        string|Omitted|null $texml = Omitted::VALUE,
         ?string $applicationSid = null,
         ?bool $asyncAmd = null,
         ?string $asyncAmdStatusCallback = null,
@@ -481,7 +483,6 @@ final class WithURL implements BaseModel
         StatusCallbackMethod|string|null $statusCallbackMethod = null,
         ?string $superviseCallSid = null,
         SupervisingRole|string|null $supervisingRole = null,
-        ?string $texml = null,
         ?int $timeLimit = null,
         ?int $timeout = null,
         ?string $to = null,
@@ -531,7 +532,7 @@ final class WithURL implements BaseModel
         null !== $statusCallbackMethod && $self['statusCallbackMethod'] = $statusCallbackMethod;
         null !== $superviseCallSid && $self['superviseCallSid'] = $superviseCallSid;
         null !== $supervisingRole && $self['supervisingRole'] = $supervisingRole;
-        null !== $texml && $self['texml'] = $texml;
+        Omitted::VALUE !== $texml && $self['texml'] = $texml;
         null !== $timeLimit && $self['timeLimit'] = $timeLimit;
         null !== $timeout && $self['timeout'] = $timeout;
         null !== $to && $self['to'] = $to;

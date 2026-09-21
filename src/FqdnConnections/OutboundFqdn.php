@@ -7,6 +7,7 @@ namespace Telnyx\FqdnConnections;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\FqdnConnections\OutboundFqdn\AniOverrideType;
 use Telnyx\FqdnConnections\OutboundFqdn\IPAuthenticationMethod;
@@ -137,17 +138,17 @@ final class OutboundFqdn implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param AniOverrideType|value-of<AniOverrideType>|null $aniOverrideType
-     * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param IPAuthenticationMethod|value-of<IPAuthenticationMethod>|null $ipAuthenticationMethod
      * @param T38ReinviteSource|value-of<T38ReinviteSource>|null $t38ReinviteSource
      */
     public static function with(
+        bool|Omitted|null $callParkingEnabled = Omitted::VALUE,
+        Omitted|EncryptedMedia|string|null $encryptedMedia = Omitted::VALUE,
         ?string $aniOverride = null,
         AniOverrideType|string|null $aniOverrideType = null,
-        ?bool $callParkingEnabled = null,
         ?int $channelLimit = null,
-        EncryptedMedia|string|null $encryptedMedia = null,
         ?bool $generateRingbackTone = null,
         ?bool $instantRingbackEnabled = null,
         IPAuthenticationMethod|string|null $ipAuthenticationMethod = null,
@@ -163,9 +164,9 @@ final class OutboundFqdn implements BaseModel
 
         null !== $aniOverride && $self['aniOverride'] = $aniOverride;
         null !== $aniOverrideType && $self['aniOverrideType'] = $aniOverrideType;
-        null !== $callParkingEnabled && $self['callParkingEnabled'] = $callParkingEnabled;
+        Omitted::VALUE !== $callParkingEnabled && $self['callParkingEnabled'] = $callParkingEnabled;
         null !== $channelLimit && $self['channelLimit'] = $channelLimit;
-        null !== $encryptedMedia && $self['encryptedMedia'] = $encryptedMedia;
+        Omitted::VALUE !== $encryptedMedia && $self['encryptedMedia'] = $encryptedMedia;
         null !== $generateRingbackTone && $self['generateRingbackTone'] = $generateRingbackTone;
         null !== $instantRingbackEnabled && $self['instantRingbackEnabled'] = $instantRingbackEnabled;
         null !== $ipAuthenticationMethod && $self['ipAuthenticationMethod'] = $ipAuthenticationMethod;

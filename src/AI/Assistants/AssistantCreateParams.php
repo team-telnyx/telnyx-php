@@ -16,6 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\AssistantsService::create()
  *
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
@@ -36,6 +37,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type AssistantCreateParamsShape = array{
  *   instructions: string,
  *   name: string,
+ *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>|null,
  *   conversationFlow?: null|ConversationFlowReq|ConversationFlowReqShape,
  *   description?: string|null,
  *   dynamicVariables?: array<string,mixed>|null,
@@ -79,6 +81,14 @@ final class AssistantCreateParams implements BaseModel
 
     #[Required]
     public string $name;
+
+    /**
+     * A2A agents this assistant can delegate to. Tools are not stored here: at the start of every conversation each agent's card is fetched and one tool is derived per skill the card advertises, named `a2a_<name>_<skill_id>`. The following limits are not enforced when the assistant is saved, and anything past them is dropped when the conversation starts: 64 agents per assistant, 64 skills per card, 128 derived tools per assistant, and a 6 second budget for all card fetches combined. An agent whose card cannot be fetched costs the assistant that capability for the conversation; it does not fail the call.
+     *
+     * @var list<AssistantA2AAgent>|null $a2aAgents
+     */
+    #[Optional('a2a_agents', list: AssistantA2AAgent::class)]
+    public ?array $a2aAgents;
 
     /**
      * Conversation flow as supplied by API clients (create / update).
@@ -247,6 +257,7 @@ final class AssistantCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param list<AssistantA2AAgent|AssistantA2AAgentShape>|null $a2aAgents
      * @param ConversationFlowReq|ConversationFlowReqShape|null $conversationFlow
      * @param array<string,mixed>|null $dynamicVariables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
@@ -271,6 +282,7 @@ final class AssistantCreateParams implements BaseModel
     public static function with(
         string $instructions,
         string $name,
+        ?array $a2aAgents = null,
         ConversationFlowReq|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
@@ -304,6 +316,7 @@ final class AssistantCreateParams implements BaseModel
         $self['instructions'] = $instructions;
         $self['name'] = $name;
 
+        null !== $a2aAgents && $self['a2aAgents'] = $a2aAgents;
         null !== $conversationFlow && $self['conversationFlow'] = $conversationFlow;
         null !== $description && $self['description'] = $description;
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
@@ -350,6 +363,19 @@ final class AssistantCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * A2A agents this assistant can delegate to. Tools are not stored here: at the start of every conversation each agent's card is fetched and one tool is derived per skill the card advertises, named `a2a_<name>_<skill_id>`. The following limits are not enforced when the assistant is saved, and anything past them is dropped when the conversation starts: 64 agents per assistant, 64 skills per card, 128 derived tools per assistant, and a 6 second budget for all card fetches combined. An agent whose card cannot be fetched costs the assistant that capability for the conversation; it does not fail the call.
+     *
+     * @param list<AssistantA2AAgent|AssistantA2AAgentShape> $a2aAgents
+     */
+    public function withA2aAgents(array $a2aAgents): self
+    {
+        $self = clone $this;
+        $self['a2aAgents'] = $a2aAgents;
 
         return $self;
     }

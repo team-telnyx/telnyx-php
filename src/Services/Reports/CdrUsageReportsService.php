@@ -6,7 +6,7 @@ namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\AggregationType;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdown;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse;
@@ -55,14 +55,15 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
         ?\DateTimeInterface $startDate = null,
         RequestOptions|array|null $requestOptions = null,
     ): CdrUsageReportFetchSyncResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'aggregationType' => $aggregationType,
                 'productBreakdown' => $productBreakdown,
-                'connections' => $connections,
-                'endDate' => $endDate,
-                'startDate' => $startDate,
+                'connections' => $connections ?? Omitted::VALUE,
+                'endDate' => $endDate ?? Omitted::VALUE,
+                'startDate' => $startDate ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -7,6 +7,7 @@ namespace Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\PhoneNumberType;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\Status;
 
@@ -222,8 +223,8 @@ final class Data implements BaseModel
      * @param list<string>|null $tags
      */
     public static function with(
+        \DateTimeInterface|Omitted|null $activatedAt = Omitted::VALUE,
         ?string $id = null,
-        ?\DateTimeInterface $activatedAt = null,
         ?string $billingGroupID = null,
         ?bool $callForwardingEnabled = null,
         ?bool $callRecordingEnabled = null,
@@ -252,7 +253,7 @@ final class Data implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $activatedAt && $self['activatedAt'] = $activatedAt;
+        Omitted::VALUE !== $activatedAt && $self['activatedAt'] = $activatedAt;
         null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
         null !== $callForwardingEnabled && $self['callForwardingEnabled'] = $callForwardingEnabled;
         null !== $callRecordingEnabled && $self['callRecordingEnabled'] = $callRecordingEnabled;

@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TrafficPolicyProfilesContract;
@@ -63,14 +63,15 @@ final class TrafficPolicyProfilesService implements TrafficPolicyProfilesContrac
         ?array $services = null,
         RequestOptions|array|null $requestOptions = null,
     ): TrafficPolicyProfileNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'type' => $type,
-                'domains' => $domains,
-                'ipRanges' => $ipRanges,
-                'limitBwKbps' => $limitBwKbps,
-                'services' => $services,
+                'domains' => $domains ?? Omitted::VALUE,
+                'ipRanges' => $ipRanges ?? Omitted::VALUE,
+                'limitBwKbps' => $limitBwKbps ?? Omitted::VALUE,
+                'services' => $services ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -107,7 +108,7 @@ final class TrafficPolicyProfilesService implements TrafficPolicyProfilesContrac
      * @param string $id identifies the traffic policy profile
      * @param list<string> $domains array of domain names
      * @param list<string> $ipRanges array of IP ranges in CIDR notation
-     * @param \Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\LimitBwKbps|value-of<\Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\LimitBwKbps>|null $limitBwKbps Bandwidth limit in kbps. Must be 512 or 1024, or null to remove.
+     * @param Omitted|\Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\LimitBwKbps|value-of<\Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\LimitBwKbps>|null $limitBwKbps Bandwidth limit in kbps. Must be 512 or 1024, or null to remove.
      * @param list<string> $services array of PCEF service IDs to include in the profile
      * @param \Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\Type|value-of<\Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\Type> $type the type of the traffic policy profile
      * @param RequestOpts|null $requestOptions
@@ -118,19 +119,20 @@ final class TrafficPolicyProfilesService implements TrafficPolicyProfilesContrac
         string $id,
         ?array $domains = null,
         ?array $ipRanges = null,
-        \Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\LimitBwKbps|int|null $limitBwKbps = null,
+        Omitted|\Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\LimitBwKbps|int|null $limitBwKbps = Omitted::VALUE,
         ?array $services = null,
         \Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateParams\Type|string|null $type = null,
         RequestOptions|array|null $requestOptions = null,
     ): TrafficPolicyProfileUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'domains' => $domains,
-                'ipRanges' => $ipRanges,
+                'domains' => $domains ?? Omitted::VALUE,
+                'ipRanges' => $ipRanges ?? Omitted::VALUE,
                 'limitBwKbps' => $limitBwKbps,
-                'services' => $services,
-                'type' => $type,
+                'services' => $services ?? Omitted::VALUE,
+                'type' => $type ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -163,14 +165,15 @@ final class TrafficPolicyProfilesService implements TrafficPolicyProfilesContrac
         Sort|string|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterService' => $filterService,
-                'filterType' => $filterType,
+                'filterService' => $filterService ?? Omitted::VALUE,
+                'filterType' => $filterType ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'sort' => $sort,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -221,13 +224,14 @@ final class TrafficPolicyProfilesService implements TrafficPolicyProfilesContrac
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterGroup' => $filterGroup,
-                'filterName' => $filterName,
+                'filterGroup' => $filterGroup ?? Omitted::VALUE,
+                'filterName' => $filterName ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

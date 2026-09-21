@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailDomains\DNSRecord\Purpose;
 use Telnyx\EmailDomains\DNSRecord\RecordType;
 use Telnyx\EmailDomains\DNSRecord\Status;
@@ -111,8 +112,8 @@ final class DNSRecord implements BaseModel
         bool $required,
         Status|string $status,
         string $value,
-        ?string $actualValue = null,
-        ?int $priority = null,
+        string|Omitted|null $actualValue = Omitted::VALUE,
+        int|Omitted|null $priority = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -124,8 +125,8 @@ final class DNSRecord implements BaseModel
         $self['status'] = $status;
         $self['value'] = $value;
 
-        null !== $actualValue && $self['actualValue'] = $actualValue;
-        null !== $priority && $self['priority'] = $priority;
+        Omitted::VALUE !== $actualValue && $self['actualValue'] = $actualValue;
+        Omitted::VALUE !== $priority && $self['priority'] = $priority;
 
         return $self;
     }

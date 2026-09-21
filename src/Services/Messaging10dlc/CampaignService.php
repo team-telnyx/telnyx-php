@@ -6,7 +6,7 @@ namespace Telnyx\Services\Messaging10dlc;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Messaging10dlc\Campaign\CampaignDeactivateResponse;
 use Telnyx\Messaging10dlc\Campaign\CampaignGetMnoMetadataResponse;
 use Telnyx\Messaging10dlc\Campaign\CampaignGetSharingStatusResponse;
@@ -108,20 +108,21 @@ final class CampaignService implements CampaignContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): TelnyxCampaignCsp {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'autoRenewal' => $autoRenewal,
-                'helpMessage' => $helpMessage,
-                'messageFlow' => $messageFlow,
-                'resellerID' => $resellerID,
-                'sample1' => $sample1,
-                'sample2' => $sample2,
-                'sample3' => $sample3,
-                'sample4' => $sample4,
-                'sample5' => $sample5,
-                'webhookFailoverURL' => $webhookFailoverURL,
-                'webhookURL' => $webhookURL,
+                'helpMessage' => $helpMessage ?? Omitted::VALUE,
+                'messageFlow' => $messageFlow ?? Omitted::VALUE,
+                'resellerID' => $resellerID ?? Omitted::VALUE,
+                'sample1' => $sample1 ?? Omitted::VALUE,
+                'sample2' => $sample2 ?? Omitted::VALUE,
+                'sample3' => $sample3 ?? Omitted::VALUE,
+                'sample4' => $sample4 ?? Omitted::VALUE,
+                'sample5' => $sample5 ?? Omitted::VALUE,
+                'webhookFailoverURL' => $webhookFailoverURL ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -152,14 +153,12 @@ final class CampaignService implements CampaignContract
         Sort|string $sort = '-createdAt',
         RequestOptions|array|null $requestOptions = null,
     ): PerPagePaginationV2 {
-        $params = Util::removeNulls(
-            [
-                'brandID' => $brandID,
-                'page' => $page,
-                'recordsPerPage' => $recordsPerPage,
-                'sort' => $sort,
-            ],
-        );
+        $params = [
+            'brandID' => $brandID,
+            'page' => $page,
+            'recordsPerPage' => $recordsPerPage,
+            'sort' => $sort,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -287,7 +286,7 @@ final class CampaignService implements CampaignContract
         string $appealReason,
         RequestOptions|array|null $requestOptions = null,
     ): CampaignSubmitAppealResponse {
-        $params = Util::removeNulls(['appealReason' => $appealReason]);
+        $params = ['appealReason' => $appealReason];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->submitAppeal($campaignID, params: $params, requestOptions: $requestOptions);

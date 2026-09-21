@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WhatsappMessageTemplatesContract;
 use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateGetResponse;
@@ -72,8 +72,12 @@ final class WhatsappMessageTemplatesService implements WhatsappMessageTemplatesC
         ?array $components = null,
         RequestOptions|array|null $requestOptions = null,
     ): WhatsappMessageTemplateUpdateResponse {
-        $params = Util::removeNulls(
-            ['category' => $category, 'components' => $components]
+        $params = array_filter(
+            [
+                'category' => $category ?? Omitted::VALUE,
+                'components' => $components ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

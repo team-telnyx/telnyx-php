@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams\CallingWindow;
 
 /**
@@ -163,10 +164,10 @@ final class OutboundVoiceProfileCreateParams implements BaseModel
      */
     public static function with(
         string $name,
-        ?string $billingGroupID = null,
+        string|Omitted|null $billingGroupID = Omitted::VALUE,
+        int|Omitted|null $concurrentCallLimit = Omitted::VALUE,
         OutboundCallRecording|array|null $callRecording = null,
         CallingWindow|array|null $callingWindow = null,
-        ?int $concurrentCallLimit = null,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
         ?bool $enabled = null,
@@ -181,10 +182,10 @@ final class OutboundVoiceProfileCreateParams implements BaseModel
 
         $self['name'] = $name;
 
-        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        Omitted::VALUE !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
         null !== $callRecording && $self['callRecording'] = $callRecording;
         null !== $callingWindow && $self['callingWindow'] = $callingWindow;
-        null !== $concurrentCallLimit && $self['concurrentCallLimit'] = $concurrentCallLimit;
+        Omitted::VALUE !== $concurrentCallLimit && $self['concurrentCallLimit'] = $concurrentCallLimit;
         null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
         null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
         null !== $enabled && $self['enabled'] = $enabled;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
@@ -33,10 +34,10 @@ interface OutboundVoiceProfilesContract
      * @api
      *
      * @param string $name a user-supplied name to help with organization
-     * @param string|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
+     * @param string|Omitted|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
      * @param OutboundCallRecording|OutboundCallRecordingShape $callRecording
      * @param CallingWindow|CallingWindowShape $callingWindow Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
-     * @param int|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
+     * @param int|Omitted|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
      * @param string $dailySpendLimit the maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls
      * @param bool $dailySpendLimitEnabled specifies whether to enforce the daily_spend_limit on this outbound voice profile
      * @param bool $enabled Specifies whether the outbound voice profile can be used. Disabled profiles will result in outbound calls being blocked for the associated Connections.
@@ -52,10 +53,10 @@ interface OutboundVoiceProfilesContract
      */
     public function create(
         string $name,
-        ?string $billingGroupID = null,
+        string|Omitted|null $billingGroupID = Omitted::VALUE,
         OutboundCallRecording|array|null $callRecording = null,
         CallingWindow|array|null $callingWindow = null,
-        ?int $concurrentCallLimit = null,
+        int|Omitted|null $concurrentCallLimit = Omitted::VALUE,
         ?string $dailySpendLimit = null,
         bool $dailySpendLimitEnabled = false,
         bool $enabled = true,
@@ -86,10 +87,10 @@ interface OutboundVoiceProfilesContract
      *
      * @param string $id identifies the resource
      * @param string $name a user-supplied name to help with organization
-     * @param string|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
+     * @param string|Omitted|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
      * @param OutboundCallRecording|OutboundCallRecordingShape $callRecording
      * @param \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow|CallingWindowShape1 $callingWindow specifies the time window and call limits for calls made using this outbound voice profile
-     * @param int|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
+     * @param int|Omitted|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
      * @param string $dailySpendLimit the maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls
      * @param bool $dailySpendLimitEnabled specifies whether to enforce the daily_spend_limit on this outbound voice profile
      * @param bool $enabled Specifies whether the outbound voice profile can be used. Disabled profiles will result in outbound calls being blocked for the associated Connections.
@@ -106,10 +107,10 @@ interface OutboundVoiceProfilesContract
     public function update(
         string $id,
         string $name,
-        ?string $billingGroupID = null,
+        string|Omitted|null $billingGroupID = Omitted::VALUE,
         OutboundCallRecording|array|null $callRecording = null,
         \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow|array|null $callingWindow = null,
-        ?int $concurrentCallLimit = null,
+        int|Omitted|null $concurrentCallLimit = Omitted::VALUE,
         ?string $dailySpendLimit = null,
         bool $dailySpendLimitEnabled = false,
         bool $enabled = true,

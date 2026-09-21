@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Dir\References\Reference\RecordType;
 use Telnyx\Dir\References\Reference\RefType;
 
@@ -143,10 +144,10 @@ final class Reference implements BaseModel
         RefType|string $refType,
         int $slot,
         string $timezone,
-        ?string $email = null,
-        ?string $jobTitle = null,
-        ?string $organization = null,
-        ?string $relationshipToRegistrant = null,
+        string|Omitted|null $email = Omitted::VALUE,
+        string|Omitted|null $jobTitle = Omitted::VALUE,
+        string|Omitted|null $organization = Omitted::VALUE,
+        string|Omitted|null $relationshipToRegistrant = Omitted::VALUE,
     ): self {
         $self = new self;
 
@@ -157,10 +158,10 @@ final class Reference implements BaseModel
         $self['slot'] = $slot;
         $self['timezone'] = $timezone;
 
-        null !== $email && $self['email'] = $email;
-        null !== $jobTitle && $self['jobTitle'] = $jobTitle;
-        null !== $organization && $self['organization'] = $organization;
-        null !== $relationshipToRegistrant && $self['relationshipToRegistrant'] = $relationshipToRegistrant;
+        Omitted::VALUE !== $email && $self['email'] = $email;
+        Omitted::VALUE !== $jobTitle && $self['jobTitle'] = $jobTitle;
+        Omitted::VALUE !== $organization && $self['organization'] = $organization;
+        Omitted::VALUE !== $relationshipToRegistrant && $self['relationshipToRegistrant'] = $relationshipToRegistrant;
 
         return $self;
     }

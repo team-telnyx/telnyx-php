@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\IntegrationSecrets\IntegrationSecret;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
@@ -58,14 +58,15 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
         ?string $username = null,
         RequestOptions|array|null $requestOptions = null,
     ): IntegrationSecretNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'identifier' => $identifier,
                 'type' => $type,
-                'token' => $token,
-                'password' => $password,
-                'username' => $username,
+                'token' => $token ?? Omitted::VALUE,
+                'password' => $password ?? Omitted::VALUE,
+                'username' => $username ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -92,12 +93,13 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

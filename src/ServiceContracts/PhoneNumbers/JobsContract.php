@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
@@ -105,7 +106,7 @@ interface JobsContract
      *
      * @param bool $emergencyEnabled indicates whether to enable or disable emergency services on the numbers
      * @param list<string> $phoneNumbers
-     * @param string|null $emergencyAddressID Identifies the address to be used with emergency services. Required if emergency_enabled is true, must be null or omitted if emergency_enabled is false.
+     * @param string|Omitted|null $emergencyAddressID Identifies the address to be used with emergency services. Required if emergency_enabled is true, must be null or omitted if emergency_enabled is false.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -113,7 +114,7 @@ interface JobsContract
     public function updateEmergencySettingsBatch(
         bool $emergencyEnabled,
         array $phoneNumbers,
-        ?string $emergencyAddressID = null,
+        string|Omitted|null $emergencyAddressID = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): JobUpdateEmergencySettingsBatchResponse;
 }

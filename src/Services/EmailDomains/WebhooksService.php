@@ -6,7 +6,7 @@ namespace Telnyx\Services\EmailDomains;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\EmailDomains\Webhooks\EmailWebhook;
 use Telnyx\EmailDomains\Webhooks\EmailWebhookEvent;
@@ -53,7 +53,7 @@ final class WebhooksService implements WebhooksContract
         string $url,
         RequestOptions|array|null $requestOptions = null,
     ): EmailWebhookResponse {
-        $params = Util::removeNulls(['events' => $events, 'url' => $url]);
+        $params = ['events' => $events, 'url' => $url];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($domainID, params: $params, requestOptions: $requestOptions);
@@ -77,7 +77,7 @@ final class WebhooksService implements WebhooksContract
         string $domainID,
         RequestOptions|array|null $requestOptions = null,
     ): EmailWebhookResponse {
-        $params = Util::removeNulls(['domainID' => $domainID]);
+        $params = ['domainID' => $domainID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -105,8 +105,13 @@ final class WebhooksService implements WebhooksContract
         ?string $url = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailWebhookResponse {
-        $params = Util::removeNulls(
-            ['domainID' => $domainID, 'events' => $events, 'url' => $url]
+        $params = array_filter(
+            [
+                'domainID' => $domainID,
+                'events' => $events ?? Omitted::VALUE,
+                'url' => $url ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -137,8 +142,13 @@ final class WebhooksService implements WebhooksContract
         Sort|string|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize, 'sort' => $sort]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'sort' => $sort ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -163,7 +173,7 @@ final class WebhooksService implements WebhooksContract
         string $domainID,
         RequestOptions|array|null $requestOptions = null,
     ): EmailWebhookResponse {
-        $params = Util::removeNulls(['domainID' => $domainID]);
+        $params = ['domainID' => $domainID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);

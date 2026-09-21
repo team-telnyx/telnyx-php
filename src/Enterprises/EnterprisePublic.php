@@ -7,6 +7,7 @@ namespace Telnyx\Enterprises;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
@@ -155,16 +156,18 @@ final class EnterprisePublic implements BaseModel
      * @param PhysicalAddress|PhysicalAddressShape|null $organizationPhysicalAddress
      */
     public static function with(
+        string|Omitted|null $corporateRegistrationNumber = Omitted::VALUE,
+        string|Omitted|null $dunBradstreetNumber = Omitted::VALUE,
+        string|Omitted|null $primaryBusinessDomainSicCode = Omitted::VALUE,
+        string|Omitted|null $professionalLicenseNumber = Omitted::VALUE,
         ?string $id = null,
         PhysicalAddress|array|null $billingAddress = null,
         BillingContact|array|null $billingContact = null,
         ?bool $brandedCallingEnabled = null,
-        ?string $corporateRegistrationNumber = null,
         ?string $countryCode = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $customerReference = null,
         ?string $doingBusinessAs = null,
-        ?string $dunBradstreetNumber = null,
         ?string $fein = null,
         ?string $industry = null,
         ?string $jurisdictionOfIncorporation = null,
@@ -175,8 +178,6 @@ final class EnterprisePublic implements BaseModel
         ?string $organizationLegalType = null,
         PhysicalAddress|array|null $organizationPhysicalAddress = null,
         ?string $organizationType = null,
-        ?string $primaryBusinessDomainSicCode = null,
-        ?string $professionalLicenseNumber = null,
         ?string $roleType = null,
         ?\DateTimeInterface $updatedAt = null,
         ?string $website = null,
@@ -187,12 +188,12 @@ final class EnterprisePublic implements BaseModel
         null !== $billingAddress && $self['billingAddress'] = $billingAddress;
         null !== $billingContact && $self['billingContact'] = $billingContact;
         null !== $brandedCallingEnabled && $self['brandedCallingEnabled'] = $brandedCallingEnabled;
-        null !== $corporateRegistrationNumber && $self['corporateRegistrationNumber'] = $corporateRegistrationNumber;
+        Omitted::VALUE !== $corporateRegistrationNumber && $self['corporateRegistrationNumber'] = $corporateRegistrationNumber;
         null !== $countryCode && $self['countryCode'] = $countryCode;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $customerReference && $self['customerReference'] = $customerReference;
         null !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
-        null !== $dunBradstreetNumber && $self['dunBradstreetNumber'] = $dunBradstreetNumber;
+        Omitted::VALUE !== $dunBradstreetNumber && $self['dunBradstreetNumber'] = $dunBradstreetNumber;
         null !== $fein && $self['fein'] = $fein;
         null !== $industry && $self['industry'] = $industry;
         null !== $jurisdictionOfIncorporation && $self['jurisdictionOfIncorporation'] = $jurisdictionOfIncorporation;
@@ -203,8 +204,8 @@ final class EnterprisePublic implements BaseModel
         null !== $organizationLegalType && $self['organizationLegalType'] = $organizationLegalType;
         null !== $organizationPhysicalAddress && $self['organizationPhysicalAddress'] = $organizationPhysicalAddress;
         null !== $organizationType && $self['organizationType'] = $organizationType;
-        null !== $primaryBusinessDomainSicCode && $self['primaryBusinessDomainSicCode'] = $primaryBusinessDomainSicCode;
-        null !== $professionalLicenseNumber && $self['professionalLicenseNumber'] = $professionalLicenseNumber;
+        Omitted::VALUE !== $primaryBusinessDomainSicCode && $self['primaryBusinessDomainSicCode'] = $primaryBusinessDomainSicCode;
+        Omitted::VALUE !== $professionalLicenseNumber && $self['professionalLicenseNumber'] = $professionalLicenseNumber;
         null !== $roleType && $self['roleType'] = $roleType;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $website && $self['website'] = $website;

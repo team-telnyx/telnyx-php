@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Enterprises\EnterpriseCreateParams\Industry;
 use Telnyx\Enterprises\EnterpriseCreateParams\NumberOfEmployees;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationLegalType;
@@ -254,11 +255,11 @@ final class EnterpriseCreateParams implements BaseModel
         PhysicalAddress|array $organizationPhysicalAddress,
         OrganizationType|string $organizationType,
         string $website,
-        ?string $corporateRegistrationNumber = null,
+        string|Omitted|null $corporateRegistrationNumber = Omitted::VALUE,
+        string|Omitted|null $dunBradstreetNumber = Omitted::VALUE,
+        string|Omitted|null $primaryBusinessDomainSicCode = Omitted::VALUE,
+        string|Omitted|null $professionalLicenseNumber = Omitted::VALUE,
         ?string $customerReference = null,
-        ?string $dunBradstreetNumber = null,
-        ?string $primaryBusinessDomainSicCode = null,
-        ?string $professionalLicenseNumber = null,
         RoleType|string|null $roleType = null,
     ): self {
         $self = new self;
@@ -278,11 +279,11 @@ final class EnterpriseCreateParams implements BaseModel
         $self['organizationType'] = $organizationType;
         $self['website'] = $website;
 
-        null !== $corporateRegistrationNumber && $self['corporateRegistrationNumber'] = $corporateRegistrationNumber;
+        Omitted::VALUE !== $corporateRegistrationNumber && $self['corporateRegistrationNumber'] = $corporateRegistrationNumber;
         null !== $customerReference && $self['customerReference'] = $customerReference;
-        null !== $dunBradstreetNumber && $self['dunBradstreetNumber'] = $dunBradstreetNumber;
-        null !== $primaryBusinessDomainSicCode && $self['primaryBusinessDomainSicCode'] = $primaryBusinessDomainSicCode;
-        null !== $professionalLicenseNumber && $self['professionalLicenseNumber'] = $professionalLicenseNumber;
+        Omitted::VALUE !== $dunBradstreetNumber && $self['dunBradstreetNumber'] = $dunBradstreetNumber;
+        Omitted::VALUE !== $primaryBusinessDomainSicCode && $self['primaryBusinessDomainSicCode'] = $primaryBusinessDomainSicCode;
+        Omitted::VALUE !== $professionalLicenseNumber && $self['professionalLicenseNumber'] = $professionalLicenseNumber;
         null !== $roleType && $self['roleType'] = $roleType;
 
         return $self;

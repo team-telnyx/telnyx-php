@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\ActivationSettings;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\Messaging;
 use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
@@ -108,23 +109,23 @@ final class PortingOrderUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|PortingOrderMisc|PortingOrderMiscShape|null $misc
      * @param ActivationSettings|ActivationSettingsShape|null $activationSettings
      * @param PortingOrderDocuments|PortingOrderDocumentsShape|null $documents
      * @param PortingOrderEndUser|PortingOrderEndUserShape|null $endUser
      * @param Messaging|MessagingShape|null $messaging
-     * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
      * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape|null $phoneNumberConfiguration
      * @param list<Requirement|RequirementShape>|null $requirements
      * @param PortingOrderUserFeedback|PortingOrderUserFeedbackShape|null $userFeedback
      */
     public static function with(
+        Omitted|PortingOrderMisc|array|null $misc = Omitted::VALUE,
         ActivationSettings|array|null $activationSettings = null,
         ?string $customerGroupReference = null,
         ?string $customerReference = null,
         PortingOrderDocuments|array|null $documents = null,
         PortingOrderEndUser|array|null $endUser = null,
         Messaging|array|null $messaging = null,
-        PortingOrderMisc|array|null $misc = null,
         PortingOrderPhoneNumberConfiguration|array|null $phoneNumberConfiguration = null,
         ?string $requirementGroupID = null,
         ?array $requirements = null,
@@ -139,7 +140,7 @@ final class PortingOrderUpdateParams implements BaseModel
         null !== $documents && $self['documents'] = $documents;
         null !== $endUser && $self['endUser'] = $endUser;
         null !== $messaging && $self['messaging'] = $messaging;
-        null !== $misc && $self['misc'] = $misc;
+        Omitted::VALUE !== $misc && $self['misc'] = $misc;
         null !== $phoneNumberConfiguration && $self['phoneNumberConfiguration'] = $phoneNumberConfiguration;
         null !== $requirementGroupID && $self['requirementGroupID'] = $requirementGroupID;
         null !== $requirements && $self['requirements'] = $requirements;

@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Creates a suppression with `reason: manual_block` and `source: manual`.
@@ -84,17 +85,17 @@ final class EmailBlockCreateParams implements BaseModel
      */
     public static function with(
         string $to,
-        ?string $domainID = null,
-        ?\DateTimeInterface $expiresAt = null,
-        ?string $from = null,
+        string|Omitted|null $domainID = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $expiresAt = Omitted::VALUE,
+        string|Omitted|null $from = Omitted::VALUE,
     ): self {
         $self = new self;
 
         $self['to'] = $to;
 
-        null !== $domainID && $self['domainID'] = $domainID;
-        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
-        null !== $from && $self['from'] = $from;
+        Omitted::VALUE !== $domainID && $self['domainID'] = $domainID;
+        Omitted::VALUE !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        Omitted::VALUE !== $from && $self['from'] = $from;
 
         return $self;
     }

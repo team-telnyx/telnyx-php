@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebSearchContract;
 use Telnyx\Services\WebSearch\ResearchService;
@@ -69,17 +69,18 @@ final class WebSearchService implements WebSearchContract
         Safesearch|string|null $safesearch = null,
         RequestOptions|array|null $requestOptions = null,
     ): WebSearchNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'query' => $query,
-                'count' => $count,
-                'country' => $country,
-                'excludeDomains' => $excludeDomains,
-                'freshness' => $freshness,
-                'includeDomains' => $includeDomains,
-                'livecrawl' => $livecrawl,
-                'safesearch' => $safesearch,
+                'count' => $count ?? Omitted::VALUE,
+                'country' => $country ?? Omitted::VALUE,
+                'excludeDomains' => $excludeDomains ?? Omitted::VALUE,
+                'freshness' => $freshness ?? Omitted::VALUE,
+                'includeDomains' => $includeDomains ?? Omitted::VALUE,
+                'livecrawl' => $livecrawl ?? Omitted::VALUE,
+                'safesearch' => $safesearch ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -96,7 +97,7 @@ final class WebSearchService implements WebSearchContract
      * @param list<string> $urls list of URLs to retrieve content from (max 20 for public API)
      * @param int $crawlTimeout timeout for crawling each URL, in seconds (1-60)
      * @param list<Format|value-of<Format>> $formats Content formats to return. If omitted, `html` and `metadata` are returned by default. Retrieval is best-effort per URL: a format field appears only when that content could be produced, and a freshly crawled page may also include `html` even when not requested.
-     * @param int|null $maxAge Maximum age of cached content in seconds. `null` means no limit.
+     * @param int|Omitted|null $maxAge Maximum age of cached content in seconds. `null` means no limit.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -105,16 +106,17 @@ final class WebSearchService implements WebSearchContract
         array $urls,
         ?int $crawlTimeout = null,
         ?array $formats = null,
-        ?int $maxAge = null,
+        int|Omitted|null $maxAge = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): WebSearchContentsResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'urls' => $urls,
-                'crawlTimeout' => $crawlTimeout,
-                'formats' => $formats,
+                'crawlTimeout' => $crawlTimeout ?? Omitted::VALUE,
+                'formats' => $formats ?? Omitted::VALUE,
                 'maxAge' => $maxAge,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

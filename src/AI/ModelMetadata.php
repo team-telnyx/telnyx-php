@@ -10,6 +10,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Metadata for a model available on Telnyx Inference. Returned by `GET /v2/ai/openai/models` (and the deprecated `GET /v2/ai/models`). Open-source models live under their Hugging Face organization (e.g. `moonshotai/Kimi-K2.6`, `zai-org/GLM-5.1-FP8`, `MiniMaxAI/MiniMax-M2.7`); fine-tuned models are owned by the Telnyx organization that trained them.
@@ -238,13 +239,13 @@ final class ModelMetadata implements BaseModel
         string $ownedBy,
         int $parameters,
         Tier|string $tier,
-        ?string $baseModel = null,
-        ?string $description = null,
+        string|Omitted|null $baseModel = Omitted::VALUE,
+        string|Omitted|null $description = Omitted::VALUE,
+        int|Omitted|null $maxCompletionTokens = Omitted::VALUE,
+        string|Omitted|null $parametersStr = Omitted::VALUE,
         ?bool $isFineTunable = null,
         ?bool $isVisionSupported = null,
-        ?int $maxCompletionTokens = null,
         ?string $object = null,
-        ?string $parametersStr = null,
         ?array $pricing = null,
         ?bool $recommendedForAssistants = null,
         ?array $regions = null,
@@ -263,13 +264,13 @@ final class ModelMetadata implements BaseModel
         $self['parameters'] = $parameters;
         $self['tier'] = $tier;
 
-        null !== $baseModel && $self['baseModel'] = $baseModel;
-        null !== $description && $self['description'] = $description;
+        Omitted::VALUE !== $baseModel && $self['baseModel'] = $baseModel;
+        Omitted::VALUE !== $description && $self['description'] = $description;
         null !== $isFineTunable && $self['isFineTunable'] = $isFineTunable;
         null !== $isVisionSupported && $self['isVisionSupported'] = $isVisionSupported;
-        null !== $maxCompletionTokens && $self['maxCompletionTokens'] = $maxCompletionTokens;
+        Omitted::VALUE !== $maxCompletionTokens && $self['maxCompletionTokens'] = $maxCompletionTokens;
         null !== $object && $self['object'] = $object;
-        null !== $parametersStr && $self['parametersStr'] = $parametersStr;
+        Omitted::VALUE !== $parametersStr && $self['parametersStr'] = $parametersStr;
         null !== $pricing && $self['pricing'] = $pricing;
         null !== $recommendedForAssistants && $self['recommendedForAssistants'] = $recommendedForAssistants;
         null !== $regions && $self['regions'] = $regions;

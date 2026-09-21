@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\ReportListMdrsParams\Direction;
 use Telnyx\Reports\ReportListMdrsParams\MessageType;
@@ -78,18 +78,19 @@ final class ReportsService implements ReportsContract
         Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): ReportListMdrsResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'id' => $id,
-                'cld' => $cld,
-                'cli' => $cli,
-                'direction' => $direction,
-                'endDate' => $endDate,
-                'messageType' => $messageType,
-                'profile' => $profile,
-                'startDate' => $startDate,
-                'status' => $status,
+                'id' => $id ?? Omitted::VALUE,
+                'cld' => $cld ?? Omitted::VALUE,
+                'cli' => $cli ?? Omitted::VALUE,
+                'direction' => $direction ?? Omitted::VALUE,
+                'endDate' => $endDate ?? Omitted::VALUE,
+                'messageType' => $messageType ?? Omitted::VALUE,
+                'profile' => $profile ?? Omitted::VALUE,
+                'startDate' => $startDate ?? Omitted::VALUE,
+                'status' => $status ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -136,22 +137,23 @@ final class ReportsService implements ReportsContract
         ?string $startDate = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'id' => $id,
-                'endDate' => $endDate,
-                'imsi' => $imsi,
-                'mcc' => $mcc,
-                'mnc' => $mnc,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'phoneNumber' => $phoneNumber,
-                'simCardID' => $simCardID,
-                'simGroupID' => $simGroupID,
-                'simGroupName' => $simGroupName,
+                'id' => $id ?? Omitted::VALUE,
+                'endDate' => $endDate ?? Omitted::VALUE,
+                'imsi' => $imsi ?? Omitted::VALUE,
+                'mcc' => $mcc ?? Omitted::VALUE,
+                'mnc' => $mnc ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'phoneNumber' => $phoneNumber ?? Omitted::VALUE,
+                'simCardID' => $simCardID ?? Omitted::VALUE,
+                'simGroupID' => $simGroupID ?? Omitted::VALUE,
+                'simGroupName' => $simGroupName ?? Omitted::VALUE,
                 'sort' => $sort,
-                'startDate' => $startDate,
+                'startDate' => $startDate ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

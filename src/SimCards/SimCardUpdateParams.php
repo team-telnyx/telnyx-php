@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\SimCards\SimCardUpdateParams\DataLimit;
 use Telnyx\SimCardStatus;
 
@@ -74,13 +75,13 @@ final class SimCardUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $authorizedImeis
+     * @param list<string>|Omitted|null $authorizedImeis
      * @param DataLimit|DataLimitShape|null $dataLimit
      * @param SimCardStatus|SimCardStatusShape|null $status
      * @param list<string>|null $tags
      */
     public static function with(
-        ?array $authorizedImeis = null,
+        array|Omitted|null $authorizedImeis = Omitted::VALUE,
         DataLimit|array|null $dataLimit = null,
         ?string $simCardGroupID = null,
         SimCardStatus|array|null $status = null,
@@ -88,7 +89,7 @@ final class SimCardUpdateParams implements BaseModel
     ): self {
         $self = new self;
 
-        null !== $authorizedImeis && $self['authorizedImeis'] = $authorizedImeis;
+        Omitted::VALUE !== $authorizedImeis && $self['authorizedImeis'] = $authorizedImeis;
         null !== $dataLimit && $self['dataLimit'] = $dataLimit;
         null !== $simCardGroupID && $self['simCardGroupID'] = $simCardGroupID;
         null !== $status && $self['status'] = $status;

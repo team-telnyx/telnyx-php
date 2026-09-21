@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\FaxApplications\FaxApplication;
@@ -58,8 +58,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @param Inbound|InboundShape $inbound
      * @param Outbound|OutboundShape $outbound
      * @param list<string> $tags tags associated with the Fax Application
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -72,22 +72,23 @@ final class FaxApplicationsService implements FaxApplicationsContract
         Inbound|array|null $inbound = null,
         Outbound|array|null $outbound = null,
         array $tags = [],
-        ?string $webhookEventFailoverURL = '',
-        ?int $webhookTimeoutSecs = null,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): FaxApplicationNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'applicationName' => $applicationName,
                 'webhookEventURL' => $webhookEventURL,
                 'active' => $active,
                 'anchorsiteOverride' => $anchorsiteOverride,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
+                'inbound' => $inbound ?? Omitted::VALUE,
+                'outbound' => $outbound ?? Omitted::VALUE,
                 'tags' => $tags,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
                 'webhookTimeoutSecs' => $webhookTimeoutSecs,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -126,12 +127,12 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param bool $active specifies whether the connection can be used
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-     * @param string|null $faxEmailRecipient Specifies an email address where faxes sent to this application will be forwarded to (as pdf or tiff attachments)
+     * @param string|Omitted|null $faxEmailRecipient Specifies an email address where faxes sent to this application will be forwarded to (as pdf or tiff attachments)
      * @param \Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound|InboundShape1 $inbound
      * @param \Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound|OutboundShape1 $outbound
      * @param list<string> $tags tags associated with the Fax Application
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param string|Omitted|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param int|Omitted|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -142,27 +143,28 @@ final class FaxApplicationsService implements FaxApplicationsContract
         string $webhookEventURL,
         bool $active = true,
         AnchorsiteOverride|string $anchorsiteOverride = 'Latency',
-        ?string $faxEmailRecipient = null,
+        string|Omitted|null $faxEmailRecipient = Omitted::VALUE,
         \Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound|array|null $inbound = null,
         \Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound|array|null $outbound = null,
         ?array $tags = null,
-        ?string $webhookEventFailoverURL = '',
-        ?int $webhookTimeoutSecs = null,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): FaxApplicationUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'applicationName' => $applicationName,
                 'webhookEventURL' => $webhookEventURL,
                 'active' => $active,
                 'anchorsiteOverride' => $anchorsiteOverride,
                 'faxEmailRecipient' => $faxEmailRecipient,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
-                'tags' => $tags,
+                'inbound' => $inbound ?? Omitted::VALUE,
+                'outbound' => $outbound ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
                 'webhookTimeoutSecs' => $webhookTimeoutSecs,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -202,13 +204,14 @@ final class FaxApplicationsService implements FaxApplicationsContract
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
                 'sort' => $sort,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

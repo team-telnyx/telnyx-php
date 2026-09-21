@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
+use Telnyx\AI\Assistants\AssistantA2AAgent;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
@@ -28,7 +29,7 @@ use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
 use Telnyx\Services\AI\Assistants\CanaryDeploysService;
@@ -43,6 +44,7 @@ use Telnyx\Services\AI\Assistants\VersionsService;
  * Configure AI assistant specifications.
  *
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
+ * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
@@ -125,6 +127,7 @@ final class AssistantsService implements AssistantsContract
      *
      * @param string $instructions Body param: System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param string $name Body param
+     * @param list<AssistantA2AAgent|AssistantA2AAgentShape> $a2aAgents Body param: A2A agents this assistant can delegate to. Tools are not stored here: at the start of every conversation each agent's card is fetched and one tool is derived per skill the card advertises, named `a2a_<name>_<skill_id>`. The following limits are not enforced when the assistant is saved, and anything past them is dropped when the conversation starts: 64 agents per assistant, 64 skills per card, 128 derived tools per assistant, and a 6 second budget for all card fetches combined. An agent whose card cannot be fetched costs the assistant that capability for the conversation; it does not fail the call.
      * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow Body param: Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -163,6 +166,7 @@ final class AssistantsService implements AssistantsContract
     public function create(
         string $instructions,
         string $name,
+        array $a2aAgents = [],
         ConversationFlowReq|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
@@ -192,38 +196,40 @@ final class AssistantsService implements AssistantsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'instructions' => $instructions,
                 'name' => $name,
-                'conversationFlow' => $conversationFlow,
-                'description' => $description,
-                'dynamicVariables' => $dynamicVariables,
+                'a2aAgents' => $a2aAgents,
+                'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
+                'description' => $description ?? Omitted::VALUE,
+                'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,
-                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-                'enabledFeatures' => $enabledFeatures,
-                'externalLlm' => $externalLlm,
-                'fallbackConfig' => $fallbackConfig,
-                'greeting' => $greeting,
-                'insightSettings' => $insightSettings,
+                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL ?? Omitted::VALUE,
+                'enabledFeatures' => $enabledFeatures ?? Omitted::VALUE,
+                'externalLlm' => $externalLlm ?? Omitted::VALUE,
+                'fallbackConfig' => $fallbackConfig ?? Omitted::VALUE,
+                'greeting' => $greeting ?? Omitted::VALUE,
+                'insightSettings' => $insightSettings ?? Omitted::VALUE,
                 'integrations' => $integrations,
-                'interruptionSettings' => $interruptionSettings,
-                'llmAPIKeyRef' => $llmAPIKeyRef,
+                'interruptionSettings' => $interruptionSettings ?? Omitted::VALUE,
+                'llmAPIKeyRef' => $llmAPIKeyRef ?? Omitted::VALUE,
                 'mcpServers' => $mcpServers,
-                'messagingSettings' => $messagingSettings,
-                'model' => $model,
-                'observabilitySettings' => $observabilitySettings,
-                'postConversationSettings' => $postConversationSettings,
-                'privacySettings' => $privacySettings,
+                'messagingSettings' => $messagingSettings ?? Omitted::VALUE,
+                'model' => $model ?? Omitted::VALUE,
+                'observabilitySettings' => $observabilitySettings ?? Omitted::VALUE,
+                'postConversationSettings' => $postConversationSettings ?? Omitted::VALUE,
+                'privacySettings' => $privacySettings ?? Omitted::VALUE,
                 'tags' => $tags,
-                'telephonySettings' => $telephonySettings,
-                'toolIDs' => $toolIDs,
-                'tools' => $tools,
-                'transcription' => $transcription,
-                'voiceSettings' => $voiceSettings,
-                'widgetSettings' => $widgetSettings,
-                'idempotencyKey' => $idempotencyKey,
+                'telephonySettings' => $telephonySettings ?? Omitted::VALUE,
+                'toolIDs' => $toolIDs ?? Omitted::VALUE,
+                'tools' => $tools ?? Omitted::VALUE,
+                'transcription' => $transcription ?? Omitted::VALUE,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'widgetSettings' => $widgetSettings ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -254,13 +260,14 @@ final class AssistantsService implements AssistantsContract
         ?string $to = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'callControlID' => $callControlID,
+                'callControlID' => $callControlID ?? Omitted::VALUE,
                 'fetchDynamicVariablesFromWebhook' => $fetchDynamicVariablesFromWebhook,
-                'from' => $from,
-                'to' => $to,
+                'from' => $from ?? Omitted::VALUE,
+                'to' => $to ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -275,6 +282,7 @@ final class AssistantsService implements AssistantsContract
      * Updates the specified AI assistant's attributes and returns the updated assistant. The request can also control how the change is promoted across assistant versions.
      *
      * @param string $assistantID unique identifier of the assistant
+     * @param list<AssistantA2AAgent|AssistantA2AAgentShape> $a2aAgents A2A agents this assistant can delegate to. Tools are not stored here: at the start of every conversation each agent's card is fetched and one tool is derived per skill the card advertises, named `a2a_<name>_<skill_id>`. The following limits are not enforced when the assistant is saved, and anything past them is dropped when the conversation starts: 64 agents per assistant, 64 skills per card, 128 derived tools per assistant, and a 6 second budget for all card fetches combined. An agent whose card cannot be fetched costs the assistant that capability for the conversation; it does not fail the call. Omit this field to leave the assistant's agents unchanged; send an empty array to remove them all.
      * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -313,6 +321,7 @@ final class AssistantsService implements AssistantsContract
      */
     public function update(
         string $assistantID,
+        ?array $a2aAgents = null,
         ConversationFlowReq|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
@@ -345,39 +354,41 @@ final class AssistantsService implements AssistantsContract
         WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'conversationFlow' => $conversationFlow,
-                'description' => $description,
-                'dynamicVariables' => $dynamicVariables,
+                'a2aAgents' => $a2aAgents ?? Omitted::VALUE,
+                'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
+                'description' => $description ?? Omitted::VALUE,
+                'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,
-                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-                'enabledFeatures' => $enabledFeatures,
-                'externalLlm' => $externalLlm,
-                'fallbackConfig' => $fallbackConfig,
-                'greeting' => $greeting,
-                'insightSettings' => $insightSettings,
-                'instructions' => $instructions,
+                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL ?? Omitted::VALUE,
+                'enabledFeatures' => $enabledFeatures ?? Omitted::VALUE,
+                'externalLlm' => $externalLlm ?? Omitted::VALUE,
+                'fallbackConfig' => $fallbackConfig ?? Omitted::VALUE,
+                'greeting' => $greeting ?? Omitted::VALUE,
+                'insightSettings' => $insightSettings ?? Omitted::VALUE,
+                'instructions' => $instructions ?? Omitted::VALUE,
                 'integrations' => $integrations,
-                'interruptionSettings' => $interruptionSettings,
-                'llmAPIKeyRef' => $llmAPIKeyRef,
+                'interruptionSettings' => $interruptionSettings ?? Omitted::VALUE,
+                'llmAPIKeyRef' => $llmAPIKeyRef ?? Omitted::VALUE,
                 'mcpServers' => $mcpServers,
-                'messagingSettings' => $messagingSettings,
-                'model' => $model,
-                'name' => $name,
-                'observabilitySettings' => $observabilitySettings,
-                'postConversationSettings' => $postConversationSettings,
-                'privacySettings' => $privacySettings,
+                'messagingSettings' => $messagingSettings ?? Omitted::VALUE,
+                'model' => $model ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'observabilitySettings' => $observabilitySettings ?? Omitted::VALUE,
+                'postConversationSettings' => $postConversationSettings ?? Omitted::VALUE,
+                'privacySettings' => $privacySettings ?? Omitted::VALUE,
                 'promoteToMain' => $promoteToMain,
                 'tags' => $tags,
-                'telephonySettings' => $telephonySettings,
-                'toolIDs' => $toolIDs,
-                'tools' => $tools,
-                'transcription' => $transcription,
+                'telephonySettings' => $telephonySettings ?? Omitted::VALUE,
+                'toolIDs' => $toolIDs ?? Omitted::VALUE,
+                'tools' => $tools ?? Omitted::VALUE,
+                'transcription' => $transcription ?? Omitted::VALUE,
                 'versionName' => $versionName,
-                'voiceSettings' => $voiceSettings,
-                'widgetSettings' => $widgetSettings,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'widgetSettings' => $widgetSettings ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -446,13 +457,14 @@ final class AssistantsService implements AssistantsContract
         bool $stream = false,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantChatResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'content' => $content,
                 'conversationID' => $conversationID,
-                'name' => $name,
+                'name' => $name ?? Omitted::VALUE,
                 'stream' => $stream,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -477,7 +489,10 @@ final class AssistantsService implements AssistantsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(['idempotencyKey' => $idempotencyKey]);
+        $params = array_filter(
+            ['idempotencyKey' => $idempotencyKey ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->clone($assistantID, params: $params, requestOptions: $requestOptions);
@@ -525,13 +540,14 @@ final class AssistantsService implements AssistantsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantsList {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'apiKeyRef' => $apiKeyRef,
                 'provider' => $provider,
-                'importIDs' => $importIDs,
-                'idempotencyKey' => $idempotencyKey,
+                'importIDs' => $importIDs ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -571,15 +587,16 @@ final class AssistantsService implements AssistantsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantSendSMSResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'from' => $from,
                 'to' => $to,
-                'conversationMetadata' => $conversationMetadata,
-                'shouldCreateConversation' => $shouldCreateConversation,
-                'text' => $text,
-                'idempotencyKey' => $idempotencyKey,
+                'conversationMetadata' => $conversationMetadata ?? Omitted::VALUE,
+                'shouldCreateConversation' => $shouldCreateConversation ?? Omitted::VALUE,
+                'text' => $text ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

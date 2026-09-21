@@ -7,6 +7,7 @@ namespace Telnyx\Organizations\Users;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Organizations\Users\OrganizationUser\UserStatus;
 
 /**
@@ -94,11 +95,11 @@ final class OrganizationUser implements BaseModel
      * @param UserStatus|value-of<UserStatus>|null $userStatus
      */
     public static function with(
+        string|Omitted|null $lastSignInAt = Omitted::VALUE,
         ?string $id = null,
         ?string $createdAt = null,
         ?string $email = null,
         ?array $groups = null,
-        ?string $lastSignInAt = null,
         ?bool $organizationUserBypassesSSO = null,
         ?string $recordType = null,
         UserStatus|string|null $userStatus = null,
@@ -109,7 +110,7 @@ final class OrganizationUser implements BaseModel
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $email && $self['email'] = $email;
         null !== $groups && $self['groups'] = $groups;
-        null !== $lastSignInAt && $self['lastSignInAt'] = $lastSignInAt;
+        Omitted::VALUE !== $lastSignInAt && $self['lastSignInAt'] = $lastSignInAt;
         null !== $organizationUserBypassesSSO && $self['organizationUserBypassesSSO'] = $organizationUserBypassesSSO;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $userStatus && $self['userStatus'] = $userStatus;

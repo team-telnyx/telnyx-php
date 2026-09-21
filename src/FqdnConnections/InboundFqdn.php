@@ -7,6 +7,7 @@ namespace Telnyx\FqdnConnections;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\FqdnConnections\InboundFqdn\AniNumberFormat;
 use Telnyx\FqdnConnections\InboundFqdn\DefaultRoutingMethod;
 use Telnyx\FqdnConnections\InboundFqdn\DnisNumberFormat;
@@ -176,21 +177,22 @@ final class InboundFqdn implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|DefaultRoutingMethod|value-of<DefaultRoutingMethod>|null $defaultRoutingMethod
      * @param AniNumberFormat|value-of<AniNumberFormat>|null $aniNumberFormat
      * @param list<string>|null $codecs
-     * @param DefaultRoutingMethod|value-of<DefaultRoutingMethod>|null $defaultRoutingMethod
      * @param DnisNumberFormat|value-of<DnisNumberFormat>|null $dnisNumberFormat
      * @param SipRegion|value-of<SipRegion>|null $sipRegion
      * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>|null $sipSubdomainReceiveSettings
      */
     public static function with(
+        int|Omitted|null $channelLimit = Omitted::VALUE,
+        string|Omitted|null $defaultPrimaryFqdnID = Omitted::VALUE,
+        Omitted|DefaultRoutingMethod|string|null $defaultRoutingMethod = Omitted::VALUE,
+        string|Omitted|null $defaultSecondaryFqdnID = Omitted::VALUE,
+        string|Omitted|null $defaultTertiaryFqdnID = Omitted::VALUE,
+        string|Omitted|null $sipSubdomain = Omitted::VALUE,
         AniNumberFormat|string|null $aniNumberFormat = null,
-        ?int $channelLimit = null,
         ?array $codecs = null,
-        ?string $defaultPrimaryFqdnID = null,
-        DefaultRoutingMethod|string|null $defaultRoutingMethod = null,
-        ?string $defaultSecondaryFqdnID = null,
-        ?string $defaultTertiaryFqdnID = null,
         DnisNumberFormat|string|null $dnisNumberFormat = null,
         ?bool $generateRingbackTone = null,
         ?bool $isupHeadersEnabled = null,
@@ -198,7 +200,6 @@ final class InboundFqdn implements BaseModel
         ?bool $shakenStirEnabled = null,
         ?bool $sipCompactHeadersEnabled = null,
         SipRegion|string|null $sipRegion = null,
-        ?string $sipSubdomain = null,
         SipSubdomainReceiveSettings|string|null $sipSubdomainReceiveSettings = null,
         ?int $timeout1xxSecs = null,
         ?int $timeout2xxSecs = null,
@@ -206,12 +207,12 @@ final class InboundFqdn implements BaseModel
         $self = new self;
 
         null !== $aniNumberFormat && $self['aniNumberFormat'] = $aniNumberFormat;
-        null !== $channelLimit && $self['channelLimit'] = $channelLimit;
+        Omitted::VALUE !== $channelLimit && $self['channelLimit'] = $channelLimit;
         null !== $codecs && $self['codecs'] = $codecs;
-        null !== $defaultPrimaryFqdnID && $self['defaultPrimaryFqdnID'] = $defaultPrimaryFqdnID;
-        null !== $defaultRoutingMethod && $self['defaultRoutingMethod'] = $defaultRoutingMethod;
-        null !== $defaultSecondaryFqdnID && $self['defaultSecondaryFqdnID'] = $defaultSecondaryFqdnID;
-        null !== $defaultTertiaryFqdnID && $self['defaultTertiaryFqdnID'] = $defaultTertiaryFqdnID;
+        Omitted::VALUE !== $defaultPrimaryFqdnID && $self['defaultPrimaryFqdnID'] = $defaultPrimaryFqdnID;
+        Omitted::VALUE !== $defaultRoutingMethod && $self['defaultRoutingMethod'] = $defaultRoutingMethod;
+        Omitted::VALUE !== $defaultSecondaryFqdnID && $self['defaultSecondaryFqdnID'] = $defaultSecondaryFqdnID;
+        Omitted::VALUE !== $defaultTertiaryFqdnID && $self['defaultTertiaryFqdnID'] = $defaultTertiaryFqdnID;
         null !== $dnisNumberFormat && $self['dnisNumberFormat'] = $dnisNumberFormat;
         null !== $generateRingbackTone && $self['generateRingbackTone'] = $generateRingbackTone;
         null !== $isupHeadersEnabled && $self['isupHeadersEnabled'] = $isupHeadersEnabled;
@@ -219,7 +220,7 @@ final class InboundFqdn implements BaseModel
         null !== $shakenStirEnabled && $self['shakenStirEnabled'] = $shakenStirEnabled;
         null !== $sipCompactHeadersEnabled && $self['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
         null !== $sipRegion && $self['sipRegion'] = $sipRegion;
-        null !== $sipSubdomain && $self['sipSubdomain'] = $sipSubdomain;
+        Omitted::VALUE !== $sipSubdomain && $self['sipSubdomain'] = $sipSubdomain;
         null !== $sipSubdomainReceiveSettings && $self['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
         null !== $timeout1xxSecs && $self['timeout1xxSecs'] = $timeout1xxSecs;
         null !== $timeout2xxSecs && $self['timeout2xxSecs'] = $timeout2xxSecs;

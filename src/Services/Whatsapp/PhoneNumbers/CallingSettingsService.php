@@ -6,7 +6,6 @@ namespace Telnyx\Services\Whatsapp\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbers\CallingSettingsContract;
 use Telnyx\Whatsapp\PhoneNumbers\CallingSettings\CallingSettingGetResponse;
@@ -67,7 +66,7 @@ final class CallingSettingsService implements CallingSettingsContract
         bool $enabled,
         RequestOptions|array|null $requestOptions = null,
     ): CallingSettingUpdateResponse {
-        $params = Util::removeNulls(['enabled' => $enabled]);
+        $params = ['enabled' => $enabled];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($phoneNumber, params: $params, requestOptions: $requestOptions);

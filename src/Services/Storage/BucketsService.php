@@ -6,7 +6,7 @@ namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\BucketsContract;
 use Telnyx\Services\Storage\Buckets\SslCertificateService;
@@ -67,7 +67,10 @@ final class BucketsService implements BucketsContract
         Body|array|null $body = null,
         RequestOptions|array|null $requestOptions = null,
     ): BucketNewPresignedURLResponse {
-        $params = Util::removeNulls(['bucketName' => $bucketName, 'body' => $body]);
+        $params = array_filter(
+            ['bucketName' => $bucketName, 'body' => $body ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createPresignedURL($objectName, params: $params, requestOptions: $requestOptions);

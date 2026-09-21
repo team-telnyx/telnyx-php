@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse;
 use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter;
 use Telnyx\RequestOptions;
@@ -47,7 +47,10 @@ final class GlobalIPUsageService implements GlobalIPUsageContract
         Filter|array|null $filter = null,
         RequestOptions|array|null $requestOptions = null,
     ): GlobalIPUsageGetResponse {
-        $params = Util::removeNulls(['filter' => $filter]);
+        $params = array_filter(
+            ['filter' => $filter ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve(params: $params, requestOptions: $requestOptions);

@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Room;
@@ -75,15 +75,16 @@ final class RoomsService implements RoomsContract
         ?int $webhookTimeoutSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): RoomNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'enableRecording' => $enableRecording,
                 'maxParticipants' => $maxParticipants,
-                'uniqueName' => $uniqueName,
+                'uniqueName' => $uniqueName ?? Omitted::VALUE,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookEventURL' => $webhookEventURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+                'webhookEventURL' => $webhookEventURL ?? Omitted::VALUE,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -108,7 +109,10 @@ final class RoomsService implements RoomsContract
         ?bool $includeSessions = null,
         RequestOptions|array|null $requestOptions = null,
     ): RoomGetResponse {
-        $params = Util::removeNulls(['includeSessions' => $includeSessions]);
+        $params = array_filter(
+            ['includeSessions' => $includeSessions ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($roomID, params: $params, requestOptions: $requestOptions);
@@ -142,15 +146,16 @@ final class RoomsService implements RoomsContract
         ?int $webhookTimeoutSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): RoomUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'enableRecording' => $enableRecording,
                 'maxParticipants' => $maxParticipants,
-                'uniqueName' => $uniqueName,
+                'uniqueName' => $uniqueName ?? Omitted::VALUE,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
-                'webhookEventURL' => $webhookEventURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+                'webhookEventURL' => $webhookEventURL ?? Omitted::VALUE,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -179,13 +184,14 @@ final class RoomsService implements RoomsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'includeSessions' => $includeSessions,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'includeSessions' => $includeSessions ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SessionAnalysisContract;
 use Telnyx\Services\SessionAnalysis\MetadataService;
@@ -63,14 +63,15 @@ final class SessionAnalysisService implements SessionAnalysisContract
         int $maxDepth = 2,
         RequestOptions|array|null $requestOptions = null,
     ): SessionAnalysisGetResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'recordType' => $recordType,
-                'dateTime' => $dateTime,
+                'dateTime' => $dateTime ?? Omitted::VALUE,
                 'expand' => $expand,
                 'includeChildren' => $includeChildren,
                 'maxDepth' => $maxDepth,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

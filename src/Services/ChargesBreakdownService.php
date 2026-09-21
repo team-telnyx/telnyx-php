@@ -8,7 +8,7 @@ use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse;
 use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams\Format;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesBreakdownContract;
 
@@ -48,8 +48,13 @@ final class ChargesBreakdownService implements ChargesBreakdownContract
         Format|string $format = 'json',
         RequestOptions|array|null $requestOptions = null,
     ): ChargesBreakdownGetResponse {
-        $params = Util::removeNulls(
-            ['startDate' => $startDate, 'endDate' => $endDate, 'format' => $format]
+        $params = array_filter(
+            [
+                'startDate' => $startDate,
+                'endDate' => $endDate ?? Omitted::VALUE,
+                'format' => $format,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

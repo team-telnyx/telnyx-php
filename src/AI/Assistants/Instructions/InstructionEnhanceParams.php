@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Enhance an assistant's instructions using an LLM. The endpoint reads the assistant's current instructions and tools, then streams back improved instructions as they are generated.
@@ -53,13 +54,13 @@ final class InstructionEnhanceParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $enhancementPrompt = null,
-        ?string $instructions = null
+        string|Omitted|null $enhancementPrompt = Omitted::VALUE,
+        string|Omitted|null $instructions = Omitted::VALUE,
     ): self {
         $self = new self;
 
-        null !== $enhancementPrompt && $self['enhancementPrompt'] = $enhancementPrompt;
-        null !== $instructions && $self['instructions'] = $instructions;
+        Omitted::VALUE !== $enhancementPrompt && $self['enhancementPrompt'] = $enhancementPrompt;
+        Omitted::VALUE !== $instructions && $self['instructions'] = $instructions;
 
         return $self;
     }

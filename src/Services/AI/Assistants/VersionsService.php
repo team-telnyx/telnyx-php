@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Assistants;
 
+use Telnyx\AI\Assistants\AssistantA2AAgent;
 use Telnyx\AI\Assistants\AssistantIntegration;
 use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantsList;
@@ -24,13 +25,14 @@ use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
 
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
@@ -82,8 +84,12 @@ final class VersionsService implements VersionsContract
         ?bool $includeMcpServers = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(
-            ['assistantID' => $assistantID, 'includeMcpServers' => $includeMcpServers]
+        $params = array_filter(
+            [
+                'assistantID' => $assistantID,
+                'includeMcpServers' => $includeMcpServers ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -99,6 +105,7 @@ final class VersionsService implements VersionsContract
      *
      * @param string $versionID path param: Unique identifier of the version
      * @param string $assistantID path param: Unique identifier of the assistant
+     * @param list<AssistantA2AAgent|AssistantA2AAgentShape> $a2aAgents Body param: A2A agents this assistant can delegate to. Tools are not stored here: at the start of every conversation each agent's card is fetched and one tool is derived per skill the card advertises, named `a2a_<name>_<skill_id>`. The following limits are not enforced when the assistant is saved, and anything past them is dropped when the conversation starts: 64 agents per assistant, 64 skills per card, 128 derived tools per assistant, and a 6 second budget for all card fetches combined. An agent whose card cannot be fetched costs the assistant that capability for the conversation; it does not fail the call. Omit this field to leave the assistant's agents unchanged; send an empty array to remove them all.
      * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow Body param: Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -139,6 +146,7 @@ final class VersionsService implements VersionsContract
     public function update(
         string $versionID,
         string $assistantID,
+        ?array $a2aAgents = null,
         ConversationFlowReq|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
@@ -170,39 +178,41 @@ final class VersionsService implements VersionsContract
         WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'assistantID' => $assistantID,
-                'conversationFlow' => $conversationFlow,
-                'description' => $description,
-                'dynamicVariables' => $dynamicVariables,
+                'a2aAgents' => $a2aAgents ?? Omitted::VALUE,
+                'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
+                'description' => $description ?? Omitted::VALUE,
+                'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,
-                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-                'enabledFeatures' => $enabledFeatures,
-                'externalLlm' => $externalLlm,
-                'fallbackConfig' => $fallbackConfig,
-                'greeting' => $greeting,
-                'insightSettings' => $insightSettings,
-                'instructions' => $instructions,
+                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL ?? Omitted::VALUE,
+                'enabledFeatures' => $enabledFeatures ?? Omitted::VALUE,
+                'externalLlm' => $externalLlm ?? Omitted::VALUE,
+                'fallbackConfig' => $fallbackConfig ?? Omitted::VALUE,
+                'greeting' => $greeting ?? Omitted::VALUE,
+                'insightSettings' => $insightSettings ?? Omitted::VALUE,
+                'instructions' => $instructions ?? Omitted::VALUE,
                 'integrations' => $integrations,
-                'interruptionSettings' => $interruptionSettings,
-                'llmAPIKeyRef' => $llmAPIKeyRef,
+                'interruptionSettings' => $interruptionSettings ?? Omitted::VALUE,
+                'llmAPIKeyRef' => $llmAPIKeyRef ?? Omitted::VALUE,
                 'mcpServers' => $mcpServers,
-                'messagingSettings' => $messagingSettings,
-                'model' => $model,
-                'name' => $name,
-                'observabilitySettings' => $observabilitySettings,
-                'postConversationSettings' => $postConversationSettings,
-                'privacySettings' => $privacySettings,
+                'messagingSettings' => $messagingSettings ?? Omitted::VALUE,
+                'model' => $model ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'observabilitySettings' => $observabilitySettings ?? Omitted::VALUE,
+                'postConversationSettings' => $postConversationSettings ?? Omitted::VALUE,
+                'privacySettings' => $privacySettings ?? Omitted::VALUE,
                 'tags' => $tags,
-                'telephonySettings' => $telephonySettings,
-                'toolIDs' => $toolIDs,
-                'tools' => $tools,
-                'transcription' => $transcription,
+                'telephonySettings' => $telephonySettings ?? Omitted::VALUE,
+                'toolIDs' => $toolIDs ?? Omitted::VALUE,
+                'tools' => $tools ?? Omitted::VALUE,
+                'transcription' => $transcription ?? Omitted::VALUE,
                 'versionName' => $versionName,
-                'voiceSettings' => $voiceSettings,
-                'widgetSettings' => $widgetSettings,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'widgetSettings' => $widgetSettings ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -247,7 +257,7 @@ final class VersionsService implements VersionsContract
         string $assistantID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['assistantID' => $assistantID]);
+        $params = ['assistantID' => $assistantID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($versionID, params: $params, requestOptions: $requestOptions);
@@ -271,7 +281,7 @@ final class VersionsService implements VersionsContract
         string $assistantID,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = Util::removeNulls(['assistantID' => $assistantID]);
+        $params = ['assistantID' => $assistantID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->promote($versionID, params: $params, requestOptions: $requestOptions);

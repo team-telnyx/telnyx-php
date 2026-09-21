@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Creates a new MCP server configuration on your account and returns the created server.
@@ -73,14 +74,14 @@ final class McpServerCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $allowedTools
+     * @param list<string>|Omitted|null $allowedTools
      */
     public static function with(
         string $name,
         string $type,
         string $url,
-        ?array $allowedTools = null,
-        ?string $apiKeyRef = null,
+        array|Omitted|null $allowedTools = Omitted::VALUE,
+        string|Omitted|null $apiKeyRef = Omitted::VALUE,
         ?string $idempotencyKey = null,
     ): self {
         $self = new self;
@@ -89,8 +90,8 @@ final class McpServerCreateParams implements BaseModel
         $self['type'] = $type;
         $self['url'] = $url;
 
-        null !== $allowedTools && $self['allowedTools'] = $allowedTools;
-        null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
+        Omitted::VALUE !== $allowedTools && $self['allowedTools'] = $allowedTools;
+        Omitted::VALUE !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
         null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;

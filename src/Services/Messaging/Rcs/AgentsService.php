@@ -6,7 +6,7 @@ namespace Telnyx\Services\Messaging\Rcs;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Rcs\Agents\RcsAgent;
 use Telnyx\Rcs\Agents\RcsAgentResponse;
@@ -59,26 +59,27 @@ final class AgentsService implements AgentsContract
      * Updates the supplied configuration fields on the specified RCS agent.
      *
      * @param string $id RCS agent ID
-     * @param string|null $profileID Messaging profile ID associated with the RCS Agent
-     * @param string|null $webhookFailoverURL Failover URL to receive RCS events
-     * @param string|null $webhookURL URL to receive RCS events
+     * @param string|Omitted|null $profileID Messaging profile ID associated with the RCS Agent
+     * @param string|Omitted|null $webhookFailoverURL Failover URL to receive RCS events
+     * @param string|Omitted|null $webhookURL URL to receive RCS events
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        ?string $profileID = null,
-        ?string $webhookFailoverURL = null,
-        ?string $webhookURL = null,
+        string|Omitted|null $profileID = Omitted::VALUE,
+        string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): RcsAgentResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'profileID' => $profileID,
                 'webhookFailoverURL' => $webhookFailoverURL,
                 'webhookURL' => $webhookURL,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -103,8 +104,12 @@ final class AgentsService implements AgentsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

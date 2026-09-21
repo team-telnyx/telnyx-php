@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailCursorPagination;
 use Telnyx\EmailTemplates\EmailTemplate;
 use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
@@ -40,9 +40,9 @@ final class EmailTemplatesService implements EmailTemplatesContract
      * Creates a Liquid email template. Variables are auto-extracted when omitted.
      *
      * @param string $name body param: Letters, numbers, spaces, hyphens, and underscores only
-     * @param string|null $htmlBody body param: Liquid template HTML body
-     * @param string|null $subject body param: Liquid template subject
-     * @param string|null $textBody body param: Liquid template text body
+     * @param string|Omitted|null $htmlBody body param: Liquid template HTML body
+     * @param string|Omitted|null $subject body param: Liquid template subject
+     * @param string|Omitted|null $textBody body param: Liquid template text body
      * @param list<string> $variables Body param: Template variables. Auto-extracted from subject/body fields when absent.
      * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
@@ -51,22 +51,23 @@ final class EmailTemplatesService implements EmailTemplatesContract
      */
     public function create(
         string $name,
-        ?string $htmlBody = null,
-        ?string $subject = null,
-        ?string $textBody = null,
+        string|Omitted|null $htmlBody = Omitted::VALUE,
+        string|Omitted|null $subject = Omitted::VALUE,
+        string|Omitted|null $textBody = Omitted::VALUE,
         ?array $variables = null,
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailTemplateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'name' => $name,
                 'htmlBody' => $htmlBody,
                 'subject' => $subject,
                 'textBody' => $textBody,
-                'variables' => $variables,
-                'idempotencyKey' => $idempotencyKey,
+                'variables' => $variables ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -101,9 +102,9 @@ final class EmailTemplatesService implements EmailTemplatesContract
      * Updates one or more fields of the specified email template and returns the updated template.
      *
      * @param string $id email template UUID
-     * @param string|null $htmlBody liquid template HTML body
-     * @param string|null $subject liquid template subject
-     * @param string|null $textBody liquid template text body
+     * @param string|Omitted|null $htmlBody liquid template HTML body
+     * @param string|Omitted|null $subject liquid template subject
+     * @param string|Omitted|null $textBody liquid template text body
      * @param list<string> $variables
      * @param RequestOpts|null $requestOptions
      *
@@ -111,21 +112,22 @@ final class EmailTemplatesService implements EmailTemplatesContract
      */
     public function update(
         string $id,
-        ?string $htmlBody = null,
+        string|Omitted|null $htmlBody = Omitted::VALUE,
         ?string $name = null,
-        ?string $subject = null,
-        ?string $textBody = null,
+        string|Omitted|null $subject = Omitted::VALUE,
+        string|Omitted|null $textBody = Omitted::VALUE,
         ?array $variables = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailTemplateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'htmlBody' => $htmlBody,
-                'name' => $name,
+                'name' => $name ?? Omitted::VALUE,
                 'subject' => $subject,
                 'textBody' => $textBody,
-                'variables' => $variables,
+                'variables' => $variables ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -152,8 +154,9 @@ final class EmailTemplatesService implements EmailTemplatesContract
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
     ): EmailCursorPagination {
-        $params = Util::removeNulls(
-            ['pageCursor' => $pageCursor, 'pageSize' => $pageSize]
+        $params = array_filter(
+            ['pageCursor' => $pageCursor ?? Omitted::VALUE, 'pageSize' => $pageSize],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -198,7 +201,7 @@ final class EmailTemplatesService implements EmailTemplatesContract
         array $templateVariables = [],
         RequestOptions|array|null $requestOptions = null,
     ): EmailTemplateRenderResponse {
-        $params = Util::removeNulls(['templateVariables' => $templateVariables]);
+        $params = ['templateVariables' => $templateVariables];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->render($id, params: $params, requestOptions: $requestOptions);
@@ -212,9 +215,9 @@ final class EmailTemplatesService implements EmailTemplatesContract
      * Replaces template fields. Behaves identically to PATCH; provided for compatibility with Phoenix resource routes.
      *
      * @param string $id email template UUID
-     * @param string|null $htmlBody liquid template HTML body
-     * @param string|null $subject liquid template subject
-     * @param string|null $textBody liquid template text body
+     * @param string|Omitted|null $htmlBody liquid template HTML body
+     * @param string|Omitted|null $subject liquid template subject
+     * @param string|Omitted|null $textBody liquid template text body
      * @param list<string> $variables
      * @param RequestOpts|null $requestOptions
      *
@@ -222,21 +225,22 @@ final class EmailTemplatesService implements EmailTemplatesContract
      */
     public function replace(
         string $id,
-        ?string $htmlBody = null,
+        string|Omitted|null $htmlBody = Omitted::VALUE,
         ?string $name = null,
-        ?string $subject = null,
-        ?string $textBody = null,
+        string|Omitted|null $subject = Omitted::VALUE,
+        string|Omitted|null $textBody = Omitted::VALUE,
         ?array $variables = null,
         RequestOptions|array|null $requestOptions = null,
     ): EmailTemplateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'htmlBody' => $htmlBody,
-                'name' => $name,
+                'name' => $name ?? Omitted::VALUE,
                 'subject' => $subject,
                 'textBody' => $textBody,
-                'variables' => $variables,
+                'variables' => $variables ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

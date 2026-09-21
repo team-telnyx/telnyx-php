@@ -6,7 +6,7 @@ namespace Telnyx\Services\EmailValidations;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\EmailValidations\Batch\BatchGetResponse;
 use Telnyx\EmailValidations\Batch\BatchNewResponse;
 use Telnyx\RequestOptions;
@@ -50,12 +50,13 @@ final class BatchService implements BatchContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): BatchNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'emails' => $emails,
-                'webhookURL' => $webhookURL,
-                'idempotencyKey' => $idempotencyKey,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

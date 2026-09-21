@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Assistants;
 
+use Telnyx\AI\Assistants\AssistantA2AAgent;
 use Telnyx\AI\Assistants\AssistantIntegration;
 use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantsList;
@@ -36,6 +37,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
@@ -110,6 +112,7 @@ final class VersionsRawService implements VersionsRawContract
      * @param string $versionID path param: Unique identifier of the version
      * @param array{
      *   assistantID: string,
+     *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>,
      *   conversationFlow?: ConversationFlowReq|ConversationFlowReqShape,
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,

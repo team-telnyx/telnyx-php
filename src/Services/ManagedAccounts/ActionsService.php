@@ -6,7 +6,6 @@ namespace Telnyx\Services\ManagedAccounts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\ManagedAccounts\Actions\ActionDisableResponse;
 use Telnyx\ManagedAccounts\Actions\ActionEnableResponse;
 use Telnyx\RequestOptions;
@@ -68,9 +67,7 @@ final class ActionsService implements ActionsContract
         bool $reenableAllConnections = false,
         RequestOptions|array|null $requestOptions = null,
     ): ActionEnableResponse {
-        $params = Util::removeNulls(
-            ['reenableAllConnections' => $reenableAllConnections]
-        );
+        $params = ['reenableAllConnections' => $reenableAllConnections];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->enable($id, params: $params, requestOptions: $requestOptions);

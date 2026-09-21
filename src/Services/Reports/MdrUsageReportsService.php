@@ -6,7 +6,7 @@ namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReport;
 use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
@@ -54,13 +54,14 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         ?string $profiles = null,
         RequestOptions|array|null $requestOptions = null,
     ): MdrUsageReportNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'aggregationType' => $aggregationType,
                 'endDate' => $endDate,
                 'startDate' => $startDate,
-                'profiles' => $profiles,
+                'profiles' => $profiles ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -105,8 +106,12 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -155,13 +160,14 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
         ?\DateTimeInterface $startDate = null,
         RequestOptions|array|null $requestOptions = null,
     ): MdrUsageReportFetchSyncResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'aggregationType' => $aggregationType,
-                'endDate' => $endDate,
-                'profiles' => $profiles,
-                'startDate' => $startDate,
+                'endDate' => $endDate ?? Omitted::VALUE,
+                'profiles' => $profiles ?? Omitted::VALUE,
+                'startDate' => $startDate ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

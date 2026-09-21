@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Organizations\Users\UserGetGroupsReportResponse\Data\UserStatus;
 use Telnyx\Organizations\Users\UserGroupReference;
 
@@ -131,7 +132,7 @@ final class Data implements BaseModel
         array $groups,
         string $recordType,
         UserStatus|string $userStatus = 'enabled',
-        ?string $lastSignInAt = null,
+        string|Omitted|null $lastSignInAt = Omitted::VALUE,
         ?bool $organizationUserBypassesSSO = null,
     ): self {
         $self = new self;
@@ -143,7 +144,7 @@ final class Data implements BaseModel
         $self['recordType'] = $recordType;
         $self['userStatus'] = $userStatus;
 
-        null !== $lastSignInAt && $self['lastSignInAt'] = $lastSignInAt;
+        Omitted::VALUE !== $lastSignInAt && $self['lastSignInAt'] = $lastSignInAt;
         null !== $organizationUserBypassesSSO && $self['organizationUserBypassesSSO'] = $organizationUserBypassesSSO;
 
         return $self;

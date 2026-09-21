@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
 
 /**
@@ -73,14 +74,14 @@ final class Record implements BaseModel
     public static function with(
         \DateTimeInterface $updatedAt,
         TfVerificationStatus|string $verificationStatus,
-        ?string $reason = null,
+        string|Omitted|null $reason = Omitted::VALUE,
     ): self {
         $self = new self;
 
         $self['updatedAt'] = $updatedAt;
         $self['verificationStatus'] = $verificationStatus;
 
-        null !== $reason && $self['reason'] = $reason;
+        Omitted::VALUE !== $reason && $self['reason'] = $reason;
 
         return $self;
     }

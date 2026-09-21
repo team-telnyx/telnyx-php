@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\OAuthClients\OAuthClient\AllowedGrantType;
 use Telnyx\OAuthClients\OAuthClient\ClientType;
 use Telnyx\OAuthClients\OAuthClient\RecordType;
@@ -202,13 +203,13 @@ final class OAuthClient implements BaseModel
         bool $requirePkce,
         \DateTimeInterface $updatedAt,
         string $userID,
+        string|Omitted|null $clientSecret = Omitted::VALUE,
+        string|Omitted|null $logoUri = Omitted::VALUE,
+        string|Omitted|null $policyUri = Omitted::VALUE,
+        string|Omitted|null $tosUri = Omitted::VALUE,
         ?array $allowedGrantTypes = null,
         ?array $allowedScopes = null,
-        ?string $clientSecret = null,
-        ?string $logoUri = null,
-        ?string $policyUri = null,
         ?array $redirectUris = null,
-        ?string $tosUri = null,
     ): self {
         $self = new self;
 
@@ -224,11 +225,11 @@ final class OAuthClient implements BaseModel
 
         null !== $allowedGrantTypes && $self['allowedGrantTypes'] = $allowedGrantTypes;
         null !== $allowedScopes && $self['allowedScopes'] = $allowedScopes;
-        null !== $clientSecret && $self['clientSecret'] = $clientSecret;
-        null !== $logoUri && $self['logoUri'] = $logoUri;
-        null !== $policyUri && $self['policyUri'] = $policyUri;
+        Omitted::VALUE !== $clientSecret && $self['clientSecret'] = $clientSecret;
+        Omitted::VALUE !== $logoUri && $self['logoUri'] = $logoUri;
+        Omitted::VALUE !== $policyUri && $self['policyUri'] = $policyUri;
         null !== $redirectUris && $self['redirectUris'] = $redirectUris;
-        null !== $tosUri && $self['tosUri'] = $tosUri;
+        Omitted::VALUE !== $tosUri && $self['tosUri'] = $tosUri;
 
         return $self;
     }

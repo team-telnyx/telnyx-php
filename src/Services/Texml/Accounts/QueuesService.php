@@ -6,7 +6,7 @@ namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultPaginationForQueues;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\QueuesContract;
@@ -50,8 +50,12 @@ final class QueuesService implements QueuesContract
         ?int $maxSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): QueueResource {
-        $params = Util::removeNulls(
-            ['friendlyName' => $friendlyName, 'maxSize' => $maxSize]
+        $params = array_filter(
+            [
+                'friendlyName' => $friendlyName ?? Omitted::VALUE,
+                'maxSize' => $maxSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -76,7 +80,7 @@ final class QueuesService implements QueuesContract
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
     ): QueueResource {
-        $params = Util::removeNulls(['accountSid' => $accountSid]);
+        $params = ['accountSid' => $accountSid];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($queueSid, params: $params, requestOptions: $requestOptions);
@@ -102,8 +106,9 @@ final class QueuesService implements QueuesContract
         ?int $maxSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): QueueResource {
-        $params = Util::removeNulls(
-            ['accountSid' => $accountSid, 'maxSize' => $maxSize]
+        $params = array_filter(
+            ['accountSid' => $accountSid, 'maxSize' => $maxSize ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -138,14 +143,15 @@ final class QueuesService implements QueuesContract
         ?string $pageToken = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultPaginationForQueues {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'dateCreated' => $dateCreated,
-                'dateUpdated' => $dateUpdated,
-                'page' => $page,
-                'pageSize' => $pageSize,
-                'pageToken' => $pageToken,
+                'dateCreated' => $dateCreated ?? Omitted::VALUE,
+                'dateUpdated' => $dateUpdated ?? Omitted::VALUE,
+                'page' => $page ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'pageToken' => $pageToken ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -170,7 +176,7 @@ final class QueuesService implements QueuesContract
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['accountSid' => $accountSid]);
+        $params = ['accountSid' => $accountSid];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($queueSid, params: $params, requestOptions: $requestOptions);

@@ -8,7 +8,7 @@ use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse;
 use Telnyx\AI\Assistants\CanaryDeploys\RuleInput;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysContract;
 
@@ -54,8 +54,12 @@ final class CanaryDeploysService implements CanaryDeploysContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): CanaryDeployResponse {
-        $params = Util::removeNulls(
-            ['rules' => $rules, 'idempotencyKey' => $idempotencyKey]
+        $params = array_filter(
+            [
+                'rules' => $rules ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -106,7 +110,10 @@ final class CanaryDeploysService implements CanaryDeploysContract
         ?array $rules = null,
         RequestOptions|array|null $requestOptions = null,
     ): CanaryDeployResponse {
-        $params = Util::removeNulls(['rules' => $rules]);
+        $params = array_filter(
+            ['rules' => $rules ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($assistantID, params: $params, requestOptions: $requestOptions);

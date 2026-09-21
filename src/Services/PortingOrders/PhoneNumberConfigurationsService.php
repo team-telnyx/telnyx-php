@@ -6,7 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter;
@@ -53,8 +53,11 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
         ?array $phoneNumberConfigurations = null,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberConfigurationNewResponse {
-        $params = Util::removeNulls(
-            ['phoneNumberConfigurations' => $phoneNumberConfigurations]
+        $params = array_filter(
+            [
+                'phoneNumberConfigurations' => $phoneNumberConfigurations ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -83,13 +86,14 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
         Sort|array|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

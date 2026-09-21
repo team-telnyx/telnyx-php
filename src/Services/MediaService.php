@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Media\MediaGetResponse;
 use Telnyx\Media\MediaListParams\Filter;
 use Telnyx\Media\MediaListResponse;
@@ -74,8 +74,12 @@ final class MediaService implements MediaContract
         ?int $ttlSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): MediaUpdateResponse {
-        $params = Util::removeNulls(
-            ['mediaURL' => $mediaURL, 'ttlSecs' => $ttlSecs]
+        $params = array_filter(
+            [
+                'mediaURL' => $mediaURL ?? Omitted::VALUE,
+                'ttlSecs' => $ttlSecs ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -98,7 +102,10 @@ final class MediaService implements MediaContract
         Filter|array|null $filter = null,
         RequestOptions|array|null $requestOptions = null,
     ): MediaListResponse {
-        $params = Util::removeNulls(['filter' => $filter]);
+        $params = array_filter(
+            ['filter' => $filter ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -164,12 +171,13 @@ final class MediaService implements MediaContract
         ?int $ttlSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): MediaUploadResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'mediaURL' => $mediaURL,
-                'mediaName' => $mediaName,
-                'ttlSecs' => $ttlSecs,
+                'mediaName' => $mediaName ?? Omitted::VALUE,
+                'ttlSecs' => $ttlSecs ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

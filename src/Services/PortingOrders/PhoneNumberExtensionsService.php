@@ -6,7 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionCreateParams\ExtensionRange;
@@ -62,13 +62,11 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
         string $portingPhoneNumberID,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberExtensionNewResponse {
-        $params = Util::removeNulls(
-            [
-                'activationRanges' => $activationRanges,
-                'extensionRange' => $extensionRange,
-                'portingPhoneNumberID' => $portingPhoneNumberID,
-            ],
-        );
+        $params = [
+            'activationRanges' => $activationRanges,
+            'extensionRange' => $extensionRange,
+            'portingPhoneNumberID' => $portingPhoneNumberID,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($portingOrderID, params: $params, requestOptions: $requestOptions);
@@ -98,13 +96,14 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
         Sort|array|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -129,7 +128,7 @@ final class PhoneNumberExtensionsService implements PhoneNumberExtensionsContrac
         string $portingOrderID,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberExtensionDeleteResponse {
-        $params = Util::removeNulls(['portingOrderID' => $portingOrderID]);
+        $params = ['portingOrderID' => $portingOrderID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);

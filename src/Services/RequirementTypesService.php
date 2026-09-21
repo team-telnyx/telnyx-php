@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementTypes\RequirementTypeGetResponse;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Filter;
@@ -71,7 +71,12 @@ final class RequirementTypesService implements RequirementTypesContract
         ?array $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): RequirementTypeListResponse {
-        $params = Util::removeNulls(['filter' => $filter, 'sort' => $sort]);
+        $params = array_filter(
+            [
+                'filter' => $filter ?? Omitted::VALUE, 'sort' => $sort ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

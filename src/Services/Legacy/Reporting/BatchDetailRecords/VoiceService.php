@@ -6,7 +6,7 @@ namespace Telnyx\Services\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceGetFieldsResponse;
@@ -75,22 +75,23 @@ final class VoiceService implements VoiceContract
         ?string $timezone = null,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'endTime' => $endTime,
                 'startTime' => $startTime,
-                'callTypes' => $callTypes,
-                'connections' => $connections,
-                'fields' => $fields,
-                'filters' => $filters,
-                'includeAllMetadata' => $includeAllMetadata,
-                'managedAccounts' => $managedAccounts,
-                'recordTypes' => $recordTypes,
-                'reportName' => $reportName,
-                'selectAllManagedAccounts' => $selectAllManagedAccounts,
-                'source' => $source,
-                'timezone' => $timezone,
+                'callTypes' => $callTypes ?? Omitted::VALUE,
+                'connections' => $connections ?? Omitted::VALUE,
+                'fields' => $fields ?? Omitted::VALUE,
+                'filters' => $filters ?? Omitted::VALUE,
+                'includeAllMetadata' => $includeAllMetadata ?? Omitted::VALUE,
+                'managedAccounts' => $managedAccounts ?? Omitted::VALUE,
+                'recordTypes' => $recordTypes ?? Omitted::VALUE,
+                'reportName' => $reportName ?? Omitted::VALUE,
+                'selectAllManagedAccounts' => $selectAllManagedAccounts ?? Omitted::VALUE,
+                'source' => $source ?? Omitted::VALUE,
+                'timezone' => $timezone ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -6,7 +6,7 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailCreateParams\Greeting;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailGetResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailNewResponse;
@@ -56,8 +56,13 @@ final class VoicemailService implements VoicemailContract
         ?string $pin = null,
         RequestOptions|array|null $requestOptions = null,
     ): VoicemailNewResponse {
-        $params = Util::removeNulls(
-            ['enabled' => $enabled, 'greeting' => $greeting, 'pin' => $pin]
+        $params = array_filter(
+            [
+                'enabled' => $enabled ?? Omitted::VALUE,
+                'greeting' => $greeting ?? Omitted::VALUE,
+                'pin' => $pin ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -106,8 +111,13 @@ final class VoicemailService implements VoicemailContract
         ?string $pin = null,
         RequestOptions|array|null $requestOptions = null,
     ): VoicemailUpdateResponse {
-        $params = Util::removeNulls(
-            ['enabled' => $enabled, 'greeting' => $greeting, 'pin' => $pin]
+        $params = array_filter(
+            [
+                'enabled' => $enabled ?? Omitted::VALUE,
+                'greeting' => $greeting ?? Omitted::VALUE,
+                'pin' => $pin ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

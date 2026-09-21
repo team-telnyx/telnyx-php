@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Creates a background job to update the emergency settings of a collection of phone numbers. At most one thousand numbers can be updated per API call.
@@ -76,14 +77,14 @@ final class JobUpdateEmergencySettingsBatchParams implements BaseModel
     public static function with(
         bool $emergencyEnabled,
         array $phoneNumbers,
-        ?string $emergencyAddressID = null,
+        string|Omitted|null $emergencyAddressID = Omitted::VALUE,
     ): self {
         $self = new self;
 
         $self['emergencyEnabled'] = $emergencyEnabled;
         $self['phoneNumbers'] = $phoneNumbers;
 
-        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
+        Omitted::VALUE !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
 
         return $self;
     }

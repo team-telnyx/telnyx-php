@@ -7,6 +7,7 @@ namespace Telnyx\VoiceDesigns;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\VoiceDesigns\VoiceDesignData\Provider;
 use Telnyx\VoiceDesigns\VoiceDesignData\RecordType;
 
@@ -128,18 +129,18 @@ final class VoiceDesignData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Provider|value-of<Provider>|null $provider
+     * @param Omitted|Provider|value-of<Provider>|null $provider
      * @param list<string>|null $providerSupportedModels
      * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
+        Omitted|Provider|string|null $provider = Omitted::VALUE,
+        string|Omitted|null $providerVoiceID = Omitted::VALUE,
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $name = null,
         ?string $prompt = null,
-        Provider|string|null $provider = null,
         ?array $providerSupportedModels = null,
-        ?string $providerVoiceID = null,
         RecordType|string|null $recordType = null,
         ?string $text = null,
         ?\DateTimeInterface $updatedAt = null,
@@ -153,9 +154,9 @@ final class VoiceDesignData implements BaseModel
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $name && $self['name'] = $name;
         null !== $prompt && $self['prompt'] = $prompt;
-        null !== $provider && $self['provider'] = $provider;
+        Omitted::VALUE !== $provider && $self['provider'] = $provider;
         null !== $providerSupportedModels && $self['providerSupportedModels'] = $providerSupportedModels;
-        null !== $providerVoiceID && $self['providerVoiceID'] = $providerVoiceID;
+        Omitted::VALUE !== $providerVoiceID && $self['providerVoiceID'] = $providerVoiceID;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $text && $self['text'] = $text;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;

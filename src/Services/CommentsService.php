@@ -12,7 +12,7 @@ use Telnyx\Comments\CommentListResponse;
 use Telnyx\Comments\CommentMarkAsReadResponse;
 use Telnyx\Comments\CommentNewResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CommentsContract;
 
@@ -53,12 +53,13 @@ final class CommentsService implements CommentsContract
         CommentRecordType|string|null $commentRecordType = null,
         RequestOptions|array|null $requestOptions = null,
     ): CommentNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'body' => $body,
-                'commentRecordID' => $commentRecordID,
-                'commentRecordType' => $commentRecordType,
+                'body' => $body ?? Omitted::VALUE,
+                'commentRecordID' => $commentRecordID ?? Omitted::VALUE,
+                'commentRecordType' => $commentRecordType ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -101,7 +102,10 @@ final class CommentsService implements CommentsContract
         Filter|array|null $filter = null,
         RequestOptions|array|null $requestOptions = null,
     ): CommentListResponse {
-        $params = Util::removeNulls(['filter' => $filter]);
+        $params = array_filter(
+            ['filter' => $filter ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -6,7 +6,7 @@ namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\CallsContract;
 use Telnyx\Services\Texml\Accounts\Calls\RecordingsJsonService;
@@ -91,7 +91,7 @@ final class CallsService implements CallsContract
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
     ): CallResource {
-        $params = Util::removeNulls(['accountSid' => $accountSid]);
+        $params = ['accountSid' => $accountSid];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($callSid, params: $params, requestOptions: $requestOptions);
@@ -131,18 +131,19 @@ final class CallsService implements CallsContract
         ?string $url = null,
         RequestOptions|array|null $requestOptions = null,
     ): CallResource {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'accountSid' => $accountSid,
-                'fallbackMethod' => $fallbackMethod,
-                'fallbackURL' => $fallbackURL,
-                'method' => $method,
-                'status' => $status,
-                'statusCallback' => $statusCallback,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'texml' => $texml,
-                'url' => $url,
+                'fallbackMethod' => $fallbackMethod ?? Omitted::VALUE,
+                'fallbackURL' => $fallbackURL ?? Omitted::VALUE,
+                'method' => $method ?? Omitted::VALUE,
+                'status' => $status ?? Omitted::VALUE,
+                'statusCallback' => $statusCallback ?? Omitted::VALUE,
+                'statusCallbackMethod' => $statusCallbackMethod ?? Omitted::VALUE,
+                'texml' => $texml ?? Omitted::VALUE,
+                'url' => $url ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -167,7 +168,7 @@ final class CallsService implements CallsContract
         WithURL|array|WithTeXml|ApplicationDefault $body,
         RequestOptions|array|null $requestOptions = null,
     ): CallCallsResponse {
-        $params = Util::removeNulls(['body' => $body]);
+        $params = ['body' => $body];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->calls($accountSid, params: $params, requestOptions: $requestOptions);
@@ -213,21 +214,22 @@ final class CallsService implements CallsContract
         ?string $to = null,
         RequestOptions|array|null $requestOptions = null,
     ): CallGetCallsResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'endTime' => $endTime,
-                'endTimeGt' => $endTimeGt,
-                'endTimeLt' => $endTimeLt,
-                'from' => $from,
-                'page' => $page,
-                'pageSize' => $pageSize,
-                'pageToken' => $pageToken,
-                'startTime' => $startTime,
-                'startTimeGt' => $startTimeGt,
-                'startTimeLt' => $startTimeLt,
-                'status' => $status,
-                'to' => $to,
+                'endTime' => $endTime ?? Omitted::VALUE,
+                'endTimeGt' => $endTimeGt ?? Omitted::VALUE,
+                'endTimeLt' => $endTimeLt ?? Omitted::VALUE,
+                'from' => $from ?? Omitted::VALUE,
+                'page' => $page ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'pageToken' => $pageToken ?? Omitted::VALUE,
+                'startTime' => $startTime ?? Omitted::VALUE,
+                'startTimeGt' => $startTimeGt ?? Omitted::VALUE,
+                'startTimeLt' => $startTimeLt ?? Omitted::VALUE,
+                'status' => $status ?? Omitted::VALUE,
+                'to' => $to ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -270,19 +272,20 @@ final class CallsService implements CallsContract
         Track|string|null $track = null,
         RequestOptions|array|null $requestOptions = null,
     ): CallSiprecJsonResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'accountSid' => $accountSid,
-                'connectorName' => $connectorName,
-                'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders,
-                'name' => $name,
-                'secure' => $secure,
+                'connectorName' => $connectorName ?? Omitted::VALUE,
+                'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders ?? Omitted::VALUE,
+                'name' => $name ?? Omitted::VALUE,
+                'secure' => $secure ?? Omitted::VALUE,
                 'sessionTimeoutSecs' => $sessionTimeoutSecs,
                 'sipTransport' => $sipTransport,
-                'statusCallback' => $statusCallback,
-                'statusCallbackMethod' => $statusCallbackMethod,
-                'track' => $track,
+                'statusCallback' => $statusCallback ?? Omitted::VALUE,
+                'statusCallbackMethod' => $statusCallbackMethod ?? Omitted::VALUE,
+                'track' => $track ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -321,17 +324,18 @@ final class CallsService implements CallsContract
         ?string $url = null,
         RequestOptions|array|null $requestOptions = null,
     ): CallStreamsJsonResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'accountSid' => $accountSid,
                 'bidirectionalCodec' => $bidirectionalCodec,
                 'bidirectionalMode' => $bidirectionalMode,
-                'name' => $name,
-                'statusCallback' => $statusCallback,
+                'name' => $name ?? Omitted::VALUE,
+                'statusCallback' => $statusCallback ?? Omitted::VALUE,
                 'statusCallbackMethod' => $statusCallbackMethod,
                 'track' => $track,
-                'url' => $url,
+                'url' => $url ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

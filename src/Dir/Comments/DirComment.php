@@ -7,6 +7,7 @@ namespace Telnyx\Dir\Comments;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Dir\Comments\DirComment\AuthorRole;
 use Telnyx\Dir\Comments\DirComment\EntityType;
 use Telnyx\Dir\Comments\DirComment\Visibility;
@@ -91,8 +92,8 @@ final class DirComment implements BaseModel
      * @param Visibility|value-of<Visibility>|null $visibility
      */
     public static function with(
+        string|Omitted|null $authorName = Omitted::VALUE,
         ?string $id = null,
-        ?string $authorName = null,
         AuthorRole|string|null $authorRole = null,
         CommentType|string|null $commentType = null,
         ?string $content = null,
@@ -103,7 +104,7 @@ final class DirComment implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $authorName && $self['authorName'] = $authorName;
+        Omitted::VALUE !== $authorName && $self['authorName'] = $authorName;
         null !== $authorRole && $self['authorRole'] = $authorRole;
         null !== $commentType && $self['commentType'] = $commentType;
         null !== $content && $self['content'] = $content;

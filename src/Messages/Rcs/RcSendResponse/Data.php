@@ -7,6 +7,7 @@ namespace Telnyx\Messages\Rcs\RcSendResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Messages\Rcs\RcSendResponse\Data\From;
 use Telnyx\Messages\RcsAgentMessage;
 use Telnyx\Messages\RcsToItem;
@@ -94,6 +95,7 @@ final class Data implements BaseModel
      * @param list<RcsToItem|RcsToItemShape>|null $to
      */
     public static function with(
+        float|Omitted|null $waitSeconds = Omitted::VALUE,
         ?string $id = null,
         RcsAgentMessage|array|null $body = null,
         ?string $direction = null,
@@ -105,7 +107,6 @@ final class Data implements BaseModel
         ?string $recordType = null,
         ?array $to = null,
         ?string $type = null,
-        ?float $waitSeconds = null,
     ): self {
         $self = new self;
 
@@ -120,7 +121,7 @@ final class Data implements BaseModel
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $to && $self['to'] = $to;
         null !== $type && $self['type'] = $type;
-        null !== $waitSeconds && $self['waitSeconds'] = $waitSeconds;
+        Omitted::VALUE !== $waitSeconds && $self['waitSeconds'] = $waitSeconds;
 
         return $self;
     }

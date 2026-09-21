@@ -7,7 +7,6 @@ namespace Telnyx\Services\Whatsapp\PhoneNumbers\Profile;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\FileParam;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbers\Profile\PhotoContract;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoGetResponse;
@@ -89,7 +88,7 @@ final class PhotoService implements PhotoContract
         string|FileParam $file,
         RequestOptions|array|null $requestOptions = null,
     ): PhotoUploadResponse {
-        $params = Util::removeNulls(['file' => $file]);
+        $params = ['file' => $file];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->upload($phoneNumber, params: $params, requestOptions: $requestOptions);

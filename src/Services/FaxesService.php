@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Faxes\Fax;
 use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
@@ -106,24 +106,25 @@ final class FaxesService implements FaxesContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): FaxNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'connectionID' => $connectionID,
                 'from' => $from,
                 'to' => $to,
                 'blackThreshold' => $blackThreshold,
-                'clientState' => $clientState,
-                'fromDisplayName' => $fromDisplayName,
-                'mediaName' => $mediaName,
-                'mediaURL' => $mediaURL,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'fromDisplayName' => $fromDisplayName ?? Omitted::VALUE,
+                'mediaName' => $mediaName ?? Omitted::VALUE,
+                'mediaURL' => $mediaURL ?? Omitted::VALUE,
                 'monochrome' => $monochrome,
                 'previewFormat' => $previewFormat,
                 'quality' => $quality,
                 'storeMedia' => $storeMedia,
                 'storePreview' => $storePreview,
                 't38Enabled' => $t38Enabled,
-                'webhookURL' => $webhookURL,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -170,12 +171,13 @@ final class FaxesService implements FaxesContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

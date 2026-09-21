@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnection;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Inbound;
@@ -63,23 +63,24 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
         Outbound|array|null $outbound = null,
         ?array $tags = null,
         WebhookAPIVersion|string $webhookAPIVersion = '2',
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookEventURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): MobileVoiceConnectionNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'active' => $active,
                 'connectionName' => $connectionName,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
-                'tags' => $tags,
+                'inbound' => $inbound ?? Omitted::VALUE,
+                'outbound' => $outbound ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
                 'webhookAPIVersion' => $webhookAPIVersion,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
                 'webhookEventURL' => $webhookEventURL,
                 'webhookTimeoutSecs' => $webhookTimeoutSecs,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -130,23 +131,24 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
         \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Outbound|array|null $outbound = null,
         ?array $tags = null,
         \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookEventURL = Omitted::VALUE,
         ?int $webhookTimeoutSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): MobileVoiceConnectionUpdateResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'active' => $active,
-                'connectionName' => $connectionName,
-                'inbound' => $inbound,
-                'outbound' => $outbound,
-                'tags' => $tags,
-                'webhookAPIVersion' => $webhookAPIVersion,
+                'active' => $active ?? Omitted::VALUE,
+                'connectionName' => $connectionName ?? Omitted::VALUE,
+                'inbound' => $inbound ?? Omitted::VALUE,
+                'outbound' => $outbound ?? Omitted::VALUE,
+                'tags' => $tags ?? Omitted::VALUE,
+                'webhookAPIVersion' => $webhookAPIVersion ?? Omitted::VALUE,
                 'webhookEventFailoverURL' => $webhookEventFailoverURL,
                 'webhookEventURL' => $webhookEventURL,
-                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -177,13 +179,14 @@ final class MobileVoiceConnectionsService implements MobileVoiceConnectionsContr
         ?string $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterConnectionNameContains' => $filterConnectionNameContains,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'filterConnectionNameContains' => $filterConnectionNameContains ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

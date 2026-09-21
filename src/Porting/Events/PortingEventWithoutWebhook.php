@@ -7,6 +7,7 @@ namespace Telnyx\Porting\Events;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Porting\Events\PortingEventWithoutWebhook\AvailableNotificationMethod;
 use Telnyx\Porting\Events\PortingEventWithoutWebhook\EventType;
 use Telnyx\Porting\Events\PortingEventWithoutWebhook\PayloadStatus;
@@ -105,11 +106,11 @@ final class PortingEventWithoutWebhook implements BaseModel
      * @param PayloadStatus|value-of<PayloadStatus>|null $payloadStatus
      */
     public static function with(
+        ?Omitted $payload = Omitted::VALUE,
         ?string $id = null,
         ?array $availableNotificationMethods = null,
         ?\DateTimeInterface $createdAt = null,
         EventType|string|null $eventType = null,
-        null $payload = null,
         PayloadStatus|string|null $payloadStatus = null,
         ?string $portingOrderID = null,
         ?string $recordType = null,
@@ -117,12 +118,11 @@ final class PortingEventWithoutWebhook implements BaseModel
     ): self {
         $self = new self;
 
-        $self['payload'] = $payload;
-
         null !== $id && $self['id'] = $id;
         null !== $availableNotificationMethods && $self['availableNotificationMethods'] = $availableNotificationMethods;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $eventType && $self['eventType'] = $eventType;
+        Omitted::VALUE !== $payload && $self['payload'] = $payload;
         null !== $payloadStatus && $self['payloadStatus'] = $payloadStatus;
         null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
         null !== $recordType && $self['recordType'] = $recordType;

@@ -6,7 +6,6 @@ namespace Telnyx\Services\AI\Missions;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Missions\McpServersContract;
 
@@ -64,7 +63,7 @@ final class McpServersService implements McpServersContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteMcpServer($mcpServerID, params: $params, requestOptions: $requestOptions);
@@ -88,7 +87,7 @@ final class McpServersService implements McpServersContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getMcpServer($mcpServerID, params: $params, requestOptions: $requestOptions);
@@ -132,7 +131,7 @@ final class McpServersService implements McpServersContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateMcpServer($mcpServerID, params: $params, requestOptions: $requestOptions);

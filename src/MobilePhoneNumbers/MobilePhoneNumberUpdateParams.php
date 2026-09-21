@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording;
 use Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CnamListing;
@@ -100,12 +101,12 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
      * @param list<string>|null $tags
      */
     public static function with(
+        string|Omitted|null $connectionID = Omitted::VALUE,
+        string|Omitted|null $customerReference = Omitted::VALUE,
         CallForwarding|array|null $callForwarding = null,
         CallRecording|array|null $callRecording = null,
         ?bool $callerIDNameEnabled = null,
         CnamListing|array|null $cnamListing = null,
-        ?string $connectionID = null,
-        ?string $customerReference = null,
         Inbound|array|null $inbound = null,
         InboundCallScreening|string|null $inboundCallScreening = null,
         ?bool $noiseSuppression = null,
@@ -118,8 +119,8 @@ final class MobilePhoneNumberUpdateParams implements BaseModel
         null !== $callRecording && $self['callRecording'] = $callRecording;
         null !== $callerIDNameEnabled && $self['callerIDNameEnabled'] = $callerIDNameEnabled;
         null !== $cnamListing && $self['cnamListing'] = $cnamListing;
-        null !== $connectionID && $self['connectionID'] = $connectionID;
-        null !== $customerReference && $self['customerReference'] = $customerReference;
+        Omitted::VALUE !== $connectionID && $self['connectionID'] = $connectionID;
+        Omitted::VALUE !== $customerReference && $self['customerReference'] = $customerReference;
         null !== $inbound && $self['inbound'] = $inbound;
         null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
         null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;

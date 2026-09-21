@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\CustomStorageCredentials\AzureConfigurationData;
 use Telnyx\CustomStorageCredentials\CredentialsResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
@@ -56,9 +55,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
         GcsConfigurationData|array|S3ConfigurationData|S3GenericConfigurationData|AzureConfigurationData $configuration,
         RequestOptions|array|null $requestOptions = null,
     ): CredentialsResponse {
-        $params = Util::removeNulls(
-            ['backend' => $backend, 'configuration' => $configuration]
-        );
+        $params = ['backend' => $backend, 'configuration' => $configuration];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($connectionID, params: $params, requestOptions: $requestOptions);
@@ -104,9 +101,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
         GcsConfigurationData|array|S3ConfigurationData|S3GenericConfigurationData|AzureConfigurationData $configuration,
         RequestOptions|array|null $requestOptions = null,
     ): CredentialsResponse {
-        $params = Util::removeNulls(
-            ['backend' => $backend, 'configuration' => $configuration]
-        );
+        $params = ['backend' => $backend, 'configuration' => $configuration];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($connectionID, params: $params, requestOptions: $requestOptions);

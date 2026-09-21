@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\Assistant;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\Avatar;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSessionCameraImageBase64Source;
@@ -94,22 +94,23 @@ final class MeetingSessionsService implements MeetingSessionsContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): MeetingSessionResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'meetingURL' => $meetingURL,
-                'assistant' => $assistant,
-                'avatar' => $avatar,
+                'assistant' => $assistant ?? Omitted::VALUE,
+                'avatar' => $avatar ?? Omitted::VALUE,
                 'bargeIn' => $bargeIn,
-                'botName' => $botName,
-                'cameraImage' => $cameraImage,
-                'idempotencyKey' => $idempotencyKey,
-                'joinAt' => $joinAt,
-                'metadata' => $metadata,
-                'speakOnEnter' => $speakOnEnter,
+                'botName' => $botName ?? Omitted::VALUE,
+                'cameraImage' => $cameraImage ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
+                'joinAt' => $joinAt ?? Omitted::VALUE,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'speakOnEnter' => $speakOnEnter ?? Omitted::VALUE,
                 'summarizeOnEnd' => $summarizeOnEnd,
-                'voice' => $voice,
-                'webhookURL' => $webhookURL,
+                'voice' => $voice ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -156,7 +157,13 @@ final class MeetingSessionsService implements MeetingSessionsContract
         ?\DateTimeInterface $joinAt = null,
         RequestOptions|array|null $requestOptions = null,
     ): MeetingSessionResponse {
-        $params = Util::removeNulls(['botName' => $botName, 'joinAt' => $joinAt]);
+        $params = array_filter(
+            [
+                'botName' => $botName ?? Omitted::VALUE,
+                'joinAt' => $joinAt ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -178,7 +185,10 @@ final class MeetingSessionsService implements MeetingSessionsContract
         Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): MeetingSessionListResponse {
-        $params = Util::removeNulls(['status' => $status]);
+        $params = array_filter(
+            ['status' => $status ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -244,7 +254,7 @@ final class MeetingSessionsService implements MeetingSessionsContract
         int $limit = 100,
         RequestOptions|array|null $requestOptions = null,
     ): MeetingSessionGetEventsResponse {
-        $params = Util::removeNulls(['after' => $after, 'limit' => $limit]);
+        $params = ['after' => $after, 'limit' => $limit];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveEvents($id, params: $params, requestOptions: $requestOptions);
@@ -292,9 +302,9 @@ final class MeetingSessionsService implements MeetingSessionsContract
         int $waitSeconds = 0,
         RequestOptions|array|null $requestOptions = null,
     ): MeetingSessionGetTranscriptResponse {
-        $params = Util::removeNulls(
-            ['after' => $after, 'limit' => $limit, 'waitSeconds' => $waitSeconds]
-        );
+        $params = [
+            'after' => $after, 'limit' => $limit, 'waitSeconds' => $waitSeconds,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveTranscript($id, params: $params, requestOptions: $requestOptions);

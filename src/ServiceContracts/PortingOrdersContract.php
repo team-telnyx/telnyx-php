@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrderDocuments;
@@ -46,7 +47,7 @@ interface PortingOrdersContract
      *
      * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers
      * @param string $customerGroupReference A customer-specified group reference for customer bookkeeping purposes
-     * @param string|null $customerReference A customer-specified reference number for customer bookkeeping purposes
+     * @param string|Omitted|null $customerReference A customer-specified reference number for customer bookkeeping purposes
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -54,7 +55,7 @@ interface PortingOrdersContract
     public function create(
         array $phoneNumbers,
         ?string $customerGroupReference = null,
-        ?string $customerReference = null,
+        string|Omitted|null $customerReference = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): PortingOrderNewResponse;
 
@@ -81,7 +82,7 @@ interface PortingOrdersContract
      * @param PortingOrderDocuments|PortingOrderDocumentsShape $documents can be specified directly or via the `requirement_group_id` parameter
      * @param PortingOrderEndUser|PortingOrderEndUserShape $endUser
      * @param Messaging|MessagingShape $messaging
-     * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
+     * @param Omitted|PortingOrderMisc|PortingOrderMiscShape|null $misc
      * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape $phoneNumberConfiguration
      * @param string $requirementGroupID If present, we will read the current values from the specified Requirement Group into the Documents and Requirements for this Porting Order. Note that any future changes in the Requirement Group would have no impact on this Porting Order. We will return an error if a specified Requirement Group conflicts with documents or requirements in the same request.
      * @param list<Requirement|RequirementShape> $requirements list of requirements for porting numbers
@@ -98,7 +99,7 @@ interface PortingOrdersContract
         PortingOrderDocuments|array|null $documents = null,
         PortingOrderEndUser|array|null $endUser = null,
         Messaging|array|null $messaging = null,
-        PortingOrderMisc|array|null $misc = null,
+        Omitted|PortingOrderMisc|array|null $misc = Omitted::VALUE,
         PortingOrderPhoneNumberConfiguration|array|null $phoneNumberConfiguration = null,
         ?string $requirementGroupID = null,
         ?array $requirements = null,

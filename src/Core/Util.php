@@ -144,12 +144,18 @@ final class Util
             return $key($array);
         }
 
+        if ([] === $key) {
+            return $array;
+        }
+        if ($array instanceof \stdClass) {
+            $array = get_object_vars($array);
+        }
         if (is_array($array)) {
             if ((is_string($key) || is_int($key)) && array_key_exists($key, array: $array)) {
                 return $array[$key];
             }
 
-            if (is_array($key) && !empty($key)) {
+            if (is_array($key)) {
                 if (array_key_exists($fst = $key[0], array: $array)) {
                     return self::dig($array[$fst], key: array_slice($key, 1));
                 }
@@ -208,13 +214,35 @@ final class Util
         parse_str($parsed['query'] ?? '', $q2);
 
         $mergedQuery = array_merge_recursive($q1, $q2, $query);
+        $parts = [];
 
-        /** @var array<string,mixed> */
-        $normalizedQuery = self::mapRecursive(
-            static fn ($v) => is_bool($v) || is_numeric($v) ? self::strVal($v) : $v,
-            value: $mergedQuery
-        );
-        $qs = http_build_query($normalizedQuery, encoding_type: PHP_QUERY_RFC3986);
+        /** @var \Closure(string,mixed):void $append */
+        $append = static function (string $key, mixed $value) use (&$append, &$parts): void {
+            if (is_null($value)) {
+                return;
+            }
+
+            if (is_array($value)) {
+                if (array_is_list($value)) {
+                    $parts[] = rawurlencode($key).'='.rawurlencode(implode(',', array_map(static fn ($item) => self::strVal($item), $value)));
+
+                    return;
+                }
+
+                foreach ($value as $nestedName => $nestedValue) {
+                    $append("{$key}[{$nestedName}]", $nestedValue);
+                }
+
+                return;
+            }
+
+            $parts[] = rawurlencode($key).'='.rawurlencode(self::strVal($value));
+        };
+
+        foreach ($mergedQuery as $key => $value) {
+            $append($key, $value);
+        }
+        $qs = implode('&', $parts);
 
         return $base->withQuery($qs);
     }
@@ -403,7 +431,7 @@ final class Util
 
     public static function decodeJson(string $json): mixed
     {
-        return json_decode($json, associative: true, flags: JSON_THROW_ON_ERROR);
+        return json_decode($json, associative: false, flags: JSON_THROW_ON_ERROR);
     }
 
     public static function decodeContent(ResponseInterface $rsp): mixed

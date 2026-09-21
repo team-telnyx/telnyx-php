@@ -10,6 +10,7 @@ use Telnyx\AI\Assistants\WidgetSettings\Theme;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Configuration settings for the assistant's web widget.
@@ -120,31 +121,31 @@ final class WidgetSettings implements BaseModel
      * @param Theme|value-of<Theme>|null $theme
      */
     public static function with(
+        string|Omitted|null $giveFeedbackURL = Omitted::VALUE,
+        string|Omitted|null $logoIconURL = Omitted::VALUE,
+        string|Omitted|null $reportIssueURL = Omitted::VALUE,
+        string|Omitted|null $viewHistoryURL = Omitted::VALUE,
         ?string $agentThinkingText = null,
         AudioVisualizerConfig|array|null $audioVisualizerConfig = null,
         DefaultState|string|null $defaultState = null,
-        ?string $giveFeedbackURL = null,
-        ?string $logoIconURL = null,
         Position|string|null $position = null,
-        ?string $reportIssueURL = null,
         ?string $speakToInterruptText = null,
         ?string $startCallText = null,
         Theme|string|null $theme = null,
-        ?string $viewHistoryURL = null,
     ): self {
         $self = new self;
 
         null !== $agentThinkingText && $self['agentThinkingText'] = $agentThinkingText;
         null !== $audioVisualizerConfig && $self['audioVisualizerConfig'] = $audioVisualizerConfig;
         null !== $defaultState && $self['defaultState'] = $defaultState;
-        null !== $giveFeedbackURL && $self['giveFeedbackURL'] = $giveFeedbackURL;
-        null !== $logoIconURL && $self['logoIconURL'] = $logoIconURL;
+        Omitted::VALUE !== $giveFeedbackURL && $self['giveFeedbackURL'] = $giveFeedbackURL;
+        Omitted::VALUE !== $logoIconURL && $self['logoIconURL'] = $logoIconURL;
         null !== $position && $self['position'] = $position;
-        null !== $reportIssueURL && $self['reportIssueURL'] = $reportIssueURL;
+        Omitted::VALUE !== $reportIssueURL && $self['reportIssueURL'] = $reportIssueURL;
         null !== $speakToInterruptText && $self['speakToInterruptText'] = $speakToInterruptText;
         null !== $startCallText && $self['startCallText'] = $startCallText;
         null !== $theme && $self['theme'] = $theme;
-        null !== $viewHistoryURL && $self['viewHistoryURL'] = $viewHistoryURL;
+        Omitted::VALUE !== $viewHistoryURL && $self['viewHistoryURL'] = $viewHistoryURL;
 
         return $self;
     }

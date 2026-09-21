@@ -6,7 +6,6 @@ namespace Telnyx\Services\ExternalRequirements;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\ExternalRequirements\SubNumberOrders\SubNumberOrderGetResponse;
 use Telnyx\ExternalRequirements\SubNumberOrders\SubNumberOrderUpdateParams\Requirement;
 use Telnyx\ExternalRequirements\SubNumberOrders\SubNumberOrderUpdateResponse;
@@ -50,9 +49,7 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
         string $regulatoryRequirementID,
         RequestOptions|array|null $requestOptions = null,
     ): SubNumberOrderGetResponse {
-        $params = Util::removeNulls(
-            ['regulatoryRequirementID' => $regulatoryRequirementID]
-        );
+        $params = ['regulatoryRequirementID' => $regulatoryRequirementID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($subNumberOrderID, params: $params, requestOptions: $requestOptions);
@@ -78,12 +75,10 @@ final class SubNumberOrdersService implements SubNumberOrdersContract
         Requirement|array $requirement,
         RequestOptions|array|null $requestOptions = null,
     ): SubNumberOrderUpdateResponse {
-        $params = Util::removeNulls(
-            [
-                'regulatoryRequirementID' => $regulatoryRequirementID,
-                'requirement' => $requirement,
-            ],
-        );
+        $params = [
+            'regulatoryRequirementID' => $regulatoryRequirementID,
+            'requirement' => $requirement,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($subNumberOrderID, params: $params, requestOptions: $requestOptions);

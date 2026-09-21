@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Inbound;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Outbound;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\WebhookAPIVersion;
@@ -83,15 +84,15 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
      * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookEventURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         ?bool $active = null,
         ?string $connectionName = null,
         Inbound|array|null $inbound = null,
         Outbound|array|null $outbound = null,
         ?array $tags = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
     ): self {
         $self = new self;
 
@@ -101,9 +102,9 @@ final class MobileVoiceConnectionCreateParams implements BaseModel
         null !== $outbound && $self['outbound'] = $outbound;
         null !== $tags && $self['tags'] = $tags;
         null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        Omitted::VALUE !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        Omitted::VALUE !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        Omitted::VALUE !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $self;
     }

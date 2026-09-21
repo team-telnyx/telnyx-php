@@ -8,6 +8,7 @@ use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Webhooks\CallHangup\Payload\CallQualityStats;
 use Telnyx\Webhooks\CallHangup\Payload\HangupCause;
 use Telnyx\Webhooks\CallHangup\Payload\HangupSource;
@@ -161,7 +162,7 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallQualityStats|CallQualityStatsShape|null $callQualityStats
+     * @param Omitted|CallQualityStats|CallQualityStatsShape|null $callQualityStats
      * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
      * @param HangupCause|value-of<HangupCause>|null $hangupCause
      * @param HangupSource|value-of<HangupSource>|null $hangupSource
@@ -170,9 +171,9 @@ final class Payload implements BaseModel
      * @param list<string>|null $tags
      */
     public static function with(
+        Omitted|CallQualityStats|array|null $callQualityStats = Omitted::VALUE,
         ?string $callControlID = null,
         ?string $callLegID = null,
-        CallQualityStats|array|null $callQualityStats = null,
         ?string $callSessionID = null,
         ?string $clientState = null,
         ?string $connectionID = null,
@@ -191,7 +192,7 @@ final class Payload implements BaseModel
 
         null !== $callControlID && $self['callControlID'] = $callControlID;
         null !== $callLegID && $self['callLegID'] = $callLegID;
-        null !== $callQualityStats && $self['callQualityStats'] = $callQualityStats;
+        Omitted::VALUE !== $callQualityStats && $self['callQualityStats'] = $callQualityStats;
         null !== $callSessionID && $self['callSessionID'] = $callSessionID;
         null !== $clientState && $self['clientState'] = $clientState;
         null !== $connectionID && $self['connectionID'] = $connectionID;

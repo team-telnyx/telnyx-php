@@ -7,6 +7,7 @@ namespace Telnyx\MobileVoiceConnections;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnection\Inbound;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnection\Outbound;
 use Telnyx\MobileVoiceConnections\MobileVoiceConnection\RecordType;
@@ -123,13 +124,17 @@ final class MobileVoiceConnection implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      * @param Inbound|InboundShape|null $inbound
      * @param Outbound|OutboundShape|null $outbound
      * @param RecordType|value-of<RecordType>|null $recordType
      * @param list<string>|null $tags
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
+        Omitted|WebhookAPIVersion|string|null $webhookAPIVersion = Omitted::VALUE,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        string|Omitted|null $webhookEventURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         ?string $id = null,
         ?bool $active = null,
         ?string $connectionName = null,
@@ -139,10 +144,6 @@ final class MobileVoiceConnection implements BaseModel
         RecordType|string|null $recordType = null,
         ?array $tags = null,
         ?\DateTimeInterface $updatedAt = null,
-        WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
-        ?string $webhookEventURL = null,
-        ?int $webhookTimeoutSecs = null,
     ): self {
         $self = new self;
 
@@ -155,10 +156,10 @@ final class MobileVoiceConnection implements BaseModel
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $tags && $self['tags'] = $tags;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
-        null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        Omitted::VALUE !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
+        Omitted::VALUE !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        Omitted::VALUE !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        Omitted::VALUE !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $self;
     }

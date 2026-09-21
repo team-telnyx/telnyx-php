@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SiprecConnectorsContract;
 use Telnyx\SiprecConnectors\SiprecConnectorResponse;
@@ -51,13 +51,14 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
         ?string $appSubdomain = null,
         RequestOptions|array|null $requestOptions = null,
     ): SiprecConnectorResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'host' => $host,
                 'name' => $name,
                 'port' => $port,
-                'appSubdomain' => $appSubdomain,
+                'appSubdomain' => $appSubdomain ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -108,13 +109,14 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
         ?string $appSubdomain = null,
         RequestOptions|array|null $requestOptions = null,
     ): SiprecConnectorResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'host' => $host,
                 'name' => $name,
                 'port' => $port,
-                'appSubdomain' => $appSubdomain,
+                'appSubdomain' => $appSubdomain ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

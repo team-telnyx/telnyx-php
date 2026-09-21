@@ -7,6 +7,7 @@ namespace Telnyx\PrivateWirelessGateways;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayStatus\Value;
 
 /**
@@ -62,14 +63,14 @@ final class PrivateWirelessGatewayStatus implements BaseModel
      * @param Value|value-of<Value>|null $value
      */
     public static function with(
-        ?string $errorCode = null,
-        ?string $errorDescription = null,
+        string|Omitted|null $errorCode = Omitted::VALUE,
+        string|Omitted|null $errorDescription = Omitted::VALUE,
         Value|string|null $value = null,
     ): self {
         $self = new self;
 
-        null !== $errorCode && $self['errorCode'] = $errorCode;
-        null !== $errorDescription && $self['errorDescription'] = $errorDescription;
+        Omitted::VALUE !== $errorCode && $self['errorCode'] = $errorCode;
+        Omitted::VALUE !== $errorDescription && $self['errorDescription'] = $errorDescription;
         null !== $value && $self['value'] = $value;
 
         return $self;

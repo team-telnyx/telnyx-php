@@ -8,7 +8,6 @@ use Telnyx\CallReasons\CallReasonListResponse;
 use Telnyx\CallReasons\CallReasonValidateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallReasonsContract;
@@ -51,9 +50,7 @@ final class CallReasonsService implements CallReasonsContract
         int $pageSize = 100,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -75,7 +72,7 @@ final class CallReasonsService implements CallReasonsContract
         array $body,
         RequestOptions|array|null $requestOptions = null
     ): CallReasonValidateResponse {
-        $params = Util::removeNulls(['body' => $body]);
+        $params = ['body' => $body];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->validate(params: $params, requestOptions: $requestOptions);

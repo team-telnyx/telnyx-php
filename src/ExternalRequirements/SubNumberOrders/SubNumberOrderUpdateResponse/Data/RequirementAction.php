@@ -7,6 +7,7 @@ namespace Telnyx\ExternalRequirements\SubNumberOrders\SubNumberOrderUpdateRespon
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type RequirementActionShape = array{
@@ -38,13 +39,13 @@ final class RequirementAction implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $type = null,
-        ?string $value = null
+        string|Omitted|null $value = Omitted::VALUE,
+        ?string $type = null
     ): self {
         $self = new self;
 
         null !== $type && $self['type'] = $type;
-        null !== $value && $self['value'] = $value;
+        Omitted::VALUE !== $value && $self['value'] = $value;
 
         return $self;
     }

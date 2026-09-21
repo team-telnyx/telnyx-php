@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\BillingContact;
 use Telnyx\Enterprises\EnterpriseCreateParams\Industry;
@@ -48,11 +49,11 @@ interface EnterprisesContract
      * - `commercial` - for-profit business entities (LLC, corp, partnership, sole proprietorship). Most callers fall here.
      * - `government` - federal/state/local government bodies.
      * - `non_profit` - registered 501(c)(3)/equivalent (incl. educational institutions, charities, religious organisations).
-     * @param string|null $corporateRegistrationNumber optional corporate-registration / company-number identifier
+     * @param string|Omitted|null $corporateRegistrationNumber optional corporate-registration / company-number identifier
      * @param string $customerReference Optional free-form string the caller can attach for their own bookkeeping. Telnyx does not interpret it.
-     * @param string|null $dunBradstreetNumber optional D-U-N-S Number
-     * @param string|null $primaryBusinessDomainSicCode optional SIC code for the primary line of business
-     * @param string|null $professionalLicenseNumber optional professional-license number for regulated industries
+     * @param string|Omitted|null $dunBradstreetNumber optional D-U-N-S Number
+     * @param string|Omitted|null $primaryBusinessDomainSicCode optional SIC code for the primary line of business
+     * @param string|Omitted|null $professionalLicenseNumber optional professional-license number for regulated industries
      * @param RoleType|value-of<RoleType> $roleType `enterprise` for an organization registering its own DIRs; `bpo` for a Business Process Outsourcer placing calls on behalf of one or more enterprises
      * @param RequestOpts|null $requestOptions
      *
@@ -73,11 +74,11 @@ interface EnterprisesContract
         PhysicalAddress|array $organizationPhysicalAddress,
         OrganizationType|string $organizationType,
         string $website,
-        ?string $corporateRegistrationNumber = null,
+        string|Omitted|null $corporateRegistrationNumber = Omitted::VALUE,
         ?string $customerReference = null,
-        ?string $dunBradstreetNumber = null,
-        ?string $primaryBusinessDomainSicCode = null,
-        ?string $professionalLicenseNumber = null,
+        string|Omitted|null $dunBradstreetNumber = Omitted::VALUE,
+        string|Omitted|null $primaryBusinessDomainSicCode = Omitted::VALUE,
+        string|Omitted|null $professionalLicenseNumber = Omitted::VALUE,
         RoleType|string $roleType = 'enterprise',
         RequestOptions|array|null $requestOptions = null,
     ): EnterprisePublicWrapped;
@@ -114,10 +115,10 @@ interface EnterprisesContract
         string $enterpriseID,
         PhysicalAddress|array|null $billingAddress = null,
         BillingContact|array|null $billingContact = null,
-        ?string $corporateRegistrationNumber = null,
+        string|Omitted|null $corporateRegistrationNumber = Omitted::VALUE,
         ?string $customerReference = null,
         ?string $doingBusinessAs = null,
-        ?string $dunBradstreetNumber = null,
+        string|Omitted|null $dunBradstreetNumber = Omitted::VALUE,
         ?string $fein = null,
         \Telnyx\Enterprises\EnterpriseUpdateParams\Industry|string|null $industry = null,
         ?string $jurisdictionOfIncorporation = null,
@@ -126,8 +127,8 @@ interface EnterprisesContract
         OrganizationContact|array|null $organizationContact = null,
         ?string $organizationLegalType = null,
         PhysicalAddress|array|null $organizationPhysicalAddress = null,
-        ?string $primaryBusinessDomainSicCode = null,
-        ?string $professionalLicenseNumber = null,
+        string|Omitted|null $primaryBusinessDomainSicCode = Omitted::VALUE,
+        string|Omitted|null $professionalLicenseNumber = Omitted::VALUE,
         ?string $website = null,
         RequestOptions|array|null $requestOptions = null,
     ): EnterprisePublicWrapped;

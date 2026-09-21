@@ -10,6 +10,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetParams;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetPhoneNumberResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
@@ -99,6 +100,21 @@ interface PhoneNumbersRawContract
         string $phoneNumber,
         array|PhoneNumberRetrieveConversationWindowParams $params,
         RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $phoneNumber Phone number (E.164 format)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<PhoneNumberGetPhoneNumberResponse>
+     *
+     * @throws APIException
+     */
+    public function retrievePhoneNumber(
+        string $phoneNumber,
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**

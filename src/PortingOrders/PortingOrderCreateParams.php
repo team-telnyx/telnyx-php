@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Creates a new porting order to bring phone numbers from another carrier to Telnyx. Complete the order's requirements and then confirm it to submit the port.
@@ -75,15 +76,15 @@ final class PortingOrderCreateParams implements BaseModel
      */
     public static function with(
         array $phoneNumbers,
+        string|Omitted|null $customerReference = Omitted::VALUE,
         ?string $customerGroupReference = null,
-        ?string $customerReference = null,
     ): self {
         $self = new self;
 
         $self['phoneNumbers'] = $phoneNumbers;
 
         null !== $customerGroupReference && $self['customerGroupReference'] = $customerGroupReference;
-        null !== $customerReference && $self['customerReference'] = $customerReference;
+        Omitted::VALUE !== $customerReference && $self['customerReference'] = $customerReference;
 
         return $self;
     }

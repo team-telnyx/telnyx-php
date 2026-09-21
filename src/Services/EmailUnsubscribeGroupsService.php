@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\EmailUnsubscribeGroups\EmailUnsubscribeGroupDeleteParams\Force\ForceString;
 use Telnyx\EmailUnsubscribeGroups\UnsubscribeGroup;
@@ -53,11 +53,12 @@ final class EmailUnsubscribeGroupsService implements EmailUnsubscribeGroupsContr
      */
     public function create(
         string $name,
-        ?string $description = null,
+        string|Omitted|null $description = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): UnsubscribeGroupResponse {
-        $params = Util::removeNulls(
-            ['name' => $name, 'description' => $description]
+        $params = array_filter(
+            ['name' => $name, 'description' => $description],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -98,12 +99,13 @@ final class EmailUnsubscribeGroupsService implements EmailUnsubscribeGroupsContr
      */
     public function update(
         string $id,
-        ?string $description = null,
+        string|Omitted|null $description = Omitted::VALUE,
         ?string $name = null,
         RequestOptions|array|null $requestOptions = null,
     ): UnsubscribeGroupResponse {
-        $params = Util::removeNulls(
-            ['description' => $description, 'name' => $name]
+        $params = array_filter(
+            ['description' => $description, 'name' => $name ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -135,9 +137,7 @@ final class EmailUnsubscribeGroupsService implements EmailUnsubscribeGroupsContr
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -167,7 +167,10 @@ final class EmailUnsubscribeGroupsService implements EmailUnsubscribeGroupsContr
         bool|ForceString|string|null $force = null,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['force' => $force]);
+        $params = array_filter(
+            ['force' => $force ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);

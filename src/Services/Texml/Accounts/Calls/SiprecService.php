@@ -6,7 +6,7 @@ namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\SiprecContract;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status;
@@ -52,8 +52,13 @@ final class SiprecService implements SiprecContract
         Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): SiprecSiprecSidJsonResponse {
-        $params = Util::removeNulls(
-            ['accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status]
+        $params = array_filter(
+            [
+                'accountSid' => $accountSid,
+                'callSid' => $callSid,
+                'status' => $status ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

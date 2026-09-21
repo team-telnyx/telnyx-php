@@ -6,7 +6,7 @@ namespace Telnyx\Services\Dir;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\Document;
 use Telnyx\Dir\PhoneNumberBatches\DirPhoneNumberStatus;
@@ -59,12 +59,13 @@ final class PhoneNumbersService implements PhoneNumbersContract
         DirPhoneNumberStatus|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'status' => $status,
+                'status' => $status ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -93,9 +94,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         array $phoneNumbers,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberAddResponse {
-        $params = Util::removeNulls(
-            ['documents' => $documents, 'phoneNumbers' => $phoneNumbers]
-        );
+        $params = ['documents' => $documents, 'phoneNumbers' => $phoneNumbers];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->add($dirID, params: $params, requestOptions: $requestOptions);
@@ -119,7 +118,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         array $phoneNumbers,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberRemoveResponse {
-        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
+        $params = ['phoneNumbers' => $phoneNumbers];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->remove($dirID, params: $params, requestOptions: $requestOptions);

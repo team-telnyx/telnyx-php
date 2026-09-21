@@ -6,7 +6,6 @@ namespace Telnyx\Services\EmailInboxes\Messages;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\EmailInboxes\Messages\Labels\LabelDeleteAllResponse;
 use Telnyx\EmailInboxes\Messages\Labels\LabelNewResponse;
 use Telnyx\RequestOptions;
@@ -60,7 +59,7 @@ final class LabelsService implements LabelsContract
         array $labels,
         RequestOptions|array|null $requestOptions = null,
     ): LabelNewResponse {
-        $params = Util::removeNulls(['inboxID' => $inboxID, 'labels' => $labels]);
+        $params = ['inboxID' => $inboxID, 'labels' => $labels];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($messageID, params: $params, requestOptions: $requestOptions);
@@ -88,7 +87,7 @@ final class LabelsService implements LabelsContract
         array $labels,
         RequestOptions|array|null $requestOptions = null,
     ): LabelDeleteAllResponse {
-        $params = Util::removeNulls(['inboxID' => $inboxID, 'labels' => $labels]);
+        $params = ['inboxID' => $inboxID, 'labels' => $labels];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteAll($messageID, params: $params, requestOptions: $requestOptions);

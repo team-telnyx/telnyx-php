@@ -6,7 +6,7 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNumberRange;
@@ -60,12 +60,10 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
         PhoneNumberRange|array $phoneNumberRange,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberBlockNewResponse {
-        $params = Util::removeNulls(
-            [
-                'activationRanges' => $activationRanges,
-                'phoneNumberRange' => $phoneNumberRange,
-            ],
-        );
+        $params = [
+            'activationRanges' => $activationRanges,
+            'phoneNumberRange' => $phoneNumberRange,
+        ];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($portingOrderID, params: $params, requestOptions: $requestOptions);
@@ -95,13 +93,14 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
         Sort|array|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+                'sort' => $sort ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -126,7 +125,7 @@ final class PhoneNumberBlocksService implements PhoneNumberBlocksContract
         string $portingOrderID,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberBlockDeleteResponse {
-        $params = Util::removeNulls(['portingOrderID' => $portingOrderID]);
+        $params = ['portingOrderID' => $portingOrderID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, params: $params, requestOptions: $requestOptions);

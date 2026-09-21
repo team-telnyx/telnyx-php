@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * The body of a tollfree verification request.
@@ -329,7 +330,7 @@ final class TfVerificationRequest implements BaseModel
      * @param list<URL|URLShape> $optInWorkflowImageURLs
      * @param list<TfPhoneNumber|TfPhoneNumberShape> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
-     * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
+     * @param Omitted|TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
      */
     public static function with(
         string $additionalInformation,
@@ -350,20 +351,20 @@ final class TfVerificationRequest implements BaseModel
         string $productionMessageContent,
         UseCaseCategories|string $useCase,
         string $useCaseSummary,
+        string|Omitted|null $businessRegistrationCountry = Omitted::VALUE,
+        string|Omitted|null $businessRegistrationNumber = Omitted::VALUE,
+        string|Omitted|null $businessRegistrationType = Omitted::VALUE,
+        string|Omitted|null $campaignVerifyAuthorizationToken = Omitted::VALUE,
+        string|Omitted|null $doingBusinessAs = Omitted::VALUE,
+        Omitted|TollFreeVerificationEntityType|string|null $entityType = Omitted::VALUE,
+        string|Omitted|null $helpMessageResponse = Omitted::VALUE,
+        string|Omitted|null $isvReseller = Omitted::VALUE,
+        string|Omitted|null $optInConfirmationResponse = Omitted::VALUE,
+        string|Omitted|null $optInKeywords = Omitted::VALUE,
+        string|Omitted|null $privacyPolicyURL = Omitted::VALUE,
+        string|Omitted|null $termsAndConditionURL = Omitted::VALUE,
         ?bool $ageGatedContent = null,
         ?string $businessAddr2 = null,
-        ?string $businessRegistrationCountry = null,
-        ?string $businessRegistrationNumber = null,
-        ?string $businessRegistrationType = null,
-        ?string $campaignVerifyAuthorizationToken = null,
-        ?string $doingBusinessAs = null,
-        TollFreeVerificationEntityType|string|null $entityType = null,
-        ?string $helpMessageResponse = null,
-        ?string $isvReseller = null,
-        ?string $optInConfirmationResponse = null,
-        ?string $optInKeywords = null,
-        ?string $privacyPolicyURL = null,
-        ?string $termsAndConditionURL = null,
         ?string $webhookURL = null,
     ): self {
         $self = new self;
@@ -389,18 +390,18 @@ final class TfVerificationRequest implements BaseModel
 
         null !== $ageGatedContent && $self['ageGatedContent'] = $ageGatedContent;
         null !== $businessAddr2 && $self['businessAddr2'] = $businessAddr2;
-        null !== $businessRegistrationCountry && $self['businessRegistrationCountry'] = $businessRegistrationCountry;
-        null !== $businessRegistrationNumber && $self['businessRegistrationNumber'] = $businessRegistrationNumber;
-        null !== $businessRegistrationType && $self['businessRegistrationType'] = $businessRegistrationType;
-        null !== $campaignVerifyAuthorizationToken && $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
-        null !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
-        null !== $entityType && $self['entityType'] = $entityType;
-        null !== $helpMessageResponse && $self['helpMessageResponse'] = $helpMessageResponse;
-        null !== $isvReseller && $self['isvReseller'] = $isvReseller;
-        null !== $optInConfirmationResponse && $self['optInConfirmationResponse'] = $optInConfirmationResponse;
-        null !== $optInKeywords && $self['optInKeywords'] = $optInKeywords;
-        null !== $privacyPolicyURL && $self['privacyPolicyURL'] = $privacyPolicyURL;
-        null !== $termsAndConditionURL && $self['termsAndConditionURL'] = $termsAndConditionURL;
+        Omitted::VALUE !== $businessRegistrationCountry && $self['businessRegistrationCountry'] = $businessRegistrationCountry;
+        Omitted::VALUE !== $businessRegistrationNumber && $self['businessRegistrationNumber'] = $businessRegistrationNumber;
+        Omitted::VALUE !== $businessRegistrationType && $self['businessRegistrationType'] = $businessRegistrationType;
+        Omitted::VALUE !== $campaignVerifyAuthorizationToken && $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
+        Omitted::VALUE !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
+        Omitted::VALUE !== $entityType && $self['entityType'] = $entityType;
+        Omitted::VALUE !== $helpMessageResponse && $self['helpMessageResponse'] = $helpMessageResponse;
+        Omitted::VALUE !== $isvReseller && $self['isvReseller'] = $isvReseller;
+        Omitted::VALUE !== $optInConfirmationResponse && $self['optInConfirmationResponse'] = $optInConfirmationResponse;
+        Omitted::VALUE !== $optInKeywords && $self['optInKeywords'] = $optInKeywords;
+        Omitted::VALUE !== $privacyPolicyURL && $self['privacyPolicyURL'] = $privacyPolicyURL;
+        Omitted::VALUE !== $termsAndConditionURL && $self['termsAndConditionURL'] = $termsAndConditionURL;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;

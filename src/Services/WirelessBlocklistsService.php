@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsContract;
@@ -54,9 +54,7 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
         array $values,
         RequestOptions|array|null $requestOptions = null,
     ): WirelessBlocklistNewResponse {
-        $params = Util::removeNulls(
-            ['name' => $name, 'type' => $type, 'values' => $values]
-        );
+        $params = ['name' => $name, 'type' => $type, 'values' => $values];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -102,7 +100,12 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
         ?array $values = null,
         RequestOptions|array|null $requestOptions = null,
     ): WirelessBlocklistUpdateResponse {
-        $params = Util::removeNulls(['name' => $name, 'values' => $values]);
+        $params = array_filter(
+            [
+                'name' => $name ?? Omitted::VALUE, 'values' => $values ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -132,13 +135,14 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filterName' => $filterName,
-                'filterType' => $filterType,
+                'filterName' => $filterName ?? Omitted::VALUE,
+                'filterType' => $filterType ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

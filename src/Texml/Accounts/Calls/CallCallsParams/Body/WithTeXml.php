@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\AsyncAmdStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\CustomHeader;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\DeepfakeDetection;
@@ -442,6 +443,7 @@ final class WithTeXml implements BaseModel
      */
     public static function with(
         string $texml,
+        string|Omitted|null $url = Omitted::VALUE,
         ?string $applicationSid = null,
         ?bool $asyncAmd = null,
         ?string $asyncAmdStatusCallback = null,
@@ -485,7 +487,6 @@ final class WithTeXml implements BaseModel
         ?int $timeout = null,
         ?string $to = null,
         Trim|string|null $trim = null,
-        ?string $url = null,
         URLMethod|string|null $urlMethod = null,
     ): self {
         $self = new self;
@@ -535,7 +536,7 @@ final class WithTeXml implements BaseModel
         null !== $timeout && $self['timeout'] = $timeout;
         null !== $to && $self['to'] = $to;
         null !== $trim && $self['trim'] = $trim;
-        null !== $url && $self['url'] = $url;
+        Omitted::VALUE !== $url && $self['url'] = $url;
         null !== $urlMethod && $self['urlMethod'] = $urlMethod;
 
         return $self;

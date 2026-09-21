@@ -7,6 +7,7 @@ namespace Telnyx\PortingOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type PortingOrderPhoneNumberConfigurationShape = array{
@@ -63,18 +64,18 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
      * @param list<string>|null $tags
      */
     public static function with(
-        ?string $billingGroupID = null,
-        ?string $connectionID = null,
-        ?string $emergencyAddressID = null,
-        ?string $messagingProfileID = null,
+        string|Omitted|null $billingGroupID = Omitted::VALUE,
+        string|Omitted|null $connectionID = Omitted::VALUE,
+        string|Omitted|null $emergencyAddressID = Omitted::VALUE,
+        string|Omitted|null $messagingProfileID = Omitted::VALUE,
         ?array $tags = null,
     ): self {
         $self = new self;
 
-        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
-        null !== $connectionID && $self['connectionID'] = $connectionID;
-        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
-        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        Omitted::VALUE !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        Omitted::VALUE !== $connectionID && $self['connectionID'] = $connectionID;
+        Omitted::VALUE !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
+        Omitted::VALUE !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         null !== $tags && $self['tags'] = $tags;
 
         return $self;

@@ -7,6 +7,7 @@ namespace Telnyx\EmailDomains\EmailDomain;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Sender reputation for this domain (present on all domain responses).
@@ -48,15 +49,15 @@ final class Reputation implements BaseModel
      * @param array<string,mixed>|null $breakdown
      */
     public static function with(
+        \DateTimeInterface|Omitted|null $computedAt = Omitted::VALUE,
         ?string $band = null,
         ?array $breakdown = null,
-        ?\DateTimeInterface $computedAt = null,
     ): self {
         $self = new self;
 
         null !== $band && $self['band'] = $band;
         null !== $breakdown && $self['breakdown'] = $breakdown;
-        null !== $computedAt && $self['computedAt'] = $computedAt;
+        Omitted::VALUE !== $computedAt && $self['computedAt'] = $computedAt;
 
         return $self;
     }

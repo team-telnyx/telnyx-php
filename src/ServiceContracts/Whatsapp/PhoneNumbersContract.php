@@ -8,6 +8,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetPhoneNumberResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams\VerificationMethod;
@@ -87,6 +88,19 @@ interface PhoneNumbersContract
         string $destinationNumber,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberGetConversationWindowResponse;
+
+    /**
+     * @api
+     *
+     * @param string $phoneNumber Phone number (E.164 format)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrievePhoneNumber(
+        string $phoneNumber,
+        RequestOptions|array|null $requestOptions = null
+    ): PhoneNumberGetPhoneNumberResponse;
 
     /**
      * @api

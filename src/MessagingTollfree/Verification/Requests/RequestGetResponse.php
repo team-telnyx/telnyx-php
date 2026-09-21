@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * A verification request and its status, suitable for returning to users.
@@ -293,12 +294,12 @@ final class RequestGetResponse implements BaseModel
         UseCaseCategories|string $useCase,
         string $useCaseSummary,
         TfVerificationStatus|string $verificationStatus,
+        string|Omitted|null $campaignVerifyAuthorizationToken = Omitted::VALUE,
         ?bool $ageGatedContent = null,
         ?string $businessAddr2 = null,
         ?string $businessRegistrationCountry = null,
         ?string $businessRegistrationNumber = null,
         ?string $businessRegistrationType = null,
-        ?string $campaignVerifyAuthorizationToken = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $doingBusinessAs = null,
         MessagingTollFreeVerificationEntityType|string|null $entityType = null,
@@ -340,7 +341,7 @@ final class RequestGetResponse implements BaseModel
         null !== $businessRegistrationCountry && $self['businessRegistrationCountry'] = $businessRegistrationCountry;
         null !== $businessRegistrationNumber && $self['businessRegistrationNumber'] = $businessRegistrationNumber;
         null !== $businessRegistrationType && $self['businessRegistrationType'] = $businessRegistrationType;
-        null !== $campaignVerifyAuthorizationToken && $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
+        Omitted::VALUE !== $campaignVerifyAuthorizationToken && $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
         null !== $entityType && $self['entityType'] = $entityType;

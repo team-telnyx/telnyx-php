@@ -6,7 +6,7 @@ namespace Telnyx\Services\Storage\Sqldbs;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Sqldbs\ActionsContract;
 use Telnyx\Storage\Sqldbs\Actions\ActionQueryResponse;
@@ -50,7 +50,10 @@ final class ActionsService implements ActionsContract
         ?array $params = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionQueryResponse {
-        $params1 = Util::removeNulls(['sql' => $sql, 'params' => $params]);
+        $params1 = array_filter(
+            ['sql' => $sql, 'params' => $params ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->query($id, params: $params1, requestOptions: $requestOptions);

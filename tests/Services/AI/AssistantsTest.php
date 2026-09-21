@@ -62,6 +62,24 @@ final class AssistantsTest extends TestCase
         $result = $this->client->ai->assistants->create(
             instructions: 'instructions',
             name: 'name',
+            a2aAgents: [
+                [
+                    'name' => 'billing_agent',
+                    'url' => 'https://agents.example.com',
+                    'async' => true,
+                    'headers' => [
+                        [
+                            'name' => 'X-Api-Key',
+                            'value' => '{{#integration_secret}}my_agent_api_key{{/integration_secret}}',
+                        ],
+                    ],
+                    'messages' => [
+                        ['content' => 'x', 'type' => 'request_start', 'timingMs' => 100],
+                    ],
+                    'pollIntervalMs' => 500,
+                    'timeoutMs' => 30000,
+                ],
+            ],
             conversationFlow: [
                 'nodes' => [
                     [
@@ -280,6 +298,7 @@ final class AssistantsTest extends TestCase
             telephonySettings: [
                 'defaultTexmlAppID' => 'default_texml_app_id',
                 'disableDtmf' => true,
+                'fallbackDestination' => 'fallback_destination',
                 'noiseSuppression' => 'krisp',
                 'noiseSuppressionConfig' => [
                     'attenuationLimit' => 0, 'mode' => 'advanced',

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCards\SimCardDeleteResponse;
@@ -49,7 +50,7 @@ interface SimCardsContract
      * @api
      *
      * @param string $simCardID identifies the SIM
-     * @param list<string>|null $authorizedImeis list of IMEIs authorized to use a given SIM card
+     * @param list<string>|Omitted|null $authorizedImeis list of IMEIs authorized to use a given SIM card
      * @param DataLimit|DataLimitShape $dataLimit the SIM card individual data limit configuration
      * @param string $simCardGroupID The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      * @param SimCardStatus|SimCardStatusShape $status
@@ -60,7 +61,7 @@ interface SimCardsContract
      */
     public function update(
         string $simCardID,
-        ?array $authorizedImeis = null,
+        array|Omitted|null $authorizedImeis = Omitted::VALUE,
         DataLimit|array|null $dataLimit = null,
         ?string $simCardGroupID = null,
         SimCardStatus|array|null $status = null,

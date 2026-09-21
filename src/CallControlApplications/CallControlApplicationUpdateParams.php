@@ -12,6 +12,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Updates settings of an existing call control application.
@@ -175,6 +176,8 @@ final class CallControlApplicationUpdateParams implements BaseModel
     public static function with(
         string $applicationName,
         string $webhookEventURL,
+        string|Omitted|null $webhookEventFailoverURL = Omitted::VALUE,
+        int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsiteOverride = null,
         ?bool $callCostInWebhooks = null,
@@ -186,8 +189,6 @@ final class CallControlApplicationUpdateParams implements BaseModel
         ?bool $redactDtmfDebugLogging = null,
         ?array $tags = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
-        ?string $webhookEventFailoverURL = null,
-        ?int $webhookTimeoutSecs = null,
     ): self {
         $self = new self;
 
@@ -205,8 +206,8 @@ final class CallControlApplicationUpdateParams implements BaseModel
         null !== $redactDtmfDebugLogging && $self['redactDtmfDebugLogging'] = $redactDtmfDebugLogging;
         null !== $tags && $self['tags'] = $tags;
         null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
-        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
+        Omitted::VALUE !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        Omitted::VALUE !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
         return $self;
     }

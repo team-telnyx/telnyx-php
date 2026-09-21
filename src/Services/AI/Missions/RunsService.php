@@ -9,7 +9,7 @@ use Telnyx\AI\Missions\Runs\MissionRunResponse;
 use Telnyx\AI\Missions\Runs\RunStatus;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Missions\RunsContract;
@@ -71,7 +71,13 @@ final class RunsService implements RunsContract
         ?array $metadata = null,
         RequestOptions|array|null $requestOptions = null,
     ): MissionRunResponse {
-        $params = Util::removeNulls(['input' => $input, 'metadata' => $metadata]);
+        $params = array_filter(
+            [
+                'input' => $input ?? Omitted::VALUE,
+                'metadata' => $metadata ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($missionID, params: $params, requestOptions: $requestOptions);
@@ -95,7 +101,7 @@ final class RunsService implements RunsContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): MissionRunResponse {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($runID, params: $params, requestOptions: $requestOptions);
@@ -129,15 +135,16 @@ final class RunsService implements RunsContract
         RunStatus|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): MissionRunResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'missionID' => $missionID,
-                'error' => $error,
-                'metadata' => $metadata,
-                'resultPayload' => $resultPayload,
-                'resultSummary' => $resultSummary,
-                'status' => $status,
+                'error' => $error ?? Omitted::VALUE,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'resultPayload' => $resultPayload ?? Omitted::VALUE,
+                'resultSummary' => $resultSummary ?? Omitted::VALUE,
+                'status' => $status ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -168,12 +175,13 @@ final class RunsService implements RunsContract
         ?string $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'status' => $status,
+                'status' => $status ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -198,7 +206,7 @@ final class RunsService implements RunsContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): MissionRunResponse {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->cancelRun($runID, params: $params, requestOptions: $requestOptions);
@@ -226,12 +234,13 @@ final class RunsService implements RunsContract
         ?string $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'status' => $status,
+                'status' => $status ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -256,7 +265,7 @@ final class RunsService implements RunsContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): MissionRunResponse {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->pauseRun($runID, params: $params, requestOptions: $requestOptions);
@@ -280,7 +289,7 @@ final class RunsService implements RunsContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): MissionRunResponse {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->resumeRun($runID, params: $params, requestOptions: $requestOptions);

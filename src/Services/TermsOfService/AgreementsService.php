@@ -6,7 +6,7 @@ namespace Telnyx\Services\TermsOfService;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TermsOfService\AgreementsContract;
@@ -78,12 +78,13 @@ final class AgreementsService implements AgreementsContract
         TosProductType|string|null $productType = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'productType' => $productType,
+                'productType' => $productType ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -6,7 +6,6 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\Payment\PaymentNewStoredPaymentTransactionResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PaymentContract;
@@ -52,7 +51,7 @@ final class PaymentService implements PaymentContract
         string $amount,
         RequestOptions|array|null $requestOptions = null
     ): PaymentNewStoredPaymentTransactionResponse {
-        $params = Util::removeNulls(['amount' => $amount]);
+        $params = ['amount' => $amount];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createStoredPaymentTransaction(params: $params, requestOptions: $requestOptions);

@@ -132,7 +132,7 @@ use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\RequestOptions;
@@ -213,13 +213,14 @@ final class ActionsService implements ActionsContract
         bool $triggerResponse = false,
         RequestOptions|array|null $requestOptions = null,
     ): ActionAddAIAssistantMessagesResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'messages' => $messages,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'messages' => $messages ?? Omitted::VALUE,
                 'triggerResponse' => $triggerResponse,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -316,41 +317,42 @@ final class ActionsService implements ActionsContract
         WebhookURLsMethod|string $webhookURLsMethod = 'POST',
         RequestOptions|array|null $requestOptions = null,
     ): ActionAnswerResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'assistant' => $assistant,
-                'billingGroupID' => $billingGroupID,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'conversationRelayConfig' => $conversationRelayConfig,
-                'customHeaders' => $customHeaders,
-                'deepfakeDetection' => $deepfakeDetection,
-                'preferredCodecs' => $preferredCodecs,
-                'record' => $record,
+                'assistant' => $assistant ?? Omitted::VALUE,
+                'billingGroupID' => $billingGroupID ?? Omitted::VALUE,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'conversationRelayConfig' => $conversationRelayConfig ?? Omitted::VALUE,
+                'customHeaders' => $customHeaders ?? Omitted::VALUE,
+                'deepfakeDetection' => $deepfakeDetection ?? Omitted::VALUE,
+                'preferredCodecs' => $preferredCodecs ?? Omitted::VALUE,
+                'record' => $record ?? Omitted::VALUE,
                 'recordChannels' => $recordChannels,
-                'recordCustomFileName' => $recordCustomFileName,
+                'recordCustomFileName' => $recordCustomFileName ?? Omitted::VALUE,
                 'recordFormat' => $recordFormat,
                 'recordMaxLength' => $recordMaxLength,
                 'recordTimeoutSecs' => $recordTimeoutSecs,
                 'recordTrack' => $recordTrack,
-                'recordTrim' => $recordTrim,
+                'recordTrim' => $recordTrim ?? Omitted::VALUE,
                 'sendSilenceWhenIdle' => $sendSilenceWhenIdle,
-                'sipHeaders' => $sipHeaders,
-                'soundModifications' => $soundModifications,
+                'sipHeaders' => $sipHeaders ?? Omitted::VALUE,
+                'soundModifications' => $soundModifications ?? Omitted::VALUE,
                 'streamBidirectionalCodec' => $streamBidirectionalCodec,
                 'streamBidirectionalMode' => $streamBidirectionalMode,
                 'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
                 'streamCodec' => $streamCodec,
                 'streamTrack' => $streamTrack,
-                'streamURL' => $streamURL,
+                'streamURL' => $streamURL ?? Omitted::VALUE,
                 'transcription' => $transcription,
-                'transcriptionConfig' => $transcriptionConfig,
-                'webhookRetriesPolicies' => $webhookRetriesPolicies,
-                'webhookURL' => $webhookURL,
+                'transcriptionConfig' => $transcriptionConfig ?? Omitted::VALUE,
+                'webhookRetriesPolicies' => $webhookRetriesPolicies ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
                 'webhookURLMethod' => $webhookURLMethod,
-                'webhookURLs' => $webhookURLs,
+                'webhookURLs' => $webhookURLs ?? Omitted::VALUE,
                 'webhookURLsMethod' => $webhookURLsMethod,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -418,29 +420,30 @@ final class ActionsService implements ActionsContract
         ?string $videoRoomID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionBridgeResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'callControlIDToBridgeWith' => $callControlIDToBridgeWith,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'holdAfterUnbridge' => $holdAfterUnbridge,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'holdAfterUnbridge' => $holdAfterUnbridge ?? Omitted::VALUE,
                 'muteDtmf' => $muteDtmf,
-                'parkAfterUnbridge' => $parkAfterUnbridge,
+                'parkAfterUnbridge' => $parkAfterUnbridge ?? Omitted::VALUE,
                 'playRingtone' => $playRingtone,
                 'preventDoubleBridge' => $preventDoubleBridge,
-                'queue' => $queue,
-                'record' => $record,
+                'queue' => $queue ?? Omitted::VALUE,
+                'record' => $record ?? Omitted::VALUE,
                 'recordChannels' => $recordChannels,
-                'recordCustomFileName' => $recordCustomFileName,
+                'recordCustomFileName' => $recordCustomFileName ?? Omitted::VALUE,
                 'recordFormat' => $recordFormat,
                 'recordMaxLength' => $recordMaxLength,
                 'recordTimeoutSecs' => $recordTimeoutSecs,
                 'recordTrack' => $recordTrack,
-                'recordTrim' => $recordTrim,
+                'recordTrim' => $recordTrim ?? Omitted::VALUE,
                 'ringtone' => $ringtone,
-                'videoRoomContext' => $videoRoomContext,
-                'videoRoomID' => $videoRoomID,
+                'videoRoomContext' => $videoRoomContext ?? Omitted::VALUE,
+                'videoRoomID' => $videoRoomID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -475,15 +478,16 @@ final class ActionsService implements ActionsContract
         ?int $maxWaitTimeSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionEnqueueResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'queueName' => $queueName,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
                 'keepAfterHangup' => $keepAfterHangup,
                 'maxSize' => $maxSize,
-                'maxWaitTimeSecs' => $maxWaitTimeSecs,
+                'maxWaitTimeSecs' => $maxWaitTimeSecs ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -533,11 +537,11 @@ final class ActionsService implements ActionsContract
         string $validDigits = '0123456789#*',
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'gatherID' => $gatherID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'gatherID' => $gatherID ?? Omitted::VALUE,
                 'initialTimeoutMillis' => $initialTimeoutMillis,
                 'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
                 'maximumDigits' => $maximumDigits,
@@ -546,6 +550,7 @@ final class ActionsService implements ActionsContract
                 'timeoutMillis' => $timeoutMillis,
                 'validDigits' => $validDigits,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -617,24 +622,25 @@ final class ActionsService implements ActionsContract
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingAIResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'parameters' => $parameters,
-                'assistant' => $assistant,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'gatherEndedSpeech' => $gatherEndedSpeech,
-                'greeting' => $greeting,
-                'interruptionSettings' => $interruptionSettings,
+                'assistant' => $assistant ?? Omitted::VALUE,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'gatherEndedSpeech' => $gatherEndedSpeech ?? Omitted::VALUE,
+                'greeting' => $greeting ?? Omitted::VALUE,
+                'interruptionSettings' => $interruptionSettings ?? Omitted::VALUE,
                 'language' => $language,
-                'messageHistory' => $messageHistory,
-                'sendMessageHistoryUpdates' => $sendMessageHistoryUpdates,
-                'sendPartialResults' => $sendPartialResults,
-                'transcription' => $transcription,
+                'messageHistory' => $messageHistory ?? Omitted::VALUE,
+                'sendMessageHistoryUpdates' => $sendMessageHistoryUpdates ?? Omitted::VALUE,
+                'sendPartialResults' => $sendPartialResults ?? Omitted::VALUE,
+                'transcription' => $transcription ?? Omitted::VALUE,
                 'userResponseTimeoutMs' => $userResponseTimeoutMs,
                 'voice' => $voice,
-                'voiceSettings' => $voiceSettings,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -692,22 +698,23 @@ final class ActionsService implements ActionsContract
         string $validDigits = '0123456789#*',
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingAudioResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'audioURL' => $audioURL,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'audioURL' => $audioURL ?? Omitted::VALUE,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
                 'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
-                'invalidAudioURL' => $invalidAudioURL,
-                'invalidMediaName' => $invalidMediaName,
+                'invalidAudioURL' => $invalidAudioURL ?? Omitted::VALUE,
+                'invalidMediaName' => $invalidMediaName ?? Omitted::VALUE,
                 'maximumDigits' => $maximumDigits,
                 'maximumTries' => $maximumTries,
-                'mediaName' => $mediaName,
+                'mediaName' => $mediaName ?? Omitted::VALUE,
                 'minimumDigits' => $minimumDigits,
                 'terminatingDigit' => $terminatingDigit,
                 'timeoutMillis' => $timeoutMillis,
                 'validDigits' => $validDigits,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -785,15 +792,15 @@ final class ActionsService implements ActionsContract
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingSpeakResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'payload' => $payload,
                 'voice' => $voice,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
                 'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
-                'invalidPayload' => $invalidPayload,
-                'language' => $language,
+                'invalidPayload' => $invalidPayload ?? Omitted::VALUE,
+                'language' => $language ?? Omitted::VALUE,
                 'maximumDigits' => $maximumDigits,
                 'maximumTries' => $maximumTries,
                 'minimumDigits' => $minimumDigits,
@@ -802,8 +809,9 @@ final class ActionsService implements ActionsContract
                 'terminatingDigit' => $terminatingDigit,
                 'timeoutMillis' => $timeoutMillis,
                 'validDigits' => $validDigits,
-                'voiceSettings' => $voiceSettings,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -837,12 +845,13 @@ final class ActionsService implements ActionsContract
         ?array $customHeaders = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionHangupResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'customHeaders' => $customHeaders,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'customHeaders' => $customHeaders ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -873,13 +882,14 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionJoinAIAssistantResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'conversationID' => $conversationID,
                 'participant' => $participant,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -906,8 +916,12 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionLeaveQueueResponse {
-        $params = Util::removeNulls(
-            ['clientState' => $clientState, 'commandID' => $commandID]
+        $params = array_filter(
+            [
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -940,12 +954,13 @@ final class ActionsService implements ActionsContract
         ?string $recordingID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionPauseRecordingResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'recordingID' => $recordingID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'recordingID' => $recordingID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1015,28 +1030,29 @@ final class ActionsService implements ActionsContract
         string $voice = 'female',
         RequestOptions|array|null $requestOptions = null,
     ): ActionPayResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'amount' => $amount,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'amount' => $amount ?? Omitted::VALUE,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
                 'connectorName' => $connectorName,
                 'currency' => $currency,
-                'description' => $description,
+                'description' => $description ?? Omitted::VALUE,
                 'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
                 'language' => $language,
                 'maxAttempts' => $maxAttempts,
-                'metadata' => $metadata,
-                'parameters' => $parameters,
+                'metadata' => $metadata ?? Omitted::VALUE,
+                'parameters' => $parameters ?? Omitted::VALUE,
                 'paymentMethod' => $paymentMethod,
-                'paymentToken' => $paymentToken,
-                'prompts' => $prompts,
+                'paymentToken' => $paymentToken ?? Omitted::VALUE,
+                'prompts' => $prompts ?? Omitted::VALUE,
                 'serviceLevel' => $serviceLevel,
                 'timeoutMillis' => $timeoutMillis,
-                'transactionType' => $transactionType,
-                'validCardTypes' => $validCardTypes,
+                'transactionType' => $transactionType ?? Omitted::VALUE,
+                'validCardTypes' => $validCardTypes ?? Omitted::VALUE,
                 'voice' => $voice,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1079,16 +1095,17 @@ final class ActionsService implements ActionsContract
         ?array $sipHeaders = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionReferResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'sipAddress' => $sipAddress,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'customHeaders' => $customHeaders,
-                'sipAuthPassword' => $sipAuthPassword,
-                'sipAuthUsername' => $sipAuthUsername,
-                'sipHeaders' => $sipHeaders,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'customHeaders' => $customHeaders ?? Omitted::VALUE,
+                'sipAuthPassword' => $sipAuthPassword ?? Omitted::VALUE,
+                'sipAuthUsername' => $sipAuthUsername ?? Omitted::VALUE,
+                'sipHeaders' => $sipHeaders ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1121,12 +1138,13 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionRejectResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'cause' => $cause,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1159,12 +1177,13 @@ final class ActionsService implements ActionsContract
         ?string $recordingID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionResumeRecordingResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'recordingID' => $recordingID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'recordingID' => $recordingID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1199,13 +1218,14 @@ final class ActionsService implements ActionsContract
         int $durationMillis = 250,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSendDtmfResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'digits' => $digits,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
                 'durationMillis' => $durationMillis,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1240,13 +1260,14 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSendSipInfoResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'body' => $body,
                 'contentType' => $contentType,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1312,20 +1333,21 @@ final class ActionsService implements ActionsContract
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'payload' => $payload,
                 'voice' => $voice,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'language' => $language,
-                'loop' => $loop,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'language' => $language ?? Omitted::VALUE,
+                'loop' => $loop ?? Omitted::VALUE,
                 'payloadType' => $payloadType,
                 'serviceLevel' => $serviceLevel,
-                'stop' => $stop,
+                'stop' => $stop ?? Omitted::VALUE,
                 'targetLegs' => $targetLegs,
-                'voiceSettings' => $voiceSettings,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1371,18 +1393,19 @@ final class ActionsService implements ActionsContract
         TranscriptionConfig|array|null $transcription = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartAIAssistantResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'assistant' => $assistant,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'greeting' => $greeting,
-                'interruptionSettings' => $interruptionSettings,
+                'assistant' => $assistant ?? Omitted::VALUE,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'greeting' => $greeting ?? Omitted::VALUE,
+                'interruptionSettings' => $interruptionSettings ?? Omitted::VALUE,
                 'messageHistory' => $messageHistory,
                 'participants' => $participants,
                 'sendMessageHistoryUpdates' => $sendMessageHistoryUpdates,
-                'transcription' => $transcription,
+                'transcription' => $transcription ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1465,32 +1488,33 @@ final class ActionsService implements ActionsContract
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartConversationRelayResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'assistant' => $assistant,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'assistant' => $assistant ?? Omitted::VALUE,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
                 'conversationRelayDtmfDetection' => $conversationRelayDtmfDetection,
-                'conversationRelaySettings' => $conversationRelaySettings,
-                'conversationRelayURL' => $conversationRelayURL,
-                'customParameters' => $customParameters,
+                'conversationRelaySettings' => $conversationRelaySettings ?? Omitted::VALUE,
+                'conversationRelayURL' => $conversationRelayURL ?? Omitted::VALUE,
+                'customParameters' => $customParameters ?? Omitted::VALUE,
                 'dtmfDetection' => $dtmfDetection,
-                'greeting' => $greeting,
+                'greeting' => $greeting ?? Omitted::VALUE,
                 'interruptible' => $interruptible,
                 'interruptibleGreeting' => $interruptibleGreeting,
-                'interruptionSettings' => $interruptionSettings,
+                'interruptionSettings' => $interruptionSettings ?? Omitted::VALUE,
                 'language' => $language,
-                'languages' => $languages,
-                'provider' => $provider,
-                'structuredProvider' => $structuredProvider,
-                'transcription' => $transcription,
+                'languages' => $languages ?? Omitted::VALUE,
+                'provider' => $provider ?? Omitted::VALUE,
+                'structuredProvider' => $structuredProvider ?? Omitted::VALUE,
+                'transcription' => $transcription ?? Omitted::VALUE,
                 'transcriptionEngine' => $transcriptionEngine,
-                'transcriptionEngineConfig' => $transcriptionEngineConfig,
-                'ttsProvider' => $ttsProvider,
-                'url' => $url,
+                'transcriptionEngineConfig' => $transcriptionEngineConfig ?? Omitted::VALUE,
+                'ttsProvider' => $ttsProvider ?? Omitted::VALUE,
+                'url' => $url ?? Omitted::VALUE,
                 'voice' => $voice,
-                'voiceSettings' => $voiceSettings,
+                'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1531,14 +1555,15 @@ final class ActionsService implements ActionsContract
         ?string $tx = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartForkingResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'rx' => $rx,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'rx' => $rx ?? Omitted::VALUE,
                 'streamType' => $streamType,
-                'tx' => $tx,
+                'tx' => $tx ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1576,14 +1601,15 @@ final class ActionsService implements ActionsContract
         NoiseSuppressionEngineConfig|array|null $noiseSuppressionEngineConfig = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartNoiseSuppressionResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
                 'direction' => $direction,
                 'noiseSuppressionEngine' => $noiseSuppressionEngine,
-                'noiseSuppressionEngineConfig' => $noiseSuppressionEngineConfig,
+                'noiseSuppressionEngineConfig' => $noiseSuppressionEngineConfig ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1639,20 +1665,21 @@ final class ActionsService implements ActionsContract
         string $targetLegs = 'self',
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartPlaybackResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'audioType' => $audioType,
-                'audioURL' => $audioURL,
+                'audioURL' => $audioURL ?? Omitted::VALUE,
                 'cacheAudio' => $cacheAudio,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'loop' => $loop,
-                'mediaName' => $mediaName,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'loop' => $loop ?? Omitted::VALUE,
+                'mediaName' => $mediaName ?? Omitted::VALUE,
                 'overlay' => $overlay,
-                'playbackContent' => $playbackContent,
-                'stop' => $stop,
+                'playbackContent' => $playbackContent ?? Omitted::VALUE,
+                'stop' => $stop ?? Omitted::VALUE,
                 'targetLegs' => $targetLegs,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1715,15 +1742,15 @@ final class ActionsService implements ActionsContract
         Trim|string|null $trim = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartRecordingResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'channels' => $channels,
                 'format' => $format,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'customFileName' => $customFileName,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'customFileName' => $customFileName ?? Omitted::VALUE,
                 'maxLength' => $maxLength,
-                'playBeep' => $playBeep,
+                'playBeep' => $playBeep ?? Omitted::VALUE,
                 'recordingTrack' => $recordingTrack,
                 'timeoutSecs' => $timeoutSecs,
                 'transcription' => $transcription,
@@ -1733,8 +1760,9 @@ final class ActionsService implements ActionsContract
                 'transcriptionMinSpeakerCount' => $transcriptionMinSpeakerCount,
                 'transcriptionProfanityFilter' => $transcriptionProfanityFilter,
                 'transcriptionSpeakerDiarization' => $transcriptionSpeakerDiarization,
-                'trim' => $trim,
+                'trim' => $trim ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1777,16 +1805,17 @@ final class ActionsService implements ActionsContract
         SiprecTrack|string $siprecTrack = 'both_tracks',
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartSiprecResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'connectorName' => $connectorName,
-                'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders,
-                'secure' => $secure,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'connectorName' => $connectorName ?? Omitted::VALUE,
+                'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders ?? Omitted::VALUE,
+                'secure' => $secure ?? Omitted::VALUE,
                 'sessionTimeoutSecs' => $sessionTimeoutSecs,
                 'sipTransport' => $sipTransport,
                 'siprecTrack' => $siprecTrack,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1837,22 +1866,23 @@ final class ActionsService implements ActionsContract
         ?string $streamURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartStreamingResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'customParameters' => $customParameters,
-                'dialogflowConfig' => $dialogflowConfig,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'customParameters' => $customParameters ?? Omitted::VALUE,
+                'dialogflowConfig' => $dialogflowConfig ?? Omitted::VALUE,
                 'enableDialogflow' => $enableDialogflow,
-                'streamAuthToken' => $streamAuthToken,
+                'streamAuthToken' => $streamAuthToken ?? Omitted::VALUE,
                 'streamBidirectionalCodec' => $streamBidirectionalCodec,
                 'streamBidirectionalMode' => $streamBidirectionalMode,
                 'streamBidirectionalSamplingRate' => $streamBidirectionalSamplingRate,
                 'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
                 'streamCodec' => $streamCodec,
                 'streamTrack' => $streamTrack,
-                'streamURL' => $streamURL,
+                'streamURL' => $streamURL ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1889,14 +1919,15 @@ final class ActionsService implements ActionsContract
         string $transcriptionTracks = 'inbound',
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartTranscriptionResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
                 'transcriptionEngine' => $transcriptionEngine,
-                'transcriptionEngineConfig' => $transcriptionEngineConfig,
+                'transcriptionEngineConfig' => $transcriptionEngineConfig ?? Omitted::VALUE,
                 'transcriptionTracks' => $transcriptionTracks,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1923,8 +1954,12 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStopAIAssistantResponse {
-        $params = Util::removeNulls(
-            ['clientState' => $clientState, 'commandID' => $commandID]
+        $params = array_filter(
+            [
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1951,8 +1986,12 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStopConversationRelayResponse {
-        $params = Util::removeNulls(
-            ['clientState' => $clientState, 'commandID' => $commandID]
+        $params = array_filter(
+            [
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -1985,12 +2024,13 @@ final class ActionsService implements ActionsContract
         \Telnyx\Calls\Actions\ActionStopForkingParams\StreamType|string $streamType = 'raw',
         RequestOptions|array|null $requestOptions = null,
     ): ActionStopForkingResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
                 'streamType' => $streamType,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -2021,8 +2061,12 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStopGatherResponse {
-        $params = Util::removeNulls(
-            ['clientState' => $clientState, 'commandID' => $commandID]
+        $params = array_filter(
+            [
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -2049,8 +2093,12 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStopNoiseSuppressionResponse {
-        $params = Util::removeNulls(
-            ['clientState' => $clientState, 'commandID' => $commandID]
+        $params = array_filter(
+            [
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -2085,13 +2133,14 @@ final class ActionsService implements ActionsContract
         string $stop = 'all',
         RequestOptions|array|null $requestOptions = null,
     ): ActionStopPlaybackResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
                 'overlay' => $overlay,
                 'stop' => $stop,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -2124,12 +2173,13 @@ final class ActionsService implements ActionsContract
         ?string $recordingID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStopRecordingResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'recordingID' => $recordingID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'recordingID' => $recordingID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -2160,8 +2210,12 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStopSiprecResponse {
-        $params = Util::removeNulls(
-            ['clientState' => $clientState, 'commandID' => $commandID]
+        $params = array_filter(
+            [
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -2194,12 +2248,13 @@ final class ActionsService implements ActionsContract
         ?string $streamID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStopStreamingResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'streamID' => $streamID,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'streamID' => $streamID ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -2226,8 +2281,12 @@ final class ActionsService implements ActionsContract
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStopTranscriptionResponse {
-        $params = Util::removeNulls(
-            ['clientState' => $clientState, 'commandID' => $commandID]
+        $params = array_filter(
+            [
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -2252,7 +2311,7 @@ final class ActionsService implements ActionsContract
         Role|string $role,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSwitchSupervisorRoleResponse {
-        $params = Util::removeNulls(['role' => $role]);
+        $params = ['role' => $role];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->switchSupervisorRole($callControlID, params: $params, requestOptions: $requestOptions);
@@ -2366,50 +2425,51 @@ final class ActionsService implements ActionsContract
         \Telnyx\Calls\Actions\ActionTransferParams\WebhookURLsMethod|string $webhookURLsMethod = 'POST',
         RequestOptions|array|null $requestOptions = null,
     ): ActionTransferResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'to' => $to,
                 'answeringMachineDetection' => $answeringMachineDetection,
-                'answeringMachineDetectionConfig' => $answeringMachineDetectionConfig,
-                'audioURL' => $audioURL,
-                'clientState' => $clientState,
-                'commandID' => $commandID,
-                'customHeaders' => $customHeaders,
-                'diversion' => $diversion,
+                'answeringMachineDetectionConfig' => $answeringMachineDetectionConfig ?? Omitted::VALUE,
+                'audioURL' => $audioURL ?? Omitted::VALUE,
+                'clientState' => $clientState ?? Omitted::VALUE,
+                'commandID' => $commandID ?? Omitted::VALUE,
+                'customHeaders' => $customHeaders ?? Omitted::VALUE,
+                'diversion' => $diversion ?? Omitted::VALUE,
                 'earlyMedia' => $earlyMedia,
-                'from' => $from,
-                'fromDisplayName' => $fromDisplayName,
+                'from' => $from ?? Omitted::VALUE,
+                'fromDisplayName' => $fromDisplayName ?? Omitted::VALUE,
                 'mediaEncryption' => $mediaEncryption,
-                'mediaName' => $mediaName,
+                'mediaName' => $mediaName ?? Omitted::VALUE,
                 'muteDtmf' => $muteDtmf,
-                'parkAfterUnbridge' => $parkAfterUnbridge,
-                'preferredCodecs' => $preferredCodecs,
-                'privacy' => $privacy,
-                'record' => $record,
+                'parkAfterUnbridge' => $parkAfterUnbridge ?? Omitted::VALUE,
+                'preferredCodecs' => $preferredCodecs ?? Omitted::VALUE,
+                'privacy' => $privacy ?? Omitted::VALUE,
+                'record' => $record ?? Omitted::VALUE,
                 'recordChannels' => $recordChannels,
-                'recordCustomFileName' => $recordCustomFileName,
+                'recordCustomFileName' => $recordCustomFileName ?? Omitted::VALUE,
                 'recordFormat' => $recordFormat,
                 'recordMaxLength' => $recordMaxLength,
                 'recordTimeoutSecs' => $recordTimeoutSecs,
                 'recordTrack' => $recordTrack,
-                'recordTrim' => $recordTrim,
+                'recordTrim' => $recordTrim ?? Omitted::VALUE,
                 'routeToMobile' => $routeToMobile,
-                'sendDigitsOnAnswer' => $sendDigitsOnAnswer,
-                'sipAuthPassword' => $sipAuthPassword,
-                'sipAuthUsername' => $sipAuthUsername,
-                'sipHeaders' => $sipHeaders,
+                'sendDigitsOnAnswer' => $sendDigitsOnAnswer ?? Omitted::VALUE,
+                'sipAuthPassword' => $sipAuthPassword ?? Omitted::VALUE,
+                'sipAuthUsername' => $sipAuthUsername ?? Omitted::VALUE,
+                'sipHeaders' => $sipHeaders ?? Omitted::VALUE,
                 'sipRegion' => $sipRegion,
                 'sipTransportProtocol' => $sipTransportProtocol,
-                'soundModifications' => $soundModifications,
-                'targetLegClientState' => $targetLegClientState,
+                'soundModifications' => $soundModifications ?? Omitted::VALUE,
+                'targetLegClientState' => $targetLegClientState ?? Omitted::VALUE,
                 'timeLimitSecs' => $timeLimitSecs,
                 'timeoutSecs' => $timeoutSecs,
-                'webhookRetriesPolicies' => $webhookRetriesPolicies,
-                'webhookURL' => $webhookURL,
+                'webhookRetriesPolicies' => $webhookRetriesPolicies ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL ?? Omitted::VALUE,
                 'webhookURLMethod' => $webhookURLMethod,
-                'webhookURLs' => $webhookURLs,
+                'webhookURLs' => $webhookURLs ?? Omitted::VALUE,
                 'webhookURLsMethod' => $webhookURLsMethod,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -2434,7 +2494,7 @@ final class ActionsService implements ActionsContract
         string $clientState,
         RequestOptions|array|null $requestOptions = null,
     ): ActionUpdateClientStateResponse {
-        $params = Util::removeNulls(['clientState' => $clientState]);
+        $params = ['clientState' => $clientState];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateClientState($callControlID, params: $params, requestOptions: $requestOptions);

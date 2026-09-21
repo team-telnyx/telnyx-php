@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Starts a verification for the specified phone number and sends its code by SMS using the selected Verify profile. Returns the pending verification record.
@@ -81,7 +82,7 @@ final class VerificationTriggerSMSParams implements BaseModel
     public static function with(
         string $phoneNumber,
         string $verifyProfileID,
-        ?string $customCode = null,
+        string|Omitted|null $customCode = Omitted::VALUE,
         ?int $timeoutSecs = null,
     ): self {
         $self = new self;
@@ -89,7 +90,7 @@ final class VerificationTriggerSMSParams implements BaseModel
         $self['phoneNumber'] = $phoneNumber;
         $self['verifyProfileID'] = $verifyProfileID;
 
-        null !== $customCode && $self['customCode'] = $customCode;
+        Omitted::VALUE !== $customCode && $self['customCode'] = $customCode;
         null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
 
         return $self;

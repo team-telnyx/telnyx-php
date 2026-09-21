@@ -8,7 +8,7 @@ use Telnyx\AI\Knowledge\Collections\CollectionGetDocumentsResponse;
 use Telnyx\AI\Knowledge\Collections\CollectionRetrieveDocumentsParams\RetrievalType;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Knowledge\CollectionsContract;
 
@@ -74,16 +74,17 @@ final class CollectionsService implements CollectionsContract
         ?int $topK = null,
         RequestOptions|array|null $requestOptions = null,
     ): CollectionGetDocumentsResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
+                'filter' => $filter ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'query' => $query,
-                'retrievalType' => $retrievalType,
-                'sources' => $sources,
-                'topK' => $topK,
+                'query' => $query ?? Omitted::VALUE,
+                'retrievalType' => $retrievalType ?? Omitted::VALUE,
+                'sources' => $sources ?? Omitted::VALUE,
+                'topK' => $topK ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

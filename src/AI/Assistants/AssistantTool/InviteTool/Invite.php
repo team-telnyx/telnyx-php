@@ -11,6 +11,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-import-type TargetsVariants from \Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\Targets
@@ -82,14 +83,14 @@ final class Invite implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param TargetsShape|Omitted|null $targets
      * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
-     * @param TargetsShape|null $targets
      * @param VoicemailDetection|VoicemailDetectionShape|null $voicemailDetection
      */
     public static function with(
         string $from,
+        Omitted|string|array|null $targets = Omitted::VALUE,
         ?array $customHeaders = null,
-        string|array|null $targets = null,
         VoicemailDetection|array|null $voicemailDetection = null,
     ): self {
         $self = new self;
@@ -97,7 +98,7 @@ final class Invite implements BaseModel
         $self['from'] = $from;
 
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
-        null !== $targets && $self['targets'] = $targets;
+        Omitted::VALUE !== $targets && $self['targets'] = $targets;
         null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
 
         return $self;

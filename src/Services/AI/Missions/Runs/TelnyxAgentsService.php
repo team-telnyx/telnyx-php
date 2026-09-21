@@ -8,7 +8,6 @@ use Telnyx\AI\Missions\Runs\TelnyxAgents\TelnyxAgentLinkResponse;
 use Telnyx\AI\Missions\Runs\TelnyxAgents\TelnyxAgentListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Missions\Runs\TelnyxAgentsContract;
 
@@ -46,7 +45,7 @@ final class TelnyxAgentsService implements TelnyxAgentsContract
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
     ): TelnyxAgentListResponse {
-        $params = Util::removeNulls(['missionID' => $missionID]);
+        $params = ['missionID' => $missionID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($runID, params: $params, requestOptions: $requestOptions);
@@ -72,9 +71,7 @@ final class TelnyxAgentsService implements TelnyxAgentsContract
         string $telnyxAgentID,
         RequestOptions|array|null $requestOptions = null,
     ): TelnyxAgentLinkResponse {
-        $params = Util::removeNulls(
-            ['missionID' => $missionID, 'telnyxAgentID' => $telnyxAgentID]
-        );
+        $params = ['missionID' => $missionID, 'telnyxAgentID' => $telnyxAgentID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->link($runID, params: $params, requestOptions: $requestOptions);
@@ -100,7 +97,7 @@ final class TelnyxAgentsService implements TelnyxAgentsContract
         string $runID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['missionID' => $missionID, 'runID' => $runID]);
+        $params = ['missionID' => $missionID, 'runID' => $runID];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->unlink($telnyxAgentID, params: $params, requestOptions: $requestOptions);

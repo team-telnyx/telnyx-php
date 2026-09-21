@@ -6,7 +6,7 @@ namespace Telnyx\Services\Whatsapp;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbersContract;
@@ -14,6 +14,7 @@ use Telnyx\Services\Whatsapp\PhoneNumbers\CallingSettingsService;
 use Telnyx\Services\Whatsapp\PhoneNumbers\ConversationalComponentsService;
 use Telnyx\Services\Whatsapp\PhoneNumbers\ProfileService;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetPhoneNumberResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams\VerificationMethod;
@@ -72,8 +73,12 @@ final class PhoneNumbersService implements PhoneNumbersContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -116,8 +121,12 @@ final class PhoneNumbersService implements PhoneNumbersContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberGetResponse {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        $params = array_filter(
+            [
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -142,7 +151,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         VerificationMethod|string $verificationMethod = 'sms',
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['verificationMethod' => $verificationMethod]);
+        $params = ['verificationMethod' => $verificationMethod];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->resendVerification($phoneNumber, params: $params, requestOptions: $requestOptions);
@@ -166,10 +175,30 @@ final class PhoneNumbersService implements PhoneNumbersContract
         string $destinationNumber,
         RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberGetConversationWindowResponse {
-        $params = Util::removeNulls(['destinationNumber' => $destinationNumber]);
+        $params = ['destinationNumber' => $destinationNumber];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveConversationWindow($phoneNumber, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Returns one WhatsApp phone number linked to the authenticated Telnyx account. For a coexistence number in the `syncing` state, the response includes `sync_progress`.
+     *
+     * @param string $phoneNumber Phone number (E.164 format)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrievePhoneNumber(
+        string $phoneNumber,
+        RequestOptions|array|null $requestOptions = null
+    ): PhoneNumberGetPhoneNumberResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrievePhoneNumber($phoneNumber, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -189,7 +218,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         string $code,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['code' => $code]);
+        $params = ['code' => $code];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->verify($phoneNumber, params: $params, requestOptions: $requestOptions);

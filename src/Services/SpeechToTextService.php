@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SpeechToTextContract;
 use Telnyx\SpeechToText\SpeechToTextListProvidersParams\Provider;
@@ -58,8 +58,12 @@ final class SpeechToTextService implements SpeechToTextContract
         SttServiceType|string|null $serviceType = null,
         RequestOptions|array|null $requestOptions = null,
     ): SpeechToTextListProvidersResponse {
-        $params = Util::removeNulls(
-            ['provider' => $provider, 'serviceType' => $serviceType]
+        $params = array_filter(
+            [
+                'provider' => $provider ?? Omitted::VALUE,
+                'serviceType' => $serviceType ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -108,19 +112,20 @@ final class SpeechToTextService implements SpeechToTextContract
         ?int $sampleRate = null,
         RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
                 'inputFormat' => $inputFormat,
                 'transcriptionEngine' => $transcriptionEngine,
-                'endpointing' => $endpointing,
-                'interimResults' => $interimResults,
-                'keyterm' => $keyterm,
-                'keywords' => $keywords,
-                'language' => $language,
-                'model' => $model,
-                'redact' => $redact,
-                'sampleRate' => $sampleRate,
+                'endpointing' => $endpointing ?? Omitted::VALUE,
+                'interimResults' => $interimResults ?? Omitted::VALUE,
+                'keyterm' => $keyterm ?? Omitted::VALUE,
+                'keywords' => $keywords ?? Omitted::VALUE,
+                'language' => $language ?? Omitted::VALUE,
+                'model' => $model ?? Omitted::VALUE,
+                'redact' => $redact ?? Omitted::VALUE,
+                'sampleRate' => $sampleRate ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type

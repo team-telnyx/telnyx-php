@@ -6,7 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
+use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\NumberReservations\NumberReservation;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
@@ -61,11 +61,12 @@ final class NumberReservationsService implements NumberReservationsContract
         ?array $phoneNumbers = null,
         RequestOptions|array|null $requestOptions = null,
     ): NumberReservationNewResponse {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'customerReference' => $customerReference,
-                'phoneNumbers' => $phoneNumbers,
+                'customerReference' => $customerReference ?? Omitted::VALUE,
+                'phoneNumbers' => $phoneNumbers ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -112,12 +113,13 @@ final class NumberReservationsService implements NumberReservationsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = Util::removeNulls(
+        $params = array_filter(
             [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'filter' => $filter ?? Omitted::VALUE,
+                'pageNumber' => $pageNumber ?? Omitted::VALUE,
+                'pageSize' => $pageSize ?? Omitted::VALUE,
             ],
+            static fn ($value) => Omitted::VALUE !== $value,
         );
 
         // @phpstan-ignore-next-line argument.type
