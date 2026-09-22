@@ -530,6 +530,14 @@ Methods:
 
 - <code title="get /ai/knowledge/collections/{slug}/documents">$client->ai->knowledge->collections-><a href="./src/Services/AI/Knowledge/CollectionsService.php">retrieveDocuments</a>(...$params)</code>
 
+## Typesafe
+
+### V1
+
+Methods:
+
+- <code title="post /ai/typesafe/v1/systemone">$client->ai->typesafe->v1-><a href="./src/Services/AI/Typesafe/V1Service.php">systemone</a>(...$params)</code>
+
 # AuditEvents
 
 Methods:
