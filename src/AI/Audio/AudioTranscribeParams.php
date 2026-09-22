@@ -36,7 +36,7 @@ final class AudioTranscribeParams implements BaseModel
     use SdkParams;
 
     /**
-     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency. The `deepgram/*` models only accept mp3/wav files: `deepgram/nova-3` covers ~49 languages plus `multi` and `deepgram/nova-2` covers ~33, while the `-medical` variants are tuned for clinical vocabulary and accept English only (`en` and its regional variants, e.g. `en-US`, `en-GB`).
+     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency. The `deepgram/*` models only accept mp3/wav files: `deepgram/nova-3` covers ~49 languages plus `multi` and `deepgram/nova-2` covers ~33, while the `-medical` variants are tuned for clinical vocabulary and accept English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). `nvidia/parakeet-v3` is multilingual with automatic language detection; `omi-health/omi-med-stt-v1` is a medical model, English only.
      *
      * @var value-of<Model> $model
      */
@@ -56,7 +56,7 @@ final class AudioTranscribeParams implements BaseModel
     public ?string $fileURL;
 
     /**
-     * The language of the audio to be transcribed. `deepgram/nova-3` supports ~49 languages plus `multi`, and `deepgram/nova-2` supports ~33 plus `multi`; the `-medical` variants are English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). Deepgram models validate on the base language and forward the full tag, so regional variants such as `de-CH` and `pt-BR` are accepted where the base language is supported; an unsupported language returns a 400. For `openai/whisper-large-v3-turbo`, supports multiple languages. `distil-whisper/distil-large-v2` does not support language parameter.
+     * The language of the audio to be transcribed. `deepgram/nova-3` supports ~49 languages plus `multi`, and `deepgram/nova-2` supports ~33 plus `multi`; the `-medical` variants are English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). Deepgram models validate on the base language and forward the full tag, so regional variants such as `de-CH` and `pt-BR` are accepted where the base language is supported; an unsupported language returns a 400. For `openai/whisper-large-v3-turbo`, supports multiple languages. `distil-whisper/distil-large-v2` does not support language parameter. `nvidia/parakeet-v3` detects the language automatically; `omi-health/omi-med-stt-v1` is English only.
      */
     #[Optional]
     public ?string $language;
@@ -138,7 +138,7 @@ final class AudioTranscribeParams implements BaseModel
     }
 
     /**
-     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency. The `deepgram/*` models only accept mp3/wav files: `deepgram/nova-3` covers ~49 languages plus `multi` and `deepgram/nova-2` covers ~33, while the `-medical` variants are tuned for clinical vocabulary and accept English only (`en` and its regional variants, e.g. `en-US`, `en-GB`).
+     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency. The `deepgram/*` models only accept mp3/wav files: `deepgram/nova-3` covers ~49 languages plus `multi` and `deepgram/nova-2` covers ~33, while the `-medical` variants are tuned for clinical vocabulary and accept English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). `nvidia/parakeet-v3` is multilingual with automatic language detection; `omi-health/omi-med-stt-v1` is a medical model, English only.
      *
      * @param Model|value-of<Model> $model
      */
@@ -173,7 +173,7 @@ final class AudioTranscribeParams implements BaseModel
     }
 
     /**
-     * The language of the audio to be transcribed. `deepgram/nova-3` supports ~49 languages plus `multi`, and `deepgram/nova-2` supports ~33 plus `multi`; the `-medical` variants are English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). Deepgram models validate on the base language and forward the full tag, so regional variants such as `de-CH` and `pt-BR` are accepted where the base language is supported; an unsupported language returns a 400. For `openai/whisper-large-v3-turbo`, supports multiple languages. `distil-whisper/distil-large-v2` does not support language parameter.
+     * The language of the audio to be transcribed. `deepgram/nova-3` supports ~49 languages plus `multi`, and `deepgram/nova-2` supports ~33 plus `multi`; the `-medical` variants are English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). Deepgram models validate on the base language and forward the full tag, so regional variants such as `de-CH` and `pt-BR` are accepted where the base language is supported; an unsupported language returns a 400. For `openai/whisper-large-v3-turbo`, supports multiple languages. `distil-whisper/distil-large-v2` does not support language parameter. `nvidia/parakeet-v3` detects the language automatically; `omi-health/omi-med-stt-v1` is English only.
      */
     public function withLanguage(string $language): self
     {

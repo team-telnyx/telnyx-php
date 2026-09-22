@@ -3139,6 +3139,14 @@ Methods:
 - <code title="get /compute/funcs/{id}/revisions">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveRevisions</a>(...$params)</code>
 - <code title="get /compute/funcs/{id}/ship_inspection">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveShipInspection</a>(...$params)</code>
 
+### Export
+
+Methods:
+
+- <code title="put /compute/funcs/{id}/logs/export">$client->compute->funcs->export-><a href="./src/Services/Compute/Funcs/ExportService.php">create</a>(...$params)</code>
+- <code title="get /compute/funcs/{id}/logs/export">$client->compute->funcs->export-><a href="./src/Services/Compute/Funcs/ExportService.php">list</a>(...$params)</code>
+- <code title="delete /compute/funcs/{id}/logs/export">$client->compute->funcs->export-><a href="./src/Services/Compute/Funcs/ExportService.php">deleteAll</a>(...$params)</code>
+
 # NoiseSuppressionEngines
 
 Methods:

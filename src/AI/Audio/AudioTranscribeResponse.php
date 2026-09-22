@@ -11,7 +11,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Response fields vary by model. `distil-whisper/distil-large-v2` returns `text`, `duration`, and `segments` in `verbose_json` mode. `openai/whisper-large-v3-turbo` returns `text` only. The `deepgram/*` models return `text` and, depending on `model_config`, may include `words` with per-word timestamps and speaker labels.
+ * Response fields vary by model. `distil-whisper/distil-large-v2` returns `text`, `duration`, and `segments` in `verbose_json` mode. `openai/whisper-large-v3-turbo` returns `text` only. The `deepgram/*` models return `text` and, depending on `model_config`, may include `words` with per-word timestamps and speaker labels. The Parakeet models (`nvidia/parakeet-v3`, `omi-health/omi-med-stt-v1`) return `text` only.
  *
  * @phpstan-import-type SegmentShape from \Telnyx\AI\Audio\AudioTranscribeResponse\Segment
  * @phpstan-import-type AudioTranscriptionResponseWordShape from \Telnyx\AI\Audio\AudioTranscriptionResponseWord

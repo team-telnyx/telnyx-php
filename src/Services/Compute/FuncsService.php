@@ -15,6 +15,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Compute\FuncsContract;
+use Telnyx\Services\Compute\Funcs\ExportService;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -27,11 +28,17 @@ final class FuncsService implements FuncsContract
     public FuncsRawService $raw;
 
     /**
+     * @api
+     */
+    public ExportService $export;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new FuncsRawService($client);
+        $this->export = new ExportService($client);
     }
 
     /**
