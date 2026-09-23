@@ -6,10 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\PrivateWirelessGateways\PrivateWirelessGateway;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayCreateParams\AddressMode;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
+use Telnyx\PrivateWirelessGateways\WirelessPrivateWirelessGateway;
 use Telnyx\RequestOptions;
 
 /**
@@ -22,6 +23,7 @@ interface PrivateWirelessGatewaysContract
      *
      * @param string $name the private wireless gateway name
      * @param string $networkID the identification of the related network resource
+     * @param AddressMode|value-of<AddressMode> $addressMode Determines how IP addresses are assigned to SIM cards using this gateway. With static, each SIM card gets a fixed IP address from the gateway's IP range that is preserved across sessions. With dynamic, an IP address is assigned by the network at attach time and may change between sessions. If omitted, the gateway is created with the default address mode, dynamic.
      * @param string $regionCode The code of the region where the private wireless gateway will be assigned. A list of available regions can be found at the regions endpoint
      * @param RequestOpts|null $requestOptions
      *
@@ -30,6 +32,7 @@ interface PrivateWirelessGatewaysContract
     public function create(
         string $name,
         string $networkID,
+        AddressMode|string $addressMode = 'dynamic',
         ?string $regionCode = null,
         RequestOptions|array|null $requestOptions = null,
     ): PrivateWirelessGatewayNewResponse;
@@ -59,7 +62,7 @@ interface PrivateWirelessGatewaysContract
      * @param int $pageSize the size of the page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PrivateWirelessGateway>
+     * @return DefaultFlatPagination<WirelessPrivateWirelessGateway>
      *
      * @throws APIException
      */

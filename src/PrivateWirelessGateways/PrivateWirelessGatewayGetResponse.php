@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type PrivateWirelessGatewayShape from \Telnyx\PrivateWirelessGateways\PrivateWirelessGateway
+ * @phpstan-import-type WirelessPrivateWirelessGatewayShape from \Telnyx\PrivateWirelessGateways\WirelessPrivateWirelessGateway
  *
  * @phpstan-type PrivateWirelessGatewayGetResponseShape = array{
- *   data?: null|PrivateWirelessGateway|PrivateWirelessGatewayShape
+ *   data?: null|WirelessPrivateWirelessGateway|WirelessPrivateWirelessGatewayShape
  * }
  */
 final class PrivateWirelessGatewayGetResponse implements BaseModel
@@ -21,7 +21,7 @@ final class PrivateWirelessGatewayGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?PrivateWirelessGateway $data;
+    public ?WirelessPrivateWirelessGateway $data;
 
     public function __construct()
     {
@@ -33,10 +33,11 @@ final class PrivateWirelessGatewayGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PrivateWirelessGateway|PrivateWirelessGatewayShape|null $data
+     * @param WirelessPrivateWirelessGateway|WirelessPrivateWirelessGatewayShape|null $data
      */
-    public static function with(PrivateWirelessGateway|array|null $data = null): self
-    {
+    public static function with(
+        WirelessPrivateWirelessGateway|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -45,9 +46,9 @@ final class PrivateWirelessGatewayGetResponse implements BaseModel
     }
 
     /**
-     * @param PrivateWirelessGateway|PrivateWirelessGatewayShape $data
+     * @param WirelessPrivateWirelessGateway|WirelessPrivateWirelessGatewayShape $data
      */
-    public function withData(PrivateWirelessGateway|array $data): self
+    public function withData(WirelessPrivateWirelessGateway|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
