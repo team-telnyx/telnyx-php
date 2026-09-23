@@ -24,4 +24,6 @@ enum Status: string
     case DELIVERED = 'delivered';
 
     case DELIVERY_FAILED = 'delivery_failed';
+
+    case READ = 'read';
 }

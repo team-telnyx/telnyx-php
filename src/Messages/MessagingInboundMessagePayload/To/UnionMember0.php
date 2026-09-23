@@ -12,6 +12,8 @@ use Telnyx\Messages\MessagingInboundMessagePayload\To\UnionMember0\Status;
 
 /**
  * @phpstan-type UnionMember0Shape = array{
+ *   agentID?: string|null,
+ *   agentName?: string|null,
  *   carrier?: string|null,
  *   lineType?: null|LineType|value-of<LineType>,
  *   phoneNumber?: string|null,
@@ -22,6 +24,18 @@ final class UnionMember0 implements BaseModel
 {
     /** @use SdkModel<UnionMember0Shape> */
     use SdkModel;
+
+    /**
+     * RCS agent identifier.
+     */
+    #[Optional('agent_id')]
+    public ?string $agentID;
+
+    /**
+     * RCS agent name.
+     */
+    #[Optional('agent_name')]
+    public ?string $agentName;
 
     /**
      * The carrier of the receiver.
@@ -61,6 +75,8 @@ final class UnionMember0 implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        ?string $agentID = null,
+        ?string $agentName = null,
         ?string $carrier = null,
         LineType|string|null $lineType = null,
         ?string $phoneNumber = null,
@@ -68,10 +84,34 @@ final class UnionMember0 implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $agentID && $self['agentID'] = $agentID;
+        null !== $agentName && $self['agentName'] = $agentName;
         null !== $carrier && $self['carrier'] = $carrier;
         null !== $lineType && $self['lineType'] = $lineType;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $status && $self['status'] = $status;
+
+        return $self;
+    }
+
+    /**
+     * RCS agent identifier.
+     */
+    public function withAgentID(string $agentID): self
+    {
+        $self = clone $this;
+        $self['agentID'] = $agentID;
+
+        return $self;
+    }
+
+    /**
+     * RCS agent name.
+     */
+    public function withAgentName(string $agentName): self
+    {
+        $self = clone $this;
+        $self['agentName'] = $agentName;
 
         return $self;
     }

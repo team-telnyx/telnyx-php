@@ -57,7 +57,14 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  *   from?: string|null,
  *   label?: string|null,
  *   machineDetection?: null|MachineDetection|value-of<MachineDetection>,
+ *   machineDetectionBeepMaxFrequency?: int|null,
+ *   machineDetectionBeepMinFrequency?: int|null,
+ *   machineDetectionBeepMinToneDuration?: int|null,
  *   machineDetectionBeepProfile?: null|MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile>,
+ *   machineDetectionBeepSpectralConfirmation?: bool|null,
+ *   machineDetectionBeepSpectralMinPurity?: float|null,
+ *   machineDetectionBeepSpectralRejectFaxCng?: bool|null,
+ *   machineDetectionBeepSpectralWindow?: int|null,
  *   machineDetectionSilenceTimeout?: int|null,
  *   machineDetectionSpeechEndThreshold?: int|null,
  *   machineDetectionSpeechThreshold?: int|null,
@@ -260,6 +267,24 @@ final class ParticipantParticipantsParams implements BaseModel
     public ?string $machineDetection;
 
     /**
+     * Highest frequency, in Hz, that a tone can reach and still be treated as a beep. Only used when MachineDetection is enabled.
+     */
+    #[Optional('MachineDetectionBeepMaxFrequency')]
+    public ?int $machineDetectionBeepMaxFrequency;
+
+    /**
+     * Lowest frequency, in Hz, that a tone must reach to be treated as a beep. Raising it above 480 excludes North American ringback (440 + 480 Hz), which can otherwise be reported as a beep when the `freq_only` profile is in use. Only used when MachineDetection is enabled.
+     */
+    #[Optional('MachineDetectionBeepMinFrequency')]
+    public ?int $machineDetectionBeepMinFrequency;
+
+    /**
+     * Shortest tone, in milliseconds, that can be treated as a beep. Raising it rejects brief tones such as call-progress blips. Only used when MachineDetection is enabled.
+     */
+    #[Optional('MachineDetectionBeepMinToneDuration')]
+    public ?int $machineDetectionBeepMinToneDuration;
+
+    /**
      * Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile. Only used when MachineDetection is enabled.
      *
      * @var value-of<MachineDetectionBeepProfile>|null $machineDetectionBeepProfile
@@ -269,6 +294,30 @@ final class ParticipantParticipantsParams implements BaseModel
         enum: MachineDetectionBeepProfile::class
     )]
     public ?string $machineDetectionBeepProfile;
+
+    /**
+     * When enabled, a candidate beep must pass an additional spectral check before it is reported. Only used when MachineDetection is enabled.
+     */
+    #[Optional('MachineDetectionBeepSpectralConfirmation')]
+    public ?bool $machineDetectionBeepSpectralConfirmation;
+
+    /**
+     * Minimum spectral purity, from 0 to 1, for a tone to be treated as a beep. Raising it rejects mixed tones such as ringback, which combines two frequencies. Only used when MachineDetection is enabled.
+     */
+    #[Optional('MachineDetectionBeepSpectralMinPurity')]
+    public ?float $machineDetectionBeepSpectralMinPurity;
+
+    /**
+     * When enabled, the fax CNG tone is rejected rather than reported as a beep. Only used when MachineDetection is enabled.
+     */
+    #[Optional('MachineDetectionBeepSpectralRejectFaxCng')]
+    public ?bool $machineDetectionBeepSpectralRejectFaxCng;
+
+    /**
+     * Length of the spectral confirmation window, in milliseconds. Only used when MachineDetection is enabled.
+     */
+    #[Optional('MachineDetectionBeepSpectralWindow')]
+    public ?int $machineDetectionBeepSpectralWindow;
 
     /**
      * If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
@@ -492,7 +541,14 @@ final class ParticipantParticipantsParams implements BaseModel
         ?string $from = null,
         ?string $label = null,
         MachineDetection|string|null $machineDetection = null,
+        ?int $machineDetectionBeepMaxFrequency = null,
+        ?int $machineDetectionBeepMinFrequency = null,
+        ?int $machineDetectionBeepMinToneDuration = null,
         MachineDetectionBeepProfile|string|null $machineDetectionBeepProfile = null,
+        ?bool $machineDetectionBeepSpectralConfirmation = null,
+        ?float $machineDetectionBeepSpectralMinPurity = null,
+        ?bool $machineDetectionBeepSpectralRejectFaxCng = null,
+        ?int $machineDetectionBeepSpectralWindow = null,
         ?int $machineDetectionSilenceTimeout = null,
         ?int $machineDetectionSpeechEndThreshold = null,
         ?int $machineDetectionSpeechThreshold = null,
@@ -546,7 +602,14 @@ final class ParticipantParticipantsParams implements BaseModel
         null !== $from && $self['from'] = $from;
         null !== $label && $self['label'] = $label;
         null !== $machineDetection && $self['machineDetection'] = $machineDetection;
+        null !== $machineDetectionBeepMaxFrequency && $self['machineDetectionBeepMaxFrequency'] = $machineDetectionBeepMaxFrequency;
+        null !== $machineDetectionBeepMinFrequency && $self['machineDetectionBeepMinFrequency'] = $machineDetectionBeepMinFrequency;
+        null !== $machineDetectionBeepMinToneDuration && $self['machineDetectionBeepMinToneDuration'] = $machineDetectionBeepMinToneDuration;
         null !== $machineDetectionBeepProfile && $self['machineDetectionBeepProfile'] = $machineDetectionBeepProfile;
+        null !== $machineDetectionBeepSpectralConfirmation && $self['machineDetectionBeepSpectralConfirmation'] = $machineDetectionBeepSpectralConfirmation;
+        null !== $machineDetectionBeepSpectralMinPurity && $self['machineDetectionBeepSpectralMinPurity'] = $machineDetectionBeepSpectralMinPurity;
+        null !== $machineDetectionBeepSpectralRejectFaxCng && $self['machineDetectionBeepSpectralRejectFaxCng'] = $machineDetectionBeepSpectralRejectFaxCng;
+        null !== $machineDetectionBeepSpectralWindow && $self['machineDetectionBeepSpectralWindow'] = $machineDetectionBeepSpectralWindow;
         null !== $machineDetectionSilenceTimeout && $self['machineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
         null !== $machineDetectionSpeechEndThreshold && $self['machineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
         null !== $machineDetectionSpeechThreshold && $self['machineDetectionSpeechThreshold'] = $machineDetectionSpeechThreshold;
@@ -877,6 +940,42 @@ final class ParticipantParticipantsParams implements BaseModel
     }
 
     /**
+     * Highest frequency, in Hz, that a tone can reach and still be treated as a beep. Only used when MachineDetection is enabled.
+     */
+    public function withMachineDetectionBeepMaxFrequency(
+        int $machineDetectionBeepMaxFrequency
+    ): self {
+        $self = clone $this;
+        $self['machineDetectionBeepMaxFrequency'] = $machineDetectionBeepMaxFrequency;
+
+        return $self;
+    }
+
+    /**
+     * Lowest frequency, in Hz, that a tone must reach to be treated as a beep. Raising it above 480 excludes North American ringback (440 + 480 Hz), which can otherwise be reported as a beep when the `freq_only` profile is in use. Only used when MachineDetection is enabled.
+     */
+    public function withMachineDetectionBeepMinFrequency(
+        int $machineDetectionBeepMinFrequency
+    ): self {
+        $self = clone $this;
+        $self['machineDetectionBeepMinFrequency'] = $machineDetectionBeepMinFrequency;
+
+        return $self;
+    }
+
+    /**
+     * Shortest tone, in milliseconds, that can be treated as a beep. Raising it rejects brief tones such as call-progress blips. Only used when MachineDetection is enabled.
+     */
+    public function withMachineDetectionBeepMinToneDuration(
+        int $machineDetectionBeepMinToneDuration
+    ): self {
+        $self = clone $this;
+        $self['machineDetectionBeepMinToneDuration'] = $machineDetectionBeepMinToneDuration;
+
+        return $self;
+    }
+
+    /**
      * Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile. Only used when MachineDetection is enabled.
      *
      * @param MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile> $machineDetectionBeepProfile
@@ -886,6 +985,54 @@ final class ParticipantParticipantsParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['machineDetectionBeepProfile'] = $machineDetectionBeepProfile;
+
+        return $self;
+    }
+
+    /**
+     * When enabled, a candidate beep must pass an additional spectral check before it is reported. Only used when MachineDetection is enabled.
+     */
+    public function withMachineDetectionBeepSpectralConfirmation(
+        bool $machineDetectionBeepSpectralConfirmation
+    ): self {
+        $self = clone $this;
+        $self['machineDetectionBeepSpectralConfirmation'] = $machineDetectionBeepSpectralConfirmation;
+
+        return $self;
+    }
+
+    /**
+     * Minimum spectral purity, from 0 to 1, for a tone to be treated as a beep. Raising it rejects mixed tones such as ringback, which combines two frequencies. Only used when MachineDetection is enabled.
+     */
+    public function withMachineDetectionBeepSpectralMinPurity(
+        float $machineDetectionBeepSpectralMinPurity
+    ): self {
+        $self = clone $this;
+        $self['machineDetectionBeepSpectralMinPurity'] = $machineDetectionBeepSpectralMinPurity;
+
+        return $self;
+    }
+
+    /**
+     * When enabled, the fax CNG tone is rejected rather than reported as a beep. Only used when MachineDetection is enabled.
+     */
+    public function withMachineDetectionBeepSpectralRejectFaxCng(
+        bool $machineDetectionBeepSpectralRejectFaxCng
+    ): self {
+        $self = clone $this;
+        $self['machineDetectionBeepSpectralRejectFaxCng'] = $machineDetectionBeepSpectralRejectFaxCng;
+
+        return $self;
+    }
+
+    /**
+     * Length of the spectral confirmation window, in milliseconds. Only used when MachineDetection is enabled.
+     */
+    public function withMachineDetectionBeepSpectralWindow(
+        int $machineDetectionBeepSpectralWindow
+    ): self {
+        $self = clone $this;
+        $self['machineDetectionBeepSpectralWindow'] = $machineDetectionBeepSpectralWindow;
 
         return $self;
     }

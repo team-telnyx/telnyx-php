@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Chat\ChatCompletionRequest\Tool;
 
-use Telnyx\AI\Chat\ChatCompletionRequest\Tool\ChatCompletionToolParam\FunctionDefinition;
+use Telnyx\AI\OpenAI\Chat\FunctionDefinition;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type FunctionDefinitionShape from \Telnyx\AI\Chat\ChatCompletionRequest\Tool\ChatCompletionToolParam\FunctionDefinition
+ * @phpstan-import-type FunctionDefinitionShape from \Telnyx\AI\OpenAI\Chat\FunctionDefinition
  *
  * @phpstan-type ChatCompletionToolParamShape = array{
  *   function: FunctionDefinition|FunctionDefinitionShape, type: 'function'

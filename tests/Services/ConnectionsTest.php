@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Connections\Connection;
+use Telnyx\Connections\ConnectionGetCountResponse;
 use Telnyx\Connections\ConnectionGetResponse;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Core\Util;
@@ -78,5 +79,18 @@ final class ConnectionsTest extends TestCase
             // @phpstan-ignore-next-line method.alreadyNarrowedType
             $this->assertInstanceOf(ConnectionListActiveCallsResponse::class, $item);
         }
+    }
+
+    #[Test]
+    public function testRetrieveCount(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->connections->retrieveCount();
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConnectionGetCountResponse::class, $result);
     }
 }

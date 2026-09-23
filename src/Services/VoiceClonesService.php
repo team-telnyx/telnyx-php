@@ -164,7 +164,7 @@ final class VoiceClonesService implements VoiceClonesContract
     /**
      * @api
      *
-     * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
+     * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–60 seconds of clear speech (Ultra accepts up to 60 seconds; Qwen3TTS auto-trims to 10 seconds; Minimax accepts up to 5 minutes). Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      *
      * @param VoiceCloneUploadRequestShape $voiceCloneUploadRequest Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      * @param RequestOpts|null $requestOptions

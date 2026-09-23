@@ -12,4 +12,6 @@ enum Type: string
     case SMS = 'SMS';
 
     case MMS = 'MMS';
+
+    case RCS = 'RCS';
 }

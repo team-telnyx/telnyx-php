@@ -68,6 +68,13 @@ final class CallsTest extends TestCase
             answeringMachineDetectionConfig: [
                 'afterGreetingSilenceMillis' => 1000,
                 'beepDetectionProfile' => 'freq_only',
+                'beepMaxFrequencyHz' => 2000,
+                'beepMinFrequencyHz' => 550,
+                'beepMinToneDurationMillis' => 300,
+                'beepSpectralConfirmation' => true,
+                'beepSpectralMinPurity' => 0.8,
+                'beepSpectralRejectFaxCng' => true,
+                'beepSpectralWindowMillis' => 100,
                 'betweenWordsSilenceMillis' => 1000,
                 'greetingDurationMillis' => 1000,
                 'greetingSilenceDurationMillis' => 2000,

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool;
 
 use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type InviteShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite
  *
  * @phpstan-type InviteToolShape = array{
- *   invite: Invite|InviteShape, type: 'invite'
+ *   invite: Invite|InviteShape, type: 'invite', shared?: bool|null
  * }
  */
 final class InviteTool implements BaseModel
@@ -27,6 +28,12 @@ final class InviteTool implements BaseModel
 
     #[Required]
     public Invite $invite;
+
+    /**
+     * Whether this tool comes from the shared Tools Library. Responses merge shared tools into `tools` with `shared: true`; inline tools carry `shared: false`. Read-only: set by the server, not accepted in requests. When updating an assistant, omit `shared: true` tools from the request `tools` array and manage them through `tool_ids` instead — re-sending their definitions creates an inline duplicate (rejected with error code 10015 when the type allows only one instance per assistant).
+     */
+    #[Optional]
+    public ?bool $shared;
 
     /**
      * `new InviteTool()` is missing required properties by the API.
@@ -54,11 +61,13 @@ final class InviteTool implements BaseModel
      *
      * @param Invite|InviteShape $invite
      */
-    public static function with(Invite|array $invite): self
+    public static function with(Invite|array $invite, ?bool $shared = null): self
     {
         $self = new self;
 
         $self['invite'] = $invite;
+
+        null !== $shared && $self['shared'] = $shared;
 
         return $self;
     }
@@ -81,6 +90,17 @@ final class InviteTool implements BaseModel
     {
         $self = clone $this;
         $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
+     * Whether this tool comes from the shared Tools Library. Responses merge shared tools into `tools` with `shared: true`; inline tools carry `shared: false`. Read-only: set by the server, not accepted in requests. When updating an assistant, omit `shared: true` tools from the request `tools` array and manage them through `tool_ids` instead — re-sending their definitions creates an inline duplicate (rejected with error code 10015 when the type allows only one instance per assistant).
+     */
+    public function withShared(bool $shared): self
+    {
+        $self = clone $this;
+        $self['shared'] = $shared;
 
         return $self;
     }

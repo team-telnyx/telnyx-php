@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\InboundMessageWebhookEvent\Data
+ * @phpstan-import-type MessagingInboundMessageShape from \Telnyx\Webhooks\MessagingInboundMessage
  *
  * @phpstan-type InboundMessageWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|MessagingInboundMessage|MessagingInboundMessageShape
  * }
  */
 final class InboundMessageWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class InboundMessageWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?MessagingInboundMessage $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class InboundMessageWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param MessagingInboundMessage|MessagingInboundMessageShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        MessagingInboundMessage|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class InboundMessageWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param MessagingInboundMessage|MessagingInboundMessageShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(MessagingInboundMessage|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

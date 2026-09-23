@@ -8,13 +8,14 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers;
+use Telnyx\Webhooks\NumberOrderStatusUpdate\Data\EventType;
 
 /**
  * @phpstan-import-type NumberOrderWithPhoneNumbersShape from \Telnyx\NumberOrders\NumberOrderWithPhoneNumbers
  *
  * @phpstan-type DataShape = array{
  *   id: string,
- *   eventType: string,
+ *   eventType: EventType|value-of<EventType>,
  *   occurredAt: \DateTimeInterface,
  *   payload: NumberOrderWithPhoneNumbers|NumberOrderWithPhoneNumbersShape,
  *   recordType: string,
@@ -33,8 +34,10 @@ final class Data implements BaseModel
 
     /**
      * The type of event being sent.
+     *
+     * @var value-of<EventType> $eventType
      */
-    #[Required('event_type')]
+    #[Required('event_type', enum: EventType::class)]
     public string $eventType;
 
     /**
@@ -83,11 +86,12 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param EventType|value-of<EventType> $eventType
      * @param NumberOrderWithPhoneNumbers|NumberOrderWithPhoneNumbersShape $payload
      */
     public static function with(
         string $id,
-        string $eventType,
+        EventType|string $eventType,
         \DateTimeInterface $occurredAt,
         NumberOrderWithPhoneNumbers|array $payload,
         string $recordType,
@@ -116,8 +120,10 @@ final class Data implements BaseModel
 
     /**
      * The type of event being sent.
+     *
+     * @param EventType|value-of<EventType> $eventType
      */
-    public function withEventType(string $eventType): self
+    public function withEventType(EventType|string $eventType): self
     {
         $self = clone $this;
         $self['eventType'] = $eventType;

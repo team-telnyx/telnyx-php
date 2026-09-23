@@ -22,7 +22,7 @@ final class MessageGetResponse implements BaseModel
 
     /** @var DataVariants|null $data */
     #[Optional(union: Data::class)]
-    public MessagingOutboundMessagePayload|MessagingInboundMessagePayload|null $data;
+    public OutboundMessagePayload|MessagingInboundMessagePayload|null $data;
 
     public function __construct()
     {
@@ -37,7 +37,7 @@ final class MessageGetResponse implements BaseModel
      * @param DataShape|null $data
      */
     public static function with(
-        MessagingOutboundMessagePayload|array|MessagingInboundMessagePayload|null $data = null,
+        OutboundMessagePayload|array|MessagingInboundMessagePayload|null $data = null
     ): self {
         $self = new self;
 
@@ -50,7 +50,7 @@ final class MessageGetResponse implements BaseModel
      * @param DataShape $data
      */
     public function withData(
-        MessagingOutboundMessagePayload|array|MessagingInboundMessagePayload $data
+        OutboundMessagePayload|array|MessagingInboundMessagePayload $data
     ): self {
         $self = clone $this;
         $self['data'] = $data;

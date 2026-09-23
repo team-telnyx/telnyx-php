@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Connections\Connection;
+use Telnyx\Connections\ConnectionGetCountResponse;
 use Telnyx\Connections\ConnectionGetResponse;
 use Telnyx\Connections\ConnectionListActiveCallsParams;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
@@ -64,5 +65,18 @@ interface ConnectionsRawContract
         string $connectionID,
         array|ConnectionListActiveCallsParams $params,
         RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ConnectionGetCountResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveCount(
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

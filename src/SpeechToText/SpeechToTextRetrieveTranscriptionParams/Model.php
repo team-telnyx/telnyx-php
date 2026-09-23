@@ -43,6 +43,8 @@ enum Model: string
 
     case NVIDIA_PARAKEET_V3 = 'nvidia/parakeet-v3';
 
+    case OMI_HEALTH_OMI_MED_STT_V1 = 'omi-health/omi-med-stt-v1';
+
     case HUMAIN_REALTIME = 'humain/realtime';
 
     case RESON8_TURNS = 'reson8/turns';

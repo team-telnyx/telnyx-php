@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Connections\Connection;
+use Telnyx\Connections\ConnectionGetCountResponse;
 use Telnyx\Connections\ConnectionGetResponse;
 use Telnyx\Connections\ConnectionListActiveCallsParams;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
@@ -132,6 +133,29 @@ final class ConnectionsRawService implements ConnectionsRawContract
             options: $options,
             convert: ConnectionListActiveCallsResponse::class,
             page: DefaultFlatPagination::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Returns the number of connections associated with the authenticated user, grouped by connection type, together with the connection limits that apply to the user. Forward-only connections are excluded from the counts.
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ConnectionGetCountResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveCount(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: 'connections/count',
+            options: $requestOptions,
+            convert: ConnectionGetCountResponse::class,
         );
     }
 }

@@ -296,6 +296,7 @@ final class VersionsTest extends TestCase
             interruptionSettings: [
                 'disableGreetingInterruption' => true,
                 'enable' => true,
+                'interruptPredictionThreshold' => 0,
                 'startSpeakingPlan' => [
                     'transcriptionEndpointingPlan' => [
                         'onNoPunctuationSeconds' => 0,
@@ -325,15 +326,21 @@ final class VersionsTest extends TestCase
                 'status' => ObservabilityStatus::ENABLED,
             ],
             postConversationSettings: ['enabled' => true],
-            privacySettings: ['dataRetention' => true],
+            privacySettings: [
+                'dataRetention' => true, 'inTransitDataLocality' => true,
+            ],
             tags: ['string'],
             telephonySettings: [
                 'defaultTexmlAppID' => 'default_texml_app_id',
                 'disableDtmf' => true,
                 'fallbackDestination' => 'fallback_destination',
-                'noiseSuppression' => 'krisp',
+                'noiseSuppression' => 'aicoustics',
                 'noiseSuppressionConfig' => [
-                    'attenuationLimit' => 0, 'mode' => 'advanced',
+                    'attenuationLimit' => 0,
+                    'enhancementLevel' => 0,
+                    'family' => 'quail',
+                    'mode' => 'advanced',
+                    'size' => 'vf',
                 ],
                 'recordingSettings' => [
                     'channels' => 'single',
@@ -358,47 +365,12 @@ final class VersionsTest extends TestCase
             toolIDs: ['string'],
             tools: [
                 [
-                    'type' => 'webhook',
-                    'webhook' => [
-                        'description' => 'description',
+                    'function' => [
                         'name' => 'name',
-                        'url' => 'https://example.com/api/v1/function',
-                        'async' => true,
-                        'asyncTimeoutMs' => 1,
-                        'bodyParameters' => [
-                            'properties' => ['age' => 'bar', 'location' => 'bar'],
-                            'required' => ['age', 'location'],
-                            'type' => 'object',
-                        ],
-                        'headers' => [['name' => 'name', 'value' => 'value']],
-                        'messages' => [
-                            [
-                                'content' => 'Let me look that up for you.',
-                                'type' => 'request_start',
-                                'timingMs' => 100,
-                            ],
-                            [
-                                'content' => 'Still working on that.',
-                                'timingMs' => 5000,
-                                'type' => 'request_response_delayed',
-                            ],
-                        ],
-                        'method' => 'GET',
-                        'pathParameters' => [
-                            'properties' => ['id' => 'bar'],
-                            'required' => ['id'],
-                            'type' => 'object',
-                        ],
-                        'presetBodyFields' => ['account_id' => 'bar', 'source' => 'bar'],
-                        'presetQueryParams' => ['caller' => 'bar', 'channel' => 'bar'],
-                        'queryParameters' => [
-                            'properties' => ['page' => 'bar'],
-                            'required' => ['page'],
-                            'type' => 'object',
-                        ],
-                        'storeFieldsAsVariables' => [['name' => 'x', 'valuePath' => 'x']],
-                        'timeoutMs' => 500,
+                        'description' => 'description',
+                        'parameters' => ['foo' => 'bar'],
                     ],
+                    'type' => 'function',
                 ],
             ],
             transcription: [

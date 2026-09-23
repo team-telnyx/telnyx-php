@@ -32,6 +32,7 @@ use Telnyx\Messages\MessagingInboundMessagePayload\Type;
  *
  * @phpstan-type MessagingInboundMessagePayloadShape = array{
  *   id?: string|null,
+ *   autoresponseType?: string|null,
  *   body?: null|Body|BodyShape,
  *   cc?: list<Cc|CcShape>|null,
  *   completedAt?: \DateTimeInterface|null,
@@ -74,7 +75,13 @@ final class MessagingInboundMessagePayload implements BaseModel
     public ?string $id;
 
     /**
-     * WhatsApp message body. For message edits and revocations, inspect `type` and the corresponding `edit` or `revoke` object.
+     * Automatic response type triggered by an inbound opt-in, opt-out, or help keyword. Examples include START, STOP, and HELP.
+     */
+    #[Optional('autoresponse_type')]
+    public ?string $autoresponseType;
+
+    /**
+     * Message body for RCS and WhatsApp. RCS messages contain text, user_file, location, or suggestion_response. For WhatsApp edits and revocations, inspect type and the corresponding edit or revoke object.
      */
     #[Optional]
     public ?Body $body;
@@ -212,7 +219,7 @@ final class MessagingInboundMessagePayload implements BaseModel
     public ?string $text;
 
     /**
-     * Receiving address. SMS and MMS webhooks use an array of recipients. WhatsApp webhooks use one E.164 phone number.
+     * Receiving address. SMS, MMS and RCS webhooks use an array of recipients. RCS recipients are identified by agent_id and agent_name. WhatsApp webhooks use one E.164 phone number.
      *
      * @var ToVariants|null $to
      */
@@ -280,6 +287,7 @@ final class MessagingInboundMessagePayload implements BaseModel
         string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
         string|Omitted|null $webhookURL = Omitted::VALUE,
         ?string $id = null,
+        ?string $autoresponseType = null,
         Body|array|null $body = null,
         ?array $cc = null,
         Direction|string|null $direction = null,
@@ -302,6 +310,7 @@ final class MessagingInboundMessagePayload implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
+        null !== $autoresponseType && $self['autoresponseType'] = $autoresponseType;
         null !== $body && $self['body'] = $body;
         null !== $cc && $self['cc'] = $cc;
         Omitted::VALUE !== $completedAt && $self['completedAt'] = $completedAt;
@@ -346,7 +355,18 @@ final class MessagingInboundMessagePayload implements BaseModel
     }
 
     /**
-     * WhatsApp message body. For message edits and revocations, inspect `type` and the corresponding `edit` or `revoke` object.
+     * Automatic response type triggered by an inbound opt-in, opt-out, or help keyword. Examples include START, STOP, and HELP.
+     */
+    public function withAutoresponseType(string $autoresponseType): self
+    {
+        $self = clone $this;
+        $self['autoresponseType'] = $autoresponseType;
+
+        return $self;
+    }
+
+    /**
+     * Message body for RCS and WhatsApp. RCS messages contain text, user_file, location, or suggestion_response. For WhatsApp edits and revocations, inspect type and the corresponding edit or revoke object.
      *
      * @param Body|BodyShape $body
      */
@@ -615,7 +635,7 @@ final class MessagingInboundMessagePayload implements BaseModel
     }
 
     /**
-     * Receiving address. SMS and MMS webhooks use an array of recipients. WhatsApp webhooks use one E.164 phone number.
+     * Receiving address. SMS, MMS and RCS webhooks use an array of recipients. RCS recipients are identified by agent_id and agent_name. WhatsApp webhooks use one E.164 phone number.
      *
      * @param ToShape $to
      */
