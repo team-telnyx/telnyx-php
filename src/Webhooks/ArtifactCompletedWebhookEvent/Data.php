@@ -21,6 +21,7 @@ use Telnyx\Webhooks\ArtifactCompletedWebhookEvent\Data\Type;
  *   artifactID: string,
  *   content: Content|ContentShape,
  *   modelProvenance: ModelProvenance|ModelProvenanceShape,
+ *   prompt: string|null,
  *   sessionID: string,
  *   type: Type|value-of<Type>,
  * }
@@ -49,6 +50,12 @@ final class Data implements BaseModel
     public ModelProvenance $modelProvenance;
 
     /**
+     * The prompt that produced this artifact, or null for a named type. Non-null only when `type` is `custom`; the five named types always return `null`.
+     */
+    #[Required]
+    public ?string $prompt;
+
+    /**
      * The meeting session this event belongs to.
      */
     #[Required('session_id')]
@@ -68,7 +75,12 @@ final class Data implements BaseModel
      * To enforce required parameters use
      * ```
      * Data::with(
-     *   artifactID: ..., content: ..., modelProvenance: ..., sessionID: ..., type: ...
+     *   artifactID: ...,
+     *   content: ...,
+     *   modelProvenance: ...,
+     *   prompt: ...,
+     *   sessionID: ...,
+     *   type: ...,
      * )
      * ```
      *
@@ -79,6 +91,7 @@ final class Data implements BaseModel
      *   ->withArtifactID(...)
      *   ->withContent(...)
      *   ->withModelProvenance(...)
+     *   ->withPrompt(...)
      *   ->withSessionID(...)
      *   ->withType(...)
      * ```
@@ -101,6 +114,7 @@ final class Data implements BaseModel
         string $artifactID,
         Content|array $content,
         ModelProvenance|array $modelProvenance,
+        ?string $prompt,
         string $sessionID,
         Type|string $type,
     ): self {
@@ -109,6 +123,7 @@ final class Data implements BaseModel
         $self['artifactID'] = $artifactID;
         $self['content'] = $content;
         $self['modelProvenance'] = $modelProvenance;
+        $self['prompt'] = $prompt;
         $self['sessionID'] = $sessionID;
         $self['type'] = $type;
 
@@ -149,6 +164,17 @@ final class Data implements BaseModel
     ): self {
         $self = clone $this;
         $self['modelProvenance'] = $modelProvenance;
+
+        return $self;
+    }
+
+    /**
+     * The prompt that produced this artifact, or null for a named type. Non-null only when `type` is `custom`; the five named types always return `null`.
+     */
+    public function withPrompt(?string $prompt): self
+    {
+        $self = clone $this;
+        $self['prompt'] = $prompt;
 
         return $self;
     }

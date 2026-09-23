@@ -30,15 +30,16 @@ interface MeetingSessionsContract
      * @api
      *
      * @param string $meetingURL the meeting URL the bot should join
-     * @param Assistant|AssistantShape $assistant Request options for attaching a voice assistant to the session. Routing fields (`call_control_connection_id`, `from`, and `loopback_sip_uri`) are used only to establish the assistant call leg and are omitted from response objects. `audio_gate` is returned with `id` in the assistant response object.
+     * @param Assistant|AssistantShape $assistant Attach a Telnyx AI Assistant to the session. Supply the Assistant's ID; the Meeting service connects it to the meeting directly. The Call Control connection, caller ID and loopback SIP URI previously required here have been removed and are now rejected as unknown fields.
      * @param Avatar|AvatarShape $avatar request options for attaching a bring-your-own-key avatar to the session
      * @param bool $bargeIn When enabled, a human participant `speech_on` event interrupts and stops the current bot audio; it does not bypass admission or initiate speech. Assistant sessions reject `barge_in: true`.
      * @param string $botName Display name for the bot in the meeting. Defaults to "Meeting Bot".
      * @param CameraImageShape $cameraImage Write-only static camera-tile image for this session, not a native account or participant profile photo. Supply exactly one JPEG source. When effective, the image is used as the bot's static camera/video output; presentation varies by meeting platform and recording configuration and is not guaranteed in recordings. An effective Avatar or Assistant webpage output takes precedence, so this input is ignored and a URL source is not fetched.
+     * @param string $chatOnEnter A message the bot posts to the meeting's chat as soon as it becomes active — typically a recording disclosure. Delivered at most once. Independent of `speak_on_enter`: both may be set, and the chat message posts first because it does not wait for text-to-speech or avatar startup. Rejected with 422 `unsupported_capability` on platforms without meeting chat.
      * @param string $idempotencyKey Client-supplied idempotency key to safely retry creation requests without duplicating sessions. Lookup is scoped to the authenticated account and compares the key only; the request payload is not fingerprinted or compared.
      * @param \DateTimeInterface $joinAt ISO-8601 timestamp in the future at which the bot should join. If omitted, the bot joins immediately.
      * @param array<string,mixed> $metadata Arbitrary key-value metadata attached to the session. The serialized JSON representation must not exceed 16384 characters at runtime.
-     * @param string $speakOnEnter text the bot speaks when it enters the meeting
+     * @param string $speakOnEnter Text the bot speaks when it enters the meeting. **Not spoken when an `assistant` is attached**: the value is accepted and echoed back on the session, but the assistant owns the voice and the line is never delivered, with no event reporting the omission. Use `chat_on_enter` to announce an assistant-backed bot.
      * @param bool $summarizeOnEnd if true, generate a summary artifact when the session ends
      * @param string $voice Session-default voice identifier used for `speak_on_enter` and ordinary speak actions. A voice supplied on an individual speak action overrides this default for that utterance.
      * @param string $webhookURL HTTPS endpoint to receive session lifecycle callbacks. Static validation requires HTTPS, rejects embedded credentials and blocked hosts, and enforces egress policy. Validation makes no network request to the endpoint.
@@ -53,6 +54,7 @@ interface MeetingSessionsContract
         bool $bargeIn = false,
         ?string $botName = null,
         MeetingSessionCameraImageBase64Source|array|MeetingSessionCameraImageURLSource|null $cameraImage = null,
+        ?string $chatOnEnter = null,
         ?string $idempotencyKey = null,
         ?\DateTimeInterface $joinAt = null,
         ?array $metadata = null,

@@ -62,15 +62,16 @@ final class MeetingSessionsService implements MeetingSessionsContract
      * Creates a new meeting session. When an idempotency_key is supplied in the request body, replay lookup is scoped to the authenticated account and compares only the key; the request payload is not fingerprinted or compared. If a session with that key already exists for the account, the existing session is replayed (200); otherwise a new session is created (201). Supports bring-your-own-key (BYOK) configuration. The session may enter asynchronous states (e.g. joining, waiting_for_admission) before becoming active. Optional `camera_image` input is write-only and applies only when no Avatar or Assistant webpage output takes precedence. An ignored URL is not fetched. An effective URL source is resolved before bot creation; neither the source URL nor image bytes are persisted, returned, or logged. Treat signed URLs as credentials.
      *
      * @param string $meetingURL the meeting URL the bot should join
-     * @param Assistant|AssistantShape $assistant Request options for attaching a voice assistant to the session. Routing fields (`call_control_connection_id`, `from`, and `loopback_sip_uri`) are used only to establish the assistant call leg and are omitted from response objects. `audio_gate` is returned with `id` in the assistant response object.
+     * @param Assistant|AssistantShape $assistant Attach a Telnyx AI Assistant to the session. Supply the Assistant's ID; the Meeting service connects it to the meeting directly. The Call Control connection, caller ID and loopback SIP URI previously required here have been removed and are now rejected as unknown fields.
      * @param Avatar|AvatarShape $avatar request options for attaching a bring-your-own-key avatar to the session
      * @param bool $bargeIn When enabled, a human participant `speech_on` event interrupts and stops the current bot audio; it does not bypass admission or initiate speech. Assistant sessions reject `barge_in: true`.
      * @param string $botName Display name for the bot in the meeting. Defaults to "Meeting Bot".
      * @param CameraImageShape $cameraImage Write-only static camera-tile image for this session, not a native account or participant profile photo. Supply exactly one JPEG source. When effective, the image is used as the bot's static camera/video output; presentation varies by meeting platform and recording configuration and is not guaranteed in recordings. An effective Avatar or Assistant webpage output takes precedence, so this input is ignored and a URL source is not fetched.
+     * @param string $chatOnEnter A message the bot posts to the meeting's chat as soon as it becomes active — typically a recording disclosure. Delivered at most once. Independent of `speak_on_enter`: both may be set, and the chat message posts first because it does not wait for text-to-speech or avatar startup. Rejected with 422 `unsupported_capability` on platforms without meeting chat.
      * @param string $idempotencyKey Client-supplied idempotency key to safely retry creation requests without duplicating sessions. Lookup is scoped to the authenticated account and compares the key only; the request payload is not fingerprinted or compared.
      * @param \DateTimeInterface $joinAt ISO-8601 timestamp in the future at which the bot should join. If omitted, the bot joins immediately.
      * @param array<string,mixed> $metadata Arbitrary key-value metadata attached to the session. The serialized JSON representation must not exceed 16384 characters at runtime.
-     * @param string $speakOnEnter text the bot speaks when it enters the meeting
+     * @param string $speakOnEnter Text the bot speaks when it enters the meeting. **Not spoken when an `assistant` is attached**: the value is accepted and echoed back on the session, but the assistant owns the voice and the line is never delivered, with no event reporting the omission. Use `chat_on_enter` to announce an assistant-backed bot.
      * @param bool $summarizeOnEnd if true, generate a summary artifact when the session ends
      * @param string $voice Session-default voice identifier used for `speak_on_enter` and ordinary speak actions. A voice supplied on an individual speak action overrides this default for that utterance.
      * @param string $webhookURL HTTPS endpoint to receive session lifecycle callbacks. Static validation requires HTTPS, rejects embedded credentials and blocked hosts, and enforces egress policy. Validation makes no network request to the endpoint.
@@ -85,6 +86,7 @@ final class MeetingSessionsService implements MeetingSessionsContract
         bool $bargeIn = false,
         ?string $botName = null,
         MeetingSessionCameraImageBase64Source|array|MeetingSessionCameraImageURLSource|null $cameraImage = null,
+        ?string $chatOnEnter = null,
         ?string $idempotencyKey = null,
         ?\DateTimeInterface $joinAt = null,
         ?array $metadata = null,
@@ -102,6 +104,7 @@ final class MeetingSessionsService implements MeetingSessionsContract
                 'bargeIn' => $bargeIn,
                 'botName' => $botName ?? Omitted::VALUE,
                 'cameraImage' => $cameraImage ?? Omitted::VALUE,
+                'chatOnEnter' => $chatOnEnter ?? Omitted::VALUE,
                 'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
                 'joinAt' => $joinAt ?? Omitted::VALUE,
                 'metadata' => $metadata ?? Omitted::VALUE,
@@ -219,7 +222,7 @@ final class MeetingSessionsService implements MeetingSessionsContract
     /**
      * @api
      *
-     * **Not yet available in production** — this route is not currently routed on api.telnyx.com and returns a generic 404; it is documented ahead of rollout. Irreversibly requests deletion of provider-hosted aggregate recording media under the provider contract. The operation retains the Telnyx-local Meeting session, transcript segments, events, artifacts, and usage records. It is separate from `DELETE /meeting_sessions/{id}`, which stops or cancels participation without deleting the persisted session. A missing/foreign session returns 404; provider deletion failures return 502.
+     * Irreversibly requests deletion of provider-hosted aggregate recording media under the provider contract. The operation retains the Telnyx-local Meeting session, transcript segments, events, artifacts, and usage records. It is separate from `DELETE /meeting_sessions/{id}`, which stops or cancels participation without deleting the persisted session. A missing/foreign session returns 404; provider deletion failures return 502.
      *
      * @param string $id unique identifier for the meeting session
      * @param RequestOpts|null $requestOptions

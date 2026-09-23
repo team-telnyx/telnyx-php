@@ -22,6 +22,7 @@ use Telnyx\MeetingSessions\Artifacts\MeetingSessionArtifact\Type;
  *   createdAt: \DateTimeInterface,
  *   failureReason: string|null,
  *   modelProvenance: null|ModelProvenance|ModelProvenanceShape,
+ *   prompt: string|null,
  *   sessionID: string,
  *   status: Status|value-of<Status>,
  *   type: Type|value-of<Type>,
@@ -48,6 +49,12 @@ final class MeetingSessionArtifact implements BaseModel
     #[Required('model_provenance')]
     public ?ModelProvenance $modelProvenance;
 
+    /**
+     * The prompt that produced this artifact, or null for a named type. Non-null only when `type` is `custom`; the five named types always return `null`.
+     */
+    #[Required]
+    public ?string $prompt;
+
     #[Required('session_id')]
     public string $sessionID;
 
@@ -73,6 +80,7 @@ final class MeetingSessionArtifact implements BaseModel
      *   createdAt: ...,
      *   failureReason: ...,
      *   modelProvenance: ...,
+     *   prompt: ...,
      *   sessionID: ...,
      *   status: ...,
      *   type: ...,
@@ -89,6 +97,7 @@ final class MeetingSessionArtifact implements BaseModel
      *   ->withCreatedAt(...)
      *   ->withFailureReason(...)
      *   ->withModelProvenance(...)
+     *   ->withPrompt(...)
      *   ->withSessionID(...)
      *   ->withStatus(...)
      *   ->withType(...)
@@ -116,6 +125,7 @@ final class MeetingSessionArtifact implements BaseModel
         \DateTimeInterface $createdAt,
         ?string $failureReason,
         ModelProvenance|array|null $modelProvenance,
+        ?string $prompt,
         string $sessionID,
         Status|string $status,
         Type|string $type,
@@ -128,6 +138,7 @@ final class MeetingSessionArtifact implements BaseModel
         $self['createdAt'] = $createdAt;
         $self['failureReason'] = $failureReason;
         $self['modelProvenance'] = $modelProvenance;
+        $self['prompt'] = $prompt;
         $self['sessionID'] = $sessionID;
         $self['status'] = $status;
         $self['type'] = $type;
@@ -179,6 +190,17 @@ final class MeetingSessionArtifact implements BaseModel
     ): self {
         $self = clone $this;
         $self['modelProvenance'] = $modelProvenance;
+
+        return $self;
+    }
+
+    /**
+     * The prompt that produced this artifact, or null for a named type. Non-null only when `type` is `custom`; the five named types always return `null`.
+     */
+    public function withPrompt(?string $prompt): self
+    {
+        $self = clone $this;
+        $self['prompt'] = $prompt;
 
         return $self;
     }
