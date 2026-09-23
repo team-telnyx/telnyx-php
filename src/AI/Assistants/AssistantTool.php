@@ -6,7 +6,9 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\AssistantTool\ClientSideTool;
 use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
+use Telnyx\AI\Assistants\AssistantTool\FunctionTool;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
+use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingHangupTool;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool;
 use Telnyx\AI\Assistants\AssistantTool\InviteTool;
 use Telnyx\AI\Assistants\AssistantTool\PayTool;
@@ -21,11 +23,12 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 /**
  * The handoff tool allows the assistant to hand off control of the conversation to another AI assistant. By default, this will happen transparently to the end user.
  *
+ * @phpstan-import-type FunctionToolShape from \Telnyx\AI\Assistants\AssistantTool\FunctionTool
  * @phpstan-import-type InferenceEmbeddingWebhookToolParamsShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams
  * @phpstan-import-type ClientSideToolShape from \Telnyx\AI\Assistants\AssistantTool\ClientSideTool
  * @phpstan-import-type RetrievalToolShape from \Telnyx\AI\Assistants\RetrievalTool
  * @phpstan-import-type HandoffToolShape from \Telnyx\AI\Assistants\AssistantTool\HandoffTool
- * @phpstan-import-type HangupToolShape from \Telnyx\AI\Assistants\HangupTool
+ * @phpstan-import-type InferenceEmbeddingHangupToolShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingHangupTool
  * @phpstan-import-type InferenceEmbeddingTransferToolShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool
  * @phpstan-import-type InviteToolShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool
  * @phpstan-import-type SipReferToolShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool
@@ -35,8 +38,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type PayToolShape from \Telnyx\AI\Assistants\AssistantTool\PayTool
  * @phpstan-import-type UpdateDynamicVariablesToolShape from \Telnyx\AI\Assistants\AssistantTool\UpdateDynamicVariablesTool
  *
- * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|ClientSideTool|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|InviteTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool|PayTool|UpdateDynamicVariablesTool
- * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|ClientSideToolShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|InviteToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape|PayToolShape|UpdateDynamicVariablesToolShape
+ * @phpstan-type AssistantToolVariants = FunctionTool|InferenceEmbeddingWebhookToolParams|ClientSideTool|RetrievalTool|HandoffTool|InferenceEmbeddingHangupTool|InferenceEmbeddingTransferTool|InviteTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool|PayTool|UpdateDynamicVariablesTool
+ * @phpstan-type AssistantToolShape = AssistantToolVariants|FunctionToolShape|InferenceEmbeddingWebhookToolParamsShape|ClientSideToolShape|RetrievalToolShape|HandoffToolShape|InferenceEmbeddingHangupToolShape|InferenceEmbeddingTransferToolShape|InviteToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape|PayToolShape|UpdateDynamicVariablesToolShape
  */
 final class AssistantTool implements ConverterSource
 {
@@ -53,11 +56,12 @@ final class AssistantTool implements ConverterSource
     public static function variants(): array
     {
         return [
+            'function' => FunctionTool::class,
             'webhook' => InferenceEmbeddingWebhookToolParams::class,
             'client_side_tool' => ClientSideTool::class,
             'retrieval' => RetrievalTool::class,
             'handoff' => HandoffTool::class,
-            'hangup' => HangupTool::class,
+            'hangup' => InferenceEmbeddingHangupTool::class,
             'transfer' => InferenceEmbeddingTransferTool::class,
             'invite' => InviteTool::class,
             'refer' => SipReferTool::class,

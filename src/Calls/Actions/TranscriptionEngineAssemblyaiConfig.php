@@ -37,7 +37,7 @@ final class TranscriptionEngineAssemblyaiConfig implements BaseModel
     public ?string $transcriptionEngine;
 
     /**
-     * The model to use for transcription.
+     * The model to use for transcription. `assemblyai/universal-streaming` is a legacy alias of `assemblyai/universal-3-5-pro` and resolves to the same model.
      *
      * @var value-of<TranscriptionModel>|null $transcriptionModel
      */
@@ -97,7 +97,7 @@ final class TranscriptionEngineAssemblyaiConfig implements BaseModel
     }
 
     /**
-     * The model to use for transcription.
+     * The model to use for transcription. `assemblyai/universal-streaming` is a legacy alias of `assemblyai/universal-3-5-pro` and resolves to the same model.
      *
      * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
      */

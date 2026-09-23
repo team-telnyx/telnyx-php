@@ -33,7 +33,7 @@ final class TelnyxUltraClone implements BaseModel
     use SdkModel;
 
     /**
-     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 5MB.
+     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide up to 60 seconds of clear, uninterrupted speech. Maximum size: 5MB.
      */
     #[Required('audio_file')]
     public string $audioFile;
@@ -153,7 +153,7 @@ final class TelnyxUltraClone implements BaseModel
     }
 
     /**
-     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 5MB.
+     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide up to 60 seconds of clear, uninterrupted speech. Maximum size: 5MB.
      */
     public function withAudioFile(string|FileParam $audioFile): self
     {

@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type MessagingOutboundMessagePayloadShape from \Telnyx\Messages\MessagingOutboundMessagePayload
+ * @phpstan-import-type OutboundMessagePayloadShape from \Telnyx\Messages\OutboundMessagePayload
  *
  * @phpstan-type MessageGetGroupMessagesResponseShape = array{
- *   data?: list<MessagingOutboundMessagePayload|MessagingOutboundMessagePayloadShape>|null,
+ *   data?: list<OutboundMessagePayload|OutboundMessagePayloadShape>|null
  * }
  */
 final class MessageGetGroupMessagesResponse implements BaseModel
@@ -20,8 +20,8 @@ final class MessageGetGroupMessagesResponse implements BaseModel
     /** @use SdkModel<MessageGetGroupMessagesResponseShape> */
     use SdkModel;
 
-    /** @var list<MessagingOutboundMessagePayload>|null $data */
-    #[Optional(list: MessagingOutboundMessagePayload::class)]
+    /** @var list<OutboundMessagePayload>|null $data */
+    #[Optional(list: OutboundMessagePayload::class)]
     public ?array $data;
 
     public function __construct()
@@ -34,7 +34,7 @@ final class MessageGetGroupMessagesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MessagingOutboundMessagePayload|MessagingOutboundMessagePayloadShape>|null $data
+     * @param list<OutboundMessagePayload|OutboundMessagePayloadShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -46,7 +46,7 @@ final class MessageGetGroupMessagesResponse implements BaseModel
     }
 
     /**
-     * @param list<MessagingOutboundMessagePayload|MessagingOutboundMessagePayloadShape> $data
+     * @param list<OutboundMessagePayload|OutboundMessagePayloadShape> $data
      */
     public function withData(array $data): self
     {

@@ -11,7 +11,7 @@ use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Messages\MessagingInboundMessagePayload\To\UnionMember0;
 
 /**
- * Receiving address. SMS and MMS webhooks use an array of recipients. WhatsApp webhooks use one E.164 phone number.
+ * Receiving address. SMS, MMS and RCS webhooks use an array of recipients. RCS recipients are identified by agent_id and agent_name. WhatsApp webhooks use one E.164 phone number.
  *
  * @phpstan-import-type UnionMember0Shape from \Telnyx\Messages\MessagingInboundMessagePayload\To\UnionMember0
  *

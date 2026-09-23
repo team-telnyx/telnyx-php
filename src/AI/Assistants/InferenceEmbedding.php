@@ -188,7 +188,7 @@ final class InferenceEmbedding implements BaseModel
     public ?Observability $observabilitySettings;
 
     /**
-     * Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
+     * Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute final tool calls such as sending a summary or updating a record via webhook or function tools. Integration and MCP server tools are not available post-conversation; call-control tools (e.g. hangup, transfer) are also unavailable. Beta feature.
      */
     #[Optional('post_conversation_settings')]
     public ?PostConversationSettings $postConversationSettings;
@@ -216,7 +216,7 @@ final class InferenceEmbedding implements BaseModel
     public ?TelephonySettings $telephonySettings;
 
     /**
-     * Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints.
+     * The assistant's tools. Responses merge the assistant's shared Tools Library tools into this array alongside inline tools, each flagged `shared: true`; inline tools carry `shared: false`. On update, a sent `tools` array fully replaces the inline tools only — shared tools stay attached unless `tool_ids` changes. Each tool type except `function`, `webhook`, and `client_side_tool` allows at most one instance per assistant across both sources.
      *
      * @var list<AssistantToolVariants>|null $tools
      */
@@ -649,7 +649,7 @@ final class InferenceEmbedding implements BaseModel
     }
 
     /**
-     * Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
+     * Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute final tool calls such as sending a summary or updating a record via webhook or function tools. Integration and MCP server tools are not available post-conversation; call-control tools (e.g. hangup, transfer) are also unavailable. Beta feature.
      *
      * @param PostConversationSettings|PostConversationSettingsShape $postConversationSettings
      */
@@ -713,7 +713,7 @@ final class InferenceEmbedding implements BaseModel
     }
 
     /**
-     * Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints.
+     * The assistant's tools. Responses merge the assistant's shared Tools Library tools into this array alongside inline tools, each flagged `shared: true`; inline tools carry `shared: false`. On update, a sent `tools` array fully replaces the inline tools only — shared tools stay attached unless `tool_ids` changes. Each tool type except `function`, `webhook`, and `client_side_tool` allows at most one instance per assistant across both sources.
      *
      * @param list<AssistantToolShape> $tools
      */

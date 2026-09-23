@@ -46,7 +46,14 @@ interface TexmlContract
      * @param list<CustomHeader|CustomHeaderShape> $customHeaders Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      * @param DetectionMode|value-of<DetectionMode> $detectionMode Allows you to choose between Regular, Premium, and PremiumCallScreening detections. See https://developers.telnyx.com/docs/voice/programmable-voice/answering-machine-detection
      * @param MachineDetection|value-of<MachineDetection> $machineDetection enables Answering Machine Detection
+     * @param int $machineDetectionBeepMaxFrequency Highest frequency, in Hz, that a tone can reach and still be treated as a beep. Only used when MachineDetection is enabled.
+     * @param int $machineDetectionBeepMinFrequency Lowest frequency, in Hz, that a tone must reach to be treated as a beep. Raising it above 480 excludes North American ringback (440 + 480 Hz), which can otherwise be reported as a beep when the `freq_only` profile is in use. Only used when MachineDetection is enabled.
+     * @param int $machineDetectionBeepMinToneDuration Shortest tone, in milliseconds, that can be treated as a beep. Raising it rejects brief tones such as call-progress blips. Only used when MachineDetection is enabled.
      * @param MachineDetectionBeepProfile|value-of<MachineDetectionBeepProfile> $machineDetectionBeepProfile Selects which detectors must validate a beep. `both` requires the amplitude and frequency detectors to agree. `freq_only` uses the frequency detector alone, for beeps whose volume is too unsteady for the default profile. Only used when MachineDetection is enabled.
+     * @param bool $machineDetectionBeepSpectralConfirmation When enabled, a candidate beep must pass an additional spectral check before it is reported. Only used when MachineDetection is enabled.
+     * @param float $machineDetectionBeepSpectralMinPurity Minimum spectral purity, from 0 to 1, for a tone to be treated as a beep. Raising it rejects mixed tones such as ringback, which combines two frequencies. Only used when MachineDetection is enabled.
+     * @param bool $machineDetectionBeepSpectralRejectFaxCng When enabled, the fax CNG tone is rejected rather than reported as a beep. Only used when MachineDetection is enabled.
+     * @param int $machineDetectionBeepSpectralWindow Length of the spectral confirmation window, in milliseconds. Only used when MachineDetection is enabled.
      * @param int $machineDetectionPromptEndTimeout Silence duration threshold after a call screening prompt before ending prompt detection, in milliseconds. Used when `DetectionMode` is `PremiumCallScreening`.
      * @param int $machineDetectionSilenceTimeout If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      * @param int $machineDetectionSpeechEndThreshold Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
@@ -93,7 +100,14 @@ interface TexmlContract
         ?array $customHeaders = null,
         DetectionMode|string $detectionMode = 'Regular',
         MachineDetection|string $machineDetection = 'Disable',
+        ?int $machineDetectionBeepMaxFrequency = null,
+        ?int $machineDetectionBeepMinFrequency = null,
+        ?int $machineDetectionBeepMinToneDuration = null,
         MachineDetectionBeepProfile|string $machineDetectionBeepProfile = 'both',
+        ?bool $machineDetectionBeepSpectralConfirmation = null,
+        ?float $machineDetectionBeepSpectralMinPurity = null,
+        ?bool $machineDetectionBeepSpectralRejectFaxCng = null,
+        ?int $machineDetectionBeepSpectralWindow = null,
         ?int $machineDetectionPromptEndTimeout = null,
         int $machineDetectionSilenceTimeout = 3500,
         int $machineDetectionSpeechEndThreshold = 800,

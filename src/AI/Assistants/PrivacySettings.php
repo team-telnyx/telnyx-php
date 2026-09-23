@@ -9,7 +9,9 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type PrivacySettingsShape = array{dataRetention?: bool|null}
+ * @phpstan-type PrivacySettingsShape = array{
+ *   dataRetention?: bool|null, inTransitDataLocality?: bool|null
+ * }
  */
 final class PrivacySettings implements BaseModel
 {
@@ -22,6 +24,12 @@ final class PrivacySettings implements BaseModel
     #[Optional('data_retention')]
     public ?bool $dataRetention;
 
+    /**
+     * Requires every model call made for a web chat turn to be received and served inside your organization's data-locality region, rather than only stored there. Applies to web chat only — voice and messaging assistants are unaffected. Enabling it requires a data-locality region with in-region inference (USA, EU, AUS, UAE; see [Inference regions](https://developers.telnyx.com/docs/inference/models/regions)) and Telnyx-hosted models for the assistant, its fallback, and any conversation-flow node that overrides the model; the request is rejected otherwise. Once enabled, send chat requests to your region's API hostname: a request entering the platform in another region is rejected rather than forwarded, because forwarding it would already have moved the content across the border. Defaults to false.
+     */
+    #[Optional('in_transit_data_locality')]
+    public ?bool $inTransitDataLocality;
+
     public function __construct()
     {
         $this->initialize();
@@ -32,11 +40,14 @@ final class PrivacySettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?bool $dataRetention = null): self
-    {
+    public static function with(
+        ?bool $dataRetention = null,
+        ?bool $inTransitDataLocality = null
+    ): self {
         $self = new self;
 
         null !== $dataRetention && $self['dataRetention'] = $dataRetention;
+        null !== $inTransitDataLocality && $self['inTransitDataLocality'] = $inTransitDataLocality;
 
         return $self;
     }
@@ -48,6 +59,17 @@ final class PrivacySettings implements BaseModel
     {
         $self = clone $this;
         $self['dataRetention'] = $dataRetention;
+
+        return $self;
+    }
+
+    /**
+     * Requires every model call made for a web chat turn to be received and served inside your organization's data-locality region, rather than only stored there. Applies to web chat only — voice and messaging assistants are unaffected. Enabling it requires a data-locality region with in-region inference (USA, EU, AUS, UAE; see [Inference regions](https://developers.telnyx.com/docs/inference/models/regions)) and Telnyx-hosted models for the assistant, its fallback, and any conversation-flow node that overrides the model; the request is rejected otherwise. Once enabled, send chat requests to your region's API hostname: a request entering the platform in another region is rejected rather than forwarded, because forwarding it would already have moved the content across the border. Defaults to false.
+     */
+    public function withInTransitDataLocality(bool $inTransitDataLocality): self
+    {
+        $self = clone $this;
+        $self['inTransitDataLocality'] = $inTransitDataLocality;
 
         return $self;
     }

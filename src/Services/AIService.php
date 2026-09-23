@@ -28,6 +28,7 @@ use Telnyx\Services\AI\McpServersService;
 use Telnyx\Services\AI\MissionsService;
 use Telnyx\Services\AI\OpenAIService;
 use Telnyx\Services\AI\ToolsService;
+use Telnyx\Services\AI\TypesafeService;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -115,6 +116,11 @@ final class AIService implements AIContract
     public KnowledgeService $knowledge;
 
     /**
+     * @api
+     */
+    public TypesafeService $typesafe;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -135,6 +141,7 @@ final class AIService implements AIContract
         $this->tools = new ToolsService($client);
         $this->anthropic = new AnthropicService($client);
         $this->knowledge = new KnowledgeService($client);
+        $this->typesafe = new TypesafeService($client);
     }
 
     /**

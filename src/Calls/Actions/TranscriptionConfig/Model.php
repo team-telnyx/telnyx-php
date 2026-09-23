@@ -10,10 +10,11 @@ namespace Telnyx\Calls\Actions\TranscriptionConfig;
  * - `deepgram/flux` (or `flux`) for live streaming turn-taking.
  * - `deepgram/nova-3` and `deepgram/nova-2` for live streaming transcription.
  * - `speechmatics/standard` and `speechmatics/enhanced` for live streaming transcription.
- * - `assemblyai/universal-streaming` for live streaming transcription.
+ * - `assemblyai/universal-3-5-pro` for live streaming transcription. The legacy alias `assemblyai/universal-streaming` is still accepted and resolves to the same model.
  * - `xai/grok-stt` for live streaming transcription.
  * - `soniox/stt-rt-v4` for live streaming multilingual transcription with automatic language detection.
  * - `nvidia/parakeet-v3` for multilingual transcription with automatic language detection.
+ * - `omi-health/omi-med-stt-v1` for English-only medical transcription (Parakeet-based).
  * - `humain/realtime` for live streaming transcription with native Arabic and Arabic/English code-switching support.
  * - `reson8/turns` for live streaming turn-based transcription of 10 European languages with automatic language detection.
  * - `cohere/ar-stt` for non-streaming Arabic and English transcription.
@@ -36,6 +37,8 @@ enum Model: string
 
     case SPEECHMATICS_ENHANCED = 'speechmatics/enhanced';
 
+    case ASSEMBLYAI_UNIVERSAL_3_5_PRO = 'assemblyai/universal-3-5-pro';
+
     case ASSEMBLYAI_UNIVERSAL_STREAMING = 'assemblyai/universal-streaming';
 
     case XAI_GROK_STT = 'xai/grok-stt';
@@ -43,6 +46,8 @@ enum Model: string
     case SONIOX_STT_RT_V4 = 'soniox/stt-rt-v4';
 
     case NVIDIA_PARAKEET_V3 = 'nvidia/parakeet-v3';
+
+    case OMI_HEALTH_OMI_MED_STT_V1 = 'omi-health/omi-med-stt-v1';
 
     case HUMAIN_REALTIME = 'humain/realtime';
 
