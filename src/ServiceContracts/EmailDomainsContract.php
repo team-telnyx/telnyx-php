@@ -14,6 +14,7 @@ use Telnyx\EmailDomains\EmailDomainGetDNSRecordsResponse;
 use Telnyx\EmailDomains\EmailDomainGetHealthResponse;
 use Telnyx\EmailDomains\EmailDomainListParams\Sort;
 use Telnyx\EmailDomains\EmailDomainResponse;
+use Telnyx\EmailDomains\EmailDomainRotateDkimResponse;
 use Telnyx\EmailDomains\EmailDomainStatus;
 use Telnyx\EmailDomains\EmailDomainType;
 use Telnyx\RequestOptions;
@@ -150,6 +151,19 @@ interface EmailDomainsContract
         string $id,
         RequestOptions|array|null $requestOptions = null
     ): EmailDomainGetHealthResponse;
+
+    /**
+     * @api
+     *
+     * @param string $domainID Email domain UUID
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function rotateDkim(
+        string $domainID,
+        RequestOptions|array|null $requestOptions = null
+    ): EmailDomainRotateDkimResponse;
 
     /**
      * @api

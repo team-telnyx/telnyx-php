@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailMessages\EmailMessageGetResponse;
+namespace Telnyx\EmailMessages\EmailMessageDetailResponse;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -10,15 +10,15 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\EmailInboxes\Drafts\EmailAddress;
 use Telnyx\EmailInboxes\Drafts\EmailMessage\Attachment;
+use Telnyx\EmailInboxes\Drafts\EmailMessage\Event;
 use Telnyx\EmailInboxes\Drafts\EmailMessage\RecordType;
 use Telnyx\EmailInboxes\Drafts\EmailMessage\Status;
-use Telnyx\EmailMessages\MessageEvent;
 use Telnyx\EmailMessages\SuppressedRecipient;
 
 /**
  * @phpstan-import-type AttachmentShape from \Telnyx\EmailInboxes\Drafts\EmailMessage\Attachment
  * @phpstan-import-type EmailAddressShape from \Telnyx\EmailInboxes\Drafts\EmailAddress
- * @phpstan-import-type MessageEventShape from \Telnyx\EmailMessages\MessageEvent
+ * @phpstan-import-type EventShape from \Telnyx\EmailInboxes\Drafts\EmailMessage\Event
  * @phpstan-import-type SuppressedRecipientShape from \Telnyx\EmailMessages\SuppressedRecipient
  *
  * @phpstan-type DataShape = array{
@@ -27,12 +27,14 @@ use Telnyx\EmailMessages\SuppressedRecipient;
  *   bcc: list<EmailAddress|EmailAddressShape>,
  *   cc: list<EmailAddress|EmailAddressShape>,
  *   createdAt: \DateTimeInterface,
- *   events: list<MessageEvent|MessageEventShape>,
+ *   events: list<Event|EventShape>,
  *   from: EmailAddress|EmailAddressShape,
+ *   metadata: array<string,mixed>,
  *   recordType: RecordType|value-of<RecordType>,
  *   replyTo: string|null,
  *   status: Status|value-of<Status>,
  *   subject: string,
+ *   tags: list<string>,
  *   templateID: string|null,
  *   templateVariables: array<string,mixed>,
  *   to: list<EmailAddress|EmailAddressShape>,
@@ -68,12 +70,20 @@ final class Data implements BaseModel
     #[Required('created_at')]
     public \DateTimeInterface $createdAt;
 
-    /** @var list<MessageEvent> $events */
-    #[Required(list: MessageEvent::class)]
+    /** @var list<Event> $events */
+    #[Required(list: Event::class)]
     public array $events;
 
     #[Required]
     public EmailAddress $from;
+
+    /**
+     * Customer-supplied metadata stored with the message.
+     *
+     * @var array<string,mixed> $metadata
+     */
+    #[Required(map: 'mixed')]
+    public array $metadata;
 
     /** @var value-of<RecordType> $recordType */
     #[Required('record_type', enum: RecordType::class)]
@@ -92,6 +102,14 @@ final class Data implements BaseModel
 
     #[Required]
     public string $subject;
+
+    /**
+     * Customer-supplied tags stored with the message.
+     *
+     * @var list<string> $tags
+     */
+    #[Required(list: 'string')]
+    public array $tags;
 
     #[Required('template_id')]
     public ?string $templateID;
@@ -165,10 +183,12 @@ final class Data implements BaseModel
      *   createdAt: ...,
      *   events: ...,
      *   from: ...,
+     *   metadata: ...,
      *   recordType: ...,
      *   replyTo: ...,
      *   status: ...,
      *   subject: ...,
+     *   tags: ...,
      *   templateID: ...,
      *   templateVariables: ...,
      *   to: ...,
@@ -188,10 +208,12 @@ final class Data implements BaseModel
      *   ->withCreatedAt(...)
      *   ->withEvents(...)
      *   ->withFrom(...)
+     *   ->withMetadata(...)
      *   ->withRecordType(...)
      *   ->withReplyTo(...)
      *   ->withStatus(...)
      *   ->withSubject(...)
+     *   ->withTags(...)
      *   ->withTemplateID(...)
      *   ->withTemplateVariables(...)
      *   ->withTo(...)
@@ -212,11 +234,13 @@ final class Data implements BaseModel
      * @param list<Attachment|AttachmentShape> $attachments
      * @param list<EmailAddress|EmailAddressShape> $bcc
      * @param list<EmailAddress|EmailAddressShape> $cc
-     * @param list<MessageEvent|MessageEventShape> $events
+     * @param list<Event|EventShape> $events
      * @param EmailAddress|EmailAddressShape $from
      * @param RecordType|value-of<RecordType> $recordType
      * @param Status|value-of<Status> $status
      * @param list<EmailAddress|EmailAddressShape> $to
+     * @param array<string,mixed> $metadata
+     * @param list<string> $tags
      * @param array<string,mixed> $templateVariables
      * @param array<string,int>|null $recipientStatuses
      * @param list<SuppressedRecipient|SuppressedRecipientShape>|null $suppressed
@@ -237,6 +261,8 @@ final class Data implements BaseModel
         array $to,
         ?string $htmlBody,
         ?string $textBody,
+        array $metadata = [],
+        array $tags = [],
         array $templateVariables = [],
         ?bool $inlineCss = null,
         ?array $recipientStatuses = null,
@@ -253,10 +279,12 @@ final class Data implements BaseModel
         $self['createdAt'] = $createdAt;
         $self['events'] = $events;
         $self['from'] = $from;
+        $self['metadata'] = $metadata;
         $self['recordType'] = $recordType;
         $self['replyTo'] = $replyTo;
         $self['status'] = $status;
         $self['subject'] = $subject;
+        $self['tags'] = $tags;
         $self['templateID'] = $templateID;
         $self['templateVariables'] = $templateVariables;
         $self['to'] = $to;
@@ -322,7 +350,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<MessageEvent|MessageEventShape> $events
+     * @param list<Event|EventShape> $events
      */
     public function withEvents(array $events): self
     {
@@ -339,6 +367,19 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['from'] = $from;
+
+        return $self;
+    }
+
+    /**
+     * Customer-supplied metadata stored with the message.
+     *
+     * @param array<string,mixed> $metadata
+     */
+    public function withMetadata(array $metadata): self
+    {
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
         return $self;
     }
@@ -379,6 +420,19 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['subject'] = $subject;
+
+        return $self;
+    }
+
+    /**
+     * Customer-supplied tags stored with the message.
+     *
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $self = clone $this;
+        $self['tags'] = $tags;
 
         return $self;
     }

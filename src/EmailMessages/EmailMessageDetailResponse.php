@@ -7,33 +7,33 @@ namespace Telnyx\EmailMessages;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailMessages\EmailMessageGetResponse\Data;
+use Telnyx\EmailMessages\EmailMessageDetailResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\EmailMessages\EmailMessageGetResponse\Data
+ * @phpstan-import-type DataShape from \Telnyx\EmailMessages\EmailMessageDetailResponse\Data
  *
- * @phpstan-type EmailMessageGetResponseShape = array{data: Data|DataShape}
+ * @phpstan-type EmailMessageDetailResponseShape = array{data: Data|DataShape}
  */
-final class EmailMessageGetResponse implements BaseModel
+final class EmailMessageDetailResponse implements BaseModel
 {
-    /** @use SdkModel<EmailMessageGetResponseShape> */
+    /** @use SdkModel<EmailMessageDetailResponseShape> */
     use SdkModel;
 
     #[Required]
     public Data $data;
 
     /**
-     * `new EmailMessageGetResponse()` is missing required properties by the API.
+     * `new EmailMessageDetailResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * EmailMessageGetResponse::with(data: ...)
+     * EmailMessageDetailResponse::with(data: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new EmailMessageGetResponse)->withData(...)
+     * (new EmailMessageDetailResponse)->withData(...)
      * ```
      */
     public function __construct()

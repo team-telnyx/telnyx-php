@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\EmailDomains\Webhooks;
 
 /**
- * Event types a webhook may subscribe to. The union of email.* events (published by email-api) and email_domain.* lifecycle events (published by this service). An event not listed here can never be subscribed to and is silently dropped.
+ * Event types accepted by domain webhook subscriptions. Allowlists match the legacy event_type, not canonical_event_type. Of the 22 accepted types, email.sending is stored but intentionally not published. Cancellation, daily-limit failures, and system failures publish after commit when a matching domain webhook is configured.
  */
 enum EmailWebhookEvent: string
 {
@@ -37,6 +37,10 @@ enum EmailWebhookEvent: string
 
     case EMAIL_RECEIVED = 'email.received';
 
+    case EMAIL_CANCELLED = 'email.cancelled';
+
+    case EMAIL_DAILY_LIMIT_EXCEEDED = 'email.daily_limit_exceeded';
+
     case EMAIL_DOMAIN_CREATED = 'email_domain.created';
 
     case EMAIL_DOMAIN_VERIFIED = 'email_domain.verified';
@@ -46,4 +50,6 @@ enum EmailWebhookEvent: string
     case EMAIL_DOMAIN_SUSPENDED = 'email_domain.suspended';
 
     case EMAIL_DOMAIN_DELETED = 'email_domain.deleted';
+
+    case EMAIL_DOMAIN_DKIM_ROTATED = 'email_domain.dkim_rotated';
 }

@@ -2918,6 +2918,7 @@ Methods:
 - <code title="delete /email_domains/{id}">$client->emailDomains-><a href="./src/Services/EmailDomainsService.php">delete</a>(...$params)</code>
 - <code title="get /email_domains/{domain_id}/dns_records">$client->emailDomains-><a href="./src/Services/EmailDomainsService.php">retrieveDNSRecords</a>(...$params)</code>
 - <code title="get /email_domains/{id}/health">$client->emailDomains-><a href="./src/Services/EmailDomainsService.php">retrieveHealth</a>(...$params)</code>
+- <code title="post /email_domains/{domain_id}/rotate_dkim">$client->emailDomains-><a href="./src/Services/EmailDomainsService.php">rotateDkim</a>(...$params)</code>
 - <code title="post /email_domains/{domain_id}/verify">$client->emailDomains-><a href="./src/Services/EmailDomainsService.php">verify</a>(...$params)</code>
 
 ## Webhooks
@@ -3016,6 +3017,7 @@ Methods:
 - <code title="delete /email_messages">$client->emailMessages-><a href="./src/Services/EmailMessagesService.php">deleteAll</a>(...$params)</code>
 - <code title="delete /email_messages/{email_id}/schedule">$client->emailMessages-><a href="./src/Services/EmailMessagesService.php">deleteSchedule</a>(...$params)</code>
 - <code title="get /email_messages/{email_id}/events">$client->emailMessages-><a href="./src/Services/EmailMessagesService.php">retrieveEvents</a>(...$params)</code>
+- <code title="patch /email_messages/{email_id}/schedule">$client->emailMessages-><a href="./src/Services/EmailMessagesService.php">updateSchedule</a>(...$params)</code>
 
 ## Recipients
 

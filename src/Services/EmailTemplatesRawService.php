@@ -11,6 +11,7 @@ use Telnyx\Core\Util;
 use Telnyx\EmailCursorPagination;
 use Telnyx\EmailTemplates\EmailTemplate;
 use Telnyx\EmailTemplates\EmailTemplateCreateParams;
+use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariableSchema;
 use Telnyx\EmailTemplates\EmailTemplateListParams;
 use Telnyx\EmailTemplates\EmailTemplateRenderParams;
 use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
@@ -23,6 +24,9 @@ use Telnyx\ServiceContracts\EmailTemplatesRawContract;
 /**
  * Create, list, retrieve, update, delete, and render Liquid email templates.
  *
+ * @phpstan-import-type VariableSchemaShape from \Telnyx\EmailTemplates\EmailTemplateCreateParams\VariableSchema
+ * @phpstan-import-type VariableSchemaShape from \Telnyx\EmailTemplates\EmailTemplateUpdateParams\VariableSchema as VariableSchemaShape1
+ * @phpstan-import-type VariableSchemaShape from \Telnyx\EmailTemplates\EmailTemplateReplaceParams\VariableSchema as VariableSchemaShape2
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class EmailTemplatesRawService implements EmailTemplatesRawContract
@@ -40,9 +44,12 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
      *
      * @param array{
      *   name: string,
+     *   autoescape?: bool,
      *   htmlBody?: string|null,
+     *   strictVariables?: bool,
      *   subject?: string|null,
      *   textBody?: string|null,
+     *   variableSchema?: array<string,VariableSchema|VariableSchemaShape>|null,
      *   variables?: list<string>,
      *   idempotencyKey?: string,
      * }|EmailTemplateCreateParams $params
@@ -111,10 +118,13 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
      *
      * @param string $id email template UUID
      * @param array{
+     *   autoescape?: bool,
      *   htmlBody?: string|null,
      *   name?: string,
+     *   strictVariables?: bool,
      *   subject?: string|null,
      *   textBody?: string|null,
+     *   variableSchema?: array<string,EmailTemplateUpdateParams\VariableSchema|VariableSchemaShape1>|null,
      *   variables?: list<string>,
      * }|EmailTemplateUpdateParams $params
      * @param RequestOpts|null $requestOptions
@@ -210,6 +220,8 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
      *
      * Renders a template using the provided Liquid variables. Missing `template_variables` defaults to `{}`.
      *
+     * When the template has `strict_variables` enabled and a required variable (per `variable_schema`) is missing, returns 422 naming the variable. When the template has `autoescape` enabled, the rendered `html_body` expression output is HTML-escaped at the output boundary; `subject` and `text_body` are not autoescaped.
+     *
      * @param string $id email template UUID
      * @param array{
      *   templateVariables?: array<string,mixed>
@@ -247,10 +259,13 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
      *
      * @param string $id email template UUID
      * @param array{
+     *   autoescape?: bool,
      *   htmlBody?: string|null,
      *   name?: string,
+     *   strictVariables?: bool,
      *   subject?: string|null,
      *   textBody?: string|null,
+     *   variableSchema?: array<string,EmailTemplateReplaceParams\VariableSchema|VariableSchemaShape2>|null,
      *   variables?: list<string>,
      * }|EmailTemplateReplaceParams $params
      * @param RequestOpts|null $requestOptions

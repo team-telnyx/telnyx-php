@@ -11,7 +11,7 @@ use Telnyx\EmailCursorPagination;
 use Telnyx\EmailInboxes\Drafts\EmailMessage;
 use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\EmailMessages\EmailMessageBatchResponse;
-use Telnyx\EmailMessages\EmailMessageGetResponse;
+use Telnyx\EmailMessages\EmailMessageDetailResponse;
 use Telnyx\EmailMessages\MessageEvent;
 use Tests\UnsupportedMockTests;
 
@@ -109,7 +109,7 @@ final class EmailMessagesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EmailMessageGetResponse::class, $result);
+        $this->assertInstanceOf(EmailMessageDetailResponse::class, $result);
     }
 
     #[Test]
@@ -312,5 +312,37 @@ final class EmailMessagesTest extends TestCase
             // @phpstan-ignore-next-line method.alreadyNarrowedType
             $this->assertInstanceOf(MessageEvent::class, $item);
         }
+    }
+
+    #[Test]
+    public function testUpdateSchedule(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->emailMessages->updateSchedule(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            scheduledAt: new \DateTimeImmutable('2099-08-07T14:30:00Z'),
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EmailMessageDetailResponse::class, $result);
+    }
+
+    #[Test]
+    public function testUpdateScheduleWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->emailMessages->updateSchedule(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            scheduledAt: new \DateTimeImmutable('2099-08-07T14:30:00Z'),
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EmailMessageDetailResponse::class, $result);
     }
 }
