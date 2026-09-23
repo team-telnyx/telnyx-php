@@ -86,6 +86,7 @@ use Telnyx\Services\IPsService;
 use Telnyx\Services\LedgerBillingGroupReportsService;
 use Telnyx\Services\LegacyService;
 use Telnyx\Services\ListService;
+use Telnyx\Services\MachinePaymentsService;
 use Telnyx\Services\ManagedAccountsService;
 use Telnyx\Services\MediaService;
 use Telnyx\Services\MeetingSessionsService;
@@ -1148,6 +1149,11 @@ class Client extends BaseClient
      */
     public BotSignupService $botSignup;
 
+    /**
+     * @api
+     */
+    public MachinePaymentsService $machinePayments;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1407,6 +1413,7 @@ class Client extends BaseClient
         $this->botChallenge = new BotChallengeService($this);
         $this->botSessions = new BotSessionsService($this);
         $this->botSignup = new BotSignupService($this);
+        $this->machinePayments = new MachinePaymentsService($this);
     }
 
     /** @return array<string,string> */

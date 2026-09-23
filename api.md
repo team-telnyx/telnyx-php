@@ -3179,3 +3179,9 @@ Methods:
 
 - <code title="post /v2/bot_signup">$client->botSignup-><a href="./src/Services/BotSignupService.php">create</a>(...$params)</code>
 - <code title="post /v2/bot_signup/resend_magic_link">$client->botSignup-><a href="./src/Services/BotSignupService.php">resendMagicLink</a>(...$params)</code>
+
+# MachinePayments
+
+Methods:
+
+- <code title="post /machine-payments/account-credit">$client->machinePayments-><a href="./src/Services/MachinePaymentsService.php">accountCredit</a>(...$params)</code>
