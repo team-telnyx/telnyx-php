@@ -42,6 +42,7 @@ use Telnyx\PhoneNumbers\NumbersPhoneNumberDetailed\Status;
  *   emergencyStatus?: null|EmergencyStatus|value-of<EmergencyStatus>,
  *   hdVoiceEnabled?: bool|null,
  *   inboundCallScreening?: null|InboundCallScreening|value-of<InboundCallScreening>,
+ *   messagingCampaignID?: string|null,
  *   messagingProfileID?: string|null,
  *   messagingProfileName?: string|null,
  *   sourceType?: null|SourceType|value-of<SourceType>,
@@ -216,13 +217,19 @@ final class NumbersPhoneNumberDetailed implements BaseModel
     public ?string $inboundCallScreening;
 
     /**
-     * Identifies the messaging profile associated with the phone number.
+     * Identifies the messaging campaign associated with the phone number's messaging profile. If the messaging profile details could not be retrieved, this value is the string `UNAVAILABLE`.
+     */
+    #[Optional('messaging_campaign_id', nullable: true)]
+    public ?string $messagingCampaignID;
+
+    /**
+     * Identifies the messaging profile associated with the phone number. If the messaging profile details could not be retrieved, this value is the string `UNAVAILABLE`.
      */
     #[Optional('messaging_profile_id', nullable: true)]
     public ?string $messagingProfileID;
 
     /**
-     * The name of the messaging profile associated with the phone number.
+     * The name of the messaging profile associated with the phone number. If the messaging profile details could not be retrieved, this value is the string `UNAVAILABLE`.
      */
     #[Optional('messaging_profile_name', nullable: true)]
     public ?string $messagingProfileName;
@@ -319,6 +326,7 @@ final class NumbersPhoneNumberDetailed implements BaseModel
         string|Omitted|null $connectionName = Omitted::VALUE,
         string|Omitted|null $customerReference = Omitted::VALUE,
         string|Omitted|null $emergencyAddressID = Omitted::VALUE,
+        string|Omitted|null $messagingCampaignID = Omitted::VALUE,
         string|Omitted|null $messagingProfileID = Omitted::VALUE,
         string|Omitted|null $messagingProfileName = Omitted::VALUE,
         Omitted|SourceType|string|null $sourceType = Omitted::VALUE,
@@ -361,6 +369,7 @@ final class NumbersPhoneNumberDetailed implements BaseModel
         null !== $emergencyStatus && $self['emergencyStatus'] = $emergencyStatus;
         null !== $hdVoiceEnabled && $self['hdVoiceEnabled'] = $hdVoiceEnabled;
         null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
+        Omitted::VALUE !== $messagingCampaignID && $self['messagingCampaignID'] = $messagingCampaignID;
         Omitted::VALUE !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         Omitted::VALUE !== $messagingProfileName && $self['messagingProfileName'] = $messagingProfileName;
         Omitted::VALUE !== $sourceType && $self['sourceType'] = $sourceType;
@@ -660,7 +669,18 @@ final class NumbersPhoneNumberDetailed implements BaseModel
     }
 
     /**
-     * Identifies the messaging profile associated with the phone number.
+     * Identifies the messaging campaign associated with the phone number's messaging profile. If the messaging profile details could not be retrieved, this value is the string `UNAVAILABLE`.
+     */
+    public function withMessagingCampaignID(?string $messagingCampaignID): self
+    {
+        $self = clone $this;
+        $self['messagingCampaignID'] = $messagingCampaignID;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the messaging profile associated with the phone number. If the messaging profile details could not be retrieved, this value is the string `UNAVAILABLE`.
      */
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
@@ -671,7 +691,7 @@ final class NumbersPhoneNumberDetailed implements BaseModel
     }
 
     /**
-     * The name of the messaging profile associated with the phone number.
+     * The name of the messaging profile associated with the phone number. If the messaging profile details could not be retrieved, this value is the string `UNAVAILABLE`.
      */
     public function withMessagingProfileName(
         ?string $messagingProfileName
