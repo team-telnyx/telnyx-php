@@ -19,11 +19,11 @@ enum Provider: string
 
     case MINIMAX = 'minimax';
 
-    case MURFAI = 'murfai';
-
     case RESEMBLE = 'resemble';
 
     case XAI = 'xai';
 
     case HUMAIN = 'humain';
+
+    case SONIOX = 'soniox';
 }

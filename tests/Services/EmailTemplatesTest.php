@@ -53,9 +53,12 @@ final class EmailTemplatesTest extends TestCase
 
         $result = $this->client->emailTemplates->create(
             name: 'Welcome Email',
+            autoescape: true,
             htmlBody: '<h1>Hello {{ first_name }}</h1>',
+            strictVariables: true,
             subject: 'Welcome, {{ first_name }}!',
             textBody: 'Hello {{ first_name }}',
+            variableSchema: ['foo' => ['required' => true, 'default' => 'default']],
             variables: ['string'],
             idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );

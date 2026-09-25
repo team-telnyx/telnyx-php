@@ -93,6 +93,7 @@ final class V1Test extends TestCase
                 ],
             ],
             state: 'Our production calls are failing. Every customer is affected.',
+            model: 'telnyx/decision-flash',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

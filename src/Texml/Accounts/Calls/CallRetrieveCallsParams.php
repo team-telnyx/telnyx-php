@@ -17,15 +17,15 @@ use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams\Status;
  *
  * @phpstan-type CallRetrieveCallsParamsShape = array{
  *   endTime?: string|null,
- *   endTimeGt?: string|null,
  *   endTimeLt?: string|null,
+ *   endTimeGt?: string|null,
  *   from?: string|null,
  *   page?: int|null,
  *   pageSize?: int|null,
  *   pageToken?: string|null,
  *   startTime?: string|null,
- *   startTimeGt?: string|null,
  *   startTimeLt?: string|null,
+ *   startTimeGt?: string|null,
  *   status?: null|Status|value-of<Status>,
  *   to?: string|null,
  * }
@@ -43,16 +43,16 @@ final class CallRetrieveCallsParams implements BaseModel
     public ?string $endTime;
 
     /**
-     * Filters calls by their end date (after). Expected format is YYYY-MM-DD.
-     */
-    #[Optional]
-    public ?string $endTimeGt;
-
-    /**
      * Filters calls by their end date (before). Expected format is YYYY-MM-DD.
      */
     #[Optional]
     public ?string $endTimeLt;
+
+    /**
+     * Filters calls by their end date (after). Expected format is YYYY-MM-DD.
+     */
+    #[Optional]
+    public ?string $endTimeGt;
 
     /**
      * Filters calls by the from number.
@@ -85,16 +85,16 @@ final class CallRetrieveCallsParams implements BaseModel
     public ?string $startTime;
 
     /**
-     * Filters calls by their start date (after). Expected format is YYYY-MM-DD.
-     */
-    #[Optional]
-    public ?string $startTimeGt;
-
-    /**
      * Filters calls by their start date (before). Expected format is YYYY-MM-DD.
      */
     #[Optional]
     public ?string $startTimeLt;
+
+    /**
+     * Filters calls by their start date (after). Expected format is YYYY-MM-DD.
+     */
+    #[Optional]
+    public ?string $startTimeGt;
 
     /**
      * Filters calls by status.
@@ -124,30 +124,30 @@ final class CallRetrieveCallsParams implements BaseModel
      */
     public static function with(
         ?string $endTime = null,
-        ?string $endTimeGt = null,
         ?string $endTimeLt = null,
+        ?string $endTimeGt = null,
         ?string $from = null,
         ?int $page = null,
         ?int $pageSize = null,
         ?string $pageToken = null,
         ?string $startTime = null,
-        ?string $startTimeGt = null,
         ?string $startTimeLt = null,
+        ?string $startTimeGt = null,
         Status|string|null $status = null,
         ?string $to = null,
     ): self {
         $self = new self;
 
         null !== $endTime && $self['endTime'] = $endTime;
-        null !== $endTimeGt && $self['endTimeGt'] = $endTimeGt;
         null !== $endTimeLt && $self['endTimeLt'] = $endTimeLt;
+        null !== $endTimeGt && $self['endTimeGt'] = $endTimeGt;
         null !== $from && $self['from'] = $from;
         null !== $page && $self['page'] = $page;
         null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $pageToken && $self['pageToken'] = $pageToken;
         null !== $startTime && $self['startTime'] = $startTime;
-        null !== $startTimeGt && $self['startTimeGt'] = $startTimeGt;
         null !== $startTimeLt && $self['startTimeLt'] = $startTimeLt;
+        null !== $startTimeGt && $self['startTimeGt'] = $startTimeGt;
         null !== $status && $self['status'] = $status;
         null !== $to && $self['to'] = $to;
 
@@ -166,23 +166,23 @@ final class CallRetrieveCallsParams implements BaseModel
     }
 
     /**
-     * Filters calls by their end date (after). Expected format is YYYY-MM-DD.
-     */
-    public function withEndTimeGt(string $endTimeGt): self
-    {
-        $self = clone $this;
-        $self['endTimeGt'] = $endTimeGt;
-
-        return $self;
-    }
-
-    /**
      * Filters calls by their end date (before). Expected format is YYYY-MM-DD.
      */
     public function withEndTimeLt(string $endTimeLt): self
     {
         $self = clone $this;
         $self['endTimeLt'] = $endTimeLt;
+
+        return $self;
+    }
+
+    /**
+     * Filters calls by their end date (after). Expected format is YYYY-MM-DD.
+     */
+    public function withEndTimeGt(string $endTimeGt): self
+    {
+        $self = clone $this;
+        $self['endTimeGt'] = $endTimeGt;
 
         return $self;
     }
@@ -243,23 +243,23 @@ final class CallRetrieveCallsParams implements BaseModel
     }
 
     /**
-     * Filters calls by their start date (after). Expected format is YYYY-MM-DD.
-     */
-    public function withStartTimeGt(string $startTimeGt): self
-    {
-        $self = clone $this;
-        $self['startTimeGt'] = $startTimeGt;
-
-        return $self;
-    }
-
-    /**
      * Filters calls by their start date (before). Expected format is YYYY-MM-DD.
      */
     public function withStartTimeLt(string $startTimeLt): self
     {
         $self = clone $this;
         $self['startTimeLt'] = $startTimeLt;
+
+        return $self;
+    }
+
+    /**
+     * Filters calls by their start date (after). Expected format is YYYY-MM-DD.
+     */
+    public function withStartTimeGt(string $startTimeGt): self
+    {
+        $self = clone $this;
+        $self['startTimeGt'] = $startTimeGt;
 
         return $self;
     }

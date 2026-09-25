@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type NodePositionShape from \Telnyx\AI\Assistants\NodePosition
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
  *
  * @phpstan-type FlowNodeReqShape = array{
  *   id: string,
@@ -36,7 +36,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   toolsMode?: null|ToolsMode|value-of<ToolsMode>,
  *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
  *   type?: null|Type|value-of<Type>,
- *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
+ *   voiceSettings?: null|InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape,
  * }
  */
 final class FlowNodeReq implements BaseModel
@@ -128,7 +128,7 @@ final class FlowNodeReq implements BaseModel
      * Per-node voice override. Only fields set here override the assistant-level voice settings; unset fields cascade.
      */
     #[Optional('voice_settings')]
-    public ?VoiceSettings $voiceSettings;
+    public ?InferenceEmbeddingVoiceSettings $voiceSettings;
 
     /**
      * `new FlowNodeReq()` is missing required properties by the API.
@@ -161,7 +161,7 @@ final class FlowNodeReq implements BaseModel
      * @param ToolsMode|value-of<ToolsMode>|null $toolsMode
      * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
      * @param Type|value-of<Type>|null $type
-     * @param VoiceSettings|VoiceSettingsShape|null $voiceSettings
+     * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         string $id,
@@ -176,7 +176,7 @@ final class FlowNodeReq implements BaseModel
         ToolsMode|string|null $toolsMode = null,
         TranscriptionSettings|array|null $transcription = null,
         Type|string|null $type = null,
-        VoiceSettings|array|null $voiceSettings = null,
+        InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
     ): self {
         $self = new self;
 
@@ -349,10 +349,11 @@ final class FlowNodeReq implements BaseModel
     /**
      * Per-node voice override. Only fields set here override the assistant-level voice settings; unset fields cascade.
      *
-     * @param VoiceSettings|VoiceSettingsShape $voiceSettings
+     * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape $voiceSettings
      */
-    public function withVoiceSettings(VoiceSettings|array $voiceSettings): self
-    {
+    public function withVoiceSettings(
+        InferenceEmbeddingVoiceSettings|array $voiceSettings
+    ): self {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;
 

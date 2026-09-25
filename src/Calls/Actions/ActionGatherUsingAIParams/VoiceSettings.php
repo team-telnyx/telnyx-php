@@ -7,6 +7,7 @@ namespace Telnyx\Calls\Actions\ActionGatherUsingAIParams;
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
+use Telnyx\Calls\Actions\SonioxVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
@@ -23,9 +24,10 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\AzureVoiceSettings
  * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\ResembleVoiceSettings
  * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\XaiVoiceSettings
+ * @phpstan-import-type SonioxVoiceSettingsShape from \Telnyx\Calls\Actions\SonioxVoiceSettings
  *
- * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings
- * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|AzureVoiceSettingsShape|ResembleVoiceSettingsShape|XaiVoiceSettingsShape
+ * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings
+ * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|AzureVoiceSettingsShape|ResembleVoiceSettingsShape|XaiVoiceSettingsShape|SonioxVoiceSettingsShape
  */
 final class VoiceSettings implements ConverterSource
 {
@@ -48,6 +50,7 @@ final class VoiceSettings implements ConverterSource
             'azure' => AzureVoiceSettings::class,
             'resemble' => ResembleVoiceSettings::class,
             'xai' => XaiVoiceSettings::class,
+            'soniox' => SonioxVoiceSettings::class,
         ];
     }
 }

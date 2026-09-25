@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\AI\Collections;
 
 use Telnyx\AI\Collections\Settings\RetrievalSettingsWrapper;
-use Telnyx\AI\Collections\Sources\Source;
+use Telnyx\AI\Collections\Sources\CollectionsSource;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-import-type RetrievalSettingsWrapperShape from \Telnyx\AI\Collections\Settings\RetrievalSettingsWrapper
- * @phpstan-import-type SourceShape from \Telnyx\AI\Collections\Sources\Source
+ * @phpstan-import-type CollectionsSourceShape from \Telnyx\AI\Collections\Sources\CollectionsSource
  *
  * @phpstan-type CollectionShape = array{
  *   createdAt?: \DateTimeInterface|null,
@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   recordType?: string|null,
  *   settings?: null|RetrievalSettingsWrapper|RetrievalSettingsWrapperShape,
  *   slug?: string|null,
- *   sources?: list<Source|SourceShape>|null,
+ *   sources?: list<CollectionsSource|CollectionsSourceShape>|null,
  *   status?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
  *   uuid?: string|null,
@@ -53,8 +53,8 @@ final class Collection implements BaseModel
     #[Optional]
     public ?string $slug;
 
-    /** @var list<Source>|null $sources */
-    #[Optional(list: Source::class)]
+    /** @var list<CollectionsSource>|null $sources */
+    #[Optional(list: CollectionsSource::class)]
     public ?array $sources;
 
     #[Optional]
@@ -77,7 +77,7 @@ final class Collection implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RetrievalSettingsWrapper|RetrievalSettingsWrapperShape|null $settings
-     * @param list<Source|SourceShape>|null $sources
+     * @param list<CollectionsSource|CollectionsSourceShape>|null $sources
      */
     public static function with(
         ?\DateTimeInterface $createdAt = null,
@@ -162,7 +162,7 @@ final class Collection implements BaseModel
     }
 
     /**
-     * @param list<Source|SourceShape> $sources
+     * @param list<CollectionsSource|CollectionsSourceShape> $sources
      */
     public function withSources(array $sources): self
     {

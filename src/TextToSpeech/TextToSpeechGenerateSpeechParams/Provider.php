@@ -24,4 +24,6 @@ enum Provider: string
     case XAI = 'xai';
 
     case HUMAIN = 'humain';
+
+    case SONIOX = 'soniox';
 }

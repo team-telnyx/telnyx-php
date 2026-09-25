@@ -31,6 +31,7 @@ use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSession
  *   bargeIn?: bool|null,
  *   botName?: string|null,
  *   cameraImage?: CameraImageShape|null,
+ *   chatOnEnter?: string|null,
  *   idempotencyKey?: string|null,
  *   joinAt?: \DateTimeInterface|null,
  *   metadata?: array<string,mixed>|null,
@@ -53,7 +54,7 @@ final class MeetingSessionCreateParams implements BaseModel
     public string $meetingURL;
 
     /**
-     * Request options for attaching a voice assistant to the session. Routing fields (`call_control_connection_id`, `from`, and `loopback_sip_uri`) are used only to establish the assistant call leg and are omitted from response objects. `audio_gate` is returned with `id` in the assistant response object.
+     * Attach a Telnyx AI Assistant to the session. Supply the Assistant's ID; the Meeting service connects it to the meeting directly. The Call Control connection, caller ID and loopback SIP URI previously required here have been removed and are now rejected as unknown fields.
      */
     #[Optional]
     public ?Assistant $assistant;
@@ -85,6 +86,12 @@ final class MeetingSessionCreateParams implements BaseModel
     public MeetingSessionCameraImageBase64Source|MeetingSessionCameraImageURLSource|null $cameraImage;
 
     /**
+     * A message the bot posts to the meeting's chat as soon as it becomes active — typically a recording disclosure. Delivered at most once. Independent of `speak_on_enter`: both may be set, and the chat message posts first because it does not wait for text-to-speech or avatar startup. Rejected with 422 `unsupported_capability` on platforms without meeting chat.
+     */
+    #[Optional('chat_on_enter')]
+    public ?string $chatOnEnter;
+
+    /**
      * Client-supplied idempotency key to safely retry creation requests without duplicating sessions. Lookup is scoped to the authenticated account and compares the key only; the request payload is not fingerprinted or compared.
      */
     #[Optional('idempotency_key')]
@@ -105,7 +112,7 @@ final class MeetingSessionCreateParams implements BaseModel
     public ?array $metadata;
 
     /**
-     * Text the bot speaks when it enters the meeting.
+     * Text the bot speaks when it enters the meeting. **Not spoken when an `assistant` is attached**: the value is accepted and echoed back on the session, but the assistant owns the voice and the line is never delivered, with no event reporting the omission. Use `chat_on_enter` to announce an assistant-backed bot.
      */
     #[Optional('speak_on_enter')]
     public ?string $speakOnEnter;
@@ -164,6 +171,7 @@ final class MeetingSessionCreateParams implements BaseModel
         ?bool $bargeIn = null,
         ?string $botName = null,
         MeetingSessionCameraImageBase64Source|array|MeetingSessionCameraImageURLSource|null $cameraImage = null,
+        ?string $chatOnEnter = null,
         ?string $idempotencyKey = null,
         ?\DateTimeInterface $joinAt = null,
         ?array $metadata = null,
@@ -181,6 +189,7 @@ final class MeetingSessionCreateParams implements BaseModel
         null !== $bargeIn && $self['bargeIn'] = $bargeIn;
         null !== $botName && $self['botName'] = $botName;
         null !== $cameraImage && $self['cameraImage'] = $cameraImage;
+        null !== $chatOnEnter && $self['chatOnEnter'] = $chatOnEnter;
         null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
         null !== $joinAt && $self['joinAt'] = $joinAt;
         null !== $metadata && $self['metadata'] = $metadata;
@@ -204,7 +213,7 @@ final class MeetingSessionCreateParams implements BaseModel
     }
 
     /**
-     * Request options for attaching a voice assistant to the session. Routing fields (`call_control_connection_id`, `from`, and `loopback_sip_uri`) are used only to establish the assistant call leg and are omitted from response objects. `audio_gate` is returned with `id` in the assistant response object.
+     * Attach a Telnyx AI Assistant to the session. Supply the Assistant's ID; the Meeting service connects it to the meeting directly. The Call Control connection, caller ID and loopback SIP URI previously required here have been removed and are now rejected as unknown fields.
      *
      * @param Assistant|AssistantShape $assistant
      */
@@ -266,6 +275,17 @@ final class MeetingSessionCreateParams implements BaseModel
     }
 
     /**
+     * A message the bot posts to the meeting's chat as soon as it becomes active — typically a recording disclosure. Delivered at most once. Independent of `speak_on_enter`: both may be set, and the chat message posts first because it does not wait for text-to-speech or avatar startup. Rejected with 422 `unsupported_capability` on platforms without meeting chat.
+     */
+    public function withChatOnEnter(string $chatOnEnter): self
+    {
+        $self = clone $this;
+        $self['chatOnEnter'] = $chatOnEnter;
+
+        return $self;
+    }
+
+    /**
      * Client-supplied idempotency key to safely retry creation requests without duplicating sessions. Lookup is scoped to the authenticated account and compares the key only; the request payload is not fingerprinted or compared.
      */
     public function withIdempotencyKey(string $idempotencyKey): self
@@ -301,7 +321,7 @@ final class MeetingSessionCreateParams implements BaseModel
     }
 
     /**
-     * Text the bot speaks when it enters the meeting.
+     * Text the bot speaks when it enters the meeting. **Not spoken when an `assistant` is attached**: the value is accepted and echoed back on the session, but the assistant owns the voice and the line is never delivered, with no event reporting the omission. Use `chat_on_enter` to announce an assistant-backed bot.
      */
     public function withSpeakOnEnter(string $speakOnEnter): self
     {

@@ -38,7 +38,7 @@ final class ArtifactsTest extends TestCase
 
         $result = $this->client->meetingSessions->artifacts->create(
             'mtgsess_a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-            type: 'summary'
+            prompt: 'x'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,7 +54,8 @@ final class ArtifactsTest extends TestCase
 
         $result = $this->client->meetingSessions->artifacts->create(
             'mtgsess_a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-            type: 'summary'
+            type: 'custom',
+            prompt: 'x',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

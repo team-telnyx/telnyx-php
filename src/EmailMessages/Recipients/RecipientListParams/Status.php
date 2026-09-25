@@ -26,4 +26,8 @@ enum Status: string
     case GW_REJECT = 'gw_reject';
 
     case CANCELLED = 'cancelled';
+
+    case INJECTION_TIMEOUT = 'injection_timeout';
+
+    case EXPIRED = 'expired';
 }

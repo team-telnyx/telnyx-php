@@ -8,7 +8,6 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\EmailCursorPagination;
 use Telnyx\EmailEvents\EmailEventGetStatsResponse;
 use Telnyx\EmailEvents\EmailEventListParams;
 use Telnyx\EmailEvents\EmailEventListResponse;
@@ -33,19 +32,19 @@ final class EmailEventsRawService implements EmailEventsRawContract
     /**
      * @api
      *
-     * Lists account-level email events sorted oldest first by `occurred_at asc, id asc`.
+     * Lists account-level email events sorted oldest first by `occurred_at asc, id asc`. Each row contains a legacy email.-prefixed event_type and an additive canonical_event_type. Gateway rejection renders email.failed with canonical email.gw_reject; ambiguous injection timeout renders email.injection_timeout in both; MTA expiration renders email.bounced with canonical email.expired. Message-scoped queued, sending, sandbox, cancelled, and daily_limit_exceeded rows fan out per durable recipient with stable derived IDs matching webhook delivery. Scheduled is the cardinality exception: account polling retains one message-scoped scheduled row with its stored event ID, while scheduled webhook publication fans out per recipient with derived IDs; reconcile scheduled events by message ID, event type, and occurrence time rather than event UUID. Recipient-scoped stored rows retain their stored UUIDs across polling and webhook delivery. Legacy names are derived from stored rows; an AdminBounce row stored as failed renders email.failed in polling while its webhook retains email.bounced, both with canonical email.failed.
      *
      * @param array{
      *   emailID?: string,
      *   eventType?: EventTypeShape,
      *   from?: \DateTimeInterface,
-     *   pageCursor?: string,
      *   pageSize?: int,
+     *   pageCursor?: string,
      *   to?: \DateTimeInterface,
      * }|EmailEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailCursorPagination<EmailEventListResponse>>
+     * @return BaseResponse<EmailEventListResponse>
      *
      * @throws APIException
      */
@@ -67,13 +66,12 @@ final class EmailEventsRawService implements EmailEventsRawContract
                 [
                     'emailID' => 'email_id',
                     'eventType' => 'event_type',
-                    'pageCursor' => 'page_cursor',
                     'pageSize' => 'page_size',
+                    'pageCursor' => 'page[cursor]',
                 ],
             ),
             options: $options,
             convert: EmailEventListResponse::class,
-            page: EmailCursorPagination::class,
         );
     }
 

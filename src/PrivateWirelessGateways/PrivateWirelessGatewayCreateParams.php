@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayCreateParams\AddressMode;
 
 /**
  * Asynchronously create a Private Wireless Gateway for SIM cards for a previously created network. This operation may take several minutes so you can check the Private Wireless Gateway status at the section Get a Private Wireless Gateway.
@@ -16,7 +17,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PrivateWirelessGatewaysService::create()
  *
  * @phpstan-type PrivateWirelessGatewayCreateParamsShape = array{
- *   name: string, networkID: string, regionCode?: string|null
+ *   name: string,
+ *   networkID: string,
+ *   addressMode?: null|AddressMode|value-of<AddressMode>,
+ *   regionCode?: string|null,
  * }
  */
 final class PrivateWirelessGatewayCreateParams implements BaseModel
@@ -36,6 +40,14 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
      */
     #[Required('network_id')]
     public string $networkID;
+
+    /**
+     * Determines how IP addresses are assigned to SIM cards using this gateway. With static, each SIM card gets a fixed IP address from the gateway's IP range that is preserved across sessions. With dynamic, an IP address is assigned by the network at attach time and may change between sessions. If omitted, the gateway is created with the default address mode, dynamic.
+     *
+     * @var value-of<AddressMode>|null $addressMode
+     */
+    #[Optional('address_mode', enum: AddressMode::class)]
+    public ?string $addressMode;
 
     /**
      * The code of the region where the private wireless gateway will be assigned. A list of available regions can be found at the regions endpoint.
@@ -66,17 +78,21 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AddressMode|value-of<AddressMode>|null $addressMode
      */
     public static function with(
         string $name,
         string $networkID,
-        ?string $regionCode = null
+        AddressMode|string|null $addressMode = null,
+        ?string $regionCode = null,
     ): self {
         $self = new self;
 
         $self['name'] = $name;
         $self['networkID'] = $networkID;
 
+        null !== $addressMode && $self['addressMode'] = $addressMode;
         null !== $regionCode && $self['regionCode'] = $regionCode;
 
         return $self;
@@ -100,6 +116,19 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['networkID'] = $networkID;
+
+        return $self;
+    }
+
+    /**
+     * Determines how IP addresses are assigned to SIM cards using this gateway. With static, each SIM card gets a fixed IP address from the gateway's IP range that is preserved across sessions. With dynamic, an IP address is assigned by the network at attach time and may change between sessions. If omitted, the gateway is created with the default address mode, dynamic.
+     *
+     * @param AddressMode|value-of<AddressMode> $addressMode
+     */
+    public function withAddressMode(AddressMode|string $addressMode): self
+    {
+        $self = clone $this;
+        $self['addressMode'] = $addressMode;
 
         return $self;
     }

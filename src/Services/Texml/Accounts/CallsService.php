@@ -183,15 +183,15 @@ final class CallsService implements CallsContract
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param string $endTime Filters calls by their end date. Expected format is YYYY-MM-DD
-     * @param string $endTimeGt Filters calls by their end date (after). Expected format is YYYY-MM-DD
      * @param string $endTimeLt Filters calls by their end date (before). Expected format is YYYY-MM-DD
+     * @param string $endTimeGt Filters calls by their end date (after). Expected format is YYYY-MM-DD
      * @param string $from filters calls by the from number
      * @param int $page the number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken
      * @param int $pageSize The number of records to be displayed on a page
      * @param string $pageToken used to request the next page of results
      * @param string $startTime Filters calls by their start date. Expected format is YYYY-MM-DD.
-     * @param string $startTimeGt Filters calls by their start date (after). Expected format is YYYY-MM-DD
      * @param string $startTimeLt Filters calls by their start date (before). Expected format is YYYY-MM-DD
+     * @param string $startTimeGt Filters calls by their start date (after). Expected format is YYYY-MM-DD
      * @param Status|value-of<Status> $status filters calls by status
      * @param string $to filters calls by the to number
      * @param RequestOpts|null $requestOptions
@@ -201,15 +201,15 @@ final class CallsService implements CallsContract
     public function retrieveCalls(
         string $accountSid,
         ?string $endTime = null,
-        ?string $endTimeGt = null,
         ?string $endTimeLt = null,
+        ?string $endTimeGt = null,
         ?string $from = null,
         ?int $page = null,
         ?int $pageSize = null,
         ?string $pageToken = null,
         ?string $startTime = null,
-        ?string $startTimeGt = null,
         ?string $startTimeLt = null,
+        ?string $startTimeGt = null,
         Status|string|null $status = null,
         ?string $to = null,
         RequestOptions|array|null $requestOptions = null,
@@ -217,15 +217,15 @@ final class CallsService implements CallsContract
         $params = array_filter(
             [
                 'endTime' => $endTime ?? Omitted::VALUE,
-                'endTimeGt' => $endTimeGt ?? Omitted::VALUE,
                 'endTimeLt' => $endTimeLt ?? Omitted::VALUE,
+                'endTimeGt' => $endTimeGt ?? Omitted::VALUE,
                 'from' => $from ?? Omitted::VALUE,
                 'page' => $page ?? Omitted::VALUE,
                 'pageSize' => $pageSize ?? Omitted::VALUE,
                 'pageToken' => $pageToken ?? Omitted::VALUE,
                 'startTime' => $startTime ?? Omitted::VALUE,
-                'startTimeGt' => $startTimeGt ?? Omitted::VALUE,
                 'startTimeLt' => $startTimeLt ?? Omitted::VALUE,
+                'startTimeGt' => $startTimeGt ?? Omitted::VALUE,
                 'status' => $status ?? Omitted::VALUE,
                 'to' => $to ?? Omitted::VALUE,
             ],

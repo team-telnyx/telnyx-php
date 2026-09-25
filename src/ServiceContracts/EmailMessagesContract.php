@@ -13,7 +13,7 @@ use Telnyx\EmailInboxes\Drafts\EmailMessageResponse;
 use Telnyx\EmailMessages\AttachmentRequest;
 use Telnyx\EmailMessages\EmailMessageBatchParams\Message;
 use Telnyx\EmailMessages\EmailMessageBatchResponse;
-use Telnyx\EmailMessages\EmailMessageGetResponse;
+use Telnyx\EmailMessages\EmailMessageDetailResponse;
 use Telnyx\EmailMessages\MessageEvent;
 use Telnyx\EmailMessages\TrackingSettings;
 use Telnyx\RequestOptions;
@@ -63,7 +63,7 @@ interface EmailMessagesContract
      *
      * Cannot be combined with `forward_of_message_id` (422).
      * @param bool $inlineCss Body param
-     * @param array<string,mixed> $metadata Body param: Custom metadata. Write-only; not returned in responses.
+     * @param array<string,mixed> $metadata Body param: Custom metadata key/value pairs. Stored on the message, returned on message responses, and propagated to Email Detail Records. Usable in `filter[metadata]` when listing messages.
      * @param EmailAddressInputShape $replyTo Body param: Reply-to address. If provided as an object with a name, only the email is stored; the name is ignored.
      * @param bool|Omitted|null $replyToAll Body param: Indicates a reply-all intent. In Phase 1 (wire-only) this does not
      * change the threading headers — recipient selection is customer-
@@ -74,16 +74,26 @@ interface EmailMessagesContract
      * at a later phase with no API change.
      *
      * Only meaningful alongside `in_reply_to_message_id`.
-     * @param bool $sandboxMode Body param
-     * @param \DateTimeInterface|Omitted|null $scheduledAt Body param: Future ISO 8601 time to schedule sending. Invalid or past timestamps
-     * are silently ignored and the email is sent immediately. The legacy
-     * alias `send_at` is still accepted for backward compatibility; when
-     * both are provided, `scheduled_at` wins.
+     * @param bool $sandboxMode Body param: Validates and accepts the message without injecting it into the MTA or outbound Kafka path. Nothing is delivered: sandbox records are non-billable, consume no daily-send-limit quota, and feed no delivery-reputation signals.
+     *
+     * The reserved sandbox test-recipient domain is `test.telnyx.com`. In sandbox mode, these addresses produce deterministic recipient-scoped lifecycle events:
+     *
+     * - `delivered@test.telnyx.com`: queued -> sending -> sent -> delivered
+     * - `hard-bounce@test.telnyx.com`: queued -> sending -> sent -> bounced (permanent)
+     * - `soft-bounce@test.telnyx.com`: queued -> sending -> sent -> bounced (transient)
+     * - `complaint@test.telnyx.com`: queued -> sending -> sent -> complained
+     * - `suppressed@test.telnyx.com`: queued -> suppressed
+     * - `invalid@test.telnyx.com`: queued -> sending -> failed (invalid recipient)
+     * - `dkim-fail@test.telnyx.com`: queued -> sending -> failed (DKIM unavailable)
+     * - `rate-limit@test.telnyx.com`: queued -> sending -> failed (rate limit exceeded)
+     *
+     * Matching is case-insensitive for both the local part and the domain and requires the exact domain `test.telnyx.com` — subdomains and other domains do not match. Mixed sandbox sends simulate only reserved test recipients; other recipients retain ordinary sandbox behavior (accepted, no delivery attempted). Hard-bounce and complaint outcomes also use the normal automatic-suppression pipeline. Non-sandbox sends to these addresses use the normal delivery path.
+     * @param \DateTimeInterface|Omitted|null $scheduledAt Body param: Future ISO 8601 delivery time. Invalid or non-future timestamps are rejected. Single sends return HTTP 422; in batch sends the invalid item is reported in the 207 per-item errors while other items continue. `send_at` remains a deprecated request alias. A non-null `scheduled_at` takes precedence over `send_at`; when `scheduled_at` is omitted or null, `send_at` is used.
      * @param \DateTimeInterface $sendAt body param: Deprecated alias for `scheduled_at`
      * @param string $subject Body param: Required unless `template_id` is supplied. When using a template, the template's subject is rendered; if the template has no subject or renders empty, the request returns 400.
-     * @param list<string> $tags Body param: Tags for categorization and reporting. Stored on the message and propagated to Email Detail Records. Not returned in API responses.
+     * @param list<string> $tags Body param: Tags for categorization and filtering. Stored on the message, returned on message responses, and propagated to Email Detail Records. Usable in `filter[tags]` when listing messages.
      * @param string $templateID Body param
-     * @param array<string,mixed> $templateVariables Body param: Variables for Liquid template rendering. Non-object values may cause a 422 validation error on message creation, but are silently treated as an empty object for template rendering.
+     * @param array<string,mixed> $templateVariables Body param: Variables for Liquid template rendering. Non-object values may cause a 422 validation error on message creation, but are silently treated as an empty object for template rendering. When the template enables `strict_variables`, a missing required variable fails the request with 422 (single send) or a per-item `unprocessable_entity` error (batch) naming the variable; no message is persisted for the failed item.
      * @param string $textBody Body param: Plain text email body. Returned only by `GET /email_messages/{id}`; omitted from create and list responses.
      * @param TrackingSettings|TrackingSettingsShape $trackingSettings Body param: Per-send open and click tracking overrides. Omitted properties inherit the sender domain's tracking settings.
      * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
@@ -132,11 +142,13 @@ interface EmailMessagesContract
     public function retrieve(
         string $id,
         RequestOptions|array|null $requestOptions = null
-    ): EmailMessageGetResponse;
+    ): EmailMessageDetailResponse;
 
     /**
      * @api
      *
+     * @param string $filterMetadata Metadata containment filter, supplied as a JSON object or comma-separated `key=value` pairs. All supplied key/value pairs must be contained in the message metadata. An empty value or empty JSON object omits the filter. Malformed values, valid non-object JSON, pairs without `=`, empty keys, and non-string/nested query shapes return HTTP 400.
+     * @param string $filterTags Comma-separated tags. Each segment is trimmed, and messages having at least one supplied tag are returned; matching is exact and case-sensitive after trimming. Because commas delimit values and surrounding whitespace is removed, this filter cannot represent stored tags containing literal commas or leading/trailing whitespace. An empty value omits the filter. Empty segments and non-string/nested query shapes return HTTP 400.
      * @param string $pageCursor opaque URL-safe Base64 cursor returned by a previous list response
      * @param int $pageSize Number of results to return. Defaults to 25; maximum is 100. Invalid values are clamped to the valid range.
      * @param RequestOpts|null $requestOptions
@@ -146,6 +158,8 @@ interface EmailMessagesContract
      * @throws APIException
      */
     public function list(
+        ?string $filterMetadata = null,
+        ?string $filterTags = null,
         ?string $pageCursor = null,
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
@@ -168,7 +182,7 @@ interface EmailMessagesContract
      * @api
      *
      * @param list<Message|MessageShape> $messages Body param: Array of email messages to send. Up to 1,000 messages per batch request. Each message is validated and sent independently; per-message failures do not affect other messages in the batch.
-     * @param bool $sandboxMode Body param: Applies sandbox mode to all messages in the batch. Overrides any per-message sandbox_mode in the messages array.
+     * @param bool $sandboxMode Body param: Applies sandbox mode to all messages in the batch and overrides any per-message `sandbox_mode` value — each message's effective `sandbox_mode` is exactly this envelope value. Reserved recipients at `test.telnyx.com` produce the deterministic event chains documented on CreateEmailRequest.sandbox_mode; no batch item is injected into the MTA or outbound Kafka path. Sandbox batch items are non-billable, consume no daily-send-limit quota, and feed no delivery-reputation signals.
      * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
@@ -225,4 +239,19 @@ interface EmailMessagesContract
         int $pageSize = 25,
         RequestOptions|array|null $requestOptions = null,
     ): EmailCursorPagination;
+
+    /**
+     * @api
+     *
+     * @param string $emailID email message UUID
+     * @param \DateTimeInterface $scheduledAt New ISO 8601 delivery time. Must be strictly in the future.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function updateSchedule(
+        string $emailID,
+        \DateTimeInterface $scheduledAt,
+        RequestOptions|array|null $requestOptions = null,
+    ): EmailMessageDetailResponse;
 }

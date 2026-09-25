@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\EmailMessages\EmailMessageBatchParams\Message;
 
 /**
- * Creates up to 1,000 email messages in a single request. Request-wide admission checks run first and can reject the whole batch before message creation. After those checks pass, each message is validated and sent independently; item-level failures do not affect other messages, and the processed batch returns 207 Multi-Status.
+ * Creates up to 1,000 email messages in a single request. Request-wide admission checks run first and can reject the whole batch before message creation. After those checks pass, each message is validated and sent independently; item-level failures do not affect other messages, and the processed batch returns 207 Multi-Status. Per-message failures include validation errors; when a template has `strict_variables` enabled, a missing required variable produces a per-item `unprocessable_entity` error naming that variable while the other messages continue.
  *
  * @see Telnyx\Services\EmailMessagesService::batch()
  *
@@ -39,7 +39,7 @@ final class EmailMessageBatchParams implements BaseModel
     public array $messages;
 
     /**
-     * Applies sandbox mode to all messages in the batch. Overrides any per-message sandbox_mode in the messages array.
+     * Applies sandbox mode to all messages in the batch and overrides any per-message `sandbox_mode` value — each message's effective `sandbox_mode` is exactly this envelope value. Reserved recipients at `test.telnyx.com` produce the deterministic event chains documented on CreateEmailRequest.sandbox_mode; no batch item is injected into the MTA or outbound Kafka path. Sandbox batch items are non-billable, consume no daily-send-limit quota, and feed no delivery-reputation signals.
      */
     #[Optional('sandbox_mode')]
     public ?bool $sandboxMode;
@@ -102,7 +102,7 @@ final class EmailMessageBatchParams implements BaseModel
     }
 
     /**
-     * Applies sandbox mode to all messages in the batch. Overrides any per-message sandbox_mode in the messages array.
+     * Applies sandbox mode to all messages in the batch and overrides any per-message `sandbox_mode` value — each message's effective `sandbox_mode` is exactly this envelope value. Reserved recipients at `test.telnyx.com` produce the deterministic event chains documented on CreateEmailRequest.sandbox_mode; no batch item is injected into the MTA or outbound Kafka path. Sandbox batch items are non-billable, consume no daily-send-limit quota, and feed no delivery-reputation signals.
      */
     public function withSandboxMode(bool $sandboxMode): self
     {

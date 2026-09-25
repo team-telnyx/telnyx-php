@@ -6,7 +6,6 @@ namespace Telnyx\Services\MeetingSessions;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MeetingSessions\Artifacts\ArtifactCreateParams\Type;
 use Telnyx\MeetingSessions\Artifacts\ArtifactListResponse;
 use Telnyx\MeetingSessions\Artifacts\MeetingSessionArtifactResponse;
 use Telnyx\RequestOptions;
@@ -35,20 +34,22 @@ final class ArtifactsService implements ArtifactsContract
     /**
      * @api
      *
-     * Requests asynchronous generation of one `summary` or `action_items` artifact. Each type requires its own request. Generation requires transcript content and configured inference and currently reads at most the first 10,000 segments, so exceptionally long transcripts may produce incomplete artifacts or fail model limits.
+     * Requests asynchronous generation of one artifact: `summary`, `action_items`, `decisions`, `topics`, `open_questions`, or `custom`. Each request produces one artifact. `custom` is answered from a `prompt` you supply, which is required for `custom` and rejected on the five named types. Generation requires transcript content and configured inference and currently reads at most the first 10,000 segments, so exceptionally long transcripts may produce incomplete artifacts or fail model limits. **Not idempotent, and every call is billed**: each request is a separate inference run, so a retry or a duplicate POST produces a second artifact and a second charge. Guard the call rather than relying on the service to collapse it. The automatic `summarize_on_end` attempt is billed on the same basis.
      *
      * @param string $id unique identifier for the meeting session
-     * @param Type|value-of<Type> $type type of artifact to generate from the session
+     * @param string $prompt An open-ended request answered from the transcript. Required when `type` is `custom`, and rejected with 400 on any named type. Trimmed before storage and echoed back in artifact responses and the `artifact.completed` webhook.
+     * @param 'custom' $type answered from the `prompt` below rather than a fixed question
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $id,
-        Type|string $type,
+        string $prompt,
+        string $type = 'custom',
         RequestOptions|array|null $requestOptions = null,
     ): MeetingSessionArtifactResponse {
-        $params = ['type' => $type];
+        $params = ['type' => $type, 'prompt' => $prompt];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);

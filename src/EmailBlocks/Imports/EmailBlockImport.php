@@ -79,6 +79,9 @@ final class EmailBlockImport implements BaseModel
     public ?int $createdCount;
 
     /**
+     * Rows that passed CSV parsing but failed suppression creation.
+     * This is the creation-failure subset of `skipped_count`;
+     * parser-rejected rows equal `skipped_count - error_count`.
      * Only when `status == completed`.
      */
     #[Optional('error_count')]
@@ -287,6 +290,9 @@ final class EmailBlockImport implements BaseModel
     }
 
     /**
+     * Rows that passed CSV parsing but failed suppression creation.
+     * This is the creation-failure subset of `skipped_count`;
+     * parser-rejected rows equal `skipped_count - error_count`.
      * Only when `status == completed`.
      */
     public function withErrorCount(int $errorCount): self

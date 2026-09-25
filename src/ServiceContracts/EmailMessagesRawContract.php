@@ -13,9 +13,10 @@ use Telnyx\EmailMessages\EmailMessageBatchParams;
 use Telnyx\EmailMessages\EmailMessageBatchResponse;
 use Telnyx\EmailMessages\EmailMessageCreateParams;
 use Telnyx\EmailMessages\EmailMessageDeleteAllParams;
-use Telnyx\EmailMessages\EmailMessageGetResponse;
+use Telnyx\EmailMessages\EmailMessageDetailResponse;
 use Telnyx\EmailMessages\EmailMessageListParams;
 use Telnyx\EmailMessages\EmailMessageRetrieveEventsParams;
+use Telnyx\EmailMessages\EmailMessageUpdateScheduleParams;
 use Telnyx\EmailMessages\MessageEvent;
 use Telnyx\RequestOptions;
 
@@ -45,7 +46,7 @@ interface EmailMessagesRawContract
      * @param string $id email message UUID
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailMessageGetResponse>
+     * @return BaseResponse<EmailMessageDetailResponse>
      *
      * @throws APIException
      */
@@ -143,6 +144,23 @@ interface EmailMessagesRawContract
     public function retrieveEvents(
         string $emailID,
         array|EmailMessageRetrieveEventsParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $emailID email message UUID
+     * @param array<string,mixed>|EmailMessageUpdateScheduleParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<EmailMessageDetailResponse>
+     *
+     * @throws APIException
+     */
+    public function updateSchedule(
+        string $emailID,
+        array|EmailMessageUpdateScheduleParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

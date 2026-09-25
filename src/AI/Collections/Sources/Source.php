@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace Telnyx\AI\Collections\Sources;
 
 use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-type SourceShape = array{
- *   id?: string|null,
- *   bucketID?: string|null,
- *   collectionID?: string|null,
- *   recordType?: string|null,
- *   sourceType?: null|SourceType|value-of<SourceType>,
- *   status?: string|null,
+ *   id: string,
+ *   memoryCount: int,
+ *   sessionID: string|null,
+ *   createdAt?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class Source implements BaseModel
@@ -23,35 +24,50 @@ final class Source implements BaseModel
     /** @use SdkModel<SourceShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $id;
-
     /**
-     * The Telnyx Storage bucket name. Present only for `bucket` sources.
+     * Identifies one source within its profile: an ingested session, or one remembered fact. Returned by `ingest` and `remember` when the write is accepted. Re-ingesting a session keeps its source id.
      */
-    #[Optional('bucket_id')]
-    public ?string $bucketID;
-
-    #[Optional('collection_id')]
-    public ?string $collectionID;
+    #[Required]
+    public string $id;
 
     /**
-     * Identifies the record type. Always `ai_collection_source`.
+     * Memories extracted from this source. A memory derived from several sources is not counted here.
      */
-    #[Optional('record_type')]
-    public ?string $recordType;
+    #[Required('memory_count')]
+    public int $memoryCount;
 
     /**
-     * The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. Only `voice` is searchable today; `meeting_bot`, `message`, and `bucket` attach but are not yet searchable (Coming soon).
+     * The session this source was ingested as. Null for a remembered fact.
+     */
+    #[Required('session_id')]
+    public ?string $sessionID;
+
+    /**
+     * When the source was first stored.
+     */
+    #[Optional('created_at', nullable: true)]
+    public ?string $createdAt;
+
+    /**
+     * When the source was last written; re-ingesting moves it.
+     */
+    #[Optional('updated_at', nullable: true)]
+    public ?string $updatedAt;
+
+    /**
+     * `new Source()` is missing required properties by the API.
      *
-     * @var value-of<SourceType>|null $sourceType
+     * To enforce required parameters use
+     * ```
+     * Source::with(id: ..., memoryCount: ..., sessionID: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new Source)->withID(...)->withMemoryCount(...)->withSessionID(...)
+     * ```
      */
-    #[Optional('source_type', enum: SourceType::class)]
-    public ?string $sourceType;
-
-    #[Optional]
-    public ?string $status;
-
     public function __construct()
     {
         $this->initialize();
@@ -61,29 +77,29 @@ final class Source implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param SourceType|value-of<SourceType>|null $sourceType
      */
     public static function with(
-        ?string $id = null,
-        ?string $bucketID = null,
-        ?string $collectionID = null,
-        ?string $recordType = null,
-        SourceType|string|null $sourceType = null,
-        ?string $status = null,
+        string $id,
+        int $memoryCount,
+        ?string $sessionID,
+        string|Omitted|null $createdAt = Omitted::VALUE,
+        string|Omitted|null $updatedAt = Omitted::VALUE,
     ): self {
         $self = new self;
 
-        null !== $id && $self['id'] = $id;
-        null !== $bucketID && $self['bucketID'] = $bucketID;
-        null !== $collectionID && $self['collectionID'] = $collectionID;
-        null !== $recordType && $self['recordType'] = $recordType;
-        null !== $sourceType && $self['sourceType'] = $sourceType;
-        null !== $status && $self['status'] = $status;
+        $self['id'] = $id;
+        $self['memoryCount'] = $memoryCount;
+        $self['sessionID'] = $sessionID;
+
+        Omitted::VALUE !== $createdAt && $self['createdAt'] = $createdAt;
+        Omitted::VALUE !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
 
+    /**
+     * Identifies one source within its profile: an ingested session, or one remembered fact. Returned by `ingest` and `remember` when the write is accepted. Re-ingesting a session keeps its source id.
+     */
     public function withID(string $id): self
     {
         $self = clone $this;
@@ -93,52 +109,45 @@ final class Source implements BaseModel
     }
 
     /**
-     * The Telnyx Storage bucket name. Present only for `bucket` sources.
+     * Memories extracted from this source. A memory derived from several sources is not counted here.
      */
-    public function withBucketID(string $bucketID): self
+    public function withMemoryCount(int $memoryCount): self
     {
         $self = clone $this;
-        $self['bucketID'] = $bucketID;
-
-        return $self;
-    }
-
-    public function withCollectionID(string $collectionID): self
-    {
-        $self = clone $this;
-        $self['collectionID'] = $collectionID;
+        $self['memoryCount'] = $memoryCount;
 
         return $self;
     }
 
     /**
-     * Identifies the record type. Always `ai_collection_source`.
+     * The session this source was ingested as. Null for a remembered fact.
      */
-    public function withRecordType(string $recordType): self
+    public function withSessionID(?string $sessionID): self
     {
         $self = clone $this;
-        $self['recordType'] = $recordType;
+        $self['sessionID'] = $sessionID;
 
         return $self;
     }
 
     /**
-     * The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. Only `voice` is searchable today; `meeting_bot`, `message`, and `bucket` attach but are not yet searchable (Coming soon).
-     *
-     * @param SourceType|value-of<SourceType> $sourceType
+     * When the source was first stored.
      */
-    public function withSourceType(SourceType|string $sourceType): self
+    public function withCreatedAt(?string $createdAt): self
     {
         $self = clone $this;
-        $self['sourceType'] = $sourceType;
+        $self['createdAt'] = $createdAt;
 
         return $self;
     }
 
-    public function withStatus(string $status): self
+    /**
+     * When the source was last written; re-ingesting moves it.
+     */
+    public function withUpdatedAt(?string $updatedAt): self
     {
         $self = clone $this;
-        $self['status'] = $status;
+        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }

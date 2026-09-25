@@ -9,12 +9,13 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\PrivateWirelessGateways\PrivateWirelessGateway;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayCreateParams;
+use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayCreateParams\AddressMode;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayListParams;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
+use Telnyx\PrivateWirelessGateways\WirelessPrivateWirelessGateway;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PrivateWirelessGatewaysRawContract;
 
@@ -37,7 +38,10 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
      * Asynchronously create a Private Wireless Gateway for SIM cards for a previously created network. This operation may take several minutes so you can check the Private Wireless Gateway status at the section Get a Private Wireless Gateway.
      *
      * @param array{
-     *   name: string, networkID: string, regionCode?: string
+     *   name: string,
+     *   networkID: string,
+     *   addressMode?: AddressMode|value-of<AddressMode>,
+     *   regionCode?: string,
      * }|PrivateWirelessGatewayCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -105,7 +109,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
      * }|PrivateWirelessGatewayListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PrivateWirelessGateway>>
+     * @return BaseResponse<DefaultFlatPagination<WirelessPrivateWirelessGateway>>
      *
      * @throws APIException
      */
@@ -135,7 +139,7 @@ final class PrivateWirelessGatewaysRawService implements PrivateWirelessGateways
                 ],
             ),
             options: $options,
-            convert: PrivateWirelessGateway::class,
+            convert: WirelessPrivateWirelessGateway::class,
             page: DefaultFlatPagination::class,
         );
     }

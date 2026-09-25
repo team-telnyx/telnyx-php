@@ -116,7 +116,7 @@ final class Message implements BaseModel
     public ?bool $inlineCss;
 
     /**
-     * Custom metadata. Write-only; not returned in responses.
+     * Custom metadata key/value pairs. Stored on the message, returned on message responses, and propagated to Email Detail Records. Usable in `filter[metadata]` when listing messages.
      *
      * @var array<string,mixed>|null $metadata
      */
@@ -131,14 +131,14 @@ final class Message implements BaseModel
     #[Optional('reply_to')]
     public string|EmailAddress|null $replyTo;
 
+    /**
+     * Per-message sandbox flag. The batch-level `sandbox_mode` envelope value is authoritative: it overwrites every message's `sandbox_mode` before processing, including the `false` default when the envelope omits the field. A per-item `sandbox_mode: true` inside a non-sandbox batch is therefore a real send. Set the envelope field to run any batch item in sandbox mode.
+     */
     #[Optional('sandbox_mode')]
     public ?bool $sandboxMode;
 
     /**
-     * Future ISO 8601 time to schedule sending. Invalid or past timestamps
-     * are silently ignored and the email is sent immediately. The legacy
-     * alias `send_at` is still accepted for backward compatibility; when
-     * both are provided, `scheduled_at` wins.
+     * Future ISO 8601 delivery time. Invalid or non-future timestamps are rejected. Single sends return HTTP 422; in batch sends the invalid item is reported in the 207 per-item errors while other items continue. `send_at` remains a deprecated request alias. A non-null `scheduled_at` takes precedence over `send_at`; when `scheduled_at` is omitted or null, `send_at` is used.
      */
     #[Optional('scheduled_at', nullable: true)]
     public ?\DateTimeInterface $scheduledAt;
@@ -158,7 +158,7 @@ final class Message implements BaseModel
     public ?string $subject;
 
     /**
-     * Tags for categorization and reporting. Stored on the message and propagated to Email Detail Records. Not returned in API responses.
+     * Tags for categorization and filtering. Stored on the message, returned on message responses, and propagated to Email Detail Records. Usable in `filter[tags]` when listing messages.
      *
      * @var list<string>|null $tags
      */
@@ -169,7 +169,7 @@ final class Message implements BaseModel
     public ?string $templateID;
 
     /**
-     * Variables for Liquid template rendering. Non-object values may cause a 422 validation error on message creation, but are silently treated as an empty object for template rendering.
+     * Variables for Liquid template rendering. Non-object values may cause a 422 validation error on message creation, but are silently treated as an empty object for template rendering. When the template enables `strict_variables`, a missing required variable fails the request with 422 (single send) or a per-item `unprocessable_entity` error (batch) naming the variable; no message is persisted for the failed item.
      *
      * @var array<string,mixed>|null $templateVariables
      */
@@ -400,7 +400,7 @@ final class Message implements BaseModel
     }
 
     /**
-     * Custom metadata. Write-only; not returned in responses.
+     * Custom metadata key/value pairs. Stored on the message, returned on message responses, and propagated to Email Detail Records. Usable in `filter[metadata]` when listing messages.
      *
      * @param array<string,mixed> $metadata
      */
@@ -425,6 +425,9 @@ final class Message implements BaseModel
         return $self;
     }
 
+    /**
+     * Per-message sandbox flag. The batch-level `sandbox_mode` envelope value is authoritative: it overwrites every message's `sandbox_mode` before processing, including the `false` default when the envelope omits the field. A per-item `sandbox_mode: true` inside a non-sandbox batch is therefore a real send. Set the envelope field to run any batch item in sandbox mode.
+     */
     public function withSandboxMode(bool $sandboxMode): self
     {
         $self = clone $this;
@@ -434,10 +437,7 @@ final class Message implements BaseModel
     }
 
     /**
-     * Future ISO 8601 time to schedule sending. Invalid or past timestamps
-     * are silently ignored and the email is sent immediately. The legacy
-     * alias `send_at` is still accepted for backward compatibility; when
-     * both are provided, `scheduled_at` wins.
+     * Future ISO 8601 delivery time. Invalid or non-future timestamps are rejected. Single sends return HTTP 422; in batch sends the invalid item is reported in the 207 per-item errors while other items continue. `send_at` remains a deprecated request alias. A non-null `scheduled_at` takes precedence over `send_at`; when `scheduled_at` is omitted or null, `send_at` is used.
      */
     public function withScheduledAt(?\DateTimeInterface $scheduledAt): self
     {
@@ -470,7 +470,7 @@ final class Message implements BaseModel
     }
 
     /**
-     * Tags for categorization and reporting. Stored on the message and propagated to Email Detail Records. Not returned in API responses.
+     * Tags for categorization and filtering. Stored on the message, returned on message responses, and propagated to Email Detail Records. Usable in `filter[tags]` when listing messages.
      *
      * @param list<string> $tags
      */
@@ -491,7 +491,7 @@ final class Message implements BaseModel
     }
 
     /**
-     * Variables for Liquid template rendering. Non-object values may cause a 422 validation error on message creation, but are silently treated as an empty object for template rendering.
+     * Variables for Liquid template rendering. Non-object values may cause a 422 validation error on message creation, but are silently treated as an empty object for template rendering. When the template enables `strict_variables`, a missing required variable fails the request with 422 (single send) or a per-item `unprocessable_entity` error (batch) naming the variable; no message is persisted for the failed item.
      *
      * @param array<string,mixed> $templateVariables
      */
