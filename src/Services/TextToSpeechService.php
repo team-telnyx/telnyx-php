@@ -17,6 +17,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Soniox;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\TextType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
@@ -33,6 +34,7 @@ use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
  * @phpstan-import-type HumainShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain
  * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble
+ * @phpstan-import-type SonioxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Soniox
  * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx
  * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -61,7 +63,7 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`, `soniox`.
      *
      * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
      *
@@ -75,6 +77,7 @@ final class TextToSpeechService implements TextToSpeechContract
      * @param OutputType|value-of<OutputType> $outputType Determines the response format. `binary_output` returns raw audio bytes, `base64_output` returns base64-encoded audio in JSON.
      * @param Provider|value-of<Provider> $provider TTS provider. Required unless `voice` is provided.
      * @param Resemble|ResembleShape $resemble resemble AI provider-specific parameters
+     * @param Soniox|SonioxShape $soniox Soniox provider-specific parameters. Every voice speaks all supported languages; set `language` to the language of the text.
      * @param Telnyx|TelnyxShape $telnyx Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
      * @param string $text the text to convert to speech
      * @param TextType|value-of<TextType> $textType Text type. Use `ssml` for SSML-formatted input (supported by AWS and Azure).
@@ -96,6 +99,7 @@ final class TextToSpeechService implements TextToSpeechContract
         OutputType|string $outputType = 'binary_output',
         Provider|string|null $provider = null,
         Resemble|array|null $resemble = null,
+        Soniox|array|null $soniox = null,
         Telnyx|array|null $telnyx = null,
         ?string $text = null,
         TextType|string|null $textType = null,
@@ -116,6 +120,7 @@ final class TextToSpeechService implements TextToSpeechContract
                 'outputType' => $outputType,
                 'provider' => $provider ?? Omitted::VALUE,
                 'resemble' => $resemble ?? Omitted::VALUE,
+                'soniox' => $soniox ?? Omitted::VALUE,
                 'telnyx' => $telnyx ?? Omitted::VALUE,
                 'text' => $text ?? Omitted::VALUE,
                 'textType' => $textType ?? Omitted::VALUE,
@@ -169,7 +174,7 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * Open a WebSocket connection to stream text and receive synthesized audio in real time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header. Send JSON frames with text to synthesize; receive JSON frames containing base64-encoded audio chunks.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `minimax`, `resemble`, `elevenlabs`, `xai`, `humain`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `minimax`, `resemble`, `elevenlabs`, `xai`, `humain`, `soniox`.
      *
      * **Connection flow:**
      * 1. Open WebSocket with query parameters specifying provider, voice, and model.

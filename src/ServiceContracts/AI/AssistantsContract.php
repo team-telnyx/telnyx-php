@@ -18,6 +18,7 @@ use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings;
+use Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\ObservabilityReq;
@@ -25,7 +26,6 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -47,7 +47,7 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -87,7 +87,7 @@ interface AssistantsContract
      * @param list<string> $toolIDs Body param: IDs of shared tools to attach to the assistant. New integrations should prefer `tool_ids` over inline `tools`.
      * @param list<AssistantToolShape> $tools Body param: Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints.
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription Body param
-     * @param VoiceSettings|VoiceSettingsShape $voiceSettings Body param
+     * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape $voiceSettings Body param
      * @param WidgetSettings|WidgetSettingsShape $widgetSettings body param: Configuration settings for the assistant's web widget
      * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
@@ -122,7 +122,7 @@ interface AssistantsContract
         ?array $toolIDs = null,
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
-        VoiceSettings|array|null $voiceSettings = null,
+        InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
@@ -184,7 +184,7 @@ interface AssistantsContract
      * @param list<AssistantToolShape> $tools Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints. On update, a sent `tools` array fully replaces the assistant's inline tools; omit the field to leave the inline tools unchanged. Each tool type except `function`, `webhook`, and `client_side_tool` allows at most one instance per assistant, counted across inline `tools` and shared `tool_ids` combined — sending a duplicate of such a type returns HTTP 400 with error code 10015. Responses merge shared tools into `tools` with `shared: true`; when updating, omit those tools from the `tools` array and manage them through `tool_ids` instead.
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
      * @param string $versionName human-readable name for the assistant version
-     * @param VoiceSettings|VoiceSettingsShape $voiceSettings
+     * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape $voiceSettings
      * @param WidgetSettings|WidgetSettingsShape $widgetSettings configuration settings for the assistant's web widget
      * @param RequestOpts|null $requestOptions
      *
@@ -221,7 +221,7 @@ interface AssistantsContract
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         string $versionName = 'New assistant',
-        VoiceSettings|array|null $voiceSettings = null,
+        InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding;

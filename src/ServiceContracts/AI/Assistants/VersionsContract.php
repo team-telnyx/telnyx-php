@@ -14,6 +14,7 @@ use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings;
+use Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\ObservabilityReq;
@@ -21,7 +22,6 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -42,7 +42,7 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -102,7 +102,7 @@ interface VersionsContract
      * @param list<AssistantToolShape> $tools Body param: Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints. On update, a sent `tools` array fully replaces the assistant's inline tools; omit the field to leave the inline tools unchanged. Each tool type except `function`, `webhook`, and `client_side_tool` allows at most one instance per assistant, counted across inline `tools` and shared `tool_ids` combined — sending a duplicate of such a type returns HTTP 400 with error code 10015. Responses merge shared tools into `tools` with `shared: true`; when updating, omit those tools from the `tools` array and manage them through `tool_ids` instead.
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription Body param
      * @param string $versionName body param: Human-readable name for the assistant version
-     * @param VoiceSettings|VoiceSettingsShape $voiceSettings Body param
+     * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape $voiceSettings Body param
      * @param WidgetSettings|WidgetSettingsShape $widgetSettings body param: Configuration settings for the assistant's web widget
      * @param RequestOpts|null $requestOptions
      *
@@ -139,7 +139,7 @@ interface VersionsContract
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         string $versionName = 'New assistant',
-        VoiceSettings|array|null $voiceSettings = null,
+        InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding;

@@ -14,6 +14,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Soniox;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\TextType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
@@ -28,6 +29,7 @@ use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
  * @phpstan-import-type HumainShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain
  * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble
+ * @phpstan-import-type SonioxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Soniox
  * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx
  * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -47,6 +49,7 @@ interface TextToSpeechContract
      * @param OutputType|value-of<OutputType> $outputType Determines the response format. `binary_output` returns raw audio bytes, `base64_output` returns base64-encoded audio in JSON.
      * @param Provider|value-of<Provider> $provider TTS provider. Required unless `voice` is provided.
      * @param Resemble|ResembleShape $resemble resemble AI provider-specific parameters
+     * @param Soniox|SonioxShape $soniox Soniox provider-specific parameters. Every voice speaks all supported languages; set `language` to the language of the text.
      * @param Telnyx|TelnyxShape $telnyx Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
      * @param string $text the text to convert to speech
      * @param TextType|value-of<TextType> $textType Text type. Use `ssml` for SSML-formatted input (supported by AWS and Azure).
@@ -68,6 +71,7 @@ interface TextToSpeechContract
         OutputType|string $outputType = 'binary_output',
         Provider|string|null $provider = null,
         Resemble|array|null $resemble = null,
+        Soniox|array|null $soniox = null,
         Telnyx|array|null $telnyx = null,
         ?string $text = null,
         TextType|string|null $textType = null,

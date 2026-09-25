@@ -16,6 +16,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Soniox;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\TextType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
@@ -27,7 +28,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
  *
  * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
  *
- * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`.
+ * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`, `soniox`.
  *
  * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
  *
@@ -39,6 +40,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
  * @phpstan-import-type HumainShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain
  * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble
+ * @phpstan-import-type SonioxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Soniox
  * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx
  * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai
  *
@@ -53,6 +55,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
  *   outputType?: null|OutputType|value-of<OutputType>,
  *   provider?: null|Provider|value-of<Provider>,
  *   resemble?: null|Resemble|ResembleShape,
+ *   soniox?: null|Soniox|SonioxShape,
  *   telnyx?: null|Telnyx|TelnyxShape,
  *   text?: string|null,
  *   textType?: null|TextType|value-of<TextType>,
@@ -132,6 +135,12 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     public ?Resemble $resemble;
 
     /**
+     * Soniox provider-specific parameters. Every voice speaks all supported languages; set `language` to the language of the text.
+     */
+    #[Optional]
+    public ?Soniox $soniox;
+
+    /**
      * Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
      */
     #[Optional]
@@ -189,6 +198,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
      * @param OutputType|value-of<OutputType>|null $outputType
      * @param Provider|value-of<Provider>|null $provider
      * @param Resemble|ResembleShape|null $resemble
+     * @param Soniox|SonioxShape|null $soniox
      * @param Telnyx|TelnyxShape|null $telnyx
      * @param TextType|value-of<TextType>|null $textType
      * @param array<string,mixed>|null $voiceSettings
@@ -205,6 +215,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
         OutputType|string|null $outputType = null,
         Provider|string|null $provider = null,
         Resemble|array|null $resemble = null,
+        Soniox|array|null $soniox = null,
         Telnyx|array|null $telnyx = null,
         ?string $text = null,
         TextType|string|null $textType = null,
@@ -224,6 +235,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
         null !== $outputType && $self['outputType'] = $outputType;
         null !== $provider && $self['provider'] = $provider;
         null !== $resemble && $self['resemble'] = $resemble;
+        null !== $soniox && $self['soniox'] = $soniox;
         null !== $telnyx && $self['telnyx'] = $telnyx;
         null !== $text && $self['text'] = $text;
         null !== $textType && $self['textType'] = $textType;
@@ -356,6 +368,19 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     {
         $self = clone $this;
         $self['resemble'] = $resemble;
+
+        return $self;
+    }
+
+    /**
+     * Soniox provider-specific parameters. Every voice speaks all supported languages; set `language` to the language of the text.
+     *
+     * @param Soniox|SonioxShape $soniox
+     */
+    public function withSoniox(Soniox|array $soniox): self
+    {
+        $self = clone $this;
+        $self['soniox'] = $soniox;
 
         return $self;
     }

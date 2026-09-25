@@ -25,6 +25,7 @@ use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings;
+use Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\ObservabilityReq;
@@ -32,7 +33,6 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -60,7 +60,7 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -105,7 +105,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   toolIDs?: list<string>,
      *   tools?: list<AssistantToolShape>,
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
-     *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
+     *   voiceSettings?: InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape,
      *   widgetSettings?: WidgetSettings|WidgetSettingsShape,
      *   idempotencyKey?: string,
      * }|AssistantCreateParams $params
@@ -222,7 +222,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   tools?: list<AssistantToolShape>,
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
      *   versionName?: string,
-     *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
+     *   voiceSettings?: InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape,
      *   widgetSettings?: WidgetSettings|WidgetSettingsShape,
      * }|AssistantUpdateParams $params
      * @param RequestOpts|null $requestOptions

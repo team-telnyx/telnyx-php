@@ -19,6 +19,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Soniox;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\TextType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
@@ -37,6 +38,7 @@ use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
  * @phpstan-import-type HumainShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain
  * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble
+ * @phpstan-import-type SonioxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Soniox
  * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx
  * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -58,7 +60,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *
      * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`, `soniox`.
      *
      * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
      *
@@ -71,8 +73,9 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *   language?: string,
      *   minimax?: Minimax|MinimaxShape,
      *   outputType?: OutputType|value-of<OutputType>,
-     *   provider?: Provider|value-of<Provider>,
+     *   provider?: value-of<Provider>,
      *   resemble?: Resemble|ResembleShape,
+     *   soniox?: Soniox|SonioxShape,
      *   telnyx?: Telnyx|TelnyxShape,
      *   text?: string,
      *   textType?: TextType|value-of<TextType>,
@@ -114,7 +117,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *
      * @param array{
      *   apiKey?: string,
-     *   provider?: TextToSpeechListVoicesParams\Provider|value-of<TextToSpeechListVoicesParams\Provider>,
+     *   provider?: value-of<TextToSpeechListVoicesParams\Provider>,
      * }|TextToSpeechListVoicesParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -146,7 +149,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *
      * Open a WebSocket connection to stream text and receive synthesized audio in real time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header. Send JSON frames with text to synthesize; receive JSON frames containing base64-encoded audio chunks.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `minimax`, `resemble`, `elevenlabs`, `xai`, `humain`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `minimax`, `resemble`, `elevenlabs`, `xai`, `humain`, `soniox`.
      *
      * **Connection flow:**
      * 1. Open WebSocket with query parameters specifying provider, voice, and model.
@@ -163,7 +166,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *   audioFormat?: AudioFormat|value-of<AudioFormat>,
      *   disableCache?: bool,
      *   modelID?: string,
-     *   provider?: TextToSpeechRetrieveSpeechParams\Provider|value-of<TextToSpeechRetrieveSpeechParams\Provider>,
+     *   provider?: value-of<TextToSpeechRetrieveSpeechParams\Provider>,
      *   socketID?: string,
      *   voice?: string,
      *   voiceID?: string,
