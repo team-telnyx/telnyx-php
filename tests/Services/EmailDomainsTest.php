@@ -12,6 +12,7 @@ use Telnyx\EmailDomains\EmailDomain;
 use Telnyx\EmailDomains\EmailDomainGetDNSRecordsResponse;
 use Telnyx\EmailDomains\EmailDomainGetHealthResponse;
 use Telnyx\EmailDomains\EmailDomainResponse;
+use Telnyx\EmailDomains\EmailDomainRotateDkimResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -158,6 +159,21 @@ final class EmailDomainsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(EmailDomainGetHealthResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRotateDkim(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->emailDomains->rotateDkim(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EmailDomainRotateDkimResponse::class, $result);
     }
 
     #[Test]

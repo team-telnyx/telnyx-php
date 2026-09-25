@@ -11,6 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type ConfigShape = array{
  *   bargeIn: bool,
+ *   chatOnEnter: string|null,
  *   speakOnEnter: string|null,
  *   summarizeOnEnd: bool,
  *   voice: string|null,
@@ -26,6 +27,12 @@ final class Config implements BaseModel
      */
     #[Required('barge_in')]
     public bool $bargeIn;
+
+    /**
+     * The message posted to chat on join, or null when unset.
+     */
+    #[Required('chat_on_enter')]
+    public ?string $chatOnEnter;
 
     /**
      * Text spoken on meeting entry, or null if not set.
@@ -50,7 +57,13 @@ final class Config implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Config::with(bargeIn: ..., speakOnEnter: ..., summarizeOnEnd: ..., voice: ...)
+     * Config::with(
+     *   bargeIn: ...,
+     *   chatOnEnter: ...,
+     *   speakOnEnter: ...,
+     *   summarizeOnEnd: ...,
+     *   voice: ...,
+     * )
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -58,6 +71,7 @@ final class Config implements BaseModel
      * ```
      * (new Config)
      *   ->withBargeIn(...)
+     *   ->withChatOnEnter(...)
      *   ->withSpeakOnEnter(...)
      *   ->withSummarizeOnEnd(...)
      *   ->withVoice(...)
@@ -75,13 +89,15 @@ final class Config implements BaseModel
      */
     public static function with(
         bool $bargeIn,
+        ?string $chatOnEnter,
         ?string $speakOnEnter,
         bool $summarizeOnEnd,
-        ?string $voice
+        ?string $voice,
     ): self {
         $self = new self;
 
         $self['bargeIn'] = $bargeIn;
+        $self['chatOnEnter'] = $chatOnEnter;
         $self['speakOnEnter'] = $speakOnEnter;
         $self['summarizeOnEnd'] = $summarizeOnEnd;
         $self['voice'] = $voice;
@@ -96,6 +112,17 @@ final class Config implements BaseModel
     {
         $self = clone $this;
         $self['bargeIn'] = $bargeIn;
+
+        return $self;
+    }
+
+    /**
+     * The message posted to chat on join, or null when unset.
+     */
+    public function withChatOnEnter(?string $chatOnEnter): self
+    {
+        $self = clone $this;
+        $self['chatOnEnter'] = $chatOnEnter;
 
         return $self;
     }

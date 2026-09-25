@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Typesafe\V1;
 
 use Telnyx\AI\Typesafe\V1\V1SystemoneResponse\Answer;
+use Telnyx\AI\Typesafe\V1\V1SystemoneResponse\Model;
 use Telnyx\AI\Typesafe\V1\V1SystemoneResponse\Usage;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -18,7 +19,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type UsageShape from \Telnyx\AI\Typesafe\V1\V1SystemoneResponse\Usage
  *
  * @phpstan-type V1SystemoneResponseShape = array{
- *   answers: array<string,AnswerShape>, model: string, usage: Usage|UsageShape
+ *   answers: array<string,AnswerShape>,
+ *   model: Model|value-of<Model>,
+ *   usage: Usage|UsageShape,
  * }
  */
 final class V1SystemoneResponse implements BaseModel
@@ -35,9 +38,11 @@ final class V1SystemoneResponse implements BaseModel
     public array $answers;
 
     /**
-     * Opaque Telnyx-controlled identifier retained for TypeSafe SDK response compatibility. It is not a selectable model name or a guarantee of a particular underlying model.
+     * Public model alias used to evaluate the request. Returns telnyx/decision-flash when model was omitted. The underlying model is managed by Telnyx.
+     *
+     * @var value-of<Model> $model
      */
-    #[Required]
+    #[Required(enum: Model::class)]
     public string $model;
 
     /**
@@ -71,11 +76,12 @@ final class V1SystemoneResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param array<string,AnswerShape> $answers
+     * @param Model|value-of<Model> $model
      * @param Usage|UsageShape $usage
      */
     public static function with(
         array $answers,
-        string $model,
+        Model|string $model,
         Usage|array $usage
     ): self {
         $self = new self;
@@ -101,9 +107,11 @@ final class V1SystemoneResponse implements BaseModel
     }
 
     /**
-     * Opaque Telnyx-controlled identifier retained for TypeSafe SDK response compatibility. It is not a selectable model name or a guarantee of a particular underlying model.
+     * Public model alias used to evaluate the request. Returns telnyx/decision-flash when model was omitted. The underlying model is managed by Telnyx.
+     *
+     * @param Model|value-of<Model> $model
      */
-    public function withModel(string $model): self
+    public function withModel(Model|string $model): self
     {
         $self = clone $this;
         $self['model'] = $model;

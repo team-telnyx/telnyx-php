@@ -21,7 +21,7 @@ use Telnyx\Core\Conversion\ListOf;
  * @phpstan-import-type NodePositionShape from \Telnyx\AI\Assistants\NodePosition
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
  *
  * @phpstan-type FlowNodeShape = array{
  *   id: string,
@@ -37,7 +37,7 @@ use Telnyx\Core\Conversion\ListOf;
  *   toolsMode?: null|ToolsMode|value-of<ToolsMode>,
  *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
  *   type?: null|Type|value-of<Type>,
- *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
+ *   voiceSettings?: null|InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape,
  * }
  */
 final class FlowNode implements BaseModel
@@ -137,7 +137,7 @@ final class FlowNode implements BaseModel
      * Per-node voice override (response form).
      */
     #[Optional('voice_settings')]
-    public ?VoiceSettings $voiceSettings;
+    public ?InferenceEmbeddingVoiceSettings $voiceSettings;
 
     /**
      * `new FlowNode()` is missing required properties by the API.
@@ -171,7 +171,7 @@ final class FlowNode implements BaseModel
      * @param ToolsMode|value-of<ToolsMode>|null $toolsMode
      * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
      * @param Type|value-of<Type>|null $type
-     * @param VoiceSettings|VoiceSettingsShape|null $voiceSettings
+     * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         string $id,
@@ -187,7 +187,7 @@ final class FlowNode implements BaseModel
         ToolsMode|string|null $toolsMode = null,
         TranscriptionSettings|array|null $transcription = null,
         Type|string|null $type = null,
-        VoiceSettings|array|null $voiceSettings = null,
+        InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
     ): self {
         $self = new self;
 
@@ -374,10 +374,11 @@ final class FlowNode implements BaseModel
     /**
      * Per-node voice override (response form).
      *
-     * @param VoiceSettings|VoiceSettingsShape $voiceSettings
+     * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape $voiceSettings
      */
-    public function withVoiceSettings(VoiceSettings|array $voiceSettings): self
-    {
+    public function withVoiceSettings(
+        InferenceEmbeddingVoiceSettings|array $voiceSettings
+    ): self {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;
 

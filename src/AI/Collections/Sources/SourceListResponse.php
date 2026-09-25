@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type SourceShape from \Telnyx\AI\Collections\Sources\Source
+ * @phpstan-import-type CollectionsSourceShape from \Telnyx\AI\Collections\Sources\CollectionsSource
  *
  * @phpstan-type SourceListResponseShape = array{
- *   data?: list<Source|SourceShape>|null
+ *   data?: list<CollectionsSource|CollectionsSourceShape>|null
  * }
  */
 final class SourceListResponse implements BaseModel
@@ -20,8 +20,8 @@ final class SourceListResponse implements BaseModel
     /** @use SdkModel<SourceListResponseShape> */
     use SdkModel;
 
-    /** @var list<Source>|null $data */
-    #[Optional(list: Source::class)]
+    /** @var list<CollectionsSource>|null $data */
+    #[Optional(list: CollectionsSource::class)]
     public ?array $data;
 
     public function __construct()
@@ -34,7 +34,7 @@ final class SourceListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Source|SourceShape>|null $data
+     * @param list<CollectionsSource|CollectionsSourceShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -46,7 +46,7 @@ final class SourceListResponse implements BaseModel
     }
 
     /**
-     * @param list<Source|SourceShape> $data
+     * @param list<CollectionsSource|CollectionsSourceShape> $data
      */
     public function withData(array $data): self
     {

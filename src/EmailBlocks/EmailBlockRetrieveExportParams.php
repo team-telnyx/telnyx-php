@@ -23,9 +23,12 @@ use Telnyx\EmailBlocks\EmailBlockRetrieveExportParams\Sort;
  * `ORDER BY created_at ASC, id ASC` with no pagination.
  *
  * CSV columns: `id,to,from,reason,source,scope,status,domain_id,
- * created_at,updated_at,expires_at,group_id`. The CSV carries the
- * `group_id` column so group-scoped suppressions' group link survives
- * the export (empty for account-scope rows).
+ * created_at,updated_at,expires_at,group_id,bounce_category,dsn_code,
+ * meta` (15 columns). The first 12 columns are the stable native
+ * signature; `bounce_category`, `dsn_code`, and `meta` are optional
+ * backup fields (empty when unset). The CSV carries the `group_id`
+ * column so group-scoped suppressions' group link survives the
+ * export (empty for account-scope rows).
  *
  * @see Telnyx\Services\EmailBlocksService::retrieveExport()
  *

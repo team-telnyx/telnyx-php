@@ -59,10 +59,11 @@ final class MeetingSessionsTest extends TestCase
             meetingURL: 'https://zoom.us/j/1234567890',
             assistant: [
                 'id' => 'asst_fake-uuid-1234',
-                'callControlConnectionID' => 'conn-fake-abcdef',
-                'from' => '+12025550199',
-                'loopbackSipUri' => 'sip:loopback@example.invalid',
                 'audioGate' => 'half_duplex',
+                'dynamicVariables' => [
+                    'candidate_name' => 'Ada Lovelace', 'role' => 'Staff Engineer',
+                ],
+                'leaveOnEnd' => true,
             ],
             avatar: [
                 'apiKey' => 'fake_avatar_api_key_do_not_use',
@@ -75,6 +76,7 @@ final class MeetingSessionsTest extends TestCase
                 'base64Data' => '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/wAALCAACAAIBAREA/8QAFAABAAAAAAAAAAAAAAAAAAAACP/EAB4QAAAEBwAAAAAAAAAAAAAAAAAEBgcCFic1RVNi/9oACAEBAAA/AH8hGJbWR09TxKW4vhC2qHgf/9k=',
                 'format' => 'jpeg',
             ],
+            chatOnEnter: 'x',
             idempotencyKey: 'x',
             joinAt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
             metadata: ['foo' => 'bar'],

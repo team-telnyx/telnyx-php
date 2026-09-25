@@ -25,6 +25,7 @@ use Telnyx\Services\AI\FineTuningService;
 use Telnyx\Services\AI\IntegrationsService;
 use Telnyx\Services\AI\KnowledgeService;
 use Telnyx\Services\AI\McpServersService;
+use Telnyx\Services\AI\MemoryService;
 use Telnyx\Services\AI\MissionsService;
 use Telnyx\Services\AI\OpenAIService;
 use Telnyx\Services\AI\ToolsService;
@@ -121,6 +122,11 @@ final class AIService implements AIContract
     public TypesafeService $typesafe;
 
     /**
+     * @api
+     */
+    public MemoryService $memory;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -142,6 +148,7 @@ final class AIService implements AIContract
         $this->anthropic = new AnthropicService($client);
         $this->knowledge = new KnowledgeService($client);
         $this->typesafe = new TypesafeService($client);
+        $this->memory = new MemoryService($client);
     }
 
     /**

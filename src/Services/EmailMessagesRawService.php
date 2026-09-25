@@ -17,9 +17,10 @@ use Telnyx\EmailMessages\EmailMessageBatchParams\Message;
 use Telnyx\EmailMessages\EmailMessageBatchResponse;
 use Telnyx\EmailMessages\EmailMessageCreateParams;
 use Telnyx\EmailMessages\EmailMessageDeleteAllParams;
-use Telnyx\EmailMessages\EmailMessageGetResponse;
+use Telnyx\EmailMessages\EmailMessageDetailResponse;
 use Telnyx\EmailMessages\EmailMessageListParams;
 use Telnyx\EmailMessages\EmailMessageRetrieveEventsParams;
+use Telnyx\EmailMessages\EmailMessageUpdateScheduleParams;
 use Telnyx\EmailMessages\MessageEvent;
 use Telnyx\EmailMessages\TrackingSettings;
 use Telnyx\RequestOptions;
@@ -123,7 +124,7 @@ final class EmailMessagesRawService implements EmailMessagesRawContract
      * @param string $id email message UUID
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailMessageGetResponse>
+     * @return BaseResponse<EmailMessageDetailResponse>
      *
      * @throws APIException
      */
@@ -136,18 +137,21 @@ final class EmailMessagesRawService implements EmailMessagesRawContract
             method: 'get',
             path: ['email_messages/%1$s', $id],
             options: $requestOptions,
-            convert: EmailMessageGetResponse::class,
+            convert: EmailMessageDetailResponse::class,
         );
     }
 
     /**
      * @api
      *
-     * Lists messages sorted newest first by `created_at desc, id desc`. No filters other than
-     * cursor pagination are implemented. The legacy `/v2/emails` GET route is a backward-compatible
-     * alias for this operation.
+     * Lists messages sorted newest first by `created_at desc, id desc`. Tags and metadata filters compose with cursor pagination. The legacy `/v2/emails` GET route is a backward-compatible alias for this operation.
      *
-     * @param array{pageCursor?: string, pageSize?: int}|EmailMessageListParams $params
+     * @param array{
+     *   filterMetadata?: string,
+     *   filterTags?: string,
+     *   pageCursor?: string,
+     *   pageSize?: int,
+     * }|EmailMessageListParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmailCursorPagination<EmailMessage>>
@@ -169,7 +173,12 @@ final class EmailMessagesRawService implements EmailMessagesRawContract
             path: 'email_messages',
             query: Util::array_transform_keys(
                 $parsed,
-                ['pageCursor' => 'page_cursor', 'pageSize' => 'page_size']
+                [
+                    'filterMetadata' => 'filter[metadata]',
+                    'filterTags' => 'filter[tags]',
+                    'pageCursor' => 'page_cursor',
+                    'pageSize' => 'page_size',
+                ],
             ),
             options: $options,
             convert: EmailMessage::class,
@@ -208,7 +217,7 @@ final class EmailMessagesRawService implements EmailMessagesRawContract
     /**
      * @api
      *
-     * Creates up to 1,000 email messages in a single request. Request-wide admission checks run first and can reject the whole batch before message creation. After those checks pass, each message is validated and sent independently; item-level failures do not affect other messages, and the processed batch returns 207 Multi-Status.
+     * Creates up to 1,000 email messages in a single request. Request-wide admission checks run first and can reject the whole batch before message creation. After those checks pass, each message is validated and sent independently; item-level failures do not affect other messages, and the processed batch returns 207 Multi-Status. Per-message failures include validation errors; when a template has `strict_variables` enabled, a missing required variable produces a per-item `unprocessable_entity` error naming that variable while the other messages continue.
      *
      * @param array{
      *   messages: list<Message|MessageShape>,
@@ -314,6 +323,16 @@ final class EmailMessagesRawService implements EmailMessagesRawContract
      * Lists events for a single message sorted oldest first by `occurred_at asc, id asc`.
      * The legacy `/v2/emails/{id}/events` GET route is a backward-compatible alias.
      *
+     * For compatibility, each event carries the legacy
+     * customer-visible `event_type` (`email.`-prefixed), the additive
+     * `canonical_event_type` (`email.`-prefixed), and the deprecated
+     * `type` duplicate — whose value keeps the exact legacy format:
+     * the bare stored event name, never `email.`-prefixed. Gateway
+     * rejections render `email.failed` + canonical `email.gw_reject`; MTA
+     * expirations render `email.bounced` + canonical `email.expired`;
+     * every unchanged outcome carries identical `event_type` and
+     * `canonical_event_type` values (and `type` keeps the stored name).
+     *
      * @param string $emailID email message UUID
      * @param array{
      *   pageCursor?: string, pageSize?: int
@@ -345,6 +364,41 @@ final class EmailMessagesRawService implements EmailMessagesRawContract
             options: $options,
             convert: MessageEvent::class,
             page: EmailCursorPagination::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Moves an existing scheduled email to a new future send time. Only the delivery time (`scheduled_at`) changes; the message ID, content, recipients, tags, and metadata remain unchanged. Returns `409 Conflict` if the message is no longer scheduled or its scheduled-send worker has already started processing it. This route emits no dedicated `rescheduled` event.
+     *
+     * @param string $emailID email message UUID
+     * @param array{
+     *   scheduledAt: \DateTimeInterface
+     * }|EmailMessageUpdateScheduleParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<EmailMessageDetailResponse>
+     *
+     * @throws APIException
+     */
+    public function updateSchedule(
+        string $emailID,
+        array|EmailMessageUpdateScheduleParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = EmailMessageUpdateScheduleParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'patch',
+            path: ['email_messages/%1$s/schedule', $emailID],
+            body: (object) $parsed,
+            options: $options,
+            convert: EmailMessageDetailResponse::class,
         );
     }
 }

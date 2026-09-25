@@ -89,6 +89,12 @@ final class EmailBlock implements BaseModel
     #[Optional('domain_id', nullable: true)]
     public ?string $domainID;
 
+    /**
+     * Optional expiration time. An active row stops matching
+     * send-time suppression checks as soon as `expires_at <= now()`.
+     * A maintenance worker later transitions the row to `status: expired`
+     * and appends an `expired` audit event (normally within 15 minutes).
+     */
     #[Optional('expires_at', nullable: true)]
     public ?\DateTimeInterface $expiresAt;
 
@@ -293,6 +299,12 @@ final class EmailBlock implements BaseModel
         return $self;
     }
 
+    /**
+     * Optional expiration time. An active row stops matching
+     * send-time suppression checks as soon as `expires_at <= now()`.
+     * A maintenance worker later transitions the row to `status: expired`
+     * and appends an `expired` audit event (normally within 15 minutes).
+     */
     public function withExpiresAt(?\DateTimeInterface $expiresAt): self
     {
         $self = clone $this;

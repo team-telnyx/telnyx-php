@@ -10,11 +10,12 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type SourceShape from \Telnyx\AI\Collections\Sources\Source
+ * @phpstan-import-type CollectionsSourceShape from \Telnyx\AI\Collections\Sources\CollectionsSource
  * @phpstan-import-type MetaShape from \Telnyx\AI\Collections\Sources\SourceReplaceResponse\Meta
  *
  * @phpstan-type SourceReplaceResponseShape = array{
- *   data?: list<Source|SourceShape>|null, meta?: null|Meta|MetaShape
+ *   data?: list<CollectionsSource|CollectionsSourceShape>|null,
+ *   meta?: null|Meta|MetaShape,
  * }
  */
 final class SourceReplaceResponse implements BaseModel
@@ -22,8 +23,8 @@ final class SourceReplaceResponse implements BaseModel
     /** @use SdkModel<SourceReplaceResponseShape> */
     use SdkModel;
 
-    /** @var list<Source>|null $data */
-    #[Optional(list: Source::class)]
+    /** @var list<CollectionsSource>|null $data */
+    #[Optional(list: CollectionsSource::class)]
     public ?array $data;
 
     /**
@@ -42,7 +43,7 @@ final class SourceReplaceResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Source|SourceShape>|null $data
+     * @param list<CollectionsSource|CollectionsSourceShape>|null $data
      * @param Meta|MetaShape|null $meta
      */
     public static function with(
@@ -58,7 +59,7 @@ final class SourceReplaceResponse implements BaseModel
     }
 
     /**
-     * @param list<Source|SourceShape> $data
+     * @param list<CollectionsSource|CollectionsSourceShape> $data
      */
     public function withData(array $data): self
     {

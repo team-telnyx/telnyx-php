@@ -8,10 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\PrivateWirelessGateways\PrivateWirelessGateway;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayDeleteResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayGetResponse;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayNewResponse;
+use Telnyx\PrivateWirelessGateways\WirelessPrivateWirelessGateway;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -58,6 +58,7 @@ final class PrivateWirelessGatewaysTest extends TestCase
         $result = $this->client->privateWirelessGateways->create(
             name: 'My private wireless gateway',
             networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            addressMode: 'static',
             regionCode: 'dc2',
         );
 
@@ -94,7 +95,7 @@ final class PrivateWirelessGatewaysTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PrivateWirelessGateway::class, $item);
+            $this->assertInstanceOf(WirelessPrivateWirelessGateway::class, $item);
         }
     }
 

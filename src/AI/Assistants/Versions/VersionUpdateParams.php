@@ -13,6 +13,7 @@ use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
 use Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings;
+use Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\ObservabilityReq;
@@ -20,7 +21,6 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -49,7 +49,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  *
  * @phpstan-type VersionUpdateParamsShape = array{
@@ -82,7 +82,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   tools?: list<AssistantToolShape>|null,
  *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
  *   versionName?: string|null,
- *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
+ *   voiceSettings?: null|InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape,
  *   widgetSettings?: null|WidgetSettings|WidgetSettingsShape,
  * }
  */
@@ -250,7 +250,7 @@ final class VersionUpdateParams implements BaseModel
     public ?string $versionName;
 
     #[Optional('voice_settings')]
-    public ?VoiceSettings $voiceSettings;
+    public ?InferenceEmbeddingVoiceSettings $voiceSettings;
 
     /**
      * Configuration settings for the assistant's web widget.
@@ -301,7 +301,7 @@ final class VersionUpdateParams implements BaseModel
      * @param list<string>|null $toolIDs
      * @param list<AssistantToolShape>|null $tools
      * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
-     * @param VoiceSettings|VoiceSettingsShape|null $voiceSettings
+     * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape|null $voiceSettings
      * @param WidgetSettings|WidgetSettingsShape|null $widgetSettings
      */
     public static function with(
@@ -334,7 +334,7 @@ final class VersionUpdateParams implements BaseModel
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         ?string $versionName = null,
-        VoiceSettings|array|null $voiceSettings = null,
+        InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
     ): self {
         $self = new self;
@@ -722,10 +722,11 @@ final class VersionUpdateParams implements BaseModel
     }
 
     /**
-     * @param VoiceSettings|VoiceSettingsShape $voiceSettings
+     * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape $voiceSettings
      */
-    public function withVoiceSettings(VoiceSettings|array $voiceSettings): self
-    {
+    public function withVoiceSettings(
+        InferenceEmbeddingVoiceSettings|array $voiceSettings
+    ): self {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;
 

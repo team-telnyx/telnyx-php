@@ -52,7 +52,7 @@ final class Telnyx implements BaseModel
     public ?float $voiceSpeed;
 
     /**
-     * Volume level for the Ultra model. Range: 0.0 to 2.0.
+     * Volume level for the Ultra model. Telnyx `Ultra` voices accept values from 0.5 to 2.0 — requests outside that range are rejected by the synthesis engine. `KokoroTTS`, `Qwen3TTS`, `Bayan`, and `Sukhan` voices accept the field but do not apply it.
      */
     #[Optional]
     public ?float $volume;
@@ -134,7 +134,7 @@ final class Telnyx implements BaseModel
     }
 
     /**
-     * Volume level for the Ultra model. Range: 0.0 to 2.0.
+     * Volume level for the Ultra model. Telnyx `Ultra` voices accept values from 0.5 to 2.0 — requests outside that range are rejected by the synthesis engine. `KokoroTTS`, `Qwen3TTS`, `Bayan`, and `Sukhan` voices accept the field but do not apply it.
      */
     public function withVolume(float $volume): self
     {
