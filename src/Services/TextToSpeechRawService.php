@@ -17,6 +17,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\TextType;
@@ -26,7 +27,6 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams;
 use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
-use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\Provider;
 
 /**
  * Text to speech streaming command operations.
@@ -71,7 +71,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *   language?: string,
      *   minimax?: Minimax|MinimaxShape,
      *   outputType?: OutputType|value-of<OutputType>,
-     *   provider?: TextToSpeechGenerateSpeechParams\Provider|value-of<TextToSpeechGenerateSpeechParams\Provider>,
+     *   provider?: Provider|value-of<Provider>,
      *   resemble?: Resemble|ResembleShape,
      *   telnyx?: Telnyx|TelnyxShape,
      *   text?: string,
@@ -146,7 +146,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *
      * Open a WebSocket connection to stream text and receive synthesized audio in real time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header. Send JSON frames with text to synthesize; receive JSON frames containing base64-encoded audio chunks.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `resemble`, `elevenlabs`, `xai`, `humain`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `minimax`, `resemble`, `elevenlabs`, `xai`, `humain`.
      *
      * **Connection flow:**
      * 1. Open WebSocket with query parameters specifying provider, voice, and model.
@@ -163,7 +163,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *   audioFormat?: AudioFormat|value-of<AudioFormat>,
      *   disableCache?: bool,
      *   modelID?: string,
-     *   provider?: value-of<Provider>,
+     *   provider?: TextToSpeechRetrieveSpeechParams\Provider|value-of<TextToSpeechRetrieveSpeechParams\Provider>,
      *   socketID?: string,
      *   voice?: string,
      *   voiceID?: string,
