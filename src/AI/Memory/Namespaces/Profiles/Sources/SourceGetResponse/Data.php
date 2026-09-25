@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Collections\Sources;
+namespace Telnyx\AI\Memory\Namespaces\Profiles\Sources\SourceGetResponse;
 
+use Telnyx\AI\Memory\Namespaces\Profiles\Sources\SourceGetResponse\Data\Content;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -11,17 +12,21 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
 
 /**
- * @phpstan-type SourceShape = array{
+ * @phpstan-import-type ContentVariants from \Telnyx\AI\Memory\Namespaces\Profiles\Sources\SourceGetResponse\Data\Content
+ * @phpstan-import-type ContentShape from \Telnyx\AI\Memory\Namespaces\Profiles\Sources\SourceGetResponse\Data\Content
+ *
+ * @phpstan-type DataShape = array{
  *   id: string,
+ *   content: ContentShape,
  *   memoryCount: int,
  *   sessionID: string|null,
  *   createdAt?: string|null,
  *   updatedAt?: string|null,
  * }
  */
-final class Source implements BaseModel
+final class Data implements BaseModel
 {
-    /** @use SdkModel<SourceShape> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
@@ -29,6 +34,14 @@ final class Source implements BaseModel
      */
     #[Required]
     public string $id;
+
+    /**
+     * What was stored, in the shape it was sent: an ingested JSON body as JSON, a string body or a remembered fact as a string. A session ingested before formats were recorded is returned as the text it was stored as.
+     *
+     * @var ContentVariants $content
+     */
+    #[Required(union: Content::class)]
+    public string|float|bool|array $content;
 
     /**
      * Memories extracted from this source. A memory derived from several sources is not counted here.
@@ -55,17 +68,21 @@ final class Source implements BaseModel
     public ?string $updatedAt;
 
     /**
-     * `new Source()` is missing required properties by the API.
+     * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Source::with(id: ..., memoryCount: ..., sessionID: ...)
+     * Data::with(id: ..., content: ..., memoryCount: ..., sessionID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Source)->withID(...)->withMemoryCount(...)->withSessionID(...)
+     * (new Data)
+     *   ->withID(...)
+     *   ->withContent(...)
+     *   ->withMemoryCount(...)
+     *   ->withSessionID(...)
      * ```
      */
     public function __construct()
@@ -77,9 +94,12 @@ final class Source implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ContentShape $content
      */
     public static function with(
         string $id,
+        string|float|bool|array $content,
         int $memoryCount,
         ?string $sessionID,
         string|Omitted|null $createdAt = Omitted::VALUE,
@@ -88,6 +108,7 @@ final class Source implements BaseModel
         $self = new self;
 
         $self['id'] = $id;
+        $self['content'] = $content;
         $self['memoryCount'] = $memoryCount;
         $self['sessionID'] = $sessionID;
 
@@ -104,6 +125,19 @@ final class Source implements BaseModel
     {
         $self = clone $this;
         $self['id'] = $id;
+
+        return $self;
+    }
+
+    /**
+     * What was stored, in the shape it was sent: an ingested JSON body as JSON, a string body or a remembered fact as a string. A session ingested before formats were recorded is returned as the text it was stored as.
+     *
+     * @param ContentShape $content
+     */
+    public function withContent(string|float|bool|array $content): self
+    {
+        $self = clone $this;
+        $self['content'] = $content;
 
         return $self;
     }

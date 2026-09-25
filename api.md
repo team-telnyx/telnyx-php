@@ -538,6 +538,47 @@ Methods:
 
 - <code title="post /ai/typesafe/v1/systemone">$client->ai->typesafe->v1-><a href="./src/Services/AI/Typesafe/V1Service.php">systemone</a>(...$params)</code>
 
+## Memory
+
+### Namespaces
+
+Methods:
+
+- <code title="get /ai/memory/namespaces/{namespace}/operations/{operation_id}">$client->ai->memory->namespaces-><a href="./src/Services/AI/Memory/NamespacesService.php">retrieve</a>(...$params)</code>
+
+#### Profiles
+
+Methods:
+
+- <code title="get /ai/memory/namespaces/{namespace}/profiles">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">list</a>(...$params)</code>
+- <code title="delete /ai/memory/namespaces/{namespace}/profiles/{profile_id}">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">delete</a>(...$params)</code>
+- <code title="post /ai/memory/namespaces/{namespace}/profiles/{profile_id}/ingest">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">ingest</a>(...$params)</code>
+- <code title="post /ai/memory/namespaces/{namespace}/profiles/{profile_id}/recall">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">recall</a>(...$params)</code>
+- <code title="post /ai/memory/namespaces/{namespace}/profiles/{profile_id}/remember">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">remember</a>(...$params)</code>
+- <code title="get /ai/memory/namespaces/{namespace}/profiles/{profile_id}/summary">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">retrieveSummary</a>(...$params)</code>
+
+##### Memories
+
+Methods:
+
+- <code title="get /ai/memory/namespaces/{namespace}/profiles/{profile_id}/memories/{memory_id}">$client->ai->memory->namespaces->profiles->memories-><a href="./src/Services/AI/Memory/Namespaces/Profiles/MemoriesService.php">retrieve</a>(...$params)</code>
+- <code title="get /ai/memory/namespaces/{namespace}/profiles/{profile_id}/memories">$client->ai->memory->namespaces->profiles->memories-><a href="./src/Services/AI/Memory/Namespaces/Profiles/MemoriesService.php">list</a>(...$params)</code>
+
+##### Sources
+
+Methods:
+
+- <code title="get /ai/memory/namespaces/{namespace}/profiles/{profile_id}/sources/{source_id}">$client->ai->memory->namespaces->profiles->sources-><a href="./src/Services/AI/Memory/Namespaces/Profiles/SourcesService.php">retrieve</a>(...$params)</code>
+- <code title="get /ai/memory/namespaces/{namespace}/profiles/{profile_id}/sources">$client->ai->memory->namespaces->profiles->sources-><a href="./src/Services/AI/Memory/Namespaces/Profiles/SourcesService.php">list</a>(...$params)</code>
+- <code title="delete /ai/memory/namespaces/{namespace}/profiles/{profile_id}/sources/{source_id}">$client->ai->memory->namespaces->profiles->sources-><a href="./src/Services/AI/Memory/Namespaces/Profiles/SourcesService.php">delete</a>(...$params)</code>
+
+#### Settings
+
+Methods:
+
+- <code title="get /ai/memory/namespaces/{namespace}/settings">$client->ai->memory->namespaces->settings-><a href="./src/Services/AI/Memory/Namespaces/SettingsService.php">list</a>(...$params)</code>
+- <code title="patch /ai/memory/namespaces/{namespace}/settings">$client->ai->memory->namespaces->settings-><a href="./src/Services/AI/Memory/Namespaces/SettingsService.php">patchAll</a>(...$params)</code>
+
 # AuditEvents
 
 Methods:

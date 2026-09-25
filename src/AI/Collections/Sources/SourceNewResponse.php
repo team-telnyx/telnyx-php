@@ -11,9 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Envelope containing a single collection source.
  *
- * @phpstan-import-type SourceShape from \Telnyx\AI\Collections\Sources\Source
+ * @phpstan-import-type CollectionsSourceShape from \Telnyx\AI\Collections\Sources\CollectionsSource
  *
- * @phpstan-type SourceNewResponseShape = array{data?: null|Source|SourceShape}
+ * @phpstan-type SourceNewResponseShape = array{
+ *   data?: null|CollectionsSource|CollectionsSourceShape
+ * }
  */
 final class SourceNewResponse implements BaseModel
 {
@@ -21,7 +23,7 @@ final class SourceNewResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Source $data;
+    public ?CollectionsSource $data;
 
     public function __construct()
     {
@@ -33,9 +35,9 @@ final class SourceNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Source|SourceShape|null $data
+     * @param CollectionsSource|CollectionsSourceShape|null $data
      */
-    public static function with(Source|array|null $data = null): self
+    public static function with(CollectionsSource|array|null $data = null): self
     {
         $self = new self;
 
@@ -45,9 +47,9 @@ final class SourceNewResponse implements BaseModel
     }
 
     /**
-     * @param Source|SourceShape $data
+     * @param CollectionsSource|CollectionsSourceShape $data
      */
-    public function withData(Source|array $data): self
+    public function withData(CollectionsSource|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
