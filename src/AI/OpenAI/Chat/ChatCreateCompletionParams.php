@@ -19,6 +19,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Chat with a language model. This endpoint is consistent with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and may be used with the OpenAI JS or Python SDK by setting the base URL to `https://api.telnyx.com/v2/ai/openai`.
@@ -120,9 +121,9 @@ final class ChatCreateCompletionParams implements BaseModel
     public ?bool $logprobs;
 
     /**
-     * Maximum number of completion tokens the model should generate.
+     * Maximum number of completion (output) tokens the model may generate per request. Defaults to 8192 when omitted or `null`. Set a higher value to allow longer completions. The model's `max_completion_tokens` metadata (see `GET /ai/models`), when set, caps both the default and any larger explicit value. Reasoning models consume this budget across reasoning and answer tokens combined.
      */
-    #[Optional('max_tokens')]
+    #[Optional('max_tokens', nullable: true)]
     public ?int $maxTokens;
 
     /**
@@ -278,6 +279,7 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     public static function with(
         array $messages,
+        int|Omitted|null $maxTokens = Omitted::VALUE,
         ?string $apiKeyRef = null,
         ?int $bestOf = null,
         ?bool $earlyStopping = null,
@@ -285,7 +287,6 @@ final class ChatCreateCompletionParams implements BaseModel
         ?float $frequencyPenalty = null,
         ?float $lengthPenalty = null,
         ?bool $logprobs = null,
-        ?int $maxTokens = null,
         ?float $minP = null,
         Mode|string|null $mode = null,
         ?string $model = null,
@@ -316,7 +317,7 @@ final class ChatCreateCompletionParams implements BaseModel
         null !== $frequencyPenalty && $self['frequencyPenalty'] = $frequencyPenalty;
         null !== $lengthPenalty && $self['lengthPenalty'] = $lengthPenalty;
         null !== $logprobs && $self['logprobs'] = $logprobs;
-        null !== $maxTokens && $self['maxTokens'] = $maxTokens;
+        Omitted::VALUE !== $maxTokens && $self['maxTokens'] = $maxTokens;
         null !== $minP && $self['minP'] = $minP;
         null !== $mode && $self['mode'] = $mode;
         null !== $model && $self['model'] = $model;
@@ -430,9 +431,9 @@ final class ChatCreateCompletionParams implements BaseModel
     }
 
     /**
-     * Maximum number of completion tokens the model should generate.
+     * Maximum number of completion (output) tokens the model may generate per request. Defaults to 8192 when omitted or `null`. Set a higher value to allow longer completions. The model's `max_completion_tokens` metadata (see `GET /ai/models`), when set, caps both the default and any larger explicit value. Reasoning models consume this budget across reasoning and answer tokens combined.
      */
-    public function withMaxTokens(int $maxTokens): self
+    public function withMaxTokens(?int $maxTokens): self
     {
         $self = clone $this;
         $self['maxTokens'] = $maxTokens;

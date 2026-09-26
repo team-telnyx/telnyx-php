@@ -33,7 +33,7 @@ final class ActionRejectParams implements BaseModel
     use SdkParams;
 
     /**
-     * Cause for call rejection.
+     * Cause for call rejection. The cause sets the SIP response the caller receives: `USER_BUSY` sends 486 User Busy, `CALL_REJECTED` sends 603 Decline, `NOT_FOUND` sends 404 Not Found, and `TEMPORARILY_UNAVAILABLE` sends 480 Temporarily Unavailable.
      *
      * @var value-of<Cause> $cause
      */
@@ -94,7 +94,7 @@ final class ActionRejectParams implements BaseModel
     }
 
     /**
-     * Cause for call rejection.
+     * Cause for call rejection. The cause sets the SIP response the caller receives: `USER_BUSY` sends 486 User Busy, `CALL_REJECTED` sends 603 Decline, `NOT_FOUND` sends 404 Not Found, and `TEMPORARILY_UNAVAILABLE` sends 480 Temporarily Unavailable.
      *
      * @param Cause|value-of<Cause> $cause
      */
