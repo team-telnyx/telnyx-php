@@ -53,7 +53,7 @@ final class ChatService implements ChatContract
      * @param float $frequencyPenalty higher values will penalize the model from repeating the same output tokens
      * @param float $lengthPenalty this is used with `use_beam_search` to prefer shorter or longer completions
      * @param bool $logprobs Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`.
-     * @param int $maxTokens maximum number of completion tokens the model should generate
+     * @param int|Omitted|null $maxTokens Maximum number of completion (output) tokens the model may generate per request. Defaults to 8192 when omitted or `null`. Set a higher value to allow longer completions. The model's `max_completion_tokens` metadata (see `GET /ai/models`), when set, caps both the default and any larger explicit value. Reasoning models consume this budget across reasoning and answer tokens combined.
      * @param float $minP This is an alternative to `top_p` that [many prefer](https://github.com/huggingface/transformers/issues/27670). Must be in [0, 1].
      * @param Mode|value-of<Mode> $mode How strictly `region` is applied. `preferred` (the default when `region` is set) tries that region first and falls back to another when the model cannot be served there, so a request that would have succeeded still succeeds. `strict` pins the request: it is served from that region or it fails with a 422, never redirected to another region. Requires `region`.
      * @param string $model the language model to chat with
@@ -87,7 +87,7 @@ final class ChatService implements ChatContract
         float $frequencyPenalty = 0,
         float $lengthPenalty = 1,
         bool $logprobs = false,
-        ?int $maxTokens = null,
+        int|Omitted|null $maxTokens = Omitted::VALUE,
         ?float $minP = null,
         Mode|string $mode = 'preferred',
         string $model = 'meta-llama/Meta-Llama-3.1-8B-Instruct',
@@ -118,7 +118,7 @@ final class ChatService implements ChatContract
                 'frequencyPenalty' => $frequencyPenalty,
                 'lengthPenalty' => $lengthPenalty,
                 'logprobs' => $logprobs,
-                'maxTokens' => $maxTokens ?? Omitted::VALUE,
+                'maxTokens' => $maxTokens,
                 'minP' => $minP ?? Omitted::VALUE,
                 'mode' => $mode,
                 'model' => $model,

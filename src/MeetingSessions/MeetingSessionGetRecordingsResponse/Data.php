@@ -19,7 +19,7 @@ final class Data implements BaseModel
     use SdkModel;
 
     /**
-     * Expiry timestamp when supplied by the provider, or null. The current adapter returns null.
+     * Expiry timestamp when available, or null. Currently returns null.
      */
     #[Required('expires_at')]
     public ?string $expiresAt;
@@ -72,7 +72,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * Expiry timestamp when supplied by the provider, or null. The current adapter returns null.
+     * Expiry timestamp when available, or null. Currently returns null.
      */
     public function withExpiresAt(?string $expiresAt): self
     {

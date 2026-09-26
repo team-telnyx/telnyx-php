@@ -127,7 +127,7 @@ final class ModelMetadata implements BaseModel
     public ?bool $isVisionSupported;
 
     /**
-     * Maximum number of completion (output) tokens the model will generate per request. `null` if unconstrained beyond `context_length`.
+     * Maximum completion (output) tokens the model may generate per request. This value caps the Chat Completions `max_tokens` default and any larger explicit value on that model. `null` if unconstrained beyond `context_length`.
      */
     #[Optional('max_completion_tokens', nullable: true)]
     public ?int $maxCompletionTokens;
@@ -428,7 +428,7 @@ final class ModelMetadata implements BaseModel
     }
 
     /**
-     * Maximum number of completion (output) tokens the model will generate per request. `null` if unconstrained beyond `context_length`.
+     * Maximum completion (output) tokens the model may generate per request. This value caps the Chat Completions `max_tokens` default and any larger explicit value on that model. `null` if unconstrained beyond `context_length`.
      */
     public function withMaxCompletionTokens(?int $maxCompletionTokens): self
     {
