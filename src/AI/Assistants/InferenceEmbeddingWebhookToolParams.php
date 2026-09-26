@@ -15,7 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type WebhookShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook
  *
  * @phpstan-type InferenceEmbeddingWebhookToolParamsShape = array{
- *   type: Type|value-of<Type>, webhook: Webhook|WebhookShape, shared?: bool|null
+ *   type: Type|value-of<Type>,
+ *   webhook: Webhook|WebhookShape,
+ *   shared?: bool|null,
+ *   timeoutMs?: int|null,
  * }
  */
 final class InferenceEmbeddingWebhookToolParams implements BaseModel
@@ -35,6 +38,12 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      */
     #[Optional]
     public ?bool $shared;
+
+    /**
+     * The maximum number of milliseconds to wait for the webhook to respond before the tool call is aborted. Set this at the tool level, as a sibling of `type` — a `timeout_ms` nested inside the `webhook` object is stored but not applied, and the tool runs at this default instead. Applies when `webhook.async` is false.
+     */
+    #[Optional('timeout_ms')]
+    public ?int $timeoutMs;
 
     /**
      * `new InferenceEmbeddingWebhookToolParams()` is missing required properties by the API.
@@ -66,7 +75,8 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     public static function with(
         Type|string $type,
         Webhook|array $webhook,
-        ?bool $shared = null
+        ?bool $shared = null,
+        ?int $timeoutMs = null,
     ): self {
         $self = new self;
 
@@ -74,6 +84,7 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
         $self['webhook'] = $webhook;
 
         null !== $shared && $self['shared'] = $shared;
+        null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
 
         return $self;
     }
@@ -107,6 +118,17 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     {
         $self = clone $this;
         $self['shared'] = $shared;
+
+        return $self;
+    }
+
+    /**
+     * The maximum number of milliseconds to wait for the webhook to respond before the tool call is aborted. Set this at the tool level, as a sibling of `type` — a `timeout_ms` nested inside the `webhook` object is stored but not applied, and the tool runs at this default instead. Applies when `webhook.async` is false.
+     */
+    public function withTimeoutMs(int $timeoutMs): self
+    {
+        $self = clone $this;
+        $self['timeoutMs'] = $timeoutMs;
 
         return $self;
     }

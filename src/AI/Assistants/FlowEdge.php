@@ -20,8 +20,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * The target is either another node in the same flow (`NodeTarget`) or a
  * different assistant (`AssistantTarget`). Multiple edges may share a
- * `start_node_id`; the runtime evaluates them in the order they're
- * declared and takes the first whose condition is true.
+ * `start_node_id`. On calls, `expression` conditions are evaluated before
+ * the model turn and take precedence over `llm` conditions regardless of
+ * declaration order, while `llm` conditions are offered to the assistant's
+ * model as transition tools and fire when the model selects one. On chat
+ * channels, an `expression` condition that is true when the turn begins
+ * routes before the reply is generated; all conditioned edges that remain
+ * are considered together in declaration order after the reply, and the
+ * first true one wins.
  *
  * @phpstan-import-type ConditionVariants from \Telnyx\AI\Assistants\FlowEdge\Condition
  * @phpstan-import-type TargetVariants from \Telnyx\AI\Assistants\FlowEdge\Target
