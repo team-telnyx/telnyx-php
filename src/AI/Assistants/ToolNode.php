@@ -20,6 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ToolNodeShape = array{
  *   id: string,
  *   sharedToolID: string,
+ *   message?: string|null,
  *   name?: string|null,
  *   position?: null|NodePosition|NodePositionShape,
  *   tool?: list<AssistantToolShape>|null,
@@ -38,10 +39,16 @@ final class ToolNode implements BaseModel
     public string $id;
 
     /**
-     * ID of the single shared (org-level) tool this node executes. When the flow reaches this node the tool runs as a deliberate step (no LLM turn); its outgoing `tool_result` edges then route on the outcome. Arguments are filled from the conversation's dynamic variables by name — a dynamic variable whose name matches one of the tool's parameters supplies that argument. Cross-validated against the org's shared tools on write.
+     * ID of the single shared (org-level) tool this node executes. When the flow reaches this node the tool runs as a deliberate step (no LLM turn); its outgoing `llm` / `expression` edges route the flow on the tool's outcome. Arguments are filled from the conversation's dynamic variables by name — a dynamic variable whose name matches one of the tool's parameters supplies that argument. Cross-validated against the org's shared tools on write.
      */
     #[Required('shared_tool_id')]
     public string $sharedToolID;
+
+    /**
+     * Optional message delivered to the user verbatim immediately before the tool executes — an announcement such as 'One moment while I look that up.' No LLM turn and no customer turn: the message is spoken/sent, then the tool runs, in the same deterministic step. `{{variable}}` placeholders are interpolated from the conversation's dynamic variables (unresolved → empty string); the tool's own result is not yet available when the message is rendered. Omit for a silent tool step.
+     */
+    #[Optional]
+    public ?string $message;
 
     /**
      * Optional human-readable label, displayed in authoring UIs.
@@ -102,6 +109,7 @@ final class ToolNode implements BaseModel
     public static function with(
         string $id,
         string $sharedToolID,
+        ?string $message = null,
         ?string $name = null,
         NodePosition|array|null $position = null,
         ?array $tool = null,
@@ -112,6 +120,7 @@ final class ToolNode implements BaseModel
         $self['id'] = $id;
         $self['sharedToolID'] = $sharedToolID;
 
+        null !== $message && $self['message'] = $message;
         null !== $name && $self['name'] = $name;
         null !== $position && $self['position'] = $position;
         null !== $tool && $self['tool'] = $tool;
@@ -132,12 +141,23 @@ final class ToolNode implements BaseModel
     }
 
     /**
-     * ID of the single shared (org-level) tool this node executes. When the flow reaches this node the tool runs as a deliberate step (no LLM turn); its outgoing `tool_result` edges then route on the outcome. Arguments are filled from the conversation's dynamic variables by name — a dynamic variable whose name matches one of the tool's parameters supplies that argument. Cross-validated against the org's shared tools on write.
+     * ID of the single shared (org-level) tool this node executes. When the flow reaches this node the tool runs as a deliberate step (no LLM turn); its outgoing `llm` / `expression` edges route the flow on the tool's outcome. Arguments are filled from the conversation's dynamic variables by name — a dynamic variable whose name matches one of the tool's parameters supplies that argument. Cross-validated against the org's shared tools on write.
      */
     public function withSharedToolID(string $sharedToolID): self
     {
         $self = clone $this;
         $self['sharedToolID'] = $sharedToolID;
+
+        return $self;
+    }
+
+    /**
+     * Optional message delivered to the user verbatim immediately before the tool executes — an announcement such as 'One moment while I look that up.' No LLM turn and no customer turn: the message is spoken/sent, then the tool runs, in the same deterministic step. `{{variable}}` placeholders are interpolated from the conversation's dynamic variables (unresolved → empty string); the tool's own result is not yet available when the message is rendered. Omit for a silent tool step.
+     */
+    public function withMessage(string $message): self
+    {
+        $self = clone $this;
+        $self['message'] = $message;
 
         return $self;
     }
