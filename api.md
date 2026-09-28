@@ -3228,3 +3228,12 @@ Methods:
 Methods:
 
 - <code title="post /machine-payments/account-credit">$client->machinePayments-><a href="./src/Services/MachinePaymentsService.php">accountCredit</a>(...$params)</code>
+
+# SpendLimits
+
+Methods:
+
+- <code title="post /spend_limits">$client->spendLimits-><a href="./src/Services/SpendLimitsService.php">create</a>(...$params)</code>
+- <code title="patch /spend_limits/{product}">$client->spendLimits-><a href="./src/Services/SpendLimitsService.php">update</a>(...$params)</code>
+- <code title="get /spend_limits">$client->spendLimits-><a href="./src/Services/SpendLimitsService.php">list</a>()</code>
+- <code title="delete /spend_limits/{product}">$client->spendLimits-><a href="./src/Services/SpendLimitsService.php">delete</a>(...$params)</code>
