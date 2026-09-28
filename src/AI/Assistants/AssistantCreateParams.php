@@ -18,6 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
+ * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -32,6 +33,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
+ * @phpstan-import-type WebsocketSettingsShape from \Telnyx\AI\Assistants\WebsocketSettings
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  *
  * @phpstan-type AssistantCreateParamsShape = array{
@@ -39,6 +41,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   name: string,
  *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>|null,
  *   conversationFlow?: null|ConversationFlowReq|ConversationFlowReqShape,
+ *   delegationSettings?: null|DelegationSettings|DelegationSettingsShape,
  *   description?: string|null,
  *   dynamicVariables?: array<string,mixed>|null,
  *   dynamicVariablesWebhookTimeoutMs?: int|null,
@@ -63,6 +66,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   tools?: list<AssistantToolShape>|null,
  *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
  *   voiceSettings?: null|InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape,
+ *   websocketSettings?: null|WebsocketSettings|WebsocketSettingsShape,
  *   widgetSettings?: null|WidgetSettings|WidgetSettingsShape,
  *   idempotencyKey?: string|null,
  * }
@@ -99,6 +103,12 @@ final class AssistantCreateParams implements BaseModel
      */
     #[Optional('conversation_flow')]
     public ?ConversationFlowReq $conversationFlow;
+
+    /**
+     * Splits the conversation between a frontend model that talks to the caller and a backend model that does the work. On the GPT-Live route the frontend model cannot call tools at all — when it needs something done it raises a delegation and waits. On the chat completion route the frontend keeps a single `delegate` tool that returns immediately, so the conversation carries on while the backend works. Either way the backend's answer is spoken as commentary or kept as silent context, depending on `speak_results`. Beta feature.
+     */
+    #[Optional('delegation_settings')]
+    public ?DelegationSettings $delegationSettings;
 
     #[Optional]
     public ?string $description;
@@ -225,6 +235,12 @@ final class AssistantCreateParams implements BaseModel
     public ?InferenceEmbeddingVoiceSettings $voiceSettings;
 
     /**
+     * Streams conversation and telephony events to a WebSocket server you host, and accepts messages injected back into the conversation. Telnyx opens the connection as a client, once per conversation. Delivery is best effort throughout: while the connection is down events are dropped rather than queued, and no socket failure is ever allowed to affect the call. Beta feature.
+     */
+    #[Optional('websocket_settings')]
+    public ?WebsocketSettings $websocketSettings;
+
+    /**
      * Configuration settings for the assistant's web widget.
      */
     #[Optional('widget_settings')]
@@ -259,6 +275,7 @@ final class AssistantCreateParams implements BaseModel
      *
      * @param list<AssistantA2AAgent|AssistantA2AAgentShape>|null $a2aAgents
      * @param ConversationFlowReq|ConversationFlowReqShape|null $conversationFlow
+     * @param DelegationSettings|DelegationSettingsShape|null $delegationSettings
      * @param array<string,mixed>|null $dynamicVariables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
      * @param ExternalLlmReq|ExternalLlmReqShape|null $externalLlm
@@ -277,6 +294,7 @@ final class AssistantCreateParams implements BaseModel
      * @param list<AssistantToolShape>|null $tools
      * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
      * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape|null $voiceSettings
+     * @param WebsocketSettings|WebsocketSettingsShape|null $websocketSettings
      * @param WidgetSettings|WidgetSettingsShape|null $widgetSettings
      */
     public static function with(
@@ -284,6 +302,7 @@ final class AssistantCreateParams implements BaseModel
         string $name,
         ?array $a2aAgents = null,
         ConversationFlowReq|array|null $conversationFlow = null,
+        DelegationSettings|array|null $delegationSettings = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         ?int $dynamicVariablesWebhookTimeoutMs = null,
@@ -308,6 +327,7 @@ final class AssistantCreateParams implements BaseModel
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
+        WebsocketSettings|array|null $websocketSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
         ?string $idempotencyKey = null,
     ): self {
@@ -318,6 +338,7 @@ final class AssistantCreateParams implements BaseModel
 
         null !== $a2aAgents && $self['a2aAgents'] = $a2aAgents;
         null !== $conversationFlow && $self['conversationFlow'] = $conversationFlow;
+        null !== $delegationSettings && $self['delegationSettings'] = $delegationSettings;
         null !== $description && $self['description'] = $description;
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
         null !== $dynamicVariablesWebhookTimeoutMs && $self['dynamicVariablesWebhookTimeoutMs'] = $dynamicVariablesWebhookTimeoutMs;
@@ -342,6 +363,7 @@ final class AssistantCreateParams implements BaseModel
         null !== $tools && $self['tools'] = $tools;
         null !== $transcription && $self['transcription'] = $transcription;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
+        null !== $websocketSettings && $self['websocketSettings'] = $websocketSettings;
         null !== $widgetSettings && $self['widgetSettings'] = $widgetSettings;
         null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
@@ -394,6 +416,20 @@ final class AssistantCreateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['conversationFlow'] = $conversationFlow;
+
+        return $self;
+    }
+
+    /**
+     * Splits the conversation between a frontend model that talks to the caller and a backend model that does the work. On the GPT-Live route the frontend model cannot call tools at all — when it needs something done it raises a delegation and waits. On the chat completion route the frontend keeps a single `delegate` tool that returns immediately, so the conversation carries on while the backend works. Either way the backend's answer is spoken as commentary or kept as silent context, depending on `speak_results`. Beta feature.
+     *
+     * @param DelegationSettings|DelegationSettingsShape $delegationSettings
+     */
+    public function withDelegationSettings(
+        DelegationSettings|array $delegationSettings
+    ): self {
+        $self = clone $this;
+        $self['delegationSettings'] = $delegationSettings;
 
         return $self;
     }
@@ -683,6 +719,20 @@ final class AssistantCreateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;
+
+        return $self;
+    }
+
+    /**
+     * Streams conversation and telephony events to a WebSocket server you host, and accepts messages injected back into the conversation. Telnyx opens the connection as a client, once per conversation. Delivery is best effort throughout: while the connection is down events are dropped rather than queued, and no socket failure is ever allowed to affect the call. Beta feature.
+     *
+     * @param WebsocketSettings|WebsocketSettingsShape $websocketSettings
+     */
+    public function withWebsocketSettings(
+        WebsocketSettings|array $websocketSettings
+    ): self {
+        $self = clone $this;
+        $self['websocketSettings'] = $websocketSettings;
 
         return $self;
     }

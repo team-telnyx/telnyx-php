@@ -20,6 +20,7 @@ use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\AssistantUpdateParams;
 use Telnyx\AI\Assistants\ConversationFlowReq;
+use Telnyx\AI\Assistants\DelegationSettings;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
@@ -33,6 +34,7 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\WebsocketSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -47,6 +49,7 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
+ * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -61,6 +64,7 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
+ * @phpstan-import-type WebsocketSettingsShape from \Telnyx\AI\Assistants\WebsocketSettings
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -82,6 +86,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   name: string,
      *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>,
      *   conversationFlow?: ConversationFlowReq|ConversationFlowReqShape,
+     *   delegationSettings?: DelegationSettings|DelegationSettingsShape,
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookTimeoutMs?: int,
@@ -106,6 +111,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   tools?: list<AssistantToolShape>,
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
      *   voiceSettings?: InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape,
+     *   websocketSettings?: WebsocketSettings|WebsocketSettingsShape,
      *   widgetSettings?: WidgetSettings|WidgetSettingsShape,
      *   idempotencyKey?: string,
      * }|AssistantCreateParams $params
@@ -195,6 +201,7 @@ final class AssistantsRawService implements AssistantsRawContract
      * @param array{
      *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>,
      *   conversationFlow?: ConversationFlowReq|ConversationFlowReqShape,
+     *   delegationSettings?: DelegationSettings|DelegationSettingsShape,
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookTimeoutMs?: int,
@@ -223,6 +230,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
      *   versionName?: string,
      *   voiceSettings?: InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape,
+     *   websocketSettings?: WebsocketSettings|WebsocketSettingsShape,
      *   widgetSettings?: WidgetSettings|WidgetSettingsShape,
      * }|AssistantUpdateParams $params
      * @param RequestOpts|null $requestOptions

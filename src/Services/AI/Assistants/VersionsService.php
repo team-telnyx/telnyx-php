@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\AssistantIntegration;
 use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\ConversationFlowReq;
+use Telnyx\AI\Assistants\DelegationSettings;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
@@ -22,6 +23,7 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\WebsocketSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -34,6 +36,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
  *
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
+ * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -48,6 +51,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
+ * @phpstan-import-type WebsocketSettingsShape from \Telnyx\AI\Assistants\WebsocketSettings
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -111,6 +115,7 @@ final class VersionsService implements VersionsContract
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
      * enforces unique node/edge IDs, that `start_node_id` references a real
      * node, and that every edge's endpoints reference real nodes.
+     * @param DelegationSettings|DelegationSettingsShape $delegationSettings Body param: Splits the conversation between a frontend model that talks to the caller and a backend model that does the work. On the GPT-Live route the frontend model cannot call tools at all — when it needs something done it raises a delegation and waits. On the chat completion route the frontend keeps a single `delegate` tool that returns immediately, so the conversation carries on while the backend works. Either way the backend's answer is spoken as commentary or kept as silent context, depending on `speak_results`. Beta feature.
      * @param string $description Body param
      * @param array<string,mixed> $dynamicVariables Body param: Map of dynamic variables and their default values
      * @param int $dynamicVariablesWebhookTimeoutMs Body param: Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
@@ -138,6 +143,7 @@ final class VersionsService implements VersionsContract
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription Body param
      * @param string $versionName body param: Human-readable name for the assistant version
      * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape $voiceSettings Body param
+     * @param WebsocketSettings|WebsocketSettingsShape $websocketSettings Body param: Streams conversation and telephony events to a WebSocket server you host, and accepts messages injected back into the conversation. Telnyx opens the connection as a client, once per conversation. Delivery is best effort throughout: while the connection is down events are dropped rather than queued, and no socket failure is ever allowed to affect the call. Beta feature.
      * @param WidgetSettings|WidgetSettingsShape $widgetSettings body param: Configuration settings for the assistant's web widget
      * @param RequestOpts|null $requestOptions
      *
@@ -148,6 +154,7 @@ final class VersionsService implements VersionsContract
         string $assistantID,
         ?array $a2aAgents = null,
         ConversationFlowReq|array|null $conversationFlow = null,
+        DelegationSettings|array|null $delegationSettings = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         int $dynamicVariablesWebhookTimeoutMs = 1500,
@@ -175,6 +182,7 @@ final class VersionsService implements VersionsContract
         TranscriptionSettings|array|null $transcription = null,
         string $versionName = 'New assistant',
         InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
+        WebsocketSettings|array|null $websocketSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
@@ -183,6 +191,7 @@ final class VersionsService implements VersionsContract
                 'assistantID' => $assistantID,
                 'a2aAgents' => $a2aAgents ?? Omitted::VALUE,
                 'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
+                'delegationSettings' => $delegationSettings ?? Omitted::VALUE,
                 'description' => $description ?? Omitted::VALUE,
                 'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,
@@ -210,6 +219,7 @@ final class VersionsService implements VersionsContract
                 'transcription' => $transcription ?? Omitted::VALUE,
                 'versionName' => $versionName,
                 'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'websocketSettings' => $websocketSettings ?? Omitted::VALUE,
                 'widgetSettings' => $widgetSettings ?? Omitted::VALUE,
             ],
             static fn ($value) => Omitted::VALUE !== $value,

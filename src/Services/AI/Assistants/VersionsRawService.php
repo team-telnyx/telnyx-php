@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\AssistantIntegration;
 use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\ConversationFlowReq;
+use Telnyx\AI\Assistants\DelegationSettings;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
@@ -26,6 +27,7 @@ use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
 use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
 use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams;
+use Telnyx\AI\Assistants\WebsocketSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -39,6 +41,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
  *
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
+ * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -53,6 +56,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
+ * @phpstan-import-type WebsocketSettingsShape from \Telnyx\AI\Assistants\WebsocketSettings
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -114,6 +118,7 @@ final class VersionsRawService implements VersionsRawContract
      *   assistantID: string,
      *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>,
      *   conversationFlow?: ConversationFlowReq|ConversationFlowReqShape,
+     *   delegationSettings?: DelegationSettings|DelegationSettingsShape,
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookTimeoutMs?: int,
@@ -141,6 +146,7 @@ final class VersionsRawService implements VersionsRawContract
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
      *   versionName?: string,
      *   voiceSettings?: InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape,
+     *   websocketSettings?: WebsocketSettings|WebsocketSettingsShape,
      *   widgetSettings?: WidgetSettings|WidgetSettingsShape,
      * }|VersionUpdateParams $params
      * @param RequestOpts|null $requestOptions

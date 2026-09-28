@@ -13,6 +13,7 @@ use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\ConversationFlowReq;
+use Telnyx\AI\Assistants\DelegationSettings;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
@@ -26,6 +27,7 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\WebsocketSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -46,6 +48,7 @@ use Telnyx\Services\AI\Assistants\VersionsService;
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
+ * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -60,6 +63,7 @@ use Telnyx\Services\AI\Assistants\VersionsService;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
+ * @phpstan-import-type WebsocketSettingsShape from \Telnyx\AI\Assistants\WebsocketSettings
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -133,6 +137,7 @@ final class AssistantsService implements AssistantsContract
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
      * enforces unique node/edge IDs, that `start_node_id` references a real
      * node, and that every edge's endpoints reference real nodes.
+     * @param DelegationSettings|DelegationSettingsShape $delegationSettings Body param: Splits the conversation between a frontend model that talks to the caller and a backend model that does the work. On the GPT-Live route the frontend model cannot call tools at all — when it needs something done it raises a delegation and waits. On the chat completion route the frontend keeps a single `delegate` tool that returns immediately, so the conversation carries on while the backend works. Either way the backend's answer is spoken as commentary or kept as silent context, depending on `speak_results`. Beta feature.
      * @param string $description Body param
      * @param array<string,mixed> $dynamicVariables Body param: Map of dynamic variables and their default values
      * @param int $dynamicVariablesWebhookTimeoutMs Body param: Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
@@ -157,6 +162,7 @@ final class AssistantsService implements AssistantsContract
      * @param list<AssistantToolShape> $tools Body param: Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints.
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription Body param
      * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape $voiceSettings Body param
+     * @param WebsocketSettings|WebsocketSettingsShape $websocketSettings Body param: Streams conversation and telephony events to a WebSocket server you host, and accepts messages injected back into the conversation. Telnyx opens the connection as a client, once per conversation. Delivery is best effort throughout: while the connection is down events are dropped rather than queued, and no socket failure is ever allowed to affect the call. Beta feature.
      * @param WidgetSettings|WidgetSettingsShape $widgetSettings body param: Configuration settings for the assistant's web widget
      * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
@@ -168,6 +174,7 @@ final class AssistantsService implements AssistantsContract
         string $name,
         array $a2aAgents = [],
         ConversationFlowReq|array|null $conversationFlow = null,
+        DelegationSettings|array|null $delegationSettings = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         int $dynamicVariablesWebhookTimeoutMs = 1500,
@@ -192,6 +199,7 @@ final class AssistantsService implements AssistantsContract
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
+        WebsocketSettings|array|null $websocketSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
@@ -202,6 +210,7 @@ final class AssistantsService implements AssistantsContract
                 'name' => $name,
                 'a2aAgents' => $a2aAgents,
                 'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
+                'delegationSettings' => $delegationSettings ?? Omitted::VALUE,
                 'description' => $description ?? Omitted::VALUE,
                 'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,
@@ -226,6 +235,7 @@ final class AssistantsService implements AssistantsContract
                 'tools' => $tools ?? Omitted::VALUE,
                 'transcription' => $transcription ?? Omitted::VALUE,
                 'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'websocketSettings' => $websocketSettings ?? Omitted::VALUE,
                 'widgetSettings' => $widgetSettings ?? Omitted::VALUE,
                 'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
@@ -288,6 +298,7 @@ final class AssistantsService implements AssistantsContract
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
      * enforces unique node/edge IDs, that `start_node_id` references a real
      * node, and that every edge's endpoints reference real nodes.
+     * @param DelegationSettings|DelegationSettingsShape $delegationSettings Splits the conversation between a frontend model that talks to the caller and a backend model that does the work. On the GPT-Live route the frontend model cannot call tools at all — when it needs something done it raises a delegation and waits. On the chat completion route the frontend keeps a single `delegate` tool that returns immediately, so the conversation carries on while the backend works. Either way the backend's answer is spoken as commentary or kept as silent context, depending on `speak_results`. Beta feature.
      * @param array<string,mixed> $dynamicVariables Map of dynamic variables and their default values
      * @param int $dynamicVariablesWebhookTimeoutMs Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      * @param string $dynamicVariablesWebhookURL If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
@@ -314,6 +325,7 @@ final class AssistantsService implements AssistantsContract
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
      * @param string $versionName human-readable name for the assistant version
      * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape $voiceSettings
+     * @param WebsocketSettings|WebsocketSettingsShape $websocketSettings Streams conversation and telephony events to a WebSocket server you host, and accepts messages injected back into the conversation. Telnyx opens the connection as a client, once per conversation. Delivery is best effort throughout: while the connection is down events are dropped rather than queued, and no socket failure is ever allowed to affect the call. Beta feature.
      * @param WidgetSettings|WidgetSettingsShape $widgetSettings configuration settings for the assistant's web widget
      * @param RequestOpts|null $requestOptions
      *
@@ -323,6 +335,7 @@ final class AssistantsService implements AssistantsContract
         string $assistantID,
         ?array $a2aAgents = null,
         ConversationFlowReq|array|null $conversationFlow = null,
+        DelegationSettings|array|null $delegationSettings = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         int $dynamicVariablesWebhookTimeoutMs = 1500,
@@ -351,6 +364,7 @@ final class AssistantsService implements AssistantsContract
         TranscriptionSettings|array|null $transcription = null,
         string $versionName = 'New assistant',
         InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
+        WebsocketSettings|array|null $websocketSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
@@ -358,6 +372,7 @@ final class AssistantsService implements AssistantsContract
             [
                 'a2aAgents' => $a2aAgents ?? Omitted::VALUE,
                 'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
+                'delegationSettings' => $delegationSettings ?? Omitted::VALUE,
                 'description' => $description ?? Omitted::VALUE,
                 'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,
@@ -386,6 +401,7 @@ final class AssistantsService implements AssistantsContract
                 'transcription' => $transcription ?? Omitted::VALUE,
                 'versionName' => $versionName,
                 'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'websocketSettings' => $websocketSettings ?? Omitted::VALUE,
                 'widgetSettings' => $widgetSettings ?? Omitted::VALUE,
             ],
             static fn ($value) => Omitted::VALUE !== $value,
