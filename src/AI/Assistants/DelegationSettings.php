@@ -62,7 +62,7 @@ final class DelegationSettings implements BaseModel
     public ?string $mode;
 
     /**
-     * The backend model that answers delegations. Must be a model available for AI Assistants. Leave unset to use the platform default backend model. Only applies when `mode` is `telnyx`.
+     * The backend model that answers delegations. Must be a model available for AI Assistants. When enabling `telnyx` delegation, explicitly set this field or `external_llm.model`; a configuration without either backend model is rejected. Only applies when `mode` is `telnyx`.
      */
     #[Optional]
     public ?string $model;
@@ -168,7 +168,7 @@ final class DelegationSettings implements BaseModel
     }
 
     /**
-     * The backend model that answers delegations. Must be a model available for AI Assistants. Leave unset to use the platform default backend model. Only applies when `mode` is `telnyx`.
+     * The backend model that answers delegations. Must be a model available for AI Assistants. When enabling `telnyx` delegation, explicitly set this field or `external_llm.model`; a configuration without either backend model is rejected. Only applies when `mode` is `telnyx`.
      */
     public function withModel(string $model): self
     {
