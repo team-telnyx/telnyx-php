@@ -544,7 +544,10 @@ Methods:
 
 Methods:
 
+- <code title="post /ai/memory/namespaces">$client->ai->memory->namespaces-><a href="./src/Services/AI/Memory/NamespacesService.php">create</a>(...$params)</code>
 - <code title="get /ai/memory/namespaces/{namespace}/operations/{operation_id}">$client->ai->memory->namespaces-><a href="./src/Services/AI/Memory/NamespacesService.php">retrieve</a>(...$params)</code>
+- <code title="get /ai/memory/namespaces">$client->ai->memory->namespaces-><a href="./src/Services/AI/Memory/NamespacesService.php">list</a>()</code>
+- <code title="delete /ai/memory/namespaces/{namespace}">$client->ai->memory->namespaces-><a href="./src/Services/AI/Memory/NamespacesService.php">delete</a>(...$params)</code>
 
 #### Profiles
 
