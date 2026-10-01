@@ -8,13 +8,16 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\BpoAuthorizationInput;
 use Telnyx\Dir\Dir;
+use Telnyx\Dir\DirDeleteResponse;
+use Telnyx\Dir\DirGetBpoAuthorizationsResponse;
 use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirListParams\Sort;
-use Telnyx\Dir\DirNewLoaParams\Signature;
 use Telnyx\Dir\DirStatus;
 use Telnyx\Dir\DirWrapped;
 use Telnyx\Dir\Document;
+use Telnyx\Dir\SignaturePayload;
 use Telnyx\Enterprises\Reputation\Loa\AgentInput;
 use Telnyx\InfringementClaims\InfringementClaim;
 use Telnyx\RequestOptions;
@@ -26,10 +29,11 @@ use Telnyx\Services\Dir\ReferencesService;
 use Telnyx\Services\Dir\VerifyEmailService;
 
 /**
+ * @phpstan-import-type BpoAuthorizationInputShape from \Telnyx\Dir\BpoAuthorizationInput
  * @phpstan-import-type AgentInputShape from \Telnyx\Enterprises\Reputation\Loa\AgentInput
- * @phpstan-import-type SignatureShape from \Telnyx\Dir\DirNewLoaParams\Signature
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
+ * @phpstan-import-type SignaturePayloadShape from \Telnyx\Dir\SignaturePayload
  */
 final class DirService implements DirContract
 {
@@ -99,11 +103,12 @@ final class DirService implements DirContract
     /**
      * @api
      *
-     * Edit a DIR. DIRs in `draft`, `rejected`, `unsuccessful`, or `suspended` can be edited freely: PATCH is a pure edit, `status` is never changed, and you re-vet by calling `POST /v2/dir/{dir_id}/submit` explicitly. A `verified` DIR can also be edited in place: a PATCH that changes any value returns the DIR to `draft` and branded delivery stops until you re-submit and the DIR is approved again, while a PATCH that changes nothing (an empty body or values identical to the current ones) leaves the DIR `verified`, so idempotent retries are safe. DIRs in any other status (`submitted`, `in_review`, `expired`, `infringement_claimed`, `permanently_rejected`) cannot be edited.
+     * Edit a DIR. DIRs in `draft`, `rejected`, `unsuccessful`, or `suspended` can be edited freely: PATCH is a pure edit, `status` is never changed, and you re-vet by calling `POST /v2/dir/{dir_id}/submit` explicitly. A `verified` DIR can also be edited in place: a PATCH that changes any value returns the DIR to `draft`; the currently approved identity keeps displaying, and the edited content goes live only after you re-submit and the DIR is approved again. A PATCH that changes nothing (an empty body or values identical to the current ones) leaves the DIR `verified`, so idempotent retries are safe. Changing only `bpo_authorizations` or `webhook_url` is the exception: the DIR stays `verified`. Each BPO authorization is reviewed on its own instead. DIRs in any other status (`submitted`, `in_review`, `expired`, `infringement_claimed`, `permanently_rejected`) cannot be edited.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param string $authorizerEmail Contact email of the authorizer. Telnyx may send verification or infringement notices here.
      * @param string $authorizerName Name of the person at your enterprise authorizing this DIR. Must be a real individual.
+     * @param list<BpoAuthorizationInput|BpoAuthorizationInputShape> $bpoAuthorizations Optional. Replace this DIR's authorized BPO (Business Process Outsourcer) accounts with these, each with its signed Letter of Authorization. The supplied list replaces the current one: a BPO left out has its authorization removed, and a new BPO (or a changed Letter of Authorization) is created `pending` admin review. Send an empty list to clear all authorizations; omit the field to leave them unchanged. Editing this list does not re-vet the DIR. Maximum 10.
      * @param list<string> $callReasons 1–10 reasons your business calls customers. Validate phrasing against `POST /call_reasons/validate`.
      * @param bool $certifyBrandIsAccurate Certification that the DIR information is accurate. Must be `true` for the DIR to be submitted for vetting.
      * @param bool $certifyIPOwnership Certification of ownership of any logos/trademarks shown. Must be `true` for the DIR to be submitted for vetting.
@@ -112,6 +117,7 @@ final class DirService implements DirContract
      * @param list<Document|DocumentShape> $documents Additional supporting documents to attach. Append-only: existing documents are never removed or replaced, and an empty or omitted list is a no-op. Each `document_id` may appear at most once on a DIR.
      * @param string $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param bool $reselling Set to true if your organization places calls on behalf of other enterprises (BPO/reseller). Updating this triggers re-vetting on next submit.
+     * @param string|Omitted|null $webhookURL Optional `https://` URL that receives webhook notifications when this DIR's compliance review completes. Send `null` to clear. Changing only this field on a `verified` DIR does not re-vet it. Maximum 2048 characters.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -120,6 +126,7 @@ final class DirService implements DirContract
         string $dirID,
         ?string $authorizerEmail = null,
         ?string $authorizerName = null,
+        ?array $bpoAuthorizations = null,
         ?array $callReasons = null,
         ?bool $certifyBrandIsAccurate = null,
         ?bool $certifyIPOwnership = null,
@@ -128,12 +135,14 @@ final class DirService implements DirContract
         ?array $documents = null,
         ?string $logoURL = null,
         ?bool $reselling = null,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): DirWrapped {
         $params = array_filter(
             [
                 'authorizerEmail' => $authorizerEmail ?? Omitted::VALUE,
                 'authorizerName' => $authorizerName ?? Omitted::VALUE,
+                'bpoAuthorizations' => $bpoAuthorizations ?? Omitted::VALUE,
                 'callReasons' => $callReasons ?? Omitted::VALUE,
                 'certifyBrandIsAccurate' => $certifyBrandIsAccurate ?? Omitted::VALUE,
                 'certifyIPOwnership' => $certifyIPOwnership ?? Omitted::VALUE,
@@ -142,6 +151,7 @@ final class DirService implements DirContract
                 'documents' => $documents ?? Omitted::VALUE,
                 'logoURL' => $logoURL ?? Omitted::VALUE,
                 'reselling' => $reselling ?? Omitted::VALUE,
+                'webhookURL' => $webhookURL,
             ],
             static fn ($value) => Omitted::VALUE !== $value,
         );
@@ -208,7 +218,7 @@ final class DirService implements DirContract
     /**
      * @api
      *
-     * Delete a DIR. Failure modes: `400` if a child phone number is in a non-deletable status, `409` if the DIR has an unresolved infringement claim, `404` if the DIR is not yours.
+     * Request deletion of a DIR. This does not remove the DIR on this call: it records the request, moves the DIR to `delete_requested`, and Telnyx completes the removal (de-registration and cleanup) shortly after. A verified DIR keeps serving its branded identity, and keeps billing, until the removal is executed. Failure modes: `400` if a child phone number is still attached or the DIR is `in_review` (wait for the review to finish), `409` if the DIR has an unresolved infringement claim, `404` if the DIR is not yours.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
@@ -218,9 +228,45 @@ final class DirService implements DirContract
     public function delete(
         string $dirID,
         RequestOptions|array|null $requestOptions = null
-    ): mixed {
+    ): DirDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($dirID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * The Letter of Authorization in which a Brand Owner authorizes an approved BPO (Business Process Outsourcer) to place branded calls that display this DIR on the owner's behalf. Both parties are read from the caller's account: the Brand Owner is the enterprise that owns the DIR, and the BPO is `bpo_enterprise_id`. No business identity is accepted in the body.
+     *
+     * When `signature` is omitted the PDF is returned unsigned so the Brand Owner can sign it externally and the BPO can upload it via the Documents API. When `signature` is present the PDF embeds the supplied image, printed name, and signed-at date.
+     *
+     * Returns `application/pdf`.
+     *
+     * @param string $dirID the DIR id
+     * @param string $bpoEnterpriseID The approved BPO enterprise the Brand Owner is authorizing. Must be a BPO account on the caller's organization that has already been approved.
+     * @param SignaturePayload|SignaturePayloadShape $signature Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the Brand Owner can sign externally and the BPO can upload it via the Documents API.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function bpoLoa(
+        string $dirID,
+        string $bpoEnterpriseID,
+        SignaturePayload|array|null $signature = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): string {
+        $params = array_filter(
+            [
+                'bpoEnterpriseID' => $bpoEnterpriseID,
+                'signature' => $signature ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->bpoLoa($dirID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -283,7 +329,7 @@ final class DirService implements DirContract
      * @param string $dirID the DIR id
      * @param list<string> $phoneNumbers Telephone numbers to authorize on the DIR, in `+E164` format (`+` followed by 10-15 digits). Max 15 per request.
      * @param AgentInput|AgentInputShape $agent Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
-     * @param Signature|SignatureShape $signature Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
+     * @param SignaturePayload|SignaturePayloadShape $signature Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -292,7 +338,7 @@ final class DirService implements DirContract
         string $dirID,
         array $phoneNumbers,
         AgentInput|array|null $agent = null,
-        Signature|array|null $signature = null,
+        SignaturePayload|array|null $signature = null,
         RequestOptions|array|null $requestOptions = null,
     ): string {
         $params = array_filter(
@@ -306,6 +352,34 @@ final class DirService implements DirContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->newLoa($dirID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * List the BPO (Business Process Outsourcer) accounts a Brand Owner has authorized on this DIR, together with the review state of each authorization.
+     *
+     * Authorizations are supplied as the `bpo_authorizations` array when creating or updating a DIR, and each one is reviewed on its own. Only an `approved` authorization adds that BPO to this DIR's authorized callers in the branded calling registry; `pending` and `rejected` authorizations do not. Each entry includes the `loa_document_id` you submitted: because `bpo_authorizations` replaces the whole list on every DIR update, send each entry you want to keep back with its `loa_document_id` unchanged, and it keeps its review state. A rejected entry carries a `rejection_reason`. Returns an empty list when the DIR has authorized no BPOs.
+     *
+     * @param string $dirID The DIR id. Lowercase UUID.
+     * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
+     * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveBpoAuthorizations(
+        string $dirID,
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DirGetBpoAuthorizationsResponse {
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveBpoAuthorizations($dirID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -340,10 +414,11 @@ final class DirService implements DirContract
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param bool $certifyBrandIsAccurate must be `true`
      * @param bool $certifyIPOwnership must be `true`
-     * @param bool $certifyNoInfringement must be `true`
+     * @param bool $certifyNoInfringement check to certify that the brand no longer infringes anyone else's trademark or intellectual property
      * @param bool $certifyNoShaftContent must be `true`
      * @param string $infringementResolutionNotes explanation of how the infringement concern was addressed
      * @param list<string>|Omitted|null $callReasons
+     * @param string|Omitted|null $displayName the business name shown to call recipients, 1 to 35 characters, no emoji, not blank
      * @param list<Document|DocumentShape>|Omitted|null $documents Append-only supporting documents to attach while resolving the claim (e.g. authorization or licensing proof).
      * @param string|Omitted|null $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param RequestOpts|null $requestOptions

@@ -696,7 +696,7 @@ interface ActionsContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param Cause|value-of<Cause> $cause cause for call rejection
+     * @param Cause|value-of<Cause> $cause Cause for call rejection. The cause sets the SIP response the caller receives: `USER_BUSY` sends 486 User Busy, `CALL_REJECTED` sends 603 Decline, `NOT_FOUND` sends 404 Not Found, and `TEMPORARILY_UNAVAILABLE` sends 480 Temporarily Unavailable.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param RequestOpts|null $requestOptions

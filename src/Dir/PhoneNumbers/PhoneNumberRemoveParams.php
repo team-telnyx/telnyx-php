@@ -22,7 +22,11 @@ final class PhoneNumberRemoveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<string> $phoneNumbers */
+    /**
+     * The phone numbers to remove from this brand, in E.164 format, up to 100 per request. They must currently be attached to this brand.
+     *
+     * @var list<string> $phoneNumbers
+     */
     #[Required('phone_numbers', list: 'string')]
     public array $phoneNumbers;
 
@@ -62,6 +66,8 @@ final class PhoneNumberRemoveParams implements BaseModel
     }
 
     /**
+     * The phone numbers to remove from this brand, in E.164 format, up to 100 per request. They must currently be attached to this brand.
+     *
      * @param list<string> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self

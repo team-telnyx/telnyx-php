@@ -260,6 +260,23 @@ final class VersionsTest extends TestCase
                     ],
                 ],
             ],
+            delegationSettings: [
+                'enabled' => true,
+                'externalLlm' => [
+                    'baseURL' => 'base_url',
+                    'model' => 'model',
+                    'authenticationMethod' => AuthenticationMethod::TOKEN,
+                    'certificateRef' => 'certificate_ref',
+                    'forwardMetadata' => true,
+                    'llmAPIKeyRef' => 'llm_api_key_ref',
+                    'tokenRetrievalURL' => 'token_retrieval_url',
+                ],
+                'instructions' => 'instructions',
+                'llmAPIKeyRef' => 'llm_api_key_ref',
+                'mode' => 'telnyx',
+                'model' => 'model',
+                'speakResults' => true,
+            ],
             description: 'description',
             dynamicVariables: ['foo' => 'bar'],
             dynamicVariablesWebhookTimeoutMs: 1,
@@ -410,6 +427,9 @@ final class VersionsTest extends TestCase
                 'temperature' => 0,
                 'useSpeakerBoost' => true,
                 'voiceSpeed' => 0,
+            ],
+            websocketSettings: [
+                'authRef' => 'auth_ref', 'enabled' => true, 'url' => 'url',
             ],
             widgetSettings: [
                 'agentThinkingText' => 'agent_thinking_text',
