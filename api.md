@@ -172,6 +172,7 @@ Methods:
 - <code title="get /ai/assistants/{assistant_id}/texml">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">getTexml</a>(...$params)</code>
 - <code title="post /ai/assistants/import">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">imports</a>(...$params)</code>
 - <code title="post /ai/assistants/{assistant_id}/chat/sms">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">sendSMS</a>(...$params)</code>
+- <code title="post /ai/assistants/{assistant_id}/chat/whatsapp">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">whatsapp</a>(...$params)</code>
 
 ### Tests
 

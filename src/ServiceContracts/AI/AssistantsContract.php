@@ -12,6 +12,7 @@ use Telnyx\AI\Assistants\AssistantIntegration;
 use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
+use Telnyx\AI\Assistants\AssistantWhatsappResponse;
 use Telnyx\AI\Assistants\ConversationFlowReq;
 use Telnyx\AI\Assistants\DelegationSettings;
 use Telnyx\AI\Assistants\EnabledFeatures;
@@ -34,6 +35,7 @@ use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
+ * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantWhatsappParams\ConversationMetadata as ConversationMetadataShape1
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
@@ -354,4 +356,27 @@ interface AssistantsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantSendSMSResponse;
+
+    /**
+     * @api
+     *
+     * @param string $assistantID Path param: Unique identifier of the assistant. Must be the assistant configured on the messaging profile of the `from` number.
+     * @param string $content Body param: Instruction for the assistant, including the values for the template variables, e.g. `Send the login verification code 482913 to the customer.`
+     * @param string $from Body param: WhatsApp number on your account to send from, in E.164 format. Its messaging profile must have this assistant configured.
+     * @param string $to Body param: Customer to message, as an E.164 phone number or a WhatsApp business-scoped user ID (BSUID).
+     * @param array<string,ConversationMetadataShape1> $conversationMetadata Body param: Metadata stored on the conversation. Keys starting with `telnyx_` and the `assistant_id` key are reserved.
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function whatsapp(
+        string $assistantID,
+        string $content,
+        string $from,
+        string $to,
+        ?array $conversationMetadata = null,
+        ?string $idempotencyKey = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): AssistantWhatsappResponse;
 }

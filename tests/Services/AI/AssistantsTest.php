@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
+use Telnyx\AI\Assistants\AssistantWhatsappResponse;
 use Telnyx\AI\Assistants\AuthenticationMethod;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\InferenceEmbedding;
@@ -602,5 +603,43 @@ final class AssistantsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AssistantSendSMSResponse::class, $result);
+    }
+
+    #[Test]
+    public function testWhatsapp(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->assistants->whatsapp(
+            'assistant_id',
+            content: 'Send the login verification code 482913 to the customer.',
+            from: '+13125550001',
+            to: '+13125550002',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssistantWhatsappResponse::class, $result);
+    }
+
+    #[Test]
+    public function testWhatsappWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->assistants->whatsapp(
+            'assistant_id',
+            content: 'Send the login verification code 482913 to the customer.',
+            from: '+13125550001',
+            to: '+13125550002',
+            conversationMetadata: ['order_id' => 'A1'],
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssistantWhatsappResponse::class, $result);
     }
 }

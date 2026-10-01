@@ -19,6 +19,8 @@ use Telnyx\AI\Assistants\AssistantSendSMSParams;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\AssistantUpdateParams;
+use Telnyx\AI\Assistants\AssistantWhatsappParams;
+use Telnyx\AI\Assistants\AssistantWhatsappResponse;
 use Telnyx\AI\Assistants\ConversationFlowReq;
 use Telnyx\AI\Assistants\DelegationSettings;
 use Telnyx\AI\Assistants\EnabledFeatures;
@@ -47,6 +49,7 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
  * Configure AI assistant specifications.
  *
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
+ * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantWhatsappParams\ConversationMetadata as ConversationMetadataShape1
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
@@ -497,6 +500,60 @@ final class AssistantsRawService implements AssistantsRawContract
             ),
             options: $options,
             convert: AssistantSendSMSResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Start a WhatsApp conversation with a customer from the business side. This endpoint:
+     * 1. Validates that `from` is a WhatsApp number on your account whose messaging profile has this assistant configured
+     * 2. Creates a new `whatsapp_chat` conversation with the provided metadata
+     * 3. Asks the assistant to pick one of its approved WhatsApp templates and fill its variables from `content`
+     * 4. Sends the template from `from` to `to`
+     * 5. Returns the conversation ID and the message ID
+     *
+     * When the customer replies, the reply is routed to the same conversation and the assistant answers within the 24-hour customer service window. The assistant needs a `whatsapp_template` tool with at least one approved template, data retention enabled and PII redaction disabled.
+     *
+     * @param string $assistantID Path param: Unique identifier of the assistant. Must be the assistant configured on the messaging profile of the `from` number.
+     * @param array{
+     *   content: string,
+     *   from: string,
+     *   to: string,
+     *   conversationMetadata?: array<string,ConversationMetadataShape1>,
+     *   idempotencyKey?: string,
+     * }|AssistantWhatsappParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<AssistantWhatsappResponse>
+     *
+     * @throws APIException
+     */
+    public function whatsapp(
+        string $assistantID,
+        array|AssistantWhatsappParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = AssistantWhatsappParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['ai/assistants/%1$s/chat/whatsapp', $assistantID],
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
+            options: $options,
+            convert: AssistantWhatsappResponse::class,
         );
     }
 }
