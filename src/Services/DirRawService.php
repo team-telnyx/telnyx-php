@@ -9,28 +9,34 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\BpoAuthorizationInput;
 use Telnyx\Dir\Dir;
+use Telnyx\Dir\DirBpoLoaParams;
+use Telnyx\Dir\DirDeleteResponse;
+use Telnyx\Dir\DirGetBpoAuthorizationsResponse;
 use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirListInfringementClaimsParams;
 use Telnyx\Dir\DirListParams;
 use Telnyx\Dir\DirListParams\Sort;
 use Telnyx\Dir\DirNewLoaParams;
-use Telnyx\Dir\DirNewLoaParams\Signature;
+use Telnyx\Dir\DirRetrieveBpoAuthorizationsParams;
 use Telnyx\Dir\DirStatus;
 use Telnyx\Dir\DirUpdateInfringementParams;
 use Telnyx\Dir\DirUpdateParams;
 use Telnyx\Dir\DirWrapped;
 use Telnyx\Dir\Document;
+use Telnyx\Dir\SignaturePayload;
 use Telnyx\Enterprises\Reputation\Loa\AgentInput;
 use Telnyx\InfringementClaims\InfringementClaim;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DirRawContract;
 
 /**
+ * @phpstan-import-type BpoAuthorizationInputShape from \Telnyx\Dir\BpoAuthorizationInput
  * @phpstan-import-type AgentInputShape from \Telnyx\Enterprises\Reputation\Loa\AgentInput
- * @phpstan-import-type SignatureShape from \Telnyx\Dir\DirNewLoaParams\Signature
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
+ * @phpstan-import-type SignaturePayloadShape from \Telnyx\Dir\SignaturePayload
  */
 final class DirRawService implements DirRawContract
 {
@@ -68,12 +74,13 @@ final class DirRawService implements DirRawContract
     /**
      * @api
      *
-     * Edit a DIR. DIRs in `draft`, `rejected`, `unsuccessful`, or `suspended` can be edited freely: PATCH is a pure edit, `status` is never changed, and you re-vet by calling `POST /v2/dir/{dir_id}/submit` explicitly. A `verified` DIR can also be edited in place: a PATCH that changes any value returns the DIR to `draft` and branded delivery stops until you re-submit and the DIR is approved again, while a PATCH that changes nothing (an empty body or values identical to the current ones) leaves the DIR `verified`, so idempotent retries are safe. DIRs in any other status (`submitted`, `in_review`, `expired`, `infringement_claimed`, `permanently_rejected`) cannot be edited.
+     * Edit a DIR. DIRs in `draft`, `rejected`, `unsuccessful`, or `suspended` can be edited freely: PATCH is a pure edit, `status` is never changed, and you re-vet by calling `POST /v2/dir/{dir_id}/submit` explicitly. A `verified` DIR can also be edited in place: a PATCH that changes any value returns the DIR to `draft`; the currently approved identity keeps displaying, and the edited content goes live only after you re-submit and the DIR is approved again. A PATCH that changes nothing (an empty body or values identical to the current ones) leaves the DIR `verified`, so idempotent retries are safe. Changing only `bpo_authorizations` or `webhook_url` is the exception: the DIR stays `verified`. Each BPO authorization is reviewed on its own instead. DIRs in any other status (`submitted`, `in_review`, `expired`, `infringement_claimed`, `permanently_rejected`) cannot be edited.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param array{
      *   authorizerEmail?: string,
      *   authorizerName?: string,
+     *   bpoAuthorizations?: list<BpoAuthorizationInput|BpoAuthorizationInputShape>,
      *   callReasons?: list<string>,
      *   certifyBrandIsAccurate?: bool,
      *   certifyIPOwnership?: bool,
@@ -82,6 +89,7 @@ final class DirRawService implements DirRawContract
      *   documents?: list<Document|DocumentShape>,
      *   logoURL?: string,
      *   reselling?: bool,
+     *   webhookURL?: string|null,
      * }|DirUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -166,12 +174,12 @@ final class DirRawService implements DirRawContract
     /**
      * @api
      *
-     * Delete a DIR. Failure modes: `400` if a child phone number is in a non-deletable status, `409` if the DIR has an unresolved infringement claim, `404` if the DIR is not yours.
+     * Request deletion of a DIR. This does not remove the DIR on this call: it records the request, moves the DIR to `delete_requested`, and Telnyx completes the removal (de-registration and cleanup) shortly after. A verified DIR keeps serving its branded identity, and keeps billing, until the removal is executed. Failure modes: `400` if a child phone number is still attached or the DIR is `in_review` (wait for the review to finish), `409` if the DIR has an unresolved infringement claim, `404` if the DIR is not yours.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<mixed>
+     * @return BaseResponse<DirDeleteResponse>
      *
      * @throws APIException
      */
@@ -184,7 +192,47 @@ final class DirRawService implements DirRawContract
             method: 'delete',
             path: ['dir/%1$s', $dirID],
             options: $requestOptions,
-            convert: null,
+            convert: DirDeleteResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * The Letter of Authorization in which a Brand Owner authorizes an approved BPO (Business Process Outsourcer) to place branded calls that display this DIR on the owner's behalf. Both parties are read from the caller's account: the Brand Owner is the enterprise that owns the DIR, and the BPO is `bpo_enterprise_id`. No business identity is accepted in the body.
+     *
+     * When `signature` is omitted the PDF is returned unsigned so the Brand Owner can sign it externally and the BPO can upload it via the Documents API. When `signature` is present the PDF embeds the supplied image, printed name, and signed-at date.
+     *
+     * Returns `application/pdf`.
+     *
+     * @param string $dirID the DIR id
+     * @param array{
+     *   bpoEnterpriseID: string, signature?: SignaturePayload|SignaturePayloadShape
+     * }|DirBpoLoaParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<string>
+     *
+     * @throws APIException
+     */
+    public function bpoLoa(
+        string $dirID,
+        array|DirBpoLoaParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = DirBpoLoaParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['dir/%1$s/bpo_loa', $dirID],
+            headers: ['Accept' => 'application/pdf'],
+            body: (object) $parsed,
+            options: $options,
+            convert: 'string',
         );
     }
 
@@ -263,7 +311,7 @@ final class DirRawService implements DirRawContract
      * @param array{
      *   phoneNumbers: list<string>,
      *   agent?: AgentInput|AgentInputShape,
-     *   signature?: Signature|SignatureShape,
+     *   signature?: SignaturePayload|SignaturePayloadShape,
      * }|DirNewLoaParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -289,6 +337,46 @@ final class DirRawService implements DirRawContract
             body: (object) $parsed,
             options: $options,
             convert: 'string',
+        );
+    }
+
+    /**
+     * @api
+     *
+     * List the BPO (Business Process Outsourcer) accounts a Brand Owner has authorized on this DIR, together with the review state of each authorization.
+     *
+     * Authorizations are supplied as the `bpo_authorizations` array when creating or updating a DIR, and each one is reviewed on its own. Only an `approved` authorization adds that BPO to this DIR's authorized callers in the branded calling registry; `pending` and `rejected` authorizations do not. Each entry includes the `loa_document_id` you submitted: because `bpo_authorizations` replaces the whole list on every DIR update, send each entry you want to keep back with its `loa_document_id` unchanged, and it keeps its review state. A rejected entry carries a `rejection_reason`. Returns an empty list when the DIR has authorized no BPOs.
+     *
+     * @param string $dirID The DIR id. Lowercase UUID.
+     * @param array{
+     *   pageNumber?: int, pageSize?: int
+     * }|DirRetrieveBpoAuthorizationsParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<DirGetBpoAuthorizationsResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveBpoAuthorizations(
+        string $dirID,
+        array|DirRetrieveBpoAuthorizationsParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = DirRetrieveBpoAuthorizationsParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['dir/%1$s/bpo_authorizations', $dirID],
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
+            options: $options,
+            convert: DirGetBpoAuthorizationsResponse::class,
         );
     }
 

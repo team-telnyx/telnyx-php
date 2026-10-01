@@ -2798,6 +2798,13 @@ Methods:
 - <code title="post /enterprises/{enterprise_id}/dir">$client->enterprises->dir-><a href="./src/Services/Enterprises/DirService.php">create</a>(...$params)</code>
 - <code title="get /enterprises/{enterprise_id}/dir">$client->enterprises->dir-><a href="./src/Services/Enterprises/DirService.php">list</a>(...$params)</code>
 
+## VerifyEmail
+
+Methods:
+
+- <code title="post /enterprises/{enterprise_id}/verify_email">$client->enterprises->verifyEmail-><a href="./src/Services/Enterprises/VerifyEmailService.php">create</a>(...$params)</code>
+- <code title="post /enterprises/{enterprise_id}/verify_email/confirm">$client->enterprises->verifyEmail-><a href="./src/Services/Enterprises/VerifyEmailService.php">confirm</a>(...$params)</code>
+
 # Reputation
 
 ## Numbers
@@ -2882,9 +2889,11 @@ Methods:
 - <code title="patch /dir/{dir_id}">$client->dir-><a href="./src/Services/DirService.php">update</a>(...$params)</code>
 - <code title="get /dir">$client->dir-><a href="./src/Services/DirService.php">list</a>(...$params)</code>
 - <code title="delete /dir/{dir_id}">$client->dir-><a href="./src/Services/DirService.php">delete</a>(...$params)</code>
+- <code title="post /dir/{dir_id}/bpo_loa">$client->dir-><a href="./src/Services/DirService.php">bpoLoa</a>(...$params)</code>
 - <code title="get /dir/document_types">$client->dir-><a href="./src/Services/DirService.php">listDocumentTypes</a>()</code>
 - <code title="get /dir/{dir_id}/infringement_claims">$client->dir-><a href="./src/Services/DirService.php">listInfringementClaims</a>(...$params)</code>
 - <code title="post /dir/{dir_id}/loa">$client->dir-><a href="./src/Services/DirService.php">newLoa</a>(...$params)</code>
+- <code title="get /dir/{dir_id}/bpo_authorizations">$client->dir-><a href="./src/Services/DirService.php">retrieveBpoAuthorizations</a>(...$params)</code>
 - <code title="post /dir/{dir_id}/submit">$client->dir-><a href="./src/Services/DirService.php">submit</a>(...$params)</code>
 - <code title="put /dir/{dir_id}/infringement_update">$client->dir-><a href="./src/Services/DirService.php">updateInfringement</a>(...$params)</code>
 

@@ -17,6 +17,7 @@ use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationLegalType;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationType;
 use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
 use Telnyx\Enterprises\EnterpriseListParams;
+use Telnyx\Enterprises\EnterpriseListParams\FilterRoleType;
 use Telnyx\Enterprises\EnterprisePublic;
 use Telnyx\Enterprises\EnterprisePublicWrapped;
 use Telnyx\Enterprises\EnterpriseUpdateParams;
@@ -129,6 +130,10 @@ final class EnterprisesRawService implements EnterprisesRawContract
      *
      * Replace the enterprise's mutable fields. Only mutable fields may be sent. Server-assigned and immutable fields (`id`, `record_type`, `created_at`, `updated_at`, status fields, `organization_type`, `country_code`, `role_type`) cannot be changed: including any of them in the body is rejected with `400 Bad Request` (`Field 'X' is not allowed in this request`).
      *
+     * For an approved BPO enterprise (`role_type` `bpo`), changing any identity field (legal name, DBA, website, FEIN, industry, number of employees, physical address, organization contact, D-U-N-S number, legal type, SIC code, corporate registration number, professional license number, or jurisdiction of incorporation) resets `bpo_verification_status` to `pending` for re-approval and sets every DIR authorization for that BPO to `rejected`. After re-approval, link it again with a newly signed LOA (a new `loa_document_id`); resending the old one keeps the authorization `rejected`. Re-sending an unchanged value does not reset anything.
+     *
+     * If Number Reputation is enabled on the enterprise, `legal_name`, `doing_business_as`, `website`, `fein`, `industry`, `number_of_employees`, `organization_physical_address`, `organization_contact`, and `dun_bradstreet_number` cannot be changed: the request is rejected with `400`.
+     *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
      *   billingAddress?: PhysicalAddress|PhysicalAddressShape,
@@ -182,6 +187,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
      *
      * @param array{
      *   filterLegalNameContains?: string,
+     *   filterRoleType?: FilterRoleType|value-of<FilterRoleType>,
      *   legalName?: string,
      *   pageNumber?: int,
      *   pageSize?: int,
@@ -209,6 +215,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
                 $parsed,
                 [
                     'filterLegalNameContains' => 'filter[legal_name][contains]',
+                    'filterRoleType' => 'filter[role_type]',
                     'legalName' => 'legal_name',
                     'pageNumber' => 'page[number]',
                     'pageSize' => 'page[size]',
