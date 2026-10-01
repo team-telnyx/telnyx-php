@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\BpoAuthorizationInput;
 use Telnyx\Dir\Dir;
 use Telnyx\Dir\DirStatus;
 use Telnyx\Dir\DirWrapped;
@@ -19,6 +20,7 @@ use Telnyx\ServiceContracts\Enterprises\DirContract;
 /**
  * A Display Identity Record (DIR) is the verified calling identity (display name, logo, call reasons) shown to recipients on outbound calls.
  *
+ * @phpstan-import-type BpoAuthorizationInputShape from \Telnyx\Dir\BpoAuthorizationInput
  * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -58,13 +60,15 @@ final class DirService implements DirContract
      * @param string $authorizerEmail Contact email of the authorizer. Telnyx may send verification or infringement-notice email here; use a monitored mailbox.
      * @param string $authorizerName Name of the person at your enterprise who is authorizing this DIR registration. Must be a real individual (used for audit and trademark-claim contests).
      * @param list<string> $callReasons 1–10 reasons your business calls customers. Validate phrasing against `POST /call_reasons/validate`.
-     * @param bool $certifyBrandIsAccurate must be `true`
+     * @param bool $certifyBrandIsAccurate Certification that the DIR information is accurate. Must be `true` for the DIR to be submitted for vetting.
      * @param bool $certifyIPOwnership Must be `true`. Confirms ownership of any logos/trademarks shown.
      * @param bool $certifyNoShaftContent Must be `true`. Confirms this DIR is not used for SHAFT content (Sex, Hate, Alcohol, Firearms, Tobacco) where prohibited.
      * @param string $displayName Name shown to call recipients. No emoji; not whitespace-only.
+     * @param list<BpoAuthorizationInput|BpoAuthorizationInputShape> $bpoAuthorizations Optional. Approved BPO (Business Process Outsourcer) accounts on your organization authorized to place branded calls for this DIR, each with the signed Letter of Authorization the Brand Owner granted it. Each authorization starts `pending` and takes effect only after an admin reviews its Letter of Authorization. Omit or send an empty list to authorize no BPO on this DIR. Maximum 10.
      * @param list<Document|DocumentShape> $documents Supporting documents. Each `document_id` may appear at most once on a DIR.
      * @param string $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param bool $reselling set to true if your organization places calls on behalf of other enterprises (BPO/reseller)
+     * @param string|Omitted|null $webhookURL Optional `https://` URL that receives webhook notifications when this DIR's compliance review completes (rejection outcomes include structured rejection reasons). Maximum 2048 characters.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -78,9 +82,11 @@ final class DirService implements DirContract
         bool $certifyIPOwnership,
         bool $certifyNoShaftContent,
         string $displayName,
+        ?array $bpoAuthorizations = null,
         ?array $documents = null,
         ?string $logoURL = null,
         bool $reselling = false,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): DirWrapped {
         $params = array_filter(
@@ -92,9 +98,11 @@ final class DirService implements DirContract
                 'certifyIPOwnership' => $certifyIPOwnership,
                 'certifyNoShaftContent' => $certifyNoShaftContent,
                 'displayName' => $displayName,
+                'bpoAuthorizations' => $bpoAuthorizations ?? Omitted::VALUE,
                 'documents' => $documents ?? Omitted::VALUE,
                 'logoURL' => $logoURL ?? Omitted::VALUE,
                 'reselling' => $reselling,
+                'webhookURL' => $webhookURL,
             ],
             static fn ($value) => Omitted::VALUE !== $value,
         );

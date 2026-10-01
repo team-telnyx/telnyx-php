@@ -15,6 +15,8 @@ use Telnyx\AI\Assistants\AssistantSendSMSParams;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\AssistantUpdateParams;
+use Telnyx\AI\Assistants\AssistantWhatsappParams;
+use Telnyx\AI\Assistants\AssistantWhatsappResponse;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -180,6 +182,23 @@ interface AssistantsRawContract
     public function sendSMS(
         string $assistantID,
         array|AssistantSendSMSParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $assistantID Path param: Unique identifier of the assistant. Must be the assistant configured on the messaging profile of the `from` number.
+     * @param array<string,mixed>|AssistantWhatsappParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<AssistantWhatsappResponse>
+     *
+     * @throws APIException
+     */
+    public function whatsapp(
+        string $assistantID,
+        array|AssistantWhatsappParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

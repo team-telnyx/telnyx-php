@@ -18,17 +18,26 @@ final class BillingContact implements BaseModel
     /** @use SdkModel<BillingContactShape> */
     use SdkModel;
 
+    /**
+     * The email address of the person Telnyx should contact about billing for this account.
+     */
     #[Required]
     public string $email;
 
+    /**
+     * The first name of the person Telnyx should contact about billing for this account.
+     */
     #[Required('first_name')]
     public string $firstName;
 
+    /**
+     * The last name of the person Telnyx should contact about billing for this account.
+     */
     #[Required('last_name')]
     public string $lastName;
 
     /**
-     * E.164 format with leading `+`.
+     * The phone number of the billing contact, in E.164 format, for example +12125551234.
      */
     #[Required('phone_number')]
     public string $phoneNumber;
@@ -79,6 +88,9 @@ final class BillingContact implements BaseModel
         return $self;
     }
 
+    /**
+     * The email address of the person Telnyx should contact about billing for this account.
+     */
     public function withEmail(string $email): self
     {
         $self = clone $this;
@@ -87,6 +99,9 @@ final class BillingContact implements BaseModel
         return $self;
     }
 
+    /**
+     * The first name of the person Telnyx should contact about billing for this account.
+     */
     public function withFirstName(string $firstName): self
     {
         $self = clone $this;
@@ -95,6 +110,9 @@ final class BillingContact implements BaseModel
         return $self;
     }
 
+    /**
+     * The last name of the person Telnyx should contact about billing for this account.
+     */
     public function withLastName(string $lastName): self
     {
         $self = clone $this;
@@ -104,7 +122,7 @@ final class BillingContact implements BaseModel
     }
 
     /**
-     * E.164 format with leading `+`.
+     * The phone number of the billing contact, in E.164 format, for example +12125551234.
      */
     public function withPhoneNumber(string $phoneNumber): self
     {

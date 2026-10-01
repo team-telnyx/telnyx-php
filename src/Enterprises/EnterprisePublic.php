@@ -8,6 +8,8 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
+use Telnyx\Enterprises\EnterprisePublic\BpoVerificationStatus;
+use Telnyx\Enterprises\EnterprisePublic\RoleType;
 
 /**
  * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
@@ -18,6 +20,8 @@ use Telnyx\Core\Omitted;
  *   id?: string|null,
  *   billingAddress?: null|PhysicalAddress|PhysicalAddressShape,
  *   billingContact?: null|BillingContact|BillingContactShape,
+ *   bpoVerificationRejectionReason?: string|null,
+ *   bpoVerificationStatus?: null|BpoVerificationStatus|value-of<BpoVerificationStatus>,
  *   brandedCallingEnabled?: bool|null,
  *   corporateRegistrationNumber?: string|null,
  *   countryCode?: string|null,
@@ -37,7 +41,7 @@ use Telnyx\Core\Omitted;
  *   organizationType?: string|null,
  *   primaryBusinessDomainSicCode?: string|null,
  *   professionalLicenseNumber?: string|null,
- *   roleType?: string|null,
+ *   roleType?: null|RoleType|value-of<RoleType>,
  *   updatedAt?: \DateTimeInterface|null,
  *   website?: string|null,
  * }
@@ -57,13 +61,31 @@ final class EnterprisePublic implements BaseModel
     public ?BillingContact $billingContact;
 
     /**
+     * Reason Telnyx rejected the BPO (Business Process Outsourcer) verification, when `bpo_verification_status` is `rejected`; `null` otherwise.
+     */
+    #[Optional('bpo_verification_rejection_reason', nullable: true)]
+    public ?string $bpoVerificationRejectionReason;
+
+    /**
+     * Whether Telnyx has approved this BPO (Business Process Outsourcer) account. Only set for accounts created with `role_type` `bpo`; `null` for normal enterprises. A BPO enterprise must be `approved` before a DIR can be linked to it through `bpo_authorizations`.
+     *
+     * @var value-of<BpoVerificationStatus>|null $bpoVerificationStatus
+     */
+    #[Optional(
+        'bpo_verification_status',
+        enum: BpoVerificationStatus::class,
+        nullable: true,
+    )]
+    public ?string $bpoVerificationStatus;
+
+    /**
      * True once Branded Calling has been activated on this enterprise (see `POST /enterprises/{id}/branded_calling`).
      */
     #[Optional('branded_calling_enabled')]
     public ?bool $brandedCallingEnabled;
 
     /**
-     * Optional corporate-registration / company-number identifier.
+     * The official number your company received when it was legally registered or incorporated (for example from your state or national business registry). It is on your certificate of incorporation.
      */
     #[Optional('corporate_registration_number', nullable: true)]
     public ?string $corporateRegistrationNumber;
@@ -74,30 +96,51 @@ final class EnterprisePublic implements BaseModel
     #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
+    /**
+     * Your own label for this account. Enter any reference that helps you find it in your records. Telnyx does not use it during vetting.
+     */
     #[Optional('customer_reference')]
     public ?string $customerReference;
 
+    /**
+     * The trade name your business operates under if it is different from your legal name, also called a Doing Business As (DBA) name. Leave blank if you only use your legal name.
+     */
     #[Optional('doing_business_as')]
     public ?string $doingBusinessAs;
 
     /**
-     * Optional D-U-N-S Number issued by Dun & Bradstreet.
+     * Your optional 9-digit D-U-N-S Number issued by Dun & Bradstreet, a unique identifier for your business. Leave blank if you do not have one.
      */
     #[Optional('dun_bradstreet_number', nullable: true)]
     public ?string $dunBradstreetNumber;
 
+    /**
+     * US Federal Employer Identification Number (`NN-NNNNNNN`) or Canadian equivalent.
+     */
     #[Optional]
     public ?string $fein;
 
+    /**
+     * The industry your business operates in. Choose the closest match from the list; if your value is not accepted, pick the nearest category.
+     */
     #[Optional]
     public ?string $industry;
 
+    /**
+     * The state, province, or country where your business was legally incorporated, for example Delaware.
+     */
     #[Optional('jurisdiction_of_incorporation')]
     public ?string $jurisdictionOfIncorporation;
 
+    /**
+     * Your business's full registered legal name, exactly as it appears on your incorporation or tax documents, 3 to 64 characters.
+     */
     #[Optional('legal_name')]
     public ?string $legalName;
 
+    /**
+     * Approximate headcount range. Used for vetting heuristics; pick the bucket that contains your current employee count.
+     */
     #[Optional('number_of_employees')]
     public ?string $numberOfEmployees;
 
@@ -110,6 +153,14 @@ final class EnterprisePublic implements BaseModel
     #[Optional('organization_contact')]
     public ?OrganizationContact $organizationContact;
 
+    /**
+     * Legal-entity form. Pick the form that matches your incorporation documents:
+     * - `corporation` - C-corp or S-corp.
+     * - `llc` - limited liability company.
+     * - `partnership` - general/limited partnership.
+     * - `nonprofit` - non-profit corporation, charitable trust, or 501(c)(3)/equivalent.
+     * - `other` - anything else (sole proprietorships, government bodies, DBAs, etc.). You may be asked for additional documents during vetting.
+     */
     #[Optional('organization_legal_type')]
     public ?string $organizationLegalType;
 
@@ -120,23 +171,27 @@ final class EnterprisePublic implements BaseModel
     public ?string $organizationType;
 
     /**
-     * Optional SIC code for the primary line of business.
+     * The 4-digit Standard Industrial Classification code for your main line of business, which tells us what industry you operate in. Look it up in the SIC code directory if you are unsure.
      */
     #[Optional('primary_business_domain_sic_code', nullable: true)]
     public ?string $primaryBusinessDomainSicCode;
 
     /**
-     * Optional professional-license number for regulated industries.
+     * If your business operates under a professional license (for example legal, medical, or financial services), enter the license number issued by the licensing authority. Leave blank if it does not apply.
      */
     #[Optional('professional_license_number', nullable: true)]
     public ?string $professionalLicenseNumber;
 
-    #[Optional('role_type')]
+    /** @var value-of<RoleType>|null $roleType */
+    #[Optional('role_type', enum: RoleType::class)]
     public ?string $roleType;
 
     #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
+    /**
+     * Your business's public website address, including https://. Leave blank if your business has no website.
+     */
     #[Optional]
     public ?string $website;
 
@@ -150,12 +205,16 @@ final class EnterprisePublic implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|BpoVerificationStatus|value-of<BpoVerificationStatus>|null $bpoVerificationStatus
      * @param PhysicalAddress|PhysicalAddressShape|null $billingAddress
      * @param BillingContact|BillingContactShape|null $billingContact
      * @param OrganizationContact|OrganizationContactShape|null $organizationContact
      * @param PhysicalAddress|PhysicalAddressShape|null $organizationPhysicalAddress
+     * @param RoleType|value-of<RoleType>|null $roleType
      */
     public static function with(
+        string|Omitted|null $bpoVerificationRejectionReason = Omitted::VALUE,
+        Omitted|BpoVerificationStatus|string|null $bpoVerificationStatus = Omitted::VALUE,
         string|Omitted|null $corporateRegistrationNumber = Omitted::VALUE,
         string|Omitted|null $dunBradstreetNumber = Omitted::VALUE,
         string|Omitted|null $primaryBusinessDomainSicCode = Omitted::VALUE,
@@ -178,7 +237,7 @@ final class EnterprisePublic implements BaseModel
         ?string $organizationLegalType = null,
         PhysicalAddress|array|null $organizationPhysicalAddress = null,
         ?string $organizationType = null,
-        ?string $roleType = null,
+        RoleType|string|null $roleType = null,
         ?\DateTimeInterface $updatedAt = null,
         ?string $website = null,
     ): self {
@@ -187,6 +246,8 @@ final class EnterprisePublic implements BaseModel
         null !== $id && $self['id'] = $id;
         null !== $billingAddress && $self['billingAddress'] = $billingAddress;
         null !== $billingContact && $self['billingContact'] = $billingContact;
+        Omitted::VALUE !== $bpoVerificationRejectionReason && $self['bpoVerificationRejectionReason'] = $bpoVerificationRejectionReason;
+        Omitted::VALUE !== $bpoVerificationStatus && $self['bpoVerificationStatus'] = $bpoVerificationStatus;
         null !== $brandedCallingEnabled && $self['brandedCallingEnabled'] = $brandedCallingEnabled;
         Omitted::VALUE !== $corporateRegistrationNumber && $self['corporateRegistrationNumber'] = $corporateRegistrationNumber;
         null !== $countryCode && $self['countryCode'] = $countryCode;
@@ -246,6 +307,32 @@ final class EnterprisePublic implements BaseModel
     }
 
     /**
+     * Reason Telnyx rejected the BPO (Business Process Outsourcer) verification, when `bpo_verification_status` is `rejected`; `null` otherwise.
+     */
+    public function withBpoVerificationRejectionReason(
+        ?string $bpoVerificationRejectionReason
+    ): self {
+        $self = clone $this;
+        $self['bpoVerificationRejectionReason'] = $bpoVerificationRejectionReason;
+
+        return $self;
+    }
+
+    /**
+     * Whether Telnyx has approved this BPO (Business Process Outsourcer) account. Only set for accounts created with `role_type` `bpo`; `null` for normal enterprises. A BPO enterprise must be `approved` before a DIR can be linked to it through `bpo_authorizations`.
+     *
+     * @param BpoVerificationStatus|value-of<BpoVerificationStatus>|null $bpoVerificationStatus
+     */
+    public function withBpoVerificationStatus(
+        BpoVerificationStatus|string|null $bpoVerificationStatus
+    ): self {
+        $self = clone $this;
+        $self['bpoVerificationStatus'] = $bpoVerificationStatus;
+
+        return $self;
+    }
+
+    /**
      * True once Branded Calling has been activated on this enterprise (see `POST /enterprises/{id}/branded_calling`).
      */
     public function withBrandedCallingEnabled(bool $brandedCallingEnabled): self
@@ -257,7 +344,7 @@ final class EnterprisePublic implements BaseModel
     }
 
     /**
-     * Optional corporate-registration / company-number identifier.
+     * The official number your company received when it was legally registered or incorporated (for example from your state or national business registry). It is on your certificate of incorporation.
      */
     public function withCorporateRegistrationNumber(
         ?string $corporateRegistrationNumber
@@ -284,6 +371,9 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
+    /**
+     * Your own label for this account. Enter any reference that helps you find it in your records. Telnyx does not use it during vetting.
+     */
     public function withCustomerReference(string $customerReference): self
     {
         $self = clone $this;
@@ -292,6 +382,9 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
+    /**
+     * The trade name your business operates under if it is different from your legal name, also called a Doing Business As (DBA) name. Leave blank if you only use your legal name.
+     */
     public function withDoingBusinessAs(string $doingBusinessAs): self
     {
         $self = clone $this;
@@ -301,7 +394,7 @@ final class EnterprisePublic implements BaseModel
     }
 
     /**
-     * Optional D-U-N-S Number issued by Dun & Bradstreet.
+     * Your optional 9-digit D-U-N-S Number issued by Dun & Bradstreet, a unique identifier for your business. Leave blank if you do not have one.
      */
     public function withDunBradstreetNumber(?string $dunBradstreetNumber): self
     {
@@ -311,6 +404,9 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
+    /**
+     * US Federal Employer Identification Number (`NN-NNNNNNN`) or Canadian equivalent.
+     */
     public function withFein(string $fein): self
     {
         $self = clone $this;
@@ -319,6 +415,9 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
+    /**
+     * The industry your business operates in. Choose the closest match from the list; if your value is not accepted, pick the nearest category.
+     */
     public function withIndustry(string $industry): self
     {
         $self = clone $this;
@@ -327,6 +426,9 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
+    /**
+     * The state, province, or country where your business was legally incorporated, for example Delaware.
+     */
     public function withJurisdictionOfIncorporation(
         string $jurisdictionOfIncorporation
     ): self {
@@ -336,6 +438,9 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
+    /**
+     * Your business's full registered legal name, exactly as it appears on your incorporation or tax documents, 3 to 64 characters.
+     */
     public function withLegalName(string $legalName): self
     {
         $self = clone $this;
@@ -344,6 +449,9 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
+    /**
+     * Approximate headcount range. Used for vetting heuristics; pick the bucket that contains your current employee count.
+     */
     public function withNumberOfEmployees(string $numberOfEmployees): self
     {
         $self = clone $this;
@@ -376,6 +484,14 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
+    /**
+     * Legal-entity form. Pick the form that matches your incorporation documents:
+     * - `corporation` - C-corp or S-corp.
+     * - `llc` - limited liability company.
+     * - `partnership` - general/limited partnership.
+     * - `nonprofit` - non-profit corporation, charitable trust, or 501(c)(3)/equivalent.
+     * - `other` - anything else (sole proprietorships, government bodies, DBAs, etc.). You may be asked for additional documents during vetting.
+     */
     public function withOrganizationLegalType(
         string $organizationLegalType
     ): self {
@@ -406,7 +522,7 @@ final class EnterprisePublic implements BaseModel
     }
 
     /**
-     * Optional SIC code for the primary line of business.
+     * The 4-digit Standard Industrial Classification code for your main line of business, which tells us what industry you operate in. Look it up in the SIC code directory if you are unsure.
      */
     public function withPrimaryBusinessDomainSicCode(
         ?string $primaryBusinessDomainSicCode
@@ -418,7 +534,7 @@ final class EnterprisePublic implements BaseModel
     }
 
     /**
-     * Optional professional-license number for regulated industries.
+     * If your business operates under a professional license (for example legal, medical, or financial services), enter the license number issued by the licensing authority. Leave blank if it does not apply.
      */
     public function withProfessionalLicenseNumber(
         ?string $professionalLicenseNumber
@@ -429,7 +545,10 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    public function withRoleType(string $roleType): self
+    /**
+     * @param RoleType|value-of<RoleType> $roleType
+     */
+    public function withRoleType(RoleType|string $roleType): self
     {
         $self = clone $this;
         $self['roleType'] = $roleType;
@@ -445,6 +564,9 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
+    /**
+     * Your business's public website address, including https://. Leave blank if your business has no website.
+     */
     public function withWebsite(string $website): self
     {
         $self = clone $this;

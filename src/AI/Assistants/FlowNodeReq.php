@@ -117,7 +117,7 @@ final class FlowNodeReq implements BaseModel
     public ?TranscriptionSettings $transcription;
 
     /**
-     * Node kind discriminator. `prompt` (default) is an LLM-driven step; `tool` is a standalone tool execution (see `ToolNodeReq`).
+     * Node kind discriminator. `prompt` (default) is an LLM-driven step; `tool` is a standalone tool execution and `speak` a scripted message (see `ToolNodeReq` / `SpeakNodeReq`).
      *
      * @var value-of<Type>|null $type
      */
@@ -334,7 +334,7 @@ final class FlowNodeReq implements BaseModel
     }
 
     /**
-     * Node kind discriminator. `prompt` (default) is an LLM-driven step; `tool` is a standalone tool execution (see `ToolNodeReq`).
+     * Node kind discriminator. `prompt` (default) is an LLM-driven step; `tool` is a standalone tool execution and `speak` a scripted message (see `ToolNodeReq` / `SpeakNodeReq`).
      *
      * @param Type|value-of<Type> $type
      */

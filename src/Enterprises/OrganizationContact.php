@@ -22,20 +22,32 @@ final class OrganizationContact implements BaseModel
     /** @use SdkModel<OrganizationContactShape> */
     use SdkModel;
 
+    /**
+     * The email address of the main person Telnyx should contact about this account. For a call center (BPO) account this is the email you will verify later, so use a mailbox you can access.
+     */
     #[Required]
     public string $email;
 
+    /**
+     * The first name of the main person Telnyx should contact about this account.
+     */
     #[Required('first_name')]
     public string $firstName;
 
+    /**
+     * The job title of the main person Telnyx should contact about this account.
+     */
     #[Required('job_title')]
     public string $jobTitle;
 
+    /**
+     * The last name of the main person Telnyx should contact about this account.
+     */
     #[Required('last_name')]
     public string $lastName;
 
     /**
-     * E.164 format with leading `+`.
+     * The phone number of the main contact, in E.164 format, for example +12125551234.
      */
     #[Required('phone_number')]
     public string $phoneNumber;
@@ -89,6 +101,9 @@ final class OrganizationContact implements BaseModel
         return $self;
     }
 
+    /**
+     * The email address of the main person Telnyx should contact about this account. For a call center (BPO) account this is the email you will verify later, so use a mailbox you can access.
+     */
     public function withEmail(string $email): self
     {
         $self = clone $this;
@@ -97,6 +112,9 @@ final class OrganizationContact implements BaseModel
         return $self;
     }
 
+    /**
+     * The first name of the main person Telnyx should contact about this account.
+     */
     public function withFirstName(string $firstName): self
     {
         $self = clone $this;
@@ -105,6 +123,9 @@ final class OrganizationContact implements BaseModel
         return $self;
     }
 
+    /**
+     * The job title of the main person Telnyx should contact about this account.
+     */
     public function withJobTitle(string $jobTitle): self
     {
         $self = clone $this;
@@ -113,6 +134,9 @@ final class OrganizationContact implements BaseModel
         return $self;
     }
 
+    /**
+     * The last name of the main person Telnyx should contact about this account.
+     */
     public function withLastName(string $lastName): self
     {
         $self = clone $this;
@@ -122,7 +146,7 @@ final class OrganizationContact implements BaseModel
     }
 
     /**
-     * E.164 format with leading `+`.
+     * The phone number of the main contact, in E.164 format, for example +12125551234.
      */
     public function withPhoneNumber(string $phoneNumber): self
     {

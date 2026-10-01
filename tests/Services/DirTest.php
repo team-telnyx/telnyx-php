@@ -9,6 +9,8 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\Dir;
+use Telnyx\Dir\DirDeleteResponse;
+use Telnyx\Dir\DirGetBpoAuthorizationsResponse;
 use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirWrapped;
 use Telnyx\InfringementClaims\InfringementClaim;
@@ -92,7 +94,40 @@ final class DirTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
+        $this->assertInstanceOf(DirDeleteResponse::class, $result);
+    }
+
+    #[Test]
+    public function testBpoLoa(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->dir->bpoLoa(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            bpoEnterpriseID: '4a6192a4-573d-446d-b3ce-aff9117272a6',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
+    }
+
+    #[Test]
+    public function testBpoLoaWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->dir->bpoLoa(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            bpoEnterpriseID: '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            signature: ['imageBase64' => 'x', 'signerName' => 'signer_name'],
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -173,6 +208,21 @@ final class DirTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsString($result);
+    }
+
+    #[Test]
+    public function testRetrieveBpoAuthorizations(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->dir->retrieveBpoAuthorizations(
+            '16635d38-75a6-4481-82e8-69af60e05011'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DirGetBpoAuthorizationsResponse::class, $result);
     }
 
     #[Test]

@@ -31,6 +31,9 @@ final class PhysicalAddress implements BaseModel
     #[Required('administrative_area')]
     public string $administrativeArea;
 
+    /**
+     * The city of your registered business address.
+     */
     #[Required]
     public string $city;
 
@@ -40,12 +43,21 @@ final class PhysicalAddress implements BaseModel
     #[Required]
     public string $country;
 
+    /**
+     * The postal or ZIP code of your registered business address.
+     */
     #[Required('postal_code')]
     public string $postalCode;
 
+    /**
+     * The street address of your registered business, including the building number and street name.
+     */
     #[Required('street_address')]
     public string $streetAddress;
 
+    /**
+     * An optional second address line, such as a suite, unit, or floor. Leave blank if it does not apply.
+     */
     #[Optional('extended_address', nullable: true)]
     public ?string $extendedAddress;
 
@@ -116,6 +128,9 @@ final class PhysicalAddress implements BaseModel
         return $self;
     }
 
+    /**
+     * The city of your registered business address.
+     */
     public function withCity(string $city): self
     {
         $self = clone $this;
@@ -135,6 +150,9 @@ final class PhysicalAddress implements BaseModel
         return $self;
     }
 
+    /**
+     * The postal or ZIP code of your registered business address.
+     */
     public function withPostalCode(string $postalCode): self
     {
         $self = clone $this;
@@ -143,6 +161,9 @@ final class PhysicalAddress implements BaseModel
         return $self;
     }
 
+    /**
+     * The street address of your registered business, including the building number and street name.
+     */
     public function withStreetAddress(string $streetAddress): self
     {
         $self = clone $this;
@@ -151,6 +172,9 @@ final class PhysicalAddress implements BaseModel
         return $self;
     }
 
+    /**
+     * An optional second address line, such as a suite, unit, or floor. Leave blank if it does not apply.
+     */
     public function withExtendedAddress(?string $extendedAddress): self
     {
         $self = clone $this;

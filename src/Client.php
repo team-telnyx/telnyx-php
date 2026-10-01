@@ -164,6 +164,7 @@ use Telnyx\Services\SimCardOrdersService;
 use Telnyx\Services\SimCardsService;
 use Telnyx\Services\SiprecConnectorsService;
 use Telnyx\Services\SpeechToTextService;
+use Telnyx\Services\SpendLimitsService;
 use Telnyx\Services\StorageService;
 use Telnyx\Services\SubNumberOrdersReportService;
 use Telnyx\Services\SubNumberOrdersService;
@@ -1154,6 +1155,11 @@ class Client extends BaseClient
      */
     public MachinePaymentsService $machinePayments;
 
+    /**
+     * @api
+     */
+    public SpendLimitsService $spendLimits;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1414,6 +1420,7 @@ class Client extends BaseClient
         $this->botSessions = new BotSessionsService($this);
         $this->botSignup = new BotSignupService($this);
         $this->machinePayments = new MachinePaymentsService($this);
+        $this->spendLimits = new SpendLimitsService($this);
     }
 
     /** @return array<string,string> */
