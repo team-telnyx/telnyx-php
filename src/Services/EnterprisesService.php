@@ -339,7 +339,7 @@ final class EnterprisesService implements EnterprisesContract
     /**
      * @api
      *
-     * Branded Calling is a paid product that must be activated on each enterprise. Activation is idempotent:
+     * Branded Calling must be activated on each enterprise. Activation is idempotent:
      * - First call: marks the enterprise as activated and begins onboarding it with the Branded Calling platform asynchronously. Returns `200` with `branded_calling_enabled: true`.
      * - Re-call after success: no-op, returns the same enterprise body.
      * - Re-call after a prior failure: re-queues onboarding, returns `200`.
@@ -347,10 +347,12 @@ final class EnterprisesService implements EnterprisesContract
      * Prerequisite: the calling user must have agreed to the Branded Calling Terms of Service (`POST /terms_of_service/branded_calling/agree`). Without that, this endpoint returns `403 terms_of_service_not_accepted`.
      *
      * Failure modes:
+     * - `400` - the account has no available credit. Add funds and retry.
+     * - `400` - the enterprise is not in the United States. Branded Calling is currently available only to US enterprises.
      * - `403` - Branded Calling Terms of Service not accepted.
      * - `404` - enterprise does not exist or does not belong to your account.
      *
-     * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
+     * **Pricing:** Activation itself is free, but the account must have available credit. Branded Calling fees are charged per DIR and per branded call. See https://telnyx.com/pricing/branded-calling for current pricing.
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions

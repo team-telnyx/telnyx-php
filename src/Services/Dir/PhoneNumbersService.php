@@ -77,9 +77,9 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Register phone numbers under a DIR. The enterprise is resolved server-side from the DIR id. Same body, failure modes, and batch semantics whichever path form you use.
+     * Register phone numbers under a DIR. The enterprise is resolved server-side from the DIR id.
      *
-     * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
+     * **Pricing:** Adding phone numbers is free. Branded Calling fees are charged per DIR and per branded call. See https://telnyx.com/pricing/branded-calling for current pricing.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param list<Document|DocumentShape> $documents Supporting documents covering this batch. At least one entry with `document_type: letter_of_authorization` is required - the LOA authorises Telnyx to register these numbers under the DIR. Each `document_id` must come from the Telnyx Documents API. Additional document types (e.g. business registration) may be included alongside the LOA.
