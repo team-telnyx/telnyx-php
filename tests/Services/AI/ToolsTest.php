@@ -140,6 +140,6 @@ final class ToolsTest extends TestCase
         $result = $this->client->ai->tools->delete('tool_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsNotResource($result);
+        $this->assertNull($result);
     }
 }

@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCloneParams;
 use Telnyx\AI\Assistants\AssistantCreateParams;
+use Telnyx\AI\Assistants\AssistantDeleteParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
@@ -290,7 +291,14 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * Delete an AI Assistant by `assistant_id`.
      *
+     * By default this performs a soft delete: the assistant moves to the Recently Deleted list and stays restorable for 30 days, after which it is permanently deleted automatically. The assistant's versions and TeXML application are preserved during the retention window.
+     *
+     * Pass `hard_delete=true` to skip the retention window and permanently delete the assistant immediately. A hard delete erases the assistant and all of its versions, and deletes its TeXML application unless phone numbers are still assigned to it. It does not delete conversations, recordings, shared tools the assistant referenced, or knowledge-base embeddings.
+     *
+     * Deletion fails with `400` if other assistants reference this one through a handoff tool or a conversation-flow edge — remove those references first.
+     *
      * @param string $assistantID unique identifier of the assistant
+     * @param array{hardDelete?: bool}|AssistantDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantDeleteResponse>
@@ -299,13 +307,23 @@ final class AssistantsRawService implements AssistantsRawContract
      */
     public function delete(
         string $assistantID,
-        RequestOptions|array|null $requestOptions = null
+        array|AssistantDeleteParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
+        [$parsed, $options] = AssistantDeleteParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['ai/assistants/%1$s', $assistantID],
-            options: $requestOptions,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['hardDelete' => 'hard_delete']
+            ),
+            options: $options,
             convert: AssistantDeleteResponse::class,
         );
     }
@@ -447,6 +465,33 @@ final class AssistantsRawService implements AssistantsRawContract
             ),
             options: $options,
             convert: AssistantsList::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Restore a soft-deleted assistant from the Recently Deleted list.
+     *
+     * The assistant becomes fully active again with its versions and TeXML application as they were at deletion time. Restoring does not re-enable numbers or connections that were released separately after the deletion.
+     *
+     * @param string $assistantID unique identifier of the assistant
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<InferenceEmbedding>
+     *
+     * @throws APIException
+     */
+    public function restore(
+        string $assistantID,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['ai/assistants/%1$s/restore', $assistantID],
+            options: $requestOptions,
+            convert: InferenceEmbedding::class,
         );
     }
 

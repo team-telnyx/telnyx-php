@@ -235,9 +235,16 @@ final class ActionsService implements ActionsContract
      *
      * Answer an incoming call. You must issue this command before executing subsequent commands on an incoming call.
      *
+     * To answer with an AI assistant, include `assistant.id` and any per-call overrides in the `assistant` object. Telnyx attempts to warm up the assistant before answering the call, then starts the assistant automatically when the call is answered. Do not also send `ai_assistant_start` for this flow. The HTTP success response can arrive before the call is answered; use the `call.answered` webhook to track the answer. If warm-up fails, Telnyx falls back to starting the assistant after answering.
+     *
+     * When `assistant.id` is supplied, obtain the conversation ID from `data.payload.conversation_id` in the [call.conversation.created](/api-reference/callbacks/call-conversation-created) webhook and correlate it using `data.payload.call_control_id`. The `answer` HTTP response does not include `conversation_id`. The created event is emitted during assistant startup and does not indicate that the assistant is ready to speak.
+     *
+     * Set the assistant voice with `assistant.voice_settings.voice` and speech-to-text settings with `assistant.transcription`. You can reuse one stored assistant with different per-call settings. Warm-up prepares assistant configuration and dependencies; it does not wait for the greeting audio to be ready or guarantee zero silence after answer. A plain `answer` followed by `ai_assistant_start` performs assistant startup after the call has already been answered.
+     *
      * **Expected Webhooks:**
      *
      * - `call.answered`
+     * - `call.conversation.created` when the requested assistant conversation is created
      * - `call.hold` and `call.unhold` if the call is held/unheld
      * - `call.deepfake_detection.result` if `deepfake_detection` was enabled
      * - `call.deepfake_detection.error` if `deepfake_detection` was enabled and an error occurred
@@ -246,7 +253,7 @@ final class ActionsService implements ActionsContract
      * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param CallAssistantRequest|CallAssistantRequestShape $assistant AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
+     * @param CallAssistantRequest|CallAssistantRequestShape $assistant AI Assistant configuration and per-call overrides. All fields except `id` are optional. Omitted assistant fields use the stored configuration. Supplied `voice_settings` and `transcription` objects replace their stored objects rather than merging individual settings; include every setting you want to retain. `dynamic_variables` are merged, with request values taking precedence.
      * @param string $billingGroupID Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
@@ -271,7 +278,7 @@ final class ActionsService implements ActionsContract
      * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      * @param StreamTrack|value-of<StreamTrack> $streamTrack specifies which track should be streamed
      * @param string $streamURL the destination WebSocket address where the stream is going to be delivered
-     * @param bool $transcription Enable transcription upon call answer. The default value is false.
+     * @param bool $transcription Enable standalone call transcription upon call answer. The default value is false. Configure this feature with `transcription_config`. To configure speech recognition for an AI assistant, use `assistant.transcription` instead.
      * @param TranscriptionStartRequest|TranscriptionStartRequestShape $transcriptionConfig
      * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape> $webhookRetriesPolicies A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
@@ -569,6 +576,7 @@ final class ActionsService implements ActionsContract
      *
      * **Expected Webhooks:**
      *
+     * - [`call.conversation.created`](/api-reference/callbacks/call-conversation-created) includes `conversation_id` during startup
      * - `call.ai_gather.ended`
      * - `call.conversation.ended`
      * - `call.ai_gather.partial_results` (if `send_partial_results` is set to `true`)
@@ -1367,11 +1375,12 @@ final class ActionsService implements ActionsContract
      *
      * **Expected Webhooks:**
      *
+     * - [`call.conversation.created`](/api-reference/callbacks/call-conversation-created) includes `conversation_id` during startup
      * - `call.conversation.ended`
      * - `call.conversation_insights.generated`
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param CallAssistantRequest|CallAssistantRequestShape $assistant AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
+     * @param CallAssistantRequest|CallAssistantRequestShape $assistant AI Assistant configuration and per-call overrides. All fields except `id` are optional. Omitted assistant fields use the stored configuration. Supplied `voice_settings` and `transcription` objects replace their stored objects rather than merging individual settings; include every setting you want to retain. `dynamic_variables` are merged, with request values taking precedence.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $greeting Text that will be played when the assistant starts, if none then nothing will be played when the assistant starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
@@ -2338,11 +2347,12 @@ final class ActionsService implements ActionsContract
      * - `call.machine.greeting.ended` if `answering_machine_detection` was requested to detect the end of machine greeting
      * - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
      * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
+     * - `call.machine.premium.call_screening.detected` if `answering_machine_detection=premium_ios_call_screening_detection` was requested and an Apple Call Screening tone was detected
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $to The DID or SIP URI to dial out to. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter. You may also append a comma followed by DTMF digits (e.g. `+18004247767,200`) to play those digits as DTMF once the transfer destination answers — equivalent to setting `send_digits_on_answer` separately. If both are present, the explicit `send_digits_on_answer` parameter takes precedence.
-     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection Enables Answering Machine Detection. When a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If 'greeting_end' or 'detect_words' is used and a 'machine' is detected, you will receive another 'call.machine.greeting.ended' webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive 'call.machine.greeting.ended' if a beep is detected.
-     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection.
+     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection Enables Answering Machine Detection. When a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If 'greeting_end' or 'detect_words' is used and a 'machine' is detected, you will receive another 'call.machine.greeting.ended' webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive 'call.machine.greeting.ended' if a beep is detected. If `answering_machine_detection` is set to `premium_ios_call_screening_detection`, Premium AMD runs with iOS Call Screening support: after an initial `machine` result, Telnyx listens for the iOS call-screening prompt to end or for an Apple Call Screening tone, sends `call.machine.premium.greeting.ended` with `result=prompt_ended` or `call.machine.premium.call_screening.detected` with `result=screening` respectively. When the Apple Call Screening tone is detected, Premium AMD is restarted on the screened call and a `call.machine.premium.detection.ended` webhook with the post-screening classification follows.
+     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection. `prompt_end_timeout_millis` is additionally applicable when `premium_ios_call_screening_detection` is selected.
      * @param string $audioURL The URL of a file to be played back when the transfer destination answers before bridging the call. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.

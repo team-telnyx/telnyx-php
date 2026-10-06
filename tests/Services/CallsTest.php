@@ -82,6 +82,7 @@ final class CallsTest extends TestCase
                 'initialSilenceMillis' => 1000,
                 'maximumNumberOfWords' => 1000,
                 'maximumWordLengthMillis' => 2000,
+                'promptEndTimeoutMillis' => 5000,
                 'silenceThreshold' => 512,
                 'totalAnalysisTimeMillis' => 5000,
             ],
@@ -130,6 +131,9 @@ final class CallsTest extends TestCase
                         ],
                         'type' => 'book_appointment',
                     ],
+                ],
+                'transcription' => [
+                    'language' => 'language', 'model' => 'distil-whisper/distil-large-v2',
                 ],
                 'voiceSettings' => [
                     'voice' => 'voice',

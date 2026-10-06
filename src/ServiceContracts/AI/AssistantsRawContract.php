@@ -8,6 +8,7 @@ use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCloneParams;
 use Telnyx\AI\Assistants\AssistantCreateParams;
+use Telnyx\AI\Assistants\AssistantDeleteParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams;
 use Telnyx\AI\Assistants\AssistantRetrieveParams;
@@ -93,6 +94,7 @@ interface AssistantsRawContract
      * @api
      *
      * @param string $assistantID unique identifier of the assistant
+     * @param array<string,mixed>|AssistantDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantDeleteResponse>
@@ -101,7 +103,8 @@ interface AssistantsRawContract
      */
     public function delete(
         string $assistantID,
-        RequestOptions|array|null $requestOptions = null
+        array|AssistantDeleteParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -166,6 +169,21 @@ interface AssistantsRawContract
     public function imports(
         array|AssistantImportsParams $params,
         RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $assistantID unique identifier of the assistant
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<InferenceEmbedding>
+     *
+     * @throws APIException
+     */
+    public function restore(
+        string $assistantID,
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**

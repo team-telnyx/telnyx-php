@@ -171,6 +171,7 @@ Methods:
 - <code title="post /ai/assistants/{assistant_id}/clone">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">clone</a>(...$params)</code>
 - <code title="get /ai/assistants/{assistant_id}/texml">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">getTexml</a>(...$params)</code>
 - <code title="post /ai/assistants/import">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">imports</a>(...$params)</code>
+- <code title="post /ai/assistants/{assistant_id}/restore">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">restore</a>(...$params)</code>
 - <code title="post /ai/assistants/{assistant_id}/chat/sms">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">sendSMS</a>(...$params)</code>
 - <code title="post /ai/assistants/{assistant_id}/chat/whatsapp">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">whatsapp</a>(...$params)</code>
 
@@ -254,6 +255,13 @@ Methods:
 Methods:
 
 - <code title="post /ai/assistants/{assistant_id}/instructions/enhance">$client->ai->assistants->instructions-><a href="./src/Services/AI/Assistants/InstructionsService.php">enhance</a>(...$params)</code>
+
+### Deleted
+
+Methods:
+
+- <code title="get /ai/assistants/deleted">$client->ai->assistants->deleted-><a href="./src/Services/AI/Assistants/DeletedService.php">list</a>(...$params)</code>
+- <code title="get /ai/assistants/{assistant_id}/deleted">$client->ai->assistants->deleted-><a href="./src/Services/AI/Assistants/DeletedService.php">get</a>(...$params)</code>
 
 ## Audio
 
@@ -2682,6 +2690,13 @@ Methods:
 - <code title="get /v2/whatsapp/phone_numbers/{phone_number}/conversational_components">$client->whatsapp->phoneNumbers->conversationalComponents-><a href="./src/Services/Whatsapp/PhoneNumbers/ConversationalComponentsService.php">list</a>(...$params)</code>
 - <code title="patch /v2/whatsapp/phone_numbers/{phone_number}/conversational_components">$client->whatsapp->phoneNumbers->conversationalComponents-><a href="./src/Services/Whatsapp/PhoneNumbers/ConversationalComponentsService.php">patchAll</a>(...$params)</code>
 
+### CallingRouting
+
+Methods:
+
+- <code title="get /whatsapp/phone_numbers/{id}/calling_routing">$client->whatsapp->phoneNumbers->callingRouting-><a href="./src/Services/Whatsapp/PhoneNumbers/CallingRoutingService.php">list</a>(...$params)</code>
+- <code title="patch /whatsapp/phone_numbers/{id}/calling_routing">$client->whatsapp->phoneNumbers->callingRouting-><a href="./src/Services/Whatsapp/PhoneNumbers/CallingRoutingService.php">patchAll</a>(...$params)</code>
+
 ## UserData
 
 Methods:
@@ -3250,3 +3265,11 @@ Methods:
 - <code title="patch /spend_limits/{product}">$client->spendLimits-><a href="./src/Services/SpendLimitsService.php">update</a>(...$params)</code>
 - <code title="get /spend_limits">$client->spendLimits-><a href="./src/Services/SpendLimitsService.php">list</a>()</code>
 - <code title="delete /spend_limits/{product}">$client->spendLimits-><a href="./src/Services/SpendLimitsService.php">delete</a>(...$params)</code>
+
+# LlmTokenGateway
+
+## Usage
+
+Methods:
+
+- <code title="get /llm_token_gateway/usage/summary">$client->llmTokenGateway->usage-><a href="./src/Services/LlmTokenGateway/UsageService.php">retrieveSummary</a>(...$params)</code>

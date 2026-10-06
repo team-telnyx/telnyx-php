@@ -16,6 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * **Expected Webhooks:**
  *
+ * - [`call.conversation.created`](/api-reference/callbacks/call-conversation-created) includes `conversation_id` during startup
  * - `call.conversation.ended`
  * - `call.conversation_insights.generated`
  *
@@ -47,7 +48,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     use SdkParams;
 
     /**
-     * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
+     * AI Assistant configuration and per-call overrides. All fields except `id` are optional. Omitted assistant fields use the stored configuration. Supplied `voice_settings` and `transcription` objects replace their stored objects rather than merging individual settings; include every setting you want to retain. `dynamic_variables` are merged, with request values taking precedence.
      */
     #[Optional]
     public ?CallAssistantRequest $assistant;
@@ -147,7 +148,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     }
 
     /**
-     * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
+     * AI Assistant configuration and per-call overrides. All fields except `id` are optional. Omitted assistant fields use the stored configuration. Supplied `voice_settings` and `transcription` objects replace their stored objects rather than merging individual settings; include every setting you want to retain. `dynamic_variables` are merged, with request values taking precedence.
      *
      * @param CallAssistantRequest|CallAssistantRequestShape $assistant
      */

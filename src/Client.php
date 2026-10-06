@@ -86,6 +86,7 @@ use Telnyx\Services\IPsService;
 use Telnyx\Services\LedgerBillingGroupReportsService;
 use Telnyx\Services\LegacyService;
 use Telnyx\Services\ListService;
+use Telnyx\Services\LlmTokenGatewayService;
 use Telnyx\Services\MachinePaymentsService;
 use Telnyx\Services\ManagedAccountsService;
 use Telnyx\Services\MediaService;
@@ -1160,6 +1161,11 @@ class Client extends BaseClient
      */
     public SpendLimitsService $spendLimits;
 
+    /**
+     * @api
+     */
+    public LlmTokenGatewayService $llmTokenGateway;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1421,6 +1427,7 @@ class Client extends BaseClient
         $this->botSignup = new BotSignupService($this);
         $this->machinePayments = new MachinePaymentsService($this);
         $this->spendLimits = new SpendLimitsService($this);
+        $this->llmTokenGateway = new LlmTokenGatewayService($this);
     }
 
     /** @return array<string,string> */

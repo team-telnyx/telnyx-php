@@ -36,6 +36,7 @@ use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
 use Telnyx\Services\AI\Assistants\CanaryDeploysService;
+use Telnyx\Services\AI\Assistants\DeletedService;
 use Telnyx\Services\AI\Assistants\InstructionsService;
 use Telnyx\Services\AI\Assistants\ScheduledEventsService;
 use Telnyx\Services\AI\Assistants\TagsService;
@@ -112,6 +113,11 @@ final class AssistantsService implements AssistantsContract
     public InstructionsService $instructions;
 
     /**
+     * @api
+     */
+    public DeletedService $deleted;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -124,6 +130,7 @@ final class AssistantsService implements AssistantsContract
         $this->versions = new VersionsService($client);
         $this->tags = new TagsService($client);
         $this->instructions = new InstructionsService($client);
+        $this->deleted = new DeletedService($client);
     }
 
     /**
@@ -438,17 +445,27 @@ final class AssistantsService implements AssistantsContract
      *
      * Delete an AI Assistant by `assistant_id`.
      *
+     * By default this performs a soft delete: the assistant moves to the Recently Deleted list and stays restorable for 30 days, after which it is permanently deleted automatically. The assistant's versions and TeXML application are preserved during the retention window.
+     *
+     * Pass `hard_delete=true` to skip the retention window and permanently delete the assistant immediately. A hard delete erases the assistant and all of its versions, and deletes its TeXML application unless phone numbers are still assigned to it. It does not delete conversations, recordings, shared tools the assistant referenced, or knowledge-base embeddings.
+     *
+     * Deletion fails with `400` if other assistants reference this one through a handoff tool or a conversation-flow edge — remove those references first.
+     *
      * @param string $assistantID unique identifier of the assistant
+     * @param bool $hardDelete permanently delete the assistant immediately instead of soft-deleting it to the Recently Deleted list, where it stays restorable for 30 days
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $assistantID,
-        RequestOptions|array|null $requestOptions = null
+        bool $hardDelete = false,
+        RequestOptions|array|null $requestOptions = null,
     ): AssistantDeleteResponse {
+        $params = ['hardDelete' => $hardDelete];
+
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->delete($assistantID, requestOptions: $requestOptions);
+        $response = $this->raw->delete($assistantID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -570,6 +587,28 @@ final class AssistantsService implements AssistantsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->imports(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Restore a soft-deleted assistant from the Recently Deleted list.
+     *
+     * The assistant becomes fully active again with its versions and TeXML application as they were at deletion time. Restoring does not re-enable numbers or connections that were released separately after the deletion.
+     *
+     * @param string $assistantID unique identifier of the assistant
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function restore(
+        string $assistantID,
+        RequestOptions|array|null $requestOptions = null
+    ): InferenceEmbedding {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->restore($assistantID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

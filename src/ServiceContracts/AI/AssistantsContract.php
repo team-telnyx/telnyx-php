@@ -255,13 +255,15 @@ interface AssistantsContract
      * @api
      *
      * @param string $assistantID unique identifier of the assistant
+     * @param bool $hardDelete permanently delete the assistant immediately instead of soft-deleting it to the Recently Deleted list, where it stays restorable for 30 days
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $assistantID,
-        RequestOptions|array|null $requestOptions = null
+        bool $hardDelete = false,
+        RequestOptions|array|null $requestOptions = null,
     ): AssistantDeleteResponse;
 
     /**
@@ -331,6 +333,19 @@ interface AssistantsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantsList;
+
+    /**
+     * @api
+     *
+     * @param string $assistantID unique identifier of the assistant
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function restore(
+        string $assistantID,
+        RequestOptions|array|null $requestOptions = null
+    ): InferenceEmbedding;
 
     /**
      * @api

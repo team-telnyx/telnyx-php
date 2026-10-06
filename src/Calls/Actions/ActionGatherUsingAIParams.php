@@ -23,6 +23,7 @@ use Telnyx\XaiVoiceSettings;
  *
  * **Expected Webhooks:**
  *
+ * - [`call.conversation.created`](/api-reference/callbacks/call-conversation-created) includes `conversation_id` during startup
  * - `call.ai_gather.ended`
  * - `call.conversation.ended`
  * - `call.ai_gather.partial_results` (if `send_partial_results` is set to `true`)

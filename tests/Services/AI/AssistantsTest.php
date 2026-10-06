@@ -568,6 +568,19 @@ final class AssistantsTest extends TestCase
     }
 
     #[Test]
+    public function testRestore(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->assistants->restore('assistant_id');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InferenceEmbedding::class, $result);
+    }
+
+    #[Test]
     public function testSendSMS(): void
     {
         if (UnsupportedMockTests::$skip) {
