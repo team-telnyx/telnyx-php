@@ -237,14 +237,11 @@ final class ActionsService implements ActionsContract
      *
      * To answer with an AI assistant, include `assistant.id` and any per-call overrides in the `assistant` object. Telnyx attempts to warm up the assistant before answering the call, then starts the assistant automatically when the call is answered. Do not also send `ai_assistant_start` for this flow. The HTTP success response can arrive before the call is answered; use the `call.answered` webhook to track the answer. If warm-up fails, Telnyx falls back to starting the assistant after answering.
      *
-     * When `assistant.id` is supplied, obtain the conversation ID from `data.payload.conversation_id` in the [call.conversation.created](/api-reference/callbacks/call-conversation-created) webhook and correlate it using `data.payload.call_control_id`. The `answer` HTTP response does not include `conversation_id`. The created event is emitted during assistant startup and does not indicate that the assistant is ready to speak.
-     *
      * Set the assistant voice with `assistant.voice_settings.voice` and speech-to-text settings with `assistant.transcription`. You can reuse one stored assistant with different per-call settings. Warm-up prepares assistant configuration and dependencies; it does not wait for the greeting audio to be ready or guarantee zero silence after answer. A plain `answer` followed by `ai_assistant_start` performs assistant startup after the call has already been answered.
      *
      * **Expected Webhooks:**
      *
      * - `call.answered`
-     * - `call.conversation.created` when the requested assistant conversation is created
      * - `call.hold` and `call.unhold` if the call is held/unheld
      * - `call.deepfake_detection.result` if `deepfake_detection` was enabled
      * - `call.deepfake_detection.error` if `deepfake_detection` was enabled and an error occurred
@@ -576,7 +573,6 @@ final class ActionsService implements ActionsContract
      *
      * **Expected Webhooks:**
      *
-     * - [`call.conversation.created`](/api-reference/callbacks/call-conversation-created) includes `conversation_id` during startup
      * - `call.ai_gather.ended`
      * - `call.conversation.ended`
      * - `call.ai_gather.partial_results` (if `send_partial_results` is set to `true`)
@@ -600,7 +596,7 @@ final class ActionsService implements ActionsContract
      *
      *  **Supported Providers:**
      * - **AWS:** Use `AWS.Polly.<VoiceId>` (e.g., `AWS.Polly.Joanna`). For neural voices, which provide more realistic, human-like speech, append `-Neural` to the `VoiceId` (e.g., `AWS.Polly.Joanna-Neural`). Check the [available voices](https://docs.aws.amazon.com/polly/latest/dg/available-voices.html) for compatibility.
-     * - **Azure:** Use `Azure.<VoiceId>` (e.g., `Azure.en-CA-ClaraNeural`, `Azure.en-CA-LiamNeural`, `Azure.en-US-BrianMultilingualNeural`, `Azure.en-US-Ava:DragonHDLatestNeural`). For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).
+     * - **Azure:** Use `Azure.<VoiceId>. (e.g. Azure.en-CA-ClaraNeural, Azure.en-CA-LiamNeural, Azure.en-US-BrianMultilingualNeural, Azure.en-US-Ava:DragonHDLatestNeural. For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).)
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`.
@@ -1375,7 +1371,6 @@ final class ActionsService implements ActionsContract
      *
      * **Expected Webhooks:**
      *
-     * - [`call.conversation.created`](/api-reference/callbacks/call-conversation-created) includes `conversation_id` during startup
      * - `call.conversation.ended`
      * - `call.conversation_insights.generated`
      *
@@ -1462,7 +1457,7 @@ final class ActionsService implements ActionsContract
      *
      *  **Supported Providers:**
      * - **AWS:** Use `AWS.Polly.<VoiceId>` (e.g., `AWS.Polly.Joanna`). For neural voices, which provide more realistic, human-like speech, append `-Neural` to the `VoiceId` (e.g., `AWS.Polly.Joanna-Neural`). Check the [available voices](https://docs.aws.amazon.com/polly/latest/dg/available-voices.html) for compatibility.
-     * - **Azure:** Use `Azure.<VoiceId>` (e.g., `Azure.en-CA-ClaraNeural`, `Azure.en-CA-LiamNeural`, `Azure.en-US-BrianMultilingualNeural`, `Azure.en-US-Ava:DragonHDLatestNeural`). For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).
+     * - **Azure:** Use `Azure.<VoiceId>. (e.g. Azure.en-CA-ClaraNeural, Azure.en-CA-LiamNeural, Azure.en-US-BrianMultilingualNeural, Azure.en-US-Ava:DragonHDLatestNeural. For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).)
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`.
@@ -2347,12 +2342,11 @@ final class ActionsService implements ActionsContract
      * - `call.machine.greeting.ended` if `answering_machine_detection` was requested to detect the end of machine greeting
      * - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
      * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
-     * - `call.machine.premium.call_screening.detected` if `answering_machine_detection=premium_ios_call_screening_detection` was requested and an Apple Call Screening tone was detected
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $to The DID or SIP URI to dial out to. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter. You may also append a comma followed by DTMF digits (e.g. `+18004247767,200`) to play those digits as DTMF once the transfer destination answers — equivalent to setting `send_digits_on_answer` separately. If both are present, the explicit `send_digits_on_answer` parameter takes precedence.
-     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection Enables Answering Machine Detection. When a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If 'greeting_end' or 'detect_words' is used and a 'machine' is detected, you will receive another 'call.machine.greeting.ended' webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive 'call.machine.greeting.ended' if a beep is detected. If `answering_machine_detection` is set to `premium_ios_call_screening_detection`, Premium AMD runs with iOS Call Screening support: after an initial `machine` result, Telnyx listens for the iOS call-screening prompt to end or for an Apple Call Screening tone, sends `call.machine.premium.greeting.ended` with `result=prompt_ended` or `call.machine.premium.call_screening.detected` with `result=screening` respectively. When the Apple Call Screening tone is detected, Premium AMD is restarted on the screened call and a `call.machine.premium.detection.ended` webhook with the post-screening classification follows.
-     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection. `prompt_end_timeout_millis` is additionally applicable when `premium_ios_call_screening_detection` is selected.
+     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection Enables Answering Machine Detection. When a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If 'greeting_end' or 'detect_words' is used and a 'machine' is detected, you will receive another 'call.machine.greeting.ended' webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive 'call.machine.greeting.ended' if a beep is detected.
+     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection.
      * @param string $audioURL The URL of a file to be played back when the transfer destination answers before bridging the call. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.

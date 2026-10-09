@@ -11,13 +11,7 @@ enum PhoneNumberType: string
 {
     case LOCAL = 'local';
 
-    case MOBILE = 'mobile';
-
-    case MULTIPURPOSE = 'multipurpose';
-
     case NATIONAL = 'national';
-
-    case SHARED_COST = 'shared_cost';
 
     case TOLL_FREE = 'toll_free';
 }

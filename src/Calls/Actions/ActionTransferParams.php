@@ -41,7 +41,6 @@ use Telnyx\Core\Conversion\ListOf;
  * - `call.machine.greeting.ended` if `answering_machine_detection` was requested to detect the end of machine greeting
  * - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
  * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
- * - `call.machine.premium.call_screening.detected` if `answering_machine_detection=premium_ios_call_screening_detection` was requested and an Apple Call Screening tone was detected
  *
  * @see Telnyx\Services\Calls\ActionsService::transfer()
  *
@@ -108,7 +107,7 @@ final class ActionTransferParams implements BaseModel
     public string $to;
 
     /**
-     * Enables Answering Machine Detection. When a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If 'greeting_end' or 'detect_words' is used and a 'machine' is detected, you will receive another 'call.machine.greeting.ended' webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive 'call.machine.greeting.ended' if a beep is detected. If `answering_machine_detection` is set to `premium_ios_call_screening_detection`, Premium AMD runs with iOS Call Screening support: after an initial `machine` result, Telnyx listens for the iOS call-screening prompt to end or for an Apple Call Screening tone, sends `call.machine.premium.greeting.ended` with `result=prompt_ended` or `call.machine.premium.call_screening.detected` with `result=screening` respectively. When the Apple Call Screening tone is detected, Premium AMD is restarted on the screened call and a `call.machine.premium.detection.ended` webhook with the post-screening classification follows.
+     * Enables Answering Machine Detection. When a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If 'greeting_end' or 'detect_words' is used and a 'machine' is detected, you will receive another 'call.machine.greeting.ended' webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive 'call.machine.greeting.ended' if a beep is detected.
      *
      * @var value-of<AnsweringMachineDetection>|null $answeringMachineDetection
      */
@@ -119,7 +118,7 @@ final class ActionTransferParams implements BaseModel
     public ?string $answeringMachineDetection;
 
     /**
-     * Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection. `prompt_end_timeout_millis` is additionally applicable when `premium_ios_call_screening_detection` is selected.
+     * Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection.
      */
     #[Optional('answering_machine_detection_config')]
     public ?AnsweringMachineDetectionConfig $answeringMachineDetectionConfig;
@@ -531,7 +530,7 @@ final class ActionTransferParams implements BaseModel
     }
 
     /**
-     * Enables Answering Machine Detection. When a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If 'greeting_end' or 'detect_words' is used and a 'machine' is detected, you will receive another 'call.machine.greeting.ended' webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive 'call.machine.greeting.ended' if a beep is detected. If `answering_machine_detection` is set to `premium_ios_call_screening_detection`, Premium AMD runs with iOS Call Screening support: after an initial `machine` result, Telnyx listens for the iOS call-screening prompt to end or for an Apple Call Screening tone, sends `call.machine.premium.greeting.ended` with `result=prompt_ended` or `call.machine.premium.call_screening.detected` with `result=screening` respectively. When the Apple Call Screening tone is detected, Premium AMD is restarted on the screened call and a `call.machine.premium.detection.ended` webhook with the post-screening classification follows.
+     * Enables Answering Machine Detection. When a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If 'greeting_end' or 'detect_words' is used and a 'machine' is detected, you will receive another 'call.machine.greeting.ended' webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive 'call.machine.greeting.ended' if a beep is detected.
      *
      * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection
      */
@@ -545,7 +544,7 @@ final class ActionTransferParams implements BaseModel
     }
 
     /**
-     * Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection. `prompt_end_timeout_millis` is additionally applicable when `premium_ios_call_screening_detection` is selected.
+     * Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection.
      *
      * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
      */

@@ -63,7 +63,7 @@ final class Payload implements BaseModel
     public ?string $from;
 
     /**
-     * Premium Answering Machine Greeting Ended result. `prompt_ended` is only sent when `answering_machine_detection` is `premium_ios_call_screening_detection` and the iOS call-screening prompt ends without a beep.
+     * Premium Answering Machine Greeting Ended result.
      *
      * @var value-of<Result>|null $result
      */
@@ -179,7 +179,7 @@ final class Payload implements BaseModel
     }
 
     /**
-     * Premium Answering Machine Greeting Ended result. `prompt_ended` is only sent when `answering_machine_detection` is `premium_ios_call_screening_detection` and the iOS call-screening prompt ends without a beep.
+     * Premium Answering Machine Greeting Ended result.
      *
      * @param Result|value-of<Result> $result
      */

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection. `prompt_end_timeout_millis` is additionally applicable when `premium_ios_call_screening_detection` is selected.
+ * Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection.
  *
  * @phpstan-type AnsweringMachineDetectionConfigShape = array{
  *   afterGreetingSilenceMillis?: int|null,
@@ -29,7 +29,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *   initialSilenceMillis?: int|null,
  *   maximumNumberOfWords?: int|null,
  *   maximumWordLengthMillis?: int|null,
- *   promptEndTimeoutMillis?: int|null,
  *   silenceThreshold?: int|null,
  *   totalAnalysisTimeMillis?: int|null,
  * }
@@ -138,12 +137,6 @@ final class AnsweringMachineDetectionConfig implements BaseModel
     public ?int $maximumWordLengthMillis;
 
     /**
-     * Maximum time Telnyx waits, in milliseconds, for the iOS call-screening prompt to end after Premium AMD initially detects a `machine`. Used when `answering_machine_detection` is `premium_ios_call_screening_detection`. Defaults to 5000 milliseconds.
-     */
-    #[Optional('prompt_end_timeout_millis')]
-    public ?int $promptEndTimeoutMillis;
-
-    /**
      * Minimum noise threshold for any analysis.
      */
     #[Optional('silence_threshold')]
@@ -184,7 +177,6 @@ final class AnsweringMachineDetectionConfig implements BaseModel
         ?int $initialSilenceMillis = null,
         ?int $maximumNumberOfWords = null,
         ?int $maximumWordLengthMillis = null,
-        ?int $promptEndTimeoutMillis = null,
         ?int $silenceThreshold = null,
         ?int $totalAnalysisTimeMillis = null,
     ): self {
@@ -206,7 +198,6 @@ final class AnsweringMachineDetectionConfig implements BaseModel
         null !== $initialSilenceMillis && $self['initialSilenceMillis'] = $initialSilenceMillis;
         null !== $maximumNumberOfWords && $self['maximumNumberOfWords'] = $maximumNumberOfWords;
         null !== $maximumWordLengthMillis && $self['maximumWordLengthMillis'] = $maximumWordLengthMillis;
-        null !== $promptEndTimeoutMillis && $self['promptEndTimeoutMillis'] = $promptEndTimeoutMillis;
         null !== $silenceThreshold && $self['silenceThreshold'] = $silenceThreshold;
         null !== $totalAnalysisTimeMillis && $self['totalAnalysisTimeMillis'] = $totalAnalysisTimeMillis;
 
@@ -399,18 +390,6 @@ final class AnsweringMachineDetectionConfig implements BaseModel
     ): self {
         $self = clone $this;
         $self['maximumWordLengthMillis'] = $maximumWordLengthMillis;
-
-        return $self;
-    }
-
-    /**
-     * Maximum time Telnyx waits, in milliseconds, for the iOS call-screening prompt to end after Premium AMD initially detects a `machine`. Used when `answering_machine_detection` is `premium_ios_call_screening_detection`. Defaults to 5000 milliseconds.
-     */
-    public function withPromptEndTimeoutMillis(
-        int $promptEndTimeoutMillis
-    ): self {
-        $self = clone $this;
-        $self['promptEndTimeoutMillis'] = $promptEndTimeoutMillis;
 
         return $self;
     }

@@ -16,7 +16,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * **Expected Webhooks:**
  *
- * - [`call.conversation.created`](/api-reference/callbacks/call-conversation-created) includes `conversation_id` during startup
  * - `call.conversation.ended`
  * - `call.conversation_insights.generated`
  *
