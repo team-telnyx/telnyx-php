@@ -10,6 +10,7 @@ use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbersContract;
+use Telnyx\Services\Whatsapp\PhoneNumbers\CallingRoutingService;
 use Telnyx\Services\Whatsapp\PhoneNumbers\CallingSettingsService;
 use Telnyx\Services\Whatsapp\PhoneNumbers\ConversationalComponentsService;
 use Telnyx\Services\Whatsapp\PhoneNumbers\ProfileService;
@@ -47,6 +48,11 @@ final class PhoneNumbersService implements PhoneNumbersContract
     public ConversationalComponentsService $conversationalComponents;
 
     /**
+     * @api
+     */
+    public CallingRoutingService $callingRouting;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -55,6 +61,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         $this->callingSettings = new CallingSettingsService($client);
         $this->profile = new ProfileService($client);
         $this->conversationalComponents = new ConversationalComponentsService($client);
+        $this->callingRouting = new CallingRoutingService($client);
     }
 
     /**

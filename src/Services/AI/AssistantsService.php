@@ -12,7 +12,9 @@ use Telnyx\AI\Assistants\AssistantIntegration;
 use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
+use Telnyx\AI\Assistants\AssistantWhatsappResponse;
 use Telnyx\AI\Assistants\ConversationFlowReq;
+use Telnyx\AI\Assistants\DelegationSettings;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
@@ -26,6 +28,7 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\WebsocketSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -33,6 +36,7 @@ use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
 use Telnyx\Services\AI\Assistants\CanaryDeploysService;
+use Telnyx\Services\AI\Assistants\DeletedService;
 use Telnyx\Services\AI\Assistants\InstructionsService;
 use Telnyx\Services\AI\Assistants\ScheduledEventsService;
 use Telnyx\Services\AI\Assistants\TagsService;
@@ -44,8 +48,10 @@ use Telnyx\Services\AI\Assistants\VersionsService;
  * Configure AI assistant specifications.
  *
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
+ * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantWhatsappParams\ConversationMetadata as ConversationMetadataShape1
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
+ * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -60,6 +66,7 @@ use Telnyx\Services\AI\Assistants\VersionsService;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
+ * @phpstan-import-type WebsocketSettingsShape from \Telnyx\AI\Assistants\WebsocketSettings
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -106,6 +113,11 @@ final class AssistantsService implements AssistantsContract
     public InstructionsService $instructions;
 
     /**
+     * @api
+     */
+    public DeletedService $deleted;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -118,6 +130,7 @@ final class AssistantsService implements AssistantsContract
         $this->versions = new VersionsService($client);
         $this->tags = new TagsService($client);
         $this->instructions = new InstructionsService($client);
+        $this->deleted = new DeletedService($client);
     }
 
     /**
@@ -133,6 +146,7 @@ final class AssistantsService implements AssistantsContract
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
      * enforces unique node/edge IDs, that `start_node_id` references a real
      * node, and that every edge's endpoints reference real nodes.
+     * @param DelegationSettings|DelegationSettingsShape $delegationSettings Body param: Splits the conversation between a frontend model that talks to the caller and a backend model that does the work. On the GPT-Live route the frontend model cannot call tools at all — when it needs something done it raises a delegation and waits. On the chat completion route the frontend keeps a single `delegate` tool that returns immediately, so the conversation carries on while the backend works. Either way the backend's answer is spoken as commentary or kept as silent context, depending on `speak_results`. Beta feature.
      * @param string $description Body param
      * @param array<string,mixed> $dynamicVariables Body param: Map of dynamic variables and their default values
      * @param int $dynamicVariablesWebhookTimeoutMs Body param: Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
@@ -157,6 +171,7 @@ final class AssistantsService implements AssistantsContract
      * @param list<AssistantToolShape> $tools Body param: Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints.
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription Body param
      * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape $voiceSettings Body param
+     * @param WebsocketSettings|WebsocketSettingsShape $websocketSettings Body param: Streams conversation and telephony events to a WebSocket server you host, and accepts messages injected back into the conversation. Telnyx opens the connection as a client, once per conversation. Delivery is best effort throughout: while the connection is down events are dropped rather than queued, and no socket failure is ever allowed to affect the call. Beta feature.
      * @param WidgetSettings|WidgetSettingsShape $widgetSettings body param: Configuration settings for the assistant's web widget
      * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
@@ -168,6 +183,7 @@ final class AssistantsService implements AssistantsContract
         string $name,
         array $a2aAgents = [],
         ConversationFlowReq|array|null $conversationFlow = null,
+        DelegationSettings|array|null $delegationSettings = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         int $dynamicVariablesWebhookTimeoutMs = 1500,
@@ -192,6 +208,7 @@ final class AssistantsService implements AssistantsContract
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
+        WebsocketSettings|array|null $websocketSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
@@ -202,6 +219,7 @@ final class AssistantsService implements AssistantsContract
                 'name' => $name,
                 'a2aAgents' => $a2aAgents,
                 'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
+                'delegationSettings' => $delegationSettings ?? Omitted::VALUE,
                 'description' => $description ?? Omitted::VALUE,
                 'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,
@@ -226,6 +244,7 @@ final class AssistantsService implements AssistantsContract
                 'tools' => $tools ?? Omitted::VALUE,
                 'transcription' => $transcription ?? Omitted::VALUE,
                 'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'websocketSettings' => $websocketSettings ?? Omitted::VALUE,
                 'widgetSettings' => $widgetSettings ?? Omitted::VALUE,
                 'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
@@ -288,6 +307,7 @@ final class AssistantsService implements AssistantsContract
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
      * enforces unique node/edge IDs, that `start_node_id` references a real
      * node, and that every edge's endpoints reference real nodes.
+     * @param DelegationSettings|DelegationSettingsShape $delegationSettings Splits the conversation between a frontend model that talks to the caller and a backend model that does the work. On the GPT-Live route the frontend model cannot call tools at all — when it needs something done it raises a delegation and waits. On the chat completion route the frontend keeps a single `delegate` tool that returns immediately, so the conversation carries on while the backend works. Either way the backend's answer is spoken as commentary or kept as silent context, depending on `speak_results`. Beta feature.
      * @param array<string,mixed> $dynamicVariables Map of dynamic variables and their default values
      * @param int $dynamicVariablesWebhookTimeoutMs Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      * @param string $dynamicVariablesWebhookURL If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
@@ -314,6 +334,7 @@ final class AssistantsService implements AssistantsContract
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
      * @param string $versionName human-readable name for the assistant version
      * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape $voiceSettings
+     * @param WebsocketSettings|WebsocketSettingsShape $websocketSettings Streams conversation and telephony events to a WebSocket server you host, and accepts messages injected back into the conversation. Telnyx opens the connection as a client, once per conversation. Delivery is best effort throughout: while the connection is down events are dropped rather than queued, and no socket failure is ever allowed to affect the call. Beta feature.
      * @param WidgetSettings|WidgetSettingsShape $widgetSettings configuration settings for the assistant's web widget
      * @param RequestOpts|null $requestOptions
      *
@@ -323,6 +344,7 @@ final class AssistantsService implements AssistantsContract
         string $assistantID,
         ?array $a2aAgents = null,
         ConversationFlowReq|array|null $conversationFlow = null,
+        DelegationSettings|array|null $delegationSettings = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         int $dynamicVariablesWebhookTimeoutMs = 1500,
@@ -351,6 +373,7 @@ final class AssistantsService implements AssistantsContract
         TranscriptionSettings|array|null $transcription = null,
         string $versionName = 'New assistant',
         InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
+        WebsocketSettings|array|null $websocketSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
@@ -358,6 +381,7 @@ final class AssistantsService implements AssistantsContract
             [
                 'a2aAgents' => $a2aAgents ?? Omitted::VALUE,
                 'conversationFlow' => $conversationFlow ?? Omitted::VALUE,
+                'delegationSettings' => $delegationSettings ?? Omitted::VALUE,
                 'description' => $description ?? Omitted::VALUE,
                 'dynamicVariables' => $dynamicVariables ?? Omitted::VALUE,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,
@@ -386,6 +410,7 @@ final class AssistantsService implements AssistantsContract
                 'transcription' => $transcription ?? Omitted::VALUE,
                 'versionName' => $versionName,
                 'voiceSettings' => $voiceSettings ?? Omitted::VALUE,
+                'websocketSettings' => $websocketSettings ?? Omitted::VALUE,
                 'widgetSettings' => $widgetSettings ?? Omitted::VALUE,
             ],
             static fn ($value) => Omitted::VALUE !== $value,
@@ -420,17 +445,27 @@ final class AssistantsService implements AssistantsContract
      *
      * Delete an AI Assistant by `assistant_id`.
      *
+     * By default this performs a soft delete: the assistant moves to the Recently Deleted list and stays restorable for 30 days, after which it is permanently deleted automatically. The assistant's versions and TeXML application are preserved during the retention window.
+     *
+     * Pass `hard_delete=true` to skip the retention window and permanently delete the assistant immediately. A hard delete erases the assistant and all of its versions, and deletes its TeXML application unless phone numbers are still assigned to it. It does not delete conversations, recordings, shared tools the assistant referenced, or knowledge-base embeddings.
+     *
+     * Deletion fails with `400` if other assistants reference this one through a handoff tool or a conversation-flow edge — remove those references first.
+     *
      * @param string $assistantID unique identifier of the assistant
+     * @param bool $hardDelete permanently delete the assistant immediately instead of soft-deleting it to the Recently Deleted list, where it stays restorable for 30 days
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $assistantID,
-        RequestOptions|array|null $requestOptions = null
+        bool $hardDelete = false,
+        RequestOptions|array|null $requestOptions = null,
     ): AssistantDeleteResponse {
+        $params = ['hardDelete' => $hardDelete];
+
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->delete($assistantID, requestOptions: $requestOptions);
+        $response = $this->raw->delete($assistantID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -559,6 +594,28 @@ final class AssistantsService implements AssistantsContract
     /**
      * @api
      *
+     * Restore a soft-deleted assistant from the Recently Deleted list.
+     *
+     * The assistant becomes fully active again with its versions and TeXML application as they were at deletion time. Restoring does not re-enable numbers or connections that were released separately after the deletion.
+     *
+     * @param string $assistantID unique identifier of the assistant
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function restore(
+        string $assistantID,
+        RequestOptions|array|null $requestOptions = null
+    ): InferenceEmbedding {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->restore($assistantID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
      * Send an SMS message for an assistant. This endpoint:
      * 1. Validates the assistant exists and has messaging profile configured
      * 2. If should_create_conversation is true, creates a new conversation with metadata
@@ -601,6 +658,54 @@ final class AssistantsService implements AssistantsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendSMS($assistantID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Start a WhatsApp conversation with a customer from the business side. This endpoint:
+     * 1. Validates that `from` is a WhatsApp number on your account whose messaging profile has this assistant configured
+     * 2. Creates a new `whatsapp_chat` conversation with the provided metadata
+     * 3. Asks the assistant to pick one of its approved WhatsApp templates and fill its variables from `content`
+     * 4. Sends the template from `from` to `to`
+     * 5. Returns the conversation ID and the message ID
+     *
+     * When the customer replies, the reply is routed to the same conversation and the assistant answers within the 24-hour customer service window. The assistant needs a `whatsapp_template` tool with at least one approved template, data retention enabled and PII redaction disabled.
+     *
+     * @param string $assistantID Path param: Unique identifier of the assistant. Must be the assistant configured on the messaging profile of the `from` number.
+     * @param string $content Body param: Instruction for the assistant, including the values for the template variables, e.g. `Send the login verification code 482913 to the customer.`
+     * @param string $from Body param: WhatsApp number on your account to send from, in E.164 format. Its messaging profile must have this assistant configured.
+     * @param string $to Body param: Customer to message, as an E.164 phone number or a WhatsApp business-scoped user ID (BSUID).
+     * @param array<string,ConversationMetadataShape1> $conversationMetadata Body param: Metadata stored on the conversation. Keys starting with `telnyx_` and the `assistant_id` key are reserved.
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function whatsapp(
+        string $assistantID,
+        string $content,
+        string $from,
+        string $to,
+        ?array $conversationMetadata = null,
+        ?string $idempotencyKey = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): AssistantWhatsappResponse {
+        $params = array_filter(
+            [
+                'content' => $content,
+                'from' => $from,
+                'to' => $to,
+                'conversationMetadata' => $conversationMetadata ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->whatsapp($assistantID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

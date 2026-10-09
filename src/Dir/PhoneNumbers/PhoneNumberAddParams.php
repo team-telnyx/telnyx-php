@@ -11,9 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Dir\Document;
 
 /**
- * Register phone numbers under a DIR. The enterprise is resolved server-side from the DIR id. Same body, failure modes, and batch semantics whichever path form you use.
+ * Register phone numbers under a DIR. The enterprise is resolved server-side from the DIR id.
  *
- * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
+ * **Pricing:** Adding phone numbers is free. Branded Calling fees are charged per DIR and per branded call. See https://telnyx.com/pricing/branded-calling for current pricing.
  *
  * @see Telnyx\Services\Dir\PhoneNumbersService::add()
  *

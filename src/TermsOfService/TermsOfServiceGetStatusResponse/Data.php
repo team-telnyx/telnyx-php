@@ -54,6 +54,9 @@ final class Data implements BaseModel
     #[Required('product_type', enum: TosProductType::class)]
     public string $productType;
 
+    /**
+     * When you accepted the terms, or null if you have not.
+     */
     #[Optional('agreed_at', nullable: true)]
     public ?\DateTimeInterface $agreedAt;
 
@@ -165,6 +168,9 @@ final class Data implements BaseModel
         return $self;
     }
 
+    /**
+     * When you accepted the terms, or null if you have not.
+     */
     public function withAgreedAt(?\DateTimeInterface $agreedAt): self
     {
         $self = clone $this;

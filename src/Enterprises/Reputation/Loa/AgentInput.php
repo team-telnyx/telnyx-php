@@ -33,39 +33,75 @@ final class AgentInput implements BaseModel
     /** @use SdkModel<AgentInputShape> */
     use SdkModel;
 
+    /**
+     * The state or province of the partner's address, as its code, for example IL or ON.
+     */
     #[Required('administrative_area')]
     public string $administrativeArea;
 
+    /**
+     * The city of the partner's address.
+     */
     #[Required]
     public string $city;
 
+    /**
+     * The email address of the contact person at the partner.
+     */
     #[Required('contact_email')]
     public string $contactEmail;
 
+    /**
+     * The name of a contact person at the partner.
+     */
     #[Required('contact_name')]
     public string $contactName;
 
+    /**
+     * The phone number of the contact person at the partner, in E.164 format, for example +13125550000.
+     */
     #[Required('contact_phone')]
     public string $contactPhone;
 
+    /**
+     * The job title of the contact person at the partner.
+     */
     #[Required('contact_title')]
     public string $contactTitle;
 
+    /**
+     * The two-letter country code of the partner's address, for example US.
+     */
     #[Required]
     public string $country;
 
+    /**
+     * The legal name of the third-party partner or reseller managing these numbers on your behalf.
+     */
     #[Required('legal_name')]
     public string $legalName;
 
+    /**
+     * The postal or ZIP code of the partner's address.
+     */
     #[Required('postal_code')]
     public string $postalCode;
 
+    /**
+     * The street address of the partner, including the building number and street name.
+     */
     #[Required('street_address')]
     public string $streetAddress;
 
+    /**
+     * The trade name (Doing Business As) the partner operates under, if different from its legal name. Leave blank if it does not apply.
+     */
     #[Optional(nullable: true)]
     public ?string $dba;
 
+    /**
+     * An optional second address line for the partner, such as a suite, unit, or floor. Leave blank if it does not apply.
+     */
     #[Optional('extended_address', nullable: true)]
     public ?string $extendedAddress;
 
@@ -147,6 +183,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * The state or province of the partner's address, as its code, for example IL or ON.
+     */
     public function withAdministrativeArea(string $administrativeArea): self
     {
         $self = clone $this;
@@ -155,6 +194,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * The city of the partner's address.
+     */
     public function withCity(string $city): self
     {
         $self = clone $this;
@@ -163,6 +205,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * The email address of the contact person at the partner.
+     */
     public function withContactEmail(string $contactEmail): self
     {
         $self = clone $this;
@@ -171,6 +216,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * The name of a contact person at the partner.
+     */
     public function withContactName(string $contactName): self
     {
         $self = clone $this;
@@ -179,6 +227,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * The phone number of the contact person at the partner, in E.164 format, for example +13125550000.
+     */
     public function withContactPhone(string $contactPhone): self
     {
         $self = clone $this;
@@ -187,6 +238,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * The job title of the contact person at the partner.
+     */
     public function withContactTitle(string $contactTitle): self
     {
         $self = clone $this;
@@ -195,6 +249,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * The two-letter country code of the partner's address, for example US.
+     */
     public function withCountry(string $country): self
     {
         $self = clone $this;
@@ -203,6 +260,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * The legal name of the third-party partner or reseller managing these numbers on your behalf.
+     */
     public function withLegalName(string $legalName): self
     {
         $self = clone $this;
@@ -211,6 +271,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * The postal or ZIP code of the partner's address.
+     */
     public function withPostalCode(string $postalCode): self
     {
         $self = clone $this;
@@ -219,6 +282,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * The street address of the partner, including the building number and street name.
+     */
     public function withStreetAddress(string $streetAddress): self
     {
         $self = clone $this;
@@ -227,6 +293,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * The trade name (Doing Business As) the partner operates under, if different from its legal name. Leave blank if it does not apply.
+     */
     public function withDba(?string $dba): self
     {
         $self = clone $this;
@@ -235,6 +304,9 @@ final class AgentInput implements BaseModel
         return $self;
     }
 
+    /**
+     * An optional second address line for the partner, such as a suite, unit, or floor. Leave blank if it does not apply.
+     */
     public function withExtendedAddress(?string $extendedAddress): self
     {
         $self = clone $this;

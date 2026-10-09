@@ -171,7 +171,9 @@ Methods:
 - <code title="post /ai/assistants/{assistant_id}/clone">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">clone</a>(...$params)</code>
 - <code title="get /ai/assistants/{assistant_id}/texml">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">getTexml</a>(...$params)</code>
 - <code title="post /ai/assistants/import">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">imports</a>(...$params)</code>
+- <code title="post /ai/assistants/{assistant_id}/restore">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">restore</a>(...$params)</code>
 - <code title="post /ai/assistants/{assistant_id}/chat/sms">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">sendSMS</a>(...$params)</code>
+- <code title="post /ai/assistants/{assistant_id}/chat/whatsapp">$client->ai->assistants-><a href="./src/Services/AI/AssistantsService.php">whatsapp</a>(...$params)</code>
 
 ### Tests
 
@@ -253,6 +255,13 @@ Methods:
 Methods:
 
 - <code title="post /ai/assistants/{assistant_id}/instructions/enhance">$client->ai->assistants->instructions-><a href="./src/Services/AI/Assistants/InstructionsService.php">enhance</a>(...$params)</code>
+
+### Deleted
+
+Methods:
+
+- <code title="get /ai/assistants/deleted">$client->ai->assistants->deleted-><a href="./src/Services/AI/Assistants/DeletedService.php">list</a>(...$params)</code>
+- <code title="get /ai/assistants/{assistant_id}/deleted">$client->ai->assistants->deleted-><a href="./src/Services/AI/Assistants/DeletedService.php">get</a>(...$params)</code>
 
 ## Audio
 
@@ -544,7 +553,10 @@ Methods:
 
 Methods:
 
+- <code title="post /ai/memory/namespaces">$client->ai->memory->namespaces-><a href="./src/Services/AI/Memory/NamespacesService.php">create</a>(...$params)</code>
 - <code title="get /ai/memory/namespaces/{namespace}/operations/{operation_id}">$client->ai->memory->namespaces-><a href="./src/Services/AI/Memory/NamespacesService.php">retrieve</a>(...$params)</code>
+- <code title="get /ai/memory/namespaces">$client->ai->memory->namespaces-><a href="./src/Services/AI/Memory/NamespacesService.php">list</a>()</code>
+- <code title="delete /ai/memory/namespaces/{namespace}">$client->ai->memory->namespaces-><a href="./src/Services/AI/Memory/NamespacesService.php">delete</a>(...$params)</code>
 
 #### Profiles
 
@@ -2678,6 +2690,13 @@ Methods:
 - <code title="get /v2/whatsapp/phone_numbers/{phone_number}/conversational_components">$client->whatsapp->phoneNumbers->conversationalComponents-><a href="./src/Services/Whatsapp/PhoneNumbers/ConversationalComponentsService.php">list</a>(...$params)</code>
 - <code title="patch /v2/whatsapp/phone_numbers/{phone_number}/conversational_components">$client->whatsapp->phoneNumbers->conversationalComponents-><a href="./src/Services/Whatsapp/PhoneNumbers/ConversationalComponentsService.php">patchAll</a>(...$params)</code>
 
+### CallingRouting
+
+Methods:
+
+- <code title="get /whatsapp/phone_numbers/{id}/calling_routing">$client->whatsapp->phoneNumbers->callingRouting-><a href="./src/Services/Whatsapp/PhoneNumbers/CallingRoutingService.php">list</a>(...$params)</code>
+- <code title="patch /whatsapp/phone_numbers/{id}/calling_routing">$client->whatsapp->phoneNumbers->callingRouting-><a href="./src/Services/Whatsapp/PhoneNumbers/CallingRoutingService.php">patchAll</a>(...$params)</code>
+
 ## UserData
 
 Methods:
@@ -2795,6 +2814,13 @@ Methods:
 - <code title="post /enterprises/{enterprise_id}/dir">$client->enterprises->dir-><a href="./src/Services/Enterprises/DirService.php">create</a>(...$params)</code>
 - <code title="get /enterprises/{enterprise_id}/dir">$client->enterprises->dir-><a href="./src/Services/Enterprises/DirService.php">list</a>(...$params)</code>
 
+## VerifyEmail
+
+Methods:
+
+- <code title="post /enterprises/{enterprise_id}/verify_email">$client->enterprises->verifyEmail-><a href="./src/Services/Enterprises/VerifyEmailService.php">create</a>(...$params)</code>
+- <code title="post /enterprises/{enterprise_id}/verify_email/confirm">$client->enterprises->verifyEmail-><a href="./src/Services/Enterprises/VerifyEmailService.php">confirm</a>(...$params)</code>
+
 # Reputation
 
 ## Numbers
@@ -2879,9 +2905,11 @@ Methods:
 - <code title="patch /dir/{dir_id}">$client->dir-><a href="./src/Services/DirService.php">update</a>(...$params)</code>
 - <code title="get /dir">$client->dir-><a href="./src/Services/DirService.php">list</a>(...$params)</code>
 - <code title="delete /dir/{dir_id}">$client->dir-><a href="./src/Services/DirService.php">delete</a>(...$params)</code>
+- <code title="post /dir/{dir_id}/bpo_loa">$client->dir-><a href="./src/Services/DirService.php">bpoLoa</a>(...$params)</code>
 - <code title="get /dir/document_types">$client->dir-><a href="./src/Services/DirService.php">listDocumentTypes</a>()</code>
 - <code title="get /dir/{dir_id}/infringement_claims">$client->dir-><a href="./src/Services/DirService.php">listInfringementClaims</a>(...$params)</code>
 - <code title="post /dir/{dir_id}/loa">$client->dir-><a href="./src/Services/DirService.php">newLoa</a>(...$params)</code>
+- <code title="get /dir/{dir_id}/bpo_authorizations">$client->dir-><a href="./src/Services/DirService.php">retrieveBpoAuthorizations</a>(...$params)</code>
 - <code title="post /dir/{dir_id}/submit">$client->dir-><a href="./src/Services/DirService.php">submit</a>(...$params)</code>
 - <code title="put /dir/{dir_id}/infringement_update">$client->dir-><a href="./src/Services/DirService.php">updateInfringement</a>(...$params)</code>
 
@@ -3228,3 +3256,20 @@ Methods:
 Methods:
 
 - <code title="post /machine-payments/account-credit">$client->machinePayments-><a href="./src/Services/MachinePaymentsService.php">accountCredit</a>(...$params)</code>
+
+# SpendLimits
+
+Methods:
+
+- <code title="post /spend_limits">$client->spendLimits-><a href="./src/Services/SpendLimitsService.php">create</a>(...$params)</code>
+- <code title="patch /spend_limits/{product}">$client->spendLimits-><a href="./src/Services/SpendLimitsService.php">update</a>(...$params)</code>
+- <code title="get /spend_limits">$client->spendLimits-><a href="./src/Services/SpendLimitsService.php">list</a>()</code>
+- <code title="delete /spend_limits/{product}">$client->spendLimits-><a href="./src/Services/SpendLimitsService.php">delete</a>(...$params)</code>
+
+# LlmTokenGateway
+
+## Usage
+
+Methods:
+
+- <code title="get /llm_token_gateway/usage/summary">$client->llmTokenGateway->usage-><a href="./src/Services/LlmTokenGateway/UsageService.php">retrieveSummary</a>(...$params)</code>

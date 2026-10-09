@@ -8,7 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Omitted;
 use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
-use Telnyx\Enterprises\Reputation\Loa\AgentInput;
+use Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Agent;
 use Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Signature;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\Reputation\LoaContract;
@@ -16,7 +16,7 @@ use Telnyx\ServiceContracts\Enterprises\Reputation\LoaContract;
 /**
  * Phone-number reputation monitoring (spam-score lookup and tracking).
  *
- * @phpstan-import-type AgentInputShape from \Telnyx\Enterprises\Reputation\Loa\AgentInput
+ * @phpstan-import-type AgentShape from \Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Agent
  * @phpstan-import-type SignatureShape from \Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Signature
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -65,7 +65,7 @@ final class LoaService implements LoaContract
      * Render the LOA for this enterprise as a PDF. The enterprise identity, address, and authorized-representative contact are taken from the enterprise record; the optional `agent` block is supplied only when a third-party partner manages the numbers. The response is the PDF itself (unsigned unless a `signature` is provided). Sign it and upload it to the Telnyx Documents API (`POST /v2/documents`, see https://developers.telnyx.com/api/documents) to obtain the `loa_document_id` required by `POST .../reputation`.
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
-     * @param AgentInput|AgentInputShape $agent Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
+     * @param Agent|AgentShape $agent Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
      * @param Signature|SignatureShape $signature Optional signature embedded in the rendered PDF. When omitted the PDF is returned unsigned for the customer to sign and upload.
      * @param RequestOpts|null $requestOptions
      *
@@ -73,7 +73,7 @@ final class LoaService implements LoaContract
      */
     public function render(
         string $enterpriseID,
-        AgentInput|array|null $agent = null,
+        Agent|array|null $agent = null,
         Signature|array|null $signature = null,
         RequestOptions|array|null $requestOptions = null,
     ): string {

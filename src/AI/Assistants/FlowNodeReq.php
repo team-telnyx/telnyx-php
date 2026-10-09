@@ -111,13 +111,13 @@ final class FlowNodeReq implements BaseModel
     public ?string $toolsMode;
 
     /**
-     * Per-node transcription override (model/language/region). Unset fields cascade from the assistant-level transcription.
+     * Per-node transcription override (model/language/region). Unset fields cascade from the assistant-level transcription. A node that sets `model`, `fallback_models`, or `challenger` doesn't inherit the assistant's `fallback_models` or `challenger`; it uses only the ones it sets. Otherwise it inherits them, and they must fit the model and language the node runs; a change they no longer fit is rejected.
      */
     #[Optional]
     public ?TranscriptionSettings $transcription;
 
     /**
-     * Node kind discriminator. `prompt` (default) is an LLM-driven step; `tool` is a standalone tool execution (see `ToolNodeReq`).
+     * Node kind discriminator. `prompt` (default) is an LLM-driven step; `tool` is a standalone tool execution and `speak` a scripted message (see `ToolNodeReq` / `SpeakNodeReq`).
      *
      * @var value-of<Type>|null $type
      */
@@ -320,7 +320,7 @@ final class FlowNodeReq implements BaseModel
     }
 
     /**
-     * Per-node transcription override (model/language/region). Unset fields cascade from the assistant-level transcription.
+     * Per-node transcription override (model/language/region). Unset fields cascade from the assistant-level transcription. A node that sets `model`, `fallback_models`, or `challenger` doesn't inherit the assistant's `fallback_models` or `challenger`; it uses only the ones it sets. Otherwise it inherits them, and they must fit the model and language the node runs; a change they no longer fit is rejected.
      *
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
      */
@@ -334,7 +334,7 @@ final class FlowNodeReq implements BaseModel
     }
 
     /**
-     * Node kind discriminator. `prompt` (default) is an LLM-driven step; `tool` is a standalone tool execution (see `ToolNodeReq`).
+     * Node kind discriminator. `prompt` (default) is an LLM-driven step; `tool` is a standalone tool execution and `speak` a scripted message (see `ToolNodeReq` / `SpeakNodeReq`).
      *
      * @param Type|value-of<Type> $type
      */

@@ -245,6 +245,10 @@ final class ActionsRawService implements ActionsRawContract
      *
      * Answer an incoming call. You must issue this command before executing subsequent commands on an incoming call.
      *
+     * To answer with an AI assistant, include `assistant.id` and any per-call overrides in the `assistant` object. Telnyx attempts to warm up the assistant before answering the call, then starts the assistant automatically when the call is answered. Do not also send `ai_assistant_start` for this flow. The HTTP success response can arrive before the call is answered; use the `call.answered` webhook to track the answer. If warm-up fails, Telnyx falls back to starting the assistant after answering.
+     *
+     * Set the assistant voice with `assistant.voice_settings.voice` and speech-to-text settings with `assistant.transcription`. You can reuse one stored assistant with different per-call settings. Warm-up prepares assistant configuration and dependencies; it does not wait for the greeting audio to be ready or guarantee zero silence after answer. A plain `answer` followed by `ai_assistant_start` performs assistant startup after the call has already been answered.
+     *
      * **Expected Webhooks:**
      *
      * - `call.answered`
