@@ -218,7 +218,7 @@ final class ToolsRawService implements ToolsRawContract
             method: 'delete',
             path: ['ai/tools/%1$s', $toolID],
             options: $requestOptions,
-            convert: 'mixed',
+            convert: null,
         );
     }
 }

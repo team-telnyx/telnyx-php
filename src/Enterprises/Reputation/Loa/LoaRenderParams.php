@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Agent;
 use Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Signature;
 
 /**
@@ -15,12 +16,11 @@ use Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Signature;
  *
  * @see Telnyx\Services\Enterprises\Reputation\LoaService::render()
  *
- * @phpstan-import-type AgentInputShape from \Telnyx\Enterprises\Reputation\Loa\AgentInput
+ * @phpstan-import-type AgentShape from \Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Agent
  * @phpstan-import-type SignatureShape from \Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Signature
  *
  * @phpstan-type LoaRenderParamsShape = array{
- *   agent?: null|AgentInput|AgentInputShape,
- *   signature?: null|Signature|SignatureShape,
+ *   agent?: null|Agent|AgentShape, signature?: null|Signature|SignatureShape
  * }
  */
 final class LoaRenderParams implements BaseModel
@@ -33,7 +33,7 @@ final class LoaRenderParams implements BaseModel
      * Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
      */
     #[Optional]
-    public ?AgentInput $agent;
+    public ?Agent $agent;
 
     /**
      * Optional signature embedded in the rendered PDF. When omitted the PDF is returned unsigned for the customer to sign and upload.
@@ -51,11 +51,11 @@ final class LoaRenderParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AgentInput|AgentInputShape|null $agent
+     * @param Agent|AgentShape|null $agent
      * @param Signature|SignatureShape|null $signature
      */
     public static function with(
-        AgentInput|array|null $agent = null,
+        Agent|array|null $agent = null,
         Signature|array|null $signature = null
     ): self {
         $self = new self;
@@ -69,9 +69,9 @@ final class LoaRenderParams implements BaseModel
     /**
      * Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
      *
-     * @param AgentInput|AgentInputShape $agent
+     * @param Agent|AgentShape $agent
      */
-    public function withAgent(AgentInput|array $agent): self
+    public function withAgent(Agent|array $agent): self
     {
         $self = clone $this;
         $self['agent'] = $agent;

@@ -9,6 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\BpoAuthorizationInput;
 use Telnyx\Dir\Dir;
 use Telnyx\Dir\DirStatus;
 use Telnyx\Dir\DirWrapped;
@@ -22,6 +23,7 @@ use Telnyx\ServiceContracts\Enterprises\DirRawContract;
 /**
  * A Display Identity Record (DIR) is the verified calling identity (display name, logo, call reasons) shown to recipients on outbound calls.
  *
+ * @phpstan-import-type BpoAuthorizationInputShape from \Telnyx\Dir\BpoAuthorizationInput
  * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -59,9 +61,11 @@ final class DirRawService implements DirRawContract
      *   certifyIPOwnership: bool,
      *   certifyNoShaftContent: bool,
      *   displayName: string,
+     *   bpoAuthorizations?: list<BpoAuthorizationInput|BpoAuthorizationInputShape>,
      *   documents?: list<Document|DocumentShape>,
      *   logoURL?: string,
      *   reselling?: bool,
+     *   webhookURL?: string|null,
      * }|DirCreateParams $params
      * @param RequestOpts|null $requestOptions
      *

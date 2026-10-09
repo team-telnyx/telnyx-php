@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Dir\DirNewLoaParams;
+namespace Telnyx\Dir;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -11,15 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
 
 /**
- * Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
- *
- * @phpstan-type SignatureShape = array{
+ * @phpstan-type SignaturePayloadShape = array{
  *   imageBase64: string, signerName?: string|null
  * }
  */
-final class Signature implements BaseModel
+final class SignaturePayload implements BaseModel
 {
-    /** @use SdkModel<SignatureShape> */
+    /** @use SdkModel<SignaturePayloadShape> */
     use SdkModel;
 
     /**
@@ -35,17 +33,17 @@ final class Signature implements BaseModel
     public ?string $signerName;
 
     /**
-     * `new Signature()` is missing required properties by the API.
+     * `new SignaturePayload()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Signature::with(imageBase64: ...)
+     * SignaturePayload::with(imageBase64: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Signature)->withImageBase64(...)
+     * (new SignaturePayload)->withImageBase64(...)
      * ```
      */
     public function __construct()

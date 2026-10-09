@@ -7,22 +7,26 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\BpoAuthorizationInput;
 use Telnyx\Dir\Dir;
+use Telnyx\Dir\DirDeleteResponse;
+use Telnyx\Dir\DirGetBpoAuthorizationsResponse;
 use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirListParams\Sort;
-use Telnyx\Dir\DirNewLoaParams\Signature;
 use Telnyx\Dir\DirStatus;
 use Telnyx\Dir\DirWrapped;
 use Telnyx\Dir\Document;
+use Telnyx\Dir\SignaturePayload;
 use Telnyx\Enterprises\Reputation\Loa\AgentInput;
 use Telnyx\InfringementClaims\InfringementClaim;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type BpoAuthorizationInputShape from \Telnyx\Dir\BpoAuthorizationInput
  * @phpstan-import-type AgentInputShape from \Telnyx\Enterprises\Reputation\Loa\AgentInput
- * @phpstan-import-type SignatureShape from \Telnyx\Dir\DirNewLoaParams\Signature
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
+ * @phpstan-import-type SignaturePayloadShape from \Telnyx\Dir\SignaturePayload
  */
 interface DirContract
 {
@@ -45,6 +49,7 @@ interface DirContract
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param string $authorizerEmail Contact email of the authorizer. Telnyx may send verification or infringement notices here.
      * @param string $authorizerName Name of the person at your enterprise authorizing this DIR. Must be a real individual.
+     * @param list<BpoAuthorizationInput|BpoAuthorizationInputShape> $bpoAuthorizations Optional. Replace this DIR's authorized BPO (Business Process Outsourcer) accounts with these, each with its signed Letter of Authorization. The supplied list replaces the current one: a BPO left out has its authorization removed, and a new BPO (or a changed Letter of Authorization) is created `pending` admin review. Send an empty list to clear all authorizations; omit the field to leave them unchanged. Editing this list does not re-vet the DIR. Maximum 10.
      * @param list<string> $callReasons 1–10 reasons your business calls customers. Validate phrasing against `POST /call_reasons/validate`.
      * @param bool $certifyBrandIsAccurate Certification that the DIR information is accurate. Must be `true` for the DIR to be submitted for vetting.
      * @param bool $certifyIPOwnership Certification of ownership of any logos/trademarks shown. Must be `true` for the DIR to be submitted for vetting.
@@ -53,6 +58,7 @@ interface DirContract
      * @param list<Document|DocumentShape> $documents Additional supporting documents to attach. Append-only: existing documents are never removed or replaced, and an empty or omitted list is a no-op. Each `document_id` may appear at most once on a DIR.
      * @param string $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param bool $reselling Set to true if your organization places calls on behalf of other enterprises (BPO/reseller). Updating this triggers re-vetting on next submit.
+     * @param string|Omitted|null $webhookURL Optional `https://` URL that receives webhook notifications when this DIR's compliance review completes. Send `null` to clear. Changing only this field on a `verified` DIR does not re-vet it. Maximum 2048 characters.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -61,6 +67,7 @@ interface DirContract
         string $dirID,
         ?string $authorizerEmail = null,
         ?string $authorizerName = null,
+        ?array $bpoAuthorizations = null,
         ?array $callReasons = null,
         ?bool $certifyBrandIsAccurate = null,
         ?bool $certifyIPOwnership = null,
@@ -69,6 +76,7 @@ interface DirContract
         ?array $documents = null,
         ?string $logoURL = null,
         ?bool $reselling = null,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): DirWrapped;
 
@@ -114,7 +122,24 @@ interface DirContract
     public function delete(
         string $dirID,
         RequestOptions|array|null $requestOptions = null
-    ): mixed;
+    ): DirDeleteResponse;
+
+    /**
+     * @api
+     *
+     * @param string $dirID the DIR id
+     * @param string $bpoEnterpriseID The approved BPO enterprise the Brand Owner is authorizing. Must be a BPO account on the caller's organization that has already been approved.
+     * @param SignaturePayload|SignaturePayloadShape $signature Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the Brand Owner can sign externally and the BPO can upload it via the Documents API.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function bpoLoa(
+        string $dirID,
+        string $bpoEnterpriseID,
+        SignaturePayload|array|null $signature = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): string;
 
     /**
      * @api
@@ -152,7 +177,7 @@ interface DirContract
      * @param string $dirID the DIR id
      * @param list<string> $phoneNumbers Telephone numbers to authorize on the DIR, in `+E164` format (`+` followed by 10-15 digits). Max 15 per request.
      * @param AgentInput|AgentInputShape $agent Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
-     * @param Signature|SignatureShape $signature Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
+     * @param SignaturePayload|SignaturePayloadShape $signature Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -161,9 +186,26 @@ interface DirContract
         string $dirID,
         array $phoneNumbers,
         AgentInput|array|null $agent = null,
-        Signature|array|null $signature = null,
+        SignaturePayload|array|null $signature = null,
         RequestOptions|array|null $requestOptions = null,
     ): string;
+
+    /**
+     * @api
+     *
+     * @param string $dirID The DIR id. Lowercase UUID.
+     * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
+     * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveBpoAuthorizations(
+        string $dirID,
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DirGetBpoAuthorizationsResponse;
 
     /**
      * @api
@@ -184,10 +226,11 @@ interface DirContract
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param bool $certifyBrandIsAccurate must be `true`
      * @param bool $certifyIPOwnership must be `true`
-     * @param bool $certifyNoInfringement must be `true`
+     * @param bool $certifyNoInfringement check to certify that the brand no longer infringes anyone else's trademark or intellectual property
      * @param bool $certifyNoShaftContent must be `true`
      * @param string $infringementResolutionNotes explanation of how the infringement concern was addressed
      * @param list<string>|Omitted|null $callReasons
+     * @param string|Omitted|null $displayName the business name shown to call recipients, 1 to 35 characters, no emoji, not blank
      * @param list<Document|DocumentShape>|Omitted|null $documents Append-only supporting documents to attach while resolving the claim (e.g. authorization or licensing proof).
      * @param string|Omitted|null $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param RequestOpts|null $requestOptions

@@ -86,6 +86,7 @@ use Telnyx\Services\IPsService;
 use Telnyx\Services\LedgerBillingGroupReportsService;
 use Telnyx\Services\LegacyService;
 use Telnyx\Services\ListService;
+use Telnyx\Services\LlmTokenGatewayService;
 use Telnyx\Services\MachinePaymentsService;
 use Telnyx\Services\ManagedAccountsService;
 use Telnyx\Services\MediaService;
@@ -164,6 +165,7 @@ use Telnyx\Services\SimCardOrdersService;
 use Telnyx\Services\SimCardsService;
 use Telnyx\Services\SiprecConnectorsService;
 use Telnyx\Services\SpeechToTextService;
+use Telnyx\Services\SpendLimitsService;
 use Telnyx\Services\StorageService;
 use Telnyx\Services\SubNumberOrdersReportService;
 use Telnyx\Services\SubNumberOrdersService;
@@ -1154,6 +1156,16 @@ class Client extends BaseClient
      */
     public MachinePaymentsService $machinePayments;
 
+    /**
+     * @api
+     */
+    public SpendLimitsService $spendLimits;
+
+    /**
+     * @api
+     */
+    public LlmTokenGatewayService $llmTokenGateway;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1414,6 +1426,8 @@ class Client extends BaseClient
         $this->botSessions = new BotSessionsService($this);
         $this->botSignup = new BotSignupService($this);
         $this->machinePayments = new MachinePaymentsService($this);
+        $this->spendLimits = new SpendLimitsService($this);
+        $this->llmTokenGateway = new LlmTokenGatewayService($this);
     }
 
     /** @return array<string,string> */

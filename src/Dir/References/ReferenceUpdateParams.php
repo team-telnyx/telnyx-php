@@ -45,31 +45,31 @@ final class ReferenceUpdateParams implements BaseModel
     public string $refType;
 
     /**
-     * Reference contact email address.
+     * The reference's email address. We email them scheduling and dial-in instructions before we call, so use an address they check.
      */
     #[Optional]
     public ?string $email;
 
     /**
-     * Full name of the reference contact.
+     * The full name of the person we should contact as your reference.
      */
     #[Optional('full_name')]
     public ?string $fullName;
 
     /**
-     * Job title of the reference contact.
+     * The reference contact's job title, for example CFO or Owner.
      */
     #[Optional('job_title', nullable: true)]
     public ?string $jobTitle;
 
     /**
-     * Organization the reference contact belongs to.
+     * The name of the organization the reference contact works for.
      */
     #[Optional(nullable: true)]
     public ?string $organization;
 
     /**
-     * Reference phone number in E.164 format.
+     * The reference's phone number in E.164 format, for example +14155550123. We call this number during their local business hours.
      */
     #[Optional('phone_e164')]
     public ?string $phoneE164;
@@ -81,7 +81,7 @@ final class ReferenceUpdateParams implements BaseModel
     public ?string $relationshipToRegistrant;
 
     /**
-     * IANA timezone id for the reference.
+     * The reference's IANA time zone, for example America/New_York. We only call during their local 8am to 9pm hours, which is why we need it.
      */
     #[Optional]
     public ?string $timezone;
@@ -159,7 +159,7 @@ final class ReferenceUpdateParams implements BaseModel
     }
 
     /**
-     * Reference contact email address.
+     * The reference's email address. We email them scheduling and dial-in instructions before we call, so use an address they check.
      */
     public function withEmail(string $email): self
     {
@@ -170,7 +170,7 @@ final class ReferenceUpdateParams implements BaseModel
     }
 
     /**
-     * Full name of the reference contact.
+     * The full name of the person we should contact as your reference.
      */
     public function withFullName(string $fullName): self
     {
@@ -181,7 +181,7 @@ final class ReferenceUpdateParams implements BaseModel
     }
 
     /**
-     * Job title of the reference contact.
+     * The reference contact's job title, for example CFO or Owner.
      */
     public function withJobTitle(?string $jobTitle): self
     {
@@ -192,7 +192,7 @@ final class ReferenceUpdateParams implements BaseModel
     }
 
     /**
-     * Organization the reference contact belongs to.
+     * The name of the organization the reference contact works for.
      */
     public function withOrganization(?string $organization): self
     {
@@ -203,7 +203,7 @@ final class ReferenceUpdateParams implements BaseModel
     }
 
     /**
-     * Reference phone number in E.164 format.
+     * The reference's phone number in E.164 format, for example +14155550123. We call this number during their local business hours.
      */
     public function withPhoneE164(string $phoneE164): self
     {
@@ -226,7 +226,7 @@ final class ReferenceUpdateParams implements BaseModel
     }
 
     /**
-     * IANA timezone id for the reference.
+     * The reference's IANA time zone, for example America/New_York. We only call during their local 8am to 9pm hours, which is why we need it.
      */
     public function withTimezone(string $timezone): self
     {

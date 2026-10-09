@@ -23,12 +23,21 @@ final class Agreement implements BaseModel
     /** @use SdkModel<AgreementShape> */
     use SdkModel;
 
+    /**
+     * The latest published version of these terms.
+     */
     #[Optional('current_version')]
     public ?string $currentVersion;
 
+    /**
+     * A short summary of the product these terms cover.
+     */
     #[Optional]
     public ?string $description;
 
+    /**
+     * The date this version took effect.
+     */
     #[Optional('effective_date')]
     public ?string $effectiveDate;
 
@@ -40,6 +49,9 @@ final class Agreement implements BaseModel
     #[Optional('product_type', enum: TosProductType::class)]
     public ?string $productType;
 
+    /**
+     * A link to the full terms text.
+     */
     #[Optional('terms_url')]
     public ?string $termsURL;
 
@@ -73,6 +85,9 @@ final class Agreement implements BaseModel
         return $self;
     }
 
+    /**
+     * The latest published version of these terms.
+     */
     public function withCurrentVersion(string $currentVersion): self
     {
         $self = clone $this;
@@ -81,6 +96,9 @@ final class Agreement implements BaseModel
         return $self;
     }
 
+    /**
+     * A short summary of the product these terms cover.
+     */
     public function withDescription(string $description): self
     {
         $self = clone $this;
@@ -89,6 +107,9 @@ final class Agreement implements BaseModel
         return $self;
     }
 
+    /**
+     * The date this version took effect.
+     */
     public function withEffectiveDate(string $effectiveDate): self
     {
         $self = clone $this;
@@ -110,6 +131,9 @@ final class Agreement implements BaseModel
         return $self;
     }
 
+    /**
+     * A link to the full terms text.
+     */
     public function withTermsURL(string $termsURL): self
     {
         $self = clone $this;

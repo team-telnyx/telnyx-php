@@ -61,7 +61,7 @@ interface PhoneNumbersContract
      * @api
      *
      * @param string $dirID The DIR id. Lowercase UUID.
-     * @param list<string> $phoneNumbers
+     * @param list<string> $phoneNumbers The phone numbers to remove from this brand, in E.164 format, up to 100 per request. They must currently be attached to this brand.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

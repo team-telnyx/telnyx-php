@@ -49,7 +49,7 @@ final class DirUpdateInfringementParams implements BaseModel
     public bool $certifyIPOwnership;
 
     /**
-     * Must be `true`.
+     * Check to certify that the brand no longer infringes anyone else's trademark or intellectual property.
      */
     #[Required('certify_no_infringement')]
     public bool $certifyNoInfringement;
@@ -70,6 +70,9 @@ final class DirUpdateInfringementParams implements BaseModel
     #[Optional('call_reasons', list: 'string', nullable: true)]
     public ?array $callReasons;
 
+    /**
+     * The business name shown to call recipients, 1 to 35 characters, no emoji, not blank.
+     */
     #[Optional('display_name', nullable: true)]
     public ?string $displayName;
 
@@ -176,7 +179,7 @@ final class DirUpdateInfringementParams implements BaseModel
     }
 
     /**
-     * Must be `true`.
+     * Check to certify that the brand no longer infringes anyone else's trademark or intellectual property.
      */
     public function withCertifyNoInfringement(bool $certifyNoInfringement): self
     {
@@ -220,6 +223,9 @@ final class DirUpdateInfringementParams implements BaseModel
         return $self;
     }
 
+    /**
+     * The business name shown to call recipients, 1 to 35 characters, no emoji, not blank.
+     */
     public function withDisplayName(?string $displayName): self
     {
         $self = clone $this;

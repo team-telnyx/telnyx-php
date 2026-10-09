@@ -199,7 +199,7 @@ interface ActionsContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param CallAssistantRequest|CallAssistantRequestShape $assistant AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
+     * @param CallAssistantRequest|CallAssistantRequestShape $assistant AI Assistant configuration and per-call overrides. All fields except `id` are optional. Omitted assistant fields use the stored configuration. Supplied `voice_settings` and `transcription` objects replace their stored objects rather than merging individual settings; include every setting you want to retain. `dynamic_variables` are merged, with request values taking precedence.
      * @param string $billingGroupID Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
@@ -224,7 +224,7 @@ interface ActionsContract
      * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
      * @param StreamTrack|value-of<StreamTrack> $streamTrack specifies which track should be streamed
      * @param string $streamURL the destination WebSocket address where the stream is going to be delivered
-     * @param bool $transcription Enable transcription upon call answer. The default value is false.
+     * @param bool $transcription Enable standalone call transcription upon call answer. The default value is false. Configure this feature with `transcription_config`. To configure speech recognition for an AI assistant, use `assistant.transcription` instead.
      * @param TranscriptionStartRequest|TranscriptionStartRequestShape $transcriptionConfig
      * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape> $webhookRetriesPolicies A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
@@ -696,7 +696,7 @@ interface ActionsContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param Cause|value-of<Cause> $cause cause for call rejection
+     * @param Cause|value-of<Cause> $cause Cause for call rejection. The cause sets the SIP response the caller receives: `USER_BUSY` sends 486 User Busy, `CALL_REJECTED` sends 603 Decline, `NOT_FOUND` sends 404 Not Found, and `TEMPORARILY_UNAVAILABLE` sends 480 Temporarily Unavailable.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param RequestOpts|null $requestOptions
@@ -828,7 +828,7 @@ interface ActionsContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param CallAssistantRequest|CallAssistantRequestShape $assistant AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
+     * @param CallAssistantRequest|CallAssistantRequestShape $assistant AI Assistant configuration and per-call overrides. All fields except `id` are optional. Omitted assistant fields use the stored configuration. Supplied `voice_settings` and `transcription` objects replace their stored objects rather than merging individual settings; include every setting you want to retain. `dynamic_variables` are merged, with request values taking precedence.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $greeting Text that will be played when the assistant starts, if none then nothing will be played when the assistant starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.

@@ -17,6 +17,7 @@ use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationLegalType;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationType;
 use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
 use Telnyx\Enterprises\EnterpriseListParams;
+use Telnyx\Enterprises\EnterpriseListParams\FilterRoleType;
 use Telnyx\Enterprises\EnterprisePublic;
 use Telnyx\Enterprises\EnterprisePublicWrapped;
 use Telnyx\Enterprises\EnterpriseUpdateParams;
@@ -129,6 +130,10 @@ final class EnterprisesRawService implements EnterprisesRawContract
      *
      * Replace the enterprise's mutable fields. Only mutable fields may be sent. Server-assigned and immutable fields (`id`, `record_type`, `created_at`, `updated_at`, status fields, `organization_type`, `country_code`, `role_type`) cannot be changed: including any of them in the body is rejected with `400 Bad Request` (`Field 'X' is not allowed in this request`).
      *
+     * For an approved BPO enterprise (`role_type` `bpo`), changing any identity field (legal name, DBA, website, FEIN, industry, number of employees, physical address, organization contact, D-U-N-S number, legal type, SIC code, corporate registration number, professional license number, or jurisdiction of incorporation) resets `bpo_verification_status` to `pending` for re-approval and sets every DIR authorization for that BPO to `rejected`. After re-approval, link it again with a newly signed LOA (a new `loa_document_id`); resending the old one keeps the authorization `rejected`. Re-sending an unchanged value does not reset anything.
+     *
+     * If Number Reputation is enabled on the enterprise, `legal_name`, `doing_business_as`, `website`, `fein`, `industry`, `number_of_employees`, `organization_physical_address`, `organization_contact`, and `dun_bradstreet_number` cannot be changed: the request is rejected with `400`.
+     *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
      *   billingAddress?: PhysicalAddress|PhysicalAddressShape,
@@ -182,6 +187,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
      *
      * @param array{
      *   filterLegalNameContains?: string,
+     *   filterRoleType?: FilterRoleType|value-of<FilterRoleType>,
      *   legalName?: string,
      *   pageNumber?: int,
      *   pageSize?: int,
@@ -209,6 +215,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
                 $parsed,
                 [
                     'filterLegalNameContains' => 'filter[legal_name][contains]',
+                    'filterRoleType' => 'filter[role_type]',
                     'legalName' => 'legal_name',
                     'pageNumber' => 'page[number]',
                     'pageSize' => 'page[size]',
@@ -253,7 +260,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
     /**
      * @api
      *
-     * Branded Calling is a paid product that must be activated on each enterprise. Activation is idempotent:
+     * Branded Calling must be activated on each enterprise. Activation is idempotent:
      * - First call: marks the enterprise as activated and begins onboarding it with the Branded Calling platform asynchronously. Returns `200` with `branded_calling_enabled: true`.
      * - Re-call after success: no-op, returns the same enterprise body.
      * - Re-call after a prior failure: re-queues onboarding, returns `200`.
@@ -261,10 +268,12 @@ final class EnterprisesRawService implements EnterprisesRawContract
      * Prerequisite: the calling user must have agreed to the Branded Calling Terms of Service (`POST /terms_of_service/branded_calling/agree`). Without that, this endpoint returns `403 terms_of_service_not_accepted`.
      *
      * Failure modes:
+     * - `400` - the account has no available credit. Add funds and retry.
+     * - `400` - the enterprise is not in the United States. Branded Calling is currently available only to US enterprises.
      * - `403` - Branded Calling Terms of Service not accepted.
      * - `404` - enterprise does not exist or does not belong to your account.
      *
-     * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
+     * **Pricing:** Activation itself is free, but the account must have available credit. Branded Calling fees are charged per DIR and per branded call. See https://telnyx.com/pricing/branded-calling for current pricing.
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
