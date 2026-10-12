@@ -2781,6 +2781,7 @@ Methods:
 - <code title="delete /enterprises/{enterprise_id}/reputation">$client->enterprises->reputation-><a href="./src/Services/Enterprises/ReputationService.php">disable</a>(...$params)</code>
 - <code title="post /enterprises/{enterprise_id}/reputation">$client->enterprises->reputation-><a href="./src/Services/Enterprises/ReputationService.php">enable</a>(...$params)</code>
 - <code title="patch /enterprises/{enterprise_id}/reputation/frequency">$client->enterprises->reputation-><a href="./src/Services/Enterprises/ReputationService.php">updateFrequency</a>(...$params)</code>
+- <code title="patch /enterprises/{enterprise_id}/reputation/webhook">$client->enterprises->reputation-><a href="./src/Services/Enterprises/ReputationService.php">updateWebhook</a>(...$params)</code>
 
 ### Numbers
 
@@ -2790,7 +2791,9 @@ Methods:
 - <code title="get /enterprises/{enterprise_id}/reputation/numbers">$client->enterprises->reputation->numbers-><a href="./src/Services/Enterprises/Reputation/NumbersService.php">list</a>(...$params)</code>
 - <code title="post /enterprises/{enterprise_id}/reputation/numbers">$client->enterprises->reputation->numbers-><a href="./src/Services/Enterprises/Reputation/NumbersService.php">associate</a>(...$params)</code>
 - <code title="delete /enterprises/{enterprise_id}/reputation/numbers/{phone_number}">$client->enterprises->reputation->numbers-><a href="./src/Services/Enterprises/Reputation/NumbersService.php">disassociate</a>(...$params)</code>
+- <code title="post /enterprises/{enterprise_id}/reputation/numbers/{phone_number}/ownership_confirm">$client->enterprises->reputation->numbers-><a href="./src/Services/Enterprises/Reputation/NumbersService.php">ownershipConfirm</a>(...$params)</code>
 - <code title="post /enterprises/{enterprise_id}/reputation/numbers/refresh">$client->enterprises->reputation->numbers-><a href="./src/Services/Enterprises/Reputation/NumbersService.php">refresh</a>(...$params)</code>
+- <code title="get /enterprises/{enterprise_id}/reputation/numbers/{phone_number}/ownership">$client->enterprises->reputation->numbers-><a href="./src/Services/Enterprises/Reputation/NumbersService.php">retrieveOwnership</a>(...$params)</code>
 
 ### Loa
 
@@ -2806,6 +2809,13 @@ Methods:
 - <code title="post /enterprises/{enterprise_id}/reputation/remediation">$client->enterprises->reputation->remediation-><a href="./src/Services/Enterprises/Reputation/RemediationService.php">create</a>(...$params)</code>
 - <code title="get /enterprises/{enterprise_id}/reputation/remediation/{remediation_id}">$client->enterprises->reputation->remediation-><a href="./src/Services/Enterprises/Reputation/RemediationService.php">retrieve</a>(...$params)</code>
 - <code title="get /enterprises/{enterprise_id}/reputation/remediation">$client->enterprises->reputation->remediation-><a href="./src/Services/Enterprises/Reputation/RemediationService.php">list</a>(...$params)</code>
+
+### ExternalVerification
+
+Methods:
+
+- <code title="post /enterprises/{enterprise_id}/reputation/external_verification">$client->enterprises->reputation->externalVerification-><a href="./src/Services/Enterprises/Reputation/ExternalVerificationService.php">create</a>(...$params)</code>
+- <code title="get /enterprises/{enterprise_id}/reputation/external_verification">$client->enterprises->reputation->externalVerification-><a href="./src/Services/Enterprises/Reputation/ExternalVerificationService.php">list</a>(...$params)</code>
 
 ## Dir
 

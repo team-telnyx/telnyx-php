@@ -10,17 +10,20 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
 use Telnyx\Enterprises\Reputation\EnterpriseReputationPublic\LoaStatus;
 use Telnyx\Enterprises\Reputation\EnterpriseReputationPublic\Status;
+use Telnyx\Enterprises\Reputation\ExternalVerification\ExternalVerificationStatus;
 
 /**
  * @phpstan-type EnterpriseReputationPublicShape = array{
  *   checkFrequency?: null|ReputationCheckFrequency|value-of<ReputationCheckFrequency>,
  *   createdAt?: \DateTimeInterface|null,
  *   enterpriseID?: string|null,
+ *   externalVerificationStatus?: null|ExternalVerificationStatus|value-of<ExternalVerificationStatus>,
  *   loaDocumentID?: string|null,
  *   loaStatus?: null|LoaStatus|value-of<LoaStatus>,
  *   rejectionReasons?: list<string>|null,
  *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class EnterpriseReputationPublic implements BaseModel
@@ -41,6 +44,18 @@ final class EnterpriseReputationPublic implements BaseModel
 
     #[Optional('enterprise_id')]
     public ?string $enterpriseID;
+
+    /**
+     * Review state of the ownership proof that allows adding phone numbers hosted with another provider.
+     *
+     * @var value-of<ExternalVerificationStatus>|null $externalVerificationStatus
+     */
+    #[Optional(
+        'external_verification_status',
+        enum: ExternalVerificationStatus::class,
+        nullable: true,
+    )]
+    public ?string $externalVerificationStatus;
 
     /**
      * Id of the signed LOA document.
@@ -75,6 +90,12 @@ final class EnterpriseReputationPublic implements BaseModel
     #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
+    /**
+     * HTTPS URL that receives number-ownership webhook events for this enterprise.
+     */
+    #[Optional('webhook_url', nullable: true)]
+    public ?string $webhookURL;
+
     public function __construct()
     {
         $this->initialize();
@@ -85,14 +106,17 @@ final class EnterpriseReputationPublic implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|ExternalVerificationStatus|value-of<ExternalVerificationStatus>|null $externalVerificationStatus
      * @param list<string>|Omitted|null $rejectionReasons
      * @param ReputationCheckFrequency|value-of<ReputationCheckFrequency>|null $checkFrequency
      * @param LoaStatus|value-of<LoaStatus>|null $loaStatus
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
+        Omitted|ExternalVerificationStatus|string|null $externalVerificationStatus = Omitted::VALUE,
         string|Omitted|null $loaDocumentID = Omitted::VALUE,
         array|Omitted|null $rejectionReasons = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         ReputationCheckFrequency|string|null $checkFrequency = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $enterpriseID = null,
@@ -105,11 +129,13 @@ final class EnterpriseReputationPublic implements BaseModel
         null !== $checkFrequency && $self['checkFrequency'] = $checkFrequency;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $enterpriseID && $self['enterpriseID'] = $enterpriseID;
+        Omitted::VALUE !== $externalVerificationStatus && $self['externalVerificationStatus'] = $externalVerificationStatus;
         Omitted::VALUE !== $loaDocumentID && $self['loaDocumentID'] = $loaDocumentID;
         null !== $loaStatus && $self['loaStatus'] = $loaStatus;
         Omitted::VALUE !== $rejectionReasons && $self['rejectionReasons'] = $rejectionReasons;
         null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }
@@ -140,6 +166,20 @@ final class EnterpriseReputationPublic implements BaseModel
     {
         $self = clone $this;
         $self['enterpriseID'] = $enterpriseID;
+
+        return $self;
+    }
+
+    /**
+     * Review state of the ownership proof that allows adding phone numbers hosted with another provider.
+     *
+     * @param ExternalVerificationStatus|value-of<ExternalVerificationStatus>|null $externalVerificationStatus
+     */
+    public function withExternalVerificationStatus(
+        ExternalVerificationStatus|string|null $externalVerificationStatus
+    ): self {
+        $self = clone $this;
+        $self['externalVerificationStatus'] = $externalVerificationStatus;
 
         return $self;
     }
@@ -198,6 +238,17 @@ final class EnterpriseReputationPublic implements BaseModel
     {
         $self = clone $this;
         $self['updatedAt'] = $updatedAt;
+
+        return $self;
+    }
+
+    /**
+     * HTTPS URL that receives number-ownership webhook events for this enterprise.
+     */
+    public function withWebhookURL(?string $webhookURL): self
+    {
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

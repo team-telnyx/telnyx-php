@@ -9,6 +9,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationNumberSource;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationOwnershipStatus;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
 use Telnyx\Reputation\Numbers\NumberListParams;
@@ -69,8 +71,10 @@ final class NumbersRawService implements NumbersRawContract
      *
      * @param array{
      *   filterEnterpriseID?: string,
+     *   filterOwnershipStatus?: ReputationOwnershipStatus|value-of<ReputationOwnershipStatus>,
      *   filterPhoneNumberContains?: string,
      *   filterPhoneNumberEq?: string,
+     *   filterSource?: ReputationNumberSource|value-of<ReputationNumberSource>,
      *   pageNumber?: int,
      *   pageSize?: int,
      * }|NumberListParams $params
@@ -97,8 +101,10 @@ final class NumbersRawService implements NumbersRawContract
                 $parsed,
                 [
                     'filterEnterpriseID' => 'filter[enterprise_id]',
+                    'filterOwnershipStatus' => 'filter[ownership_status]',
                     'filterPhoneNumberContains' => 'filter[phone_number][contains]',
                     'filterPhoneNumberEq' => 'filter[phone_number][eq]',
+                    'filterSource' => 'filter[source]',
                     'pageNumber' => 'page[number]',
                     'pageSize' => 'page[size]',
                 ],

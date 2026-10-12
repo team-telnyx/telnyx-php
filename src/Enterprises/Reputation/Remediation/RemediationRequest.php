@@ -78,7 +78,7 @@ final class RemediationRequest implements BaseModel
     public ?string $contactEmail;
 
     /**
-     * Per-category buckets. Populated once results are available. Null while the request is still pending.
+     * Per-category buckets of phone numbers, populated once results are available. Empty lists are kept (not omitted) so consumers can iterate without null-checking each key.
      */
     #[Optional(nullable: true)]
     public ?RemediationPerNumberResults $results;
@@ -259,7 +259,7 @@ final class RemediationRequest implements BaseModel
     }
 
     /**
-     * Per-category buckets. Populated once results are available. Null while the request is still pending.
+     * Per-category buckets of phone numbers, populated once results are available. Empty lists are kept (not omitted) so consumers can iterate without null-checking each key.
      *
      * @param RemediationPerNumberResults|RemediationPerNumberResultsShape|null $results
      */

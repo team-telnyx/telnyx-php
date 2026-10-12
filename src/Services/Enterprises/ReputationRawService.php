@@ -11,6 +11,7 @@ use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
 use Telnyx\Enterprises\Reputation\ReputationCheckFrequency;
 use Telnyx\Enterprises\Reputation\ReputationEnableParams;
 use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams;
+use Telnyx\Enterprises\Reputation\ReputationUpdateWebhookParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\ReputationRawContract;
 
@@ -156,6 +157,39 @@ final class ReputationRawService implements ReputationRawContract
         return $this->client->request(
             method: 'patch',
             path: ['enterprises/%1$s/reputation/frequency', $enterpriseID],
+            body: (object) $parsed,
+            options: $options,
+            convert: EnterpriseReputationPublicWrapped::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Set the HTTPS URL that receives number-ownership events for this enterprise: `number_reputation.number.flagged`, `number_reputation.number.removed` and `number_reputation.external_verification.status_changed`. Send `webhook_url: null` to stop receiving them.
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param array{webhookURL: string|null}|ReputationUpdateWebhookParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<EnterpriseReputationPublicWrapped>
+     *
+     * @throws APIException
+     */
+    public function updateWebhook(
+        string $enterpriseID,
+        array|ReputationUpdateWebhookParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ReputationUpdateWebhookParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'patch',
+            path: ['enterprises/%1$s/reputation/webhook', $enterpriseID],
             body: (object) $parsed,
             options: $options,
             convert: EnterpriseReputationPublicWrapped::class,

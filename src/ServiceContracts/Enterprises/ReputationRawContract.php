@@ -9,6 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
 use Telnyx\Enterprises\Reputation\ReputationEnableParams;
 use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams;
+use Telnyx\Enterprises\Reputation\ReputationUpdateWebhookParams;
 use Telnyx\RequestOptions;
 
 /**
@@ -77,6 +78,23 @@ interface ReputationRawContract
     public function updateFrequency(
         string $enterpriseID,
         array|ReputationUpdateFrequencyParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param array<string,mixed>|ReputationUpdateWebhookParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<EnterpriseReputationPublicWrapped>
+     *
+     * @throws APIException
+     */
+    public function updateWebhook(
+        string $enterpriseID,
+        array|ReputationUpdateWebhookParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

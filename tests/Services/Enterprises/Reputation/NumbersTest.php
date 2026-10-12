@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Enterprises\Reputation\Numbers\NumberGetOwnershipResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberList;
@@ -156,6 +157,47 @@ final class NumbersTest extends TestCase
     }
 
     #[Test]
+    public function testOwnershipConfirm(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->numbers->ownershipConfirm(
+            '+19493253498',
+            enterpriseID: '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            stillOwn: true,
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ReputationPhoneNumberWithReputation::class,
+            $result
+        );
+    }
+
+    #[Test]
+    public function testOwnershipConfirmWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->numbers->ownershipConfirm(
+            '+19493253498',
+            enterpriseID: '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            stillOwn: true,
+            evidenceDocumentID: '2a7e8337-e803-4057-a4ae-26c40eb0bc6c',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ReputationPhoneNumberWithReputation::class,
+            $result
+        );
+    }
+
+    #[Test]
     public function testRefresh(): void
     {
         if (UnsupportedMockTests::$skip) {
@@ -185,5 +227,49 @@ final class NumbersTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NumberRefreshResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRetrieveOwnership(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this
+            ->client
+            ->enterprises
+            ->reputation
+            ->numbers
+            ->retrieveOwnership(
+                '+19493253498',
+                enterpriseID: '4a6192a4-573d-446d-b3ce-aff9117272a6'
+            )
+        ;
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberGetOwnershipResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRetrieveOwnershipWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this
+            ->client
+            ->enterprises
+            ->reputation
+            ->numbers
+            ->retrieveOwnership(
+                '+19493253498',
+                enterpriseID: '4a6192a4-573d-446d-b3ce-aff9117272a6'
+            )
+        ;
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberGetOwnershipResponse::class, $result);
     }
 }
