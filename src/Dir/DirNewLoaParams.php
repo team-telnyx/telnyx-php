@@ -44,7 +44,7 @@ final class DirNewLoaParams implements BaseModel
     public array $phoneNumbers;
 
     /**
-     * Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
+     * Third-party reseller / partner managing the enterprise's phone numbers on its behalf, such as a call center (BPO) acting for a client. Omit when the enterprise manages its own numbers.
      */
     #[Optional]
     public ?AgentInput $agent;
@@ -112,7 +112,7 @@ final class DirNewLoaParams implements BaseModel
     }
 
     /**
-     * Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
+     * Third-party reseller / partner managing the enterprise's phone numbers on its behalf, such as a call center (BPO) acting for a client. Omit when the enterprise manages its own numbers.
      *
      * @param AgentInput|AgentInputShape $agent
      */

@@ -176,7 +176,7 @@ interface DirContract
      *
      * @param string $dirID the DIR id
      * @param list<string> $phoneNumbers Telephone numbers to authorize on the DIR, in `+E164` format (`+` followed by 10-15 digits). Max 15 per request.
-     * @param AgentInput|AgentInputShape $agent Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
+     * @param AgentInput|AgentInputShape $agent Third-party reseller / partner managing the enterprise's phone numbers on its behalf, such as a call center (BPO) acting for a client. Omit when the enterprise manages its own numbers.
      * @param SignaturePayload|SignaturePayloadShape $signature Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
      * @param RequestOpts|null $requestOptions
      *
