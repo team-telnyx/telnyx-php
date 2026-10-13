@@ -8,6 +8,7 @@ use Telnyx\AI\Memory\Namespaces\Profiles\ProfileDeleteResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileGetSummaryResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileIngestResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileListResponse;
+use Telnyx\AI\Memory\Namespaces\Profiles\ProfilePreviewResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRecallResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRememberResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -72,6 +73,23 @@ interface ProfilesContract
         string|Omitted|null $sessionID = Omitted::VALUE,
         RequestOptions|array|null $requestOptions = null,
     ): ProfileIngestResponse;
+
+    /**
+     * @api
+     *
+     * @param string $profileID path param: The profile: your identifier for the user, caller or agent this memory is about
+     * @param string $namespace Path param: The namespace. `default` exists for every organization.
+     * @param string|Omitted|null $instructions Body param: The candidate note to try. `null`, empty, or whitespace-only previews the neutral default -- the summary a profile returns to when instructions are cleared. Capped at 2000 characters, the same cap `PATCH /settings` applies on save; a longer note is refused with `422` before anything is generated.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function preview(
+        string $profileID,
+        string $namespace,
+        string|Omitted|null $instructions = Omitted::VALUE,
+        RequestOptions|array|null $requestOptions = null,
+    ): ProfilePreviewResponse;
 
     /**
      * @api

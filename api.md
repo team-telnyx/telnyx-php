@@ -565,6 +565,7 @@ Methods:
 - <code title="get /ai/memory/namespaces/{namespace}/profiles">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">list</a>(...$params)</code>
 - <code title="delete /ai/memory/namespaces/{namespace}/profiles/{profile_id}">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">delete</a>(...$params)</code>
 - <code title="post /ai/memory/namespaces/{namespace}/profiles/{profile_id}/ingest">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">ingest</a>(...$params)</code>
+- <code title="post /ai/memory/namespaces/{namespace}/profiles/{profile_id}/summary/preview">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">preview</a>(...$params)</code>
 - <code title="post /ai/memory/namespaces/{namespace}/profiles/{profile_id}/recall">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">recall</a>(...$params)</code>
 - <code title="post /ai/memory/namespaces/{namespace}/profiles/{profile_id}/remember">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">remember</a>(...$params)</code>
 - <code title="get /ai/memory/namespaces/{namespace}/profiles/{profile_id}/summary">$client->ai->memory->namespaces->profiles-><a href="./src/Services/AI/Memory/Namespaces/ProfilesService.php">retrieveSummary</a>(...$params)</code>

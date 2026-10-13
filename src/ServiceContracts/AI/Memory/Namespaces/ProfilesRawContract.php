@@ -11,6 +11,8 @@ use Telnyx\AI\Memory\Namespaces\Profiles\ProfileIngestParams;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileIngestResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileListParams;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileListResponse;
+use Telnyx\AI\Memory\Namespaces\Profiles\ProfilePreviewParams;
+use Telnyx\AI\Memory\Namespaces\Profiles\ProfilePreviewResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRecallParams;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRecallResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRememberParams;
@@ -73,6 +75,23 @@ interface ProfilesRawContract
     public function ingest(
         string $profileID,
         array|ProfileIngestParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $profileID path param: The profile: your identifier for the user, caller or agent this memory is about
+     * @param array<string,mixed>|ProfilePreviewParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ProfilePreviewResponse>
+     *
+     * @throws APIException
+     */
+    public function preview(
+        string $profileID,
+        array|ProfilePreviewParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
