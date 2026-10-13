@@ -164,6 +164,7 @@ use Telnyx\Services\SimCardOrderPreviewService;
 use Telnyx\Services\SimCardOrdersService;
 use Telnyx\Services\SimCardsService;
 use Telnyx\Services\SiprecConnectorsService;
+use Telnyx\Services\SipRegistrationStatusService;
 use Telnyx\Services\SpeechToTextService;
 use Telnyx\Services\SpendLimitsService;
 use Telnyx\Services\StorageService;
@@ -1166,6 +1167,11 @@ class Client extends BaseClient
      */
     public LlmTokenGatewayService $llmTokenGateway;
 
+    /**
+     * @api
+     */
+    public SipRegistrationStatusService $sipRegistrationStatus;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1428,6 +1434,7 @@ class Client extends BaseClient
         $this->machinePayments = new MachinePaymentsService($this);
         $this->spendLimits = new SpendLimitsService($this);
         $this->llmTokenGateway = new LlmTokenGatewayService($this);
+        $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
     }
 
     /** @return array<string,string> */

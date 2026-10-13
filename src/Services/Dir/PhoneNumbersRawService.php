@@ -10,7 +10,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\Document;
-use Telnyx\Dir\PhoneNumberBatches\DirPhoneNumberStatus;
 use Telnyx\Dir\PhoneNumbers\DirPhoneNumber;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberAddParams;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberAddResponse;
@@ -40,9 +39,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      * List the phone numbers registered under a DIR. The enterprise is resolved server-side from the DIR id.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
-     * @param array{
-     *   pageNumber?: int, pageSize?: int, status?: value-of<DirPhoneNumberStatus>
-     * }|PhoneNumberListParams $params
+     * @param array{pageNumber?: int, pageSize?: int}|PhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<DirPhoneNumber>>

@@ -3318,3 +3318,9 @@ Methods:
 - <code title="patch /llm_token_gateway/token_keys/{id}">$client->llmTokenGateway->tokenKeys-><a href="./src/Services/LlmTokenGateway/TokenKeysService.php">update</a>(...$params)</code>
 - <code title="get /llm_token_gateway/token_keys">$client->llmTokenGateway->tokenKeys-><a href="./src/Services/LlmTokenGateway/TokenKeysService.php">list</a>(...$params)</code>
 - <code title="delete /llm_token_gateway/token_keys/{id}">$client->llmTokenGateway->tokenKeys-><a href="./src/Services/LlmTokenGateway/TokenKeysService.php">delete</a>(...$params)</code>
+
+# SipRegistrationStatus
+
+Methods:
+
+- <code title="get /sip_registration_status">$client->sipRegistrationStatus-><a href="./src/Services/SipRegistrationStatusService.php">list</a>(...$params)</code>
