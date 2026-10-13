@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\LlmTokenGateway\TokenGroups\TokenGroup\Guardrails\Dlp;
+
+enum Response: string
+{
+    case IGNORE = 'ignore';
+
+    case FLAG = 'flag';
+
+    case BLOCK = 'block';
+}

@@ -10,7 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MetaShape = array{
- *   endDate: string, startDate: string, tokenGroupID: string
+ *   endDate: string,
+ *   metadata: array<string,string>,
+ *   startDate: string,
+ *   tokenGroupID: string,
  * }
  */
 final class Meta implements BaseModel
@@ -20,6 +23,14 @@ final class Meta implements BaseModel
 
     #[Required('end_date')]
     public string $endDate;
+
+    /**
+     * The metadata[<key>] filters applied to every section; {} when unfiltered.
+     *
+     * @var array<string,string> $metadata
+     */
+    #[Required(map: 'string')]
+    public array $metadata;
 
     #[Required('start_date')]
     public string $startDate;
@@ -32,13 +43,17 @@ final class Meta implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Meta::with(endDate: ..., startDate: ..., tokenGroupID: ...)
+     * Meta::with(endDate: ..., metadata: ..., startDate: ..., tokenGroupID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Meta)->withEndDate(...)->withStartDate(...)->withTokenGroupID(...)
+     * (new Meta)
+     *   ->withEndDate(...)
+     *   ->withMetadata(...)
+     *   ->withStartDate(...)
+     *   ->withTokenGroupID(...)
      * ```
      */
     public function __construct()
@@ -50,15 +65,19 @@ final class Meta implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param array<string,string> $metadata
      */
     public static function with(
         string $endDate,
+        array $metadata,
         string $startDate,
         string $tokenGroupID
     ): self {
         $self = new self;
 
         $self['endDate'] = $endDate;
+        $self['metadata'] = $metadata;
         $self['startDate'] = $startDate;
         $self['tokenGroupID'] = $tokenGroupID;
 
@@ -69,6 +88,19 @@ final class Meta implements BaseModel
     {
         $self = clone $this;
         $self['endDate'] = $endDate;
+
+        return $self;
+    }
+
+    /**
+     * The metadata[<key>] filters applied to every section; {} when unfiltered.
+     *
+     * @param array<string,string> $metadata
+     */
+    public function withMetadata(array $metadata): self
+    {
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
         return $self;
     }

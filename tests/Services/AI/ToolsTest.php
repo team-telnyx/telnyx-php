@@ -61,9 +61,13 @@ final class ToolsTest extends TestCase
             invite: ['foo' => 'bar'],
             pay: [
                 'connectorName' => 'connector_name',
+                'connectorParameters' => [
+                    'campaignid' => 'bar', 'customer_ref' => 'bar',
+                ],
                 'currency' => 'currency',
                 'description' => 'description',
                 'paymentMethod' => 'payment_method',
+                'validCardTypes' => ['visa', 'mastercard'],
             ],
             retrieval: ['foo' => 'bar'],
             timeoutMs: 0,

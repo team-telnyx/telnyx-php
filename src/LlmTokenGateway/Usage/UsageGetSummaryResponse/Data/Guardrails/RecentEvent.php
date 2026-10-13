@@ -7,12 +7,15 @@ namespace Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse\Data\Guardrails;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse\Data\Guardrails\RecentEvent\Finding;
+use Telnyx\LlmTokenGateway\Usage\GuardrailFinding;
+use Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse\Data\Guardrails\RecentEvent\Metadata;
 use Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse\Data\Guardrails\RecentEvent\Outcome;
 use Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse\Data\Guardrails\RecentEvent\Stage;
 
 /**
- * @phpstan-import-type FindingShape from \Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse\Data\Guardrails\RecentEvent\Finding
+ * @phpstan-import-type MetadataVariants from \Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse\Data\Guardrails\RecentEvent\Metadata
+ * @phpstan-import-type GuardrailFindingShape from \Telnyx\LlmTokenGateway\Usage\GuardrailFinding
+ * @phpstan-import-type MetadataShape from \Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse\Data\Guardrails\RecentEvent\Metadata
  *
  * @phpstan-type RecentEventShape = array{
  *   id: string,
@@ -20,7 +23,8 @@ use Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse\Data\Guardrails\RecentE
  *   endUserID: string|null,
  *   evaluationInputTokens: int|null,
  *   evaluationOutputTokens: int|null,
- *   findings: list<Finding|FindingShape>,
+ *   findings: list<GuardrailFinding|GuardrailFindingShape>,
+ *   metadata: array<string,MetadataShape>,
  *   model: string,
  *   outcome: Outcome|value-of<Outcome>,
  *   recordType: 'guardrail_event',
@@ -55,13 +59,18 @@ final class RecentEvent implements BaseModel
     #[Required('evaluation_output_tokens')]
     public ?int $evaluationOutputTokens;
 
-    /** @var list<Finding> $findings */
-    #[Required(list: Finding::class)]
+    /** @var list<GuardrailFinding> $findings */
+    #[Required(list: GuardrailFinding::class)]
     public array $findings;
 
     /**
-     * Model identifier.
+     * Customer request tags from the x-ltg-metadata header: up to 5 entries. Keys are case-sensitive; keys starting with ltg_, telnyx_, litellm_ or cf_ (any case) are reserved. Values are strings (1-256 characters, no control or format characters), integers within +/-9007199254740991, or booleans; floats, null, objects and arrays are rejected. Values that look like credentials are rejected. Tags are attribution only: never forwarded upstream, never part of the response cache key, never used for budgets or routing. An untagged request reports {}.
+     *
+     * @var array<string,MetadataVariants> $metadata
      */
+    #[Required(map: Metadata::class)]
+    public array $metadata;
+
     #[Required]
     public string $model;
 
@@ -97,6 +106,7 @@ final class RecentEvent implements BaseModel
      *   evaluationInputTokens: ...,
      *   evaluationOutputTokens: ...,
      *   findings: ...,
+     *   metadata: ...,
      *   model: ...,
      *   outcome: ...,
      *   requestID: ...,
@@ -117,6 +127,7 @@ final class RecentEvent implements BaseModel
      *   ->withEvaluationInputTokens(...)
      *   ->withEvaluationOutputTokens(...)
      *   ->withFindings(...)
+     *   ->withMetadata(...)
      *   ->withModel(...)
      *   ->withOutcome(...)
      *   ->withRequestID(...)
@@ -136,7 +147,8 @@ final class RecentEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Finding|FindingShape> $findings
+     * @param list<GuardrailFinding|GuardrailFindingShape> $findings
+     * @param array<string,MetadataShape> $metadata
      * @param Outcome|value-of<Outcome> $outcome
      * @param Stage|value-of<Stage> $stage
      */
@@ -147,6 +159,7 @@ final class RecentEvent implements BaseModel
         ?int $evaluationInputTokens,
         ?int $evaluationOutputTokens,
         array $findings,
+        array $metadata,
         string $model,
         Outcome|string $outcome,
         string $requestID,
@@ -163,6 +176,7 @@ final class RecentEvent implements BaseModel
         $self['evaluationInputTokens'] = $evaluationInputTokens;
         $self['evaluationOutputTokens'] = $evaluationOutputTokens;
         $self['findings'] = $findings;
+        $self['metadata'] = $metadata;
         $self['model'] = $model;
         $self['outcome'] = $outcome;
         $self['requestID'] = $requestID;
@@ -216,7 +230,7 @@ final class RecentEvent implements BaseModel
     }
 
     /**
-     * @param list<Finding|FindingShape> $findings
+     * @param list<GuardrailFinding|GuardrailFindingShape> $findings
      */
     public function withFindings(array $findings): self
     {
@@ -227,8 +241,18 @@ final class RecentEvent implements BaseModel
     }
 
     /**
-     * Model identifier.
+     * Customer request tags from the x-ltg-metadata header: up to 5 entries. Keys are case-sensitive; keys starting with ltg_, telnyx_, litellm_ or cf_ (any case) are reserved. Values are strings (1-256 characters, no control or format characters), integers within +/-9007199254740991, or booleans; floats, null, objects and arrays are rejected. Values that look like credentials are rejected. Tags are attribution only: never forwarded upstream, never part of the response cache key, never used for budgets or routing. An untagged request reports {}.
+     *
+     * @param array<string,MetadataShape> $metadata
      */
+    public function withMetadata(array $metadata): self
+    {
+        $self = clone $this;
+        $self['metadata'] = $metadata;
+
+        return $self;
+    }
+
     public function withModel(string $model): self
     {
         $self = clone $this;

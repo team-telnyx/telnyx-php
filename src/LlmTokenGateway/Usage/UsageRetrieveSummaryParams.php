@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\LlmTokenGateway\Usage;
 
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Return complete usage totals, UTC daily and model breakdowns, and guardrail event counts for one token group owned by the authenticated account. Requires the llm_token_gateway.usage.read permission; spend and guardrail read permissions do not grant this combined report. All sections share one database snapshot and include the latest usage corrections. Dates use an inclusive start and exclusive end spanning 1 to 31 days. Only token_group_id, start_date and end_date are accepted; pagination, group_by and other filters are rejected. Spend is reference/enforcement USD, not invoice truth or BYOK provider charges. Unknown cost is excluded from spend and reported through unknown_requests and reserved_spend. Daily rows include zero-activity days. Model rows are ordered by request count descending, then model name, and are limited to 1,000. Guardrail counts count events, not distinct requests; recent_events contains at most 20 newest events. A report that exceeds model or query limits returns 503 rather than a truncated success.
+ * Gateway reference/enforcement usage, not invoice truth or BYOK provider charges. Requires the dedicated llm_token_gateway.usage.read V2 action for combined spend and guardrail reporting; existing spend.read and guardrail_events.read grants do not grant this endpoint. All totals, UTC daily buckets, models and latest 20 guardrail events share one database snapshot. UTC half-open dates, at most 31 days. Zero-filled days; at most 1000 models (503 rather than truncation on overflow/timeout). Known tokens sum independently known categories across latest attempt evidence, including corrections; unknown spend is excluded and unknown_requests/reserved_spend remain explicit. Guardrail counts count events, not distinct requests. No raw spend events, prompts or secrets. This read-only report creates no pagination snapshot and accepts no pagination parameters.
  *
  * @see Telnyx\Services\LlmTokenGateway\UsageService::retrieveSummary()
  *
  * @phpstan-type UsageRetrieveSummaryParamsShape = array{
- *   endDate: string, startDate: string, tokenGroupID: string
+ *   endDate: string,
+ *   startDate: string,
+ *   tokenGroupID: string,
+ *   metadata?: array<string,string>|null,
  * }
  */
 final class UsageRetrieveSummaryParams implements BaseModel
@@ -24,23 +28,22 @@ final class UsageRetrieveSummaryParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Exclusive UTC date in YYYY-MM-DD format. Must follow start_date by 1 to 31 days.
-     */
     #[Required]
     public string $endDate;
 
-    /**
-     * Inclusive UTC date in YYYY-MM-DD format. Must precede end_date by 1 to 31 days.
-     */
     #[Required]
     public string $startDate;
 
-    /**
-     * ID of a token group owned by the authenticated account.
-     */
     #[Required]
     public string $tokenGroupID;
+
+    /**
+     * Request tag filters as metadata[<key>]=<value>, at most 5, combined with AND. A value matches the tag's text form exactly (booleans as true/false, integers in decimal), so metadata[flag]=true matches both boolean true and the string "true". Keys are case-sensitive; reserved-prefix keys are rejected. Unindexed: bounded by the account, the date range and the report timeout.
+     *
+     * @var array<string,string>|null $metadata
+     */
+    #[Optional(map: 'string')]
+    public ?array $metadata;
 
     /**
      * `new UsageRetrieveSummaryParams()` is missing required properties by the API.
@@ -70,11 +73,14 @@ final class UsageRetrieveSummaryParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param array<string,string>|null $metadata
      */
     public static function with(
         string $endDate,
         string $startDate,
-        string $tokenGroupID
+        string $tokenGroupID,
+        ?array $metadata = null,
     ): self {
         $self = new self;
 
@@ -82,12 +88,11 @@ final class UsageRetrieveSummaryParams implements BaseModel
         $self['startDate'] = $startDate;
         $self['tokenGroupID'] = $tokenGroupID;
 
+        null !== $metadata && $self['metadata'] = $metadata;
+
         return $self;
     }
 
-    /**
-     * Exclusive UTC date in YYYY-MM-DD format. Must follow start_date by 1 to 31 days.
-     */
     public function withEndDate(string $endDate): self
     {
         $self = clone $this;
@@ -96,9 +101,6 @@ final class UsageRetrieveSummaryParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Inclusive UTC date in YYYY-MM-DD format. Must precede end_date by 1 to 31 days.
-     */
     public function withStartDate(string $startDate): self
     {
         $self = clone $this;
@@ -107,13 +109,23 @@ final class UsageRetrieveSummaryParams implements BaseModel
         return $self;
     }
 
-    /**
-     * ID of a token group owned by the authenticated account.
-     */
     public function withTokenGroupID(string $tokenGroupID): self
     {
         $self = clone $this;
         $self['tokenGroupID'] = $tokenGroupID;
+
+        return $self;
+    }
+
+    /**
+     * Request tag filters as metadata[<key>]=<value>, at most 5, combined with AND. A value matches the tag's text form exactly (booleans as true/false, integers in decimal), so metadata[flag]=true matches both boolean true and the string "true". Keys are case-sensitive; reserved-prefix keys are rejected. Unindexed: bounded by the account, the date range and the report timeout.
+     *
+     * @param array<string,string> $metadata
+     */
+    public function withMetadata(array $metadata): self
+    {
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
         return $self;
     }

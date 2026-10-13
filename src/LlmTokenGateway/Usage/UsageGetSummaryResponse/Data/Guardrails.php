@@ -10,8 +10,6 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse\Data\Guardrails\RecentEvent;
 
 /**
- * Complete guardrail event counts and bounded recent findings for the same group and range.
- *
  * @phpstan-import-type RecentEventShape from \Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse\Data\Guardrails\RecentEvent
  *
  * @phpstan-type GuardrailsShape = array{
@@ -25,23 +23,13 @@ final class Guardrails implements BaseModel
     /** @use SdkModel<GuardrailsShape> */
     use SdkModel;
 
-    /**
-     * Total blocked guardrail events, not distinct requests.
-     */
     #[Required('blocked_events')]
     public int $blockedEvents;
 
-    /**
-     * Total flagged guardrail events, not distinct requests.
-     */
     #[Required('flagged_events')]
     public int $flaggedEvents;
 
-    /**
-     * Up to 20 newest privacy-safe guardrail events, ordered by creation time descending and event ID.
-     *
-     * @var list<RecentEvent> $recentEvents
-     */
+    /** @var list<RecentEvent> $recentEvents */
     #[Required('recent_events', list: RecentEvent::class)]
     public array $recentEvents;
 
@@ -88,9 +76,6 @@ final class Guardrails implements BaseModel
         return $self;
     }
 
-    /**
-     * Total blocked guardrail events, not distinct requests.
-     */
     public function withBlockedEvents(int $blockedEvents): self
     {
         $self = clone $this;
@@ -99,9 +84,6 @@ final class Guardrails implements BaseModel
         return $self;
     }
 
-    /**
-     * Total flagged guardrail events, not distinct requests.
-     */
     public function withFlaggedEvents(int $flaggedEvents): self
     {
         $self = clone $this;
@@ -111,8 +93,6 @@ final class Guardrails implements BaseModel
     }
 
     /**
-     * Up to 20 newest privacy-safe guardrail events, ordered by creation time descending and event ID.
-     *
      * @param list<RecentEvent|RecentEventShape> $recentEvents
      */
     public function withRecentEvents(array $recentEvents): self

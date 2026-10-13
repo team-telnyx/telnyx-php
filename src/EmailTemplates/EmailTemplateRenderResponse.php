@@ -20,7 +20,7 @@ final class EmailTemplateRenderResponse implements BaseModel
     use SdkModel;
 
     /**
-     * Template object with `subject`, `html_body`, and `text_body` replaced by their Liquid-rendered values. All other template fields (id, name, variables, etc.) remain unchanged.
+     * Template object with `subject`, `html_body`, and `text_body` replaced by their Liquid-rendered values. Rendered content is not limited by the stored template-field lengths. All other template fields remain unchanged.
      */
     #[Required]
     public Data $data;
@@ -61,7 +61,7 @@ final class EmailTemplateRenderResponse implements BaseModel
     }
 
     /**
-     * Template object with `subject`, `html_body`, and `text_body` replaced by their Liquid-rendered values. All other template fields (id, name, variables, etc.) remain unchanged.
+     * Template object with `subject`, `html_body`, and `text_body` replaced by their Liquid-rendered values. Rendered content is not limited by the stored template-field lengths. All other template fields remain unchanged.
      *
      * @param Data|DataShape $data
      */

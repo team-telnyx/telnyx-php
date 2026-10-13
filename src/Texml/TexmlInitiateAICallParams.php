@@ -23,7 +23,7 @@ use Telnyx\Texml\TexmlInitiateAICallParams\StatusCallbackMethod;
 use Telnyx\Texml\TexmlInitiateAICallParams\Trim;
 
 /**
- * Initiate an outbound AI call with warm-up support. Validates parameters, builds an internal TeXML with an AI Assistant configuration, encodes instructions into client state, and calls the dial API. The Twiml, Texml, and Url parameters are not allowed and will result in a 422 error.
+ * Initiate an outbound AI call with warm-up support: Telnyx attempts to warm up the assistant identified by `AIAssistantId` before placing the call and starts it automatically when the called party answers. Validates parameters, builds an internal TeXML with an AI Assistant configuration, encodes instructions into client state, and calls the dial API. The Twiml, Texml, and Url parameters are not allowed and will result in a 422 error.
  *
  * **Expected callback events:**
  *
@@ -95,7 +95,7 @@ final class TexmlInitiateAICallParams implements BaseModel
     use SdkParams;
 
     /**
-     * The ID of the AI assistant to use for the call.
+     * The ID of the AI assistant to use for the call. Telnyx attempts to warm up this assistant before the call is placed and starts it automatically when the called party answers.
      */
     #[Required('AIAssistantId')]
     public string $aiAssistantID;
@@ -573,7 +573,7 @@ final class TexmlInitiateAICallParams implements BaseModel
     }
 
     /**
-     * The ID of the AI assistant to use for the call.
+     * The ID of the AI assistant to use for the call. Telnyx attempts to warm up this assistant before the call is placed and starts it automatically when the called party answers.
      */
     public function withAIAssistantID(string $aiAssistantID): self
     {

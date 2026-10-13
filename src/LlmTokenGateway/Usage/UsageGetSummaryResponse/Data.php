@@ -30,31 +30,17 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /**
-     * One row per UTC day, including zero-activity days.
-     *
-     * @var list<ByDay> $byDay
-     */
+    /** @var list<ByDay> $byDay */
     #[Required('by_day', list: ByDay::class)]
     public array $byDay;
 
-    /**
-     * One row per model, ordered by request count descending then model name.
-     *
-     * @var list<ByModel> $byModel
-     */
+    /** @var list<ByModel> $byModel */
     #[Required('by_model', list: ByModel::class)]
     public array $byModel;
 
-    /**
-     * Complete guardrail event counts and bounded recent findings for the same group and range.
-     */
     #[Required]
     public Guardrails $guardrails;
 
-    /**
-     * Metrics for all matching requests.
-     */
     #[Required]
     public Totals $totals;
 
@@ -108,8 +94,6 @@ final class Data implements BaseModel
     }
 
     /**
-     * One row per UTC day, including zero-activity days.
-     *
      * @param list<ByDay|ByDayShape> $byDay
      */
     public function withByDay(array $byDay): self
@@ -121,8 +105,6 @@ final class Data implements BaseModel
     }
 
     /**
-     * One row per model, ordered by request count descending then model name.
-     *
      * @param list<ByModel|ByModelShape> $byModel
      */
     public function withByModel(array $byModel): self
@@ -134,8 +116,6 @@ final class Data implements BaseModel
     }
 
     /**
-     * Complete guardrail event counts and bounded recent findings for the same group and range.
-     *
      * @param Guardrails|GuardrailsShape $guardrails
      */
     public function withGuardrails(Guardrails|array $guardrails): self
@@ -147,8 +127,6 @@ final class Data implements BaseModel
     }
 
     /**
-     * Metrics for all matching requests.
-     *
      * @param Totals|TotalsShape $totals
      */
     public function withTotals(Totals|array $totals): self

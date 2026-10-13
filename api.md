@@ -2704,6 +2704,13 @@ Methods:
 - <code title="get /v2/whatsapp/user_data">$client->whatsapp->userData-><a href="./src/Services/Whatsapp/UserDataService.php">retrieve</a>()</code>
 - <code title="patch /v2/whatsapp/user_data">$client->whatsapp->userData-><a href="./src/Services/Whatsapp/UserDataService.php">update</a>(...$params)</code>
 
+## Signup
+
+Methods:
+
+- <code title="get /whatsapp/signup">$client->whatsapp->signup-><a href="./src/Services/Whatsapp/SignupService.php">list</a>(...$params)</code>
+- <code title="get /whatsapp/signup/{id}/status">$client->whatsapp->signup-><a href="./src/Services/Whatsapp/SignupService.php">retrieveStatus</a>(...$params)</code>
+
 # WhatsappMessageTemplates
 
 Methods:
@@ -3282,4 +3289,32 @@ Methods:
 
 Methods:
 
+- <code title="get /llm_token_gateway/usage/export">$client->llmTokenGateway->usage-><a href="./src/Services/LlmTokenGateway/UsageService.php">retrieveExport</a>(...$params)</code>
 - <code title="get /llm_token_gateway/usage/summary">$client->llmTokenGateway->usage-><a href="./src/Services/LlmTokenGateway/UsageService.php">retrieveSummary</a>(...$params)</code>
+
+## Spend
+
+Methods:
+
+- <code title="get /llm_token_gateway/spend/events">$client->llmTokenGateway->spend-><a href="./src/Services/LlmTokenGateway/SpendService.php">retrieveEvents</a>(...$params)</code>
+- <code title="get /llm_token_gateway/spend/summary">$client->llmTokenGateway->spend-><a href="./src/Services/LlmTokenGateway/SpendService.php">retrieveSummary</a>(...$params)</code>
+
+## TokenGroups
+
+Methods:
+
+- <code title="post /llm_token_gateway/token_groups">$client->llmTokenGateway->tokenGroups-><a href="./src/Services/LlmTokenGateway/TokenGroupsService.php">create</a>(...$params)</code>
+- <code title="get /llm_token_gateway/token_groups/{id}">$client->llmTokenGateway->tokenGroups-><a href="./src/Services/LlmTokenGateway/TokenGroupsService.php">retrieve</a>(...$params)</code>
+- <code title="patch /llm_token_gateway/token_groups/{id}">$client->llmTokenGateway->tokenGroups-><a href="./src/Services/LlmTokenGateway/TokenGroupsService.php">update</a>(...$params)</code>
+- <code title="get /llm_token_gateway/token_groups">$client->llmTokenGateway->tokenGroups-><a href="./src/Services/LlmTokenGateway/TokenGroupsService.php">list</a>(...$params)</code>
+- <code title="delete /llm_token_gateway/token_groups/{id}">$client->llmTokenGateway->tokenGroups-><a href="./src/Services/LlmTokenGateway/TokenGroupsService.php">delete</a>(...$params)</code>
+
+## TokenKeys
+
+Methods:
+
+- <code title="post /llm_token_gateway/token_keys">$client->llmTokenGateway->tokenKeys-><a href="./src/Services/LlmTokenGateway/TokenKeysService.php">create</a>(...$params)</code>
+- <code title="get /llm_token_gateway/token_keys/{id}">$client->llmTokenGateway->tokenKeys-><a href="./src/Services/LlmTokenGateway/TokenKeysService.php">retrieve</a>(...$params)</code>
+- <code title="patch /llm_token_gateway/token_keys/{id}">$client->llmTokenGateway->tokenKeys-><a href="./src/Services/LlmTokenGateway/TokenKeysService.php">update</a>(...$params)</code>
+- <code title="get /llm_token_gateway/token_keys">$client->llmTokenGateway->tokenKeys-><a href="./src/Services/LlmTokenGateway/TokenKeysService.php">list</a>(...$params)</code>
+- <code title="delete /llm_token_gateway/token_keys/{id}">$client->llmTokenGateway->tokenKeys-><a href="./src/Services/LlmTokenGateway/TokenKeysService.php">delete</a>(...$params)</code>

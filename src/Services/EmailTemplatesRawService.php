@@ -12,7 +12,11 @@ use Telnyx\EmailCursorPagination;
 use Telnyx\EmailTemplates\EmailTemplate;
 use Telnyx\EmailTemplates\EmailTemplateCreateParams;
 use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariableSchema;
+use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariablesMode;
 use Telnyx\EmailTemplates\EmailTemplateListParams;
+use Telnyx\EmailTemplates\EmailTemplateListParams\FilterAutoescape;
+use Telnyx\EmailTemplates\EmailTemplateListParams\FilterContentType;
+use Telnyx\EmailTemplates\EmailTemplateListParams\FilterStrictVariables;
 use Telnyx\EmailTemplates\EmailTemplateRenderParams;
 use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
 use Telnyx\EmailTemplates\EmailTemplateReplaceParams;
@@ -50,7 +54,8 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
      *   subject?: string|null,
      *   textBody?: string|null,
      *   variableSchema?: array<string,VariableSchema|VariableSchemaShape>|null,
-     *   variables?: list<string>,
+     *   variables?: list<string>|null,
+     *   variablesMode?: VariablesMode|value-of<VariablesMode>,
      *   idempotencyKey?: string,
      * }|EmailTemplateCreateParams $params
      * @param RequestOpts|null $requestOptions
@@ -125,7 +130,8 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
      *   subject?: string|null,
      *   textBody?: string|null,
      *   variableSchema?: array<string,EmailTemplateUpdateParams\VariableSchema|VariableSchemaShape1>|null,
-     *   variables?: list<string>,
+     *   variables?: list<string>|null,
+     *   variablesMode?: EmailTemplateUpdateParams\VariablesMode|value-of<EmailTemplateUpdateParams\VariablesMode>,
      * }|EmailTemplateUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -156,10 +162,15 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
     /**
      * @api
      *
-     * Lists templates sorted newest first by `created_at desc, id desc`.
+     * Lists templates sorted newest first by `created_at desc, id desc`. Optional filters match a case-insensitive literal name/subject query, stored body presence, and the `strict_variables` and `autoescape` settings. Filters intersect, remain scoped to the authenticated account, and apply before cursor pagination. Invalid filter names or values return 400.
      *
      * @param array{
-     *   pageCursor?: string, pageSize?: int
+     *   filterAutoescape?: FilterAutoescape|value-of<FilterAutoescape>,
+     *   filterContentType?: FilterContentType|value-of<FilterContentType>,
+     *   filterQuery?: string,
+     *   filterStrictVariables?: FilterStrictVariables|value-of<FilterStrictVariables>,
+     *   pageCursor?: string,
+     *   pageSize?: int,
      * }|EmailTemplateListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -182,7 +193,14 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
             path: 'email_templates',
             query: Util::array_transform_keys(
                 $parsed,
-                ['pageCursor' => 'page_cursor', 'pageSize' => 'page_size']
+                [
+                    'filterAutoescape' => 'filter[autoescape]',
+                    'filterContentType' => 'filter[content_type]',
+                    'filterQuery' => 'filter[query]',
+                    'filterStrictVariables' => 'filter[strict_variables]',
+                    'pageCursor' => 'page_cursor',
+                    'pageSize' => 'page_size',
+                ],
             ),
             options: $options,
             convert: EmailTemplate::class,
@@ -266,7 +284,8 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
      *   subject?: string|null,
      *   textBody?: string|null,
      *   variableSchema?: array<string,EmailTemplateReplaceParams\VariableSchema|VariableSchemaShape2>|null,
-     *   variables?: list<string>,
+     *   variables?: list<string>|null,
+     *   variablesMode?: EmailTemplateReplaceParams\VariablesMode|value-of<EmailTemplateReplaceParams\VariablesMode>,
      * }|EmailTemplateReplaceParams $params
      * @param RequestOpts|null $requestOptions
      *

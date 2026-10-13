@@ -60,6 +60,7 @@ final class EmailTemplatesTest extends TestCase
             textBody: 'Hello {{ first_name }}',
             variableSchema: ['foo' => ['required' => true, 'default' => 'default']],
             variables: ['string'],
+            variablesMode: 'automatic',
             idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 

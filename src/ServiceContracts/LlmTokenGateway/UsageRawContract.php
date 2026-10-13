@@ -6,7 +6,9 @@ namespace Telnyx\ServiceContracts\LlmTokenGateway;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\LlmTokenGateway\Usage\UsageGetExportResponse;
 use Telnyx\LlmTokenGateway\Usage\UsageGetSummaryResponse;
+use Telnyx\LlmTokenGateway\Usage\UsageRetrieveExportParams;
 use Telnyx\LlmTokenGateway\Usage\UsageRetrieveSummaryParams;
 use Telnyx\RequestOptions;
 
@@ -15,6 +17,21 @@ use Telnyx\RequestOptions;
  */
 interface UsageRawContract
 {
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|UsageRetrieveExportParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<UsageGetExportResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveExport(
+        array|UsageRetrieveExportParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
     /**
      * @api
      *

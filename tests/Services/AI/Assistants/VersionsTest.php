@@ -231,6 +231,11 @@ final class VersionsTest extends TestCase
                             'speed' => 0,
                             'style' => 0,
                             'temperature' => 0,
+                            'toolCallAudio' => [
+                                'type' => 'predefined_media',
+                                'value' => 'typing',
+                                'volume' => 0.5,
+                            ],
                             'useSpeakerBoost' => true,
                             'voiceSpeed' => 0,
                         ],
@@ -354,6 +359,11 @@ final class VersionsTest extends TestCase
                             'speed' => 0,
                             'style' => 0,
                             'temperature' => 0,
+                            'toolCallAudio' => [
+                                'type' => 'predefined_media',
+                                'value' => 'typing',
+                                'volume' => 0.5,
+                            ],
                             'useSpeakerBoost' => true,
                             'voiceSpeed' => 0,
                         ],
@@ -614,6 +624,9 @@ final class VersionsTest extends TestCase
                 'speed' => 0,
                 'style' => 0,
                 'temperature' => 0,
+                'toolCallAudio' => [
+                    'type' => 'predefined_media', 'value' => 'typing', 'volume' => 0.5,
+                ],
                 'useSpeakerBoost' => true,
                 'voiceSpeed' => 0,
             ],

@@ -28,69 +28,42 @@ final class ByDay implements BaseModel
     /** @use SdkModel<ByDayShape> */
     use SdkModel;
 
-    /**
-     * Requests served from the gateway cache.
-     */
     #[Required('cache_hits')]
     public int $cacheHits;
 
-    /**
-     * UTC day.
-     */
     #[Required]
     public string $date;
 
-    /**
-     * Requests classified as failed.
-     */
     #[Required('failed_requests')]
     public int $failedRequests;
 
-    /**
-     * Independently known input tokens across attempts, including corrected usage.
-     */
     #[Required('input_tokens')]
     public int $inputTokens;
 
-    /**
-     * Independently known output tokens across attempts, including corrected usage.
-     */
     #[Required('output_tokens')]
     public int $outputTokens;
 
-    /**
-     * Requests classified as partial after streaming began.
-     */
     #[Required('partial_requests')]
     public int $partialRequests;
 
-    /**
-     * Number of matching requests.
-     */
     #[Required]
     public int $requests;
 
     /**
-     * Unresolved budget reservations in USD.
+     * USD, decimal precision at most 6 places; parse exactly to integer micro-USD, never binary float accounting.
      */
     #[Required('reserved_spend')]
     public float $reservedSpend;
 
     /**
-     * Sum of known reference/enforcement cost in USD.
+     * USD, decimal precision at most 6 places; parse exactly to integer micro-USD, never binary float accounting.
      */
     #[Required]
     public float $spend;
 
-    /**
-     * Requests classified as succeeded.
-     */
     #[Required('succeeded_requests')]
     public int $succeededRequests;
 
-    /**
-     * Requests whose cost remains unresolved; unknown cost is excluded from spend.
-     */
     #[Required('unknown_requests')]
     public int $unknownRequests;
 
@@ -171,9 +144,6 @@ final class ByDay implements BaseModel
         return $self;
     }
 
-    /**
-     * Requests served from the gateway cache.
-     */
     public function withCacheHits(int $cacheHits): self
     {
         $self = clone $this;
@@ -182,9 +152,6 @@ final class ByDay implements BaseModel
         return $self;
     }
 
-    /**
-     * UTC day.
-     */
     public function withDate(string $date): self
     {
         $self = clone $this;
@@ -193,9 +160,6 @@ final class ByDay implements BaseModel
         return $self;
     }
 
-    /**
-     * Requests classified as failed.
-     */
     public function withFailedRequests(int $failedRequests): self
     {
         $self = clone $this;
@@ -204,9 +168,6 @@ final class ByDay implements BaseModel
         return $self;
     }
 
-    /**
-     * Independently known input tokens across attempts, including corrected usage.
-     */
     public function withInputTokens(int $inputTokens): self
     {
         $self = clone $this;
@@ -215,9 +176,6 @@ final class ByDay implements BaseModel
         return $self;
     }
 
-    /**
-     * Independently known output tokens across attempts, including corrected usage.
-     */
     public function withOutputTokens(int $outputTokens): self
     {
         $self = clone $this;
@@ -226,9 +184,6 @@ final class ByDay implements BaseModel
         return $self;
     }
 
-    /**
-     * Requests classified as partial after streaming began.
-     */
     public function withPartialRequests(int $partialRequests): self
     {
         $self = clone $this;
@@ -237,9 +192,6 @@ final class ByDay implements BaseModel
         return $self;
     }
 
-    /**
-     * Number of matching requests.
-     */
     public function withRequests(int $requests): self
     {
         $self = clone $this;
@@ -249,7 +201,7 @@ final class ByDay implements BaseModel
     }
 
     /**
-     * Unresolved budget reservations in USD.
+     * USD, decimal precision at most 6 places; parse exactly to integer micro-USD, never binary float accounting.
      */
     public function withReservedSpend(float $reservedSpend): self
     {
@@ -260,7 +212,7 @@ final class ByDay implements BaseModel
     }
 
     /**
-     * Sum of known reference/enforcement cost in USD.
+     * USD, decimal precision at most 6 places; parse exactly to integer micro-USD, never binary float accounting.
      */
     public function withSpend(float $spend): self
     {
@@ -270,9 +222,6 @@ final class ByDay implements BaseModel
         return $self;
     }
 
-    /**
-     * Requests classified as succeeded.
-     */
     public function withSucceededRequests(int $succeededRequests): self
     {
         $self = clone $this;
@@ -281,9 +230,6 @@ final class ByDay implements BaseModel
         return $self;
     }
 
-    /**
-     * Requests whose cost remains unresolved; unknown cost is excluded from spend.
-     */
     public function withUnknownRequests(int $unknownRequests): self
     {
         $self = clone $this;

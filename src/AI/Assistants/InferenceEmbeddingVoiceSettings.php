@@ -16,7 +16,9 @@ use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-import-type BackgroundAudioVariants from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings\BackgroundAudio
+ * @phpstan-import-type ToolCallAudioVariants from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings\ToolCallAudio
  * @phpstan-import-type BackgroundAudioShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings\BackgroundAudio
+ * @phpstan-import-type ToolCallAudioShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings\ToolCallAudio
  *
  * @phpstan-type InferenceEmbeddingVoiceSettingsShape = array{
  *   voice: string,
@@ -28,6 +30,7 @@ use Telnyx\Core\Omitted;
  *   speed?: float|null,
  *   style?: float|null,
  *   temperature?: float|null,
+ *   toolCallAudio?: ToolCallAudioShape|null,
  *   useSpeakerBoost?: bool|null,
  *   voiceSpeed?: float|null,
  * }
@@ -98,6 +101,14 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
     public ?float $temperature;
 
     /**
+     * Optional sound played to the caller while the assistant runs a tool (for example a webhook or MCP tool). It replaces the background audio until the tool responds, then the background audio resumes. Defaults to null, which plays no sound; send `null` on update to clear it. Not played in conference calls.
+     *
+     * @var ToolCallAudioVariants|null $toolCallAudio
+     */
+    #[Optional('tool_call_audio', nullable: true)]
+    public \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember0|InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember1|null $toolCallAudio;
+
+    /**
      * Amplifies similarity to the original speaker voice. Increases computational load and latency slightly. Only applicable when using ElevenLabs.
      */
     #[Optional('use_speaker_boost')]
@@ -134,11 +145,13 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Omitted|LanguageBoost|value-of<LanguageBoost>|null $languageBoost
+     * @param ToolCallAudioShape|Omitted|null $toolCallAudio
      * @param BackgroundAudioShape|null $backgroundAudio
      */
     public static function with(
         string $voice,
         Omitted|LanguageBoost|string|null $languageBoost = Omitted::VALUE,
+        Omitted|InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember0|array|InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember1|null $toolCallAudio = Omitted::VALUE,
         ?string $apiKeyRef = null,
         UnionMember0|array|UnionMember1|UnionMember2|null $backgroundAudio = null,
         ?bool $expressiveMode = null,
@@ -161,6 +174,7 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
         null !== $speed && $self['speed'] = $speed;
         null !== $style && $self['style'] = $style;
         null !== $temperature && $self['temperature'] = $temperature;
+        Omitted::VALUE !== $toolCallAudio && $self['toolCallAudio'] = $toolCallAudio;
         null !== $useSpeakerBoost && $self['useSpeakerBoost'] = $useSpeakerBoost;
         null !== $voiceSpeed && $self['voiceSpeed'] = $voiceSpeed;
 
@@ -270,6 +284,20 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
     {
         $self = clone $this;
         $self['temperature'] = $temperature;
+
+        return $self;
+    }
+
+    /**
+     * Optional sound played to the caller while the assistant runs a tool (for example a webhook or MCP tool). It replaces the background audio until the tool responds, then the background audio resumes. Defaults to null, which plays no sound; send `null` on update to clear it. Not played in conference calls.
+     *
+     * @param ToolCallAudioShape|null $toolCallAudio
+     */
+    public function withToolCallAudio(
+        InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember0|array|InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember1|null $toolCallAudio,
+    ): self {
+        $self = clone $this;
+        $self['toolCallAudio'] = $toolCallAudio;
 
         return $self;
     }
