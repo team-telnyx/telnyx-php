@@ -8,10 +8,12 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
+ * @phpstan-import-type TelnyxAvatarSettingsShape from \Telnyx\AI\Assistants\TelnyxAvatarSettings
  * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\ConversationFlow
  * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\ExternalLlm
@@ -39,6 +41,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   model: string,
  *   name: string,
  *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>|null,
+ *   avatarSettings?: null|TelnyxAvatarSettings|TelnyxAvatarSettingsShape,
  *   conversationFlow?: null|ConversationFlow|ConversationFlowShape,
  *   delegationSettings?: null|DelegationSettings|DelegationSettingsShape,
  *   description?: string|null,
@@ -105,6 +108,12 @@ final class InferenceEmbedding implements BaseModel
      */
     #[Optional('a2a_agents', list: AssistantA2AAgent::class)]
     public ?array $a2aAgents;
+
+    /**
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     */
+    #[Optional('avatar_settings', nullable: true)]
+    public ?TelnyxAvatarSettings $avatarSettings;
 
     /**
      * Conversation flow as returned by the API.
@@ -300,6 +309,7 @@ final class InferenceEmbedding implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|TelnyxAvatarSettings|TelnyxAvatarSettingsShape|null $avatarSettings
      * @param list<AssistantA2AAgent|AssistantA2AAgentShape>|null $a2aAgents
      * @param ConversationFlow|ConversationFlowShape|null $conversationFlow
      * @param DelegationSettings|DelegationSettingsShape|null $delegationSettings
@@ -331,6 +341,7 @@ final class InferenceEmbedding implements BaseModel
         string $instructions,
         string $model,
         string $name,
+        Omitted|TelnyxAvatarSettings|array|null $avatarSettings = Omitted::VALUE,
         ?array $a2aAgents = null,
         ConversationFlow|array|null $conversationFlow = null,
         DelegationSettings|array|null $delegationSettings = null,
@@ -373,6 +384,7 @@ final class InferenceEmbedding implements BaseModel
         $self['name'] = $name;
 
         null !== $a2aAgents && $self['a2aAgents'] = $a2aAgents;
+        Omitted::VALUE !== $avatarSettings && $self['avatarSettings'] = $avatarSettings;
         null !== $conversationFlow && $self['conversationFlow'] = $conversationFlow;
         null !== $delegationSettings && $self['delegationSettings'] = $delegationSettings;
         null !== $description && $self['description'] = $description;
@@ -463,6 +475,20 @@ final class InferenceEmbedding implements BaseModel
     {
         $self = clone $this;
         $self['a2aAgents'] = $a2aAgents;
+
+        return $self;
+    }
+
+    /**
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     *
+     * @param TelnyxAvatarSettings|TelnyxAvatarSettingsShape|null $avatarSettings
+     */
+    public function withAvatarSettings(
+        TelnyxAvatarSettings|array|null $avatarSettings
+    ): self {
+        $self = clone $this;
+        $self['avatarSettings'] = $avatarSettings;
 
         return $self;
     }

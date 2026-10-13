@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Creates a new AI assistant from the provided configuration, including its model, instructions, and attached tools, and returns the created assistant.
@@ -17,6 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
+ * @phpstan-import-type AvatarSettingsRequestShape from \Telnyx\AI\Assistants\AvatarSettingsRequest
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
@@ -40,6 +42,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   instructions: string,
  *   name: string,
  *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>|null,
+ *   avatarSettings?: null|AvatarSettingsRequest|AvatarSettingsRequestShape,
  *   conversationFlow?: null|ConversationFlowReq|ConversationFlowReqShape,
  *   delegationSettings?: null|DelegationSettings|DelegationSettingsShape,
  *   description?: string|null,
@@ -93,6 +96,12 @@ final class AssistantCreateParams implements BaseModel
      */
     #[Optional('a2a_agents', list: AssistantA2AAgent::class)]
     public ?array $a2aAgents;
+
+    /**
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     */
+    #[Optional('avatar_settings', nullable: true)]
+    public ?AvatarSettingsRequest $avatarSettings;
 
     /**
      * Conversation flow as supplied by API clients (create / update).
@@ -273,6 +282,7 @@ final class AssistantCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|AvatarSettingsRequest|AvatarSettingsRequestShape|null $avatarSettings
      * @param list<AssistantA2AAgent|AssistantA2AAgentShape>|null $a2aAgents
      * @param ConversationFlowReq|ConversationFlowReqShape|null $conversationFlow
      * @param DelegationSettings|DelegationSettingsShape|null $delegationSettings
@@ -300,6 +310,7 @@ final class AssistantCreateParams implements BaseModel
     public static function with(
         string $instructions,
         string $name,
+        Omitted|AvatarSettingsRequest|array|null $avatarSettings = Omitted::VALUE,
         ?array $a2aAgents = null,
         ConversationFlowReq|array|null $conversationFlow = null,
         DelegationSettings|array|null $delegationSettings = null,
@@ -337,6 +348,7 @@ final class AssistantCreateParams implements BaseModel
         $self['name'] = $name;
 
         null !== $a2aAgents && $self['a2aAgents'] = $a2aAgents;
+        Omitted::VALUE !== $avatarSettings && $self['avatarSettings'] = $avatarSettings;
         null !== $conversationFlow && $self['conversationFlow'] = $conversationFlow;
         null !== $delegationSettings && $self['delegationSettings'] = $delegationSettings;
         null !== $description && $self['description'] = $description;
@@ -398,6 +410,20 @@ final class AssistantCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['a2aAgents'] = $a2aAgents;
+
+        return $self;
+    }
+
+    /**
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     *
+     * @param AvatarSettingsRequest|AvatarSettingsRequestShape|null $avatarSettings
+     */
+    public function withAvatarSettings(
+        AvatarSettingsRequest|array|null $avatarSettings
+    ): self {
+        $self = clone $this;
+        $self['avatarSettings'] = $avatarSettings;
 
         return $self;
     }

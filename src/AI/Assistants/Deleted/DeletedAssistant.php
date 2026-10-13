@@ -22,6 +22,7 @@ use Telnyx\AI\Assistants\Observability;
 use Telnyx\AI\Assistants\PostConversationSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
+use Telnyx\AI\Assistants\TelnyxAvatarSettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\WebsocketSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
@@ -35,6 +36,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
+ * @phpstan-import-type TelnyxAvatarSettingsShape from \Telnyx\AI\Assistants\TelnyxAvatarSettings
  * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\ConversationFlow
  * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\ExternalLlm
@@ -62,6 +64,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   model: string,
  *   name: string,
  *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>|null,
+ *   avatarSettings?: null|TelnyxAvatarSettings|TelnyxAvatarSettingsShape,
  *   conversationFlow?: null|ConversationFlow|ConversationFlowShape,
  *   delegationSettings?: null|DelegationSettings|DelegationSettingsShape,
  *   description?: string|null,
@@ -130,6 +133,12 @@ final class DeletedAssistant implements BaseModel
      */
     #[Optional('a2a_agents', list: AssistantA2AAgent::class)]
     public ?array $a2aAgents;
+
+    /**
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     */
+    #[Optional('avatar_settings')]
+    public ?TelnyxAvatarSettings $avatarSettings;
 
     /**
      * Conversation flow as returned by the API.
@@ -346,6 +355,7 @@ final class DeletedAssistant implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<AssistantA2AAgent|AssistantA2AAgentShape>|null $a2aAgents
+     * @param TelnyxAvatarSettings|TelnyxAvatarSettingsShape|null $avatarSettings
      * @param ConversationFlow|ConversationFlowShape|null $conversationFlow
      * @param DelegationSettings|DelegationSettingsShape|null $delegationSettings
      * @param array<string,mixed>|null $dynamicVariables
@@ -379,6 +389,7 @@ final class DeletedAssistant implements BaseModel
         \DateTimeInterface $deletedAt,
         \DateTimeInterface $permanentlyDeletedAt,
         ?array $a2aAgents = null,
+        TelnyxAvatarSettings|array|null $avatarSettings = null,
         ConversationFlow|array|null $conversationFlow = null,
         DelegationSettings|array|null $delegationSettings = null,
         ?string $description = null,
@@ -422,6 +433,7 @@ final class DeletedAssistant implements BaseModel
         $self['permanentlyDeletedAt'] = $permanentlyDeletedAt;
 
         null !== $a2aAgents && $self['a2aAgents'] = $a2aAgents;
+        null !== $avatarSettings && $self['avatarSettings'] = $avatarSettings;
         null !== $conversationFlow && $self['conversationFlow'] = $conversationFlow;
         null !== $delegationSettings && $self['delegationSettings'] = $delegationSettings;
         null !== $description && $self['description'] = $description;
@@ -512,6 +524,20 @@ final class DeletedAssistant implements BaseModel
     {
         $self = clone $this;
         $self['a2aAgents'] = $a2aAgents;
+
+        return $self;
+    }
+
+    /**
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     *
+     * @param TelnyxAvatarSettings|TelnyxAvatarSettingsShape $avatarSettings
+     */
+    public function withAvatarSettings(
+        TelnyxAvatarSettings|array $avatarSettings
+    ): self {
+        $self = clone $this;
+        $self['avatarSettings'] = $avatarSettings;
 
         return $self;
     }

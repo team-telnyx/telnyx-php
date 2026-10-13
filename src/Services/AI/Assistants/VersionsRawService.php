@@ -8,6 +8,7 @@ use Telnyx\AI\Assistants\AssistantA2AAgent;
 use Telnyx\AI\Assistants\AssistantIntegration;
 use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantsList;
+use Telnyx\AI\Assistants\AvatarSettingsRequest;
 use Telnyx\AI\Assistants\ConversationFlowReq;
 use Telnyx\AI\Assistants\DelegationSettings;
 use Telnyx\AI\Assistants\EnabledFeatures;
@@ -40,6 +41,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
  * Configure AI assistant specifications.
  *
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
+ * @phpstan-import-type AvatarSettingsRequestShape from \Telnyx\AI\Assistants\AvatarSettingsRequest
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
@@ -117,6 +119,7 @@ final class VersionsRawService implements VersionsRawContract
      * @param array{
      *   assistantID: string,
      *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>,
+     *   avatarSettings?: AvatarSettingsRequest|AvatarSettingsRequestShape|null,
      *   conversationFlow?: ConversationFlowReq|ConversationFlowReqShape,
      *   delegationSettings?: DelegationSettings|DelegationSettingsShape,
      *   description?: string,

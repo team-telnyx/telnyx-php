@@ -8,6 +8,7 @@ use Telnyx\AI\Assistants\AssistantA2AAgent;
 use Telnyx\AI\Assistants\AssistantIntegration;
 use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantsList;
+use Telnyx\AI\Assistants\AvatarSettingsRequest;
 use Telnyx\AI\Assistants\ConversationFlowReq;
 use Telnyx\AI\Assistants\DelegationSettings;
 use Telnyx\AI\Assistants\EnabledFeatures;
@@ -26,10 +27,12 @@ use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\WebsocketSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Omitted;
 use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
+ * @phpstan-import-type AvatarSettingsRequestShape from \Telnyx\AI\Assistants\AvatarSettingsRequest
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
@@ -75,6 +78,7 @@ interface VersionsContract
      * @param string $versionID path param: Unique identifier of the version
      * @param string $assistantID path param: Unique identifier of the assistant
      * @param list<AssistantA2AAgent|AssistantA2AAgentShape> $a2aAgents Body param: A2A agents this assistant can delegate to. Tools are not stored here: at the start of every conversation each agent's card is fetched and one tool is derived per skill the card advertises, named `a2a_<name>_<skill_id>`. The following limits are not enforced when the assistant is saved, and anything past them is dropped when the conversation starts: 64 agents per assistant, 64 skills per card, 128 derived tools per assistant, and a 6 second budget for all card fetches combined. An agent whose card cannot be fetched costs the assistant that capability for the conversation; it does not fail the call. Omit this field to leave the assistant's agents unchanged; send an empty array to remove them all.
+     * @param Omitted|AvatarSettingsRequest|AvatarSettingsRequestShape|null $avatarSettings Body param: **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
      * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow Body param: Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -118,6 +122,7 @@ interface VersionsContract
         string $versionID,
         string $assistantID,
         ?array $a2aAgents = null,
+        Omitted|AvatarSettingsRequest|array|null $avatarSettings = Omitted::VALUE,
         ConversationFlowReq|array|null $conversationFlow = null,
         DelegationSettings|array|null $delegationSettings = null,
         ?string $description = null,

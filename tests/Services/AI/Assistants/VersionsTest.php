@@ -110,6 +110,12 @@ final class VersionsTest extends TestCase
                     'timeoutMs' => 30000,
                 ],
             ],
+            avatarSettings: [
+                'avatarID' => 'elena',
+                'backgroundID' => 'office',
+                'model' => 'foxtrot-1',
+                'provider' => 'telnyx',
+            ],
             conversationFlow: [
                 'nodes' => [
                     [

@@ -22,6 +22,7 @@ use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\AssistantUpdateParams;
 use Telnyx\AI\Assistants\AssistantWhatsappParams;
 use Telnyx\AI\Assistants\AssistantWhatsappResponse;
+use Telnyx\AI\Assistants\AvatarSettingsRequest;
 use Telnyx\AI\Assistants\ConversationFlowReq;
 use Telnyx\AI\Assistants\DelegationSettings;
 use Telnyx\AI\Assistants\EnabledFeatures;
@@ -52,6 +53,7 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantWhatsappParams\ConversationMetadata as ConversationMetadataShape1
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
+ * @phpstan-import-type AvatarSettingsRequestShape from \Telnyx\AI\Assistants\AvatarSettingsRequest
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
  * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
@@ -89,6 +91,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   instructions: string,
      *   name: string,
      *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>,
+     *   avatarSettings?: AvatarSettingsRequest|AvatarSettingsRequestShape|null,
      *   conversationFlow?: ConversationFlowReq|ConversationFlowReqShape,
      *   delegationSettings?: DelegationSettings|DelegationSettingsShape,
      *   description?: string,
@@ -204,6 +207,7 @@ final class AssistantsRawService implements AssistantsRawContract
      * @param string $assistantID unique identifier of the assistant
      * @param array{
      *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>,
+     *   avatarSettings?: AvatarSettingsRequest|AvatarSettingsRequestShape|null,
      *   conversationFlow?: ConversationFlowReq|ConversationFlowReqShape,
      *   delegationSettings?: DelegationSettings|DelegationSettingsShape,
      *   description?: string,
