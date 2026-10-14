@@ -25,12 +25,21 @@ final class TosAgreement implements BaseModel
     /** @use SdkModel<TosAgreementShape> */
     use SdkModel;
 
+    /**
+     * The unique identifier of this recorded agreement.
+     */
     #[Optional]
     public ?string $id;
 
+    /**
+     * When you accepted this version of the terms.
+     */
     #[Optional('agreed_at')]
     public ?\DateTimeInterface $agreedAt;
 
+    /**
+     * When this agreement record was created.
+     */
     #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
@@ -42,6 +51,9 @@ final class TosAgreement implements BaseModel
     #[Optional('product_type', enum: TosProductType::class)]
     public ?string $productType;
 
+    /**
+     * The version of the terms you accepted.
+     */
     #[Optional('terms_version')]
     public ?string $termsVersion;
 
@@ -83,6 +95,9 @@ final class TosAgreement implements BaseModel
         return $self;
     }
 
+    /**
+     * The unique identifier of this recorded agreement.
+     */
     public function withID(string $id): self
     {
         $self = clone $this;
@@ -91,6 +106,9 @@ final class TosAgreement implements BaseModel
         return $self;
     }
 
+    /**
+     * When you accepted this version of the terms.
+     */
     public function withAgreedAt(\DateTimeInterface $agreedAt): self
     {
         $self = clone $this;
@@ -99,6 +117,9 @@ final class TosAgreement implements BaseModel
         return $self;
     }
 
+    /**
+     * When this agreement record was created.
+     */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $self = clone $this;
@@ -120,6 +141,9 @@ final class TosAgreement implements BaseModel
         return $self;
     }
 
+    /**
+     * The version of the terms you accepted.
+     */
     public function withTermsVersion(string $termsVersion): self
     {
         $self = clone $this;

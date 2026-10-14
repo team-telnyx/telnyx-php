@@ -155,6 +155,7 @@ final class ConversationsService implements ConversationsContract
      * @param string $lastMessageAt Filter by last message datetime (e.g., `last_message_at=lte.2025-06-01`)
      * @param int $limit Limit the number of returned conversations (e.g., `limit=10`)
      * @param string $metadataAssistantID Filter by assistant ID (e.g., `metadata->assistant_id=eq.assistant-123`)
+     * @param string $metadataAssistantVersionID Filter by assistant version ID (e.g., `metadata->assistant_version_id=eq.20250812T114318034399`). The version that handled the conversation is stored in metadata when the conversation starts; conversations created before this field was tracked, or that never resolved a version, have no `assistant_version_id` and do not match this filter.
      * @param string $metadataCallControlID Filter by call control ID (e.g., `metadata->call_control_id=eq.v3:123`)
      * @param string $metadataTelnyxAgentTarget Filter by the phone number, SIP URI, or other identifier for the agent (e.g., `metadata->telnyx_agent_target=eq.+13128675309`)
      * @param string $metadataTelnyxConversationChannel Filter by conversation channel (e.g., `metadata->telnyx_conversation_channel=eq.phone_call`)
@@ -172,6 +173,7 @@ final class ConversationsService implements ConversationsContract
         ?string $lastMessageAt = null,
         ?int $limit = null,
         ?string $metadataAssistantID = null,
+        ?string $metadataAssistantVersionID = null,
         ?string $metadataCallControlID = null,
         ?string $metadataTelnyxAgentTarget = null,
         ?string $metadataTelnyxConversationChannel = null,
@@ -188,6 +190,7 @@ final class ConversationsService implements ConversationsContract
                 'lastMessageAt' => $lastMessageAt ?? Omitted::VALUE,
                 'limit' => $limit ?? Omitted::VALUE,
                 'metadataAssistantID' => $metadataAssistantID ?? Omitted::VALUE,
+                'metadataAssistantVersionID' => $metadataAssistantVersionID ?? Omitted::VALUE,
                 'metadataCallControlID' => $metadataCallControlID ?? Omitted::VALUE,
                 'metadataTelnyxAgentTarget' => $metadataTelnyxAgentTarget ?? Omitted::VALUE,
                 'metadataTelnyxConversationChannel' => $metadataTelnyxConversationChannel ?? Omitted::VALUE,

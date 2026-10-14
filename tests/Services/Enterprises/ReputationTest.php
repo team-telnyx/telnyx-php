@@ -123,4 +123,36 @@ final class ReputationTest extends TestCase
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(EnterpriseReputationPublicWrapped::class, $result);
     }
+
+    #[Test]
+    public function testUpdateWebhook(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->updateWebhook(
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            webhookURL: 'https://example.com/webhooks/telnyx',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EnterpriseReputationPublicWrapped::class, $result);
+    }
+
+    #[Test]
+    public function testUpdateWebhookWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->updateWebhook(
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            webhookURL: 'https://example.com/webhooks/telnyx',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EnterpriseReputationPublicWrapped::class, $result);
+    }
 }

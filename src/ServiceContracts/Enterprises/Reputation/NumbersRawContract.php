@@ -9,9 +9,12 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateParams;
 use Telnyx\Enterprises\Reputation\Numbers\NumberDisassociateParams;
+use Telnyx\Enterprises\Reputation\Numbers\NumberGetOwnershipResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberListParams;
+use Telnyx\Enterprises\Reputation\Numbers\NumberOwnershipConfirmParams;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshParams;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
+use Telnyx\Enterprises\Reputation\Numbers\NumberRetrieveOwnershipParams;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRetrieveParams;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberList;
@@ -94,6 +97,23 @@ interface NumbersRawContract
     /**
      * @api
      *
+     * @param string $phoneNumber Path param: Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
+     * @param array<string,mixed>|NumberOwnershipConfirmParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ReputationPhoneNumberWithReputation>
+     *
+     * @throws APIException
+     */
+    public function ownershipConfirm(
+        string $phoneNumber,
+        array|NumberOwnershipConfirmParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array<string,mixed>|NumberRefreshParams $params
      * @param RequestOpts|null $requestOptions
@@ -105,6 +125,23 @@ interface NumbersRawContract
     public function refresh(
         string $enterpriseID,
         array|NumberRefreshParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $phoneNumber Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
+     * @param array<string,mixed>|NumberRetrieveOwnershipParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<NumberGetOwnershipResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveOwnership(
+        string $phoneNumber,
+        array|NumberRetrieveOwnershipParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

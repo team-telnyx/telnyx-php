@@ -68,6 +68,12 @@ final class DirTest extends TestCase
             certifyIPOwnership: true,
             certifyNoShaftContent: true,
             displayName: 'Acme Plumbing',
+            bpoAuthorizations: [
+                [
+                    'bpoEnterpriseID' => '4a6192a4-573d-446d-b3ce-aff9117272a6',
+                    'loaDocumentID' => '2a7e8337-e803-4057-a4ae-26c40eb0bc6c',
+                ],
+            ],
             documents: [
                 [
                     'documentID' => '2a7e8337-e803-4057-a4ae-26c40eb0bc6c',
@@ -77,6 +83,7 @@ final class DirTest extends TestCase
             ],
             logoURL: 'https://acmeplumbing.example.com/logo-256.bmp',
             reselling: false,
+            webhookURL: 'https://mapleridge.example.com/webhooks/branded-calling',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -36,6 +36,9 @@ final class Document implements BaseModel
     #[Required('document_type', enum: DocumentType::class)]
     public string $documentType;
 
+    /**
+     * An optional note describing this document, for example what it proves.
+     */
     #[Optional]
     public ?string $description;
 
@@ -104,6 +107,9 @@ final class Document implements BaseModel
         return $self;
     }
 
+    /**
+     * An optional note describing this document, for example what it proves.
+     */
     public function withDescription(string $description): self
     {
         $self = clone $this;

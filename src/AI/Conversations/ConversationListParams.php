@@ -20,6 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   lastMessageAt?: string|null,
  *   limit?: int|null,
  *   metadataAssistantID?: string|null,
+ *   metadataAssistantVersionID?: string|null,
  *   metadataCallControlID?: string|null,
  *   metadataTelnyxAgentTarget?: string|null,
  *   metadataTelnyxConversationChannel?: string|null,
@@ -64,6 +65,12 @@ final class ConversationListParams implements BaseModel
      */
     #[Optional]
     public ?string $metadataAssistantID;
+
+    /**
+     * Filter by assistant version ID (e.g., `metadata->assistant_version_id=eq.20250812T114318034399`). The version that handled the conversation is stored in metadata when the conversation starts; conversations created before this field was tracked, or that never resolved a version, have no `assistant_version_id` and do not match this filter.
+     */
+    #[Optional]
+    public ?string $metadataAssistantVersionID;
 
     /**
      * Filter by call control ID (e.g., `metadata->call_control_id=eq.v3:123`).
@@ -123,6 +130,7 @@ final class ConversationListParams implements BaseModel
         ?string $lastMessageAt = null,
         ?int $limit = null,
         ?string $metadataAssistantID = null,
+        ?string $metadataAssistantVersionID = null,
         ?string $metadataCallControlID = null,
         ?string $metadataTelnyxAgentTarget = null,
         ?string $metadataTelnyxConversationChannel = null,
@@ -138,6 +146,7 @@ final class ConversationListParams implements BaseModel
         null !== $lastMessageAt && $self['lastMessageAt'] = $lastMessageAt;
         null !== $limit && $self['limit'] = $limit;
         null !== $metadataAssistantID && $self['metadataAssistantID'] = $metadataAssistantID;
+        null !== $metadataAssistantVersionID && $self['metadataAssistantVersionID'] = $metadataAssistantVersionID;
         null !== $metadataCallControlID && $self['metadataCallControlID'] = $metadataCallControlID;
         null !== $metadataTelnyxAgentTarget && $self['metadataTelnyxAgentTarget'] = $metadataTelnyxAgentTarget;
         null !== $metadataTelnyxConversationChannel && $self['metadataTelnyxConversationChannel'] = $metadataTelnyxConversationChannel;
@@ -200,6 +209,18 @@ final class ConversationListParams implements BaseModel
     {
         $self = clone $this;
         $self['metadataAssistantID'] = $metadataAssistantID;
+
+        return $self;
+    }
+
+    /**
+     * Filter by assistant version ID (e.g., `metadata->assistant_version_id=eq.20250812T114318034399`). The version that handled the conversation is stored in metadata when the conversation starts; conversations created before this field was tracked, or that never resolved a version, have no `assistant_version_id` and do not match this filter.
+     */
+    public function withMetadataAssistantVersionID(
+        string $metadataAssistantVersionID
+    ): self {
+        $self = clone $this;
+        $self['metadataAssistantVersionID'] = $metadataAssistantVersionID;
 
         return $self;
     }

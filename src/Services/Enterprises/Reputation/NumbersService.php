@@ -8,7 +8,10 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Enterprises\Reputation\Numbers\NumberGetOwnershipResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationNumberSource;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationOwnershipStatus;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberList;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
@@ -67,8 +70,10 @@ final class NumbersService implements NumbersContract
      * Paginated list of phone numbers registered for reputation monitoring under this enterprise. The response includes the latest reputation snapshot per number where one has been collected.
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param ReputationOwnershipStatus|value-of<ReputationOwnershipStatus> $filterOwnershipStatus Only numbers with this ownership status. `removed` lists the numbers that were removed, each with its `removal_reason` and `removed_at`; removed numbers are not returned otherwise.
      * @param string $filterPhoneNumberContains Partial match on phone number. Must contain at least 5 digits.
      * @param string $filterPhoneNumberEq Exact phone-number match (E.164).
+     * @param ReputationNumberSource|value-of<ReputationNumberSource> $filterSource only numbers with this source
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Default 10. Maximum 250; values above are clamped to 250.
      * @param RequestOpts|null $requestOptions
@@ -79,16 +84,20 @@ final class NumbersService implements NumbersContract
      */
     public function list(
         string $enterpriseID,
+        ReputationOwnershipStatus|string|null $filterOwnershipStatus = null,
         ?string $filterPhoneNumberContains = null,
         ?string $filterPhoneNumberEq = null,
+        ReputationNumberSource|string|null $filterSource = null,
         int $pageNumber = 1,
         int $pageSize = 10,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = array_filter(
             [
+                'filterOwnershipStatus' => $filterOwnershipStatus ?? Omitted::VALUE,
                 'filterPhoneNumberContains' => $filterPhoneNumberContains ?? Omitted::VALUE,
                 'filterPhoneNumberEq' => $filterPhoneNumberEq ?? Omitted::VALUE,
+                'filterSource' => $filterSource ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
@@ -104,11 +113,13 @@ final class NumbersService implements NumbersContract
     /**
      * @api
      *
-     * Add up to 100 phone numbers to reputation monitoring on this enterprise. Each must be in E.164 format (`+1NPANXXXXXX` for US/CA) and belong to your Telnyx phone-number inventory.
+     * Add up to 100 phone numbers to reputation monitoring on this enterprise. Each must be in E.164 format (`+1NPANXXXXXX` for US/CA). A number in your Telnyx phone-number inventory is accepted as `source: telnyx`; a number that is not is treated as hosted with another provider and must meet the requirements below.
      *
      * **Prerequisite**: reputation must already be enabled on this enterprise (see `POST .../reputation`).
      *
      * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
+     *
+     * A phone number that is not in your Telnyx inventory is treated as a number hosted with another provider (`source: external`). It must be a US local number, and the enterprise's ownership proof must be approved first (`POST /enterprises/{enterprise_id}/reputation/external_verification`); otherwise the request fails with a 400 whose `detail` contains `external_verification_required`. Ownership of such numbers is checked every day.
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param list<string> $phoneNumbers 1–100 phone numbers in E.164 format with a leading `+`.
@@ -156,6 +167,45 @@ final class NumbersService implements NumbersContract
     /**
      * @api
      *
+     * Answer an ownership question about a phone number hosted with another provider.
+     *
+     * Send `still_own: true` to confirm you still own a number whose `ownership_status` is `pending_confirmation` or `flagged`; its status returns to `verified` and, after a carrier change, the new carrier becomes the one on record.
+     *
+     * Send `still_own: false` to report that you no longer own the number. It is removed from Number Reputation immediately, whatever its current status, and the response shows it with `ownership_status: removed`.
+     *
+     * @param string $phoneNumber Path param: Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
+     * @param string $enterpriseID Path param: The enterprise id. Lowercase UUID.
+     * @param bool $stillOwn Body param: `true` confirms you still own the number. `false` reports that you no longer own it and removes it from Number Reputation.
+     * @param string $evidenceDocumentID body param: Optional id of an uploaded document supporting the confirmation
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function ownershipConfirm(
+        string $phoneNumber,
+        string $enterpriseID,
+        bool $stillOwn,
+        ?string $evidenceDocumentID = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): ReputationPhoneNumberWithReputation {
+        $params = array_filter(
+            [
+                'enterpriseID' => $enterpriseID,
+                'stillOwn' => $stillOwn,
+                'evidenceDocumentID' => $evidenceDocumentID ?? Omitted::VALUE,
+            ],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->ownershipConfirm($phoneNumber, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
      * Immediately refresh the stored reputation data for the listed numbers. This is in addition to the periodic refresh determined by `check_frequency`. Up to 100 numbers per call. The response carries the kicked-off jobs; the actual refresh runs asynchronously.
      *
      * **Pricing:** Forcing a refresh performs live reputation lookups, which are billable. See https://telnyx.com/pricing/numbers for current pricing.
@@ -175,6 +225,30 @@ final class NumbersService implements NumbersContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->refresh($enterpriseID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Get the ownership status of a phone number, when it was last checked, the carrier recorded as its baseline, and the history of ownership events.
+     *
+     * @param string $phoneNumber Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveOwnership(
+        string $phoneNumber,
+        string $enterpriseID,
+        RequestOptions|array|null $requestOptions = null,
+    ): NumberGetOwnershipResponse {
+        $params = ['enterpriseID' => $enterpriseID];
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveOwnership($phoneNumber, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

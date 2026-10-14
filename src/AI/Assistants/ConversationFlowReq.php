@@ -33,7 +33,7 @@ final class ConversationFlowReq implements BaseModel
     use SdkModel;
 
     /**
-     * All nodes in the flow. Must contain `start_node_id`. Each node is a prompt node (`type: prompt`) or a tool node (`type: tool`).
+     * All nodes in the flow. Must contain `start_node_id`. Each node is a prompt node (`type: prompt`), a tool node (`type: tool`), or a speak node (`type: speak`).
      *
      * @var list<NodeVariants> $nodes
      */
@@ -97,7 +97,7 @@ final class ConversationFlowReq implements BaseModel
     }
 
     /**
-     * All nodes in the flow. Must contain `start_node_id`. Each node is a prompt node (`type: prompt`) or a tool node (`type: tool`).
+     * All nodes in the flow. Must contain `start_node_id`. Each node is a prompt node (`type: prompt`), a tool node (`type: tool`), or a speak node (`type: speak`).
      *
      * @param list<NodeShape> $nodes
      */

@@ -8,6 +8,7 @@ use Telnyx\AI\Memory\Namespaces\Profiles\ProfileDeleteResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileGetSummaryResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileIngestResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileListResponse;
+use Telnyx\AI\Memory\Namespaces\Profiles\ProfilePreviewResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRecallResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRememberResponse;
 use Telnyx\Client;
@@ -128,6 +129,35 @@ final class ProfilesService implements ProfilesContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->ingest($profileID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Try a candidate note on one profile and see how that profile's summary would read under it, without saving the note and without touching the stored summary. Composes the same source query the apply path (`PATCH /ai/memory/namespaces/{namespace}/settings`) would use, so a preview cannot drift from what saving the note would produce. Reads the candidate alone -- the namespace's current instructions and the profile's stored summary are neither read nor replaced. Bounded at 120 seconds: the summary is generated on the spot rather than read from a stored one. Nothing about the request is stored.
+     *
+     * @param string $profileID path param: The profile: your identifier for the user, caller or agent this memory is about
+     * @param string $namespace Path param: The namespace. `default` exists for every organization.
+     * @param string|Omitted|null $instructions Body param: The candidate note to try. `null`, empty, or whitespace-only previews the neutral default -- the summary a profile returns to when instructions are cleared. Capped at 2000 characters, the same cap `PATCH /settings` applies on save; a longer note is refused with `422` before anything is generated.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function preview(
+        string $profileID,
+        string $namespace,
+        string|Omitted|null $instructions = Omitted::VALUE,
+        RequestOptions|array|null $requestOptions = null,
+    ): ProfilePreviewResponse {
+        $params = array_filter(
+            ['namespace' => $namespace, 'instructions' => $instructions],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->preview($profileID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

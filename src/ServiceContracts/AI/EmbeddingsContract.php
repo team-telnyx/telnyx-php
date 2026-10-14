@@ -35,7 +35,7 @@ interface EmbeddingsContract
         string $bucketName,
         int $documentChunkOverlapSize = 512,
         int $documentChunkSize = 1024,
-        EmbeddingModel|string $embeddingModel = 'thenlper/gte-large',
+        EmbeddingModel|string $embeddingModel = 'intfloat/multilingual-e5-large',
         Loader|string $loader = 'default',
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,

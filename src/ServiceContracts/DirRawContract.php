@@ -8,10 +8,14 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\Dir;
+use Telnyx\Dir\DirBpoLoaParams;
+use Telnyx\Dir\DirDeleteResponse;
+use Telnyx\Dir\DirGetBpoAuthorizationsResponse;
 use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirListInfringementClaimsParams;
 use Telnyx\Dir\DirListParams;
 use Telnyx\Dir\DirNewLoaParams;
+use Telnyx\Dir\DirRetrieveBpoAuthorizationsParams;
 use Telnyx\Dir\DirUpdateInfringementParams;
 use Telnyx\Dir\DirUpdateParams;
 use Telnyx\Dir\DirWrapped;
@@ -76,13 +80,30 @@ interface DirRawContract
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<mixed>
+     * @return BaseResponse<DirDeleteResponse>
      *
      * @throws APIException
      */
     public function delete(
         string $dirID,
         RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $dirID the DIR id
+     * @param array<string,mixed>|DirBpoLoaParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<string>
+     *
+     * @throws APIException
+     */
+    public function bpoLoa(
+        string $dirID,
+        array|DirBpoLoaParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -129,6 +150,23 @@ interface DirRawContract
     public function newLoa(
         string $dirID,
         array|DirNewLoaParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $dirID The DIR id. Lowercase UUID.
+     * @param array<string,mixed>|DirRetrieveBpoAuthorizationsParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<DirGetBpoAuthorizationsResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveBpoAuthorizations(
+        string $dirID,
+        array|DirRetrieveBpoAuthorizationsParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 

@@ -16,7 +16,9 @@ use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-import-type BackgroundAudioVariants from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings\BackgroundAudio
+ * @phpstan-import-type ToolCallAudioVariants from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings\ToolCallAudio
  * @phpstan-import-type BackgroundAudioShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings\BackgroundAudio
+ * @phpstan-import-type ToolCallAudioShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings\ToolCallAudio
  *
  * @phpstan-type InferenceEmbeddingVoiceSettingsShape = array{
  *   voice: string,
@@ -28,6 +30,7 @@ use Telnyx\Core\Omitted;
  *   speed?: float|null,
  *   style?: float|null,
  *   temperature?: float|null,
+ *   toolCallAudio?: ToolCallAudioShape|null,
  *   useSpeakerBoost?: bool|null,
  *   voiceSpeed?: float|null,
  * }
@@ -98,13 +101,21 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
     public ?float $temperature;
 
     /**
+     * Optional sound played to the caller while the assistant runs a tool (for example a webhook or MCP tool). It replaces the background audio until the tool responds, then the background audio resumes. Defaults to null, which plays no sound; send `null` on update to clear it. Not played in conference calls.
+     *
+     * @var ToolCallAudioVariants|null $toolCallAudio
+     */
+    #[Optional('tool_call_audio', nullable: true)]
+    public \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember0|InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember1|null $toolCallAudio;
+
+    /**
      * Amplifies similarity to the original speaker voice. Increases computational load and latency slightly. Only applicable when using ElevenLabs.
      */
     #[Optional('use_speaker_boost')]
     public ?bool $useSpeakerBoost;
 
     /**
-     * The speed of the voice in the range [0.25, 2.0]. 1.0 is deafult speed. Larger numbers make the voice faster, smaller numbers make it slower. This is only applicable for Telnyx Natural voices and Soniox voices (0.7 to 1.3 for Soniox).
+     * The speed of the voice in the range [0.6, 1.5]. 1.0 is the default speed. Larger numbers make the voice faster, smaller numbers make it slower. Applies to Telnyx `Ultra` voices; values outside this range are rejected by the synthesis engine. Soniox voices support a speed range of 0.7 to 1.3.
      */
     #[Optional('voice_speed')]
     public ?float $voiceSpeed;
@@ -134,11 +145,13 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Omitted|LanguageBoost|value-of<LanguageBoost>|null $languageBoost
+     * @param ToolCallAudioShape|Omitted|null $toolCallAudio
      * @param BackgroundAudioShape|null $backgroundAudio
      */
     public static function with(
         string $voice,
         Omitted|LanguageBoost|string|null $languageBoost = Omitted::VALUE,
+        Omitted|InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember0|array|InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember1|null $toolCallAudio = Omitted::VALUE,
         ?string $apiKeyRef = null,
         UnionMember0|array|UnionMember1|UnionMember2|null $backgroundAudio = null,
         ?bool $expressiveMode = null,
@@ -161,6 +174,7 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
         null !== $speed && $self['speed'] = $speed;
         null !== $style && $self['style'] = $style;
         null !== $temperature && $self['temperature'] = $temperature;
+        Omitted::VALUE !== $toolCallAudio && $self['toolCallAudio'] = $toolCallAudio;
         null !== $useSpeakerBoost && $self['useSpeakerBoost'] = $useSpeakerBoost;
         null !== $voiceSpeed && $self['voiceSpeed'] = $voiceSpeed;
 
@@ -275,6 +289,20 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
     }
 
     /**
+     * Optional sound played to the caller while the assistant runs a tool (for example a webhook or MCP tool). It replaces the background audio until the tool responds, then the background audio resumes. Defaults to null, which plays no sound; send `null` on update to clear it. Not played in conference calls.
+     *
+     * @param ToolCallAudioShape|null $toolCallAudio
+     */
+    public function withToolCallAudio(
+        InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember0|array|InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember1|null $toolCallAudio,
+    ): self {
+        $self = clone $this;
+        $self['toolCallAudio'] = $toolCallAudio;
+
+        return $self;
+    }
+
+    /**
      * Amplifies similarity to the original speaker voice. Increases computational load and latency slightly. Only applicable when using ElevenLabs.
      */
     public function withUseSpeakerBoost(bool $useSpeakerBoost): self
@@ -286,7 +314,7 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
     }
 
     /**
-     * The speed of the voice in the range [0.25, 2.0]. 1.0 is deafult speed. Larger numbers make the voice faster, smaller numbers make it slower. This is only applicable for Telnyx Natural voices and Soniox voices (0.7 to 1.3 for Soniox).
+     * The speed of the voice in the range [0.6, 1.5]. 1.0 is the default speed. Larger numbers make the voice faster, smaller numbers make it slower. Applies to Telnyx `Ultra` voices; values outside this range are rejected by the synthesis engine. Soniox voices support a speed range of 0.7 to 1.3.
      */
     public function withVoiceSpeed(float $voiceSpeed): self
     {

@@ -40,7 +40,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *   presetQueryParams?: array<string,mixed>|null,
  *   queryParameters?: null|QueryParameters|QueryParametersShape,
  *   storeFieldsAsVariables?: list<StoreFieldsAsVariable|StoreFieldsAsVariableShape>|null,
- *   timeoutMs?: int|null,
  * }
  */
 final class Webhook implements BaseModel
@@ -145,12 +144,6 @@ final class Webhook implements BaseModel
     public ?array $storeFieldsAsVariables;
 
     /**
-     * The maximum number of milliseconds to wait for the webhook to respond. Only applicable when async is false.
-     */
-    #[Optional('timeout_ms')]
-    public ?int $timeoutMs;
-
-    /**
      * `new Webhook()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -199,7 +192,6 @@ final class Webhook implements BaseModel
         ?array $presetQueryParams = null,
         QueryParameters|array|null $queryParameters = null,
         ?array $storeFieldsAsVariables = null,
-        ?int $timeoutMs = null,
     ): self {
         $self = new self;
 
@@ -218,7 +210,6 @@ final class Webhook implements BaseModel
         null !== $presetQueryParams && $self['presetQueryParams'] = $presetQueryParams;
         null !== $queryParameters && $self['queryParameters'] = $queryParameters;
         null !== $storeFieldsAsVariables && $self['storeFieldsAsVariables'] = $storeFieldsAsVariables;
-        null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
 
         return $self;
     }
@@ -395,17 +386,6 @@ final class Webhook implements BaseModel
     ): self {
         $self = clone $this;
         $self['storeFieldsAsVariables'] = $storeFieldsAsVariables;
-
-        return $self;
-    }
-
-    /**
-     * The maximum number of milliseconds to wait for the webhook to respond. Only applicable when async is false.
-     */
-    public function withTimeoutMs(int $timeoutMs): self
-    {
-        $self = clone $this;
-        $self['timeoutMs'] = $timeoutMs;
 
         return $self;
     }

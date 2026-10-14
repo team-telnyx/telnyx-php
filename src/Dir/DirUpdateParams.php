@@ -8,17 +8,20 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
- * Edit a DIR. DIRs in `draft`, `rejected`, `unsuccessful`, or `suspended` can be edited freely: PATCH is a pure edit, `status` is never changed, and you re-vet by calling `POST /v2/dir/{dir_id}/submit` explicitly. A `verified` DIR can also be edited in place: a PATCH that changes any value returns the DIR to `draft` and branded delivery stops until you re-submit and the DIR is approved again, while a PATCH that changes nothing (an empty body or values identical to the current ones) leaves the DIR `verified`, so idempotent retries are safe. DIRs in any other status (`submitted`, `in_review`, `expired`, `infringement_claimed`, `permanently_rejected`) cannot be edited.
+ * Edit a DIR. DIRs in `draft`, `rejected`, `unsuccessful`, or `suspended` can be edited freely: PATCH is a pure edit, `status` is never changed, and you re-vet by calling `POST /v2/dir/{dir_id}/submit` explicitly. A `verified` DIR can also be edited in place: a PATCH that changes any value returns the DIR to `draft`; the currently approved identity keeps displaying, and the edited content goes live only after you re-submit and the DIR is approved again. A PATCH that changes nothing (an empty body or values identical to the current ones) leaves the DIR `verified`, so idempotent retries are safe. Changing only `bpo_authorizations` or `webhook_url` is the exception: the DIR stays `verified`. Each BPO authorization is reviewed on its own instead. DIRs in any other status (`submitted`, `in_review`, `expired`, `infringement_claimed`, `permanently_rejected`) cannot be edited.
  *
  * @see Telnyx\Services\DirService::update()
  *
+ * @phpstan-import-type BpoAuthorizationInputShape from \Telnyx\Dir\BpoAuthorizationInput
  * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  *
  * @phpstan-type DirUpdateParamsShape = array{
  *   authorizerEmail?: string|null,
  *   authorizerName?: string|null,
+ *   bpoAuthorizations?: list<BpoAuthorizationInput|BpoAuthorizationInputShape>|null,
  *   callReasons?: list<string>|null,
  *   certifyBrandIsAccurate?: bool|null,
  *   certifyIPOwnership?: bool|null,
@@ -27,6 +30,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   documents?: list<Document|DocumentShape>|null,
  *   logoURL?: string|null,
  *   reselling?: bool|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class DirUpdateParams implements BaseModel
@@ -46,6 +50,14 @@ final class DirUpdateParams implements BaseModel
      */
     #[Optional('authorizer_name')]
     public ?string $authorizerName;
+
+    /**
+     * Optional. Replace this DIR's authorized BPO (Business Process Outsourcer) accounts with these, each with its signed Letter of Authorization. The supplied list replaces the current one: a BPO left out has its authorization removed, and a new BPO (or a changed Letter of Authorization) is created `pending` admin review. Send an empty list to clear all authorizations; omit the field to leave them unchanged. Editing this list does not re-vet the DIR. Maximum 10.
+     *
+     * @var list<BpoAuthorizationInput>|null $bpoAuthorizations
+     */
+    #[Optional('bpo_authorizations', list: BpoAuthorizationInput::class)]
+    public ?array $bpoAuthorizations;
 
     /**
      * 1–10 reasons your business calls customers. Validate phrasing against `POST /call_reasons/validate`.
@@ -99,6 +111,12 @@ final class DirUpdateParams implements BaseModel
     #[Optional]
     public ?bool $reselling;
 
+    /**
+     * Optional `https://` URL that receives webhook notifications when this DIR's compliance review completes. Send `null` to clear. Changing only this field on a `verified` DIR does not re-vet it. Maximum 2048 characters.
+     */
+    #[Optional('webhook_url', nullable: true)]
+    public ?string $webhookURL;
+
     public function __construct()
     {
         $this->initialize();
@@ -109,12 +127,15 @@ final class DirUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param list<BpoAuthorizationInput|BpoAuthorizationInputShape>|null $bpoAuthorizations
      * @param list<string>|null $callReasons
      * @param list<Document|DocumentShape>|null $documents
      */
     public static function with(
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         ?string $authorizerEmail = null,
         ?string $authorizerName = null,
+        ?array $bpoAuthorizations = null,
         ?array $callReasons = null,
         ?bool $certifyBrandIsAccurate = null,
         ?bool $certifyIPOwnership = null,
@@ -128,6 +149,7 @@ final class DirUpdateParams implements BaseModel
 
         null !== $authorizerEmail && $self['authorizerEmail'] = $authorizerEmail;
         null !== $authorizerName && $self['authorizerName'] = $authorizerName;
+        null !== $bpoAuthorizations && $self['bpoAuthorizations'] = $bpoAuthorizations;
         null !== $callReasons && $self['callReasons'] = $callReasons;
         null !== $certifyBrandIsAccurate && $self['certifyBrandIsAccurate'] = $certifyBrandIsAccurate;
         null !== $certifyIPOwnership && $self['certifyIPOwnership'] = $certifyIPOwnership;
@@ -136,6 +158,7 @@ final class DirUpdateParams implements BaseModel
         null !== $documents && $self['documents'] = $documents;
         null !== $logoURL && $self['logoURL'] = $logoURL;
         null !== $reselling && $self['reselling'] = $reselling;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }
@@ -158,6 +181,19 @@ final class DirUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['authorizerName'] = $authorizerName;
+
+        return $self;
+    }
+
+    /**
+     * Optional. Replace this DIR's authorized BPO (Business Process Outsourcer) accounts with these, each with its signed Letter of Authorization. The supplied list replaces the current one: a BPO left out has its authorization removed, and a new BPO (or a changed Letter of Authorization) is created `pending` admin review. Send an empty list to clear all authorizations; omit the field to leave them unchanged. Editing this list does not re-vet the DIR. Maximum 10.
+     *
+     * @param list<BpoAuthorizationInput|BpoAuthorizationInputShape> $bpoAuthorizations
+     */
+    public function withBpoAuthorizations(array $bpoAuthorizations): self
+    {
+        $self = clone $this;
+        $self['bpoAuthorizations'] = $bpoAuthorizations;
 
         return $self;
     }
@@ -251,6 +287,17 @@ final class DirUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['reselling'] = $reselling;
+
+        return $self;
+    }
+
+    /**
+     * Optional `https://` URL that receives webhook notifications when this DIR's compliance review completes. Send `null` to clear. Changing only this field on a `verified` DIR does not re-vet it. Maximum 2048 characters.
+     */
+    public function withWebhookURL(?string $webhookURL): self
+    {
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

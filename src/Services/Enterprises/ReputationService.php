@@ -11,6 +11,7 @@ use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
 use Telnyx\Enterprises\Reputation\ReputationCheckFrequency;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\ReputationContract;
+use Telnyx\Services\Enterprises\Reputation\ExternalVerificationService;
 use Telnyx\Services\Enterprises\Reputation\LoaService;
 use Telnyx\Services\Enterprises\Reputation\NumbersService;
 use Telnyx\Services\Enterprises\Reputation\RemediationService;
@@ -43,6 +44,11 @@ final class ReputationService implements ReputationContract
     public RemediationService $remediation;
 
     /**
+     * @api
+     */
+    public ExternalVerificationService $externalVerification;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -51,6 +57,7 @@ final class ReputationService implements ReputationContract
         $this->numbers = new NumbersService($client);
         $this->loa = new LoaService($client);
         $this->remediation = new RemediationService($client);
+        $this->externalVerification = new ExternalVerificationService($client);
     }
 
     /**
@@ -159,6 +166,33 @@ final class ReputationService implements ReputationContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateFrequency($enterpriseID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Set the HTTPS URL that receives number-ownership events for this enterprise: `number_reputation.number.flagged`, `number_reputation.number.removed` and `number_reputation.external_verification.status_changed`. Send `webhook_url: null` to stop receiving them.
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param string|null $webhookURL HTTPS URL on a publicly routable host. Send `null` to stop receiving number-ownership events.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function updateWebhook(
+        string $enterpriseID,
+        ?string $webhookURL,
+        RequestOptions|array|null $requestOptions = null,
+    ): EnterpriseReputationPublicWrapped {
+        $params = array_filter(
+            ['webhookURL' => $webhookURL ?? Omitted::VALUE],
+            static fn ($value) => Omitted::VALUE !== $value,
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateWebhook($enterpriseID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

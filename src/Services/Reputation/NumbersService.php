@@ -8,6 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationNumberSource;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationOwnershipStatus;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
 use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
 use Telnyx\RequestOptions;
@@ -63,8 +65,10 @@ final class NumbersService implements NumbersContract
      * Convenience alias for `GET /v2/enterprises/{enterprise_id}/reputation/numbers` that returns numbers across every enterprise you own. Useful when you don't want to look up the enterprise id first.
      *
      * @param string $filterEnterpriseID filter by enterprise ID
+     * @param ReputationOwnershipStatus|value-of<ReputationOwnershipStatus> $filterOwnershipStatus Only numbers with this ownership status. `removed` lists the numbers that were removed, each with its `removal_reason` and `removed_at`; removed numbers are not returned otherwise.
      * @param string $filterPhoneNumberContains Partial match on phone number. Must contain at least 5 digits.
      * @param string $filterPhoneNumberEq Exact phone-number match (E.164).
+     * @param ReputationNumberSource|value-of<ReputationNumberSource> $filterSource only numbers with this source
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
      * @param RequestOpts|null $requestOptions
@@ -75,8 +79,10 @@ final class NumbersService implements NumbersContract
      */
     public function list(
         ?string $filterEnterpriseID = null,
+        ReputationOwnershipStatus|string|null $filterOwnershipStatus = null,
         ?string $filterPhoneNumberContains = null,
         ?string $filterPhoneNumberEq = null,
+        ReputationNumberSource|string|null $filterSource = null,
         int $pageNumber = 1,
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
@@ -84,8 +90,10 @@ final class NumbersService implements NumbersContract
         $params = array_filter(
             [
                 'filterEnterpriseID' => $filterEnterpriseID ?? Omitted::VALUE,
+                'filterOwnershipStatus' => $filterOwnershipStatus ?? Omitted::VALUE,
                 'filterPhoneNumberContains' => $filterPhoneNumberContains ?? Omitted::VALUE,
                 'filterPhoneNumberEq' => $filterPhoneNumberEq ?? Omitted::VALUE,
+                'filterSource' => $filterSource ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],

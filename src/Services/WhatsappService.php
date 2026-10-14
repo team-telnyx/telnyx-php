@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\ServiceContracts\WhatsappContract;
 use Telnyx\Services\Whatsapp\BusinessAccountsService;
 use Telnyx\Services\Whatsapp\PhoneNumbersService;
+use Telnyx\Services\Whatsapp\SignupService;
 use Telnyx\Services\Whatsapp\TemplatesService;
 use Telnyx\Services\Whatsapp\UserDataService;
 
@@ -39,6 +40,11 @@ final class WhatsappService implements WhatsappContract
     public UserDataService $userData;
 
     /**
+     * @api
+     */
+    public SignupService $signup;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -48,5 +54,6 @@ final class WhatsappService implements WhatsappContract
         $this->templates = new TemplatesService($client);
         $this->phoneNumbers = new PhoneNumbersService($client);
         $this->userData = new UserDataService($client);
+        $this->signup = new SignupService($client);
     }
 }

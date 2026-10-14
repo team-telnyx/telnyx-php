@@ -71,4 +71,19 @@ interface ReputationContract
         ReputationCheckFrequency|string $checkFrequency,
         RequestOptions|array|null $requestOptions = null,
     ): EnterpriseReputationPublicWrapped;
+
+    /**
+     * @api
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param string|null $webhookURL HTTPS URL on a publicly routable host. Send `null` to stop receiving number-ownership events.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function updateWebhook(
+        string $enterpriseID,
+        ?string $webhookURL,
+        RequestOptions|array|null $requestOptions = null,
+    ): EnterpriseReputationPublicWrapped;
 }

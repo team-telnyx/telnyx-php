@@ -34,6 +34,7 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
  * @phpstan-import-type ConversationRelayInterruptionSettingsShape from \Telnyx\Calls\ConversationRelayInterruptionSettings
  * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
+ * @phpstan-import-type ConversationRelayTranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ConversationRelayTranscriptionEngineConfig
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings
  *
  * @phpstan-type ActionStartConversationRelayParamsShape = array{
@@ -55,7 +56,7 @@ use Telnyx\XaiVoiceSettings;
  *   structuredProvider?: array<string,mixed>|null,
  *   transcription?: array<string,mixed>|null,
  *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
- *   transcriptionEngineConfig?: array<string,mixed>|null,
+ *   transcriptionEngineConfig?: null|ConversationRelayTranscriptionEngineConfig|ConversationRelayTranscriptionEngineConfigShape,
  *   ttsProvider?: string|null,
  *   url?: string|null,
  *   voice?: string|null,
@@ -196,12 +197,10 @@ final class ActionStartConversationRelayParams implements BaseModel
     public ?string $transcriptionEngine;
 
     /**
-     * Engine-specific transcription settings for Conversation Relay. This accepts the same provider-specific options used by the Call Transcription Start command, such as `transcription_model`, without requiring the engine discriminator to be repeated inside this object.
-     *
-     * @var array<string,mixed>|null $transcriptionEngineConfig
+     * Engine-specific transcription settings for Conversation Relay. This accepts the same provider-specific options used by the Call Transcription Start command, such as `transcription_model`, without requiring the engine discriminator to be repeated inside this object. With Deepgram Flux (`deepgram/flux`), `interim_results`, `eot_threshold` and `eager_eot_threshold` control the interim prompts and the `eagerEndOfTurn` and `turnResumed` frames sent to your WebSocket server.
      */
-    #[Optional('transcription_engine_config', map: 'mixed')]
-    public ?array $transcriptionEngineConfig;
+    #[Optional('transcription_engine_config')]
+    public ?ConversationRelayTranscriptionEngineConfig $transcriptionEngineConfig;
 
     /**
      * Text-to-speech provider. If omitted, Telnyx derives it from `voice` or `provider`.
@@ -220,7 +219,7 @@ final class ActionStartConversationRelayParams implements BaseModel
      *
      *  **Supported Providers:**
      * - **AWS:** Use `AWS.Polly.<VoiceId>` (e.g., `AWS.Polly.Joanna`). For neural voices, which provide more realistic, human-like speech, append `-Neural` to the `VoiceId` (e.g., `AWS.Polly.Joanna-Neural`). Check the [available voices](https://docs.aws.amazon.com/polly/latest/dg/available-voices.html) for compatibility.
-     * - **Azure:** Use `Azure.<VoiceId>. (e.g. Azure.en-CA-ClaraNeural, Azure.en-CA-LiamNeural, Azure.en-US-BrianMultilingualNeural, Azure.en-US-Ava:DragonHDLatestNeural. For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).)
+     * - **Azure:** Use `Azure.<VoiceId>` (e.g., `Azure.en-CA-ClaraNeural`, `Azure.en-CA-LiamNeural`, `Azure.en-US-BrianMultilingualNeural`, `Azure.en-US-Ava:DragonHDLatestNeural`). For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`.
@@ -260,7 +259,7 @@ final class ActionStartConversationRelayParams implements BaseModel
      * @param array<string,mixed>|null $structuredProvider
      * @param array<string,mixed>|null $transcription
      * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
-     * @param array<string,mixed>|null $transcriptionEngineConfig
+     * @param ConversationRelayTranscriptionEngineConfig|ConversationRelayTranscriptionEngineConfigShape|null $transcriptionEngineConfig
      * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
@@ -282,7 +281,7 @@ final class ActionStartConversationRelayParams implements BaseModel
         ?array $structuredProvider = null,
         ?array $transcription = null,
         TranscriptionEngine|string|null $transcriptionEngine = null,
-        ?array $transcriptionEngineConfig = null,
+        ConversationRelayTranscriptionEngineConfig|array|null $transcriptionEngineConfig = null,
         ?string $ttsProvider = null,
         ?string $url = null,
         ?string $voice = null,
@@ -542,12 +541,12 @@ final class ActionStartConversationRelayParams implements BaseModel
     }
 
     /**
-     * Engine-specific transcription settings for Conversation Relay. This accepts the same provider-specific options used by the Call Transcription Start command, such as `transcription_model`, without requiring the engine discriminator to be repeated inside this object.
+     * Engine-specific transcription settings for Conversation Relay. This accepts the same provider-specific options used by the Call Transcription Start command, such as `transcription_model`, without requiring the engine discriminator to be repeated inside this object. With Deepgram Flux (`deepgram/flux`), `interim_results`, `eot_threshold` and `eager_eot_threshold` control the interim prompts and the `eagerEndOfTurn` and `turnResumed` frames sent to your WebSocket server.
      *
-     * @param array<string,mixed> $transcriptionEngineConfig
+     * @param ConversationRelayTranscriptionEngineConfig|ConversationRelayTranscriptionEngineConfigShape $transcriptionEngineConfig
      */
     public function withTranscriptionEngineConfig(
-        array $transcriptionEngineConfig
+        ConversationRelayTranscriptionEngineConfig|array $transcriptionEngineConfig
     ): self {
         $self = clone $this;
         $self['transcriptionEngineConfig'] = $transcriptionEngineConfig;
@@ -582,7 +581,7 @@ final class ActionStartConversationRelayParams implements BaseModel
      *
      *  **Supported Providers:**
      * - **AWS:** Use `AWS.Polly.<VoiceId>` (e.g., `AWS.Polly.Joanna`). For neural voices, which provide more realistic, human-like speech, append `-Neural` to the `VoiceId` (e.g., `AWS.Polly.Joanna-Neural`). Check the [available voices](https://docs.aws.amazon.com/polly/latest/dg/available-voices.html) for compatibility.
-     * - **Azure:** Use `Azure.<VoiceId>. (e.g. Azure.en-CA-ClaraNeural, Azure.en-CA-LiamNeural, Azure.en-US-BrianMultilingualNeural, Azure.en-US-Ava:DragonHDLatestNeural. For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).)
+     * - **Azure:** Use `Azure.<VoiceId>` (e.g., `Azure.en-CA-ClaraNeural`, `Azure.en-CA-LiamNeural`, `Azure.en-US-BrianMultilingualNeural`, `Azure.en-US-Ava:DragonHDLatestNeural`). For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`.

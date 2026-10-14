@@ -46,7 +46,7 @@ final class ChatRawService implements ChatRawContract
      *   frequencyPenalty?: float,
      *   lengthPenalty?: float,
      *   logprobs?: bool,
-     *   maxTokens?: int,
+     *   maxTokens?: int|null,
      *   minP?: float,
      *   mode?: Mode|value-of<Mode>,
      *   model?: string,

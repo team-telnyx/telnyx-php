@@ -15,8 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Enterprises\Reputation\NumbersService::list()
  *
  * @phpstan-type NumberListParamsShape = array{
+ *   filterOwnershipStatus?: null|ReputationOwnershipStatus|value-of<ReputationOwnershipStatus>,
  *   filterPhoneNumberContains?: string|null,
  *   filterPhoneNumberEq?: string|null,
+ *   filterSource?: null|ReputationNumberSource|value-of<ReputationNumberSource>,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  * }
@@ -26,6 +28,14 @@ final class NumberListParams implements BaseModel
     /** @use SdkModel<NumberListParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    /**
+     * Only numbers with this ownership status. `removed` lists the numbers that were removed, each with its `removal_reason` and `removed_at`; removed numbers are not returned otherwise.
+     *
+     * @var value-of<ReputationOwnershipStatus>|null $filterOwnershipStatus
+     */
+    #[Optional(enum: ReputationOwnershipStatus::class)]
+    public ?string $filterOwnershipStatus;
 
     /**
      * Partial match on phone number. Must contain at least 5 digits.
@@ -38,6 +48,14 @@ final class NumberListParams implements BaseModel
      */
     #[Optional]
     public ?string $filterPhoneNumberEq;
+
+    /**
+     * Only numbers with this source.
+     *
+     * @var value-of<ReputationNumberSource>|null $filterSource
+     */
+    #[Optional(enum: ReputationNumberSource::class)]
+    public ?string $filterSource;
 
     /**
      * 1-based page number. Out-of-range values return an empty page with correct meta.
@@ -60,19 +78,40 @@ final class NumberListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ReputationOwnershipStatus|value-of<ReputationOwnershipStatus>|null $filterOwnershipStatus
+     * @param ReputationNumberSource|value-of<ReputationNumberSource>|null $filterSource
      */
     public static function with(
+        ReputationOwnershipStatus|string|null $filterOwnershipStatus = null,
         ?string $filterPhoneNumberContains = null,
         ?string $filterPhoneNumberEq = null,
+        ReputationNumberSource|string|null $filterSource = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
         $self = new self;
 
+        null !== $filterOwnershipStatus && $self['filterOwnershipStatus'] = $filterOwnershipStatus;
         null !== $filterPhoneNumberContains && $self['filterPhoneNumberContains'] = $filterPhoneNumberContains;
         null !== $filterPhoneNumberEq && $self['filterPhoneNumberEq'] = $filterPhoneNumberEq;
+        null !== $filterSource && $self['filterSource'] = $filterSource;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
+
+        return $self;
+    }
+
+    /**
+     * Only numbers with this ownership status. `removed` lists the numbers that were removed, each with its `removal_reason` and `removed_at`; removed numbers are not returned otherwise.
+     *
+     * @param ReputationOwnershipStatus|value-of<ReputationOwnershipStatus> $filterOwnershipStatus
+     */
+    public function withFilterOwnershipStatus(
+        ReputationOwnershipStatus|string $filterOwnershipStatus
+    ): self {
+        $self = clone $this;
+        $self['filterOwnershipStatus'] = $filterOwnershipStatus;
 
         return $self;
     }
@@ -96,6 +135,20 @@ final class NumberListParams implements BaseModel
     {
         $self = clone $this;
         $self['filterPhoneNumberEq'] = $filterPhoneNumberEq;
+
+        return $self;
+    }
+
+    /**
+     * Only numbers with this source.
+     *
+     * @param ReputationNumberSource|value-of<ReputationNumberSource> $filterSource
+     */
+    public function withFilterSource(
+        ReputationNumberSource|string $filterSource
+    ): self {
+        $self = clone $this;
+        $self['filterSource'] = $filterSource;
 
         return $self;
     }

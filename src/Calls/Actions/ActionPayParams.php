@@ -28,6 +28,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::pay()
  *
+ * @phpstan-import-type PostalCodeVariants from \Telnyx\Calls\Actions\ActionPayParams\PostalCode
+ * @phpstan-import-type PostalCodeShape from \Telnyx\Calls\Actions\ActionPayParams\PostalCode
  * @phpstan-import-type PromptsShape from \Telnyx\Calls\Actions\ActionPayParams\Prompts
  *
  * @phpstan-type ActionPayParamsShape = array{
@@ -41,9 +43,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *   language?: string|null,
  *   maxAttempts?: int|null,
  *   metadata?: array<string,mixed>|null,
+ *   minPostalCodeLength?: int|null,
  *   parameters?: array<string,mixed>|null,
  *   paymentMethod?: null|PaymentMethod|value-of<PaymentMethod>,
  *   paymentToken?: string|null,
+ *   postalCode?: PostalCodeShape|null,
  *   prompts?: null|Prompts|PromptsShape,
  *   serviceLevel?: string|null,
  *   timeoutMillis?: int|null,
@@ -123,6 +127,12 @@ final class ActionPayParams implements BaseModel
     public ?array $metadata;
 
     /**
+     * Minimum number of digits the caller must enter when collecting a credit-card billing postal code. Applies only when `postal_code` is `true` or `"true"` and no `payment_token` is supplied. The default is 1. The maximum number of digits collected is the greater of 10 and this value. This does not validate the length of a postal code supplied directly in `postal_code`.
+     */
+    #[Optional('min_postal_code_length')]
+    public ?int $minPostalCodeLength;
+
+    /**
      * Additional parameters forwarded to the Pay connector.
      *
      * @var array<string,mixed>|null $parameters
@@ -143,6 +153,14 @@ final class ActionPayParams implements BaseModel
      */
     #[Optional('payment_token')]
     public ?string $paymentToken;
+
+    /**
+     * Controls billing postal code collection for credit-card payments when no `payment_token` is supplied. Set to `true` or the string `"true"` (the default) to prompt the caller for a postal code. Set to `false` or the string `"false"` to skip the postal code prompt without supplying a postal code to the payment connector. Supply any other non-empty string, such as `"90210"`, to use that postal code without prompting. Empty or whitespace-only strings are rejected. This option does not affect ACH debit payments or payments using an existing token.
+     *
+     * @var PostalCodeVariants|null $postalCode
+     */
+    #[Optional('postal_code')]
+    public string|bool|null $postalCode;
 
     /**
      * Custom text-to-speech prompts keyed by payment collection step.
@@ -198,6 +216,7 @@ final class ActionPayParams implements BaseModel
      * @param array<string,mixed>|null $metadata
      * @param array<string,mixed>|null $parameters
      * @param PaymentMethod|value-of<PaymentMethod>|null $paymentMethod
+     * @param PostalCodeShape|null $postalCode
      * @param Prompts|PromptsShape|null $prompts
      * @param TransactionType|value-of<TransactionType>|null $transactionType
      * @param list<ValidCardType|value-of<ValidCardType>>|null $validCardTypes
@@ -213,9 +232,11 @@ final class ActionPayParams implements BaseModel
         ?string $language = null,
         ?int $maxAttempts = null,
         ?array $metadata = null,
+        ?int $minPostalCodeLength = null,
         ?array $parameters = null,
         PaymentMethod|string|null $paymentMethod = null,
         ?string $paymentToken = null,
+        string|bool|null $postalCode = null,
         Prompts|array|null $prompts = null,
         ?string $serviceLevel = null,
         ?int $timeoutMillis = null,
@@ -235,9 +256,11 @@ final class ActionPayParams implements BaseModel
         null !== $language && $self['language'] = $language;
         null !== $maxAttempts && $self['maxAttempts'] = $maxAttempts;
         null !== $metadata && $self['metadata'] = $metadata;
+        null !== $minPostalCodeLength && $self['minPostalCodeLength'] = $minPostalCodeLength;
         null !== $parameters && $self['parameters'] = $parameters;
         null !== $paymentMethod && $self['paymentMethod'] = $paymentMethod;
         null !== $paymentToken && $self['paymentToken'] = $paymentToken;
+        null !== $postalCode && $self['postalCode'] = $postalCode;
         null !== $prompts && $self['prompts'] = $prompts;
         null !== $serviceLevel && $self['serviceLevel'] = $serviceLevel;
         null !== $timeoutMillis && $self['timeoutMillis'] = $timeoutMillis;
@@ -364,6 +387,17 @@ final class ActionPayParams implements BaseModel
     }
 
     /**
+     * Minimum number of digits the caller must enter when collecting a credit-card billing postal code. Applies only when `postal_code` is `true` or `"true"` and no `payment_token` is supplied. The default is 1. The maximum number of digits collected is the greater of 10 and this value. This does not validate the length of a postal code supplied directly in `postal_code`.
+     */
+    public function withMinPostalCodeLength(int $minPostalCodeLength): self
+    {
+        $self = clone $this;
+        $self['minPostalCodeLength'] = $minPostalCodeLength;
+
+        return $self;
+    }
+
+    /**
      * Additional parameters forwarded to the Pay connector.
      *
      * @param array<string,mixed> $parameters
@@ -396,6 +430,19 @@ final class ActionPayParams implements BaseModel
     {
         $self = clone $this;
         $self['paymentToken'] = $paymentToken;
+
+        return $self;
+    }
+
+    /**
+     * Controls billing postal code collection for credit-card payments when no `payment_token` is supplied. Set to `true` or the string `"true"` (the default) to prompt the caller for a postal code. Set to `false` or the string `"false"` to skip the postal code prompt without supplying a postal code to the payment connector. Supply any other non-empty string, such as `"90210"`, to use that postal code without prompting. Empty or whitespace-only strings are rejected. This option does not affect ACH debit payments or payments using an existing token.
+     *
+     * @param PostalCodeShape $postalCode
+     */
+    public function withPostalCode(string|bool $postalCode): self
+    {
+        $self = clone $this;
+        $self['postalCode'] = $postalCode;
 
         return $self;
     }

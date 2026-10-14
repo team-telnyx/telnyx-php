@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Enterprises\EnterpriseUpdateParams;
 
+/**
+ * The industry your business operates in. Choose the closest match from the list; if your value is not accepted, pick the nearest category.
+ */
 enum Industry: string
 {
     case ACCOUNTING = 'accounting';

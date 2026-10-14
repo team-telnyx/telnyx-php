@@ -61,9 +61,13 @@ final class ToolsTest extends TestCase
             invite: ['foo' => 'bar'],
             pay: [
                 'connectorName' => 'connector_name',
+                'connectorParameters' => [
+                    'campaignid' => 'bar', 'customer_ref' => 'bar',
+                ],
                 'currency' => 'currency',
                 'description' => 'description',
                 'paymentMethod' => 'payment_method',
+                'validCardTypes' => ['visa', 'mastercard'],
             ],
             retrieval: ['foo' => 'bar'],
             timeoutMs: 0,
@@ -140,6 +144,6 @@ final class ToolsTest extends TestCase
         $result = $this->client->ai->tools->delete('tool_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsNotResource($result);
+        $this->assertNull($result);
     }
 }

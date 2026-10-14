@@ -13,7 +13,7 @@ use Telnyx\MeetingSessions\MeetingSessionDeleteRecordingMediaResponse\Data\Delet
  * @phpstan-type DataShape = array{
  *   deletionStatus: DeletionStatus|value-of<DeletionStatus>,
  *   meetingSessionID: string,
- *   provider: 'recall',
+ *   provider: 'telnyx',
  *   scope: 'provider_recording_media',
  * }
  */
@@ -22,9 +22,9 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /** @var 'recall' $provider */
+    /** @var 'telnyx' $provider */
     #[Required]
-    public string $provider = 'recall';
+    public string $provider = 'telnyx';
 
     /** @var 'provider_recording_media' $scope */
     #[Required]
@@ -102,7 +102,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param 'recall' $provider
+     * @param 'telnyx' $provider
      */
     public function withProvider(string $provider): self
     {

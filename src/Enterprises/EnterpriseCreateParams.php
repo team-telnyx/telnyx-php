@@ -72,6 +72,9 @@ final class EnterpriseCreateParams implements BaseModel
     #[Required('country_code')]
     public string $countryCode;
 
+    /**
+     * The trade name your business operates under if it is different from your legal name, also called a Doing Business As (DBA) name. Leave blank if you only use your legal name.
+     */
     #[Required('doing_business_as')]
     public string $doingBusinessAs;
 
@@ -82,18 +85,21 @@ final class EnterpriseCreateParams implements BaseModel
     public string $fein;
 
     /**
-     * Industry classification.
+     * The industry your business operates in. Choose the closest match from the list; if your value is not accepted, pick the nearest category.
      *
      * @var value-of<Industry> $industry
      */
     #[Required(enum: Industry::class)]
     public string $industry;
 
+    /**
+     * The state, province, or country where your business was legally incorporated, for example Delaware.
+     */
     #[Required('jurisdiction_of_incorporation')]
     public string $jurisdictionOfIncorporation;
 
     /**
-     * Legal name of the enterprise.
+     * Your business's full registered legal name, exactly as it appears on your incorporation or tax documents, 3 to 64 characters.
      */
     #[Required('legal_name')]
     public string $legalName;
@@ -136,41 +142,44 @@ final class EnterpriseCreateParams implements BaseModel
     #[Required('organization_type', enum: OrganizationType::class)]
     public string $organizationType;
 
+    /**
+     * Your business's public website address, including https://. Leave blank if your business has no website.
+     */
     #[Required]
     public string $website;
 
     /**
-     * Optional corporate-registration / company-number identifier.
+     * The official number your company received when it was legally registered or incorporated (for example from your state or national business registry). It is on your certificate of incorporation.
      */
     #[Optional('corporate_registration_number', nullable: true)]
     public ?string $corporateRegistrationNumber;
 
     /**
-     * Optional free-form string the caller can attach for their own bookkeeping. Telnyx does not interpret it.
+     * Your own label for this account. Enter any reference that helps you find it in your records. Telnyx does not use it during vetting.
      */
     #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
-     * Optional D-U-N-S Number.
+     * Your optional 9-digit D-U-N-S Number issued by Dun & Bradstreet, a unique identifier for your business. Leave blank if you do not have one.
      */
     #[Optional('dun_bradstreet_number', nullable: true)]
     public ?string $dunBradstreetNumber;
 
     /**
-     * Optional SIC code for the primary line of business.
+     * The 4-digit Standard Industrial Classification code for your main line of business, which tells us what industry you operate in. Look it up in the SIC code directory if you are unsure.
      */
     #[Optional('primary_business_domain_sic_code', nullable: true)]
     public ?string $primaryBusinessDomainSicCode;
 
     /**
-     * Optional professional-license number for regulated industries.
+     * If your business operates under a professional license (for example legal, medical, or financial services), enter the license number issued by the licensing authority. Leave blank if it does not apply.
      */
     #[Optional('professional_license_number', nullable: true)]
     public ?string $professionalLicenseNumber;
 
     /**
-     * `enterprise` for an organization registering its own DIRs; `bpo` for a Business Process Outsourcer placing calls on behalf of one or more enterprises.
+     * `enterprise` for an organization registering its own DIRs (the default, and the right choice when the calls display your own brand). `bpo` for a Business Process Outsourcer: a call center that places calls on behalf of other enterprises and displays their brand. A `bpo` enterprise describes the call center itself and cannot own a DIR. Each client the call center calls for gets its own `enterprise` in the same account, with the client's DIR under it; that DIR is then linked to the `bpo` enterprise through `bpo_authorizations`. Fixed at creation.
      *
      * @var value-of<RoleType>|null $roleType
      */
@@ -324,6 +333,9 @@ final class EnterpriseCreateParams implements BaseModel
         return $self;
     }
 
+    /**
+     * The trade name your business operates under if it is different from your legal name, also called a Doing Business As (DBA) name. Leave blank if you only use your legal name.
+     */
     public function withDoingBusinessAs(string $doingBusinessAs): self
     {
         $self = clone $this;
@@ -344,7 +356,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Industry classification.
+     * The industry your business operates in. Choose the closest match from the list; if your value is not accepted, pick the nearest category.
      *
      * @param Industry|value-of<Industry> $industry
      */
@@ -356,6 +368,9 @@ final class EnterpriseCreateParams implements BaseModel
         return $self;
     }
 
+    /**
+     * The state, province, or country where your business was legally incorporated, for example Delaware.
+     */
     public function withJurisdictionOfIncorporation(
         string $jurisdictionOfIncorporation
     ): self {
@@ -366,7 +381,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Legal name of the enterprise.
+     * Your business's full registered legal name, exactly as it appears on your incorporation or tax documents, 3 to 64 characters.
      */
     public function withLegalName(string $legalName): self
     {
@@ -450,6 +465,9 @@ final class EnterpriseCreateParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Your business's public website address, including https://. Leave blank if your business has no website.
+     */
     public function withWebsite(string $website): self
     {
         $self = clone $this;
@@ -459,7 +477,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Optional corporate-registration / company-number identifier.
+     * The official number your company received when it was legally registered or incorporated (for example from your state or national business registry). It is on your certificate of incorporation.
      */
     public function withCorporateRegistrationNumber(
         ?string $corporateRegistrationNumber
@@ -471,7 +489,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Optional free-form string the caller can attach for their own bookkeeping. Telnyx does not interpret it.
+     * Your own label for this account. Enter any reference that helps you find it in your records. Telnyx does not use it during vetting.
      */
     public function withCustomerReference(string $customerReference): self
     {
@@ -482,7 +500,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Optional D-U-N-S Number.
+     * Your optional 9-digit D-U-N-S Number issued by Dun & Bradstreet, a unique identifier for your business. Leave blank if you do not have one.
      */
     public function withDunBradstreetNumber(?string $dunBradstreetNumber): self
     {
@@ -493,7 +511,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Optional SIC code for the primary line of business.
+     * The 4-digit Standard Industrial Classification code for your main line of business, which tells us what industry you operate in. Look it up in the SIC code directory if you are unsure.
      */
     public function withPrimaryBusinessDomainSicCode(
         ?string $primaryBusinessDomainSicCode
@@ -505,7 +523,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Optional professional-license number for regulated industries.
+     * If your business operates under a professional license (for example legal, medical, or financial services), enter the license number issued by the licensing authority. Leave blank if it does not apply.
      */
     public function withProfessionalLicenseNumber(
         ?string $professionalLicenseNumber
@@ -517,7 +535,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * `enterprise` for an organization registering its own DIRs; `bpo` for a Business Process Outsourcer placing calls on behalf of one or more enterprises.
+     * `enterprise` for an organization registering its own DIRs (the default, and the right choice when the calls display your own brand). `bpo` for a Business Process Outsourcer: a call center that places calls on behalf of other enterprises and displays their brand. A `bpo` enterprise describes the call center itself and cannot own a DIR. Each client the call center calls for gets its own `enterprise` in the same account, with the client's DIR under it; that DIR is then linked to the `bpo` enterprise through `bpo_authorizations`. Fixed at creation.
      *
      * @param RoleType|value-of<RoleType> $roleType
      */

@@ -7,13 +7,14 @@ namespace Telnyx\EmailTemplates\EmailTemplateRenderResponse;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailTemplates\EmailTemplate\RecordType;
-use Telnyx\EmailTemplates\EmailTemplate\VariableSchema;
+use Telnyx\EmailTemplates\EmailTemplateCommon\RecordType;
+use Telnyx\EmailTemplates\EmailTemplateCommon\VariableSchema;
+use Telnyx\EmailTemplates\EmailTemplateCommon\VariablesMode;
 
 /**
- * Template object with `subject`, `html_body`, and `text_body` replaced by their Liquid-rendered values. All other template fields (id, name, variables, etc.) remain unchanged.
+ * Template object with `subject`, `html_body`, and `text_body` replaced by their Liquid-rendered values. Rendered content is not limited by the stored template-field lengths. All other template fields remain unchanged.
  *
- * @phpstan-import-type VariableSchemaShape from \Telnyx\EmailTemplates\EmailTemplate\VariableSchema
+ * @phpstan-import-type VariableSchemaShape from \Telnyx\EmailTemplates\EmailTemplateCommon\VariableSchema
  *
  * @phpstan-type DataShape = array{
  *   id: string,
@@ -23,11 +24,12 @@ use Telnyx\EmailTemplates\EmailTemplate\VariableSchema;
  *   name: string,
  *   recordType: RecordType|value-of<RecordType>,
  *   strictVariables: bool,
- *   subject: string|null,
  *   textBody: string|null,
  *   updatedAt: \DateTimeInterface,
  *   variableSchema: array<string,VariableSchema|VariableSchemaShape>|null,
  *   variables: list<string>,
+ *   variablesMode: VariablesMode|value-of<VariablesMode>,
+ *   subject: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -63,9 +65,6 @@ final class Data implements BaseModel
     #[Required('strict_variables')]
     public bool $strictVariables;
 
-    #[Required]
-    public ?string $subject;
-
     #[Required('text_body')]
     public ?string $textBody;
 
@@ -81,12 +80,23 @@ final class Data implements BaseModel
     public ?array $variableSchema;
 
     /**
-     * Legacy unstructured variable names. This path remains supported unchanged.
+     * Persisted variable names. In `explicit` mode this array preserves the exact provided order, duplicates, and string contents; in `automatic` mode it is derived from the stored subject and bodies.
      *
      * @var list<string> $variables
      */
     #[Required(list: 'string')]
     public array $variables;
+
+    /**
+     * `automatic` when variable names are derived from template content; `explicit` when `variables` is the exact manually managed array.
+     *
+     * @var value-of<VariablesMode> $variablesMode
+     */
+    #[Required('variables_mode', enum: VariablesMode::class)]
+    public string $variablesMode;
+
+    #[Required]
+    public ?string $subject;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -101,11 +111,12 @@ final class Data implements BaseModel
      *   name: ...,
      *   recordType: ...,
      *   strictVariables: ...,
-     *   subject: ...,
      *   textBody: ...,
      *   updatedAt: ...,
      *   variableSchema: ...,
      *   variables: ...,
+     *   variablesMode: ...,
+     *   subject: ...,
      * )
      * ```
      *
@@ -120,11 +131,12 @@ final class Data implements BaseModel
      *   ->withName(...)
      *   ->withRecordType(...)
      *   ->withStrictVariables(...)
-     *   ->withSubject(...)
      *   ->withTextBody(...)
      *   ->withUpdatedAt(...)
      *   ->withVariableSchema(...)
      *   ->withVariables(...)
+     *   ->withVariablesMode(...)
+     *   ->withSubject(...)
      * ```
      */
     public function __construct()
@@ -140,6 +152,7 @@ final class Data implements BaseModel
      * @param RecordType|value-of<RecordType> $recordType
      * @param array<string,VariableSchema|VariableSchemaShape>|null $variableSchema
      * @param list<string> $variables
+     * @param VariablesMode|value-of<VariablesMode> $variablesMode
      */
     public static function with(
         string $id,
@@ -149,11 +162,12 @@ final class Data implements BaseModel
         string $name,
         RecordType|string $recordType,
         bool $strictVariables,
-        ?string $subject,
         ?string $textBody,
         \DateTimeInterface $updatedAt,
         ?array $variableSchema,
         array $variables,
+        VariablesMode|string $variablesMode,
+        ?string $subject,
     ): self {
         $self = new self;
 
@@ -164,11 +178,12 @@ final class Data implements BaseModel
         $self['name'] = $name;
         $self['recordType'] = $recordType;
         $self['strictVariables'] = $strictVariables;
-        $self['subject'] = $subject;
         $self['textBody'] = $textBody;
         $self['updatedAt'] = $updatedAt;
         $self['variableSchema'] = $variableSchema;
         $self['variables'] = $variables;
+        $self['variablesMode'] = $variablesMode;
+        $self['subject'] = $subject;
 
         return $self;
     }
@@ -238,14 +253,6 @@ final class Data implements BaseModel
         return $self;
     }
 
-    public function withSubject(?string $subject): self
-    {
-        $self = clone $this;
-        $self['subject'] = $subject;
-
-        return $self;
-    }
-
     public function withTextBody(?string $textBody): self
     {
         $self = clone $this;
@@ -276,7 +283,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * Legacy unstructured variable names. This path remains supported unchanged.
+     * Persisted variable names. In `explicit` mode this array preserves the exact provided order, duplicates, and string contents; in `automatic` mode it is derived from the stored subject and bodies.
      *
      * @param list<string> $variables
      */
@@ -284,6 +291,27 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['variables'] = $variables;
+
+        return $self;
+    }
+
+    /**
+     * `automatic` when variable names are derived from template content; `explicit` when `variables` is the exact manually managed array.
+     *
+     * @param VariablesMode|value-of<VariablesMode> $variablesMode
+     */
+    public function withVariablesMode(VariablesMode|string $variablesMode): self
+    {
+        $self = clone $this;
+        $self['variablesMode'] = $variablesMode;
+
+        return $self;
+    }
+
+    public function withSubject(?string $subject): self
+    {
+        $self = clone $this;
+        $self['subject'] = $subject;
 
         return $self;
     }

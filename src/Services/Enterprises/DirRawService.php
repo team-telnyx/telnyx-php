@@ -9,6 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\BpoAuthorizationInput;
 use Telnyx\Dir\Dir;
 use Telnyx\Dir\DirStatus;
 use Telnyx\Dir\DirWrapped;
@@ -22,6 +23,7 @@ use Telnyx\ServiceContracts\Enterprises\DirRawContract;
 /**
  * A Display Identity Record (DIR) is the verified calling identity (display name, logo, call reasons) shown to recipients on outbound calls.
  *
+ * @phpstan-import-type BpoAuthorizationInputShape from \Telnyx\Dir\BpoAuthorizationInput
  * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -46,9 +48,13 @@ final class DirRawService implements DirRawContract
      * - `certify_brand_is_accurate`, `certify_no_shaft_content`, `certify_ip_ownership` MUST all be `true`.
      *
      * **Failure modes**
-     * - `422` - validation error; `errors[].source.pointer` names the offending field.
-     * - `403` - Branded Calling not activated on this enterprise (see `POST /enterprises/{id}/branded_calling`).
+     * - `400` - validation error; `errors[].source.pointer` names the offending field.
+     * - `400` - a certification field is not `true`.
+     * - `400` - Branded Calling not activated on this enterprise (see `POST /enterprises/{id}/branded_calling`).
+     * - `400` - the enterprise is a BPO enterprise (`role_type` `bpo`), which cannot own a DIR.
+     * - `400` - a `bpo_authorizations` entry is not an approved BPO enterprise in your account, or its `loa_document_id` could not be validated.
      * - `404` - enterprise does not exist or does not belong to your account.
+     * - `503` - the document check is temporarily unavailable; retry.
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
@@ -59,9 +65,11 @@ final class DirRawService implements DirRawContract
      *   certifyIPOwnership: bool,
      *   certifyNoShaftContent: bool,
      *   displayName: string,
+     *   bpoAuthorizations?: list<BpoAuthorizationInput|BpoAuthorizationInputShape>,
      *   documents?: list<Document|DocumentShape>,
      *   logoURL?: string,
      *   reselling?: bool,
+     *   webhookURL?: string|null,
      * }|DirCreateParams $params
      * @param RequestOpts|null $requestOptions
      *

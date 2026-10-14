@@ -25,6 +25,7 @@ use Telnyx\Dir\PhoneNumbers\RejectionReason;
  *   certifyIPOwnership?: bool|null,
  *   certifyNoShaftContent?: bool|null,
  *   createdAt?: \DateTimeInterface|null,
+ *   deleteRequestedAt?: \DateTimeInterface|null,
  *   displayName?: string|null,
  *   documents?: list<Document|DocumentShape>|null,
  *   enterpriseID?: string|null,
@@ -37,6 +38,7 @@ use Telnyx\Dir\PhoneNumbers\RejectionReason;
  *   submittedAt?: \DateTimeInterface|null,
  *   updatedAt?: \DateTimeInterface|null,
  *   verifiedAt?: \DateTimeInterface|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class Dir implements BaseModel
@@ -68,6 +70,12 @@ final class Dir implements BaseModel
 
     #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
+
+    /**
+     * When deletion was requested. Set once the DIR enters `delete_requested`; `null` otherwise.
+     */
+    #[Optional('delete_requested_at', nullable: true)]
+    public ?\DateTimeInterface $deleteRequestedAt;
 
     #[Optional('display_name')]
     public ?string $displayName;
@@ -110,6 +118,7 @@ final class Dir implements BaseModel
      * - `expired` - verification expired; customer must resubmit.
      * - `infringement_claimed` - a trademark/impersonation claim is open against this DIR.
      * - `permanently_rejected` - terminal; cannot be resubmitted.
+     * - `delete_requested` - you have requested deletion; the DIR still exists and Telnyx is completing the removal (de-registration and cleanup). A verified DIR keeps serving its branded identity, and keeps billing, until the removal finishes.
      *
      * @var value-of<DirStatus>|null $status
      */
@@ -124,6 +133,12 @@ final class Dir implements BaseModel
 
     #[Optional('verified_at', nullable: true)]
     public ?\DateTimeInterface $verifiedAt;
+
+    /**
+     * `https://` URL that receives webhook notifications for this DIR's compliance-review outcomes. `null` when not subscribed.
+     */
+    #[Optional('webhook_url', nullable: true)]
+    public ?string $webhookURL;
 
     public function __construct()
     {
@@ -143,6 +158,7 @@ final class Dir implements BaseModel
     public static function with(
         string|Omitted|null $authorizerEmail = Omitted::VALUE,
         string|Omitted|null $authorizerName = Omitted::VALUE,
+        \DateTimeInterface|Omitted|null $deleteRequestedAt = Omitted::VALUE,
         array|Omitted|null $documents = Omitted::VALUE,
         \DateTimeInterface|Omitted|null $expiringAt = Omitted::VALUE,
         string|Omitted|null $logoURL = Omitted::VALUE,
@@ -150,6 +166,7 @@ final class Dir implements BaseModel
         array|Omitted|null $rejectionReasons = Omitted::VALUE,
         \DateTimeInterface|Omitted|null $submittedAt = Omitted::VALUE,
         \DateTimeInterface|Omitted|null $verifiedAt = Omitted::VALUE,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
         ?string $id = null,
         ?array $callReasons = null,
         ?bool $certifyBrandIsAccurate = null,
@@ -172,6 +189,7 @@ final class Dir implements BaseModel
         null !== $certifyIPOwnership && $self['certifyIPOwnership'] = $certifyIPOwnership;
         null !== $certifyNoShaftContent && $self['certifyNoShaftContent'] = $certifyNoShaftContent;
         null !== $createdAt && $self['createdAt'] = $createdAt;
+        Omitted::VALUE !== $deleteRequestedAt && $self['deleteRequestedAt'] = $deleteRequestedAt;
         null !== $displayName && $self['displayName'] = $displayName;
         Omitted::VALUE !== $documents && $self['documents'] = $documents;
         null !== $enterpriseID && $self['enterpriseID'] = $enterpriseID;
@@ -184,6 +202,7 @@ final class Dir implements BaseModel
         Omitted::VALUE !== $submittedAt && $self['submittedAt'] = $submittedAt;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         Omitted::VALUE !== $verifiedAt && $self['verifiedAt'] = $verifiedAt;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }
@@ -252,6 +271,18 @@ final class Dir implements BaseModel
     {
         $self = clone $this;
         $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    /**
+     * When deletion was requested. Set once the DIR enters `delete_requested`; `null` otherwise.
+     */
+    public function withDeleteRequestedAt(
+        ?\DateTimeInterface $deleteRequestedAt
+    ): self {
+        $self = clone $this;
+        $self['deleteRequestedAt'] = $deleteRequestedAt;
 
         return $self;
     }
@@ -339,6 +370,7 @@ final class Dir implements BaseModel
      * - `expired` - verification expired; customer must resubmit.
      * - `infringement_claimed` - a trademark/impersonation claim is open against this DIR.
      * - `permanently_rejected` - terminal; cannot be resubmitted.
+     * - `delete_requested` - you have requested deletion; the DIR still exists and Telnyx is completing the removal (de-registration and cleanup). A verified DIR keeps serving its branded identity, and keeps billing, until the removal finishes.
      *
      * @param DirStatus|value-of<DirStatus> $status
      */
@@ -370,6 +402,17 @@ final class Dir implements BaseModel
     {
         $self = clone $this;
         $self['verifiedAt'] = $verifiedAt;
+
+        return $self;
+    }
+
+    /**
+     * `https://` URL that receives webhook notifications for this DIR's compliance-review outcomes. `null` when not subscribed.
+     */
+    public function withWebhookURL(?string $webhookURL): self
+    {
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

@@ -9,6 +9,7 @@ use Telnyx\AI\Memory\Namespaces\Profiles\ProfileDeleteResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileGetSummaryResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileIngestResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileListResponse;
+use Telnyx\AI\Memory\Namespaces\Profiles\ProfilePreviewResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRecallResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRememberResponse;
 use Telnyx\Client;
@@ -117,6 +118,39 @@ final class ProfilesTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ProfileIngestResponse::class, $result);
+    }
+
+    #[Test]
+    public function testPreview(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->memory->namespaces->profiles->preview(
+            'profile_id',
+            namespace: 'namespace'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ProfilePreviewResponse::class, $result);
+    }
+
+    #[Test]
+    public function testPreviewWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->memory->namespaces->profiles->preview(
+            'profile_id',
+            namespace: 'namespace',
+            instructions: 'Lead with billing status. Prefer plain language over jargon.',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ProfilePreviewResponse::class, $result);
     }
 
     #[Test]

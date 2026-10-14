@@ -6,10 +6,8 @@ namespace Telnyx\Services\Dir;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Omitted;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\Document;
-use Telnyx\Dir\PhoneNumberBatches\DirPhoneNumberStatus;
 use Telnyx\Dir\PhoneNumbers\DirPhoneNumber;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberAddResponse;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberRemoveResponse;
@@ -45,7 +43,6 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
-     * @param DirPhoneNumberStatus|value-of<DirPhoneNumberStatus> $status filter by phone-number status
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<DirPhoneNumber>
@@ -56,17 +53,9 @@ final class PhoneNumbersService implements PhoneNumbersContract
         string $dirID,
         int $pageNumber = 1,
         int $pageSize = 20,
-        DirPhoneNumberStatus|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
-        $params = array_filter(
-            [
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'status' => $status ?? Omitted::VALUE,
-            ],
-            static fn ($value) => Omitted::VALUE !== $value,
-        );
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($dirID, params: $params, requestOptions: $requestOptions);
@@ -77,9 +66,9 @@ final class PhoneNumbersService implements PhoneNumbersContract
     /**
      * @api
      *
-     * Register phone numbers under a DIR. The enterprise is resolved server-side from the DIR id. Same body, failure modes, and batch semantics whichever path form you use.
+     * Register phone numbers under a DIR. The enterprise is resolved server-side from the DIR id.
      *
-     * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
+     * **Pricing:** Adding phone numbers is free. Branded Calling fees are charged per DIR and per branded call. See https://telnyx.com/pricing/branded-calling for current pricing.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param list<Document|DocumentShape> $documents Supporting documents covering this batch. At least one entry with `document_type: letter_of_authorization` is required - the LOA authorises Telnyx to register these numbers under the DIR. Each `document_id` must come from the Telnyx Documents API. Additional document types (e.g. business registration) may be included alongside the LOA.
@@ -108,7 +97,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * Deregister phone numbers from a DIR. The enterprise is resolved server-side from the DIR id. Returns a partial-success envelope.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
-     * @param list<string> $phoneNumbers
+     * @param list<string> $phoneNumbers The phone numbers to remove from this brand, in E.164 format, up to 100 per request. They must currently be attached to this brand.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
