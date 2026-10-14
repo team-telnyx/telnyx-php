@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls;
 
 use Telnyx\AI\Assistants\VoiceSettings;
+use Telnyx\Calls\Actions\TranscriptionConfig;
 use Telnyx\Calls\CallAssistantRequest\DynamicVariable;
 use Telnyx\Calls\CallAssistantRequest\ExternalLlm;
 use Telnyx\Calls\CallAssistantRequest\FallbackConfig;
@@ -16,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\MapOf;
 
 /**
- * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
+ * AI Assistant configuration and per-call overrides. All fields except `id` are optional. Omitted assistant fields use the stored configuration. Supplied `voice_settings` and `transcription` objects replace their stored objects rather than merging individual settings; include every setting you want to retain. `dynamic_variables` are merged, with request values taking precedence.
  *
  * @phpstan-import-type DynamicVariableVariants from \Telnyx\Calls\CallAssistantRequest\DynamicVariable
  * @phpstan-import-type ToolVariants from \Telnyx\Calls\CallAssistantRequest\Tool
@@ -24,6 +25,7 @@ use Telnyx\Core\Conversion\MapOf;
  * @phpstan-import-type ExternalLlmShape from \Telnyx\Calls\CallAssistantRequest\ExternalLlm
  * @phpstan-import-type FallbackConfigShape from \Telnyx\Calls\CallAssistantRequest\FallbackConfig
  * @phpstan-import-type ToolShape from \Telnyx\Calls\CallAssistantRequest\Tool
+ * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
  *
  * @phpstan-type CallAssistantRequestShape = array{
@@ -40,6 +42,7 @@ use Telnyx\Core\Conversion\MapOf;
  *   observabilitySettings?: array<string,mixed>|null,
  *   openaiAPIKeyRef?: string|null,
  *   tools?: list<ToolShape>|null,
+ *   transcription?: null|TranscriptionConfig|TranscriptionConfigShape,
  *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
  * }
  */
@@ -136,6 +139,15 @@ final class CallAssistantRequest implements BaseModel
     #[Optional(list: Tool::class)]
     public ?array $tools;
 
+    /**
+     * Per-call speech-to-text configuration for the assistant. If omitted, the stored assistant transcription configuration is used. If supplied, this object replaces the stored transcription settings. This is separate from the top-level `transcription` boolean on answer and dial commands.
+     */
+    #[Optional]
+    public ?TranscriptionConfig $transcription;
+
+    /**
+     * Per-call voice configuration. Set the voice identifier in `voice_settings.voice`, not in `assistant.voice`. If supplied, this object replaces the stored voice settings.
+     */
     #[Optional('voice_settings')]
     public ?VoiceSettings $voiceSettings;
 
@@ -169,6 +181,7 @@ final class CallAssistantRequest implements BaseModel
      * @param list<array<string,mixed>>|null $mcpServers
      * @param array<string,mixed>|null $observabilitySettings
      * @param list<ToolShape>|null $tools
+     * @param TranscriptionConfig|TranscriptionConfigShape|null $transcription
      * @param VoiceSettings|VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
@@ -185,6 +198,7 @@ final class CallAssistantRequest implements BaseModel
         ?array $observabilitySettings = null,
         ?string $openaiAPIKeyRef = null,
         ?array $tools = null,
+        TranscriptionConfig|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
     ): self {
         $self = new self;
@@ -203,6 +217,7 @@ final class CallAssistantRequest implements BaseModel
         null !== $observabilitySettings && $self['observabilitySettings'] = $observabilitySettings;
         null !== $openaiAPIKeyRef && $self['openaiAPIKeyRef'] = $openaiAPIKeyRef;
         null !== $tools && $self['tools'] = $tools;
+        null !== $transcription && $self['transcription'] = $transcription;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
         return $self;
@@ -366,6 +381,22 @@ final class CallAssistantRequest implements BaseModel
     }
 
     /**
+     * Per-call speech-to-text configuration for the assistant. If omitted, the stored assistant transcription configuration is used. If supplied, this object replaces the stored transcription settings. This is separate from the top-level `transcription` boolean on answer and dial commands.
+     *
+     * @param TranscriptionConfig|TranscriptionConfigShape $transcription
+     */
+    public function withTranscription(
+        TranscriptionConfig|array $transcription
+    ): self {
+        $self = clone $this;
+        $self['transcription'] = $transcription;
+
+        return $self;
+    }
+
+    /**
+     * Per-call voice configuration. Set the voice identifier in `voice_settings.voice`, not in `assistant.voice`. If supplied, this object replaces the stored voice settings.
+     *
      * @param VoiceSettings|VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(VoiceSettings|array $voiceSettings): self

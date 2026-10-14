@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Enterprises\EnterpriseListParams\FilterRoleType;
 
 /**
  * Return the enterprises you own, paginated. The default page size is 20; the maximum is 250.
@@ -16,6 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type EnterpriseListParamsShape = array{
  *   filterLegalNameContains?: string|null,
+ *   filterRoleType?: null|FilterRoleType|value-of<FilterRoleType>,
  *   legalName?: string|null,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
@@ -32,6 +34,14 @@ final class EnterpriseListParams implements BaseModel
      */
     #[Optional]
     public ?string $filterLegalNameContains;
+
+    /**
+     * Only return enterprises of this type: `bpo` for call-center (BPO) enterprises, `enterprise` for normal enterprises. Omit to return both.
+     *
+     * @var value-of<FilterRoleType>|null $filterRoleType
+     */
+    #[Optional(enum: FilterRoleType::class)]
+    public ?string $filterRoleType;
 
     /**
      * Filter by legal name (partial match).
@@ -60,9 +70,12 @@ final class EnterpriseListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param FilterRoleType|value-of<FilterRoleType>|null $filterRoleType
      */
     public static function with(
         ?string $filterLegalNameContains = null,
+        FilterRoleType|string|null $filterRoleType = null,
         ?string $legalName = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
@@ -70,6 +83,7 @@ final class EnterpriseListParams implements BaseModel
         $self = new self;
 
         null !== $filterLegalNameContains && $self['filterLegalNameContains'] = $filterLegalNameContains;
+        null !== $filterRoleType && $self['filterRoleType'] = $filterRoleType;
         null !== $legalName && $self['legalName'] = $legalName;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
@@ -85,6 +99,20 @@ final class EnterpriseListParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['filterLegalNameContains'] = $filterLegalNameContains;
+
+        return $self;
+    }
+
+    /**
+     * Only return enterprises of this type: `bpo` for call-center (BPO) enterprises, `enterprise` for normal enterprises. Omit to return both.
+     *
+     * @param FilterRoleType|value-of<FilterRoleType> $filterRoleType
+     */
+    public function withFilterRoleType(
+        FilterRoleType|string $filterRoleType
+    ): self {
+        $self = clone $this;
+        $self['filterRoleType'] = $filterRoleType;
 
         return $self;
     }

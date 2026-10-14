@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Memory\Namespaces\NamespaceGetResponse;
+use Telnyx\AI\Memory\Namespaces\NamespaceListResponse;
+use Telnyx\AI\Memory\Namespaces\NamespaceNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
@@ -26,6 +28,32 @@ final class NamespacesTest extends TestCase
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
+    }
+
+    #[Test]
+    public function testCreate(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->memory->namespaces->create(name: 'staging');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NamespaceNewResponse::class, $result);
+    }
+
+    #[Test]
+    public function testCreateWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->memory->namespaces->create(name: 'staging');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NamespaceNewResponse::class, $result);
     }
 
     #[Test]
@@ -58,5 +86,31 @@ final class NamespacesTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NamespaceGetResponse::class, $result);
+    }
+
+    #[Test]
+    public function testList(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->memory->namespaces->list();
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NamespaceListResponse::class, $result);
+    }
+
+    #[Test]
+    public function testDelete(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->memory->namespaces->delete('namespace');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

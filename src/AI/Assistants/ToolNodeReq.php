@@ -16,13 +16,17 @@ use Telnyx\Core\Contracts\BaseModel;
  * Unlike a prompt node, a tool node has no instructions or model — it
  * isn't an LLM turn. Reaching it deterministically runs one shared tool
  * (arguments filled from matching dynamic variables by name), then routes
- * on the result via outgoing `tool_result` edges.
+ * via outgoing `llm` / `expression` edges, with exactly one `default`
+ * fallback edge required when the node has any outgoing edges (the
+ * tool's outcome is readable as `telnyx_last_tool_status_code` in
+ * `expression` conditions).
  *
  * @phpstan-import-type NodePositionShape from \Telnyx\AI\Assistants\NodePosition
  *
  * @phpstan-type ToolNodeReqShape = array{
  *   id: string,
  *   sharedToolID: string,
+ *   message?: string|null,
  *   name?: string|null,
  *   position?: null|NodePosition|NodePositionShape,
  *   type?: null|Type|value-of<Type>,
@@ -40,10 +44,16 @@ final class ToolNodeReq implements BaseModel
     public string $id;
 
     /**
-     * ID of the single shared (org-level) tool this node executes. When the flow reaches this node the tool runs as a deliberate step (no LLM turn); its outgoing `tool_result` edges then route on the outcome. Arguments are filled from the conversation's dynamic variables by name — a dynamic variable whose name matches one of the tool's parameters supplies that argument. Cross-validated against the org's shared tools on write.
+     * ID of the single shared (org-level) tool this node executes. When the flow reaches this node the tool runs as a deliberate step (no LLM turn); its outgoing `llm` / `expression` edges route the flow on the tool's outcome. Arguments are filled from the conversation's dynamic variables by name — a dynamic variable whose name matches one of the tool's parameters supplies that argument. Cross-validated against the org's shared tools on write.
      */
     #[Required('shared_tool_id')]
     public string $sharedToolID;
+
+    /**
+     * Optional message delivered to the user verbatim immediately before the tool executes — an announcement such as 'One moment while I look that up.' No LLM turn and no customer turn: the message is spoken/sent, then the tool runs, in the same deterministic step. `{{variable}}` placeholders are interpolated from the conversation's dynamic variables (unresolved → empty string); the tool's own result is not yet available when the message is rendered. Omit for a silent tool step.
+     */
+    #[Optional]
+    public ?string $message;
 
     /**
      * Optional human-readable label, displayed in authoring UIs.
@@ -95,6 +105,7 @@ final class ToolNodeReq implements BaseModel
     public static function with(
         string $id,
         string $sharedToolID,
+        ?string $message = null,
         ?string $name = null,
         NodePosition|array|null $position = null,
         Type|string|null $type = null,
@@ -104,6 +115,7 @@ final class ToolNodeReq implements BaseModel
         $self['id'] = $id;
         $self['sharedToolID'] = $sharedToolID;
 
+        null !== $message && $self['message'] = $message;
         null !== $name && $self['name'] = $name;
         null !== $position && $self['position'] = $position;
         null !== $type && $self['type'] = $type;
@@ -123,12 +135,23 @@ final class ToolNodeReq implements BaseModel
     }
 
     /**
-     * ID of the single shared (org-level) tool this node executes. When the flow reaches this node the tool runs as a deliberate step (no LLM turn); its outgoing `tool_result` edges then route on the outcome. Arguments are filled from the conversation's dynamic variables by name — a dynamic variable whose name matches one of the tool's parameters supplies that argument. Cross-validated against the org's shared tools on write.
+     * ID of the single shared (org-level) tool this node executes. When the flow reaches this node the tool runs as a deliberate step (no LLM turn); its outgoing `llm` / `expression` edges route the flow on the tool's outcome. Arguments are filled from the conversation's dynamic variables by name — a dynamic variable whose name matches one of the tool's parameters supplies that argument. Cross-validated against the org's shared tools on write.
      */
     public function withSharedToolID(string $sharedToolID): self
     {
         $self = clone $this;
         $self['sharedToolID'] = $sharedToolID;
+
+        return $self;
+    }
+
+    /**
+     * Optional message delivered to the user verbatim immediately before the tool executes — an announcement such as 'One moment while I look that up.' No LLM turn and no customer turn: the message is spoken/sent, then the tool runs, in the same deterministic step. `{{variable}}` placeholders are interpolated from the conversation's dynamic variables (unresolved → empty string); the tool's own result is not yet available when the message is rendered. Omit for a silent tool step.
+     */
+    public function withMessage(string $message): self
+    {
+        $self = clone $this;
+        $self['message'] = $message;
 
         return $self;
     }

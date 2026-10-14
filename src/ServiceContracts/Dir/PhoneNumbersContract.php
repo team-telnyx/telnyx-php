@@ -7,7 +7,6 @@ namespace Telnyx\ServiceContracts\Dir;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\Document;
-use Telnyx\Dir\PhoneNumberBatches\DirPhoneNumberStatus;
 use Telnyx\Dir\PhoneNumbers\DirPhoneNumber;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberAddResponse;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberRemoveResponse;
@@ -25,7 +24,6 @@ interface PhoneNumbersContract
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
-     * @param DirPhoneNumberStatus|value-of<DirPhoneNumberStatus> $status filter by phone-number status
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<DirPhoneNumber>
@@ -36,7 +34,6 @@ interface PhoneNumbersContract
         string $dirID,
         int $pageNumber = 1,
         int $pageSize = 20,
-        DirPhoneNumberStatus|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 
@@ -61,7 +58,7 @@ interface PhoneNumbersContract
      * @api
      *
      * @param string $dirID The DIR id. Lowercase UUID.
-     * @param list<string> $phoneNumbers
+     * @param list<string> $phoneNumbers The phone numbers to remove from this brand, in E.164 format, up to 100 per request. They must currently be attached to this brand.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

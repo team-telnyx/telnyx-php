@@ -55,7 +55,7 @@ final class EmbeddingsTest extends TestCase
             bucketName: 'Bucket Name',
             documentChunkOverlapSize: 512,
             documentChunkSize: 1024,
-            embeddingModel: 'thenlper/gte-large',
+            embeddingModel: 'intfloat/multilingual-e5-large',
             loader: 'default',
             idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );

@@ -8,7 +8,9 @@ use Telnyx\AI\Assistants\AssistantA2AAgent;
 use Telnyx\AI\Assistants\AssistantIntegration;
 use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantTool;
+use Telnyx\AI\Assistants\AvatarSettingsRequest;
 use Telnyx\AI\Assistants\ConversationFlowReq;
+use Telnyx\AI\Assistants\DelegationSettings;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
@@ -21,12 +23,14 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\WebsocketSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Updates the configuration of a specific assistant version. Can not update main version.
@@ -35,7 +39,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type AssistantA2AAgentShape from \Telnyx\AI\Assistants\AssistantA2AAgent
+ * @phpstan-import-type AvatarSettingsRequestShape from \Telnyx\AI\Assistants\AvatarSettingsRequest
  * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
+ * @phpstan-import-type DelegationSettingsShape from \Telnyx\AI\Assistants\DelegationSettings
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -50,12 +56,15 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type InferenceEmbeddingVoiceSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingVoiceSettings
+ * @phpstan-import-type WebsocketSettingsShape from \Telnyx\AI\Assistants\WebsocketSettings
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  *
  * @phpstan-type VersionUpdateParamsShape = array{
  *   assistantID: string,
  *   a2aAgents?: list<AssistantA2AAgent|AssistantA2AAgentShape>|null,
+ *   avatarSettings?: null|AvatarSettingsRequest|AvatarSettingsRequestShape,
  *   conversationFlow?: null|ConversationFlowReq|ConversationFlowReqShape,
+ *   delegationSettings?: null|DelegationSettings|DelegationSettingsShape,
  *   description?: string|null,
  *   dynamicVariables?: array<string,mixed>|null,
  *   dynamicVariablesWebhookTimeoutMs?: int|null,
@@ -83,6 +92,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
  *   versionName?: string|null,
  *   voiceSettings?: null|InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape,
+ *   websocketSettings?: null|WebsocketSettings|WebsocketSettingsShape,
  *   widgetSettings?: null|WidgetSettings|WidgetSettingsShape,
  * }
  */
@@ -104,6 +114,12 @@ final class VersionUpdateParams implements BaseModel
     public ?array $a2aAgents;
 
     /**
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     */
+    #[Optional('avatar_settings', nullable: true)]
+    public ?AvatarSettingsRequest $avatarSettings;
+
+    /**
      * Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -112,6 +128,12 @@ final class VersionUpdateParams implements BaseModel
      */
     #[Optional('conversation_flow')]
     public ?ConversationFlowReq $conversationFlow;
+
+    /**
+     * Splits the conversation between a frontend model that talks to the caller and a backend model that does the work. On the GPT-Live route the frontend model cannot call tools at all — when it needs something done it raises a delegation and waits. On the chat completion route the frontend keeps a single `delegate` tool that returns immediately, so the conversation carries on while the backend works. Either way the backend's answer is spoken as commentary or kept as silent context, depending on `speak_results`. Beta feature.
+     */
+    #[Optional('delegation_settings')]
+    public ?DelegationSettings $delegationSettings;
 
     #[Optional]
     public ?string $description;
@@ -253,6 +275,12 @@ final class VersionUpdateParams implements BaseModel
     public ?InferenceEmbeddingVoiceSettings $voiceSettings;
 
     /**
+     * Streams conversation and telephony events to a WebSocket server you host, and accepts messages injected back into the conversation. Telnyx opens the connection as a client, once per conversation. Delivery is best effort throughout: while the connection is down events are dropped rather than queued, and no socket failure is ever allowed to affect the call. Beta feature.
+     */
+    #[Optional('websocket_settings')]
+    public ?WebsocketSettings $websocketSettings;
+
+    /**
      * Configuration settings for the assistant's web widget.
      */
     #[Optional('widget_settings')]
@@ -282,8 +310,10 @@ final class VersionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|AvatarSettingsRequest|AvatarSettingsRequestShape|null $avatarSettings
      * @param list<AssistantA2AAgent|AssistantA2AAgentShape>|null $a2aAgents
      * @param ConversationFlowReq|ConversationFlowReqShape|null $conversationFlow
+     * @param DelegationSettings|DelegationSettingsShape|null $delegationSettings
      * @param array<string,mixed>|null $dynamicVariables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
      * @param ExternalLlmReq|ExternalLlmReqShape|null $externalLlm
@@ -302,12 +332,15 @@ final class VersionUpdateParams implements BaseModel
      * @param list<AssistantToolShape>|null $tools
      * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
      * @param InferenceEmbeddingVoiceSettings|InferenceEmbeddingVoiceSettingsShape|null $voiceSettings
+     * @param WebsocketSettings|WebsocketSettingsShape|null $websocketSettings
      * @param WidgetSettings|WidgetSettingsShape|null $widgetSettings
      */
     public static function with(
         string $assistantID,
+        Omitted|AvatarSettingsRequest|array|null $avatarSettings = Omitted::VALUE,
         ?array $a2aAgents = null,
         ConversationFlowReq|array|null $conversationFlow = null,
+        DelegationSettings|array|null $delegationSettings = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         ?int $dynamicVariablesWebhookTimeoutMs = null,
@@ -335,6 +368,7 @@ final class VersionUpdateParams implements BaseModel
         TranscriptionSettings|array|null $transcription = null,
         ?string $versionName = null,
         InferenceEmbeddingVoiceSettings|array|null $voiceSettings = null,
+        WebsocketSettings|array|null $websocketSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
     ): self {
         $self = new self;
@@ -342,7 +376,9 @@ final class VersionUpdateParams implements BaseModel
         $self['assistantID'] = $assistantID;
 
         null !== $a2aAgents && $self['a2aAgents'] = $a2aAgents;
+        Omitted::VALUE !== $avatarSettings && $self['avatarSettings'] = $avatarSettings;
         null !== $conversationFlow && $self['conversationFlow'] = $conversationFlow;
+        null !== $delegationSettings && $self['delegationSettings'] = $delegationSettings;
         null !== $description && $self['description'] = $description;
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
         null !== $dynamicVariablesWebhookTimeoutMs && $self['dynamicVariablesWebhookTimeoutMs'] = $dynamicVariablesWebhookTimeoutMs;
@@ -370,6 +406,7 @@ final class VersionUpdateParams implements BaseModel
         null !== $transcription && $self['transcription'] = $transcription;
         null !== $versionName && $self['versionName'] = $versionName;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
+        null !== $websocketSettings && $self['websocketSettings'] = $websocketSettings;
         null !== $widgetSettings && $self['widgetSettings'] = $widgetSettings;
 
         return $self;
@@ -397,6 +434,20 @@ final class VersionUpdateParams implements BaseModel
     }
 
     /**
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     *
+     * @param AvatarSettingsRequest|AvatarSettingsRequestShape|null $avatarSettings
+     */
+    public function withAvatarSettings(
+        AvatarSettingsRequest|array|null $avatarSettings
+    ): self {
+        $self = clone $this;
+        $self['avatarSettings'] = $avatarSettings;
+
+        return $self;
+    }
+
+    /**
      * Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -410,6 +461,20 @@ final class VersionUpdateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['conversationFlow'] = $conversationFlow;
+
+        return $self;
+    }
+
+    /**
+     * Splits the conversation between a frontend model that talks to the caller and a backend model that does the work. On the GPT-Live route the frontend model cannot call tools at all — when it needs something done it raises a delegation and waits. On the chat completion route the frontend keeps a single `delegate` tool that returns immediately, so the conversation carries on while the backend works. Either way the backend's answer is spoken as commentary or kept as silent context, depending on `speak_results`. Beta feature.
+     *
+     * @param DelegationSettings|DelegationSettingsShape $delegationSettings
+     */
+    public function withDelegationSettings(
+        DelegationSettings|array $delegationSettings
+    ): self {
+        $self = clone $this;
+        $self['delegationSettings'] = $delegationSettings;
 
         return $self;
     }
@@ -729,6 +794,20 @@ final class VersionUpdateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;
+
+        return $self;
+    }
+
+    /**
+     * Streams conversation and telephony events to a WebSocket server you host, and accepts messages injected back into the conversation. Telnyx opens the connection as a client, once per conversation. Delivery is best effort throughout: while the connection is down events are dropped rather than queued, and no socket failure is ever allowed to affect the call. Beta feature.
+     *
+     * @param WebsocketSettings|WebsocketSettingsShape $websocketSettings
+     */
+    public function withWebsocketSettings(
+        WebsocketSettings|array $websocketSettings
+    ): self {
+        $self = clone $this;
+        $self['websocketSettings'] = $websocketSettings;
 
         return $self;
     }

@@ -9,7 +9,6 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Dir\DirNewLoaParams\Signature;
 use Telnyx\Enterprises\Reputation\Loa\AgentInput;
 
 /**
@@ -22,12 +21,12 @@ use Telnyx\Enterprises\Reputation\Loa\AgentInput;
  * @see Telnyx\Services\DirService::newLoa()
  *
  * @phpstan-import-type AgentInputShape from \Telnyx\Enterprises\Reputation\Loa\AgentInput
- * @phpstan-import-type SignatureShape from \Telnyx\Dir\DirNewLoaParams\Signature
+ * @phpstan-import-type SignaturePayloadShape from \Telnyx\Dir\SignaturePayload
  *
  * @phpstan-type DirNewLoaParamsShape = array{
  *   phoneNumbers: list<string>,
  *   agent?: null|AgentInput|AgentInputShape,
- *   signature?: null|Signature|SignatureShape,
+ *   signature?: null|SignaturePayload|SignaturePayloadShape,
  * }
  */
 final class DirNewLoaParams implements BaseModel
@@ -45,7 +44,7 @@ final class DirNewLoaParams implements BaseModel
     public array $phoneNumbers;
 
     /**
-     * Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
+     * Third-party reseller / partner managing the enterprise's phone numbers on its behalf, such as a call center (BPO) acting for a client. Omit when the enterprise manages its own numbers.
      */
     #[Optional]
     public ?AgentInput $agent;
@@ -54,7 +53,7 @@ final class DirNewLoaParams implements BaseModel
      * Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
      */
     #[Optional]
-    public ?Signature $signature;
+    public ?SignaturePayload $signature;
 
     /**
      * `new DirNewLoaParams()` is missing required properties by the API.
@@ -82,12 +81,12 @@ final class DirNewLoaParams implements BaseModel
      *
      * @param list<string> $phoneNumbers
      * @param AgentInput|AgentInputShape|null $agent
-     * @param Signature|SignatureShape|null $signature
+     * @param SignaturePayload|SignaturePayloadShape|null $signature
      */
     public static function with(
         array $phoneNumbers,
         AgentInput|array|null $agent = null,
-        Signature|array|null $signature = null,
+        SignaturePayload|array|null $signature = null,
     ): self {
         $self = new self;
 
@@ -113,7 +112,7 @@ final class DirNewLoaParams implements BaseModel
     }
 
     /**
-     * Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
+     * Third-party reseller / partner managing the enterprise's phone numbers on its behalf, such as a call center (BPO) acting for a client. Omit when the enterprise manages its own numbers.
      *
      * @param AgentInput|AgentInputShape $agent
      */
@@ -128,9 +127,9 @@ final class DirNewLoaParams implements BaseModel
     /**
      * Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
      *
-     * @param Signature|SignatureShape $signature
+     * @param SignaturePayload|SignaturePayloadShape $signature
      */
-    public function withSignature(Signature|array $signature): self
+    public function withSignature(SignaturePayload|array $signature): self
     {
         $self = clone $this;
         $self['signature'] = $signature;

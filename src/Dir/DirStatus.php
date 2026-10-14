@@ -15,6 +15,7 @@ namespace Telnyx\Dir;
  * - `expired` - verification expired; customer must resubmit.
  * - `infringement_claimed` - a trademark/impersonation claim is open against this DIR.
  * - `permanently_rejected` - terminal; cannot be resubmitted.
+ * - `delete_requested` - you have requested deletion; the DIR still exists and Telnyx is completing the removal (de-registration and cleanup). A verified DIR keeps serving its branded identity, and keeps billing, until the removal finishes.
  */
 enum DirStatus: string
 {
@@ -37,4 +38,6 @@ enum DirStatus: string
     case INFRINGEMENT_CLAIMED = 'infringement_claimed';
 
     case PERMANENTLY_REJECTED = 'permanently_rejected';
+
+    case DELETE_REQUESTED = 'delete_requested';
 }

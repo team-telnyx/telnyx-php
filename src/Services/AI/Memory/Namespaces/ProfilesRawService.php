@@ -11,6 +11,8 @@ use Telnyx\AI\Memory\Namespaces\Profiles\ProfileIngestParams;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileIngestResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileListParams;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileListResponse;
+use Telnyx\AI\Memory\Namespaces\Profiles\ProfilePreviewParams;
+use Telnyx\AI\Memory\Namespaces\Profiles\ProfilePreviewResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRecallParams;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRecallResponse;
 use Telnyx\AI\Memory\Namespaces\Profiles\ProfileRememberParams;
@@ -149,6 +151,47 @@ final class ProfilesRawService implements ProfilesRawContract
             body: array_diff_key($body, array_flip(['namespace'])),
             options: $options,
             convert: ProfileIngestResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Try a candidate note on one profile and see how that profile's summary would read under it, without saving the note and without touching the stored summary. Composes the same source query the apply path (`PATCH /ai/memory/namespaces/{namespace}/settings`) would use, so a preview cannot drift from what saving the note would produce. Reads the candidate alone -- the namespace's current instructions and the profile's stored summary are neither read nor replaced. Bounded at 120 seconds: the summary is generated on the spot rather than read from a stored one. Nothing about the request is stored.
+     *
+     * @param string $profileID path param: The profile: your identifier for the user, caller or agent this memory is about
+     * @param array{
+     *   namespace: string, instructions?: string|null
+     * }|ProfilePreviewParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ProfilePreviewResponse>
+     *
+     * @throws APIException
+     */
+    public function preview(
+        string $profileID,
+        array|ProfilePreviewParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ProfilePreviewParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+        $namespace = $parsed['namespace'];
+        unset($parsed['namespace']);
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: [
+                'ai/memory/namespaces/%1$s/profiles/%2$s/summary/preview',
+                $namespace,
+                $profileID,
+            ],
+            body: (object) array_diff_key($parsed, array_flip(['namespace'])),
+            options: $options,
+            convert: ProfilePreviewResponse::class,
         );
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Tools;
 
+use Telnyx\AI\Tools\PayToolParams\ValidCardType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -13,9 +14,11 @@ use Telnyx\Core\Omitted;
 /**
  * @phpstan-type PayToolParamsShape = array{
  *   connectorName: string,
+ *   connectorParameters?: array<string,mixed>|null,
  *   currency?: string|null,
  *   description?: string|null,
  *   paymentMethod?: string|null,
+ *   validCardTypes?: list<ValidCardType|value-of<ValidCardType>>|null,
  * }
  */
 final class PayToolParams implements BaseModel
@@ -30,13 +33,21 @@ final class PayToolParams implements BaseModel
     public string $connectorName;
 
     /**
+     * Custom key/value parameters forwarded to the pay connector as `parameters` in the processor request. String values may use `{{dynamic_variable}}` templating, resolved per call.
+     *
+     * @var array<string,mixed>|null $connectorParameters
+     */
+    #[Optional('connector_parameters', map: 'mixed')]
+    public ?array $connectorParameters;
+
+    /**
      * Default currency for payments processed by this tool.
      */
     #[Optional]
     public ?string $currency;
 
     /**
-     * Optional description of the pay tool that will be passed to the assistant.
+     * Description of the pay tool shown to the assistant so it knows when to call the tool. Not sent to the payment connector — the per-call `description` argument the assistant passes is what reaches the processor.
      */
     #[Optional(nullable: true)]
     public ?string $description;
@@ -46,6 +57,14 @@ final class PayToolParams implements BaseModel
      */
     #[Optional('payment_method')]
     public ?string $paymentMethod;
+
+    /**
+     * Restricts accepted card numbers to the listed card types. When the caller enters a card number that does not match one of the listed types, Pay treats the input as invalid and re-prompts for the card number.
+     *
+     * @var list<value-of<ValidCardType>>|null $validCardTypes
+     */
+    #[Optional('valid_card_types', list: ValidCardType::class)]
+    public ?array $validCardTypes;
 
     /**
      * `new PayToolParams()` is missing required properties by the API.
@@ -70,20 +89,27 @@ final class PayToolParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param array<string,mixed>|null $connectorParameters
+     * @param list<ValidCardType|value-of<ValidCardType>>|null $validCardTypes
      */
     public static function with(
         string $connectorName,
         string|Omitted|null $description = Omitted::VALUE,
+        ?array $connectorParameters = null,
         ?string $currency = null,
         ?string $paymentMethod = null,
+        ?array $validCardTypes = null,
     ): self {
         $self = new self;
 
         $self['connectorName'] = $connectorName;
 
+        null !== $connectorParameters && $self['connectorParameters'] = $connectorParameters;
         null !== $currency && $self['currency'] = $currency;
         Omitted::VALUE !== $description && $self['description'] = $description;
         null !== $paymentMethod && $self['paymentMethod'] = $paymentMethod;
+        null !== $validCardTypes && $self['validCardTypes'] = $validCardTypes;
 
         return $self;
     }
@@ -100,6 +126,19 @@ final class PayToolParams implements BaseModel
     }
 
     /**
+     * Custom key/value parameters forwarded to the pay connector as `parameters` in the processor request. String values may use `{{dynamic_variable}}` templating, resolved per call.
+     *
+     * @param array<string,mixed> $connectorParameters
+     */
+    public function withConnectorParameters(array $connectorParameters): self
+    {
+        $self = clone $this;
+        $self['connectorParameters'] = $connectorParameters;
+
+        return $self;
+    }
+
+    /**
      * Default currency for payments processed by this tool.
      */
     public function withCurrency(string $currency): self
@@ -111,7 +150,7 @@ final class PayToolParams implements BaseModel
     }
 
     /**
-     * Optional description of the pay tool that will be passed to the assistant.
+     * Description of the pay tool shown to the assistant so it knows when to call the tool. Not sent to the payment connector — the per-call `description` argument the assistant passes is what reaches the processor.
      */
     public function withDescription(?string $description): self
     {
@@ -128,6 +167,19 @@ final class PayToolParams implements BaseModel
     {
         $self = clone $this;
         $self['paymentMethod'] = $paymentMethod;
+
+        return $self;
+    }
+
+    /**
+     * Restricts accepted card numbers to the listed card types. When the caller enters a card number that does not match one of the listed types, Pay treats the input as invalid and re-prompts for the card number.
+     *
+     * @param list<ValidCardType|value-of<ValidCardType>> $validCardTypes
+     */
+    public function withValidCardTypes(array $validCardTypes): self
+    {
+        $self = clone $this;
+        $self['validCardTypes'] = $validCardTypes;
 
         return $self;
     }

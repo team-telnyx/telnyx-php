@@ -4,16 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\TranscriptionSettings\Challenger;
+use Telnyx\AI\Assistants\TranscriptionSettings\FallbackModel;
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
+ * @phpstan-import-type ChallengerShape from \Telnyx\AI\Assistants\TranscriptionSettings\Challenger
+ * @phpstan-import-type FallbackModelShape from \Telnyx\AI\Assistants\TranscriptionSettings\FallbackModel
  * @phpstan-import-type TranscriptionSettingsConfigShape from \Telnyx\AI\Assistants\TranscriptionSettingsConfig
  *
  * @phpstan-type TranscriptionSettingsShape = array{
  *   apiKeyRef?: string|null,
+ *   challenger?: null|Challenger|ChallengerShape,
+ *   fallbackModels?: list<FallbackModel|FallbackModelShape>|null,
  *   language?: string|null,
  *   model?: null|Model|value-of<Model>,
  *   region?: string|null,
@@ -30,6 +37,20 @@ final class TranscriptionSettings implements BaseModel
      */
     #[Optional('api_key_ref')]
     public ?string $apiKeyRef;
+
+    /**
+     * A second speech-to-text model that transcribes alongside `transcription.model`, and the rule that decides which transcript the assistant uses.
+     */
+    #[Optional(nullable: true)]
+    public ?Challenger $challenger;
+
+    /**
+     * Up to 3 streaming models that take over transcription, in this order, when the model in use fails, at the start of a call or mid-call. `model` must be a streaming model too, and must support `language` alongside other models. On update, a list replaces the stored one: omit the field to keep the stored list, or send `null` or `[]` to remove it. When an update changes `model` or `language`, stored fallbacks that no longer fit are removed without an error. Can't be combined with `challenger`, the language booster; to replace a stored language booster, send `challenger: null` in the same request.
+     *
+     * @var list<FallbackModel>|null $fallbackModels
+     */
+    #[Optional('fallback_models', list: FallbackModel::class, nullable: true)]
+    public ?array $fallbackModels;
 
     /**
      * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`. For `soniox/stt-rt-v4` and `soniox/stt-rt-v5`, `auto` omits the language hint and lets Soniox auto-detect; ISO 639-1 codes (e.g. `en`, `es`) bias detection toward that language; `settings.language_hints` can pin multiple languages at once instead. For `humain/realtime`, supported values are `ar`, `en`, `codeswitch` (Arabic/English code-switching), and `auto` (resolves server-side to code-switching). Unlike other models, `humain/realtime` does not fall back to `auto` when `language` is omitted — omitting it applies `en` instead. For `reson8/turns`, supported values are `auto` (or unset) for automatic language detection, and the language codes `nl`, `en`, `fr`, `fy`, `de`, `it`, `pl`, `pt`, `es`, and `sv` to fix the transcription language. For `cohere/ar-stt`, supported values are `ar` and `en`; unlike other models, this model does not auto-detect and defaults to `ar` when `language` is omitted.
@@ -52,6 +73,7 @@ final class TranscriptionSettings implements BaseModel
      * - `humain/realtime` is a streaming model with native Arabic and Arabic/English code-switching support.
      * - `reson8/turns` is a turn-based streaming model covering 10 European languages with automatic language detection.
      * - `cohere/ar-stt` is a non-streaming Arabic and English transcription model.
+     * - `telnyx/basira` is a non-streaming Arabic transcription model.
      *
      * @var value-of<Model>|null $model
      */
@@ -77,10 +99,14 @@ final class TranscriptionSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|Challenger|ChallengerShape|null $challenger
+     * @param list<FallbackModel|FallbackModelShape>|Omitted|null $fallbackModels
      * @param Model|value-of<Model>|null $model
      * @param TranscriptionSettingsConfig|TranscriptionSettingsConfigShape|null $settings
      */
     public static function with(
+        Omitted|Challenger|array|null $challenger = Omitted::VALUE,
+        array|Omitted|null $fallbackModels = Omitted::VALUE,
         ?string $apiKeyRef = null,
         ?string $language = null,
         Model|string|null $model = null,
@@ -90,6 +116,8 @@ final class TranscriptionSettings implements BaseModel
         $self = new self;
 
         null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
+        Omitted::VALUE !== $challenger && $self['challenger'] = $challenger;
+        Omitted::VALUE !== $fallbackModels && $self['fallbackModels'] = $fallbackModels;
         null !== $language && $self['language'] = $language;
         null !== $model && $self['model'] = $model;
         null !== $region && $self['region'] = $region;
@@ -105,6 +133,32 @@ final class TranscriptionSettings implements BaseModel
     {
         $self = clone $this;
         $self['apiKeyRef'] = $apiKeyRef;
+
+        return $self;
+    }
+
+    /**
+     * A second speech-to-text model that transcribes alongside `transcription.model`, and the rule that decides which transcript the assistant uses.
+     *
+     * @param Challenger|ChallengerShape|null $challenger
+     */
+    public function withChallenger(Challenger|array|null $challenger): self
+    {
+        $self = clone $this;
+        $self['challenger'] = $challenger;
+
+        return $self;
+    }
+
+    /**
+     * Up to 3 streaming models that take over transcription, in this order, when the model in use fails, at the start of a call or mid-call. `model` must be a streaming model too, and must support `language` alongside other models. On update, a list replaces the stored one: omit the field to keep the stored list, or send `null` or `[]` to remove it. When an update changes `model` or `language`, stored fallbacks that no longer fit are removed without an error. Can't be combined with `challenger`, the language booster; to replace a stored language booster, send `challenger: null` in the same request.
+     *
+     * @param list<FallbackModel|FallbackModelShape>|null $fallbackModels
+     */
+    public function withFallbackModels(?array $fallbackModels): self
+    {
+        $self = clone $this;
+        $self['fallbackModels'] = $fallbackModels;
 
         return $self;
     }
@@ -135,6 +189,7 @@ final class TranscriptionSettings implements BaseModel
      * - `humain/realtime` is a streaming model with native Arabic and Arabic/English code-switching support.
      * - `reson8/turns` is a turn-based streaming model covering 10 European languages with automatic language detection.
      * - `cohere/ar-stt` is a non-streaming Arabic and English transcription model.
+     * - `telnyx/basira` is a non-streaming Arabic transcription model.
      *
      * @param Model|value-of<Model> $model
      */

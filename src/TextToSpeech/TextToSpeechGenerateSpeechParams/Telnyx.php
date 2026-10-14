@@ -46,7 +46,7 @@ final class Telnyx implements BaseModel
     public ?int $samplingRate;
 
     /**
-     * Voice speed multiplier. Applies to all models except `Bayan` and `Sukhan`, which don't support it. Range: 0.5 to 2.0.
+     * Voice speed multiplier. Telnyx `Ultra` voices accept values from 0.6 to 1.5 — requests outside that range are rejected by the synthesis engine. `KokoroTTS` and `Qwen3TTS` accept the field but do not apply it. `Bayan` and `Sukhan` don't support it.
      */
     #[Optional('voice_speed')]
     public ?float $voiceSpeed;
@@ -123,7 +123,7 @@ final class Telnyx implements BaseModel
     }
 
     /**
-     * Voice speed multiplier. Applies to all models except `Bayan` and `Sukhan`, which don't support it. Range: 0.5 to 2.0.
+     * Voice speed multiplier. Telnyx `Ultra` voices accept values from 0.6 to 1.5 — requests outside that range are rejected by the synthesis engine. `KokoroTTS` and `Qwen3TTS` accept the field but do not apply it. `Bayan` and `Sukhan` don't support it.
      */
     public function withVoiceSpeed(float $voiceSpeed): self
     {

@@ -31,7 +31,7 @@ interface TexmlContract
      * @api
      *
      * @param string $connectionID the ID of the TeXML connection to use for the call
-     * @param string $aiAssistantID the ID of the AI assistant to use for the call
+     * @param string $aiAssistantID The ID of the AI assistant to use for the call. Telnyx attempts to warm up this assistant before the call is placed and starts it automatically when the called party answers.
      * @param string $from The phone number of the party initiating the call. Phone numbers are formatted with a `+` and country code.
      * @param string $to The phone number of the called party. Phone numbers are formatted with a `+` and country code.
      * @param array<string,string> $aiAssistantDynamicVariables key-value map of dynamic variables to pass to the AI assistant

@@ -11,6 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
 use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariableSchema;
+use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariablesMode;
 
 /**
  * Creates a Liquid email template. Variables are auto-extracted when omitted.
@@ -28,6 +29,7 @@ use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariableSchema;
  *   textBody?: string|null,
  *   variableSchema?: array<string,VariableSchema|VariableSchemaShape>|null,
  *   variables?: list<string>|null,
+ *   variablesMode?: null|VariablesMode|value-of<VariablesMode>,
  *   idempotencyKey?: string|null,
  * }
  */
@@ -82,12 +84,20 @@ final class EmailTemplateCreateParams implements BaseModel
     public ?array $variableSchema;
 
     /**
-     * Template variables. Auto-extracted from subject/body fields when absent.
+     * Persisted variable names. In `automatic` mode a non-null array is rejected; in `explicit` mode this is the exact manual array and each item is limited to 255 Unicode code points.
      *
      * @var list<string>|null $variables
      */
-    #[Optional(list: 'string')]
+    #[Optional(list: 'string', nullable: true)]
     public ?array $variables;
+
+    /**
+     * Controls how `variables` is maintained. If both fields are omitted (or `variables` is null), the template uses `automatic` mode and extracts variable names from the effective subject, HTML body, and text body. A non-null `variables` array with no mode selects `explicit`. `automatic` rejects a simultaneous non-null array; `explicit` requires a non-null array, including valid `[]`, and preserves its exact order, duplicates, and string contents.
+     *
+     * @var value-of<VariablesMode>|null $variablesMode
+     */
+    #[Optional('variables_mode', enum: VariablesMode::class)]
+    public ?string $variablesMode;
 
     #[Optional]
     public ?string $idempotencyKey;
@@ -117,7 +127,8 @@ final class EmailTemplateCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Omitted|array<string,VariableSchema|VariableSchemaShape>|null $variableSchema
-     * @param list<string>|null $variables
+     * @param list<string>|Omitted|null $variables
+     * @param VariablesMode|value-of<VariablesMode>|null $variablesMode
      */
     public static function with(
         string $name,
@@ -125,9 +136,10 @@ final class EmailTemplateCreateParams implements BaseModel
         string|Omitted|null $subject = Omitted::VALUE,
         string|Omitted|null $textBody = Omitted::VALUE,
         Omitted|array|null $variableSchema = Omitted::VALUE,
+        array|Omitted|null $variables = Omitted::VALUE,
         ?bool $autoescape = null,
         ?bool $strictVariables = null,
-        ?array $variables = null,
+        VariablesMode|string|null $variablesMode = null,
         ?string $idempotencyKey = null,
     ): self {
         $self = new self;
@@ -140,7 +152,8 @@ final class EmailTemplateCreateParams implements BaseModel
         Omitted::VALUE !== $subject && $self['subject'] = $subject;
         Omitted::VALUE !== $textBody && $self['textBody'] = $textBody;
         Omitted::VALUE !== $variableSchema && $self['variableSchema'] = $variableSchema;
-        null !== $variables && $self['variables'] = $variables;
+        Omitted::VALUE !== $variables && $self['variables'] = $variables;
+        null !== $variablesMode && $self['variablesMode'] = $variablesMode;
         null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
@@ -226,14 +239,27 @@ final class EmailTemplateCreateParams implements BaseModel
     }
 
     /**
-     * Template variables. Auto-extracted from subject/body fields when absent.
+     * Persisted variable names. In `automatic` mode a non-null array is rejected; in `explicit` mode this is the exact manual array and each item is limited to 255 Unicode code points.
      *
-     * @param list<string> $variables
+     * @param list<string>|null $variables
      */
-    public function withVariables(array $variables): self
+    public function withVariables(?array $variables): self
     {
         $self = clone $this;
         $self['variables'] = $variables;
+
+        return $self;
+    }
+
+    /**
+     * Controls how `variables` is maintained. If both fields are omitted (or `variables` is null), the template uses `automatic` mode and extracts variable names from the effective subject, HTML body, and text body. A non-null `variables` array with no mode selects `explicit`. `automatic` rejects a simultaneous non-null array; `explicit` requires a non-null array, including valid `[]`, and preserves its exact order, duplicates, and string contents.
+     *
+     * @param VariablesMode|value-of<VariablesMode> $variablesMode
+     */
+    public function withVariablesMode(VariablesMode|string $variablesMode): self
+    {
+        $self = clone $this;
+        $self['variablesMode'] = $variablesMode;
 
         return $self;
     }

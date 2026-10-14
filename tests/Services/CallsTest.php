@@ -82,6 +82,7 @@ final class CallsTest extends TestCase
                 'initialSilenceMillis' => 1000,
                 'maximumNumberOfWords' => 1000,
                 'maximumWordLengthMillis' => 2000,
+                'promptEndTimeoutMillis' => 5000,
                 'silenceThreshold' => 512,
                 'totalAnalysisTimeMillis' => 5000,
             ],
@@ -130,6 +131,9 @@ final class CallsTest extends TestCase
                         ],
                         'type' => 'book_appointment',
                     ],
+                ],
+                'transcription' => [
+                    'language' => 'language', 'model' => 'distil-whisper/distil-large-v2',
                 ],
                 'voiceSettings' => [
                     'voice' => 'voice',
@@ -191,7 +195,11 @@ final class CallsTest extends TestCase
                         'language' => 'en-US',
                         'speechModel' => 'nova-3',
                         'transcriptionEngine' => 'Deepgram',
-                        'transcriptionEngineConfig' => ['transcription_model' => 'bar'],
+                        'transcriptionEngineConfig' => [
+                            'eagerEotThreshold' => 0.5,
+                            'eotThreshold' => 0.5,
+                            'interimResults' => true,
+                        ],
                         'transcriptionProvider' => 'Deepgram',
                         'ttsProvider' => 'telnyx',
                         'voice' => 'Telnyx.Ultra.alloy',
@@ -204,9 +212,9 @@ final class CallsTest extends TestCase
                 'structuredProvider' => ['voice_id' => 'bar', 'model_id' => 'bar'],
                 'transcriptionEngine' => 'Google',
                 'transcriptionEngineConfig' => [
-                    'transcription_model' => 'bar',
-                    'interim_results' => 'bar',
-                    'keywords_boosting' => 'bar',
+                    'eagerEotThreshold' => 0.5,
+                    'eotThreshold' => 0.5,
+                    'interimResults' => true,
                 ],
                 'ttsProvider' => 'telnyx',
                 'voice' => 'Telnyx.KokoroTTS.af',

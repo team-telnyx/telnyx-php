@@ -71,15 +71,19 @@ final class CallsRawService implements CallsRawContract
      *
      * Dial a number or SIP URI from a given connection. A successful response will include a `call_leg_id` which can be used to correlate the command with subsequent webhooks.
      *
+     * To place the call with an AI assistant from the start, include `assistant.id` and any per-call overrides in the `assistant` object; Telnyx attempts to warm up the assistant before placing the call and starts it automatically when the called party answers.
+     *
      * **Expected Webhooks:**
      *
      * - `call.initiated`
      * - `call.answered` or `call.hangup`
+     * - `call.conversation.created` when the requested assistant conversation is created, or `call.conversation.start_failed` when it could not be started after the called party answered
      * - `call.hold` and `call.unhold` if the call is held/unheld
      * - `call.machine.detection.ended` if `answering_machine_detection` was requested
      * - `call.machine.greeting.ended` if `answering_machine_detection` was requested to detect the end of machine greeting
      * - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
      * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
+     * - `call.machine.premium.call_screening.detected` if `answering_machine_detection=premium_ios_call_screening_detection` was requested and an Apple Call Screening tone was detected
      * - `call.deepfake_detection.result` if `deepfake_detection` was enabled
      * - `call.deepfake_detection.error` if `deepfake_detection` was enabled and an error occurred
      * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
@@ -90,7 +94,7 @@ final class CallsRawService implements CallsRawContract
      *   connectionID: string,
      *   from: string,
      *   to: ToShape,
-     *   answeringMachineDetection?: AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
+     *   answeringMachineDetection?: value-of<AnsweringMachineDetection>,
      *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape,
      *   assistant?: CallAssistantRequest|CallAssistantRequestShape,
      *   audioURL?: string,

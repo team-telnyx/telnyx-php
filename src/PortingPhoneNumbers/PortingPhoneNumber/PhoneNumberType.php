@@ -15,7 +15,11 @@ enum PhoneNumberType: string
 
     case MOBILE = 'mobile';
 
+    case MULTIPURPOSE = 'multipurpose';
+
     case NATIONAL = 'national';
+
+    case OTHER = 'other';
 
     case SHARED_COST = 'shared_cost';
 

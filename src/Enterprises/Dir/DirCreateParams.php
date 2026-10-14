@@ -9,6 +9,8 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
+use Telnyx\Dir\BpoAuthorizationInput;
 use Telnyx\Dir\Document;
 
 /**
@@ -22,12 +24,17 @@ use Telnyx\Dir\Document;
  * - `certify_brand_is_accurate`, `certify_no_shaft_content`, `certify_ip_ownership` MUST all be `true`.
  *
  * **Failure modes**
- * - `422` - validation error; `errors[].source.pointer` names the offending field.
- * - `403` - Branded Calling not activated on this enterprise (see `POST /enterprises/{id}/branded_calling`).
+ * - `400` - validation error; `errors[].source.pointer` names the offending field.
+ * - `400` - a certification field is not `true`.
+ * - `400` - Branded Calling not activated on this enterprise (see `POST /enterprises/{id}/branded_calling`).
+ * - `400` - the enterprise is a BPO enterprise (`role_type` `bpo`), which cannot own a DIR.
+ * - `400` - a `bpo_authorizations` entry is not an approved BPO enterprise in your account, or its `loa_document_id` could not be validated.
  * - `404` - enterprise does not exist or does not belong to your account.
+ * - `503` - the document check is temporarily unavailable; retry.
  *
  * @see Telnyx\Services\Enterprises\DirService::create()
  *
+ * @phpstan-import-type BpoAuthorizationInputShape from \Telnyx\Dir\BpoAuthorizationInput
  * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  *
  * @phpstan-type DirCreateParamsShape = array{
@@ -38,9 +45,11 @@ use Telnyx\Dir\Document;
  *   certifyIPOwnership: bool,
  *   certifyNoShaftContent: bool,
  *   displayName: string,
+ *   bpoAuthorizations?: list<BpoAuthorizationInput|BpoAuthorizationInputShape>|null,
  *   documents?: list<Document|DocumentShape>|null,
  *   logoURL?: string|null,
  *   reselling?: bool|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class DirCreateParams implements BaseModel
@@ -70,7 +79,7 @@ final class DirCreateParams implements BaseModel
     public array $callReasons;
 
     /**
-     * Must be `true`.
+     * Certification that the DIR information is accurate. Must be `true` for the DIR to be submitted for vetting.
      */
     #[Required('certify_brand_is_accurate')]
     public bool $certifyBrandIsAccurate;
@@ -94,6 +103,14 @@ final class DirCreateParams implements BaseModel
     public string $displayName;
 
     /**
+     * Optional. Approved BPO (Business Process Outsourcer) accounts on your organization authorized to place branded calls for this DIR, each with the signed Letter of Authorization the Brand Owner granted it. Each authorization starts `pending` and takes effect only after an admin reviews its Letter of Authorization. Omit or send an empty list to authorize no BPO on this DIR. Maximum 10.
+     *
+     * @var list<BpoAuthorizationInput>|null $bpoAuthorizations
+     */
+    #[Optional('bpo_authorizations', list: BpoAuthorizationInput::class)]
+    public ?array $bpoAuthorizations;
+
+    /**
      * Supporting documents. Each `document_id` may appear at most once on a DIR.
      *
      * @var list<Document>|null $documents
@@ -112,6 +129,12 @@ final class DirCreateParams implements BaseModel
      */
     #[Optional]
     public ?bool $reselling;
+
+    /**
+     * Optional `https://` URL that receives webhook notifications when this DIR's compliance review completes (rejection outcomes include structured rejection reasons). Maximum 2048 characters.
+     */
+    #[Optional('webhook_url', nullable: true)]
+    public ?string $webhookURL;
 
     /**
      * `new DirCreateParams()` is missing required properties by the API.
@@ -153,6 +176,7 @@ final class DirCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $callReasons
+     * @param list<BpoAuthorizationInput|BpoAuthorizationInputShape>|null $bpoAuthorizations
      * @param list<Document|DocumentShape>|null $documents
      */
     public static function with(
@@ -163,6 +187,8 @@ final class DirCreateParams implements BaseModel
         bool $certifyIPOwnership,
         bool $certifyNoShaftContent,
         string $displayName,
+        string|Omitted|null $webhookURL = Omitted::VALUE,
+        ?array $bpoAuthorizations = null,
         ?array $documents = null,
         ?string $logoURL = null,
         ?bool $reselling = null,
@@ -177,9 +203,11 @@ final class DirCreateParams implements BaseModel
         $self['certifyNoShaftContent'] = $certifyNoShaftContent;
         $self['displayName'] = $displayName;
 
+        null !== $bpoAuthorizations && $self['bpoAuthorizations'] = $bpoAuthorizations;
         null !== $documents && $self['documents'] = $documents;
         null !== $logoURL && $self['logoURL'] = $logoURL;
         null !== $reselling && $self['reselling'] = $reselling;
+        Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }
@@ -220,7 +248,7 @@ final class DirCreateParams implements BaseModel
     }
 
     /**
-     * Must be `true`.
+     * Certification that the DIR information is accurate. Must be `true` for the DIR to be submitted for vetting.
      */
     public function withCertifyBrandIsAccurate(
         bool $certifyBrandIsAccurate
@@ -265,6 +293,19 @@ final class DirCreateParams implements BaseModel
     }
 
     /**
+     * Optional. Approved BPO (Business Process Outsourcer) accounts on your organization authorized to place branded calls for this DIR, each with the signed Letter of Authorization the Brand Owner granted it. Each authorization starts `pending` and takes effect only after an admin reviews its Letter of Authorization. Omit or send an empty list to authorize no BPO on this DIR. Maximum 10.
+     *
+     * @param list<BpoAuthorizationInput|BpoAuthorizationInputShape> $bpoAuthorizations
+     */
+    public function withBpoAuthorizations(array $bpoAuthorizations): self
+    {
+        $self = clone $this;
+        $self['bpoAuthorizations'] = $bpoAuthorizations;
+
+        return $self;
+    }
+
+    /**
      * Supporting documents. Each `document_id` may appear at most once on a DIR.
      *
      * @param list<Document|DocumentShape> $documents
@@ -295,6 +336,17 @@ final class DirCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['reselling'] = $reselling;
+
+        return $self;
+    }
+
+    /**
+     * Optional `https://` URL that receives webhook notifications when this DIR's compliance review completes (rejection outcomes include structured rejection reasons). Maximum 2048 characters.
+     */
+    public function withWebhookURL(?string $webhookURL): self
+    {
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

@@ -41,13 +41,13 @@ interface ReferencesContract
      * @param int $slot Path param: Reference slot, counting from 1. Business references are slots 1 and 2, matching the order they were sent in the `business_references` array; the financial reference is slot 1. Every reference returned by the submit and list endpoints carries its own `ref_type` and `slot`, so you do not need to derive them.
      * @param string $dirID Path param: The DIR id. Lowercase UUID.
      * @param RefType|value-of<RefType> $refType path param: Reference type to address
-     * @param string $email body param: Reference contact email address
-     * @param string $fullName body param: Full name of the reference contact
-     * @param string|Omitted|null $jobTitle body param: Job title of the reference contact
-     * @param string|Omitted|null $organization body param: Organization the reference contact belongs to
-     * @param string $phoneE164 Body param: Reference phone number in E.164 format.
+     * @param string $email Body param: The reference's email address. We email them scheduling and dial-in instructions before we call, so use an address they check.
+     * @param string $fullName body param: The full name of the person we should contact as your reference
+     * @param string|Omitted|null $jobTitle body param: The reference contact's job title, for example CFO or Owner
+     * @param string|Omitted|null $organization body param: The name of the organization the reference contact works for
+     * @param string $phoneE164 Body param: The reference's phone number in E.164 format, for example +14155550123. We call this number during their local business hours.
      * @param string|Omitted|null $relationshipToRegistrant body param: How the reference contact is related to the registering business
-     * @param string $timezone body param: IANA timezone id for the reference
+     * @param string $timezone Body param: The reference's IANA time zone, for example America/New_York. We only call during their local 8am to 9pm hours, which is why we need it.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

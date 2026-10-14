@@ -6,6 +6,7 @@ namespace Telnyx\Calls;
 
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
+use Telnyx\Calls\Actions\ConversationRelayTranscriptionEngineConfig;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\SonioxVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -24,13 +25,14 @@ use Telnyx\XaiVoiceSettings;
  * Language-specific TTS and transcription settings for Conversation Relay.
  *
  * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\ConversationRelayLanguage\VoiceSettings
+ * @phpstan-import-type ConversationRelayTranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ConversationRelayTranscriptionEngineConfig
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\ConversationRelayLanguage\VoiceSettings
  *
  * @phpstan-type ConversationRelayLanguageShape = array{
  *   language: string,
  *   speechModel?: string|null,
  *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
- *   transcriptionEngineConfig?: array<string,mixed>|null,
+ *   transcriptionEngineConfig?: null|ConversationRelayTranscriptionEngineConfig|ConversationRelayTranscriptionEngineConfigShape,
  *   transcriptionProvider?: string|null,
  *   ttsProvider?: string|null,
  *   voice?: string|null,
@@ -63,12 +65,10 @@ final class ConversationRelayLanguage implements BaseModel
     public ?string $transcriptionEngine;
 
     /**
-     * Engine-specific transcription settings for Conversation Relay. This accepts the same provider-specific options used by the Call Transcription Start command, such as `transcription_model`, without requiring the engine discriminator to be repeated inside this object.
-     *
-     * @var array<string,mixed>|null $transcriptionEngineConfig
+     * Engine-specific transcription settings for Conversation Relay. This accepts the same provider-specific options used by the Call Transcription Start command, such as `transcription_model`, without requiring the engine discriminator to be repeated inside this object. With Deepgram Flux (`deepgram/flux`), `interim_results`, `eot_threshold` and `eager_eot_threshold` control the interim prompts and the `eagerEndOfTurn` and `turnResumed` frames sent to your WebSocket server.
      */
-    #[Optional('transcription_engine_config', map: 'mixed')]
-    public ?array $transcriptionEngineConfig;
+    #[Optional('transcription_engine_config')]
+    public ?ConversationRelayTranscriptionEngineConfig $transcriptionEngineConfig;
 
     /**
      * Conversation Relay transcription provider name. Prefer `transcription_engine` when configuring speech-to-text.
@@ -121,14 +121,14 @@ final class ConversationRelayLanguage implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
-     * @param array<string,mixed>|null $transcriptionEngineConfig
+     * @param ConversationRelayTranscriptionEngineConfig|ConversationRelayTranscriptionEngineConfigShape|null $transcriptionEngineConfig
      * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         string $language,
         ?string $speechModel = null,
         TranscriptionEngine|string|null $transcriptionEngine = null,
-        ?array $transcriptionEngineConfig = null,
+        ConversationRelayTranscriptionEngineConfig|array|null $transcriptionEngineConfig = null,
         ?string $transcriptionProvider = null,
         ?string $ttsProvider = null,
         ?string $voice = null,
@@ -186,12 +186,12 @@ final class ConversationRelayLanguage implements BaseModel
     }
 
     /**
-     * Engine-specific transcription settings for Conversation Relay. This accepts the same provider-specific options used by the Call Transcription Start command, such as `transcription_model`, without requiring the engine discriminator to be repeated inside this object.
+     * Engine-specific transcription settings for Conversation Relay. This accepts the same provider-specific options used by the Call Transcription Start command, such as `transcription_model`, without requiring the engine discriminator to be repeated inside this object. With Deepgram Flux (`deepgram/flux`), `interim_results`, `eot_threshold` and `eager_eot_threshold` control the interim prompts and the `eagerEndOfTurn` and `turnResumed` frames sent to your WebSocket server.
      *
-     * @param array<string,mixed> $transcriptionEngineConfig
+     * @param ConversationRelayTranscriptionEngineConfig|ConversationRelayTranscriptionEngineConfigShape $transcriptionEngineConfig
      */
     public function withTranscriptionEngineConfig(
-        array $transcriptionEngineConfig
+        ConversationRelayTranscriptionEngineConfig|array $transcriptionEngineConfig
     ): self {
         $self = clone $this;
         $self['transcriptionEngineConfig'] = $transcriptionEngineConfig;
