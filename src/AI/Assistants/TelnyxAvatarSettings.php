@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\TelnyxAvatarSettings\AvatarID;
 use Telnyx\AI\Assistants\TelnyxAvatarSettings\BackgroundID;
 use Telnyx\AI\Assistants\TelnyxAvatarSettings\Model;
+use Telnyx\AI\Avatars\AvatarID;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+ * **Beta:** Configuration for the Telnyx open-source avatar provider. Use one of the six stock avatars or an organization-owned custom avatar returned by the Avatars API. Supported backgrounds are office, studio, and reception.
  *
  * @phpstan-type TelnyxAvatarSettingsShape = array{
- *   avatarID: AvatarID|value-of<AvatarID>,
+ *   avatarID: string|AvatarID|value-of<AvatarID>,
  *   backgroundID: BackgroundID|value-of<BackgroundID>,
  *   model: Model|value-of<Model>,
  *   provider: 'telnyx',
@@ -35,9 +35,9 @@ final class TelnyxAvatarSettings implements BaseModel
     public string $provider = 'telnyx';
 
     /**
-     * The Telnyx avatar to render.
+     * The Telnyx stock avatar or organization-owned custom avatar to render.
      *
-     * @var value-of<AvatarID> $avatarID
+     * @var string|value-of<AvatarID> $avatarID
      */
     #[Required('avatar_id', enum: AvatarID::class)]
     public string $avatarID;
@@ -85,7 +85,7 @@ final class TelnyxAvatarSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AvatarID|value-of<AvatarID> $avatarID
+     * @param string|AvatarID|value-of<AvatarID> $avatarID
      * @param BackgroundID|value-of<BackgroundID> $backgroundID
      * @param Model|value-of<Model> $model
      */
@@ -104,9 +104,9 @@ final class TelnyxAvatarSettings implements BaseModel
     }
 
     /**
-     * The Telnyx avatar to render.
+     * The Telnyx stock avatar or organization-owned custom avatar to render.
      *
-     * @param AvatarID|value-of<AvatarID> $avatarID
+     * @param string|AvatarID|value-of<AvatarID> $avatarID
      */
     public function withAvatarID(AvatarID|string $avatarID): self
     {

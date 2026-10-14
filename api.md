@@ -592,6 +592,15 @@ Methods:
 - <code title="get /ai/memory/namespaces/{namespace}/settings">$client->ai->memory->namespaces->settings-><a href="./src/Services/AI/Memory/Namespaces/SettingsService.php">list</a>(...$params)</code>
 - <code title="patch /ai/memory/namespaces/{namespace}/settings">$client->ai->memory->namespaces->settings-><a href="./src/Services/AI/Memory/Namespaces/SettingsService.php">patchAll</a>(...$params)</code>
 
+## Avatars
+
+Methods:
+
+- <code title="post /ai/avatars">$client->ai->avatars-><a href="./src/Services/AI/AvatarsService.php">create</a>(...$params)</code>
+- <code title="get /ai/avatars/{avatar_id}">$client->ai->avatars-><a href="./src/Services/AI/AvatarsService.php">retrieve</a>(...$params)</code>
+- <code title="patch /ai/avatars/{avatar_id}">$client->ai->avatars-><a href="./src/Services/AI/AvatarsService.php">update</a>(...$params)</code>
+- <code title="get /ai/avatars">$client->ai->avatars-><a href="./src/Services/AI/AvatarsService.php">list</a>(...$params)</code>
+
 # AuditEvents
 
 Methods:

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AvatarSettingsRequest;
+namespace Telnyx\AI\Avatars;
 
 /**
- * The Telnyx avatar to render.
+ * Stable identifier of a Telnyx stock avatar or an organization-owned custom avatar. Custom avatar IDs are returned by the Avatars API and use the `avatar_` prefix.
  */
 enum AvatarID: string
 {

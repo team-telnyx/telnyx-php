@@ -15,6 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type WarmTransferAcceptanceShape = array{
  *   enabled?: bool|null,
  *   endUserTargetContextMode?: null|EndUserTargetContextMode|value-of<EndUserTargetContextMode>,
+ *   requireAcceptance?: bool|null,
  * }
  */
 final class WarmTransferAcceptance implements BaseModel
@@ -39,6 +40,12 @@ final class WarmTransferAcceptance implements BaseModel
     )]
     public ?string $endUserTargetContextMode;
 
+    /**
+     * Fail closed when the acceptance consult cannot run. Off by default: if the consult cannot be set up for any reason — including where acceptance is unavailable at all (`gather_using_ai`, Conversation Relay or web calls, a conference, or additional invited participants) — the transfer degrades to a plain warm transfer (the warm transfer message is played to the destination as audio and the calls are bridged anyway). Set to true to treat those paths as a decline instead: the destination is disconnected without being asked, the assistant returns to the caller, and no bridge happens without an acceptance. Only consult-setup failures are affected; the destination must still explicitly accept on every consult that does run.
+     */
+    #[Optional('require_acceptance')]
+    public ?bool $requireAcceptance;
+
     public function __construct()
     {
         $this->initialize();
@@ -54,11 +61,13 @@ final class WarmTransferAcceptance implements BaseModel
     public static function with(
         ?bool $enabled = null,
         EndUserTargetContextMode|string|null $endUserTargetContextMode = null,
+        ?bool $requireAcceptance = null,
     ): self {
         $self = new self;
 
         null !== $enabled && $self['enabled'] = $enabled;
         null !== $endUserTargetContextMode && $self['endUserTargetContextMode'] = $endUserTargetContextMode;
+        null !== $requireAcceptance && $self['requireAcceptance'] = $requireAcceptance;
 
         return $self;
     }
@@ -84,6 +93,17 @@ final class WarmTransferAcceptance implements BaseModel
     ): self {
         $self = clone $this;
         $self['endUserTargetContextMode'] = $endUserTargetContextMode;
+
+        return $self;
+    }
+
+    /**
+     * Fail closed when the acceptance consult cannot run. Off by default: if the consult cannot be set up for any reason — including where acceptance is unavailable at all (`gather_using_ai`, Conversation Relay or web calls, a conference, or additional invited participants) — the transfer degrades to a plain warm transfer (the warm transfer message is played to the destination as audio and the calls are bridged anyway). Set to true to treat those paths as a decline instead: the destination is disconnected without being asked, the assistant returns to the caller, and no bridge happens without an acceptance. Only consult-setup failures are affected; the destination must still explicitly accept on every consult that does run.
+     */
+    public function withRequireAcceptance(bool $requireAcceptance): self
+    {
+        $self = clone $this;
+        $self['requireAcceptance'] = $requireAcceptance;
 
         return $self;
     }

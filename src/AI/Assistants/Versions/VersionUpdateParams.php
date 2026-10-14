@@ -114,7 +114,7 @@ final class VersionUpdateParams implements BaseModel
     public ?array $a2aAgents;
 
     /**
-     * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. Use one of the six stock avatars or an organization-owned custom avatar returned by the Avatars API. Supported backgrounds are office, studio, and reception.
      */
     #[Optional('avatar_settings', nullable: true)]
     public ?AvatarSettingsRequest $avatarSettings;
@@ -434,7 +434,7 @@ final class VersionUpdateParams implements BaseModel
     }
 
     /**
-     * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. Use one of the six stock avatars or an organization-owned custom avatar returned by the Avatars API. Supported backgrounds are office, studio, and reception.
      *
      * @param AvatarSettingsRequest|AvatarSettingsRequestShape|null $avatarSettings
      */
