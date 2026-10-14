@@ -18,6 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\TelephonySettings\VoicemailDetection
  *
  * @phpstan-type TelephonySettingsShape = array{
+ *   conversationEndedFullHistory?: bool|null,
  *   defaultTexmlAppID?: string|null,
  *   disableDtmf?: bool|null,
  *   fallbackDestination?: string|null,
@@ -36,6 +37,12 @@ final class TelephonySettings implements BaseModel
 {
     /** @use SdkModel<TelephonySettingsShape> */
     use SdkModel;
+
+    /**
+     * When enabled, the `messages` array of the `call.conversation.ended` webhook contains the full conversation history in order: user and assistant turns, assistant tool calls (`tool_calls`), tool results (`role: tool` with `tool_call_id`), and informational `system` and `developer` entries. The assistant's instructions are never included. When disabled, `messages` contains only user and assistant text turns.
+     */
+    #[Optional('conversation_ended_full_history')]
+    public ?bool $conversationEndedFullHistory;
 
     /**
      * Default Texml App used for voice calls with your assistant. This will be created automatically on assistant creation.
@@ -127,6 +134,7 @@ final class TelephonySettings implements BaseModel
      * @param VoicemailDetection|VoicemailDetectionShape|null $voicemailDetection
      */
     public static function with(
+        ?bool $conversationEndedFullHistory = null,
         ?string $defaultTexmlAppID = null,
         ?bool $disableDtmf = null,
         ?string $fallbackDestination = null,
@@ -142,6 +150,7 @@ final class TelephonySettings implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $conversationEndedFullHistory && $self['conversationEndedFullHistory'] = $conversationEndedFullHistory;
         null !== $defaultTexmlAppID && $self['defaultTexmlAppID'] = $defaultTexmlAppID;
         null !== $disableDtmf && $self['disableDtmf'] = $disableDtmf;
         null !== $fallbackDestination && $self['fallbackDestination'] = $fallbackDestination;
@@ -154,6 +163,18 @@ final class TelephonySettings implements BaseModel
         null !== $userIdleReplySecs && $self['userIdleReplySecs'] = $userIdleReplySecs;
         null !== $userIdleTimeoutSecs && $self['userIdleTimeoutSecs'] = $userIdleTimeoutSecs;
         null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
+
+        return $self;
+    }
+
+    /**
+     * When enabled, the `messages` array of the `call.conversation.ended` webhook contains the full conversation history in order: user and assistant turns, assistant tool calls (`tool_calls`), tool results (`role: tool` with `tool_call_id`), and informational `system` and `developer` entries. The assistant's instructions are never included. When disabled, `messages` contains only user and assistant text turns.
+     */
+    public function withConversationEndedFullHistory(
+        bool $conversationEndedFullHistory
+    ): self {
+        $self = clone $this;
+        $self['conversationEndedFullHistory'] = $conversationEndedFullHistory;
 
         return $self;
     }

@@ -490,6 +490,7 @@ final class VersionsTest extends TestCase
             ],
             tags: ['string'],
             telephonySettings: [
+                'conversationEndedFullHistory' => true,
                 'defaultTexmlAppID' => 'default_texml_app_id',
                 'disableDtmf' => true,
                 'fallbackDestination' => 'fallback_destination',

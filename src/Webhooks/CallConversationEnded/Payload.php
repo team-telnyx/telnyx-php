@@ -9,8 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
 use Telnyx\Webhooks\CallConversationEnded\Payload\CallingPartyType;
+use Telnyx\Webhooks\CallConversationEnded\Payload\Message;
 
 /**
+ * @phpstan-import-type MessageShape from \Telnyx\Webhooks\CallConversationEnded\Payload\Message
+ *
  * @phpstan-type PayloadShape = array{
  *   assistantID?: string|null,
  *   callControlID?: string|null,
@@ -23,6 +26,7 @@ use Telnyx\Webhooks\CallConversationEnded\Payload\CallingPartyType;
  *   durationSec?: int|null,
  *   from?: string|null,
  *   llmModel?: string|null,
+ *   messages?: list<Message|MessageShape>|null,
  *   reason?: string|null,
  *   sttModel?: string|null,
  *   to?: string|null,
@@ -105,6 +109,14 @@ final class Payload implements BaseModel
     public ?string $llmModel;
 
     /**
+     * The conversation transcript, in order. By default it contains only `user` and `assistant` text turns. When the assistant's `telephony_settings.conversation_ended_full_history` is `true`, it contains the full conversation history, including assistant tool calls, tool results, and `system` and `developer` entries. Redacted when data retention is disabled for the account.
+     *
+     * @var list<Message>|null $messages
+     */
+    #[Optional(list: Message::class)]
+    public ?array $messages;
+
+    /**
      * Reason the conversation ended. For Conversation Relay, `customer_disconnect` indicates that the customer WebSocket disconnected.
      */
     #[Optional(nullable: true)]
@@ -151,6 +163,7 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CallingPartyType|value-of<CallingPartyType>|null $callingPartyType
+     * @param list<Message|MessageShape>|null $messages
      */
     public static function with(
         string|Omitted|null $reason = Omitted::VALUE,
@@ -165,6 +178,7 @@ final class Payload implements BaseModel
         ?int $durationSec = null,
         ?string $from = null,
         ?string $llmModel = null,
+        ?array $messages = null,
         ?string $sttModel = null,
         ?string $to = null,
         ?string $ttsModelID = null,
@@ -184,6 +198,7 @@ final class Payload implements BaseModel
         null !== $durationSec && $self['durationSec'] = $durationSec;
         null !== $from && $self['from'] = $from;
         null !== $llmModel && $self['llmModel'] = $llmModel;
+        null !== $messages && $self['messages'] = $messages;
         Omitted::VALUE !== $reason && $self['reason'] = $reason;
         null !== $sttModel && $self['sttModel'] = $sttModel;
         null !== $to && $self['to'] = $to;
@@ -314,6 +329,19 @@ final class Payload implements BaseModel
     {
         $self = clone $this;
         $self['llmModel'] = $llmModel;
+
+        return $self;
+    }
+
+    /**
+     * The conversation transcript, in order. By default it contains only `user` and `assistant` text turns. When the assistant's `telephony_settings.conversation_ended_full_history` is `true`, it contains the full conversation history, including assistant tool calls, tool results, and `system` and `developer` entries. Redacted when data retention is disabled for the account.
+     *
+     * @param list<Message|MessageShape> $messages
+     */
+    public function withMessages(array $messages): self
+    {
+        $self = clone $this;
+        $self['messages'] = $messages;
 
         return $self;
     }
