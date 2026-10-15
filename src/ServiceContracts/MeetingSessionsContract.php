@@ -10,7 +10,6 @@ use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSession
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSessionCameraImageURLSource;
 use Telnyx\MeetingSessions\MeetingSessionDeleteRecordingMediaResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetEventsResponse;
-use Telnyx\MeetingSessions\MeetingSessionGetRecordingsResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetTranscriptResponse;
 use Telnyx\MeetingSessions\MeetingSessionListParams\Status;
 use Telnyx\MeetingSessions\MeetingSessionListResponse;
@@ -146,19 +145,6 @@ interface MeetingSessionsContract
         int $limit = 100,
         RequestOptions|array|null $requestOptions = null,
     ): MeetingSessionGetEventsResponse;
-
-    /**
-     * @api
-     *
-     * @param string $id unique identifier for the meeting session
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function retrieveRecordings(
-        string $id,
-        RequestOptions|array|null $requestOptions = null
-    ): MeetingSessionGetRecordingsResponse;
 
     /**
      * @api

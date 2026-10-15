@@ -3206,7 +3206,6 @@ Methods:
 - <code title="delete /meeting_sessions/{id}">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">delete</a>(...$params)</code>
 - <code title="delete /meeting_sessions/{id}/recording_media">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">deleteRecordingMedia</a>(...$params)</code>
 - <code title="get /meeting_sessions/{id}/events">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">retrieveEvents</a>(...$params)</code>
-- <code title="get /meeting_sessions/{id}/recordings">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">retrieveRecordings</a>(...$params)</code>
 - <code title="get /meeting_sessions/{id}/transcript">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">retrieveTranscript</a>(...$params)</code>
 
 ## Actions

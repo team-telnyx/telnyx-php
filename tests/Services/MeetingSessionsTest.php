@@ -9,7 +9,6 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\MeetingSessions\MeetingSessionDeleteRecordingMediaResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetEventsResponse;
-use Telnyx\MeetingSessions\MeetingSessionGetRecordingsResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetTranscriptResponse;
 use Telnyx\MeetingSessions\MeetingSessionListResponse;
 use Telnyx\MeetingSessions\MeetingSessionResponse;
@@ -173,24 +172,6 @@ final class MeetingSessionsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MeetingSessionGetEventsResponse::class, $result);
-    }
-
-    #[Test]
-    public function testRetrieveRecordings(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->meetingSessions->retrieveRecordings(
-            'mtgsess_a1b2c3d4-e5f6-7890-abcd-ef1234567890'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            MeetingSessionGetRecordingsResponse::class,
-            $result
-        );
     }
 
     #[Test]

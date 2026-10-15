@@ -12,7 +12,6 @@ use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSession
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSessionCameraImageURLSource;
 use Telnyx\MeetingSessions\MeetingSessionDeleteRecordingMediaResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetEventsResponse;
-use Telnyx\MeetingSessions\MeetingSessionGetRecordingsResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetTranscriptResponse;
 use Telnyx\MeetingSessions\MeetingSessionListParams\Status;
 use Telnyx\MeetingSessions\MeetingSessionListResponse;
@@ -217,7 +216,7 @@ final class MeetingSessionsService implements MeetingSessionsContract
     /**
      * @api
      *
-     * Irreversibly requests deletion of the aggregate recording media for the session. The operation retains the Telnyx-local Meeting session, transcript segments, events, artifacts, and usage records. It is separate from `DELETE /meeting_sessions/{id}`, which stops or cancels participation without deleting the persisted session. A missing/foreign session returns 404; provider deletion failures return 502.
+     * Irreversibly requests deletion of the aggregate recording media for the session. The operation retains the Telnyx-local Meeting session, transcript segments, events, artifacts, and usage records. It is separate from `DELETE /meeting_sessions/{id}`, which stops or cancels participation without deleting the persisted session. A missing/foreign session returns 404; a deletion request whose outcome is unknown returns 502.
      *
      * @param string $id unique identifier for the meeting session
      * @param RequestOpts|null $requestOptions
@@ -256,26 +255,6 @@ final class MeetingSessionsService implements MeetingSessionsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveEvents($id, params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @api
-     *
-     * Returns recordings for a meeting session.
-     *
-     * @param string $id unique identifier for the meeting session
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function retrieveRecordings(
-        string $id,
-        RequestOptions|array|null $requestOptions = null
-    ): MeetingSessionGetRecordingsResponse {
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveRecordings($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

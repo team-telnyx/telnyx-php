@@ -19,7 +19,7 @@ use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
-use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
+use Telnyx\PhoneNumbers\Jobs\NumbersPhoneNumbersJob;
 use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\JobsRawContract;
@@ -78,7 +78,7 @@ final class JobsRawService implements JobsRawContract
      * }|JobListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumbersJob>>
+     * @return BaseResponse<DefaultFlatPagination<NumbersPhoneNumbersJob>>
      *
      * @throws APIException
      */
@@ -100,7 +100,7 @@ final class JobsRawService implements JobsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PhoneNumbersJob::class,
+            convert: NumbersPhoneNumbersJob::class,
             page: DefaultFlatPagination::class,
         );
     }
