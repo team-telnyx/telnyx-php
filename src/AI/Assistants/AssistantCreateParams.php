@@ -98,7 +98,7 @@ final class AssistantCreateParams implements BaseModel
     public ?array $a2aAgents;
 
     /**
-     * **Beta:** Configuration for the Telnyx open-source avatar provider. Use one of the six stock avatars or an organization-owned custom avatar returned by the Avatars API. Supported backgrounds are office, studio, and reception.
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. Use a stock avatar or an organization-owned custom avatar returned by the Avatars API. Discover the available stock catalog with GET /v2/ai/avatars and filter[avatar_type]=stock; follow meta.total_pages to load every page. Supported backgrounds are office, studio, and reception.
      */
     #[Optional('avatar_settings', nullable: true)]
     public ?AvatarSettingsRequest $avatarSettings;
@@ -415,7 +415,7 @@ final class AssistantCreateParams implements BaseModel
     }
 
     /**
-     * **Beta:** Configuration for the Telnyx open-source avatar provider. Use one of the six stock avatars or an organization-owned custom avatar returned by the Avatars API. Supported backgrounds are office, studio, and reception.
+     * **Beta:** Configuration for the Telnyx open-source avatar provider. Use a stock avatar or an organization-owned custom avatar returned by the Avatars API. Discover the available stock catalog with GET /v2/ai/avatars and filter[avatar_type]=stock; follow meta.total_pages to load every page. Supported backgrounds are office, studio, and reception.
      *
      * @param AvatarSettingsRequest|AvatarSettingsRequestShape|null $avatarSettings
      */
