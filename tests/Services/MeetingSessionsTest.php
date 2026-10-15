@@ -59,16 +59,10 @@ final class MeetingSessionsTest extends TestCase
             meetingURL: 'https://zoom.us/j/1234567890',
             assistant: [
                 'id' => 'asst_fake-uuid-1234',
-                'audioGate' => 'half_duplex',
-                'dynamicVariables' => [
-                    'candidate_name' => 'Ada Lovelace', 'role' => 'Staff Engineer',
-                ],
+                'audioGate' => 'full_duplex',
+                'avatar' => true,
+                'dynamicVariables' => ['foo' => 'string'],
                 'leaveOnEnd' => true,
-            ],
-            avatar: [
-                'apiKey' => 'fake_avatar_api_key_do_not_use',
-                'avatarID' => 'avatar_fake-001',
-                'provider' => 'anam',
             ],
             bargeIn: true,
             botName: 'Notetaker',

@@ -16,6 +16,7 @@ use Telnyx\MeetingSessions\MeetingSessionCreateParams\Assistant\AudioGate;
  * @phpstan-type AssistantShape = array{
  *   id: string,
  *   audioGate?: null|AudioGate|value-of<AudioGate>,
+ *   avatar?: bool|null,
  *   dynamicVariables?: array<string,string>|null,
  *   leaveOnEnd?: bool|null,
  * }
@@ -38,6 +39,12 @@ final class Assistant implements BaseModel
      */
     #[Optional('audio_gate', enum: AudioGate::class)]
     public ?string $audioGate;
+
+    /**
+     * Beta. Show the avatar configured on the assistant (its `avatar_settings`; see [AI Assistant avatars](/docs/inference/ai-assistants/avatars)) as the bot's camera, lip-synced to the assistant's own speech. The request carries no avatar ID or key: the assistant is read at creation and the request is rejected with 400 `invalid_request` if it has no Telnyx avatar configured. Supported on Google Meet, Zoom, Microsoft Teams and Webex; other platforms return 422 `unsupported_capability`. REST-only. Not echoed back on `assistant`; the session's top-level `avatar` and `avatar_state` fields report it instead. If the avatar fails, the session continues voice-only and `avatar_state` becomes `degraded`.
+     */
+    #[Optional]
+    public ?bool $avatar;
 
     /**
      * Per-conversation values for the [dynamic variables](/docs/inference/ai-assistants/dynamic-variables) used in the Assistant's instructions, greeting, or tools. Delivered before the Assistant's first utterance, so they resolve for the opening line as well as the rest of the conversation. At most 63 entries; keys 1-128 characters; values must be strings. The map is budgeted in aggregate at 1,047,552 bytes (1023 KiB) rather than capped per value. `streaming_audio`, `ai_assistant_streaming_audio` and `meeting_session_id` are reserved and rejected with `400 invalid_request` -- they toggle provider infrastructure or are set by the service rather than fill a prompt template.
@@ -83,6 +90,7 @@ final class Assistant implements BaseModel
     public static function with(
         string $id,
         AudioGate|string|null $audioGate = null,
+        ?bool $avatar = null,
         ?array $dynamicVariables = null,
         ?bool $leaveOnEnd = null,
     ): self {
@@ -91,6 +99,7 @@ final class Assistant implements BaseModel
         $self['id'] = $id;
 
         null !== $audioGate && $self['audioGate'] = $audioGate;
+        null !== $avatar && $self['avatar'] = $avatar;
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
         null !== $leaveOnEnd && $self['leaveOnEnd'] = $leaveOnEnd;
 
@@ -117,6 +126,17 @@ final class Assistant implements BaseModel
     {
         $self = clone $this;
         $self['audioGate'] = $audioGate;
+
+        return $self;
+    }
+
+    /**
+     * Beta. Show the avatar configured on the assistant (its `avatar_settings`; see [AI Assistant avatars](/docs/inference/ai-assistants/avatars)) as the bot's camera, lip-synced to the assistant's own speech. The request carries no avatar ID or key: the assistant is read at creation and the request is rejected with 400 `invalid_request` if it has no Telnyx avatar configured. Supported on Google Meet, Zoom, Microsoft Teams and Webex; other platforms return 422 `unsupported_capability`. REST-only. Not echoed back on `assistant`; the session's top-level `avatar` and `avatar_state` fields report it instead. If the avatar fails, the session continues voice-only and `avatar_state` becomes `degraded`.
+     */
+    public function withAvatar(bool $avatar): self
+    {
+        $self = clone $this;
+        $self['avatar'] = $avatar;
 
         return $self;
     }

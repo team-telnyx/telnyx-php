@@ -8,7 +8,6 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Omitted;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\Assistant;
-use Telnyx\MeetingSessions\MeetingSessionCreateParams\Avatar;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSessionCameraImageBase64Source;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSessionCameraImageURLSource;
 use Telnyx\MeetingSessions\MeetingSessionDeleteRecordingMediaResponse;
@@ -25,7 +24,6 @@ use Telnyx\Services\MeetingSessions\ArtifactsService;
 
 /**
  * @phpstan-import-type AssistantShape from \Telnyx\MeetingSessions\MeetingSessionCreateParams\Assistant
- * @phpstan-import-type AvatarShape from \Telnyx\MeetingSessions\MeetingSessionCreateParams\Avatar
  * @phpstan-import-type CameraImageShape from \Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -59,11 +57,10 @@ final class MeetingSessionsService implements MeetingSessionsContract
     /**
      * @api
      *
-     * Creates a new meeting session. When an idempotency_key is supplied in the request body, replay lookup is scoped to the authenticated account and compares only the key; the request payload is not fingerprinted or compared. If a session with that key already exists for the account, the existing session is replayed (200); otherwise a new session is created (201). Supports bring-your-own-key (BYOK) configuration. The session may enter asynchronous states (e.g. joining, waiting_for_admission) before becoming active. Optional `camera_image` input is write-only and applies only when no Avatar or Assistant webpage output takes precedence. An ignored URL is not fetched. An effective URL source is resolved before bot creation; neither the source URL nor image bytes are persisted, returned, or logged. Treat signed URLs as credentials.
+     * Creates a new meeting session. When an idempotency_key is supplied in the request body, replay lookup is scoped to the authenticated account and compares only the key; the request payload is not fingerprinted or compared. If a session with that key already exists for the account, the existing session is replayed (200); otherwise a new session is created (201). The session may enter asynchronous states (e.g. joining, waiting_for_admission) before becoming active. Optional `camera_image` input is write-only and applies only when no avatar or Assistant webpage output takes precedence. An ignored URL is not fetched. An effective URL source is resolved before bot creation; neither the source URL nor image bytes are persisted, returned, or logged. Treat signed URLs as credentials. With `assistant.avatar: true`, the assistant is read before the bot is created: an assistant without a Telnyx avatar configured is rejected with 400 `invalid_request` (message prefix `assistant_avatar_not_configured:`), an unknown assistant with 400 `invalid_request` (prefix `assistant_not_found:`), and a failed lookup with 503 `assistant_lookup_unavailable`; no bot is created in any of these cases.
      *
      * @param string $meetingURL the meeting URL the bot should join
      * @param Assistant|AssistantShape $assistant Attach a Telnyx AI Assistant to the session. Supply the Assistant's ID; the Meeting service connects it to the meeting directly. The Call Control connection, caller ID and loopback SIP URI previously required here have been removed and are now rejected as unknown fields.
-     * @param Avatar|AvatarShape $avatar request options for attaching a bring-your-own-key avatar to the session
      * @param bool $bargeIn When enabled, a human participant `speech_on` event interrupts and stops the current bot audio; it does not bypass admission or initiate speech. Assistant sessions reject `barge_in: true`.
      * @param string $botName Display name for the bot in the meeting. Defaults to "Meeting Bot".
      * @param CameraImageShape $cameraImage Write-only static camera-tile image for this session, not a native account or participant profile photo. Supply exactly one JPEG source. When effective, the image is used as the bot's static camera/video output; presentation varies by meeting platform and recording configuration and is not guaranteed in recordings. An effective Avatar or Assistant webpage output takes precedence, so this input is ignored and a URL source is not fetched.
@@ -71,7 +68,7 @@ final class MeetingSessionsService implements MeetingSessionsContract
      * @param string $idempotencyKey Client-supplied idempotency key to safely retry creation requests without duplicating sessions. Lookup is scoped to the authenticated account and compares the key only; the request payload is not fingerprinted or compared.
      * @param \DateTimeInterface $joinAt ISO-8601 timestamp in the future at which the bot should join. If omitted, the bot joins immediately.
      * @param array<string,mixed> $metadata Arbitrary key-value metadata attached to the session. The serialized JSON representation must not exceed 16384 characters at runtime.
-     * @param string $speakOnEnter Text the bot speaks when it enters the meeting. **Not spoken when an `assistant` is attached**: the value is accepted and echoed back on the session, but the assistant owns the voice and the line is never delivered, with no event reporting the omission. Use `chat_on_enter` to announce an assistant-backed bot.
+     * @param string $speakOnEnter Text the bot speaks when it enters the meeting. **Not spoken when an `assistant` is attached**: the value is accepted and echoed back on the session, but the assistant owns the voice and the line is never delivered, with no event reporting the omission. Use `chat_on_enter` to announce an assistant-backed bot. Rejected with 400 `invalid_request` when `assistant.avatar` is `true`.
      * @param bool $summarizeOnEnd if true, generate a summary artifact when the session ends
      * @param string $voice Session-default voice identifier used for `speak_on_enter` and ordinary speak actions. A voice supplied on an individual speak action overrides this default for that utterance.
      * @param string $webhookURL HTTPS endpoint to receive session lifecycle callbacks. Static validation requires HTTPS, rejects embedded credentials and blocked hosts, and enforces egress policy. Validation makes no network request to the endpoint.
@@ -82,7 +79,6 @@ final class MeetingSessionsService implements MeetingSessionsContract
     public function create(
         string $meetingURL,
         Assistant|array|null $assistant = null,
-        Avatar|array|null $avatar = null,
         bool $bargeIn = false,
         ?string $botName = null,
         MeetingSessionCameraImageBase64Source|array|MeetingSessionCameraImageURLSource|null $cameraImage = null,
@@ -100,7 +96,6 @@ final class MeetingSessionsService implements MeetingSessionsContract
             [
                 'meetingURL' => $meetingURL,
                 'assistant' => $assistant ?? Omitted::VALUE,
-                'avatar' => $avatar ?? Omitted::VALUE,
                 'bargeIn' => $bargeIn,
                 'botName' => $botName ?? Omitted::VALUE,
                 'cameraImage' => $cameraImage ?? Omitted::VALUE,
