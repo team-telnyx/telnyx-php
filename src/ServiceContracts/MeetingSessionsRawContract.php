@@ -9,7 +9,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams;
 use Telnyx\MeetingSessions\MeetingSessionDeleteRecordingMediaResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetEventsResponse;
-use Telnyx\MeetingSessions\MeetingSessionGetRecordingsResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetTranscriptResponse;
 use Telnyx\MeetingSessions\MeetingSessionListParams;
 use Telnyx\MeetingSessions\MeetingSessionListResponse;
@@ -131,21 +130,6 @@ interface MeetingSessionsRawContract
         string $id,
         array|MeetingSessionRetrieveEventsParams $params,
         RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
-     * @param string $id unique identifier for the meeting session
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<MeetingSessionGetRecordingsResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRecordings(
-        string $id,
-        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**

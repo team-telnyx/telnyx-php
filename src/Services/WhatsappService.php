@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\ServiceContracts\WhatsappContract;
 use Telnyx\Services\Whatsapp\BusinessAccountsService;
+use Telnyx\Services\Whatsapp\HostedSignupsService;
 use Telnyx\Services\Whatsapp\PhoneNumbersService;
 use Telnyx\Services\Whatsapp\SignupService;
 use Telnyx\Services\Whatsapp\TemplatesService;
@@ -45,6 +46,11 @@ final class WhatsappService implements WhatsappContract
     public SignupService $signup;
 
     /**
+     * @api
+     */
+    public HostedSignupsService $hostedSignups;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -55,5 +61,6 @@ final class WhatsappService implements WhatsappContract
         $this->phoneNumbers = new PhoneNumbersService($client);
         $this->userData = new UserDataService($client);
         $this->signup = new SignupService($client);
+        $this->hostedSignups = new HostedSignupsService($client);
     }
 }

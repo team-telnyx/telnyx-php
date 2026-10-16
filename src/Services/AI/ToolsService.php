@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\Tools\PayToolParams;
 use Telnyx\AI\Tools\SharedToolResponse;
 use Telnyx\AI\Tools\UpdateDynamicVariablesToolParams;
+use Telnyx\AI\Tools\VisionToolParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Omitted;
@@ -19,6 +20,7 @@ use Telnyx\ServiceContracts\AI\ToolsContract;
  *
  * @phpstan-import-type PayToolParamsShape from \Telnyx\AI\Tools\PayToolParams
  * @phpstan-import-type UpdateDynamicVariablesToolParamsShape from \Telnyx\AI\Tools\UpdateDynamicVariablesToolParams
+ * @phpstan-import-type VisionToolParamsShape from \Telnyx\AI\Tools\VisionToolParams
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ToolsService implements ToolsContract
@@ -51,6 +53,7 @@ final class ToolsService implements ToolsContract
      * @param array<string,mixed> $retrieval Body param
      * @param int $timeoutMs Body param
      * @param UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape $updateDynamicVariables body param: Configuration for an update_dynamic_variables tool
+     * @param VisionToolParams|VisionToolParamsShape $vision Body param
      * @param array<string,mixed> $webhook Body param
      * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
@@ -68,6 +71,7 @@ final class ToolsService implements ToolsContract
         ?array $retrieval = null,
         int $timeoutMs = 5000,
         UpdateDynamicVariablesToolParams|array|null $updateDynamicVariables = null,
+        VisionToolParams|array|null $vision = null,
         ?array $webhook = null,
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
@@ -84,6 +88,7 @@ final class ToolsService implements ToolsContract
                 'retrieval' => $retrieval ?? Omitted::VALUE,
                 'timeoutMs' => $timeoutMs,
                 'updateDynamicVariables' => $updateDynamicVariables ?? Omitted::VALUE,
+                'vision' => $vision ?? Omitted::VALUE,
                 'webhook' => $webhook ?? Omitted::VALUE,
                 'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
@@ -129,6 +134,7 @@ final class ToolsService implements ToolsContract
      * @param PayToolParams|PayToolParamsShape $pay
      * @param array<string,mixed> $retrieval
      * @param UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape $updateDynamicVariables configuration for an update_dynamic_variables tool
+     * @param VisionToolParams|VisionToolParamsShape $vision
      * @param array<string,mixed> $webhook
      * @param RequestOpts|null $requestOptions
      *
@@ -146,6 +152,7 @@ final class ToolsService implements ToolsContract
         ?int $timeoutMs = null,
         ?string $type = null,
         UpdateDynamicVariablesToolParams|array|null $updateDynamicVariables = null,
+        VisionToolParams|array|null $vision = null,
         ?array $webhook = null,
         RequestOptions|array|null $requestOptions = null,
     ): SharedToolResponse {
@@ -161,6 +168,7 @@ final class ToolsService implements ToolsContract
                 'timeoutMs' => $timeoutMs ?? Omitted::VALUE,
                 'type' => $type ?? Omitted::VALUE,
                 'updateDynamicVariables' => $updateDynamicVariables ?? Omitted::VALUE,
+                'vision' => $vision ?? Omitted::VALUE,
                 'webhook' => $webhook ?? Omitted::VALUE,
             ],
             static fn ($value) => Omitted::VALUE !== $value,

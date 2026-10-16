@@ -82,6 +82,7 @@ final class ToolsTest extends TestCase
                     ],
                 ],
             ],
+            vision: ['maxFrameAgeSecs' => 1],
             webhook: ['foo' => 'bar'],
             idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );

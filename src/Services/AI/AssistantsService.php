@@ -143,7 +143,7 @@ final class AssistantsService implements AssistantsContract
      * @param string $instructions Body param: System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param string $name Body param
      * @param list<AssistantA2AAgent|AssistantA2AAgentShape> $a2aAgents Body param: A2A agents this assistant can delegate to. Tools are not stored here: at the start of every conversation each agent's card is fetched and one tool is derived per skill the card advertises, named `a2a_<name>_<skill_id>`. The following limits are not enforced when the assistant is saved, and anything past them is dropped when the conversation starts: 64 agents per assistant, 64 skills per card, 128 derived tools per assistant, and a 6 second budget for all card fetches combined. An agent whose card cannot be fetched costs the assistant that capability for the conversation; it does not fail the call.
-     * @param Omitted|AvatarSettingsRequest|AvatarSettingsRequestShape|null $avatarSettings Body param: **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     * @param Omitted|AvatarSettingsRequest|AvatarSettingsRequestShape|null $avatarSettings Body param: **Beta:** Configuration for the Telnyx open-source avatar provider. Use a stock avatar or an organization-owned custom avatar returned by the Avatars API. Discover the available stock catalog with GET /v2/ai/avatars and filter[avatar_type]=stock; follow meta.total_pages to load every page. Supported backgrounds are office, studio, and reception.
      * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow Body param: Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -303,11 +303,11 @@ final class AssistantsService implements AssistantsContract
     /**
      * @api
      *
-     * Updates the specified AI assistant's attributes and returns the updated assistant. The request can also control how the change is promoted across assistant versions.
+     * Updates the specified AI assistant's attributes and returns the updated assistant. The request can also control how the change is promoted across assistant versions. Every update saves a new version, and an assistant keeps at most 10 versions: once it has more, the oldest versions are permanently deleted, except the main version and any version referenced by a traffic distribution rule.
      *
      * @param string $assistantID unique identifier of the assistant
      * @param list<AssistantA2AAgent|AssistantA2AAgentShape> $a2aAgents A2A agents this assistant can delegate to. Tools are not stored here: at the start of every conversation each agent's card is fetched and one tool is derived per skill the card advertises, named `a2a_<name>_<skill_id>`. The following limits are not enforced when the assistant is saved, and anything past them is dropped when the conversation starts: 64 agents per assistant, 64 skills per card, 128 derived tools per assistant, and a 6 second budget for all card fetches combined. An agent whose card cannot be fetched costs the assistant that capability for the conversation; it does not fail the call. Omit this field to leave the assistant's agents unchanged; send an empty array to remove them all.
-     * @param Omitted|AvatarSettingsRequest|AvatarSettingsRequestShape|null $avatarSettings **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+     * @param Omitted|AvatarSettingsRequest|AvatarSettingsRequestShape|null $avatarSettings **Beta:** Configuration for the Telnyx open-source avatar provider. Use a stock avatar or an organization-owned custom avatar returned by the Avatars API. Discover the available stock catalog with GET /v2/ai/avatars and filter[avatar_type]=stock; follow meta.total_pages to load every page. Supported backgrounds are office, studio, and reception.
      * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation

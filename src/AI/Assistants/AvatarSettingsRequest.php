@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\AvatarSettingsRequest\AvatarID;
 use Telnyx\AI\Assistants\AvatarSettingsRequest\BackgroundID;
 use Telnyx\AI\Assistants\AvatarSettingsRequest\Model;
 use Telnyx\Core\Attributes\Required;
@@ -12,10 +11,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * **Beta:** Configuration for the Telnyx open-source avatar provider. The launch catalog supports six avatars and office, studio, or reception backgrounds.
+ * **Beta:** Configuration for the Telnyx open-source avatar provider. Use a stock avatar or an organization-owned custom avatar returned by the Avatars API. Discover the available stock catalog with GET /v2/ai/avatars and filter[avatar_type]=stock; follow meta.total_pages to load every page. Supported backgrounds are office, studio, and reception.
  *
  * @phpstan-type AvatarSettingsRequestShape = array{
- *   avatarID: AvatarID|value-of<AvatarID>,
+ *   avatarID: string,
  *   backgroundID: BackgroundID|value-of<BackgroundID>,
  *   model: Model|value-of<Model>,
  *   provider: 'telnyx',
@@ -35,11 +34,9 @@ final class AvatarSettingsRequest implements BaseModel
     public string $provider = 'telnyx';
 
     /**
-     * The Telnyx avatar to render.
-     *
-     * @var value-of<AvatarID> $avatarID
+     * The Telnyx stock avatar or organization-owned custom avatar to render.
      */
-    #[Required('avatar_id', enum: AvatarID::class)]
+    #[Required('avatar_id')]
     public string $avatarID;
 
     /**
@@ -85,14 +82,13 @@ final class AvatarSettingsRequest implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AvatarID|value-of<AvatarID> $avatarID
      * @param BackgroundID|value-of<BackgroundID> $backgroundID
      * @param Model|value-of<Model> $model
      */
     public static function with(
-        AvatarID|string $avatarID,
+        string $avatarID,
         BackgroundID|string $backgroundID,
-        Model|string $model,
+        Model|string $model
     ): self {
         $self = new self;
 
@@ -104,11 +100,9 @@ final class AvatarSettingsRequest implements BaseModel
     }
 
     /**
-     * The Telnyx avatar to render.
-     *
-     * @param AvatarID|value-of<AvatarID> $avatarID
+     * The Telnyx stock avatar or organization-owned custom avatar to render.
      */
-    public function withAvatarID(AvatarID|string $avatarID): self
+    public function withAvatarID(string $avatarID): self
     {
         $self = clone $this;
         $self['avatarID'] = $avatarID;
