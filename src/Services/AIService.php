@@ -16,6 +16,7 @@ use Telnyx\ServiceContracts\AIContract;
 use Telnyx\Services\AI\AnthropicService;
 use Telnyx\Services\AI\AssistantsService;
 use Telnyx\Services\AI\AudioService;
+use Telnyx\Services\AI\AvatarsService;
 use Telnyx\Services\AI\ChatService;
 use Telnyx\Services\AI\ClustersService;
 use Telnyx\Services\AI\CollectionsService;
@@ -127,6 +128,11 @@ final class AIService implements AIContract
     public MemoryService $memory;
 
     /**
+     * @api
+     */
+    public AvatarsService $avatars;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -149,6 +155,7 @@ final class AIService implements AIContract
         $this->knowledge = new KnowledgeService($client);
         $this->typesafe = new TypesafeService($client);
         $this->memory = new MemoryService($client);
+        $this->avatars = new AvatarsService($client);
     }
 
     /**

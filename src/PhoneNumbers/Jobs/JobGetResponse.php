@@ -9,10 +9,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type PhoneNumbersJobShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob
+ * @phpstan-import-type NumbersPhoneNumbersJobShape from \Telnyx\PhoneNumbers\Jobs\NumbersPhoneNumbersJob
  *
  * @phpstan-type JobGetResponseShape = array{
- *   data?: null|PhoneNumbersJob|PhoneNumbersJobShape
+ *   data?: null|NumbersPhoneNumbersJob|NumbersPhoneNumbersJobShape
  * }
  */
 final class JobGetResponse implements BaseModel
@@ -21,7 +21,7 @@ final class JobGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?PhoneNumbersJob $data;
+    public ?NumbersPhoneNumbersJob $data;
 
     public function __construct()
     {
@@ -33,9 +33,9 @@ final class JobGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumbersJob|PhoneNumbersJobShape|null $data
+     * @param NumbersPhoneNumbersJob|NumbersPhoneNumbersJobShape|null $data
      */
-    public static function with(PhoneNumbersJob|array|null $data = null): self
+    public static function with(NumbersPhoneNumbersJob|array|null $data = null): self
     {
         $self = new self;
 
@@ -45,9 +45,9 @@ final class JobGetResponse implements BaseModel
     }
 
     /**
-     * @param PhoneNumbersJob|PhoneNumbersJobShape $data
+     * @param NumbersPhoneNumbersJob|NumbersPhoneNumbersJobShape $data
      */
-    public function withData(PhoneNumbersJob|array $data): self
+    public function withData(NumbersPhoneNumbersJob|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

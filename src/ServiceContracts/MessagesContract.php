@@ -18,12 +18,12 @@ use Telnyx\Messages\MessageSendParams\Encoding;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
+use Telnyx\Messages\MessageWhatsappParams\WhatsappMessage;
 use Telnyx\Messages\MessageWhatsappResponse;
-use Telnyx\Messages\WhatsappMessageContent;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type WhatsappMessageContentShape from \Telnyx\Messages\WhatsappMessageContent
+ * @phpstan-import-type WhatsappMessageShape from \Telnyx\Messages\MessageWhatsappParams\WhatsappMessage
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface MessagesContract
@@ -322,8 +322,8 @@ interface MessagesContract
      * @api
      *
      * @param string $from Phone number in +E.164 format associated with Whatsapp account
-     * @param string $to Phone number in +E.164 format
-     * @param WhatsappMessageContent|WhatsappMessageContentShape $whatsappMessage
+     * @param string $to Recipient phone number in +E.164 format, or the business-scoped user ID (BSUID) of a WhatsApp user who hides their phone number, for example `US.13491208655302741918`. Authentication templates cannot be sent to a BSUID.
+     * @param WhatsappMessage|WhatsappMessageShape $whatsappMessage
      * @param string $messagingProfileID Messaging profile ID - required if the 'from' number is not SMS-enabled
      * @param \Telnyx\Messages\MessageWhatsappParams\Type|value-of<\Telnyx\Messages\MessageWhatsappParams\Type> $type Message type - must be set to "WHATSAPP"
      * @param string $webhookURL the URL where webhooks related to this message will be sent
@@ -334,7 +334,7 @@ interface MessagesContract
     public function whatsapp(
         string $from,
         string $to,
-        WhatsappMessageContent|array $whatsappMessage,
+        WhatsappMessage|array $whatsappMessage,
         ?string $messagingProfileID = null,
         \Telnyx\Messages\MessageWhatsappParams\Type|string|null $type = null,
         ?string $webhookURL = null,

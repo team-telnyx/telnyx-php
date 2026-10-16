@@ -9,7 +9,6 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\MeetingSessions\MeetingSessionDeleteRecordingMediaResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetEventsResponse;
-use Telnyx\MeetingSessions\MeetingSessionGetRecordingsResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetTranscriptResponse;
 use Telnyx\MeetingSessions\MeetingSessionListResponse;
 use Telnyx\MeetingSessions\MeetingSessionResponse;
@@ -59,16 +58,10 @@ final class MeetingSessionsTest extends TestCase
             meetingURL: 'https://zoom.us/j/1234567890',
             assistant: [
                 'id' => 'asst_fake-uuid-1234',
-                'audioGate' => 'half_duplex',
-                'dynamicVariables' => [
-                    'candidate_name' => 'Ada Lovelace', 'role' => 'Staff Engineer',
-                ],
+                'audioGate' => 'full_duplex',
+                'avatar' => true,
+                'dynamicVariables' => ['foo' => 'string'],
                 'leaveOnEnd' => true,
-            ],
-            avatar: [
-                'apiKey' => 'fake_avatar_api_key_do_not_use',
-                'avatarID' => 'avatar_fake-001',
-                'provider' => 'anam',
             ],
             bargeIn: true,
             botName: 'Notetaker',
@@ -179,24 +172,6 @@ final class MeetingSessionsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MeetingSessionGetEventsResponse::class, $result);
-    }
-
-    #[Test]
-    public function testRetrieveRecordings(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->meetingSessions->retrieveRecordings(
-            'mtgsess_a1b2c3d4-e5f6-7890-abcd-ef1234567890'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            MeetingSessionGetRecordingsResponse::class,
-            $result
-        );
     }
 
     #[Test]

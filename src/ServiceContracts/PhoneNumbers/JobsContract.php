@@ -13,7 +13,7 @@ use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
-use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
+use Telnyx\PhoneNumbers\Jobs\NumbersPhoneNumbersJob;
 use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
 use Telnyx\RequestOptions;
 
@@ -45,7 +45,7 @@ interface JobsContract
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PhoneNumbersJob>
+     * @return DefaultFlatPagination<NumbersPhoneNumbersJob>
      *
      * @throws APIException
      */

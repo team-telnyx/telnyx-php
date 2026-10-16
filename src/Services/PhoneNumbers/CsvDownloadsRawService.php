@@ -37,7 +37,9 @@ final class CsvDownloadsRawService implements CsvDownloadsRawContract
      * Starts generation of a CSV export for phone numbers matching the supplied filters. The `csv_format` parameter selects the output format, and the response contains the resulting download record.
      *
      * @param array{
-     *   csvFormat?: CsvFormat|value-of<CsvFormat>, filter?: Filter|FilterShape
+     *   csvFormat?: CsvFormat|value-of<CsvFormat>,
+     *   filter?: Filter|FilterShape,
+     *   includeManagedAccounts?: bool,
      * }|CsvDownloadCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -58,7 +60,13 @@ final class CsvDownloadsRawService implements CsvDownloadsRawContract
         return $this->client->request(
             method: 'post',
             path: 'phone_numbers/csv_downloads',
-            query: Util::array_transform_keys($parsed, ['csvFormat' => 'csv_format']),
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'csvFormat' => 'csv_format',
+                    'includeManagedAccounts' => 'include_managed_accounts',
+                ],
+            ),
             options: $options,
             convert: CsvDownloadNewResponse::class,
         );

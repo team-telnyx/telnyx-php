@@ -24,6 +24,7 @@ interface CsvDownloadsContract
      *
      * @param CsvFormat|value-of<CsvFormat> $csvFormat Which format to use when generating the CSV file. The default for backwards compatibility is 'V1'
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
+     * @param bool $includeManagedAccounts When true, the CSV includes phone numbers from all managed accounts in addition to the requesting account's own numbers. Only applies to V2 format; ignored for V1. The export appends `user_id` and `email` columns identifying the account that owns each number. When a filter is provided, it applies to the combined set of numbers. Requires access to managed accounts; requests without that access are rejected.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -31,6 +32,7 @@ interface CsvDownloadsContract
     public function create(
         CsvFormat|string $csvFormat = 'V1',
         Filter|array|null $filter = null,
+        bool $includeManagedAccounts = false,
         RequestOptions|array|null $requestOptions = null,
     ): CsvDownloadNewResponse;
 

@@ -16,6 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-import-type PayToolParamsShape from \Telnyx\AI\Tools\PayToolParams
  * @phpstan-import-type UpdateDynamicVariablesToolParamsShape from \Telnyx\AI\Tools\UpdateDynamicVariablesToolParams
+ * @phpstan-import-type VisionToolParamsShape from \Telnyx\AI\Tools\VisionToolParams
  *
  * @phpstan-type ToolUpdateParamsShape = array{
  *   clientSideTool?: array<string,mixed>|null,
@@ -28,6 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   timeoutMs?: int|null,
  *   type?: string|null,
  *   updateDynamicVariables?: null|UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape,
+ *   vision?: null|VisionToolParams|VisionToolParamsShape,
  *   webhook?: array<string,mixed>|null,
  * }
  */
@@ -75,6 +77,9 @@ final class ToolUpdateParams implements BaseModel
     #[Optional('update_dynamic_variables')]
     public ?UpdateDynamicVariablesToolParams $updateDynamicVariables;
 
+    #[Optional]
+    public ?VisionToolParams $vision;
+
     /** @var array<string,mixed>|null $webhook */
     #[Optional(map: 'mixed')]
     public ?array $webhook;
@@ -96,6 +101,7 @@ final class ToolUpdateParams implements BaseModel
      * @param PayToolParams|PayToolParamsShape|null $pay
      * @param array<string,mixed>|null $retrieval
      * @param UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape|null $updateDynamicVariables
+     * @param VisionToolParams|VisionToolParamsShape|null $vision
      * @param array<string,mixed>|null $webhook
      */
     public static function with(
@@ -109,6 +115,7 @@ final class ToolUpdateParams implements BaseModel
         ?int $timeoutMs = null,
         ?string $type = null,
         UpdateDynamicVariablesToolParams|array|null $updateDynamicVariables = null,
+        VisionToolParams|array|null $vision = null,
         ?array $webhook = null,
     ): self {
         $self = new self;
@@ -123,6 +130,7 @@ final class ToolUpdateParams implements BaseModel
         null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
         null !== $type && $self['type'] = $type;
         null !== $updateDynamicVariables && $self['updateDynamicVariables'] = $updateDynamicVariables;
+        null !== $vision && $self['vision'] = $vision;
         null !== $webhook && $self['webhook'] = $webhook;
 
         return $self;
@@ -228,6 +236,17 @@ final class ToolUpdateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['updateDynamicVariables'] = $updateDynamicVariables;
+
+        return $self;
+    }
+
+    /**
+     * @param VisionToolParams|VisionToolParamsShape $vision
+     */
+    public function withVision(VisionToolParams|array $vision): self
+    {
+        $self = clone $this;
+        $self['vision'] = $vision;
 
         return $self;
     }
