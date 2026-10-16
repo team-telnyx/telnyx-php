@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Avatars\Avatar;
-use Telnyx\AI\Avatars\AvatarID;
 use Telnyx\AI\Avatars\AvatarResponse;
 use Telnyx\AI\Avatars\AvatarType;
 use Telnyx\Client;
@@ -65,13 +64,13 @@ final class AvatarsService implements AvatarsContract
      *
      * Returns a Telnyx stock avatar or a custom avatar owned by the authenticated organization. A custom avatar belonging to another organization is returned as not found.
      *
-     * @param string|AvatarID|value-of<AvatarID> $avatarID Stable identifier of a Telnyx stock avatar or an organization-owned custom avatar. Custom avatar IDs are returned by the Avatars API and use the `avatar_` prefix.
+     * @param string $avatarID Stable identifier returned by the Avatars API. Discover available stock IDs with GET /v2/ai/avatars and filter[avatar_type]=stock rather than maintaining a fixed list. Custom avatar IDs use the `avatar_` prefix and must belong to the authenticated organization. The service validates that the selected avatar is available.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
-        AvatarID|string $avatarID,
+        string $avatarID,
         RequestOptions|array|null $requestOptions = null
     ): AvatarResponse {
         // @phpstan-ignore-next-line argument.type
@@ -85,14 +84,14 @@ final class AvatarsService implements AvatarsContract
      *
      * Updates the customer-facing name of a custom avatar owned by the authenticated organization. Stock avatars cannot be modified. To replace the image, create a new custom avatar so existing references keep their original content.
      *
-     * @param string|AvatarID|value-of<AvatarID> $avatarID Stable identifier of a Telnyx stock avatar or an organization-owned custom avatar. Custom avatar IDs are returned by the Avatars API and use the `avatar_` prefix.
+     * @param string $avatarID Stable identifier returned by the Avatars API. Discover available stock IDs with GET /v2/ai/avatars and filter[avatar_type]=stock rather than maintaining a fixed list. Custom avatar IDs use the `avatar_` prefix and must belong to the authenticated organization. The service validates that the selected avatar is available.
      * @param string $name new customer-facing name of the custom avatar
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
-        AvatarID|string $avatarID,
+        string $avatarID,
         string $name,
         RequestOptions|array|null $requestOptions = null,
     ): AvatarResponse {
@@ -107,10 +106,10 @@ final class AvatarsService implements AvatarsContract
     /**
      * @api
      *
-     * Returns a paginated list of the Telnyx stock avatars and custom avatars available to the authenticated organization. Custom avatars owned by other organizations are never returned. The `image_url` value is suitable for displaying a thumbnail and may be refreshed by listing or retrieving the avatar again.
+     * Returns a paginated list of the Telnyx stock avatars and custom avatars available to the authenticated organization. Custom avatars owned by other organizations are never returned. The `image_url` value is suitable for displaying a thumbnail and may be refreshed by listing or retrieving the avatar again. `suggested_voice_id` recommends a compatible Telnyx voice for stock avatars and is an empty string for custom avatars; it does not change an AI Assistant's voice automatically.
      *
      * @param AvatarType|value-of<AvatarType> $filterAvatarType return only stock or custom avatars
-     * @param string|AvatarID|value-of<AvatarID> $filterID return the avatar with this exact ID
+     * @param string $filterID return the avatar with this exact ID
      * @param string $filterName return avatars whose names contain this value, using case-insensitive matching
      * @param int $pageNumber page number to retrieve, starting at 1
      * @param int $pageSize number of avatars to return per page
@@ -122,7 +121,7 @@ final class AvatarsService implements AvatarsContract
      */
     public function list(
         AvatarType|string|null $filterAvatarType = null,
-        AvatarID|string|null $filterID = null,
+        ?string $filterID = null,
         ?string $filterName = null,
         int $pageNumber = 1,
         int $pageSize = 20,

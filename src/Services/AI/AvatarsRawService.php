@@ -6,7 +6,6 @@ namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Avatars\Avatar;
 use Telnyx\AI\Avatars\AvatarCreateParams;
-use Telnyx\AI\Avatars\AvatarID;
 use Telnyx\AI\Avatars\AvatarListParams;
 use Telnyx\AI\Avatars\AvatarResponse;
 use Telnyx\AI\Avatars\AvatarType;
@@ -72,7 +71,7 @@ final class AvatarsRawService implements AvatarsRawContract
      *
      * Returns a Telnyx stock avatar or a custom avatar owned by the authenticated organization. A custom avatar belonging to another organization is returned as not found.
      *
-     * @param string|AvatarID|value-of<AvatarID> $avatarID Stable identifier of a Telnyx stock avatar or an organization-owned custom avatar. Custom avatar IDs are returned by the Avatars API and use the `avatar_` prefix.
+     * @param string $avatarID Stable identifier returned by the Avatars API. Discover available stock IDs with GET /v2/ai/avatars and filter[avatar_type]=stock rather than maintaining a fixed list. Custom avatar IDs use the `avatar_` prefix and must belong to the authenticated organization. The service validates that the selected avatar is available.
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AvatarResponse>
@@ -80,7 +79,7 @@ final class AvatarsRawService implements AvatarsRawContract
      * @throws APIException
      */
     public function retrieve(
-        AvatarID|string $avatarID,
+        string $avatarID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
@@ -97,7 +96,7 @@ final class AvatarsRawService implements AvatarsRawContract
      *
      * Updates the customer-facing name of a custom avatar owned by the authenticated organization. Stock avatars cannot be modified. To replace the image, create a new custom avatar so existing references keep their original content.
      *
-     * @param string|AvatarID|value-of<AvatarID> $avatarID Stable identifier of a Telnyx stock avatar or an organization-owned custom avatar. Custom avatar IDs are returned by the Avatars API and use the `avatar_` prefix.
+     * @param string $avatarID Stable identifier returned by the Avatars API. Discover available stock IDs with GET /v2/ai/avatars and filter[avatar_type]=stock rather than maintaining a fixed list. Custom avatar IDs use the `avatar_` prefix and must belong to the authenticated organization. The service validates that the selected avatar is available.
      * @param array{name: string}|AvatarUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -106,7 +105,7 @@ final class AvatarsRawService implements AvatarsRawContract
      * @throws APIException
      */
     public function update(
-        AvatarID|string $avatarID,
+        string $avatarID,
         array|AvatarUpdateParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
@@ -128,11 +127,11 @@ final class AvatarsRawService implements AvatarsRawContract
     /**
      * @api
      *
-     * Returns a paginated list of the Telnyx stock avatars and custom avatars available to the authenticated organization. Custom avatars owned by other organizations are never returned. The `image_url` value is suitable for displaying a thumbnail and may be refreshed by listing or retrieving the avatar again.
+     * Returns a paginated list of the Telnyx stock avatars and custom avatars available to the authenticated organization. Custom avatars owned by other organizations are never returned. The `image_url` value is suitable for displaying a thumbnail and may be refreshed by listing or retrieving the avatar again. `suggested_voice_id` recommends a compatible Telnyx voice for stock avatars and is an empty string for custom avatars; it does not change an AI Assistant's voice automatically.
      *
      * @param array{
      *   filterAvatarType?: AvatarType|value-of<AvatarType>,
-     *   filterID?: string|AvatarID|value-of<AvatarID>,
+     *   filterID?: string,
      *   filterName?: string,
      *   pageNumber?: int,
      *   pageSize?: int,

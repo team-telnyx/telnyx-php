@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Avatars\Avatar;
 use Telnyx\AI\Avatars\AvatarCreateParams;
-use Telnyx\AI\Avatars\AvatarID;
 use Telnyx\AI\Avatars\AvatarListParams;
 use Telnyx\AI\Avatars\AvatarResponse;
 use Telnyx\AI\Avatars\AvatarUpdateParams;
@@ -38,7 +37,7 @@ interface AvatarsRawContract
     /**
      * @api
      *
-     * @param string|AvatarID $avatarID Stable identifier of a Telnyx stock avatar or an organization-owned custom avatar. Custom avatar IDs are returned by the Avatars API and use the `avatar_` prefix.
+     * @param string $avatarID Stable identifier returned by the Avatars API. Discover available stock IDs with GET /v2/ai/avatars and filter[avatar_type]=stock rather than maintaining a fixed list. Custom avatar IDs use the `avatar_` prefix and must belong to the authenticated organization. The service validates that the selected avatar is available.
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AvatarResponse>
@@ -46,14 +45,14 @@ interface AvatarsRawContract
      * @throws APIException
      */
     public function retrieve(
-        AvatarID|string $avatarID,
-        RequestOptions|array|null $requestOptions = null,
+        string $avatarID,
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
-     * @param string|AvatarID $avatarID Stable identifier of a Telnyx stock avatar or an organization-owned custom avatar. Custom avatar IDs are returned by the Avatars API and use the `avatar_` prefix.
+     * @param string $avatarID Stable identifier returned by the Avatars API. Discover available stock IDs with GET /v2/ai/avatars and filter[avatar_type]=stock rather than maintaining a fixed list. Custom avatar IDs use the `avatar_` prefix and must belong to the authenticated organization. The service validates that the selected avatar is available.
      * @param array<string,mixed>|AvatarUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -62,7 +61,7 @@ interface AvatarsRawContract
      * @throws APIException
      */
     public function update(
-        AvatarID|string $avatarID,
+        string $avatarID,
         array|AvatarUpdateParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;

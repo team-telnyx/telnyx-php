@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Avatars\Avatar;
-use Telnyx\AI\Avatars\AvatarID;
 use Telnyx\AI\Avatars\AvatarResponse;
 use Telnyx\AI\Avatars\AvatarType;
 use Telnyx\Core\Exceptions\APIException;
@@ -36,27 +35,27 @@ interface AvatarsContract
     /**
      * @api
      *
-     * @param string|AvatarID $avatarID Stable identifier of a Telnyx stock avatar or an organization-owned custom avatar. Custom avatar IDs are returned by the Avatars API and use the `avatar_` prefix.
+     * @param string $avatarID Stable identifier returned by the Avatars API. Discover available stock IDs with GET /v2/ai/avatars and filter[avatar_type]=stock rather than maintaining a fixed list. Custom avatar IDs use the `avatar_` prefix and must belong to the authenticated organization. The service validates that the selected avatar is available.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
-        AvatarID|string $avatarID,
-        RequestOptions|array|null $requestOptions = null,
+        string $avatarID,
+        RequestOptions|array|null $requestOptions = null
     ): AvatarResponse;
 
     /**
      * @api
      *
-     * @param string|AvatarID $avatarID Stable identifier of a Telnyx stock avatar or an organization-owned custom avatar. Custom avatar IDs are returned by the Avatars API and use the `avatar_` prefix.
+     * @param string $avatarID Stable identifier returned by the Avatars API. Discover available stock IDs with GET /v2/ai/avatars and filter[avatar_type]=stock rather than maintaining a fixed list. Custom avatar IDs use the `avatar_` prefix and must belong to the authenticated organization. The service validates that the selected avatar is available.
      * @param string $name new customer-facing name of the custom avatar
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
-        AvatarID|string $avatarID,
+        string $avatarID,
         string $name,
         RequestOptions|array|null $requestOptions = null,
     ): AvatarResponse;
@@ -65,7 +64,7 @@ interface AvatarsContract
      * @api
      *
      * @param AvatarType|value-of<AvatarType> $filterAvatarType return only stock or custom avatars
-     * @param string|AvatarID|value-of<AvatarID> $filterID return the avatar with this exact ID
+     * @param string $filterID return the avatar with this exact ID
      * @param string $filterName return avatars whose names contain this value, using case-insensitive matching
      * @param int $pageNumber page number to retrieve, starting at 1
      * @param int $pageSize number of avatars to return per page
@@ -77,7 +76,7 @@ interface AvatarsContract
      */
     public function list(
         AvatarType|string|null $filterAvatarType = null,
-        AvatarID|string|null $filterID = null,
+        ?string $filterID = null,
         ?string $filterName = null,
         int $pageNumber = 1,
         int $pageSize = 20,

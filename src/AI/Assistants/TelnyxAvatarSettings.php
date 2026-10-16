@@ -6,7 +6,6 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\TelnyxAvatarSettings\BackgroundID;
 use Telnyx\AI\Assistants\TelnyxAvatarSettings\Model;
-use Telnyx\AI\Avatars\AvatarID;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * **Beta:** Configuration for the Telnyx open-source avatar provider. Use a stock avatar or an organization-owned custom avatar returned by the Avatars API. Discover the available stock catalog with GET /v2/ai/avatars and filter[avatar_type]=stock; follow meta.total_pages to load every page. Supported backgrounds are office, studio, and reception.
  *
  * @phpstan-type TelnyxAvatarSettingsShape = array{
- *   avatarID: string|AvatarID|value-of<AvatarID>,
+ *   avatarID: string,
  *   backgroundID: BackgroundID|value-of<BackgroundID>,
  *   model: Model|value-of<Model>,
  *   provider: 'telnyx',
@@ -36,10 +35,8 @@ final class TelnyxAvatarSettings implements BaseModel
 
     /**
      * The Telnyx stock avatar or organization-owned custom avatar to render.
-     *
-     * @var string|value-of<AvatarID> $avatarID
      */
-    #[Required('avatar_id', enum: AvatarID::class)]
+    #[Required('avatar_id')]
     public string $avatarID;
 
     /**
@@ -85,14 +82,13 @@ final class TelnyxAvatarSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|AvatarID|value-of<AvatarID> $avatarID
      * @param BackgroundID|value-of<BackgroundID> $backgroundID
      * @param Model|value-of<Model> $model
      */
     public static function with(
-        AvatarID|string $avatarID,
+        string $avatarID,
         BackgroundID|string $backgroundID,
-        Model|string $model,
+        Model|string $model
     ): self {
         $self = new self;
 
@@ -105,10 +101,8 @@ final class TelnyxAvatarSettings implements BaseModel
 
     /**
      * The Telnyx stock avatar or organization-owned custom avatar to render.
-     *
-     * @param string|AvatarID|value-of<AvatarID> $avatarID
      */
-    public function withAvatarID(AvatarID|string $avatarID): self
+    public function withAvatarID(string $avatarID): self
     {
         $self = clone $this;
         $self['avatarID'] = $avatarID;

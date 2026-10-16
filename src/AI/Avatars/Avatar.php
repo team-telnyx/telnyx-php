@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AvatarShape = array{
- *   id: string|AvatarID|value-of<AvatarID>,
+ *   id: string,
  *   avatarType: AvatarType|value-of<AvatarType>,
  *   hosted: bool,
  *   imageURL: string,
@@ -23,6 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   heightPx?: int|null,
  *   imageURLExpiresAt?: \DateTimeInterface|null,
  *   sizeBytes?: int|null,
+ *   suggestedVoiceID?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
  *   widthPx?: int|null,
  * }
@@ -47,11 +48,9 @@ final class Avatar implements BaseModel
     public string $provider = 'telnyx';
 
     /**
-     * Stable identifier of a Telnyx stock avatar or an organization-owned custom avatar. Custom avatar IDs are returned by the Avatars API and use the `avatar_` prefix.
-     *
-     * @var string|value-of<AvatarID> $id
+     * Stable identifier returned by the Avatars API. Discover available stock IDs with GET /v2/ai/avatars and filter[avatar_type]=stock rather than maintaining a fixed list. Custom avatar IDs use the `avatar_` prefix and must belong to the authenticated organization. The service validates that the selected avatar is available.
      */
-    #[Required(enum: AvatarID::class)]
+    #[Required]
     public string $id;
 
     /**
@@ -107,6 +106,12 @@ final class Avatar implements BaseModel
     public ?int $sizeBytes;
 
     /**
+     * Optional recommended Telnyx text-to-speech voice for this avatar. An omitted field or empty string means no recommendation is available. Custom avatars have no suggested voice. It is informational and selecting the avatar does not automatically change the AI Assistant's configured voice.
+     */
+    #[Optional('suggested_voice_id')]
+    public ?string $suggestedVoiceID;
+
+    /**
      * Time when the custom avatar was last updated.
      */
     #[Optional('updated_at')]
@@ -142,12 +147,11 @@ final class Avatar implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|AvatarID|value-of<AvatarID> $id
      * @param AvatarType|value-of<AvatarType> $avatarType
      * @param ContentType|value-of<ContentType>|null $contentType
      */
     public static function with(
-        AvatarID|string $id,
+        string $id,
         AvatarType|string $avatarType,
         string $imageURL,
         string $name,
@@ -156,6 +160,7 @@ final class Avatar implements BaseModel
         ?int $heightPx = null,
         ?\DateTimeInterface $imageURLExpiresAt = null,
         ?int $sizeBytes = null,
+        ?string $suggestedVoiceID = null,
         ?\DateTimeInterface $updatedAt = null,
         ?int $widthPx = null,
     ): self {
@@ -171,6 +176,7 @@ final class Avatar implements BaseModel
         null !== $heightPx && $self['heightPx'] = $heightPx;
         null !== $imageURLExpiresAt && $self['imageURLExpiresAt'] = $imageURLExpiresAt;
         null !== $sizeBytes && $self['sizeBytes'] = $sizeBytes;
+        null !== $suggestedVoiceID && $self['suggestedVoiceID'] = $suggestedVoiceID;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $widthPx && $self['widthPx'] = $widthPx;
 
@@ -178,11 +184,9 @@ final class Avatar implements BaseModel
     }
 
     /**
-     * Stable identifier of a Telnyx stock avatar or an organization-owned custom avatar. Custom avatar IDs are returned by the Avatars API and use the `avatar_` prefix.
-     *
-     * @param string|AvatarID|value-of<AvatarID> $id
+     * Stable identifier returned by the Avatars API. Discover available stock IDs with GET /v2/ai/avatars and filter[avatar_type]=stock rather than maintaining a fixed list. Custom avatar IDs use the `avatar_` prefix and must belong to the authenticated organization. The service validates that the selected avatar is available.
      */
-    public function withID(AvatarID|string $id): self
+    public function withID(string $id): self
     {
         $self = clone $this;
         $self['id'] = $id;
@@ -303,6 +307,17 @@ final class Avatar implements BaseModel
     {
         $self = clone $this;
         $self['sizeBytes'] = $sizeBytes;
+
+        return $self;
+    }
+
+    /**
+     * Optional recommended Telnyx text-to-speech voice for this avatar. An omitted field or empty string means no recommendation is available. Custom avatars have no suggested voice. It is informational and selecting the avatar does not automatically change the AI Assistant's configured voice.
+     */
+    public function withSuggestedVoiceID(string $suggestedVoiceID): self
+    {
+        $self = clone $this;
+        $self['suggestedVoiceID'] = $suggestedVoiceID;
 
         return $self;
     }

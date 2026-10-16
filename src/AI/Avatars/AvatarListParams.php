@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Returns a paginated list of the Telnyx stock avatars and custom avatars available to the authenticated organization. Custom avatars owned by other organizations are never returned. The `image_url` value is suitable for displaying a thumbnail and may be refreshed by listing or retrieving the avatar again.
+ * Returns a paginated list of the Telnyx stock avatars and custom avatars available to the authenticated organization. Custom avatars owned by other organizations are never returned. The `image_url` value is suitable for displaying a thumbnail and may be refreshed by listing or retrieving the avatar again. `suggested_voice_id` recommends a compatible Telnyx voice for stock avatars and is an empty string for custom avatars; it does not change an AI Assistant's voice automatically.
  *
  * @see Telnyx\Services\AI\AvatarsService::list()
  *
  * @phpstan-type AvatarListParamsShape = array{
  *   filterAvatarType?: null|AvatarType|value-of<AvatarType>,
- *   filterID?: string|null|AvatarID|value-of<AvatarID>,
+ *   filterID?: string|null,
  *   filterName?: string|null,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
@@ -38,10 +38,8 @@ final class AvatarListParams implements BaseModel
 
     /**
      * Return the avatar with this exact ID.
-     *
-     * @var string|value-of<AvatarID>|null $filterID
      */
-    #[Optional(enum: AvatarID::class)]
+    #[Optional]
     public ?string $filterID;
 
     /**
@@ -73,11 +71,10 @@ final class AvatarListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AvatarType|value-of<AvatarType>|null $filterAvatarType
-     * @param string|AvatarID|value-of<AvatarID>|null $filterID
      */
     public static function with(
         AvatarType|string|null $filterAvatarType = null,
-        AvatarID|string|null $filterID = null,
+        ?string $filterID = null,
         ?string $filterName = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
@@ -109,10 +106,8 @@ final class AvatarListParams implements BaseModel
 
     /**
      * Return the avatar with this exact ID.
-     *
-     * @param string|AvatarID|value-of<AvatarID> $filterID
      */
-    public function withFilterID(AvatarID|string $filterID): self
+    public function withFilterID(string $filterID): self
     {
         $self = clone $this;
         $self['filterID'] = $filterID;
