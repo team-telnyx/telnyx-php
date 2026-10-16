@@ -303,7 +303,7 @@ final class AssistantsService implements AssistantsContract
     /**
      * @api
      *
-     * Updates the specified AI assistant's attributes and returns the updated assistant. The request can also control how the change is promoted across assistant versions.
+     * Updates the specified AI assistant's attributes and returns the updated assistant. The request can also control how the change is promoted across assistant versions. Every update saves a new version, and an assistant keeps at most 10 versions: once it has more, the oldest versions are permanently deleted, except the main version and any version referenced by a traffic distribution rule.
      *
      * @param string $assistantID unique identifier of the assistant
      * @param list<AssistantA2AAgent|AssistantA2AAgentShape> $a2aAgents A2A agents this assistant can delegate to. Tools are not stored here: at the start of every conversation each agent's card is fetched and one tool is derived per skill the card advertises, named `a2a_<name>_<skill_id>`. The following limits are not enforced when the assistant is saved, and anything past them is dropped when the conversation starts: 64 agents per assistant, 64 skills per card, 128 derived tools per assistant, and a 6 second budget for all card fetches combined. An agent whose card cannot be fetched costs the assistant that capability for the conversation; it does not fail the call. Omit this field to leave the assistant's agents unchanged; send an empty array to remove them all.

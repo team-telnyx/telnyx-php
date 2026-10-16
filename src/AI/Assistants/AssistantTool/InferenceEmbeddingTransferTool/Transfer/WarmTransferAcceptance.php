@@ -16,6 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   enabled?: bool|null,
  *   endUserTargetContextMode?: null|EndUserTargetContextMode|value-of<EndUserTargetContextMode>,
  *   requireAcceptance?: bool|null,
+ *   timeoutSecs?: int|null,
  * }
  */
 final class WarmTransferAcceptance implements BaseModel
@@ -46,6 +47,12 @@ final class WarmTransferAcceptance implements BaseModel
     #[Optional('require_acceptance')]
     public ?bool $requireAcceptance;
 
+    /**
+     * How long, in seconds, the destination has to accept the transfer, counted from when the private consult starts (right after the destination answers, or after `warm_message_delay_ms`). The caller keeps hearing ringback the whole time. If no acceptance arrives in time, the destination is hung up and the assistant returns to the caller (the transfer fails as a timeout). Raise it for destinations that answer before a human is on the line, such as a call-center queue/ACD or an IVR playing hold audio; keep it as short as practical, since the caller waits on ringback until it expires.
+     */
+    #[Optional('timeout_secs')]
+    public ?int $timeoutSecs;
+
     public function __construct()
     {
         $this->initialize();
@@ -62,12 +69,14 @@ final class WarmTransferAcceptance implements BaseModel
         ?bool $enabled = null,
         EndUserTargetContextMode|string|null $endUserTargetContextMode = null,
         ?bool $requireAcceptance = null,
+        ?int $timeoutSecs = null,
     ): self {
         $self = new self;
 
         null !== $enabled && $self['enabled'] = $enabled;
         null !== $endUserTargetContextMode && $self['endUserTargetContextMode'] = $endUserTargetContextMode;
         null !== $requireAcceptance && $self['requireAcceptance'] = $requireAcceptance;
+        null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
 
         return $self;
     }
@@ -104,6 +113,17 @@ final class WarmTransferAcceptance implements BaseModel
     {
         $self = clone $this;
         $self['requireAcceptance'] = $requireAcceptance;
+
+        return $self;
+    }
+
+    /**
+     * How long, in seconds, the destination has to accept the transfer, counted from when the private consult starts (right after the destination answers, or after `warm_message_delay_ms`). The caller keeps hearing ringback the whole time. If no acceptance arrives in time, the destination is hung up and the assistant returns to the caller (the transfer fails as a timeout). Raise it for destinations that answer before a human is on the line, such as a call-center queue/ACD or an IVR playing hold audio; keep it as short as practical, since the caller waits on ringback until it expires.
+     */
+    public function withTimeoutSecs(int $timeoutSecs): self
+    {
+        $self = clone $this;
+        $self['timeoutSecs'] = $timeoutSecs;
 
         return $self;
     }
