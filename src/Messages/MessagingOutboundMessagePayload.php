@@ -54,6 +54,8 @@ use Telnyx\Messages\MessagingOutboundMessagePayload\Type;
  *   tcrCampaignBillable?: bool|null,
  *   tcrCampaignID?: string|null,
  *   tcrCampaignRegistered?: string|null,
+ *   templateID?: string|null,
+ *   templateName?: string|null,
  *   text?: string|null,
  *   to?: list<To|ToShape>|null,
  *   type?: null|Type|value-of<Type>,
@@ -75,7 +77,7 @@ final class MessagingOutboundMessagePayload implements BaseModel
     public ?string $id;
 
     /**
-     * RCS webhook message body. Text messages use the text property.
+     * Message body for RCS and WhatsApp. RCS text messages use the text property. WhatsApp messages contain the `whatsapp_message` object from the send request.
      */
     #[Optional]
     public ?Body $body;
@@ -211,6 +213,18 @@ final class MessagingOutboundMessagePayload implements BaseModel
     public ?string $tcrCampaignRegistered;
 
     /**
+     * Telnyx ID of the WhatsApp template used by the message, when known.
+     */
+    #[Optional('template_id')]
+    public ?string $templateID;
+
+    /**
+     * Name of the WhatsApp template used by the message. Present for WhatsApp template messages.
+     */
+    #[Optional('template_name')]
+    public ?string $templateName;
+
+    /**
      * Message body (i.e., content) as a non-empty string.
      *
      * **Required for SMS**
@@ -306,6 +320,8 @@ final class MessagingOutboundMessagePayload implements BaseModel
         ?bool $smartEncodingApplied = null,
         ?array $tags = null,
         ?bool $tcrCampaignBillable = null,
+        ?string $templateID = null,
+        ?string $templateName = null,
         ?string $text = null,
         ?array $to = null,
         Type|string|null $type = null,
@@ -336,6 +352,8 @@ final class MessagingOutboundMessagePayload implements BaseModel
         null !== $tcrCampaignBillable && $self['tcrCampaignBillable'] = $tcrCampaignBillable;
         Omitted::VALUE !== $tcrCampaignID && $self['tcrCampaignID'] = $tcrCampaignID;
         Omitted::VALUE !== $tcrCampaignRegistered && $self['tcrCampaignRegistered'] = $tcrCampaignRegistered;
+        null !== $templateID && $self['templateID'] = $templateID;
+        null !== $templateName && $self['templateName'] = $templateName;
         null !== $text && $self['text'] = $text;
         null !== $to && $self['to'] = $to;
         null !== $type && $self['type'] = $type;
@@ -359,7 +377,7 @@ final class MessagingOutboundMessagePayload implements BaseModel
     }
 
     /**
-     * RCS webhook message body. Text messages use the text property.
+     * Message body for RCS and WhatsApp. RCS text messages use the text property. WhatsApp messages contain the `whatsapp_message` object from the send request.
      *
      * @param Body|BodyShape $body
      */
@@ -621,6 +639,28 @@ final class MessagingOutboundMessagePayload implements BaseModel
     ): self {
         $self = clone $this;
         $self['tcrCampaignRegistered'] = $tcrCampaignRegistered;
+
+        return $self;
+    }
+
+    /**
+     * Telnyx ID of the WhatsApp template used by the message, when known.
+     */
+    public function withTemplateID(string $templateID): self
+    {
+        $self = clone $this;
+        $self['templateID'] = $templateID;
+
+        return $self;
+    }
+
+    /**
+     * Name of the WhatsApp template used by the message. Present for WhatsApp template messages.
+     */
+    public function withTemplateName(string $templateName): self
+    {
+        $self = clone $this;
+        $self['templateName'] = $templateName;
 
         return $self;
     }

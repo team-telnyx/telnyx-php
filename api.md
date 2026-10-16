@@ -2721,6 +2721,14 @@ Methods:
 - <code title="get /whatsapp/signup">$client->whatsapp->signup-><a href="./src/Services/Whatsapp/SignupService.php">list</a>(...$params)</code>
 - <code title="get /whatsapp/signup/{id}/status">$client->whatsapp->signup-><a href="./src/Services/Whatsapp/SignupService.php">retrieveStatus</a>(...$params)</code>
 
+## HostedSignups
+
+Methods:
+
+- <code title="post /whatsapp/hosted_signups">$client->whatsapp->hostedSignups-><a href="./src/Services/Whatsapp/HostedSignupsService.php">create</a>(...$params)</code>
+- <code title="get /whatsapp/hosted_signups/{id}">$client->whatsapp->hostedSignups-><a href="./src/Services/Whatsapp/HostedSignupsService.php">retrieve</a>(...$params)</code>
+- <code title="get /whatsapp/hosted_signups">$client->whatsapp->hostedSignups-><a href="./src/Services/Whatsapp/HostedSignupsService.php">list</a>(...$params)</code>
+
 # WhatsappMessageTemplates
 
 Methods:

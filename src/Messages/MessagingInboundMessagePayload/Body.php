@@ -29,6 +29,7 @@ use Telnyx\Messages\MessagingInboundMessagePayload\Body\UserFile;
  *   edit?: null|Edit|EditShape,
  *   foreignID?: string|null,
  *   from?: string|null,
+ *   fromUserID?: string|null,
  *   location?: null|Location|LocationShape,
  *   revoke?: null|Revoke|RevokeShape,
  *   suggestionResponse?: null|SuggestionResponse|SuggestionResponseShape,
@@ -62,10 +63,16 @@ final class Body implements BaseModel
     public ?string $foreignID;
 
     /**
-     * WhatsApp sender in E.164 format.
+     * WhatsApp sender in E.164 format. Empty when the user hides their phone number; `from_user_id` then identifies the sender.
      */
     #[Optional]
     public ?string $from;
+
+    /**
+     * Business-scoped user ID (BSUID) of the WhatsApp sender when Meta provides one, for example `US.13491208655302741918`. When `from` is empty, pass this value as `to` to reply.
+     */
+    #[Optional('from_user_id')]
+    public ?string $fromUserID;
 
     /**
      * Location shared in an RCS message.
@@ -133,6 +140,7 @@ final class Body implements BaseModel
         Edit|array|null $edit = null,
         ?string $foreignID = null,
         ?string $from = null,
+        ?string $fromUserID = null,
         Location|array|null $location = null,
         Revoke|array|null $revoke = null,
         SuggestionResponse|array|null $suggestionResponse = null,
@@ -147,6 +155,7 @@ final class Body implements BaseModel
         null !== $edit && $self['edit'] = $edit;
         null !== $foreignID && $self['foreignID'] = $foreignID;
         null !== $from && $self['from'] = $from;
+        null !== $fromUserID && $self['fromUserID'] = $fromUserID;
         null !== $location && $self['location'] = $location;
         null !== $revoke && $self['revoke'] = $revoke;
         null !== $suggestionResponse && $self['suggestionResponse'] = $suggestionResponse;
@@ -194,12 +203,23 @@ final class Body implements BaseModel
     }
 
     /**
-     * WhatsApp sender in E.164 format.
+     * WhatsApp sender in E.164 format. Empty when the user hides their phone number; `from_user_id` then identifies the sender.
      */
     public function withFrom(string $from): self
     {
         $self = clone $this;
         $self['from'] = $from;
+
+        return $self;
+    }
+
+    /**
+     * Business-scoped user ID (BSUID) of the WhatsApp sender when Meta provides one, for example `US.13491208655302741918`. When `from` is empty, pass this value as `to` to reply.
+     */
+    public function withFromUserID(string $fromUserID): self
+    {
+        $self = clone $this;
+        $self['fromUserID'] = $fromUserID;
 
         return $self;
     }

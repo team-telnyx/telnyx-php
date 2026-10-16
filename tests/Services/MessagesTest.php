@@ -418,7 +418,14 @@ final class MessagesTest extends TestCase
                         ],
                         'birthday' => 'birthday',
                         'emails' => [['email' => 'email', 'type' => 'type']],
-                        'name' => 'name',
+                        'name' => [
+                            'formattedName' => 'formatted_name',
+                            'firstName' => 'first_name',
+                            'lastName' => 'last_name',
+                            'middleName' => 'middle_name',
+                            'prefix' => 'prefix',
+                            'suffix' => 'suffix',
+                        ],
                         'org' => [
                             'company' => 'company',
                             'department' => 'department',
@@ -477,7 +484,20 @@ final class MessagesTest extends TestCase
                         'catalogID' => 'catalog_id',
                         'mode' => 'mode',
                         'name' => 'name',
-                        'parameters' => ['displayText' => 'display_text', 'url' => 'url'],
+                        'parameters' => [
+                            'displayText' => 'display_text',
+                            'flowAction' => 'navigate',
+                            'flowActionPayload' => [
+                                'data' => (object) [], 'screen' => 'screen',
+                            ],
+                            'flowCta' => 'flow_cta',
+                            'flowID' => 'flow_id',
+                            'flowMessageVersion' => 'flow_message_version',
+                            'flowName' => 'flow_name',
+                            'flowToken' => 'flow_token',
+                            'mode' => 'draft',
+                            'url' => 'url',
+                        ],
                         'productRetailerID' => 'product_retailer_id',
                         'sections' => [
                             [
@@ -498,6 +518,7 @@ final class MessagesTest extends TestCase
                     'body' => ['text' => 'text'],
                     'footer' => ['text' => 'text'],
                     'header' => [
+                        'type' => 'document',
                         'document' => [
                             'caption' => 'caption',
                             'filename' => 'filename',
@@ -538,7 +559,15 @@ final class MessagesTest extends TestCase
                     'components' => [
                         [
                             'index' => 0,
-                            'parameters' => [['text' => 'text', 'type' => 'text']],
+                            'parameters' => [
+                                [
+                                    'action' => [
+                                        'flowActionData' => (object) [], 'flowToken' => 'flow_token',
+                                    ],
+                                    'text' => 'text',
+                                    'type' => 'text',
+                                ],
+                            ],
                             'subType' => 'quick_reply',
                             'type' => 'header',
                         ],
