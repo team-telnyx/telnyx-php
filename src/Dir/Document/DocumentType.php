@@ -15,6 +15,8 @@ enum DocumentType: string
 
     case ARTICLES_OF_INCORPORATION = 'articles_of_incorporation';
 
+    case CERTIFICATE_OF_GOOD_STANDING = 'certificate_of_good_standing';
+
     case TAX_DOCUMENT = 'tax_document';
 
     case EIN_LETTER = 'ein_letter';
@@ -32,6 +34,10 @@ enum DocumentType: string
     case UTILITY_BILL = 'utility_bill';
 
     case BANK_STATEMENT = 'bank_statement';
+
+    case BUSINESS_CREDIT_REPORT = 'business_credit_report';
+
+    case BANK_REFERENCE_LETTER = 'bank_reference_letter';
 
     case OTHER = 'other';
 }
