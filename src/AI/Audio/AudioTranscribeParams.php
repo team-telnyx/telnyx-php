@@ -62,7 +62,7 @@ final class AudioTranscribeParams implements BaseModel
     public ?string $language;
 
     /**
-     * Additional model-specific configuration parameters. Only allowed with the `deepgram/*` models. Can include Deepgram-specific options such as `smart_format`, `punctuate`, `diarize`, `utterance`, `numerals`, and `language`. If `language` is provided both as a top-level parameter and in `model_config`, the top-level parameter takes precedence.
+     * Additional model-specific configuration parameters. Only allowed with the `deepgram/*` models. Sent as a JSON string in multipart requests and passed through to Deepgram as query parameters. Any other model with `model_config` returns 422. Can include Deepgram-specific options such as `smart_format`, `punctuate`, `diarize` (speaker labels), `multichannel` (transcribe each channel independently; billed duration is file duration multiplied by the number of channels), `utterances`, `numerals`, and `language`. If `language` is provided both as a top-level parameter and in `model_config`, the top-level parameter takes precedence.
      *
      * @var array<string,mixed>|null $modelConfig
      */
@@ -184,7 +184,7 @@ final class AudioTranscribeParams implements BaseModel
     }
 
     /**
-     * Additional model-specific configuration parameters. Only allowed with the `deepgram/*` models. Can include Deepgram-specific options such as `smart_format`, `punctuate`, `diarize`, `utterance`, `numerals`, and `language`. If `language` is provided both as a top-level parameter and in `model_config`, the top-level parameter takes precedence.
+     * Additional model-specific configuration parameters. Only allowed with the `deepgram/*` models. Sent as a JSON string in multipart requests and passed through to Deepgram as query parameters. Any other model with `model_config` returns 422. Can include Deepgram-specific options such as `smart_format`, `punctuate`, `diarize` (speaker labels), `multichannel` (transcribe each channel independently; billed duration is file duration multiplied by the number of channels), `utterances`, `numerals`, and `language`. If `language` is provided both as a top-level parameter and in `model_config`, the top-level parameter takes precedence.
      *
      * @param array<string,mixed> $modelConfig
      */
