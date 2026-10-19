@@ -31,6 +31,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
  *   adjustDtmfTimestamp?: bool|null,
  *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   androidPushCredentialID?: string|null,
+ *   bridgeGenerateComfortNoiseOnCn?: bool|null,
  *   callCostEnabled?: bool|null,
  *   callCostInWebhooks?: bool|null,
  *   conversationPersistence?: bool|null,
@@ -110,6 +111,12 @@ final class FqdnConnection implements BaseModel
      */
     #[Optional('android_push_credential_id', nullable: true)]
     public ?string $androidPushCredentialID;
+
+    /**
+     * Stores the connection preference for generating silent RTP toward the opposite call leg when comfort-noise packets (CN, payload type 13) are received during hold. Defaults to false and returns the saved value. Only JSON true and false are accepted; null and non-boolean values are rejected. This preference is independent of default_on_hold_comfort_noise_enabled and does not modify that setting. This API provisions the preference; call-processing behavior is implemented separately.
+     */
+    #[Optional('bridge_generate_comfort_noise_on_cn')]
+    public ?bool $bridgeGenerateComfortNoiseOnCn;
 
     /**
      * Indicates whether call cost calculation is enabled.
@@ -372,6 +379,7 @@ final class FqdnConnection implements BaseModel
         ?bool $active = null,
         ?bool $adjustDtmfTimestamp = null,
         AnchorsiteOverride|string|null $anchorsiteOverride = null,
+        ?bool $bridgeGenerateComfortNoiseOnCn = null,
         ?bool $callCostEnabled = null,
         ?bool $callCostInWebhooks = null,
         ?bool $conversationPersistence = null,
@@ -413,6 +421,7 @@ final class FqdnConnection implements BaseModel
         null !== $adjustDtmfTimestamp && $self['adjustDtmfTimestamp'] = $adjustDtmfTimestamp;
         null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
         Omitted::VALUE !== $androidPushCredentialID && $self['androidPushCredentialID'] = $androidPushCredentialID;
+        null !== $bridgeGenerateComfortNoiseOnCn && $self['bridgeGenerateComfortNoiseOnCn'] = $bridgeGenerateComfortNoiseOnCn;
         null !== $callCostEnabled && $self['callCostEnabled'] = $callCostEnabled;
         null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
         null !== $conversationPersistence && $self['conversationPersistence'] = $conversationPersistence;
@@ -518,6 +527,18 @@ final class FqdnConnection implements BaseModel
     ): self {
         $self = clone $this;
         $self['androidPushCredentialID'] = $androidPushCredentialID;
+
+        return $self;
+    }
+
+    /**
+     * Stores the connection preference for generating silent RTP toward the opposite call leg when comfort-noise packets (CN, payload type 13) are received during hold. Defaults to false and returns the saved value. Only JSON true and false are accepted; null and non-boolean values are rejected. This preference is independent of default_on_hold_comfort_noise_enabled and does not modify that setting. This API provisions the preference; call-processing behavior is implemented separately.
+     */
+    public function withBridgeGenerateComfortNoiseOnCn(
+        bool $bridgeGenerateComfortNoiseOnCn
+    ): self {
+        $self = clone $this;
+        $self['bridgeGenerateComfortNoiseOnCn'] = $bridgeGenerateComfortNoiseOnCn;
 
         return $self;
     }

@@ -49,6 +49,7 @@ interface UacConnectionsContract
      * @param bool $active Defaults to true
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      * @param string|Omitted|null $androidPushCredentialID The uuid of the push credential for Android
+     * @param bool $bridgeGenerateComfortNoiseOnCn Stores the connection preference for generating silent RTP toward the opposite call leg when comfort-noise packets (CN, payload type 13) are received during hold. Optional; defaults to false when omitted on creation. Only JSON true and false are accepted; null and non-boolean values are rejected. This preference is independent of default_on_hold_comfort_noise_enabled and does not modify that setting. This API provisions the preference; call-processing behavior is implemented separately.
      * @param bool $callCostInWebhooks specifies if call cost webhooks should be sent for this connection
      * @param bool $defaultOnHoldComfortNoiseEnabled When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      * @param DtmfType|value-of<DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
@@ -81,6 +82,7 @@ interface UacConnectionsContract
         ?bool $active = null,
         AnchorsiteOverride|string $anchorsiteOverride = 'Latency',
         string|Omitted|null $androidPushCredentialID = Omitted::VALUE,
+        bool $bridgeGenerateComfortNoiseOnCn = false,
         bool $callCostInWebhooks = false,
         bool $defaultOnHoldComfortNoiseEnabled = false,
         DtmfType|string $dtmfType = 'RFC 2833',
@@ -127,6 +129,7 @@ interface UacConnectionsContract
      * @param bool $active Defaults to true
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      * @param string|Omitted|null $androidPushCredentialID The uuid of the push credential for Android
+     * @param bool $bridgeGenerateComfortNoiseOnCn Stores the connection preference for generating silent RTP toward the opposite call leg when comfort-noise packets (CN, payload type 13) are received during hold. Optional; omitting this field preserves the saved value. Only JSON true and false are accepted; null and non-boolean values are rejected. This preference is independent of default_on_hold_comfort_noise_enabled and does not modify that setting. This API provisions the preference; call-processing behavior is implemented separately.
      * @param bool $callCostInWebhooks specifies if call cost webhooks should be sent for this connection
      * @param string $connectionName a user-assigned name to help manage the connection
      * @param bool $defaultOnHoldComfortNoiseEnabled When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
@@ -160,6 +163,7 @@ interface UacConnectionsContract
         ?bool $active = null,
         AnchorsiteOverride|string $anchorsiteOverride = 'Latency',
         string|Omitted|null $androidPushCredentialID = Omitted::VALUE,
+        bool $bridgeGenerateComfortNoiseOnCn = false,
         bool $callCostInWebhooks = false,
         ?string $connectionName = null,
         bool $defaultOnHoldComfortNoiseEnabled = false,

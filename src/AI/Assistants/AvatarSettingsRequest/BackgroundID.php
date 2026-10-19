@@ -14,4 +14,6 @@ enum BackgroundID: string
     case STUDIO = 'studio';
 
     case RECEPTION = 'reception';
+
+    case ILLUSTRATED_WORKSPACE = 'illustrated_workspace';
 }
