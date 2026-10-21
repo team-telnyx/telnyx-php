@@ -105,12 +105,14 @@ interface TelephonyCredentialsContract
      * @api
      *
      * @param string $id identifies the resource
+     * @param string $idempotencyKey Unique key for safely retrying the same logical request. Generate a UUID v4 for each operation and reuse it only when retrying that operation with the same request body. Valid characters: A-Z, a-z, 0-9, -, and _. Length: 1-255 characters. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function createToken(
         string $id,
-        RequestOptions|array|null $requestOptions = null
+        ?string $idempotencyKey = null,
+        RequestOptions|array|null $requestOptions = null,
     ): string;
 }

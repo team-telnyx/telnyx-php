@@ -8,30 +8,46 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
+use Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerIdentity;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerName;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier;
+use Telnyx\NumberLookup\NumberLookupGetResponse\Data\EnhancedCallerName;
+use Telnyx\NumberLookup\NumberLookupGetResponse\Data\NnidOverride;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability;
 
 /**
+ * @phpstan-import-type CallerIdentityShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerIdentity
  * @phpstan-import-type CallerNameShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerName
  * @phpstan-import-type CarrierShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier
+ * @phpstan-import-type EnhancedCallerNameShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\EnhancedCallerName
+ * @phpstan-import-type NnidOverrideShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\NnidOverride
  * @phpstan-import-type PortabilityShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability
  *
  * @phpstan-type DataShape = array{
+ *   callerIdentity?: null|CallerIdentity|CallerIdentityShape,
  *   callerName?: null|CallerName|CallerNameShape,
  *   carrier?: null|Carrier|CarrierShape,
  *   countryCode?: string|null,
+ *   enhancedCallerName?: null|EnhancedCallerName|EnhancedCallerNameShape,
  *   fraud?: string|null,
  *   nationalFormat?: string|null,
+ *   nnidOverride?: null|NnidOverride|NnidOverrideShape,
  *   phoneNumber?: string|null,
  *   portability?: null|Portability|PortabilityShape,
  *   recordType?: string|null,
+ *   validNumber?: bool|null,
  * }
  */
 final class Data implements BaseModel
 {
     /** @use SdkModel<DataShape> */
     use SdkModel;
+
+    /**
+     * Identity information for the phone number's owner, including name and postal address. Populated when `type=caller-identity` is requested.
+     */
+    #[Optional('caller_identity')]
+    public ?CallerIdentity $callerIdentity;
 
     #[Optional('caller_name')]
     public ?CallerName $callerName;
@@ -46,6 +62,12 @@ final class Data implements BaseModel
     public ?string $countryCode;
 
     /**
+     * Enhanced caller name for the phone number's owner. Populated when `type=enhanced-caller-name` is requested.
+     */
+    #[Optional('enhanced_caller_name')]
+    public ?EnhancedCallerName $enhancedCallerName;
+
+    /**
      * Unused.
      */
     #[Optional(nullable: true)]
@@ -56,6 +78,12 @@ final class Data implements BaseModel
      */
     #[Optional('national_format')]
     public ?string $nationalFormat;
+
+    /**
+     * Network number ID (NNID) override for the phone number, when one applies (available only to accounts enabled for NNID); otherwise null.
+     */
+    #[Optional('nnid_override', nullable: true)]
+    public ?NnidOverride $nnidOverride;
 
     /**
      * E164-formatted phone number.
@@ -72,6 +100,12 @@ final class Data implements BaseModel
     #[Optional('record_type')]
     public ?string $recordType;
 
+    /**
+     * Indicates whether the phone number is valid.
+     */
+    #[Optional('valid_number')]
+    public ?bool $validNumber;
+
     public function __construct()
     {
         $this->initialize();
@@ -82,30 +116,55 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Omitted|NnidOverride|NnidOverrideShape|null $nnidOverride
+     * @param CallerIdentity|CallerIdentityShape|null $callerIdentity
      * @param CallerName|CallerNameShape|null $callerName
      * @param Carrier|CarrierShape|null $carrier
+     * @param EnhancedCallerName|EnhancedCallerNameShape|null $enhancedCallerName
      * @param Portability|PortabilityShape|null $portability
      */
     public static function with(
         string|Omitted|null $fraud = Omitted::VALUE,
+        Omitted|NnidOverride|array|null $nnidOverride = Omitted::VALUE,
+        CallerIdentity|array|null $callerIdentity = null,
         CallerName|array|null $callerName = null,
         Carrier|array|null $carrier = null,
         ?string $countryCode = null,
+        EnhancedCallerName|array|null $enhancedCallerName = null,
         ?string $nationalFormat = null,
         ?string $phoneNumber = null,
         Portability|array|null $portability = null,
         ?string $recordType = null,
+        ?bool $validNumber = null,
     ): self {
         $self = new self;
 
+        null !== $callerIdentity && $self['callerIdentity'] = $callerIdentity;
         null !== $callerName && $self['callerName'] = $callerName;
         null !== $carrier && $self['carrier'] = $carrier;
         null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $enhancedCallerName && $self['enhancedCallerName'] = $enhancedCallerName;
         Omitted::VALUE !== $fraud && $self['fraud'] = $fraud;
         null !== $nationalFormat && $self['nationalFormat'] = $nationalFormat;
+        Omitted::VALUE !== $nnidOverride && $self['nnidOverride'] = $nnidOverride;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $portability && $self['portability'] = $portability;
         null !== $recordType && $self['recordType'] = $recordType;
+        null !== $validNumber && $self['validNumber'] = $validNumber;
+
+        return $self;
+    }
+
+    /**
+     * Identity information for the phone number's owner, including name and postal address. Populated when `type=caller-identity` is requested.
+     *
+     * @param CallerIdentity|CallerIdentityShape $callerIdentity
+     */
+    public function withCallerIdentity(
+        CallerIdentity|array $callerIdentity
+    ): self {
+        $self = clone $this;
+        $self['callerIdentity'] = $callerIdentity;
 
         return $self;
     }
@@ -144,6 +203,20 @@ final class Data implements BaseModel
     }
 
     /**
+     * Enhanced caller name for the phone number's owner. Populated when `type=enhanced-caller-name` is requested.
+     *
+     * @param EnhancedCallerName|EnhancedCallerNameShape $enhancedCallerName
+     */
+    public function withEnhancedCallerName(
+        EnhancedCallerName|array $enhancedCallerName
+    ): self {
+        $self = clone $this;
+        $self['enhancedCallerName'] = $enhancedCallerName;
+
+        return $self;
+    }
+
+    /**
      * Unused.
      */
     public function withFraud(?string $fraud): self
@@ -161,6 +234,20 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['nationalFormat'] = $nationalFormat;
+
+        return $self;
+    }
+
+    /**
+     * Network number ID (NNID) override for the phone number, when one applies (available only to accounts enabled for NNID); otherwise null.
+     *
+     * @param NnidOverride|NnidOverrideShape|null $nnidOverride
+     */
+    public function withNnidOverride(
+        NnidOverride|array|null $nnidOverride
+    ): self {
+        $self = clone $this;
+        $self['nnidOverride'] = $nnidOverride;
 
         return $self;
     }
@@ -194,6 +281,17 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * Indicates whether the phone number is valid.
+     */
+    public function withValidNumber(bool $validNumber): self
+    {
+        $self = clone $this;
+        $self['validNumber'] = $validNumber;
 
         return $self;
     }

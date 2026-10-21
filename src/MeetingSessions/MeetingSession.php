@@ -87,13 +87,13 @@ final class MeetingSession implements BaseModel
     public ?\DateTimeInterface $assistantStateChangedAt;
 
     /**
-     * Avatar configuration if an avatar is attached, otherwise null.
+     * The assistant's avatar, captured from its `avatar_settings` when the session was created. For display only; later changes to the assistant do not update it.
      */
     #[Required]
     public ?Avatar $avatar;
 
     /**
-     * Current state of the avatar connection, or null if no avatar is attached.
+     * Current state of the avatar, or null if the session has no avatar. `starting` until the avatar's video is playing, then `connected`; `degraded` when the session has fallen back to voice-only (the `avatar.degraded` event carries the reason); `disconnected` when the avatar has ended.
      *
      * @var value-of<AvatarState>|null $avatarState
      */
@@ -405,7 +405,7 @@ final class MeetingSession implements BaseModel
     }
 
     /**
-     * Avatar configuration if an avatar is attached, otherwise null.
+     * The assistant's avatar, captured from its `avatar_settings` when the session was created. For display only; later changes to the assistant do not update it.
      *
      * @param Avatar|AvatarShape|null $avatar
      */
@@ -418,7 +418,7 @@ final class MeetingSession implements BaseModel
     }
 
     /**
-     * Current state of the avatar connection, or null if no avatar is attached.
+     * Current state of the avatar, or null if the session has no avatar. `starting` until the avatar's video is playing, then `connected`; `degraded` when the session has fallen back to voice-only (the `avatar.degraded` event carries the reason); `disconnected` when the avatar has ended.
      *
      * @param AvatarState|value-of<AvatarState>|null $avatarState
      */

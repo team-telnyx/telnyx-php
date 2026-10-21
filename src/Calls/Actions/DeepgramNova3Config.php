@@ -44,7 +44,7 @@ final class DeepgramNova3Config implements BaseModel
     public ?bool $interimResults;
 
     /**
-     * Nova-3 keyterm prompting. Up to 100 domain-specific terms or brand names to bias recognition toward. Nova-3-only; use `hints` on Nova-2.
+     * Keyterm prompting. Up to 100 domain-specific terms or brand names to bias recognition toward. Supported on Nova-3 and Flux models (`deepgram/nova-3`, `deepgram/nova-3-medical`, `deepgram/flux`, `deepgram/flux-multi`); use `hints` on Nova-2.
      *
      * @var list<string>|null $keyterms
      */
@@ -172,7 +172,7 @@ final class DeepgramNova3Config implements BaseModel
     }
 
     /**
-     * Nova-3 keyterm prompting. Up to 100 domain-specific terms or brand names to bias recognition toward. Nova-3-only; use `hints` on Nova-2.
+     * Keyterm prompting. Up to 100 domain-specific terms or brand names to bias recognition toward. Supported on Nova-3 and Flux models (`deepgram/nova-3`, `deepgram/nova-3-medical`, `deepgram/flux`, `deepgram/flux-multi`); use `hints` on Nova-2.
      *
      * @param list<string> $keyterms
      */

@@ -41,7 +41,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * Starts recording with specified parameters for call idientified by call_sid.
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
-     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param string $accountSid Path param: The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param bool $playBeep body param: Whether to play a beep when recording is started
      * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels Body param: When `dual`, final audio file has the first leg on channel A, and the rest on channel B. `single` mixes both tracks into a single channel.
      * @param string $recordingStatusCallback body param: Url where status callbacks will be sent
@@ -91,7 +91,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * Returns recordings for a call identified by call_sid.
      *
      * @param string $callSid the CallSid that identifies the call to update
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

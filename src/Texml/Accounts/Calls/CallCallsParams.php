@@ -14,7 +14,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithURL;
 
 /**
- * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the connection in the Mission Control Portal.
+ * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the TeXML Application in the Mission Control Portal.
  *
  * @see Telnyx\Services\Texml\Accounts\CallsService::calls()
  *

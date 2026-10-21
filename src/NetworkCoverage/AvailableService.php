@@ -10,5 +10,7 @@ enum AvailableService: string
 
     case PRIVATE_WIRELESS_GATEWAY = 'private_wireless_gateway';
 
+    case TAILSCALE_SUBNET_ROUTER = 'tailscale_subnet_router';
+
     case VIRTUAL_CROSS_CONNECT = 'virtual_cross_connect';
 }

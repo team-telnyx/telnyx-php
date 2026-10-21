@@ -41,7 +41,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->retrieve(
             'call_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -57,7 +57,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->retrieve(
             'call_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -73,7 +73,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->update(
             'call_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -89,7 +89,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->update(
             'call_sid',
-            accountSid: 'account_sid',
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
             fallbackMethod: 'GET',
             fallbackURL: 'https://www.example.com/intruction-c.xml',
             method: 'GET',
@@ -112,8 +112,8 @@ final class CallsTest extends TestCase
         }
 
         $result = $this->client->texml->accounts->calls->calls(
-            'account_sid',
-            body: ['url' => 'https://www.example.com/texml.xml']
+            'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
+            body: ['url' => 'https://www.example.com/texml.xml'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -128,10 +128,10 @@ final class CallsTest extends TestCase
         }
 
         $result = $this->client->texml->accounts->calls->calls(
-            'account_sid',
+            'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
             body: [
                 'url' => 'https://www.example.com/texml.xml',
-                'applicationSid' => 'example-app-sid',
+                'applicationSid' => '1293384261075731499',
                 'asyncAmd' => true,
                 'asyncAmdStatusCallback' => 'https://www.example.com/callback',
                 'asyncAmdStatusCallbackMethod' => 'GET',
@@ -200,7 +200,7 @@ final class CallsTest extends TestCase
         }
 
         $result = $this->client->texml->accounts->calls->retrieveCalls(
-            'account_sid'
+            'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -216,7 +216,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->siprecJson(
             'call_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -232,7 +232,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->siprecJson(
             'call_sid',
-            accountSid: 'account_sid',
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
             connectorName: 'my_connector',
             includeMetadataCustomHeaders: true,
             name: 'my_siprec_session',
@@ -257,7 +257,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->streamsJson(
             'call_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -273,7 +273,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->streamsJson(
             'call_sid',
-            accountSid: 'account_sid',
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
             bidirectionalCodec: 'G722',
             bidirectionalMode: 'rtp',
             name: 'My stream',

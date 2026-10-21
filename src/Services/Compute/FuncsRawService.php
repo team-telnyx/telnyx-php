@@ -11,6 +11,8 @@ use Telnyx\Compute\Funcs\FuncGetLogsResponse\FuncRuntimeLogsResponse;
 use Telnyx\Compute\Funcs\FuncGetMetricAggregatesResponse;
 use Telnyx\Compute\Funcs\FuncGetRevisionsResponse;
 use Telnyx\Compute\Funcs\FuncGetShipInspectionResponse;
+use Telnyx\Compute\Funcs\FuncListParams;
+use Telnyx\Compute\Funcs\FuncListResponse;
 use Telnyx\Compute\Funcs\FuncRetrieveLogsParams;
 use Telnyx\Compute\Funcs\FuncRetrieveLogsParams\Type;
 use Telnyx\Compute\Funcs\FuncRetrieveMetricAggregatesParams;
@@ -18,10 +20,13 @@ use Telnyx\Compute\Funcs\FuncRetrieveRevisionsParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Compute\FuncsRawContract;
 
 /**
+ * Manage Edge Compute functions.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class FuncsRawService implements FuncsRawContract
@@ -31,6 +36,41 @@ final class FuncsRawService implements FuncsRawContract
      * @internal
      */
     public function __construct(private Client $client) {}
+
+    /**
+     * @api
+     *
+     * List functions for the authenticated organization. Each function includes its persisted function-scoped bindings. Actor bindings expose actor_type and env_name, allowing clients to identify every function attached to a Stateful Actor type.
+     *
+     * @param array{pageNumber?: int, pageSize?: int}|FuncListParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<DefaultFlatPagination<FuncListResponse>>
+     *
+     * @throws APIException
+     */
+    public function list(
+        array|FuncListParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = FuncListParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: 'compute/funcs',
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
+            options: $options,
+            convert: FuncListResponse::class,
+            page: DefaultFlatPagination::class,
+        );
+    }
 
     /**
      * @api

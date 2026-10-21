@@ -66,7 +66,7 @@ final class JobUpdateBatchParams implements BaseModel
     public ?string $connectionID;
 
     /**
-     * A customer reference string for customer look ups.
+     * Sets the customer reference on the selected phone numbers and retains the supplied value on the job. Recover the job without its ID using GET /phone_numbers/jobs with filter[customer_reference] within 90 days of job creation. This body field updates the numbers; the separate filter[customer_reference] query parameter selects numbers by their current reference.
      */
     #[Optional('customer_reference')]
     public ?string $customerReference;
@@ -207,7 +207,7 @@ final class JobUpdateBatchParams implements BaseModel
     }
 
     /**
-     * A customer reference string for customer look ups.
+     * Sets the customer reference on the selected phone numbers and retains the supplied value on the job. Recover the job without its ID using GET /phone_numbers/jobs with filter[customer_reference] within 90 days of job creation. This body field updates the numbers; the separate filter[customer_reference] query parameter selects numbers by their current reference.
      */
     public function withCustomerReference(string $customerReference): self
     {

@@ -13,7 +13,7 @@ use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
-use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
+use Telnyx\PhoneNumbers\Jobs\NumbersPhoneNumbersJob;
 use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
 use Telnyx\RequestOptions;
 
@@ -45,7 +45,7 @@ interface JobsContract
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PhoneNumbersJob>
+     * @return DefaultFlatPagination<NumbersPhoneNumbersJob>
      *
      * @throws APIException
      */
@@ -77,7 +77,7 @@ interface JobsContract
      * @param \Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter|FilterShape1 $filter Query param: Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
      * @param string $billingGroupID body param: Identifies the billing group associated with the phone number
      * @param string $connectionID body param: Identifies the connection associated with the phone number
-     * @param string $customerReference body param: A customer reference string for customer look ups
+     * @param string $customerReference Body param: Sets the customer reference on the selected phone numbers and retains the supplied value on the job. Recover the job without its ID using GET /phone_numbers/jobs with filter[customer_reference] within 90 days of job creation. This body field updates the numbers; the separate filter[customer_reference] query parameter selects numbers by their current reference.
      * @param bool $deletionLockEnabled Body param: Indicates whether to enable or disable the deletion lock on each phone number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
      * @param string $externalPin Body param: If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
      * @param bool $hdVoiceEnabled Body param: Indicates whether to enable or disable HD Voice on each phone number. HD Voice is a paid feature and may not be available for all phone numbers, more details about it can be found in the Telnyx support documentation.

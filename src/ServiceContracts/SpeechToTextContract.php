@@ -38,14 +38,14 @@ interface SpeechToTextContract
      *
      * @param InputFormat|value-of<InputFormat> $inputFormat the format of input audio stream
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine the transcription engine to use for processing the audio stream
-     * @param int $endpointing Silence duration (in milliseconds) that triggers end-of-speech detection. When set, the engine uses this value to determine when a speaker has stopped talking. Supported by `xAI`, `Deepgram`, `Google`, `Speechmatics`, and `Soniox`. `Soniox` accepts values between 500 and 3000. Other engines may not support this parameter.
+     * @param int $endpointing Silence duration (in milliseconds) that triggers end-of-speech detection. When set, the engine uses this value to determine when a speaker has stopped talking. Supported by `xAI`, `Deepgram`, `Google`, `Speechmatics` (`speechmatics/standard` only; `speechmatics/linden-1` uses fixed service-side voice activity detection and ignores it), and `Soniox`. `Soniox` accepts values between 500 and 3000. Other engines may not support this parameter.
      * @param bool $interimResults whether to receive interim transcription results
      * @param string $keyterm A key term to boost in the transcription. The engine will be more likely to recognize this term. Can be specified multiple times for multiple terms.
      * @param string $keywords Comma-separated list of keywords to boost in the transcription. The engine will prioritize recognition of these words.
-     * @param string $language The language spoken in the audio stream. For `cohere/ar-stt`, this must be `ar` or `en` — unlike other engines, Cohere does not auto-detect the language, and rejects unsupported values including `auto`; omitting it defaults to `ar`.
+     * @param string $language The language spoken in the audio stream. For `cohere/ar-stt`, this must be `ar` or `en` — unlike other engines, Cohere does not auto-detect the language, and rejects unsupported values including `auto`; omitting it defaults to `ar`. For `speechmatics/linden-1`, omitting it defaults to `en`; `auto`, `auto_beta`, `multi`, or a language outside its supported list is rejected when the connection is established. `speechmatics/linden-1` also accepts `en-US`, `en-GB`, `en-AU`, `cmn-Hans`, and `cmn-Hant`, which select the spelling or script variant (`en` alone uses the default spelling).
      * @param Model|value-of<Model> $model the specific model to use within the selected transcription engine
      * @param string $redact Enable redaction of sensitive information (e.g., PCI data, SSN) from transcription results. Supported values depend on the transcription engine.
-     * @param int $sampleRate Audio sample rate in Hz. Required when `input_format` is a raw encoding (`linear16`, `linear32`) — those formats carry no header metadata. Ignored for container formats (`mp3`, `wav`), which self-describe their rate.
+     * @param int $sampleRate Audio sample rate in Hz. Required when `input_format` is a raw encoding (`linear16`, `linear32`) — those formats carry no header metadata. Ignored for container formats (`mp3`, `wav`), which self-describe their rate. `speechmatics/linden-1` accepts only `16000`.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -548,6 +548,7 @@ interface ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP BYE message
+     * @param string $reason Text for the SIP `Reason` header (RFC 3326) sent when cancelling an unanswered outbound leg. The SIP CANCEL carries `Reason: SIP;cause=200;text="<reason>"`; phones such as Poly and Yealink use it to suppress the missed-call entry for a call answered elsewhere. Has no effect on an answered leg or an inbound leg. A hangup sent before the leg's `call.initiated` webhook still hangs up the leg, but without the `Reason` header. Must not contain `"`, `\`, control characters, or characters outside the Basic Multilingual Plane (such as emoji); invalid values are rejected with a 422.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -557,6 +558,7 @@ interface ActionsContract
         ?string $clientState = null,
         ?string $commandID = null,
         ?array $customHeaders = null,
+        ?string $reason = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionHangupResponse;
 

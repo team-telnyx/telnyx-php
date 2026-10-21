@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * RCS webhook message body. Text messages use the text property.
+ * Message body for RCS and WhatsApp. RCS text messages use the text property. WhatsApp messages contain the `whatsapp_message` object from the send request.
  *
  * @phpstan-type BodyShape = array{text?: string|null}
  */

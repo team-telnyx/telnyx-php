@@ -23,6 +23,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   maxTurnSilence?: int|null,
  *   minTurnSilence?: int|null,
  *   numerals?: bool|null,
+ *   prompt?: string|null,
+ *   removeDisfluencies?: bool|null,
  *   smartFormat?: bool|null,
  * }
  */
@@ -50,7 +52,9 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?bool $enableEndpointDetection;
 
     /**
-     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Confidence level required to trigger an end of turn. Higher values require more certainty before ending a turn.
+     * @deprecated
+     *
+     * Deprecated and ignored. Accepted for backwards compatibility. AssemblyAI turn detection is configured with min_turn_silence and max_turn_silence.
      */
     #[Optional('end_of_turn_confidence_threshold')]
     public ?float $endOfTurnConfidenceThreshold;
@@ -74,7 +78,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?bool $interimResults;
 
     /**
-     * Available only for deepgram/nova-3 and deepgram/flux. A comma-separated list of key terms to boost for recognition during transcription. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to the speech-to-text engine.
+     * A comma-separated list of key terms to boost for recognition during transcription, used by Deepgram, Reson8, Speechmatics Linden 1 and AssemblyAI models. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words. At most 1000 characters in total. For assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming), also at most 100 terms of up to 50 characters each. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to the speech-to-text engine.
      */
     #[Optional]
     public ?string $keyterm;
@@ -108,6 +112,18 @@ final class TranscriptionSettingsConfig implements BaseModel
     #[Optional]
     public ?bool $numerals;
 
+    /**
+     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Context about the conversation (domain, names, terms) to improve transcription; describe the content, do not give instructions. Leave empty unless needed. At most 1750 characters.
+     */
+    #[Optional]
+    public ?string $prompt;
+
+    /**
+     * Available only for speechmatics/linden-1. When true, filler words such as "um" and "uh" are removed from the transcript. Disfluency removal is supported only for `ar`, `cmn`, `da`, `de`, `el`, `en`, `es`, `fr`, `he`, `hi`, `hu`, `it`, `ja`, `nl`, `pl`, `pt`, and `ru`, determined by the base language (so `en-US`, `en-GB`, `en-AU`, `cmn-Hans`, and `cmn-Hant` are supported); for other languages, filler words remain in the transcript.
+     */
+    #[Optional('remove_disfluencies')]
+    public ?bool $removeDisfluencies;
+
     #[Optional('smart_format')]
     public ?bool $smartFormat;
 
@@ -137,6 +153,8 @@ final class TranscriptionSettingsConfig implements BaseModel
         ?int $maxTurnSilence = null,
         ?int $minTurnSilence = null,
         ?bool $numerals = null,
+        ?string $prompt = null,
+        ?bool $removeDisfluencies = null,
         ?bool $smartFormat = null,
     ): self {
         $self = new self;
@@ -154,6 +172,8 @@ final class TranscriptionSettingsConfig implements BaseModel
         null !== $maxTurnSilence && $self['maxTurnSilence'] = $maxTurnSilence;
         null !== $minTurnSilence && $self['minTurnSilence'] = $minTurnSilence;
         null !== $numerals && $self['numerals'] = $numerals;
+        null !== $prompt && $self['prompt'] = $prompt;
+        null !== $removeDisfluencies && $self['removeDisfluencies'] = $removeDisfluencies;
         null !== $smartFormat && $self['smartFormat'] = $smartFormat;
 
         return $self;
@@ -194,7 +214,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Confidence level required to trigger an end of turn. Higher values require more certainty before ending a turn.
+     * Deprecated and ignored. Accepted for backwards compatibility. AssemblyAI turn detection is configured with min_turn_silence and max_turn_silence.
      */
     public function withEndOfTurnConfidenceThreshold(
         float $endOfTurnConfidenceThreshold
@@ -239,7 +259,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for deepgram/nova-3 and deepgram/flux. A comma-separated list of key terms to boost for recognition during transcription. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to the speech-to-text engine.
+     * A comma-separated list of key terms to boost for recognition during transcription, used by Deepgram, Reson8, Speechmatics Linden 1 and AssemblyAI models. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words. At most 1000 characters in total. For assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming), also at most 100 terms of up to 50 characters each. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to the speech-to-text engine.
      */
     public function withKeyterm(string $keyterm): self
     {
@@ -299,6 +319,28 @@ final class TranscriptionSettingsConfig implements BaseModel
     {
         $self = clone $this;
         $self['numerals'] = $numerals;
+
+        return $self;
+    }
+
+    /**
+     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Context about the conversation (domain, names, terms) to improve transcription; describe the content, do not give instructions. Leave empty unless needed. At most 1750 characters.
+     */
+    public function withPrompt(string $prompt): self
+    {
+        $self = clone $this;
+        $self['prompt'] = $prompt;
+
+        return $self;
+    }
+
+    /**
+     * Available only for speechmatics/linden-1. When true, filler words such as "um" and "uh" are removed from the transcript. Disfluency removal is supported only for `ar`, `cmn`, `da`, `de`, `el`, `en`, `es`, `fr`, `he`, `hi`, `hu`, `it`, `ja`, `nl`, `pl`, `pt`, and `ru`, determined by the base language (so `en-US`, `en-GB`, `en-AU`, `cmn-Hans`, and `cmn-Hant` are supported); for other languages, filler words remain in the transcript.
+     */
+    public function withRemoveDisfluencies(bool $removeDisfluencies): self
+    {
+        $self = clone $this;
+        $self['removeDisfluencies'] = $removeDisfluencies;
 
         return $self;
     }

@@ -39,6 +39,8 @@ enum Model: string
 
     case SPEECHMATICS_STANDARD = 'speechmatics/standard';
 
+    case SPEECHMATICS_LINDEN_1 = 'speechmatics/linden-1';
+
     case SONIOX_STT_RT_V4 = 'soniox/stt-rt-v4';
 
     case NVIDIA_PARAKEET_V3 = 'nvidia/parakeet-v3';

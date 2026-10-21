@@ -663,6 +663,7 @@ final class ActionsRawService implements ActionsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>,
+     *   reason?: string,
      * }|ActionHangupParams $params
      * @param RequestOpts|null $requestOptions
      *

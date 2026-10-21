@@ -33,7 +33,7 @@ final class TelnyxUltraClone implements BaseModel
     use SdkModel;
 
     /**
-     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide up to 60 seconds of clear, uninterrupted speech. Maximum size: 5MB.
+     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide up to 60 seconds of clear, uninterrupted speech. Maximum size: 20MB.
      */
     #[Required('audio_file')]
     public string $audioFile;
@@ -47,7 +47,7 @@ final class TelnyxUltraClone implements BaseModel
     public string $gender;
 
     /**
-     * ISO 639-1 language code from the Ultra language set (40 languages).
+     * ISO 639-1 language code from the Ultra language set (42 languages).
      */
     #[Required]
     public string $language;
@@ -153,7 +153,7 @@ final class TelnyxUltraClone implements BaseModel
     }
 
     /**
-     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide up to 60 seconds of clear, uninterrupted speech. Maximum size: 5MB.
+     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide up to 60 seconds of clear, uninterrupted speech. Maximum size: 20MB.
      */
     public function withAudioFile(string|FileParam $audioFile): self
     {
@@ -177,7 +177,7 @@ final class TelnyxUltraClone implements BaseModel
     }
 
     /**
-     * ISO 639-1 language code from the Ultra language set (40 languages).
+     * ISO 639-1 language code from the Ultra language set (42 languages).
      */
     public function withLanguage(string $language): self
     {

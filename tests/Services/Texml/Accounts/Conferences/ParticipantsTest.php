@@ -45,7 +45,7 @@ final class ParticipantsTest extends TestCase
             ->participants
             ->retrieve(
                 'call_sid_or_participant_label',
-                accountSid: 'account_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
                 conferenceSid: 'conference_sid',
             )
         ;
@@ -69,7 +69,7 @@ final class ParticipantsTest extends TestCase
             ->participants
             ->retrieve(
                 'call_sid_or_participant_label',
-                accountSid: 'account_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
                 conferenceSid: 'conference_sid',
             )
         ;
@@ -87,7 +87,7 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->update(
             'call_sid_or_participant_label',
-            accountSid: 'account_sid',
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
             conferenceSid: 'conference_sid',
         );
 
@@ -104,7 +104,7 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->update(
             'call_sid_or_participant_label',
-            accountSid: 'account_sid',
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
             conferenceSid: 'conference_sid',
             announceMethod: 'GET',
             announceURL: 'https://www.example.com/announce.xml',
@@ -132,7 +132,7 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->delete(
             'call_sid_or_participant_label',
-            accountSid: 'account_sid',
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
             conferenceSid: 'conference_sid',
         );
 
@@ -149,7 +149,7 @@ final class ParticipantsTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->participants->delete(
             'call_sid_or_participant_label',
-            accountSid: 'account_sid',
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
             conferenceSid: 'conference_sid',
         );
 
@@ -170,7 +170,10 @@ final class ParticipantsTest extends TestCase
             ->accounts
             ->conferences
             ->participants
-            ->participants('conference_sid', accountSid: 'account_sid')
+            ->participants(
+                'conference_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -192,7 +195,7 @@ final class ParticipantsTest extends TestCase
             ->participants
             ->participants(
                 'conference_sid',
-                accountSid: 'account_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
                 amdStatusCallback: 'https://www.example.com/amd_result',
                 amdStatusCallbackMethod: 'GET',
                 applicationSid: '1846572522338780702',
@@ -269,7 +272,10 @@ final class ParticipantsTest extends TestCase
             ->accounts
             ->conferences
             ->participants
-            ->retrieveParticipants('conference_sid', accountSid: 'account_sid')
+            ->retrieveParticipants(
+                'conference_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -289,7 +295,10 @@ final class ParticipantsTest extends TestCase
             ->accounts
             ->conferences
             ->participants
-            ->retrieveParticipants('conference_sid', accountSid: 'account_sid')
+            ->retrieveParticipants(
+                'conference_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

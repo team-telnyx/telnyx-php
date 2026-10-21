@@ -68,6 +68,7 @@ final class CredentialConnectionsTest extends TestCase
             active: true,
             anchorsiteOverride: AnchorsiteOverride::LATENCY,
             androidPushCredentialID: '06b09dfd-7154-4980-8b75-cebf7a9d4f8e',
+            bridgeGenerateComfortNoiseOnCn: false,
             callCostInWebhooks: false,
             defaultOnHoldComfortNoiseEnabled: false,
             dtmfType: DtmfType::RFC_2833,

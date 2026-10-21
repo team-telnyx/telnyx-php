@@ -9,7 +9,9 @@ use Telnyx\Client;
 use Telnyx\Compute\Funcs\FuncGetMetricAggregatesResponse;
 use Telnyx\Compute\Funcs\FuncGetRevisionsResponse;
 use Telnyx\Compute\Funcs\FuncGetShipInspectionResponse;
+use Telnyx\Compute\Funcs\FuncListResponse;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -28,6 +30,24 @@ final class FuncsTest extends TestCase
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
+    }
+
+    #[Test]
+    public function testList(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $page = $this->client->compute->funcs->list();
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(FuncListResponse::class, $item);
+        }
     }
 
     #[Test]

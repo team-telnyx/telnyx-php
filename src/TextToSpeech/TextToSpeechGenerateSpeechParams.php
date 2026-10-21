@@ -141,7 +141,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     public ?Soniox $soniox;
 
     /**
-     * Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
+     * Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`. `Bayan` accepts `voice_speed` from 0.5 to 2.0; `Sukhan` doesn't support it. `Bayan` synthesizes at a native 16 kHz: `sampling_rate` `8000`, `22050`, or `24000` is resampled, needs `response_format: pcm`, and isn't available with `output_type: audio_id`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
      */
     #[Optional]
     public ?Telnyx $telnyx;
@@ -386,7 +386,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     }
 
     /**
-     * Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
+     * Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`. `Bayan` accepts `voice_speed` from 0.5 to 2.0; `Sukhan` doesn't support it. `Bayan` synthesizes at a native 16 kHz: `sampling_rate` `8000`, `22050`, or `24000` is resampled, needs `response_format: pcm`, and isn't available with `output_type: audio_id`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
      *
      * @param Telnyx|TelnyxShape $telnyx
      */

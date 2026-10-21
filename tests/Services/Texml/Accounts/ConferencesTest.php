@@ -40,7 +40,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieve(
             'conference_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -56,7 +56,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieve(
             'conference_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -72,7 +72,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->update(
             'conference_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -88,7 +88,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->update(
             'conference_sid',
-            accountSid: 'account_sid',
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
             announceMethod: 'GET',
             announceURL: 'https://www.example.com/announce.xml',
             status: 'completed',
@@ -106,7 +106,7 @@ final class ConferencesTest extends TestCase
         }
 
         $result = $this->client->texml->accounts->conferences->retrieveConferences(
-            'account_sid'
+            'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -122,7 +122,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieveRecordings(
             'conference_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -138,7 +138,7 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieveRecordings(
             'conference_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -157,7 +157,10 @@ final class ConferencesTest extends TestCase
             ->texml
             ->accounts
             ->conferences
-            ->retrieveRecordingsJson('conference_sid', accountSid: 'account_sid')
+            ->retrieveRecordingsJson(
+                'conference_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -176,7 +179,10 @@ final class ConferencesTest extends TestCase
             ->texml
             ->accounts
             ->conferences
-            ->retrieveRecordingsJson('conference_sid', accountSid: 'account_sid')
+            ->retrieveRecordingsJson(
+                'conference_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

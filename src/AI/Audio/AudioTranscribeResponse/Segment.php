@@ -18,6 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   end: float,
  *   start: float,
  *   text: string,
+ *   channel?: int|null,
  *   speakers?: list<int>|null,
  *   words?: list<AudioTranscriptionResponseWord|AudioTranscriptionResponseWordShape>|null,
  * }
@@ -52,7 +53,13 @@ final class Segment implements BaseModel
     public string $text;
 
     /**
-     * Speaker indices heard in this segment. Returned by the `deepgram/*` models when `diarize` is enabled via `model_config`.
+     * Zero-indexed audio channel of this segment. Returned by the `deepgram/*` models when `multichannel` is enabled via `model_config` and the file has more than one channel. Segments from all channels are merged in one list ordered by start time.
+     */
+    #[Optional]
+    public ?int $channel;
+
+    /**
+     * Speaker indices heard in this segment. Returned by the `deepgram/*` models and `reson8/prerecorded` when `diarize` is enabled via `model_config`. With `multichannel`, speakers are numbered per channel from 0, so identify a speaker by (`channel`, speaker).
      *
      * @var list<int>|null $speakers
      */
@@ -60,7 +67,7 @@ final class Segment implements BaseModel
     public ?array $speakers;
 
     /**
-     * Word-level timing detail for this segment. Returned by the `deepgram/*` models when word-level output is enabled via `model_config`.
+     * Word-level timing detail for this segment. Returned by the `deepgram/*` models when word-level output is enabled via `model_config`, and by `reson8/prerecorded`.
      *
      * @var list<AudioTranscriptionResponseWord>|null $words
      */
@@ -99,6 +106,7 @@ final class Segment implements BaseModel
         float $end,
         float $start,
         string $text,
+        ?int $channel = null,
         ?array $speakers = null,
         ?array $words = null,
     ): self {
@@ -109,6 +117,7 @@ final class Segment implements BaseModel
         $self['start'] = $start;
         $self['text'] = $text;
 
+        null !== $channel && $self['channel'] = $channel;
         null !== $speakers && $self['speakers'] = $speakers;
         null !== $words && $self['words'] = $words;
 
@@ -160,7 +169,18 @@ final class Segment implements BaseModel
     }
 
     /**
-     * Speaker indices heard in this segment. Returned by the `deepgram/*` models when `diarize` is enabled via `model_config`.
+     * Zero-indexed audio channel of this segment. Returned by the `deepgram/*` models when `multichannel` is enabled via `model_config` and the file has more than one channel. Segments from all channels are merged in one list ordered by start time.
+     */
+    public function withChannel(int $channel): self
+    {
+        $self = clone $this;
+        $self['channel'] = $channel;
+
+        return $self;
+    }
+
+    /**
+     * Speaker indices heard in this segment. Returned by the `deepgram/*` models and `reson8/prerecorded` when `diarize` is enabled via `model_config`. With `multichannel`, speakers are numbered per channel from 0, so identify a speaker by (`channel`, speaker).
      *
      * @param list<int> $speakers
      */
@@ -173,7 +193,7 @@ final class Segment implements BaseModel
     }
 
     /**
-     * Word-level timing detail for this segment. Returned by the `deepgram/*` models when word-level output is enabled via `model_config`.
+     * Word-level timing detail for this segment. Returned by the `deepgram/*` models when word-level output is enabled via `model_config`, and by `reson8/prerecorded`.
      *
      * @param list<AudioTranscriptionResponseWord|AudioTranscriptionResponseWordShape> $words
      */
