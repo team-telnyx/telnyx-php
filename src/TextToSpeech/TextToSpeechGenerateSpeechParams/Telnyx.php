@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx\Emotion;
 
 /**
- * Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
+ * Telnyx provider-specific parameters. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`. `Bayan` accepts `voice_speed` from 0.5 to 2.0; `Sukhan` doesn't support it. `Bayan` synthesizes at a native 16 kHz: `sampling_rate` `8000`, `22050`, or `24000` is resampled, needs `response_format: pcm`, and isn't available with `output_type: audio_id`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
  *
  * @phpstan-type TelnyxShape = array{
  *   emotion?: null|Emotion|value-of<Emotion>,
@@ -40,13 +40,13 @@ final class Telnyx implements BaseModel
     public ?string $responseFormat;
 
     /**
-     * Audio sampling rate in Hz.
+     * Audio sampling rate in Hz. `Bayan` ignores the default and synthesizes at its native 16 kHz unless `8000`, `22050`, or `24000` is set explicitly with `response_format: pcm`. Resampled rates aren't available with `output_type: audio_id`.
      */
     #[Optional('sampling_rate')]
     public ?int $samplingRate;
 
     /**
-     * Voice speed multiplier. Telnyx `Ultra` voices accept values from 0.6 to 1.5 — requests outside that range are rejected by the synthesis engine. `KokoroTTS` and `Qwen3TTS` accept the field but do not apply it. `Bayan` and `Sukhan` don't support it.
+     * Voice speed multiplier. Telnyx `Ultra` voices accept values from 0.6 to 1.5 — requests outside that range are rejected by the synthesis engine. `Bayan` accepts values from 0.5 to 2.0. `KokoroTTS` and `Qwen3TTS` accept the field but do not apply it. `Sukhan` doesn't support it.
      */
     #[Optional('voice_speed')]
     public ?float $voiceSpeed;
@@ -112,7 +112,7 @@ final class Telnyx implements BaseModel
     }
 
     /**
-     * Audio sampling rate in Hz.
+     * Audio sampling rate in Hz. `Bayan` ignores the default and synthesizes at its native 16 kHz unless `8000`, `22050`, or `24000` is set explicitly with `response_format: pcm`. Resampled rates aren't available with `output_type: audio_id`.
      */
     public function withSamplingRate(int $samplingRate): self
     {
@@ -123,7 +123,7 @@ final class Telnyx implements BaseModel
     }
 
     /**
-     * Voice speed multiplier. Telnyx `Ultra` voices accept values from 0.6 to 1.5 — requests outside that range are rejected by the synthesis engine. `KokoroTTS` and `Qwen3TTS` accept the field but do not apply it. `Bayan` and `Sukhan` don't support it.
+     * Voice speed multiplier. Telnyx `Ultra` voices accept values from 0.6 to 1.5 — requests outside that range are rejected by the synthesis engine. `Bayan` accepts values from 0.5 to 2.0. `KokoroTTS` and `Qwen3TTS` accept the field but do not apply it. `Sukhan` doesn't support it.
      */
     public function withVoiceSpeed(float $voiceSpeed): self
     {

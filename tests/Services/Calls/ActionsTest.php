@@ -325,7 +325,9 @@ final class ActionsTest extends TestCase
             terminatingDigit: '#',
             timeoutMillis: 60000,
             validDigits: '123',
-            voiceSettings: ['apiKeyRef' => 'acme-engine-key'],
+            voiceSettings: [
+                'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
+            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -620,7 +622,9 @@ final class ActionsTest extends TestCase
             serviceLevel: 'basic',
             stop: 'current',
             targetLegs: 'both',
-            voiceSettings: ['apiKeyRef' => 'acme-engine-key'],
+            voiceSettings: [
+                'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
+            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

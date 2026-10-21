@@ -6,7 +6,6 @@ namespace Telnyx\Calls\Actions\ActionSpeakParams;
 
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
-use Telnyx\Calls\Actions\CommunityVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\SonioxVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -19,7 +18,7 @@ use Telnyx\ResembleVoiceSettings;
 use Telnyx\XaiVoiceSettings;
 
 /**
- * The settings associated with the voice selected. For a community engine voice, `api_key_ref` plus the engine's own settings.
+ * The settings associated with the voice selected.
  *
  * @phpstan-import-type ElevenLabsVoiceSettingsShape from \Telnyx\Calls\Actions\ElevenLabsVoiceSettings
  * @phpstan-import-type TelnyxVoiceSettingsShape from \Telnyx\Calls\Actions\TelnyxVoiceSettings
@@ -30,14 +29,18 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type InworldVoiceSettingsShape from \Telnyx\InworldVoiceSettings
  * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\XaiVoiceSettings
  * @phpstan-import-type SonioxVoiceSettingsShape from \Telnyx\Calls\Actions\SonioxVoiceSettings
- * @phpstan-import-type CommunityVoiceSettingsShape from \Telnyx\Calls\Actions\CommunityVoiceSettings
  *
- * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|CommunityVoiceSettings
- * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|ResembleVoiceSettingsShape|InworldVoiceSettingsShape|XaiVoiceSettingsShape|SonioxVoiceSettingsShape|CommunityVoiceSettingsShape
+ * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings
+ * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|ResembleVoiceSettingsShape|InworldVoiceSettingsShape|XaiVoiceSettingsShape|SonioxVoiceSettingsShape
  */
 final class VoiceSettings implements ConverterSource
 {
     use SdkUnion;
+
+    public static function discriminator(): string
+    {
+        return 'type';
+    }
 
     /**
      * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
@@ -45,16 +48,15 @@ final class VoiceSettings implements ConverterSource
     public static function variants(): array
     {
         return [
-            ElevenLabsVoiceSettings::class,
-            TelnyxVoiceSettings::class,
-            AwsVoiceSettings::class,
-            MinimaxVoiceSettings::class,
-            AzureVoiceSettings::class,
-            ResembleVoiceSettings::class,
-            InworldVoiceSettings::class,
-            XaiVoiceSettings::class,
-            SonioxVoiceSettings::class,
-            CommunityVoiceSettings::class,
+            'elevenlabs' => ElevenLabsVoiceSettings::class,
+            'telnyx' => TelnyxVoiceSettings::class,
+            'aws' => AwsVoiceSettings::class,
+            'minimax' => MinimaxVoiceSettings::class,
+            'azure' => AzureVoiceSettings::class,
+            'resemble' => ResembleVoiceSettings::class,
+            'inworld' => InworldVoiceSettings::class,
+            'xai' => XaiVoiceSettings::class,
+            'soniox' => SonioxVoiceSettings::class,
         ];
     }
 }

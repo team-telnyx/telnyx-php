@@ -175,13 +175,12 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type PromptsShape from \Telnyx\Calls\Actions\ActionPayParams\Prompts
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant as AssistantShape1
  * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
  * @phpstan-import-type ConversationRelayInterruptionSettingsShape from \Telnyx\Calls\ConversationRelayInterruptionSettings
  * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
  * @phpstan-import-type ConversationRelayTranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ConversationRelayTranscriptionEngineConfig
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -1143,8 +1142,6 @@ final class ActionsRawService implements ActionsRawContract
      *   participants?: list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape>,
      *   sendMessageHistoryUpdates?: bool,
      *   transcription?: TranscriptionConfig|TranscriptionConfigShape,
-     *   voice?: string,
-     *   voiceSettings?: VoiceSettingsShape3,
      * }|ActionStartAIAssistantParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -1205,7 +1202,7 @@ final class ActionsRawService implements ActionsRawContract
      *   ttsProvider?: string,
      *   url?: string,
      *   voice?: string,
-     *   voiceSettings?: VoiceSettingsShape4,
+     *   voiceSettings?: VoiceSettingsShape3,
      * }|ActionStartConversationRelayParams $params
      * @param RequestOpts|null $requestOptions
      *

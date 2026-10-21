@@ -9,6 +9,7 @@ use Telnyx\Calls\Actions\ActionSpeakParams\Language;
 use Telnyx\Calls\Actions\ActionSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionSpeakParams\TargetLegs;
+use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -77,7 +78,6 @@ final class ActionSpeakParams implements BaseModel
      * - **Soniox:** Use `Soniox.<ModelId>.<VoiceId>` (e.g., `Soniox.tts-rt-v2.Emma`). Supported model: `tts-rt-v2`. Browse the catalog via the [Voices API](https://developers.telnyx.com/api-reference/text-to-speech-commands/list-available-voices). Every voice speaks all supported languages; set `language` to the two-letter ISO 639-1 code of the text, for example `it`. SSML is not supported. Use `voice_settings` to configure `speed` (0.7 to 1.3) and `reduce_silence`.
      * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      * - **Humain:** Use `Humain.<VoiceId>` (e.g., `Humain.sara-ar`). Available voices: `sara-en`, `abdulaziz-en`, `sara-ar`, `abdulaziz-ar`, `nourah-ar`, `abdullah-ar`. Native Arabic (Saudi dialect) and English voices only — no `ModelId` segment.
-     * - **Community engines:** Use `<EngineName>.<VoiceId>` (e.g., `acme.alpha`), where `EngineName` is the lowercase name of a community text-to-speech engine and `VoiceId` is one of the voices it lists. You must provide your key for the engine as an integration identifier secret in `"voice_settings": {"api_key_ref": "<secret_identifier>"}`; any other key in `voice_settings` is a setting of the engine. See the [Community TTS engines guide](/docs/voice/tts/community-engines).
      *
      * For service_level basic, you may define the gender of the speaker (male or female).
      */
@@ -143,12 +143,12 @@ final class ActionSpeakParams implements BaseModel
     public ?string $targetLegs;
 
     /**
-     * The settings associated with the voice selected. For a community engine voice, `api_key_ref` plus the engine's own settings.
+     * The settings associated with the voice selected.
      *
      * @var VoiceSettingsVariants|null $voiceSettings
      */
-    #[Optional('voice_settings')]
-    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|CommunityVoiceSettings|null $voiceSettings;
+    #[Optional('voice_settings', union: VoiceSettings::class)]
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings;
 
     /**
      * `new ActionSpeakParams()` is missing required properties by the API.
@@ -192,7 +192,7 @@ final class ActionSpeakParams implements BaseModel
         ServiceLevel|string|null $serviceLevel = null,
         ?string $stop = null,
         TargetLegs|string|null $targetLegs = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|CommunityVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
 
@@ -240,7 +240,6 @@ final class ActionSpeakParams implements BaseModel
      * - **Soniox:** Use `Soniox.<ModelId>.<VoiceId>` (e.g., `Soniox.tts-rt-v2.Emma`). Supported model: `tts-rt-v2`. Browse the catalog via the [Voices API](https://developers.telnyx.com/api-reference/text-to-speech-commands/list-available-voices). Every voice speaks all supported languages; set `language` to the two-letter ISO 639-1 code of the text, for example `it`. SSML is not supported. Use `voice_settings` to configure `speed` (0.7 to 1.3) and `reduce_silence`.
      * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      * - **Humain:** Use `Humain.<VoiceId>` (e.g., `Humain.sara-ar`). Available voices: `sara-en`, `abdulaziz-en`, `sara-ar`, `abdulaziz-ar`, `nourah-ar`, `abdullah-ar`. Native Arabic (Saudi dialect) and English voices only — no `ModelId` segment.
-     * - **Community engines:** Use `<EngineName>.<VoiceId>` (e.g., `acme.alpha`), where `EngineName` is the lowercase name of a community text-to-speech engine and `VoiceId` is one of the voices it lists. You must provide your key for the engine as an integration identifier secret in `"voice_settings": {"api_key_ref": "<secret_identifier>"}`; any other key in `voice_settings` is a setting of the engine. See the [Community TTS engines guide](/docs/voice/tts/community-engines).
      *
      * For service_level basic, you may define the gender of the speaker (male or female).
      */
@@ -351,12 +350,12 @@ final class ActionSpeakParams implements BaseModel
     }
 
     /**
-     * The settings associated with the voice selected. For a community engine voice, `api_key_ref` plus the engine's own settings.
+     * The settings associated with the voice selected.
      *
      * @param VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|CommunityVoiceSettings $voiceSettings,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings $voiceSettings,
     ): self {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;

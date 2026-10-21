@@ -95,7 +95,6 @@ use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\AIAssistantJoinParticipant;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
-use Telnyx\Calls\Actions\CommunityVoiceSettings;
 use Telnyx\Calls\Actions\ConversationRelayInterruptible;
 use Telnyx\Calls\Actions\ConversationRelayTranscriptionEngineConfig;
 use Telnyx\Calls\Actions\DeepgramNova2Config;
@@ -154,13 +153,12 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type PromptsShape from \Telnyx\Calls\Actions\ActionPayParams\Prompts
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant as AssistantShape1
  * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
  * @phpstan-import-type ConversationRelayInterruptionSettingsShape from \Telnyx\Calls\ConversationRelayInterruptionSettings
  * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
  * @phpstan-import-type ConversationRelayTranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ConversationRelayTranscriptionEngineConfig
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -502,7 +500,6 @@ interface ActionsContract
      * - **Soniox:** Use `Soniox.<ModelId>.<VoiceId>` (e.g., `Soniox.tts-rt-v2.Emma`). Supported model: `tts-rt-v2`. Browse the catalog via the [Voices API](https://developers.telnyx.com/api-reference/text-to-speech-commands/list-available-voices). Every voice speaks all supported languages; set `language` to the two-letter ISO 639-1 code of the text, for example `it`. SSML is not supported. Use `voice_settings` to configure `speed` (0.7 to 1.3) and `reduce_silence`.
      * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      * - **Humain:** Use `Humain.<VoiceId>` (e.g., `Humain.sara-ar`). Available voices: `sara-en`, `abdulaziz-en`, `sara-ar`, `abdulaziz-ar`, `nourah-ar`, `abdullah-ar`. Native Arabic (Saudi dialect) and English voices only — no `ModelId` segment.
-     * - **Community engines:** Use `<EngineName>.<VoiceId>` (e.g., `acme.alpha`), where `EngineName` is the lowercase name of a community text-to-speech engine and `VoiceId` is one of the voices it lists. You must provide your key for the engine as an integration identifier secret in `"voice_settings": {"api_key_ref": "<secret_identifier>"}`; any other key in `voice_settings` is a setting of the engine. See the [Community TTS engines guide](/docs/voice/tts/community-engines).
      *
      * For service_level basic, you may define the gender of the speaker (male or female).
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -518,7 +515,7 @@ interface ActionsContract
      * @param string $terminatingDigit The digit used to terminate input if fewer than `maximum_digits` digits have been gathered. Set to an empty string to disable the terminating digit entirely, so that a digit such as `#` can be collected as input per `valid_digits`.
      * @param int $timeoutMillis the number of milliseconds to wait for a DTMF response after speak ends before a replaying the sound file
      * @param string $validDigits a list of all digits accepted as valid
-     * @param VoiceSettingsShape1 $voiceSettings The settings associated with the voice selected. For a community engine voice, `api_key_ref` plus the engine's own settings.
+     * @param VoiceSettingsShape1 $voiceSettings The settings associated with the voice selected
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -540,7 +537,7 @@ interface ActionsContract
         string $terminatingDigit = '#',
         int $timeoutMillis = 60000,
         string $validDigits = '0123456789#*',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|CommunityVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingSpeakResponse;
 
@@ -805,7 +802,6 @@ interface ActionsContract
      * - **Soniox:** Use `Soniox.<ModelId>.<VoiceId>` (e.g., `Soniox.tts-rt-v2.Emma`). Supported model: `tts-rt-v2`. Browse the catalog via the [Voices API](https://developers.telnyx.com/api-reference/text-to-speech-commands/list-available-voices). Every voice speaks all supported languages; set `language` to the two-letter ISO 639-1 code of the text, for example `it`. SSML is not supported. Use `voice_settings` to configure `speed` (0.7 to 1.3) and `reduce_silence`.
      * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      * - **Humain:** Use `Humain.<VoiceId>` (e.g., `Humain.sara-ar`). Available voices: `sara-en`, `abdulaziz-en`, `sara-ar`, `abdulaziz-ar`, `nourah-ar`, `abdullah-ar`. Native Arabic (Saudi dialect) and English voices only — no `ModelId` segment.
-     * - **Community engines:** Use `<EngineName>.<VoiceId>` (e.g., `acme.alpha`), where `EngineName` is the lowercase name of a community text-to-speech engine and `VoiceId` is one of the voices it lists. You must provide your key for the engine as an integration identifier secret in `"voice_settings": {"api_key_ref": "<secret_identifier>"}`; any other key in `voice_settings` is a setting of the engine. See the [Community TTS engines guide](/docs/voice/tts/community-engines).
      *
      * For service_level basic, you may define the gender of the speaker (male or female).
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -816,7 +812,7 @@ interface ActionsContract
      * @param \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|value-of<\Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel> $serviceLevel This parameter impacts speech quality, language options and payload types. When using `basic`, only the `en-US` language and payload type `text` are allowed.
      * @param string $stop When specified, it stops the current audio being played. Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
      * @param TargetLegs|value-of<TargetLegs> $targetLegs specifies which legs of the call should receive the spoken audio
-     * @param VoiceSettingsShape2 $voiceSettings The settings associated with the voice selected. For a community engine voice, `api_key_ref` plus the engine's own settings.
+     * @param VoiceSettingsShape2 $voiceSettings The settings associated with the voice selected
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -833,7 +829,7 @@ interface ActionsContract
         \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|string $serviceLevel = 'premium',
         ?string $stop = null,
         TargetLegs|string $targetLegs = 'self',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|CommunityVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse;
 
@@ -850,8 +846,6 @@ interface ActionsContract
      * @param list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape> $participants a list of participants to add to the conversation when it starts
      * @param bool $sendMessageHistoryUpdates When `true`, a `call.ai_gather.message_history_updated` webhook carrying the full message history is sent each time the conversation message history is updated. The assistant's own `telephony_settings.send_message_history_updates` overrides this value when it is set.
      * @param TranscriptionConfig|TranscriptionConfigShape $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
-     * @param string $voice The voice the assistant speaks with on this call, in place of the assistant's own voice. Use the same formats as the `voice` of the [speak](/api-reference/call-commands/speak-text) command. A community engine voice is `<EngineName>.<VoiceId>` (e.g., `acme.alpha`) and needs `voice_settings.api_key_ref`; see the [Community TTS engines guide](/docs/voice/tts/community-engines). Without `voice`, the assistant's own voice is used.
-     * @param VoiceSettingsShape3 $voiceSettings The settings of `voice`. A community engine voice requires `api_key_ref`; the other keys are the engine's own settings.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -867,8 +861,6 @@ interface ActionsContract
         array $participants = [],
         bool $sendMessageHistoryUpdates = false,
         TranscriptionConfig|array|null $transcription = null,
-        ?string $voice = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|CommunityVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartAIAssistantResponse;
 
@@ -909,7 +901,7 @@ interface ActionsContract
      * - **Soniox:** Use `Soniox.<ModelId>.<VoiceId>` (e.g., `Soniox.tts-rt-v2.Emma`). Supported model: `tts-rt-v2`. Browse the catalog via the [Voices API](https://developers.telnyx.com/api-reference/text-to-speech-commands/list-available-voices). Every voice speaks all supported languages; set `language` to the two-letter ISO 639-1 code of the text, for example `it`. SSML is not supported. Use `voice_settings` to configure `speed` (0.7 to 1.3) and `reduce_silence`.
      * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      * - **Humain:** Use `Humain.<VoiceId>` (e.g., `Humain.sara-ar`). Available voices: `sara-en`, `abdulaziz-en`, `sara-ar`, `abdulaziz-ar`, `nourah-ar`, `abdullah-ar`. Native Arabic (Saudi dialect) and English voices only — no `ModelId` segment.
-     * @param VoiceSettingsShape4 $voiceSettings The settings associated with the voice selected
+     * @param VoiceSettingsShape3 $voiceSettings The settings associated with the voice selected
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

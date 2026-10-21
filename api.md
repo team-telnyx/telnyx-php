@@ -3347,27 +3347,3 @@ Methods:
 Methods:
 
 - <code title="get /dial_metrics">$client->dialMetrics-><a href="./src/Services/DialMetricsService.php">list</a>(...$params)</code>
-
-# TtsIntegrations
-
-Methods:
-
-- <code title="post /tts_integrations">$client->ttsIntegrations-><a href="./src/Services/TtsIntegrationsService.php">create</a>(...$params)</code>
-- <code title="get /tts_integrations/{id}">$client->ttsIntegrations-><a href="./src/Services/TtsIntegrationsService.php">retrieve</a>(...$params)</code>
-- <code title="patch /tts_integrations/{id}">$client->ttsIntegrations-><a href="./src/Services/TtsIntegrationsService.php">update</a>(...$params)</code>
-- <code title="get /tts_integrations">$client->ttsIntegrations-><a href="./src/Services/TtsIntegrationsService.php">list</a>(...$params)</code>
-- <code title="delete /tts_integrations/{id}">$client->ttsIntegrations-><a href="./src/Services/TtsIntegrationsService.php">delete</a>(...$params)</code>
-- <code title="put /tts_integrations/{id}">$client->ttsIntegrations-><a href="./src/Services/TtsIntegrationsService.php">replace</a>(...$params)</code>
-- <code title="get /tts_integrations/{id}/conformance_runs">$client->ttsIntegrations-><a href="./src/Services/TtsIntegrationsService.php">retrieveConformanceRuns</a>(...$params)</code>
-- <code title="get /tts_integrations/discoverable">$client->ttsIntegrations-><a href="./src/Services/TtsIntegrationsService.php">retrieveDiscoverable</a>(...$params)</code>
-- <code title="get /tts_integrations/{id}/voices">$client->ttsIntegrations-><a href="./src/Services/TtsIntegrationsService.php">retrieveVoices</a>(...$params)</code>
-
-## Actions
-
-Methods:
-
-- <code title="post /tts_integrations/{id}/actions/disable">$client->ttsIntegrations->actions-><a href="./src/Services/TtsIntegrations/ActionsService.php">disable</a>(...$params)</code>
-- <code title="post /tts_integrations/{id}/actions/enable">$client->ttsIntegrations->actions-><a href="./src/Services/TtsIntegrations/ActionsService.php">enable</a>(...$params)</code>
-- <code title="post /tts_integrations/{id}/actions/refresh_voices">$client->ttsIntegrations->actions-><a href="./src/Services/TtsIntegrations/ActionsService.php">refreshVoices</a>(...$params)</code>
-- <code title="post /tts_integrations/{id}/actions/request_review">$client->ttsIntegrations->actions-><a href="./src/Services/TtsIntegrations/ActionsService.php">requestReview</a>(...$params)</code>
-- <code title="post /tts_integrations/{id}/actions/test_connection">$client->ttsIntegrations->actions-><a href="./src/Services/TtsIntegrations/ActionsService.php">testConnection</a>(...$params)</code>

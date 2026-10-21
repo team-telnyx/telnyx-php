@@ -13,5 +13,7 @@ enum ModelID: string
 
     case ULTRA = 'Ultra';
 
+    case BAYAN = 'Bayan';
+
     case SPEECH_2_8_TURBO = 'speech-2.8-turbo';
 }
