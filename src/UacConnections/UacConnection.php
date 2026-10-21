@@ -155,7 +155,7 @@ final class UacConnection implements BaseModel
     public ?bool $encodeContactHeaderEnabled;
 
     /**
-     * Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
+     * Enable use of SRTP for encryption. Can only be set when the SIP signaling transport protocol is TLS.
      *
      * @var value-of<EncryptedMedia>|null $encryptedMedia
      */
@@ -575,7 +575,7 @@ final class UacConnection implements BaseModel
     }
 
     /**
-     * Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
+     * Enable use of SRTP for encryption. Can only be set when the SIP signaling transport protocol is TLS.
      *
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      */

@@ -43,6 +43,7 @@ use Telnyx\Services\CredentialConnectionsService;
 use Telnyx\Services\CustomerServiceRecordsService;
 use Telnyx\Services\CustomStorageCredentialsService;
 use Telnyx\Services\DetailRecordsService;
+use Telnyx\Services\DialMetricsService;
 use Telnyx\Services\DialogflowConnectionsService;
 use Telnyx\Services\DirService;
 use Telnyx\Services\DocumentLinksService;
@@ -1172,6 +1173,11 @@ class Client extends BaseClient
      */
     public SipRegistrationStatusService $sipRegistrationStatus;
 
+    /**
+     * @api
+     */
+    public DialMetricsService $dialMetrics;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1435,6 +1441,7 @@ class Client extends BaseClient
         $this->spendLimits = new SpendLimitsService($this);
         $this->llmTokenGateway = new LlmTokenGatewayService($this);
         $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
+        $this->dialMetrics = new DialMetricsService($this);
     }
 
     /** @return array<string,string> */

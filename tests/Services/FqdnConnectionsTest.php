@@ -125,7 +125,7 @@ final class FqdnConnectionsTest extends TestCase
                 'reportFrequencySecs' => 10,
             ],
             tags: ['tag1', 'tag2'],
-            transportProtocol: TransportProtocol::UDP,
+            transportProtocol: TransportProtocol::TLS,
             webhookAPIVersion: WebhookAPIVersion::V1,
             webhookEventFailoverURL: 'https://failover.example.com',
             webhookEventURL: 'https://example.com',

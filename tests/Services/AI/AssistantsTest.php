@@ -463,7 +463,9 @@ final class AssistantsTest extends TestCase
             ],
             postConversationSettings: ['enabled' => true],
             privacySettings: [
-                'dataRetention' => true, 'inTransitDataLocality' => true,
+                'dataRetention' => true,
+                'inTransitDataLocality' => true,
+                'piiRedaction' => 'disabled',
             ],
             tags: ['string'],
             telephonySettings: [

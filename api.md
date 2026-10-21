@@ -3341,3 +3341,9 @@ Methods:
 Methods:
 
 - <code title="get /sip_registration_status">$client->sipRegistrationStatus-><a href="./src/Services/SipRegistrationStatusService.php">list</a>(...$params)</code>
+
+# DialMetrics
+
+Methods:
+
+- <code title="get /dial_metrics">$client->dialMetrics-><a href="./src/Services/DialMetricsService.php">list</a>(...$params)</code>
