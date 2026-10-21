@@ -3243,10 +3243,15 @@ Methods:
 
 # Compute
 
+Methods:
+
+- <code title="get /compute/actors/{id}">$client->compute-><a href="./src/Services/ComputeService.php">retrieve</a>(...$params)</code>
+
 ## Funcs
 
 Methods:
 
+- <code title="get /compute/funcs">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">list</a>(...$params)</code>
 - <code title="get /compute/funcs/{id}/logs">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveLogs</a>(...$params)</code>
 - <code title="get /compute/funcs/{id}/metric_aggregates">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveMetricAggregates</a>(...$params)</code>
 - <code title="get /compute/funcs/{id}/revisions">$client->compute->funcs-><a href="./src/Services/Compute/FuncsService.php">retrieveRevisions</a>(...$params)</code>
@@ -3347,3 +3352,13 @@ Methods:
 Methods:
 
 - <code title="get /dial_metrics">$client->dialMetrics-><a href="./src/Services/DialMetricsService.php">list</a>(...$params)</code>
+
+# TailscaleSubnetRouters
+
+Methods:
+
+- <code title="post /tailscale_subnet_routers">$client->tailscaleSubnetRouters-><a href="./src/Services/TailscaleSubnetRoutersService.php">create</a>(...$params)</code>
+- <code title="get /tailscale_subnet_routers/{id}">$client->tailscaleSubnetRouters-><a href="./src/Services/TailscaleSubnetRoutersService.php">retrieve</a>(...$params)</code>
+- <code title="patch /tailscale_subnet_routers/{id}">$client->tailscaleSubnetRouters-><a href="./src/Services/TailscaleSubnetRoutersService.php">update</a>(...$params)</code>
+- <code title="get /tailscale_subnet_routers">$client->tailscaleSubnetRouters-><a href="./src/Services/TailscaleSubnetRoutersService.php">list</a>(...$params)</code>
+- <code title="delete /tailscale_subnet_routers/{id}">$client->tailscaleSubnetRouters-><a href="./src/Services/TailscaleSubnetRoutersService.php">delete</a>(...$params)</code>

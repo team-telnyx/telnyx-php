@@ -9,11 +9,14 @@ use Telnyx\Compute\Funcs\FuncGetLogsResponse\FuncRuntimeLogsResponse;
 use Telnyx\Compute\Funcs\FuncGetMetricAggregatesResponse;
 use Telnyx\Compute\Funcs\FuncGetRevisionsResponse;
 use Telnyx\Compute\Funcs\FuncGetShipInspectionResponse;
+use Telnyx\Compute\Funcs\FuncListParams;
+use Telnyx\Compute\Funcs\FuncListResponse;
 use Telnyx\Compute\Funcs\FuncRetrieveLogsParams;
 use Telnyx\Compute\Funcs\FuncRetrieveMetricAggregatesParams;
 use Telnyx\Compute\Funcs\FuncRetrieveRevisionsParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -21,6 +24,21 @@ use Telnyx\RequestOptions;
  */
 interface FuncsRawContract
 {
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|FuncListParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<DefaultFlatPagination<FuncListResponse>>
+     *
+     * @throws APIException
+     */
+    public function list(
+        array|FuncListParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
     /**
      * @api
      *

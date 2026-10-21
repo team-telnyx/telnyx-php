@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Word-level timing detail. Only present when using a `deepgram/*` model with `model_config` options that enable word timestamps.
+ * Word-level timing detail. Only present when using a `deepgram/*` model with `model_config` options that enable word timestamps, or `reson8/prerecorded`.
  *
  * @phpstan-type AudioTranscriptionResponseWordShape = array{
  *   end: float,

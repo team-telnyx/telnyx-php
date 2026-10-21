@@ -26,7 +26,7 @@ final class NumberLookupRetrieveParams implements BaseModel
     use SdkParams;
 
     /**
-     * Specifies the type of number lookup to be performed.
+     * Specifies the type of number lookup to be performed. May be supplied more than once to request several data sources in a single call (for example, `?type=carrier&type=enhanced-caller-name`). Each requested type populates the corresponding object in the response.
      *
      * @var value-of<Type>|null $type
      */
@@ -55,7 +55,7 @@ final class NumberLookupRetrieveParams implements BaseModel
     }
 
     /**
-     * Specifies the type of number lookup to be performed.
+     * Specifies the type of number lookup to be performed. May be supplied more than once to request several data sources in a single call (for example, `?type=carrier&type=enhanced-caller-name`). Each requested type populates the corresponding object in the response.
      *
      * @param Type|value-of<Type> $type
      */

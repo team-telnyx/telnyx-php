@@ -434,7 +434,10 @@ final class AssistantsTest extends TestCase
                 'model' => 'model',
             ],
             greeting: 'greeting',
-            insightSettings: ['insightGroupID' => 'insight_group_id'],
+            insightSettings: [
+                'insightGroupID' => 'insight_group_id',
+                'model' => 'zai-org/GLM-5.3-Flash',
+            ],
             integrations: [
                 ['integrationID' => 'integration_id', 'allowedList' => ['string']],
             ],

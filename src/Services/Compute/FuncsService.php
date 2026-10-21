@@ -10,14 +10,18 @@ use Telnyx\Compute\Funcs\FuncGetLogsResponse\FuncRuntimeLogsResponse;
 use Telnyx\Compute\Funcs\FuncGetMetricAggregatesResponse;
 use Telnyx\Compute\Funcs\FuncGetRevisionsResponse;
 use Telnyx\Compute\Funcs\FuncGetShipInspectionResponse;
+use Telnyx\Compute\Funcs\FuncListResponse;
 use Telnyx\Compute\Funcs\FuncRetrieveLogsParams\Type;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Omitted;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Compute\FuncsContract;
 use Telnyx\Services\Compute\Funcs\ExportService;
 
 /**
+ * Manage Edge Compute functions.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class FuncsService implements FuncsContract
@@ -39,6 +43,32 @@ final class FuncsService implements FuncsContract
     {
         $this->raw = new FuncsRawService($client);
         $this->export = new ExportService($client);
+    }
+
+    /**
+     * @api
+     *
+     * List functions for the authenticated organization. Each function includes its persisted function-scoped bindings. Actor bindings expose actor_type and env_name, allowing clients to identify every function attached to a Stateful Actor type.
+     *
+     * @param int $pageNumber Page number
+     * @param int $pageSize Page size (maximum 250)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<FuncListResponse>
+     *
+     * @throws APIException
+     */
+    public function list(
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**

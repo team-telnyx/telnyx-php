@@ -9,8 +9,10 @@ use Telnyx\Compute\Funcs\FuncGetLogsResponse\FuncRuntimeLogsResponse;
 use Telnyx\Compute\Funcs\FuncGetMetricAggregatesResponse;
 use Telnyx\Compute\Funcs\FuncGetRevisionsResponse;
 use Telnyx\Compute\Funcs\FuncGetShipInspectionResponse;
+use Telnyx\Compute\Funcs\FuncListResponse;
 use Telnyx\Compute\Funcs\FuncRetrieveLogsParams\Type;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -18,6 +20,23 @@ use Telnyx\RequestOptions;
  */
 interface FuncsContract
 {
+    /**
+     * @api
+     *
+     * @param int $pageNumber Page number
+     * @param int $pageSize Page size (maximum 250)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<FuncListResponse>
+     *
+     * @throws APIException
+     */
+    public function list(
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination;
+
     /**
      * @api
      *

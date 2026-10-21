@@ -36,7 +36,7 @@ final class AudioTranscribeParams implements BaseModel
     use SdkParams;
 
     /**
-     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency. The `deepgram/*` models only accept mp3/wav files: `deepgram/nova-3` covers ~49 languages plus `multi` and `deepgram/nova-2` covers ~33, while the `-medical` variants are tuned for clinical vocabulary and accept English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). `nvidia/parakeet-v3` is multilingual with automatic language detection; `omi-health/omi-med-stt-v1` is a medical model, English only.
+     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency. The `deepgram/*` models only accept mp3/wav files: `deepgram/nova-3` covers ~49 languages plus `multi` and `deepgram/nova-2` covers ~33, while the `-medical` variants are tuned for clinical vocabulary and accept English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). `nvidia/parakeet-v3` is multilingual with automatic language detection; `omi-health/omi-med-stt-v1` is a medical model, English only. `reson8/prerecorded` covers 10 languages, returns word timestamps, and labels speakers via `model_config`.
      *
      * @var value-of<Model> $model
      */
@@ -56,13 +56,13 @@ final class AudioTranscribeParams implements BaseModel
     public ?string $fileURL;
 
     /**
-     * The language of the audio to be transcribed. `deepgram/nova-3` supports ~49 languages plus `multi`, and `deepgram/nova-2` supports ~33 plus `multi`; the `-medical` variants are English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). Deepgram models validate on the base language and forward the full tag, so regional variants such as `de-CH` and `pt-BR` are accepted where the base language is supported; an unsupported language returns a 400. For `openai/whisper-large-v3-turbo`, supports multiple languages. `distil-whisper/distil-large-v2` does not support language parameter. `nvidia/parakeet-v3` detects the language automatically; `omi-health/omi-med-stt-v1` is English only.
+     * The language of the audio to be transcribed. `deepgram/nova-3` supports ~49 languages plus `multi`, and `deepgram/nova-2` supports ~33 plus `multi`; the `-medical` variants are English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). Deepgram models validate on the base language and forward the full tag, so regional variants such as `de-CH` and `pt-BR` are accepted where the base language is supported; an unsupported language returns a 400. For `openai/whisper-large-v3-turbo`, supports multiple languages. `distil-whisper/distil-large-v2` does not support language parameter. `nvidia/parakeet-v3` detects the language automatically; `omi-health/omi-med-stt-v1` is English only. `reson8/prerecorded` accepts `nl`, `en`, `fr`, `fy`, `de`, `it`, `pl`, `pt`, `es` and `sv` (regional variants are transcribed as the base language) and detects the language when it is omitted.
      */
     #[Optional]
     public ?string $language;
 
     /**
-     * Additional model-specific configuration parameters. Only allowed with the `deepgram/*` models. Sent as a JSON string in multipart requests and passed through to Deepgram as query parameters. Any other model with `model_config` returns 422. Can include Deepgram-specific options such as `smart_format`, `punctuate`, `diarize` (speaker labels), `multichannel` (transcribe each channel independently; billed duration is file duration multiplied by the number of channels), `utterances`, `numerals`, and `language`. If `language` is provided both as a top-level parameter and in `model_config`, the top-level parameter takes precedence.
+     * Additional model-specific configuration parameters. Only allowed with the `deepgram/*` models and `reson8/prerecorded`. Sent as a JSON string in multipart requests; for the `deepgram/*` models it is passed through to Deepgram as query parameters, while `reson8/prerecorded` accepts only `diarize` (speaker labels) and `max_speakers` (1 to 8). Any other model with `model_config` returns 400. Can include Deepgram-specific options such as `smart_format`, `punctuate`, `diarize` (speaker labels), `multichannel` (transcribe each channel independently; billed duration is file duration multiplied by the number of channels), `utterances`, `numerals`, and `language`. If `language` is provided both as a top-level parameter and in `model_config`, the top-level parameter takes precedence.
      *
      * @var array<string,mixed>|null $modelConfig
      */
@@ -138,7 +138,7 @@ final class AudioTranscribeParams implements BaseModel
     }
 
     /**
-     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency. The `deepgram/*` models only accept mp3/wav files: `deepgram/nova-3` covers ~49 languages plus `multi` and `deepgram/nova-2` covers ~33, while the `-medical` variants are tuned for clinical vocabulary and accept English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). `nvidia/parakeet-v3` is multilingual with automatic language detection; `omi-health/omi-med-stt-v1` is a medical model, English only.
+     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency. The `deepgram/*` models only accept mp3/wav files: `deepgram/nova-3` covers ~49 languages plus `multi` and `deepgram/nova-2` covers ~33, while the `-medical` variants are tuned for clinical vocabulary and accept English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). `nvidia/parakeet-v3` is multilingual with automatic language detection; `omi-health/omi-med-stt-v1` is a medical model, English only. `reson8/prerecorded` covers 10 languages, returns word timestamps, and labels speakers via `model_config`.
      *
      * @param Model|value-of<Model> $model
      */
@@ -173,7 +173,7 @@ final class AudioTranscribeParams implements BaseModel
     }
 
     /**
-     * The language of the audio to be transcribed. `deepgram/nova-3` supports ~49 languages plus `multi`, and `deepgram/nova-2` supports ~33 plus `multi`; the `-medical` variants are English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). Deepgram models validate on the base language and forward the full tag, so regional variants such as `de-CH` and `pt-BR` are accepted where the base language is supported; an unsupported language returns a 400. For `openai/whisper-large-v3-turbo`, supports multiple languages. `distil-whisper/distil-large-v2` does not support language parameter. `nvidia/parakeet-v3` detects the language automatically; `omi-health/omi-med-stt-v1` is English only.
+     * The language of the audio to be transcribed. `deepgram/nova-3` supports ~49 languages plus `multi`, and `deepgram/nova-2` supports ~33 plus `multi`; the `-medical` variants are English only (`en` and its regional variants, e.g. `en-US`, `en-GB`). Deepgram models validate on the base language and forward the full tag, so regional variants such as `de-CH` and `pt-BR` are accepted where the base language is supported; an unsupported language returns a 400. For `openai/whisper-large-v3-turbo`, supports multiple languages. `distil-whisper/distil-large-v2` does not support language parameter. `nvidia/parakeet-v3` detects the language automatically; `omi-health/omi-med-stt-v1` is English only. `reson8/prerecorded` accepts `nl`, `en`, `fr`, `fy`, `de`, `it`, `pl`, `pt`, `es` and `sv` (regional variants are transcribed as the base language) and detects the language when it is omitted.
      */
     public function withLanguage(string $language): self
     {
@@ -184,7 +184,7 @@ final class AudioTranscribeParams implements BaseModel
     }
 
     /**
-     * Additional model-specific configuration parameters. Only allowed with the `deepgram/*` models. Sent as a JSON string in multipart requests and passed through to Deepgram as query parameters. Any other model with `model_config` returns 422. Can include Deepgram-specific options such as `smart_format`, `punctuate`, `diarize` (speaker labels), `multichannel` (transcribe each channel independently; billed duration is file duration multiplied by the number of channels), `utterances`, `numerals`, and `language`. If `language` is provided both as a top-level parameter and in `model_config`, the top-level parameter takes precedence.
+     * Additional model-specific configuration parameters. Only allowed with the `deepgram/*` models and `reson8/prerecorded`. Sent as a JSON string in multipart requests; for the `deepgram/*` models it is passed through to Deepgram as query parameters, while `reson8/prerecorded` accepts only `diarize` (speaker labels) and `max_speakers` (1 to 8). Any other model with `model_config` returns 400. Can include Deepgram-specific options such as `smart_format`, `punctuate`, `diarize` (speaker labels), `multichannel` (transcribe each channel independently; billed duration is file duration multiplied by the number of channels), `utterances`, `numerals`, and `language`. If `language` is provided both as a top-level parameter and in `model_config`, the top-level parameter takes precedence.
      *
      * @param array<string,mixed> $modelConfig
      */

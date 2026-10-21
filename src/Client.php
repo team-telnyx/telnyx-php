@@ -171,6 +171,7 @@ use Telnyx\Services\SpendLimitsService;
 use Telnyx\Services\StorageService;
 use Telnyx\Services\SubNumberOrdersReportService;
 use Telnyx\Services\SubNumberOrdersService;
+use Telnyx\Services\TailscaleSubnetRoutersService;
 use Telnyx\Services\TelephonyCredentialsService;
 use Telnyx\Services\TermsOfServiceService;
 use Telnyx\Services\TexmlApplicationsService;
@@ -1184,6 +1185,11 @@ class Client extends BaseClient
      */
     public TtsIntegrationsService $ttsIntegrations;
 
+    /**
+     * @api
+     */
+    public TailscaleSubnetRoutersService $tailscaleSubnetRouters;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1449,6 +1455,7 @@ class Client extends BaseClient
         $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
         $this->dialMetrics = new DialMetricsService($this);
         $this->ttsIntegrations = new TtsIntegrationsService($this);
+        $this->tailscaleSubnetRouters = new TailscaleSubnetRoutersService($this);
     }
 
     /** @return array<string,string> */
