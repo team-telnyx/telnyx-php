@@ -26,6 +26,7 @@ use Telnyx\Messages\MessageWhatsappParams\WhatsappMessage;
  *   messagingProfileID?: string|null,
  *   type?: null|Type|value-of<Type>,
  *   webhookURL?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class MessageWhatsappParams implements BaseModel
@@ -69,6 +70,9 @@ final class MessageWhatsappParams implements BaseModel
     #[Optional('webhook_url')]
     public ?string $webhookURL;
 
+    #[Optional]
+    public ?string $idempotencyKey;
+
     /**
      * `new MessageWhatsappParams()` is missing required properties by the API.
      *
@@ -106,6 +110,7 @@ final class MessageWhatsappParams implements BaseModel
         ?string $messagingProfileID = null,
         Type|string|null $type = null,
         ?string $webhookURL = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -116,6 +121,7 @@ final class MessageWhatsappParams implements BaseModel
         null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         null !== $type && $self['type'] = $type;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -185,6 +191,14 @@ final class MessageWhatsappParams implements BaseModel
     {
         $self = clone $this;
         $self['webhookURL'] = $webhookURL;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

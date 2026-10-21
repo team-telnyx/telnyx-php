@@ -177,6 +177,7 @@ use Telnyx\Services\TexmlApplicationsService;
 use Telnyx\Services\TexmlService;
 use Telnyx\Services\TextToSpeechService;
 use Telnyx\Services\TrafficPolicyProfilesService;
+use Telnyx\Services\TtsIntegrationsService;
 use Telnyx\Services\UacConnectionsService;
 use Telnyx\Services\UsageReportsService;
 use Telnyx\Services\UserAddressesService;
@@ -1178,6 +1179,11 @@ class Client extends BaseClient
      */
     public DialMetricsService $dialMetrics;
 
+    /**
+     * @api
+     */
+    public TtsIntegrationsService $ttsIntegrations;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1442,6 +1448,7 @@ class Client extends BaseClient
         $this->llmTokenGateway = new LlmTokenGatewayService($this);
         $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
         $this->dialMetrics = new DialMetricsService($this);
+        $this->ttsIntegrations = new TtsIntegrationsService($this);
     }
 
     /** @return array<string,string> */

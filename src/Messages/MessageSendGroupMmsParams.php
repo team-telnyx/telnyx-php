@@ -24,6 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   useProfileWebhooks?: bool|null,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class MessageSendGroupMmsParams implements BaseModel
@@ -84,6 +85,9 @@ final class MessageSendGroupMmsParams implements BaseModel
     #[Optional('webhook_url')]
     public ?string $webhookURL;
 
+    #[Optional]
+    public ?string $idempotencyKey;
+
     /**
      * `new MessageSendGroupMmsParams()` is missing required properties by the API.
      *
@@ -120,6 +124,7 @@ final class MessageSendGroupMmsParams implements BaseModel
         ?bool $useProfileWebhooks = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -132,6 +137,7 @@ final class MessageSendGroupMmsParams implements BaseModel
         null !== $useProfileWebhooks && $self['useProfileWebhooks'] = $useProfileWebhooks;
         null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -224,6 +230,14 @@ final class MessageSendGroupMmsParams implements BaseModel
     {
         $self = clone $this;
         $self['webhookURL'] = $webhookURL;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

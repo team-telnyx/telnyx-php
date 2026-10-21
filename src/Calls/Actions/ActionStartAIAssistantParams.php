@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
+use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory;
 use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\InworldVoiceSettings;
+use Telnyx\MinimaxVoiceSettings;
+use Telnyx\ResembleVoiceSettings;
+use Telnyx\XaiVoiceSettings;
 
 /**
  * Start an AI assistant on the call.
@@ -23,11 +28,13 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Calls\ActionsService::startAIAssistant()
  *
  * @phpstan-import-type MessageHistoryVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory
+ * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
  * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory
  * @phpstan-import-type AIAssistantJoinParticipantShape from \Telnyx\Calls\Actions\AIAssistantJoinParticipant
  * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
  *
  * @phpstan-type ActionStartAIAssistantParamsShape = array{
  *   assistant?: null|CallAssistantRequest|CallAssistantRequestShape,
@@ -39,6 +46,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   participants?: list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape>|null,
  *   sendMessageHistoryUpdates?: bool|null,
  *   transcription?: null|TranscriptionConfig|TranscriptionConfigShape,
+ *   voice?: string|null,
+ *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
 final class ActionStartAIAssistantParams implements BaseModel
@@ -105,6 +114,20 @@ final class ActionStartAIAssistantParams implements BaseModel
     #[Optional]
     public ?TranscriptionConfig $transcription;
 
+    /**
+     * The voice the assistant speaks with on this call, in place of the assistant's own voice. Use the same formats as the `voice` of the [speak](/api-reference/call-commands/speak-text) command. A community engine voice is `<EngineName>.<VoiceId>` (e.g., `acme.alpha`) and needs `voice_settings.api_key_ref`; see the [Community TTS engines guide](/docs/voice/tts/community-engines). Without `voice`, the assistant's own voice is used.
+     */
+    #[Optional]
+    public ?string $voice;
+
+    /**
+     * The settings of `voice`. A community engine voice requires `api_key_ref`; the other keys are the engine's own settings.
+     *
+     * @var VoiceSettingsVariants|null $voiceSettings
+     */
+    #[Optional('voice_settings')]
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|CommunityVoiceSettings|null $voiceSettings;
+
     public function __construct()
     {
         $this->initialize();
@@ -120,6 +143,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      * @param list<MessageHistoryShape>|null $messageHistory
      * @param list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape>|null $participants
      * @param TranscriptionConfig|TranscriptionConfigShape|null $transcription
+     * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         CallAssistantRequest|array|null $assistant = null,
@@ -131,6 +155,8 @@ final class ActionStartAIAssistantParams implements BaseModel
         ?array $participants = null,
         ?bool $sendMessageHistoryUpdates = null,
         TranscriptionConfig|array|null $transcription = null,
+        ?string $voice = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|CommunityVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
 
@@ -143,6 +169,8 @@ final class ActionStartAIAssistantParams implements BaseModel
         null !== $participants && $self['participants'] = $participants;
         null !== $sendMessageHistoryUpdates && $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
         null !== $transcription && $self['transcription'] = $transcription;
+        null !== $voice && $self['voice'] = $voice;
+        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
         return $self;
     }
@@ -255,6 +283,31 @@ final class ActionStartAIAssistantParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['transcription'] = $transcription;
+
+        return $self;
+    }
+
+    /**
+     * The voice the assistant speaks with on this call, in place of the assistant's own voice. Use the same formats as the `voice` of the [speak](/api-reference/call-commands/speak-text) command. A community engine voice is `<EngineName>.<VoiceId>` (e.g., `acme.alpha`) and needs `voice_settings.api_key_ref`; see the [Community TTS engines guide](/docs/voice/tts/community-engines). Without `voice`, the assistant's own voice is used.
+     */
+    public function withVoice(string $voice): self
+    {
+        $self = clone $this;
+        $self['voice'] = $voice;
+
+        return $self;
+    }
+
+    /**
+     * The settings of `voice`. A community engine voice requires `api_key_ref`; the other keys are the engine's own settings.
+     *
+     * @param VoiceSettingsShape $voiceSettings
+     */
+    public function withVoiceSettings(
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|CommunityVoiceSettings $voiceSettings,
+    ): self {
+        $self = clone $this;
+        $self['voiceSettings'] = $voiceSettings;
 
         return $self;
     }

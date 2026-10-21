@@ -36,7 +36,9 @@ final class QueuesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->texml->accounts->queues->create('account_sid');
+        $result = $this->client->texml->accounts->queues->create(
+            'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(QueueResource::class, $result);
@@ -51,7 +53,7 @@ final class QueuesTest extends TestCase
 
         $result = $this->client->texml->accounts->queues->retrieve(
             'queue_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -67,7 +69,7 @@ final class QueuesTest extends TestCase
 
         $result = $this->client->texml->accounts->queues->retrieve(
             'queue_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -83,7 +85,7 @@ final class QueuesTest extends TestCase
 
         $result = $this->client->texml->accounts->queues->update(
             'queue_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -99,8 +101,8 @@ final class QueuesTest extends TestCase
 
         $result = $this->client->texml->accounts->queues->update(
             'queue_sid',
-            accountSid: 'account_sid',
-            maxSize: 10
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
+            maxSize: 10,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -114,7 +116,9 @@ final class QueuesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $page = $this->client->texml->accounts->queues->list('account_sid');
+        $page = $this->client->texml->accounts->queues->list(
+            'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DefaultPaginationForQueues::class, $page);
@@ -134,7 +138,7 @@ final class QueuesTest extends TestCase
 
         $result = $this->client->texml->accounts->queues->delete(
             'queue_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -150,7 +154,7 @@ final class QueuesTest extends TestCase
 
         $result = $this->client->texml->accounts->queues->delete(
             'queue_sid',
-            accountSid: 'account_sid'
+            accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

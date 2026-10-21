@@ -37,7 +37,7 @@ final class AccountsTest extends TestCase
         }
 
         $result = $this->client->texml->accounts->retrieveRecordingsJson(
-            'account_sid'
+            'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -52,7 +52,7 @@ final class AccountsTest extends TestCase
         }
 
         $result = $this->client->texml->accounts->retrieveTranscriptionsJson(
-            'account_sid'
+            'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -87,6 +87,7 @@ final class RcsRawService implements RcsRawContract
      *   smsFallback?: SMSFallback|SMSFallbackShape,
      *   type?: Type|value-of<Type>,
      *   webhookURL?: string,
+     *   idempotencyKey?: string,
      * }|RcSendParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -102,12 +103,20 @@ final class RcsRawService implements RcsRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/rcs',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: RcSendResponse::class,
         );

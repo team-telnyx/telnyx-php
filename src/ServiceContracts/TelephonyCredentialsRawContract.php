@@ -10,6 +10,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\TelephonyCredentials\TelephonyCredential;
 use Telnyx\TelephonyCredentials\TelephonyCredentialCreateParams;
+use Telnyx\TelephonyCredentials\TelephonyCredentialCreateTokenParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListParams;
@@ -103,6 +104,7 @@ interface TelephonyCredentialsRawContract
      * @api
      *
      * @param string $id identifies the resource
+     * @param array<string,mixed>|TelephonyCredentialCreateTokenParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
@@ -111,6 +113,7 @@ interface TelephonyCredentialsRawContract
      */
     public function createToken(
         string $id,
-        RequestOptions|array|null $requestOptions = null
+        array|TelephonyCredentialCreateTokenParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -24,6 +24,7 @@ use Telnyx\Core\Omitted;
  *   useProfileWebhooks?: bool|null,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class MessageSendWithAlphanumericSenderParams implements BaseModel
@@ -74,6 +75,9 @@ final class MessageSendWithAlphanumericSenderParams implements BaseModel
     #[Optional('webhook_url', nullable: true)]
     public ?string $webhookURL;
 
+    #[Optional]
+    public ?string $idempotencyKey;
+
     /**
      * `new MessageSendWithAlphanumericSenderParams()` is missing required properties by the API.
      *
@@ -112,6 +116,7 @@ final class MessageSendWithAlphanumericSenderParams implements BaseModel
         string|Omitted|null $webhookFailoverURL = Omitted::VALUE,
         string|Omitted|null $webhookURL = Omitted::VALUE,
         ?bool $useProfileWebhooks = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -123,6 +128,7 @@ final class MessageSendWithAlphanumericSenderParams implements BaseModel
         null !== $useProfileWebhooks && $self['useProfileWebhooks'] = $useProfileWebhooks;
         Omitted::VALUE !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
         Omitted::VALUE !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -200,6 +206,14 @@ final class MessageSendWithAlphanumericSenderParams implements BaseModel
     {
         $self = clone $this;
         $self['webhookURL'] = $webhookURL;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

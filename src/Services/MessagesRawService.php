@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Messages\MessageCancelScheduledResponse;
 use Telnyx\Messages\MessageGetGroupMessagesResponse;
 use Telnyx\Messages\MessageGetResponse;
@@ -190,6 +191,7 @@ final class MessagesRawService implements MessagesRawContract
      *   useProfileWebhooks?: bool,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
+     *   idempotencyKey?: string,
      * }|MessageSendParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -205,12 +207,20 @@ final class MessagesRawService implements MessagesRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: MessageSendResponse::class,
         );
@@ -230,6 +240,7 @@ final class MessagesRawService implements MessagesRawContract
      *   useProfileWebhooks?: bool,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
+     *   idempotencyKey?: string,
      * }|MessageSendGroupMmsParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -245,12 +256,20 @@ final class MessagesRawService implements MessagesRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/group_mms',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: MessageSendGroupMmsResponse::class,
         );
@@ -273,6 +292,7 @@ final class MessagesRawService implements MessagesRawContract
      *   useProfileWebhooks?: bool,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
+     *   idempotencyKey?: string,
      * }|MessageSendLongCodeParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -288,12 +308,20 @@ final class MessagesRawService implements MessagesRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/long_code',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: MessageSendLongCodeResponse::class,
         );
@@ -316,6 +344,7 @@ final class MessagesRawService implements MessagesRawContract
      *   useProfileWebhooks?: bool,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
+     *   idempotencyKey?: string,
      * }|MessageSendNumberPoolParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -331,12 +360,20 @@ final class MessagesRawService implements MessagesRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/number_pool',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: MessageSendNumberPoolResponse::class,
         );
@@ -359,6 +396,7 @@ final class MessagesRawService implements MessagesRawContract
      *   useProfileWebhooks?: bool,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
+     *   idempotencyKey?: string,
      * }|MessageSendShortCodeParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -374,12 +412,20 @@ final class MessagesRawService implements MessagesRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/short_code',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: MessageSendShortCodeResponse::class,
         );
@@ -398,6 +444,7 @@ final class MessagesRawService implements MessagesRawContract
      *   useProfileWebhooks?: bool,
      *   webhookFailoverURL?: string|null,
      *   webhookURL?: string|null,
+     *   idempotencyKey?: string,
      * }|MessageSendWithAlphanumericSenderParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -413,12 +460,20 @@ final class MessagesRawService implements MessagesRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/alphanumeric_sender_id',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: MessageSendWithAlphanumericSenderResponse::class,
         );
@@ -436,6 +491,7 @@ final class MessagesRawService implements MessagesRawContract
      *   messagingProfileID?: string,
      *   type?: MessageWhatsappParams\Type|value-of<MessageWhatsappParams\Type>,
      *   webhookURL?: string,
+     *   idempotencyKey?: string,
      * }|MessageWhatsappParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -451,12 +507,20 @@ final class MessagesRawService implements MessagesRawContract
             $params,
             $requestOptions,
         );
+        $header_params = ['idempotencyKey' => 'Idempotency-Key'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'messages/whatsapp',
-            body: (object) $parsed,
+            headers: Util::array_transform_keys(
+                array_intersect_key($parsed, array_flip(array_keys($header_params))),
+                $header_params,
+            ),
+            body: (object) array_diff_key(
+                $parsed,
+                array_flip(array_keys($header_params))
+            ),
             options: $options,
             convert: MessageWhatsappResponse::class,
         );

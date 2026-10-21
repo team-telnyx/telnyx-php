@@ -13,6 +13,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TelephonyCredentialsRawContract;
 use Telnyx\TelephonyCredentials\TelephonyCredential;
 use Telnyx\TelephonyCredentials\TelephonyCredentialCreateParams;
+use Telnyx\TelephonyCredentials\TelephonyCredentialCreateTokenParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListParams;
@@ -194,6 +195,9 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      * Create an Access Token (JWT) for the credential.
      *
      * @param string $id identifies the resource
+     * @param array{
+     *   idempotencyKey?: string
+     * }|TelephonyCredentialCreateTokenParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
@@ -202,14 +206,23 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      */
     public function createToken(
         string $id,
-        RequestOptions|array|null $requestOptions = null
+        array|TelephonyCredentialCreateTokenParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
+        [$parsed, $options] = TelephonyCredentialCreateTokenParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['telephony_credentials/%1$s/token', $id],
-            headers: ['Accept' => 'text/plain'],
-            options: $requestOptions,
+            headers: Util::array_transform_keys(
+                ['Accept' => 'text/plain', ...$parsed],
+                ['idempotencyKey' => 'Idempotency-Key'],
+            ),
+            options: $options,
             convert: 'string',
         );
     }

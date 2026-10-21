@@ -156,6 +156,7 @@ final class MessagesTest extends TestCase
             useProfileWebhooks: true,
             webhookFailoverURL: 'https://backup.example.com/hooks',
             webhookURL: 'http://example.com/webhooks',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -194,6 +195,7 @@ final class MessagesTest extends TestCase
             useProfileWebhooks: true,
             webhookFailoverURL: 'https://backup.example.com/hooks',
             webhookURL: 'http://example.com/webhooks',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -235,6 +237,7 @@ final class MessagesTest extends TestCase
             useProfileWebhooks: true,
             webhookFailoverURL: 'https://backup.example.com/hooks',
             webhookURL: 'http://example.com/webhooks',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -276,6 +279,7 @@ final class MessagesTest extends TestCase
             useProfileWebhooks: true,
             webhookFailoverURL: 'https://backup.example.com/hooks',
             webhookURL: 'http://example.com/webhooks',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -317,6 +321,7 @@ final class MessagesTest extends TestCase
             useProfileWebhooks: true,
             webhookFailoverURL: 'https://backup.example.com/hooks',
             webhookURL: 'http://example.com/webhooks',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -359,6 +364,7 @@ final class MessagesTest extends TestCase
             useProfileWebhooks: true,
             webhookFailoverURL: 'webhook_failover_url',
             webhookURL: 'webhook_url',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -588,6 +594,7 @@ final class MessagesTest extends TestCase
             messagingProfileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             type: 'WHATSAPP',
             webhookURL: 'webhook_url',
+            idempotencyKey: '8e03978e-40d5-43e8-bc93-6894a57f9326',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
