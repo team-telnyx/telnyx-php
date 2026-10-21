@@ -10,6 +10,8 @@ namespace Telnyx\AI\Assistants\TranscriptionSettings;
  * - `deepgram/flux` is optimized for turn-taking with multilingual language hints.
  * - `deepgram/nova-3` is multilingual with automatic language detection.
  * - `deepgram/nova-2` is Deepgram's previous-generation multilingual model.
+ * - `speechmatics/standard` is a Speechmatics model self-hosted by Telnyx; it supports a fixed set of language packs (including bilingual packs such as `ar_en`) and defaults to `en`.
+ * - `speechmatics/linden-1` (preview) is a vendor-hosted streaming model with no auto-detect; set `language` from Speechmatics' Realtime language list (defaults to `en`).
  * - `azure/fast` is a multilingual Azure transcription model.
  * - `assemblyai/universal-3-5-pro` is a multilingual streaming model with configurable turn detection. The legacy alias `assemblyai/universal-streaming` is still accepted and resolves to the same model.
  * - `xai/grok-stt` is a multilingual Grok STT model.
@@ -28,6 +30,10 @@ enum Model: string
     case DEEPGRAM_NOVA_3 = 'deepgram/nova-3';
 
     case DEEPGRAM_NOVA_2 = 'deepgram/nova-2';
+
+    case SPEECHMATICS_STANDARD = 'speechmatics/standard';
+
+    case SPEECHMATICS_LINDEN_1 = 'speechmatics/linden-1';
 
     case AZURE_FAST = 'azure/fast';
 

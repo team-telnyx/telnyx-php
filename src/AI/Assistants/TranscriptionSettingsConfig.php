@@ -24,6 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   minTurnSilence?: int|null,
  *   numerals?: bool|null,
  *   prompt?: string|null,
+ *   removeDisfluencies?: bool|null,
  *   smartFormat?: bool|null,
  * }
  */
@@ -117,6 +118,12 @@ final class TranscriptionSettingsConfig implements BaseModel
     #[Optional]
     public ?string $prompt;
 
+    /**
+     * Available only for speechmatics/linden-1. When true, filler words such as "um" and "uh" are removed from the transcript. Disfluency removal is supported only for `ar`, `cmn`, `da`, `de`, `el`, `en`, `es`, `fr`, `he`, `hi`, `hu`, `it`, `ja`, `nl`, `pl`, `pt`, and `ru`, determined by the base language (so `en-US`, `en-GB`, `en-AU`, `cmn-Hans`, and `cmn-Hant` are supported); for other languages, filler words remain in the transcript.
+     */
+    #[Optional('remove_disfluencies')]
+    public ?bool $removeDisfluencies;
+
     #[Optional('smart_format')]
     public ?bool $smartFormat;
 
@@ -147,6 +154,7 @@ final class TranscriptionSettingsConfig implements BaseModel
         ?int $minTurnSilence = null,
         ?bool $numerals = null,
         ?string $prompt = null,
+        ?bool $removeDisfluencies = null,
         ?bool $smartFormat = null,
     ): self {
         $self = new self;
@@ -165,6 +173,7 @@ final class TranscriptionSettingsConfig implements BaseModel
         null !== $minTurnSilence && $self['minTurnSilence'] = $minTurnSilence;
         null !== $numerals && $self['numerals'] = $numerals;
         null !== $prompt && $self['prompt'] = $prompt;
+        null !== $removeDisfluencies && $self['removeDisfluencies'] = $removeDisfluencies;
         null !== $smartFormat && $self['smartFormat'] = $smartFormat;
 
         return $self;
@@ -321,6 +330,17 @@ final class TranscriptionSettingsConfig implements BaseModel
     {
         $self = clone $this;
         $self['prompt'] = $prompt;
+
+        return $self;
+    }
+
+    /**
+     * Available only for speechmatics/linden-1. When true, filler words such as "um" and "uh" are removed from the transcript. Disfluency removal is supported only for `ar`, `cmn`, `da`, `de`, `el`, `en`, `es`, `fr`, `he`, `hi`, `hu`, `it`, `ja`, `nl`, `pl`, `pt`, and `ru`, determined by the base language (so `en-US`, `en-GB`, `en-AU`, `cmn-Hans`, and `cmn-Hant` are supported); for other languages, filler words remain in the transcript.
+     */
+    public function withRemoveDisfluencies(bool $removeDisfluencies): self
+    {
+        $self = clone $this;
+        $self['removeDisfluencies'] = $removeDisfluencies;
 
         return $self;
     }
