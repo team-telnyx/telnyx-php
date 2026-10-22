@@ -13,6 +13,8 @@ enum PhoneNumberType: string
 
     case LOCAL = 'local';
 
+    case LOCALCOMMERCIAL = 'localcommercial';
+
     case MOBILE = 'mobile';
 
     case MULTIPURPOSE = 'multipurpose';

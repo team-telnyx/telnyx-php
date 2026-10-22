@@ -81,7 +81,7 @@ final class CallsService implements CallsContract
      * Returns an individual call identified by its CallSid. This endpoint is eventually consistent.
      *
      * @param string $callSid the CallSid that identifies the call to update
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -105,7 +105,7 @@ final class CallsService implements CallsContract
      * Update TeXML call. Please note that the keys present in the payload MUST BE formatted in CamelCase as specified in the example.
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
-     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param string $accountSid Path param: The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param FallbackMethod|value-of<FallbackMethod> $fallbackMethod body param: HTTP request type used for `FallbackUrl`
      * @param string $fallbackURL body param: A failover URL for which Telnyx will retrieve the TeXML call instructions if the Url is not responding
      * @param Method|value-of<Method> $method body param: HTTP request type used for `Url`
@@ -155,9 +155,9 @@ final class CallsService implements CallsContract
     /**
      * @api
      *
-     * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the connection in the Mission Control Portal.
+     * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the TeXML Application in the Mission Control Portal.
      *
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param BodyShape $body
      * @param RequestOpts|null $requestOptions
      *
@@ -181,7 +181,7 @@ final class CallsService implements CallsContract
      *
      * Returns multiple call resouces for an account. This endpoint is eventually consistent.
      *
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param string $endTime Filters calls by their end date. Expected format is YYYY-MM-DD
      * @param string $endTimeLt Filters calls by their end date (before). Expected format is YYYY-MM-DD
      * @param string $endTimeGt Filters calls by their end date (after). Expected format is YYYY-MM-DD
@@ -244,7 +244,7 @@ final class CallsService implements CallsContract
      * Starts siprec session with specified parameters for call idientified by call_sid.
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
-     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param string $accountSid Path param: The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param string $connectorName body param: The name of the connector to use for the SIPREC session
      * @param bool $includeMetadataCustomHeaders Body param: When set, custom parameters will be added as metadata (recording.session.ExtensionParameters). Otherwise, they’ll be added to sip headers.
      * @param string $name Body param: Name of the SIPREC session. May be used to stop the SIPREC session from TeXML instruction.
@@ -300,7 +300,7 @@ final class CallsService implements CallsContract
      * Starts streaming media from a call to a specific WebSocket address.
      *
      * @param string $callSid path param: The CallSid that identifies the call to update
-     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param string $accountSid Path param: The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param BidirectionalCodec|value-of<BidirectionalCodec> $bidirectionalCodec Body param: Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      * @param BidirectionalMode|value-of<BidirectionalMode> $bidirectionalMode body param: Configures method of bidirectional streaming (mp3, rtp)
      * @param string $name body param: The user specified name of Stream

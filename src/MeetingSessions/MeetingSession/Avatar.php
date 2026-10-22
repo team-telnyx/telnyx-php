@@ -9,9 +9,11 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Avatar configuration if an avatar is attached, otherwise null.
+ * The assistant's avatar, captured from its `avatar_settings` when the session was created. For display only; later changes to the assistant do not update it.
  *
- * @phpstan-type AvatarShape = array{avatarID: string, provider: 'anam'}
+ * @phpstan-type AvatarShape = array{
+ *   avatarID: string, backgroundID: string, model: string, provider: 'telnyx'
+ * }
  */
 final class Avatar implements BaseModel
 {
@@ -21,10 +23,10 @@ final class Avatar implements BaseModel
     /**
      * Avatar provider identifier.
      *
-     * @var 'anam' $provider
+     * @var 'telnyx' $provider
      */
     #[Required]
-    public string $provider = 'anam';
+    public string $provider = 'telnyx';
 
     /**
      * Identifier of the avatar.
@@ -33,17 +35,29 @@ final class Avatar implements BaseModel
     public string $avatarID;
 
     /**
+     * Identifier of the avatar's background.
+     */
+    #[Required('background_id')]
+    public string $backgroundID;
+
+    /**
+     * Avatar rendering model, for example `foxtrot-1`.
+     */
+    #[Required]
+    public string $model;
+
+    /**
      * `new Avatar()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Avatar::with(avatarID: ...)
+     * Avatar::with(avatarID: ..., backgroundID: ..., model: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Avatar)->withAvatarID(...)
+     * (new Avatar)->withAvatarID(...)->withBackgroundID(...)->withModel(...)
      * ```
      */
     public function __construct()
@@ -56,11 +70,16 @@ final class Avatar implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $avatarID): self
-    {
+    public static function with(
+        string $avatarID,
+        string $backgroundID,
+        string $model
+    ): self {
         $self = new self;
 
         $self['avatarID'] = $avatarID;
+        $self['backgroundID'] = $backgroundID;
+        $self['model'] = $model;
 
         return $self;
     }
@@ -77,9 +96,31 @@ final class Avatar implements BaseModel
     }
 
     /**
+     * Identifier of the avatar's background.
+     */
+    public function withBackgroundID(string $backgroundID): self
+    {
+        $self = clone $this;
+        $self['backgroundID'] = $backgroundID;
+
+        return $self;
+    }
+
+    /**
+     * Avatar rendering model, for example `foxtrot-1`.
+     */
+    public function withModel(string $model): self
+    {
+        $self = clone $this;
+        $self['model'] = $model;
+
+        return $self;
+    }
+
+    /**
      * Avatar provider identifier.
      *
-     * @param 'anam' $provider
+     * @param 'telnyx' $provider
      */
     public function withProvider(string $provider): self
     {

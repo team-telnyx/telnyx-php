@@ -76,14 +76,15 @@ final class RcsService implements RcsContract
      *
      * Queues an outbound RCS message through the selected RCS agent. Check recipient capabilities before sending features that require RCS support.
      *
-     * @param string $agentID RCS Agent ID
-     * @param RcsAgentMessage|RcsAgentMessageShape $agentMessage
-     * @param string $messagingProfileID A valid messaging profile ID
-     * @param string $to Phone number in +E.164 format
-     * @param MmsFallback|MmsFallbackShape $mmsFallback
-     * @param SMSFallback|SMSFallbackShape $smsFallback
-     * @param Type|value-of<Type> $type Message type - must be set to "RCS"
-     * @param string $webhookURL the URL where webhooks related to this message will be sent
+     * @param string $agentID Body param: RCS Agent ID
+     * @param RcsAgentMessage|RcsAgentMessageShape $agentMessage Body param
+     * @param string $messagingProfileID Body param: A valid messaging profile ID
+     * @param string $to Body param: Phone number in +E.164 format
+     * @param MmsFallback|MmsFallbackShape $mmsFallback Body param
+     * @param SMSFallback|SMSFallbackShape $smsFallback Body param
+     * @param Type|value-of<Type> $type Body param: Message type - must be set to "RCS"
+     * @param string $webhookURL body param: The URL where webhooks related to this message will be sent
+     * @param string $idempotencyKey Header param: Optional opaque, unquoted key for safely retrying the same logical request. Keys must contain 1 to 255 letters, numbers, hyphens, or underscores. Generate a unique UUID v4 for each operation and reuse it only when retrying that operation with the same request. Invalid headers—including duplicate, empty, malformed, or overlong values—return 400 with error code 10015. A request already in progress with the same key returns 409; reusing the key with a different request returns 422. Only successful responses are replayed, for up to 24 hours. Do not include sensitive data in the key.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -97,6 +98,7 @@ final class RcsService implements RcsContract
         SMSFallback|array|null $smsFallback = null,
         Type|string|null $type = null,
         ?string $webhookURL = null,
+        ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): RcSendResponse {
         $params = array_filter(
@@ -109,6 +111,7 @@ final class RcsService implements RcsContract
                 'smsFallback' => $smsFallback ?? Omitted::VALUE,
                 'type' => $type ?? Omitted::VALUE,
                 'webhookURL' => $webhookURL ?? Omitted::VALUE,
+                'idempotencyKey' => $idempotencyKey ?? Omitted::VALUE,
             ],
             static fn ($value) => Omitted::VALUE !== $value,
         );

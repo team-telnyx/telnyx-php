@@ -42,7 +42,10 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->recordingsJson('call_sid', accountSid: 'account_sid')
+            ->recordingsJson(
+                'call_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -67,7 +70,7 @@ final class RecordingsJsonTest extends TestCase
             ->recordingsJson
             ->recordingsJson(
                 'call_sid',
-                accountSid: 'account_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
                 playBeep: false,
                 recordingChannels: 'single',
                 recordingStatusCallback: 'http://webhook.com/callback',
@@ -98,7 +101,10 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->retrieveRecordingsJson('call_sid', accountSid: 'account_sid')
+            ->retrieveRecordingsJson(
+                'call_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -118,7 +124,10 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->retrieveRecordingsJson('call_sid', accountSid: 'account_sid')
+            ->retrieveRecordingsJson(
+                'call_sid',
+                accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9'
+            )
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

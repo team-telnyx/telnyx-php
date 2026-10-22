@@ -10,24 +10,21 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\Assistant;
-use Telnyx\MeetingSessions\MeetingSessionCreateParams\Avatar;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSessionCameraImageBase64Source;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSessionCameraImageURLSource;
 
 /**
- * Creates a new meeting session. When an idempotency_key is supplied in the request body, replay lookup is scoped to the authenticated account and compares only the key; the request payload is not fingerprinted or compared. If a session with that key already exists for the account, the existing session is replayed (200); otherwise a new session is created (201). Supports bring-your-own-key (BYOK) configuration. The session may enter asynchronous states (e.g. joining, waiting_for_admission) before becoming active. Optional `camera_image` input is write-only and applies only when no Avatar or Assistant webpage output takes precedence. An ignored URL is not fetched. An effective URL source is resolved before bot creation; neither the source URL nor image bytes are persisted, returned, or logged. Treat signed URLs as credentials.
+ * Creates a new meeting session. When an idempotency_key is supplied in the request body, replay lookup is scoped to the authenticated account and compares only the key; the request payload is not fingerprinted or compared. If a session with that key already exists for the account, the existing session is replayed (200); otherwise a new session is created (201). The session may enter asynchronous states (e.g. joining, waiting_for_admission) before becoming active. Optional `camera_image` input is write-only and applies only when no avatar or Assistant webpage output takes precedence. An ignored URL is not fetched. An effective URL source is resolved before bot creation; neither the source URL nor image bytes are persisted, returned, or logged. Treat signed URLs as credentials. With `assistant.avatar: true`, the assistant is read before the bot is created: an assistant without a Telnyx avatar configured is rejected with 400 `invalid_request` (message prefix `assistant_avatar_not_configured:`), an unknown assistant with 400 `invalid_request` (prefix `assistant_not_found:`), and a failed lookup with 503 `assistant_lookup_unavailable`; no bot is created in any of these cases.
  *
  * @see Telnyx\Services\MeetingSessionsService::create()
  *
  * @phpstan-import-type CameraImageVariants from \Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage
  * @phpstan-import-type AssistantShape from \Telnyx\MeetingSessions\MeetingSessionCreateParams\Assistant
- * @phpstan-import-type AvatarShape from \Telnyx\MeetingSessions\MeetingSessionCreateParams\Avatar
  * @phpstan-import-type CameraImageShape from \Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage
  *
  * @phpstan-type MeetingSessionCreateParamsShape = array{
  *   meetingURL: string,
  *   assistant?: null|Assistant|AssistantShape,
- *   avatar?: null|Avatar|AvatarShape,
  *   bargeIn?: bool|null,
  *   botName?: string|null,
  *   cameraImage?: CameraImageShape|null,
@@ -58,12 +55,6 @@ final class MeetingSessionCreateParams implements BaseModel
      */
     #[Optional]
     public ?Assistant $assistant;
-
-    /**
-     * Request options for attaching a bring-your-own-key avatar to the session.
-     */
-    #[Optional]
-    public ?Avatar $avatar;
 
     /**
      * When enabled, a human participant `speech_on` event interrupts and stops the current bot audio; it does not bypass admission or initiate speech. Assistant sessions reject `barge_in: true`.
@@ -112,7 +103,7 @@ final class MeetingSessionCreateParams implements BaseModel
     public ?array $metadata;
 
     /**
-     * Text the bot speaks when it enters the meeting. **Not spoken when an `assistant` is attached**: the value is accepted and echoed back on the session, but the assistant owns the voice and the line is never delivered, with no event reporting the omission. Use `chat_on_enter` to announce an assistant-backed bot.
+     * Text the bot speaks when it enters the meeting. **Not spoken when an `assistant` is attached**: the value is accepted and echoed back on the session, but the assistant owns the voice and the line is never delivered, with no event reporting the omission. Use `chat_on_enter` to announce an assistant-backed bot. Rejected with 400 `invalid_request` when `assistant.avatar` is `true`.
      */
     #[Optional('speak_on_enter')]
     public ?string $speakOnEnter;
@@ -160,14 +151,12 @@ final class MeetingSessionCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Assistant|AssistantShape|null $assistant
-     * @param Avatar|AvatarShape|null $avatar
      * @param CameraImageShape|null $cameraImage
      * @param array<string,mixed>|null $metadata
      */
     public static function with(
         string $meetingURL,
         Assistant|array|null $assistant = null,
-        Avatar|array|null $avatar = null,
         ?bool $bargeIn = null,
         ?string $botName = null,
         MeetingSessionCameraImageBase64Source|array|MeetingSessionCameraImageURLSource|null $cameraImage = null,
@@ -185,7 +174,6 @@ final class MeetingSessionCreateParams implements BaseModel
         $self['meetingURL'] = $meetingURL;
 
         null !== $assistant && $self['assistant'] = $assistant;
-        null !== $avatar && $self['avatar'] = $avatar;
         null !== $bargeIn && $self['bargeIn'] = $bargeIn;
         null !== $botName && $self['botName'] = $botName;
         null !== $cameraImage && $self['cameraImage'] = $cameraImage;
@@ -221,19 +209,6 @@ final class MeetingSessionCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['assistant'] = $assistant;
-
-        return $self;
-    }
-
-    /**
-     * Request options for attaching a bring-your-own-key avatar to the session.
-     *
-     * @param Avatar|AvatarShape $avatar
-     */
-    public function withAvatar(Avatar|array $avatar): self
-    {
-        $self = clone $this;
-        $self['avatar'] = $avatar;
 
         return $self;
     }
@@ -321,7 +296,7 @@ final class MeetingSessionCreateParams implements BaseModel
     }
 
     /**
-     * Text the bot speaks when it enters the meeting. **Not spoken when an `assistant` is attached**: the value is accepted and echoed back on the session, but the assistant owns the voice and the line is never delivered, with no event reporting the omission. Use `chat_on_enter` to announce an assistant-backed bot.
+     * Text the bot speaks when it enters the meeting. **Not spoken when an `assistant` is attached**: the value is accepted and echoed back on the session, but the assistant owns the voice and the line is never delivered, with no event reporting the omission. Use `chat_on_enter` to announce an assistant-backed bot. Rejected with 400 `invalid_request` when `assistant.avatar` is `true`.
      */
     public function withSpeakOnEnter(string $speakOnEnter): self
     {

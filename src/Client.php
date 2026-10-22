@@ -43,6 +43,7 @@ use Telnyx\Services\CredentialConnectionsService;
 use Telnyx\Services\CustomerServiceRecordsService;
 use Telnyx\Services\CustomStorageCredentialsService;
 use Telnyx\Services\DetailRecordsService;
+use Telnyx\Services\DialMetricsService;
 use Telnyx\Services\DialogflowConnectionsService;
 use Telnyx\Services\DirService;
 use Telnyx\Services\DocumentLinksService;
@@ -170,12 +171,14 @@ use Telnyx\Services\SpendLimitsService;
 use Telnyx\Services\StorageService;
 use Telnyx\Services\SubNumberOrdersReportService;
 use Telnyx\Services\SubNumberOrdersService;
+use Telnyx\Services\TailscaleSubnetRoutersService;
 use Telnyx\Services\TelephonyCredentialsService;
 use Telnyx\Services\TermsOfServiceService;
 use Telnyx\Services\TexmlApplicationsService;
 use Telnyx\Services\TexmlService;
 use Telnyx\Services\TextToSpeechService;
 use Telnyx\Services\TrafficPolicyProfilesService;
+use Telnyx\Services\TtsIntegrationsService;
 use Telnyx\Services\UacConnectionsService;
 use Telnyx\Services\UsageReportsService;
 use Telnyx\Services\UserAddressesService;
@@ -1172,6 +1175,21 @@ class Client extends BaseClient
      */
     public SipRegistrationStatusService $sipRegistrationStatus;
 
+    /**
+     * @api
+     */
+    public DialMetricsService $dialMetrics;
+
+    /**
+     * @api
+     */
+    public TtsIntegrationsService $ttsIntegrations;
+
+    /**
+     * @api
+     */
+    public TailscaleSubnetRoutersService $tailscaleSubnetRouters;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1435,6 +1453,9 @@ class Client extends BaseClient
         $this->spendLimits = new SpendLimitsService($this);
         $this->llmTokenGateway = new LlmTokenGatewayService($this);
         $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
+        $this->dialMetrics = new DialMetricsService($this);
+        $this->ttsIntegrations = new TtsIntegrationsService($this);
+        $this->tailscaleSubnetRouters = new TailscaleSubnetRoutersService($this);
     }
 
     /** @return array<string,string> */

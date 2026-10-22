@@ -8,6 +8,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxBayanClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxQwen3TtsClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxUltraClone;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest\MinimaxDesignClone;
@@ -96,13 +97,13 @@ interface VoiceClonesContract
     /**
      * @api
      *
-     * @param VoiceCloneUploadRequestShape $voiceCloneUploadRequest Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
+     * @param VoiceCloneUploadRequestShape $voiceCloneUploadRequest Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 20MB.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function createFromUpload(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $voiceCloneUploadRequest,
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone $voiceCloneUploadRequest,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneResponse;
 

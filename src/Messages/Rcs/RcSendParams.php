@@ -32,6 +32,7 @@ use Telnyx\Messages\RcsAgentMessage;
  *   smsFallback?: null|SMSFallback|SMSFallbackShape,
  *   type?: null|Type|value-of<Type>,
  *   webhookURL?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class RcSendParams implements BaseModel
@@ -81,6 +82,9 @@ final class RcSendParams implements BaseModel
     #[Optional('webhook_url')]
     public ?string $webhookURL;
 
+    #[Optional]
+    public ?string $idempotencyKey;
+
     /**
      * `new RcSendParams()` is missing required properties by the API.
      *
@@ -125,6 +129,7 @@ final class RcSendParams implements BaseModel
         SMSFallback|array|null $smsFallback = null,
         Type|string|null $type = null,
         ?string $webhookURL = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -137,6 +142,7 @@ final class RcSendParams implements BaseModel
         null !== $smsFallback && $self['smsFallback'] = $smsFallback;
         null !== $type && $self['type'] = $type;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -227,6 +233,14 @@ final class RcSendParams implements BaseModel
     {
         $self = clone $this;
         $self['webhookURL'] = $webhookURL;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

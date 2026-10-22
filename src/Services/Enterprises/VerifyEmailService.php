@@ -11,7 +11,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\VerifyEmailContract;
 
 /**
- * Verify ownership of a DIR's authorizer email. A short code is emailed and confirmed; the email must be verified before references can be submitted.
+ * Verify ownership of a DIR's authorizer email. A short code is emailed and confirmed.
  *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

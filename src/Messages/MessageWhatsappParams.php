@@ -10,21 +10,23 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessageWhatsappParams\Type;
+use Telnyx\Messages\MessageWhatsappParams\WhatsappMessage;
 
 /**
  * Sends a WhatsApp message using a Telnyx WhatsApp-enabled number. The message body, interactive elements, media, location, and reaction content are specified in the `whatsapp_message` field. Delivery progress and final disposition are reported asynchronously through messaging webhooks.
  *
  * @see Telnyx\Services\MessagesService::whatsapp()
  *
- * @phpstan-import-type WhatsappMessageContentShape from \Telnyx\Messages\WhatsappMessageContent
+ * @phpstan-import-type WhatsappMessageShape from \Telnyx\Messages\MessageWhatsappParams\WhatsappMessage
  *
  * @phpstan-type MessageWhatsappParamsShape = array{
  *   from: string,
  *   to: string,
- *   whatsappMessage: WhatsappMessageContent|WhatsappMessageContentShape,
+ *   whatsappMessage: WhatsappMessage|WhatsappMessageShape,
  *   messagingProfileID?: string|null,
  *   type?: null|Type|value-of<Type>,
  *   webhookURL?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class MessageWhatsappParams implements BaseModel
@@ -40,13 +42,13 @@ final class MessageWhatsappParams implements BaseModel
     public string $from;
 
     /**
-     * Phone number in +E.164 format.
+     * Recipient phone number in +E.164 format, or the business-scoped user ID (BSUID) of a WhatsApp user who hides their phone number, for example `US.13491208655302741918`. Authentication templates cannot be sent to a BSUID.
      */
     #[Required]
     public string $to;
 
     #[Required('whatsapp_message')]
-    public WhatsappMessageContent $whatsappMessage;
+    public WhatsappMessage $whatsappMessage;
 
     /**
      * Messaging profile ID - required if the 'from' number is not SMS-enabled.
@@ -67,6 +69,9 @@ final class MessageWhatsappParams implements BaseModel
      */
     #[Optional('webhook_url')]
     public ?string $webhookURL;
+
+    #[Optional]
+    public ?string $idempotencyKey;
 
     /**
      * `new MessageWhatsappParams()` is missing required properties by the API.
@@ -95,16 +100,17 @@ final class MessageWhatsappParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WhatsappMessageContent|WhatsappMessageContentShape $whatsappMessage
+     * @param WhatsappMessage|WhatsappMessageShape $whatsappMessage
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
         string $from,
         string $to,
-        WhatsappMessageContent|array $whatsappMessage,
+        WhatsappMessage|array $whatsappMessage,
         ?string $messagingProfileID = null,
         Type|string|null $type = null,
         ?string $webhookURL = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -115,6 +121,7 @@ final class MessageWhatsappParams implements BaseModel
         null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         null !== $type && $self['type'] = $type;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -131,7 +138,7 @@ final class MessageWhatsappParams implements BaseModel
     }
 
     /**
-     * Phone number in +E.164 format.
+     * Recipient phone number in +E.164 format, or the business-scoped user ID (BSUID) of a WhatsApp user who hides their phone number, for example `US.13491208655302741918`. Authentication templates cannot be sent to a BSUID.
      */
     public function withTo(string $to): self
     {
@@ -142,10 +149,10 @@ final class MessageWhatsappParams implements BaseModel
     }
 
     /**
-     * @param WhatsappMessageContent|WhatsappMessageContentShape $whatsappMessage
+     * @param WhatsappMessage|WhatsappMessageShape $whatsappMessage
      */
     public function withWhatsappMessage(
-        WhatsappMessageContent|array $whatsappMessage
+        WhatsappMessage|array $whatsappMessage
     ): self {
         $self = clone $this;
         $self['whatsappMessage'] = $whatsappMessage;
@@ -184,6 +191,14 @@ final class MessageWhatsappParams implements BaseModel
     {
         $self = clone $this;
         $self['webhookURL'] = $webhookURL;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

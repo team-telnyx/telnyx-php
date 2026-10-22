@@ -18,7 +18,7 @@ interface NumberLookupContract
      * @api
      *
      * @param string $phoneNumber The phone number to be looked up
-     * @param Type|value-of<Type> $type Specifies the type of number lookup to be performed
+     * @param Type|value-of<Type> $type Specifies the type of number lookup to be performed. May be supplied more than once to request several data sources in a single call (for example, `?type=carrier&type=enhanced-caller-name`). Each requested type populates the corresponding object in the response.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

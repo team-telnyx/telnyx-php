@@ -9,11 +9,12 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxBayanClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxQwen3TtsClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxUltraClone;
 
 /**
- * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–60 seconds of clear speech (Ultra accepts up to 60 seconds; Qwen3TTS auto-trims to 10 seconds; Minimax accepts up to 5 minutes). Maximum file size: 5MB for Telnyx, 20MB for Minimax.
+ * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. Maximum file size: 20MB. Reference audio is trimmed per model: Qwen3TTS and Bayan use the first 10 seconds, Ultra uses up to 60 seconds, and Minimax accepts 10 seconds to 5 minutes. Ultra clones return `202` with status `pending`; all other models return `201` with status `active`. Bayan clones require `ref_text` (the exact transcript of the reference audio) and support `ar` (default) and `en` only.
  *
  * @see Telnyx\Services\VoiceClonesService::createFromUpload()
  *
@@ -31,12 +32,12 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
     use SdkParams;
 
     /**
-     * Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
+     * Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 20MB.
      *
      * @var VoiceCloneUploadRequestVariants $voiceCloneUploadRequest
      */
     #[Required]
-    public TelnyxQwen3TtsClone|TelnyxUltraClone|MinimaxClone $voiceCloneUploadRequest;
+    public TelnyxQwen3TtsClone|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone $voiceCloneUploadRequest;
 
     /**
      * `new VoiceCloneCreateFromUploadParams()` is missing required properties by the API.
@@ -65,7 +66,7 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
      * @param VoiceCloneUploadRequestShape $voiceCloneUploadRequest
      */
     public static function with(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $voiceCloneUploadRequest,
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone $voiceCloneUploadRequest,
     ): self {
         $self = new self;
 
@@ -75,12 +76,12 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
     }
 
     /**
-     * Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
+     * Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 20MB.
      *
      * @param VoiceCloneUploadRequestShape $voiceCloneUploadRequest
      */
     public function withVoiceCloneUploadRequest(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $voiceCloneUploadRequest,
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone $voiceCloneUploadRequest,
     ): self {
         $self = clone $this;
         $self['voiceCloneUploadRequest'] = $voiceCloneUploadRequest;

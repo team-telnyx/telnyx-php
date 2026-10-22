@@ -16,6 +16,7 @@ use Telnyx\AI\Assistants\AssistantTool\SendMessageTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\AssistantTool\SkipTurnTool;
 use Telnyx\AI\Assistants\AssistantTool\UpdateDynamicVariablesTool;
+use Telnyx\AI\Assistants\AssistantTool\VisionTool;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -35,11 +36,12 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type DtmfToolShape from \Telnyx\AI\Assistants\AssistantTool\DtmfTool
  * @phpstan-import-type SendMessageToolShape from \Telnyx\AI\Assistants\AssistantTool\SendMessageTool
  * @phpstan-import-type SkipTurnToolShape from \Telnyx\AI\Assistants\AssistantTool\SkipTurnTool
+ * @phpstan-import-type VisionToolShape from \Telnyx\AI\Assistants\AssistantTool\VisionTool
  * @phpstan-import-type PayToolShape from \Telnyx\AI\Assistants\AssistantTool\PayTool
  * @phpstan-import-type UpdateDynamicVariablesToolShape from \Telnyx\AI\Assistants\AssistantTool\UpdateDynamicVariablesTool
  *
- * @phpstan-type AssistantToolVariants = FunctionTool|InferenceEmbeddingWebhookToolParams|ClientSideTool|RetrievalTool|HandoffTool|InferenceEmbeddingHangupTool|InferenceEmbeddingTransferTool|InviteTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool|PayTool|UpdateDynamicVariablesTool
- * @phpstan-type AssistantToolShape = AssistantToolVariants|FunctionToolShape|InferenceEmbeddingWebhookToolParamsShape|ClientSideToolShape|RetrievalToolShape|HandoffToolShape|InferenceEmbeddingHangupToolShape|InferenceEmbeddingTransferToolShape|InviteToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape|PayToolShape|UpdateDynamicVariablesToolShape
+ * @phpstan-type AssistantToolVariants = FunctionTool|InferenceEmbeddingWebhookToolParams|ClientSideTool|RetrievalTool|HandoffTool|InferenceEmbeddingHangupTool|InferenceEmbeddingTransferTool|InviteTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool|VisionTool|PayTool|UpdateDynamicVariablesTool
+ * @phpstan-type AssistantToolShape = AssistantToolVariants|FunctionToolShape|InferenceEmbeddingWebhookToolParamsShape|ClientSideToolShape|RetrievalToolShape|HandoffToolShape|InferenceEmbeddingHangupToolShape|InferenceEmbeddingTransferToolShape|InviteToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape|VisionToolShape|PayToolShape|UpdateDynamicVariablesToolShape
  */
 final class AssistantTool implements ConverterSource
 {
@@ -68,6 +70,7 @@ final class AssistantTool implements ConverterSource
             'send_dtmf' => DtmfTool::class,
             'send_message' => SendMessageTool::class,
             'skip_turn' => SkipTurnTool::class,
+            'vision' => VisionTool::class,
             'pay' => PayTool::class,
             'update_dynamic_variables' => UpdateDynamicVariablesTool::class,
         ];

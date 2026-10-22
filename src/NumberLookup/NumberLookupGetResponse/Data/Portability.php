@@ -7,6 +7,7 @@ namespace Telnyx\NumberLookup\NumberLookupGetResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\LineType;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\PortedStatus;
 
 /**
@@ -15,7 +16,7 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability\PortedStatus;
  *   altspidCarrierName?: string|null,
  *   altspidCarrierType?: string|null,
  *   city?: string|null,
- *   lineType?: string|null,
+ *   lineType?: null|LineType|value-of<LineType>,
  *   lrn?: string|null,
  *   ocn?: string|null,
  *   portedDate?: string|null,
@@ -56,9 +57,11 @@ final class Portability implements BaseModel
     public ?string $city;
 
     /**
-     * Type of number.
+     * The line type of the phone number. Uses the same value set as carrier.type; see the API reference for the full list.
+     *
+     * @var value-of<LineType>|null $lineType
      */
-    #[Optional('line_type')]
+    #[Optional('line_type', enum: LineType::class)]
     public ?string $lineType;
 
     /**
@@ -118,6 +121,7 @@ final class Portability implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param LineType|value-of<LineType>|null $lineType
      * @param PortedStatus|value-of<PortedStatus>|null $portedStatus
      */
     public static function with(
@@ -125,7 +129,7 @@ final class Portability implements BaseModel
         ?string $altspidCarrierName = null,
         ?string $altspidCarrierType = null,
         ?string $city = null,
-        ?string $lineType = null,
+        LineType|string|null $lineType = null,
         ?string $lrn = null,
         ?string $ocn = null,
         ?string $portedDate = null,
@@ -199,9 +203,11 @@ final class Portability implements BaseModel
     }
 
     /**
-     * Type of number.
+     * The line type of the phone number. Uses the same value set as carrier.type; see the API reference for the full list.
+     *
+     * @param LineType|value-of<LineType> $lineType
      */
-    public function withLineType(string $lineType): self
+    public function withLineType(LineType|string $lineType): self
     {
         $self = clone $this;
         $self['lineType'] = $lineType;

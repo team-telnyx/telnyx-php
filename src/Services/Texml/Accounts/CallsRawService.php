@@ -127,9 +127,9 @@ final class CallsRawService implements CallsRawContract
     /**
      * @api
      *
-     * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the connection in the Mission Control Portal.
+     * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the TeXML Application in the Mission Control Portal.
      *
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param array{body: BodyShape}|CallCallsParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -162,7 +162,7 @@ final class CallsRawService implements CallsRawContract
      *
      * Returns multiple call resouces for an account. This endpoint is eventually consistent.
      *
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param array{
      *   endTime?: string,
      *   endTimeLt?: string,

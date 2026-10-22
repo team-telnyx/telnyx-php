@@ -21,6 +21,7 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
  * @phpstan-type CsvDownloadCreateParamsShape = array{
  *   csvFormat?: null|CsvFormat|value-of<CsvFormat>,
  *   filter?: null|Filter|FilterShape,
+ *   includeManagedAccounts?: bool|null,
  * }
  */
 final class CsvDownloadCreateParams implements BaseModel
@@ -43,6 +44,12 @@ final class CsvDownloadCreateParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
+    /**
+     * When true, the CSV includes phone numbers from all managed accounts in addition to the requesting account's own numbers. Only applies to V2 format; ignored for V1. The export appends `user_id` and `email` columns identifying the account that owns each number. When a filter is provided, it applies to the combined set of numbers. Requires access to managed accounts; requests without that access are rejected.
+     */
+    #[Optional]
+    public ?bool $includeManagedAccounts;
+
     public function __construct()
     {
         $this->initialize();
@@ -58,12 +65,14 @@ final class CsvDownloadCreateParams implements BaseModel
      */
     public static function with(
         CsvFormat|string|null $csvFormat = null,
-        Filter|array|null $filter = null
+        Filter|array|null $filter = null,
+        ?bool $includeManagedAccounts = null,
     ): self {
         $self = new self;
 
         null !== $csvFormat && $self['csvFormat'] = $csvFormat;
         null !== $filter && $self['filter'] = $filter;
+        null !== $includeManagedAccounts && $self['includeManagedAccounts'] = $includeManagedAccounts;
 
         return $self;
     }
@@ -90,6 +99,18 @@ final class CsvDownloadCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['filter'] = $filter;
+
+        return $self;
+    }
+
+    /**
+     * When true, the CSV includes phone numbers from all managed accounts in addition to the requesting account's own numbers. Only applies to V2 format; ignored for V1. The export appends `user_id` and `email` columns identifying the account that owns each number. When a filter is provided, it applies to the combined set of numbers. Requires access to managed accounts; requests without that access are rejected.
+     */
+    public function withIncludeManagedAccounts(
+        bool $includeManagedAccounts
+    ): self {
+        $self = clone $this;
+        $self['includeManagedAccounts'] = $includeManagedAccounts;
 
         return $self;
     }

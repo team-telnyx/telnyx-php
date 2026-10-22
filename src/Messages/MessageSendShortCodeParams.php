@@ -29,6 +29,7 @@ use Telnyx\Messages\MessageSendShortCodeParams\Type;
  *   useProfileWebhooks?: bool|null,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
+ *   idempotencyKey?: string|null,
  * }
  */
 final class MessageSendShortCodeParams implements BaseModel
@@ -113,6 +114,9 @@ final class MessageSendShortCodeParams implements BaseModel
     #[Optional('webhook_url')]
     public ?string $webhookURL;
 
+    #[Optional]
+    public ?string $idempotencyKey;
+
     /**
      * `new MessageSendShortCodeParams()` is missing required properties by the API.
      *
@@ -153,6 +157,7 @@ final class MessageSendShortCodeParams implements BaseModel
         ?bool $useProfileWebhooks = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
+        ?string $idempotencyKey = null,
     ): self {
         $self = new self;
 
@@ -168,6 +173,7 @@ final class MessageSendShortCodeParams implements BaseModel
         null !== $useProfileWebhooks && $self['useProfileWebhooks'] = $useProfileWebhooks;
         null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }
@@ -299,6 +305,14 @@ final class MessageSendShortCodeParams implements BaseModel
     {
         $self = clone $this;
         $self['webhookURL'] = $webhookURL;
+
+        return $self;
+    }
+
+    public function withIdempotencyKey(string $idempotencyKey): self
+    {
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
         return $self;
     }

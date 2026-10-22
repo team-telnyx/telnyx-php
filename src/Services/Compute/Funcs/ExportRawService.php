@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Compute\Funcs\ExportRawContract;
 
 /**
+ * Manage Edge Compute functions.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ExportRawService implements ExportRawContract

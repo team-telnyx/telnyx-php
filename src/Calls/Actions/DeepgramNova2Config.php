@@ -38,7 +38,7 @@ final class DeepgramNova2Config implements BaseModel
     public string $transcriptionModel;
 
     /**
-     * Nova-2 keyword biasing without intensifiers. Up to 100 terms to bias recognition toward. For weighted biasing, use `keywords_boosting` instead. Nova-2-only; use `keyterms` on Nova-3.
+     * Nova-2 keyword biasing without intensifiers. Up to 100 terms to bias recognition toward. For weighted biasing, use `keywords_boosting` instead. Supported on Nova-2 models only (`deepgram/nova-2`, `deepgram/nova-2-medical`, `deepgram/nova-2-phonecall`); use `keyterms` on Nova-3 and Flux.
      *
      * @var list<string>|null $hints
      */
@@ -161,7 +161,7 @@ final class DeepgramNova2Config implements BaseModel
     }
 
     /**
-     * Nova-2 keyword biasing without intensifiers. Up to 100 terms to bias recognition toward. For weighted biasing, use `keywords_boosting` instead. Nova-2-only; use `keyterms` on Nova-3.
+     * Nova-2 keyword biasing without intensifiers. Up to 100 terms to bias recognition toward. For weighted biasing, use `keywords_boosting` instead. Supported on Nova-2 models only (`deepgram/nova-2`, `deepgram/nova-2-medical`, `deepgram/nova-2-phonecall`); use `keyterms` on Nova-3 and Flux.
      *
      * @param list<string> $hints
      */

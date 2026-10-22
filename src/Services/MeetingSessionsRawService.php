@@ -10,10 +10,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\Assistant;
-use Telnyx\MeetingSessions\MeetingSessionCreateParams\Avatar;
 use Telnyx\MeetingSessions\MeetingSessionDeleteRecordingMediaResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetEventsResponse;
-use Telnyx\MeetingSessions\MeetingSessionGetRecordingsResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetTranscriptResponse;
 use Telnyx\MeetingSessions\MeetingSessionListParams;
 use Telnyx\MeetingSessions\MeetingSessionListParams\Status;
@@ -27,7 +25,6 @@ use Telnyx\ServiceContracts\MeetingSessionsRawContract;
 
 /**
  * @phpstan-import-type AssistantShape from \Telnyx\MeetingSessions\MeetingSessionCreateParams\Assistant
- * @phpstan-import-type AvatarShape from \Telnyx\MeetingSessions\MeetingSessionCreateParams\Avatar
  * @phpstan-import-type CameraImageShape from \Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -42,12 +39,11 @@ final class MeetingSessionsRawService implements MeetingSessionsRawContract
     /**
      * @api
      *
-     * Creates a new meeting session. When an idempotency_key is supplied in the request body, replay lookup is scoped to the authenticated account and compares only the key; the request payload is not fingerprinted or compared. If a session with that key already exists for the account, the existing session is replayed (200); otherwise a new session is created (201). Supports bring-your-own-key (BYOK) configuration. The session may enter asynchronous states (e.g. joining, waiting_for_admission) before becoming active. Optional `camera_image` input is write-only and applies only when no Avatar or Assistant webpage output takes precedence. An ignored URL is not fetched. An effective URL source is resolved before bot creation; neither the source URL nor image bytes are persisted, returned, or logged. Treat signed URLs as credentials.
+     * Creates a new meeting session. When an idempotency_key is supplied in the request body, replay lookup is scoped to the authenticated account and compares only the key; the request payload is not fingerprinted or compared. If a session with that key already exists for the account, the existing session is replayed (200); otherwise a new session is created (201). The session may enter asynchronous states (e.g. joining, waiting_for_admission) before becoming active. Optional `camera_image` input is write-only and applies only when no avatar or Assistant webpage output takes precedence. An ignored URL is not fetched. An effective URL source is resolved before bot creation; neither the source URL nor image bytes are persisted, returned, or logged. Treat signed URLs as credentials. With `assistant.avatar: true`, the assistant is read before the bot is created: an assistant without a Telnyx avatar configured is rejected with 400 `invalid_request` (message prefix `assistant_avatar_not_configured:`), an unknown assistant with 400 `invalid_request` (prefix `assistant_not_found:`), and a failed lookup with 503 `assistant_lookup_unavailable`; no bot is created in any of these cases.
      *
      * @param array{
      *   meetingURL: string,
      *   assistant?: Assistant|AssistantShape,
-     *   avatar?: Avatar|AvatarShape,
      *   bargeIn?: bool,
      *   botName?: string,
      *   cameraImage?: CameraImageShape,
@@ -204,7 +200,7 @@ final class MeetingSessionsRawService implements MeetingSessionsRawContract
     /**
      * @api
      *
-     * Irreversibly requests deletion of the aggregate recording media for the session. The operation retains the Telnyx-local Meeting session, transcript segments, events, artifacts, and usage records. It is separate from `DELETE /meeting_sessions/{id}`, which stops or cancels participation without deleting the persisted session. A missing/foreign session returns 404; provider deletion failures return 502.
+     * Irreversibly requests deletion of the aggregate recording media for the session. The operation retains the Telnyx-local Meeting session, transcript segments, events, artifacts, and usage records. It is separate from `DELETE /meeting_sessions/{id}`, which stops or cancels participation without deleting the persisted session. A missing/foreign session returns 404; a deletion request whose outcome is unknown returns 502.
      *
      * @param string $id unique identifier for the meeting session
      * @param RequestOpts|null $requestOptions
@@ -258,31 +254,6 @@ final class MeetingSessionsRawService implements MeetingSessionsRawContract
             query: $parsed,
             options: $options,
             convert: MeetingSessionGetEventsResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Returns recordings for a meeting session.
-     *
-     * @param string $id unique identifier for the meeting session
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<MeetingSessionGetRecordingsResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveRecordings(
-        string $id,
-        RequestOptions|array|null $requestOptions = null
-    ): BaseResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'get',
-            path: ['meeting_sessions/%1$s/recordings', $id],
-            options: $requestOptions,
-            convert: MeetingSessionGetRecordingsResponse::class,
         );
     }
 

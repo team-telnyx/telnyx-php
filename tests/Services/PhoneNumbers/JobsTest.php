@@ -12,7 +12,7 @@ use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
-use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
+use Telnyx\PhoneNumbers\Jobs\NumbersPhoneNumbersJob;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -60,7 +60,7 @@ final class JobsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PhoneNumbersJob::class, $item);
+            $this->assertInstanceOf(NumbersPhoneNumbersJob::class, $item);
         }
     }
 

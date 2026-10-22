@@ -22,7 +22,7 @@ interface ConferencesContract
      * @api
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -37,7 +37,7 @@ interface ConferencesContract
      * @api
      *
      * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
-     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param string $accountSid Path param: The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param AnnounceMethod|value-of<AnnounceMethod> $announceMethod Body param: The HTTP method used to call the `AnnounceUrl`. Defaults to `POST`.
      * @param string $announceURL Body param: The URL we should call to announce something into the conference. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      * @param string $status Body param: The new status of the resource. Specifying `completed` will end the conference and hang up all participants.
@@ -57,7 +57,7 @@ interface ConferencesContract
     /**
      * @api
      *
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param string $dateCreated Filters conferences by the creation date. Expected format is YYYY-MM-DD. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
      * @param string $dateUpdated Filters conferences by the time they were last updated. Expected format is YYYY-MM-DD. Also accepts inequality operators, e.g. DateUpdated>=2023-05-22.
      * @param string $friendlyName filters conferences by their friendly name
@@ -85,7 +85,7 @@ interface ConferencesContract
      * @api
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -100,7 +100,7 @@ interface ConferencesContract
      * @api
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

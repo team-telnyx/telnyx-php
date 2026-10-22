@@ -39,7 +39,7 @@ final class Data implements BaseModel
     public string $status;
 
     /**
-     * Additional detail about the status (for example `timeout_exceeded_everyone_left` or `cancelled`), or null.
+     * Additional detail about the status (for example `cancelled`), or null.
      */
     #[Required('status_detail')]
     public ?string $statusDetail;
@@ -122,7 +122,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * Additional detail about the status (for example `timeout_exceeded_everyone_left` or `cancelled`), or null.
+     * Additional detail about the status (for example `cancelled`), or null.
      */
     public function withStatusDetail(?string $statusDetail): self
     {

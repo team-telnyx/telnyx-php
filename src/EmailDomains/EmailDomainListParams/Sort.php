@@ -16,4 +16,8 @@ enum Sort: string
     case DOMAIN = 'domain';
 
     case MINUS_DOMAIN = '-domain';
+
+    case UPDATED_AT = 'updated_at';
+
+    case UPDATED_AT_DESC = '-updated_at';
 }

@@ -65,11 +65,12 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param bool $active Defaults to true
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      * @param string|Omitted|null $androidPushCredentialID The uuid of the push credential for Android
+     * @param bool $bridgeGenerateComfortNoiseOnCn Stores the connection preference for generating silent RTP toward the opposite call leg when comfort-noise packets (CN, payload type 13) are received during hold. Optional; defaults to false when omitted on creation. Only JSON true and false are accepted; null and non-boolean values are rejected. This preference is independent of default_on_hold_comfort_noise_enabled and does not modify that setting. This API provisions the preference; call-processing behavior is implemented separately.
      * @param bool $callCostInWebhooks specifies if call cost webhooks should be sent for this connection
      * @param bool $defaultOnHoldComfortNoiseEnabled When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      * @param DtmfType|value-of<DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      * @param bool $encodeContactHeaderEnabled encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios
-     * @param Omitted|EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
+     * @param Omitted|EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Can only be set when the SIP signaling transport protocol is TLS.
      * @param Inbound|InboundShape $inbound
      * @param string|Omitted|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
@@ -92,6 +93,7 @@ final class IPConnectionsService implements IPConnectionsContract
         ?bool $active = null,
         AnchorsiteOverride|string $anchorsiteOverride = 'Latency',
         string|Omitted|null $androidPushCredentialID = Omitted::VALUE,
+        bool $bridgeGenerateComfortNoiseOnCn = false,
         bool $callCostInWebhooks = false,
         ?string $connectionName = null,
         bool $defaultOnHoldComfortNoiseEnabled = true,
@@ -119,6 +121,7 @@ final class IPConnectionsService implements IPConnectionsContract
                 'active' => $active ?? Omitted::VALUE,
                 'anchorsiteOverride' => $anchorsiteOverride,
                 'androidPushCredentialID' => $androidPushCredentialID,
+                'bridgeGenerateComfortNoiseOnCn' => $bridgeGenerateComfortNoiseOnCn,
                 'callCostInWebhooks' => $callCostInWebhooks,
                 'connectionName' => $connectionName ?? Omitted::VALUE,
                 'defaultOnHoldComfortNoiseEnabled' => $defaultOnHoldComfortNoiseEnabled,
@@ -178,12 +181,13 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param bool $active Defaults to true
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      * @param string|Omitted|null $androidPushCredentialID The uuid of the push credential for Android
+     * @param bool $bridgeGenerateComfortNoiseOnCn Stores the connection preference for generating silent RTP toward the opposite call leg when comfort-noise packets (CN, payload type 13) are received during hold. Optional; omitting this field preserves the saved value. Only JSON true and false are accepted; null and non-boolean values are rejected. This preference is independent of default_on_hold_comfort_noise_enabled and does not modify that setting. This API provisions the preference; call-processing behavior is implemented separately.
      * @param bool $callCostInWebhooks specifies if call cost webhooks should be sent for this connection
      * @param bool $conversationPersistence Whether conversation persistence is enabled for this connection. When enabled, calls handled by the connection are transcribed, stored, and indexed. Defaults to false.
      * @param bool $defaultOnHoldComfortNoiseEnabled When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      * @param DtmfType|value-of<DtmfType> $dtmfType Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      * @param bool $encodeContactHeaderEnabled encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios
-     * @param Omitted|EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
+     * @param Omitted|EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Can only be set when the SIP signaling transport protocol is TLS.
      * @param InboundIP|InboundIPShape $inbound
      * @param string|Omitted|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
@@ -207,6 +211,7 @@ final class IPConnectionsService implements IPConnectionsContract
         ?bool $active = null,
         AnchorsiteOverride|string $anchorsiteOverride = 'Latency',
         string|Omitted|null $androidPushCredentialID = Omitted::VALUE,
+        bool $bridgeGenerateComfortNoiseOnCn = false,
         bool $callCostInWebhooks = false,
         ?string $connectionName = null,
         ?bool $conversationPersistence = null,
@@ -235,6 +240,7 @@ final class IPConnectionsService implements IPConnectionsContract
                 'active' => $active ?? Omitted::VALUE,
                 'anchorsiteOverride' => $anchorsiteOverride,
                 'androidPushCredentialID' => $androidPushCredentialID,
+                'bridgeGenerateComfortNoiseOnCn' => $bridgeGenerateComfortNoiseOnCn,
                 'callCostInWebhooks' => $callCostInWebhooks,
                 'connectionName' => $connectionName ?? Omitted::VALUE,
                 'conversationPersistence' => $conversationPersistence ?? Omitted::VALUE,

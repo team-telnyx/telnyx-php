@@ -15,7 +15,7 @@ use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
-use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
+use Telnyx\PhoneNumbers\Jobs\NumbersPhoneNumbersJob;
 use Telnyx\RequestOptions;
 
 /**
@@ -44,7 +44,7 @@ interface JobsRawContract
      * @param array<string,mixed>|JobListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumbersJob>>
+     * @return BaseResponse<DefaultFlatPagination<NumbersPhoneNumbersJob>>
      *
      * @throws APIException
      */

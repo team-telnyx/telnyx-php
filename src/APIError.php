@@ -17,6 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   code: string,
  *   title: string,
  *   description?: string|null,
+ *   detail?: string|null,
  *   meta?: array<string,mixed>|null,
  *   source?: null|Source|SourceShape,
  * }
@@ -34,6 +35,12 @@ final class APIError implements BaseModel
 
     #[Optional]
     public ?string $description;
+
+    /**
+     * A human-readable explanation of the error.
+     */
+    #[Optional]
+    public ?string $detail;
 
     /** @var array<string,mixed>|null $meta */
     #[Optional(map: 'mixed')]
@@ -73,6 +80,7 @@ final class APIError implements BaseModel
         string $code,
         string $title,
         ?string $description = null,
+        ?string $detail = null,
         ?array $meta = null,
         Source|array|null $source = null,
     ): self {
@@ -82,6 +90,7 @@ final class APIError implements BaseModel
         $self['title'] = $title;
 
         null !== $description && $self['description'] = $description;
+        null !== $detail && $self['detail'] = $detail;
         null !== $meta && $self['meta'] = $meta;
         null !== $source && $self['source'] = $source;
 
@@ -108,6 +117,17 @@ final class APIError implements BaseModel
     {
         $self = clone $this;
         $self['description'] = $description;
+
+        return $self;
+    }
+
+    /**
+     * A human-readable explanation of the error.
+     */
+    public function withDetail(string $detail): self
+    {
+        $self = clone $this;
+        $self['detail'] = $detail;
 
         return $self;
     }

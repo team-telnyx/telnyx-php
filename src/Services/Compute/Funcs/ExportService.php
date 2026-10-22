@@ -11,6 +11,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Compute\Funcs\ExportContract;
 
 /**
+ * Manage Edge Compute functions.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ExportService implements ExportContract

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool;
 
+use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\BridgeBeep;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\CustomHeader;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Targets;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\VoicemailDetection;
@@ -17,6 +18,7 @@ use Telnyx\Core\Omitted;
 /**
  * @phpstan-import-type TargetsVariants from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Targets
  * @phpstan-import-type TargetsShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Targets
+ * @phpstan-import-type BridgeBeepShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\BridgeBeep
  * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\CustomHeader
  * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\VoicemailDetection
  * @phpstan-import-type WarmTransferAcceptanceShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\WarmTransferAcceptance
@@ -24,6 +26,7 @@ use Telnyx\Core\Omitted;
  * @phpstan-type TransferShape = array{
  *   from: string,
  *   targets: TargetsShape,
+ *   bridgeBeep?: null|BridgeBeep|BridgeBeepShape,
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
  *   description?: string|null,
  *   diversion?: string|null,
@@ -51,6 +54,12 @@ final class Transfer implements BaseModel
      */
     #[Required(union: Targets::class)]
     public string|array $targets;
+
+    /**
+     * Plays a short beep once the transfer completes and the calls are bridged, so the transfer destination knows the caller is now on the line. The warm transfer message plays before the bridge; this marks the moment the caller actually joins. Works with and without `warm_transfer_acceptance`.
+     */
+    #[Optional('bridge_beep')]
+    public ?BridgeBeep $bridgeBeep;
 
     /**
      * Custom headers to be added to the SIP INVITE for the transfer command.
@@ -121,6 +130,7 @@ final class Transfer implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TargetsShape $targets
+     * @param BridgeBeep|BridgeBeepShape|null $bridgeBeep
      * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
      * @param VoicemailDetection|VoicemailDetectionShape|null $voicemailDetection
      * @param WarmTransferAcceptance|WarmTransferAcceptanceShape|null $warmTransferAcceptance
@@ -129,6 +139,7 @@ final class Transfer implements BaseModel
         string $from,
         string|array $targets,
         int|Omitted|null $warmMessageDelayMs = Omitted::VALUE,
+        BridgeBeep|array|null $bridgeBeep = null,
         ?array $customHeaders = null,
         ?string $description = null,
         ?string $diversion = null,
@@ -141,6 +152,7 @@ final class Transfer implements BaseModel
         $self['from'] = $from;
         $self['targets'] = $targets;
 
+        null !== $bridgeBeep && $self['bridgeBeep'] = $bridgeBeep;
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
         null !== $description && $self['description'] = $description;
         null !== $diversion && $self['diversion'] = $diversion;
@@ -172,6 +184,19 @@ final class Transfer implements BaseModel
     {
         $self = clone $this;
         $self['targets'] = $targets;
+
+        return $self;
+    }
+
+    /**
+     * Plays a short beep once the transfer completes and the calls are bridged, so the transfer destination knows the caller is now on the line. The warm transfer message plays before the bridge; this marks the moment the caller actually joins. Works with and without `warm_transfer_acceptance`.
+     *
+     * @param BridgeBeep|BridgeBeepShape $bridgeBeep
+     */
+    public function withBridgeBeep(BridgeBeep|array $bridgeBeep): self
+    {
+        $self = clone $this;
+        $self['bridgeBeep'] = $bridgeBeep;
 
         return $self;
     }

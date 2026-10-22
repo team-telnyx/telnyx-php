@@ -36,6 +36,7 @@ use Telnyx\UacConnections\UacConnectionUpdateParams\WebhookAPIVersion;
  *   active?: bool|null,
  *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   androidPushCredentialID?: string|null,
+ *   bridgeGenerateComfortNoiseOnCn?: bool|null,
  *   callCostInWebhooks?: bool|null,
  *   connectionName?: string|null,
  *   defaultOnHoldComfortNoiseEnabled?: bool|null,
@@ -89,6 +90,12 @@ final class UacConnectionUpdateParams implements BaseModel
     public ?string $androidPushCredentialID;
 
     /**
+     * Stores the connection preference for generating silent RTP toward the opposite call leg when comfort-noise packets (CN, payload type 13) are received during hold. Optional; omitting this field preserves the saved value. Only JSON true and false are accepted; null and non-boolean values are rejected. This preference is independent of default_on_hold_comfort_noise_enabled and does not modify that setting. This API provisions the preference; call-processing behavior is implemented separately.
+     */
+    #[Optional('bridge_generate_comfort_noise_on_cn')]
+    public ?bool $bridgeGenerateComfortNoiseOnCn;
+
+    /**
      * Specifies if call cost webhooks should be sent for this connection.
      */
     #[Optional('call_cost_in_webhooks')]
@@ -121,7 +128,7 @@ final class UacConnectionUpdateParams implements BaseModel
     public ?bool $encodeContactHeaderEnabled;
 
     /**
-     * Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
+     * Enable use of SRTP for encryption. Can only be set when the SIP signaling transport protocol is TLS.
      *
      * @var value-of<EncryptedMedia>|null $encryptedMedia
      */
@@ -274,6 +281,7 @@ final class UacConnectionUpdateParams implements BaseModel
         int|Omitted|null $webhookTimeoutSecs = Omitted::VALUE,
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsiteOverride = null,
+        ?bool $bridgeGenerateComfortNoiseOnCn = null,
         ?bool $callCostInWebhooks = null,
         ?string $connectionName = null,
         ?bool $defaultOnHoldComfortNoiseEnabled = null,
@@ -300,6 +308,7 @@ final class UacConnectionUpdateParams implements BaseModel
         null !== $active && $self['active'] = $active;
         null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
         Omitted::VALUE !== $androidPushCredentialID && $self['androidPushCredentialID'] = $androidPushCredentialID;
+        null !== $bridgeGenerateComfortNoiseOnCn && $self['bridgeGenerateComfortNoiseOnCn'] = $bridgeGenerateComfortNoiseOnCn;
         null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
         null !== $connectionName && $self['connectionName'] = $connectionName;
         null !== $defaultOnHoldComfortNoiseEnabled && $self['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
@@ -366,6 +375,18 @@ final class UacConnectionUpdateParams implements BaseModel
     }
 
     /**
+     * Stores the connection preference for generating silent RTP toward the opposite call leg when comfort-noise packets (CN, payload type 13) are received during hold. Optional; omitting this field preserves the saved value. Only JSON true and false are accepted; null and non-boolean values are rejected. This preference is independent of default_on_hold_comfort_noise_enabled and does not modify that setting. This API provisions the preference; call-processing behavior is implemented separately.
+     */
+    public function withBridgeGenerateComfortNoiseOnCn(
+        bool $bridgeGenerateComfortNoiseOnCn
+    ): self {
+        $self = clone $this;
+        $self['bridgeGenerateComfortNoiseOnCn'] = $bridgeGenerateComfortNoiseOnCn;
+
+        return $self;
+    }
+
+    /**
      * Specifies if call cost webhooks should be sent for this connection.
      */
     public function withCallCostInWebhooks(bool $callCostInWebhooks): self
@@ -425,7 +446,7 @@ final class UacConnectionUpdateParams implements BaseModel
     }
 
     /**
-     * Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
+     * Enable use of SRTP for encryption. Can only be set when the SIP signaling transport protocol is TLS.
      *
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      */

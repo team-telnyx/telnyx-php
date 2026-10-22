@@ -56,7 +56,7 @@ final class ParticipantsService implements ParticipantsContract
      * Returns a single conference participant resource by call SID or participant label.
      *
      * @param string $callSidOrParticipantLabel callSid or Label of the Participant to update
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param RequestOpts|null $requestOptions
      *
@@ -82,7 +82,7 @@ final class ParticipantsService implements ParticipantsContract
      * Updates the specified conference participant, for example muting or holding them, and returns the updated participant.
      *
      * @param string $callSidOrParticipantLabel path param: CallSid or Label of the Participant to update
-     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param string $accountSid Path param: The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
      * @param AnnounceMethod|value-of<AnnounceMethod> $announceMethod Body param: The HTTP method used to call the `AnnounceUrl`. Defaults to `POST`.
      * @param string $announceURL Body param: The URL to call to announce something to the participant. The URL may return an MP3 fileo a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
@@ -147,7 +147,7 @@ final class ParticipantsService implements ParticipantsContract
      * Removes the specified participant from the conference, ending their leg of the call.
      *
      * @param string $callSidOrParticipantLabel callSid or Label of the Participant to update
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
      * @param RequestOpts|null $requestOptions
      *
@@ -173,7 +173,7 @@ final class ParticipantsService implements ParticipantsContract
      * Dials a new participant into the specified conference and returns the created participant resource.
      *
      * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
-     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param string $accountSid Path param: The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param string $amdStatusCallback body param: The URL the result of answering machine detection will be sent to
      * @param AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod> $amdStatusCallbackMethod Body param: HTTP request type used for `AmdStatusCallback`. Defaults to `POST`.
      * @param string $applicationSid Body param: The SID of the TeXML application that will handle the new participant's call. Required unless joining an existing conference by its ConferenceSid.
@@ -370,7 +370,7 @@ final class ParticipantsService implements ParticipantsContract
      * Returns the list of participants currently in the specified conference.
      *
      * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
-     * @param string $accountSid the id of the account the resource belongs to
+     * @param string $accountSid The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
