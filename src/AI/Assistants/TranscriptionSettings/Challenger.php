@@ -31,7 +31,7 @@ final class Challenger implements BaseModel
     use SdkModel;
 
     /**
-     * The language booster's model. It must be the same kind of model as `transcription.model`: both streaming (`deepgram/flux`, `deepgram/nova-3`, `deepgram/nova-2`, `assemblyai/universal-3-5-pro` or its legacy alias `assemblyai/universal-streaming`, `xai/grok-stt`, `soniox/stt-rt-v4`, `soniox/stt-rt-v5`, `humain/realtime`, `reson8/turns`) or both non-streaming (`azure/fast`, `nvidia/parakeet-v3`, `omi-health/omi-med-stt-v1`, `cohere/ar-stt`, `distil-whisper/distil-large-v2`, `openai/whisper-large-v3-turbo`, `telnyx/basira`). It can be the same model as `transcription.model` on a different `language`.
+     * The language booster's model. It must be the same kind of model as `transcription.model`: both streaming (`deepgram/flux`, `deepgram/nova-3`, `deepgram/nova-2`, `assemblyai/universal-3-6-pro` or its legacy aliases `assemblyai/universal-3-5-pro` and `assemblyai/universal-streaming`, `xai/grok-stt`, `soniox/stt-rt-v4`, `soniox/stt-rt-v5`, `humain/realtime`, `reson8/turns`) or both non-streaming (`azure/fast`, `nvidia/parakeet-v3`, `omi-health/omi-med-stt-v1`, `cohere/ar-stt`, `distil-whisper/distil-large-v2`, `openai/whisper-large-v3-turbo`, `telnyx/basira`). It can be the same model as `transcription.model` on a different `language`.
      *
      * @var value-of<Model> $model
      */
@@ -110,7 +110,7 @@ final class Challenger implements BaseModel
     }
 
     /**
-     * The language booster's model. It must be the same kind of model as `transcription.model`: both streaming (`deepgram/flux`, `deepgram/nova-3`, `deepgram/nova-2`, `assemblyai/universal-3-5-pro` or its legacy alias `assemblyai/universal-streaming`, `xai/grok-stt`, `soniox/stt-rt-v4`, `soniox/stt-rt-v5`, `humain/realtime`, `reson8/turns`) or both non-streaming (`azure/fast`, `nvidia/parakeet-v3`, `omi-health/omi-med-stt-v1`, `cohere/ar-stt`, `distil-whisper/distil-large-v2`, `openai/whisper-large-v3-turbo`, `telnyx/basira`). It can be the same model as `transcription.model` on a different `language`.
+     * The language booster's model. It must be the same kind of model as `transcription.model`: both streaming (`deepgram/flux`, `deepgram/nova-3`, `deepgram/nova-2`, `assemblyai/universal-3-6-pro` or its legacy aliases `assemblyai/universal-3-5-pro` and `assemblyai/universal-streaming`, `xai/grok-stt`, `soniox/stt-rt-v4`, `soniox/stt-rt-v5`, `humain/realtime`, `reson8/turns`) or both non-streaming (`azure/fast`, `nvidia/parakeet-v3`, `omi-health/omi-med-stt-v1`, `cohere/ar-stt`, `distil-whisper/distil-large-v2`, `openai/whisper-large-v3-turbo`, `telnyx/basira`). It can be the same model as `transcription.model` on a different `language`.
      *
      * @param Model|value-of<Model> $model
      */

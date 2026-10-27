@@ -9,15 +9,17 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
- * Sets a limit for a product and period that has none. Send exactly one of `amount` and `unlimited: true`. The period's spend is checked at once: if it is already above the new limit, the product is blocked immediately (`evaluation.blocked_now`). Returns 409 when a limit already exists for the product and period; update it instead.
+ * Sets a limit for a product and period that has none. Send exactly one of `amount` and `unlimited: true`. The period's spend is checked at once: if it is already above the new limit, the product is blocked immediately (`evaluation.blocked_now`). Returns 409 when a limit already exists for the product and period; update it instead. With `credential_id`, the limit applies to that API key only: it needs an `amount`, and the period's API key limits cannot add up to more than the total limit when the total has an amount.
  *
  * @see Telnyx\Services\SpendLimitsService::create()
  *
  * @phpstan-type SpendLimitCreateParamsShape = array{
  *   amount: float,
  *   product: string,
+ *   credentialID?: string|null,
  *   period?: null|SpendLimitPeriod|value-of<SpendLimitPeriod>,
  *   reason?: string|null,
  *   unlimited: bool,
@@ -40,6 +42,12 @@ final class SpendLimitCreateParams implements BaseModel
      */
     #[Required]
     public string $product;
+
+    /**
+     * Optional. Identifier of one API key as recorded on usage, never the key's secret: the limit then applies to that key only. Absent or `null` sets the total limit. A blank value, or one with control characters, is refused; it never means the total limit. An API key limit always has an `amount`.
+     */
+    #[Optional('credential_id', nullable: true)]
+    public ?string $credentialID;
 
     /**
      * `daily` is the current UTC day; `monthly` is the current UTC calendar month.
@@ -94,6 +102,7 @@ final class SpendLimitCreateParams implements BaseModel
         float $amount,
         string $product,
         bool $unlimited,
+        string|Omitted|null $credentialID = Omitted::VALUE,
         SpendLimitPeriod|string|null $period = null,
         ?string $reason = null,
     ): self {
@@ -103,6 +112,7 @@ final class SpendLimitCreateParams implements BaseModel
         $self['product'] = $product;
         $self['unlimited'] = $unlimited;
 
+        Omitted::VALUE !== $credentialID && $self['credentialID'] = $credentialID;
         null !== $period && $self['period'] = $period;
         null !== $reason && $self['reason'] = $reason;
 
@@ -127,6 +137,17 @@ final class SpendLimitCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['product'] = $product;
+
+        return $self;
+    }
+
+    /**
+     * Optional. Identifier of one API key as recorded on usage, never the key's secret: the limit then applies to that key only. Absent or `null` sets the total limit. A blank value, or one with control characters, is refused; it never means the total limit. An API key limit always has an `amount`.
+     */
+    public function withCredentialID(?string $credentialID): self
+    {
+        $self = clone $this;
+        $self['credentialID'] = $credentialID;
 
         return $self;
     }

@@ -1,3 +1,20 @@
+# BrowserSessions
+
+Methods:
+
+- <code title="post /browser_sessions">$client->browserSessions-><a href="./src/Services/BrowserSessionsService.php">create</a>(...$params)</code>
+- <code title="get /browser_sessions/{id}">$client->browserSessions-><a href="./src/Services/BrowserSessionsService.php">retrieve</a>(...$params)</code>
+- <code title="get /browser_sessions">$client->browserSessions-><a href="./src/Services/BrowserSessionsService.php">list</a>(...$params)</code>
+- <code title="delete /browser_sessions/{id}">$client->browserSessions-><a href="./src/Services/BrowserSessionsService.php">delete</a>(...$params)</code>
+- <code title="get /browser_sessions/{id}/artifacts/{artifactId}">$client->browserSessions-><a href="./src/Services/BrowserSessionsService.php">retrieveArtifact</a>(...$params)</code>
+
+## Actions
+
+Methods:
+
+- <code title="post /browser_sessions/{id}/actions">$client->browserSessions->actions-><a href="./src/Services/BrowserSessions/ActionsService.php">create</a>(...$params)</code>
+- <code title="get /browser_sessions/{id}/actions/{actionId}">$client->browserSessions->actions-><a href="./src/Services/BrowserSessions/ActionsService.php">retrieve</a>(...$params)</code>
+
 # Legacy
 
 ## Reporting
@@ -600,6 +617,78 @@ Methods:
 - <code title="get /ai/avatars/{avatar_id}">$client->ai->avatars-><a href="./src/Services/AI/AvatarsService.php">retrieve</a>(...$params)</code>
 - <code title="patch /ai/avatars/{avatar_id}">$client->ai->avatars-><a href="./src/Services/AI/AvatarsService.php">update</a>(...$params)</code>
 - <code title="get /ai/avatars">$client->ai->avatars-><a href="./src/Services/AI/AvatarsService.php">list</a>(...$params)</code>
+
+## Tests
+
+### Schedules
+
+#### V1
+
+##### CronJobs
+
+Methods:
+
+- <code title="get /ai/tests/schedules/v1/cron-jobs/{id}">$client->ai->tests->schedules->v1->cronJobs-><a href="./src/Services/AI/Tests/Schedules/V1/CronJobsService.php">retrieve</a>(...$params)</code>
+- <code title="patch /ai/tests/schedules/v1/cron-jobs/{id}">$client->ai->tests->schedules->v1->cronJobs-><a href="./src/Services/AI/Tests/Schedules/V1/CronJobsService.php">update</a>(...$params)</code>
+- <code title="delete /ai/tests/schedules/v1/cron-jobs/{id}">$client->ai->tests->schedules->v1->cronJobs-><a href="./src/Services/AI/Tests/Schedules/V1/CronJobsService.php">delete</a>(...$params)</code>
+- <code title="post /ai/tests/schedules/v1/cron-jobs">$client->ai->tests->schedules->v1->cronJobs-><a href="./src/Services/AI/Tests/Schedules/V1/CronJobsService.php">cronJobs</a>(...$params)</code>
+- <code title="get /ai/tests/schedules/v1/cron-jobs">$client->ai->tests->schedules->v1->cronJobs-><a href="./src/Services/AI/Tests/Schedules/V1/CronJobsService.php">retrieveCronJobs</a>(...$params)</code>
+
+### TestFramework
+
+#### V1
+
+Methods:
+
+- <code title="get /ai/tests/test_framework/v1/personalities">$client->ai->tests->testFramework->v1-><a href="./src/Services/AI/Tests/TestFramework/V1Service.php">retrievePersonalities</a>()</code>
+
+##### Aiagents
+
+Methods:
+
+- <code title="post /ai/tests/test_framework/v1/aiagents">$client->ai->tests->testFramework->v1->aiagents-><a href="./src/Services/AI/Tests/TestFramework/V1/AiagentsService.php">create</a>(...$params)</code>
+- <code title="get /ai/tests/test_framework/v1/aiagents/{id}">$client->ai->tests->testFramework->v1->aiagents-><a href="./src/Services/AI/Tests/TestFramework/V1/AiagentsService.php">retrieve</a>(...$params)</code>
+- <code title="put /ai/tests/test_framework/v1/aiagents/{id}">$client->ai->tests->testFramework->v1->aiagents-><a href="./src/Services/AI/Tests/TestFramework/V1/AiagentsService.php">update</a>(...$params)</code>
+- <code title="get /ai/tests/test_framework/v1/aiagents">$client->ai->tests->testFramework->v1->aiagents-><a href="./src/Services/AI/Tests/TestFramework/V1/AiagentsService.php">list</a>(...$params)</code>
+- <code title="delete /ai/tests/test_framework/v1/aiagents/{id}">$client->ai->tests->testFramework->v1->aiagents-><a href="./src/Services/AI/Tests/TestFramework/V1/AiagentsService.php">delete</a>(...$params)</code>
+
+##### Metrics
+
+Methods:
+
+- <code title="post /ai/tests/test_framework/v1/metrics">$client->ai->tests->testFramework->v1->metrics-><a href="./src/Services/AI/Tests/TestFramework/V1/MetricsService.php">create</a>(...$params)</code>
+- <code title="get /ai/tests/test_framework/v1/metrics/{id}">$client->ai->tests->testFramework->v1->metrics-><a href="./src/Services/AI/Tests/TestFramework/V1/MetricsService.php">retrieve</a>(...$params)</code>
+- <code title="patch /ai/tests/test_framework/v1/metrics/{id}">$client->ai->tests->testFramework->v1->metrics-><a href="./src/Services/AI/Tests/TestFramework/V1/MetricsService.php">update</a>(...$params)</code>
+- <code title="get /ai/tests/test_framework/v1/metrics">$client->ai->tests->testFramework->v1->metrics-><a href="./src/Services/AI/Tests/TestFramework/V1/MetricsService.php">list</a>(...$params)</code>
+- <code title="delete /ai/tests/test_framework/v1/metrics/{id}">$client->ai->tests->testFramework->v1->metrics-><a href="./src/Services/AI/Tests/TestFramework/V1/MetricsService.php">delete</a>(...$params)</code>
+- <code title="post /ai/tests/test_framework/v1/metrics/bulk_create">$client->ai->tests->testFramework->v1->metrics-><a href="./src/Services/AI/Tests/TestFramework/V1/MetricsService.php">bulkCreate</a>(...$params)</code>
+- <code title="post /ai/tests/test_framework/v1/metrics/generate_metrics">$client->ai->tests->testFramework->v1->metrics-><a href="./src/Services/AI/Tests/TestFramework/V1/MetricsService.php">generateMetrics</a>(...$params)</code>
+- <code title="get /ai/tests/test_framework/v1/metrics/generate_metrics_progress">$client->ai->tests->testFramework->v1->metrics-><a href="./src/Services/AI/Tests/TestFramework/V1/MetricsService.php">retrieveGenerateMetricsProgress</a>(...$params)</code>
+
+##### Results
+
+Methods:
+
+- <code title="get /ai/tests/test_framework/v1/results/{id}">$client->ai->tests->testFramework->v1->results-><a href="./src/Services/AI/Tests/TestFramework/V1/ResultsService.php">retrieve</a>(...$params)</code>
+- <code title="get /ai/tests/test_framework/v1/results">$client->ai->tests->testFramework->v1->results-><a href="./src/Services/AI/Tests/TestFramework/V1/ResultsService.php">list</a>(...$params)</code>
+- <code title="delete /ai/tests/test_framework/v1/results/{id}">$client->ai->tests->testFramework->v1->results-><a href="./src/Services/AI/Tests/TestFramework/V1/ResultsService.php">delete</a>(...$params)</code>
+- <code title="post /ai/tests/test_framework/v1/results/{id}/rerun">$client->ai->tests->testFramework->v1->results-><a href="./src/Services/AI/Tests/TestFramework/V1/ResultsService.php">rerun</a>(...$params)</code>
+
+##### Scenarios
+
+Methods:
+
+- <code title="post /ai/tests/test_framework/v1/scenarios">$client->ai->tests->testFramework->v1->scenarios-><a href="./src/Services/AI/Tests/TestFramework/V1/ScenariosService.php">create</a>(...$params)</code>
+- <code title="get /ai/tests/test_framework/v1/scenarios/{id}">$client->ai->tests->testFramework->v1->scenarios-><a href="./src/Services/AI/Tests/TestFramework/V1/ScenariosService.php">retrieve</a>(...$params)</code>
+- <code title="patch /ai/tests/test_framework/v1/scenarios/{id}">$client->ai->tests->testFramework->v1->scenarios-><a href="./src/Services/AI/Tests/TestFramework/V1/ScenariosService.php">update</a>(...$params)</code>
+- <code title="get /ai/tests/test_framework/v1/scenarios">$client->ai->tests->testFramework->v1->scenarios-><a href="./src/Services/AI/Tests/TestFramework/V1/ScenariosService.php">list</a>(...$params)</code>
+- <code title="delete /ai/tests/test_framework/v1/scenarios/{id}">$client->ai->tests->testFramework->v1->scenarios-><a href="./src/Services/AI/Tests/TestFramework/V1/ScenariosService.php">delete</a>(...$params)</code>
+- <code title="post /ai/tests/test_framework/v1/scenarios/generate-bg">$client->ai->tests->testFramework->v1->scenarios-><a href="./src/Services/AI/Tests/TestFramework/V1/ScenariosService.php">generateBg</a>(...$params)</code>
+- <code title="get /ai/tests/test_framework/v1/scenarios/export_scenarios">$client->ai->tests->testFramework->v1->scenarios-><a href="./src/Services/AI/Tests/TestFramework/V1/ScenariosService.php">retrieveExportScenarios</a>(...$params)</code>
+- <code title="get /ai/tests/test_framework/v1/scenarios/generate-progress">$client->ai->tests->testFramework->v1->scenarios-><a href="./src/Services/AI/Tests/TestFramework/V1/ScenariosService.php">retrieveGenerateProgress</a>(...$params)</code>
+- <code title="get /ai/tests/test_framework/v1/scenarios/scenario-agent-progress">$client->ai->tests->testFramework->v1->scenarios-><a href="./src/Services/AI/Tests/TestFramework/V1/ScenariosService.php">retrieveScenarioAgentProgress</a>(...$params)</code>
+- <code title="post /ai/tests/test_framework/v1/scenarios/run_scenarios">$client->ai->tests->testFramework->v1->scenarios-><a href="./src/Services/AI/Tests/TestFramework/V1/ScenariosService.php">runScenarios</a>(...$params)</code>
+- <code title="post /ai/tests/test_framework/v1/scenarios/scenario-agent">$client->ai->tests->testFramework->v1->scenarios-><a href="./src/Services/AI/Tests/TestFramework/V1/ScenariosService.php">scenarioAgent</a>(...$params)</code>
 
 # AuditEvents
 
@@ -3275,20 +3364,20 @@ Methods:
 
 Methods:
 
-- <code title="post /v2/bot_challenge">$client->botChallenge-><a href="./src/Services/BotChallengeService.php">create</a>(...$params)</code>
+- <code title="post /bot_challenge">$client->botChallenge-><a href="./src/Services/BotChallengeService.php">create</a>(...$params)</code>
 
 # BotSessions
 
 Methods:
 
-- <code title="get /v2/bot_sessions">$client->botSessions-><a href="./src/Services/BotSessionsService.php">list</a>(...$params)</code>
+- <code title="get /bot_sessions">$client->botSessions-><a href="./src/Services/BotSessionsService.php">list</a>(...$params)</code>
 
 # BotSignup
 
 Methods:
 
-- <code title="post /v2/bot_signup">$client->botSignup-><a href="./src/Services/BotSignupService.php">create</a>(...$params)</code>
-- <code title="post /v2/bot_signup/resend_magic_link">$client->botSignup-><a href="./src/Services/BotSignupService.php">resendMagicLink</a>(...$params)</code>
+- <code title="post /bot_signup">$client->botSignup-><a href="./src/Services/BotSignupService.php">create</a>(...$params)</code>
+- <code title="post /bot_signup/resend_magic_link">$client->botSignup-><a href="./src/Services/BotSignupService.php">resendMagicLink</a>(...$params)</code>
 
 # MachinePayments
 
@@ -3362,3 +3451,81 @@ Methods:
 - <code title="patch /tailscale_subnet_routers/{id}">$client->tailscaleSubnetRouters-><a href="./src/Services/TailscaleSubnetRoutersService.php">update</a>(...$params)</code>
 - <code title="get /tailscale_subnet_routers">$client->tailscaleSubnetRouters-><a href="./src/Services/TailscaleSubnetRoutersService.php">list</a>(...$params)</code>
 - <code title="delete /tailscale_subnet_routers/{id}">$client->tailscaleSubnetRouters-><a href="./src/Services/TailscaleSubnetRoutersService.php">delete</a>(...$params)</code>
+
+# ArtifactDownloads
+
+Methods:
+
+- <code title="get /artifact_downloads/{artifactId}">$client->artifactDownloads-><a href="./src/Services/ArtifactDownloadsService.php">retrieve</a>(...$params)</code>
+
+# Email
+
+## DedicatedIPs
+
+Methods:
+
+- <code title="post /email/dedicated_ips">$client->email->dedicatedIPs-><a href="./src/Services/Email/DedicatedIPsService.php">create</a>(...$params)</code>
+- <code title="get /email/dedicated_ips/{id}">$client->email->dedicatedIPs-><a href="./src/Services/Email/DedicatedIPsService.php">retrieve</a>(...$params)</code>
+- <code title="patch /email/dedicated_ips/{id}">$client->email->dedicatedIPs-><a href="./src/Services/Email/DedicatedIPsService.php">update</a>(...$params)</code>
+- <code title="get /email/dedicated_ips">$client->email->dedicatedIPs-><a href="./src/Services/Email/DedicatedIPsService.php">list</a>(...$params)</code>
+- <code title="delete /email/dedicated_ips/{id}">$client->email->dedicatedIPs-><a href="./src/Services/Email/DedicatedIPsService.php">delete</a>(...$params)</code>
+
+### Actions
+
+Methods:
+
+- <code title="post /email/dedicated_ips/{id}/actions/complete_warmup">$client->email->dedicatedIPs->actions-><a href="./src/Services/Email/DedicatedIPs/ActionsService.php">completeWarmup</a>(...$params)</code>
+- <code title="post /email/dedicated_ips/{id}/actions/pause_warmup">$client->email->dedicatedIPs->actions-><a href="./src/Services/Email/DedicatedIPs/ActionsService.php">pauseWarmup</a>(...$params)</code>
+- <code title="post /email/dedicated_ips/{id}/actions/resume_warmup">$client->email->dedicatedIPs->actions-><a href="./src/Services/Email/DedicatedIPs/ActionsService.php">resumeWarmup</a>(...$params)</code>
+- <code title="post /email/dedicated_ips/{id}/actions/start_warmup">$client->email->dedicatedIPs->actions-><a href="./src/Services/Email/DedicatedIPs/ActionsService.php">startWarmup</a>(...$params)</code>
+
+## IPPools
+
+Methods:
+
+- <code title="post /email/ip_pools">$client->email->ipPools-><a href="./src/Services/Email/IPPoolsService.php">create</a>(...$params)</code>
+- <code title="get /email/ip_pools/{id}">$client->email->ipPools-><a href="./src/Services/Email/IPPoolsService.php">retrieve</a>(...$params)</code>
+- <code title="patch /email/ip_pools/{id}">$client->email->ipPools-><a href="./src/Services/Email/IPPoolsService.php">update</a>(...$params)</code>
+- <code title="get /email/ip_pools">$client->email->ipPools-><a href="./src/Services/Email/IPPoolsService.php">list</a>()</code>
+- <code title="delete /email/ip_pools/{id}">$client->email->ipPools-><a href="./src/Services/Email/IPPoolsService.php">delete</a>(...$params)</code>
+
+### IPs
+
+Methods:
+
+- <code title="post /email/ip_pools/{id}/ips">$client->email->ipPools->ips-><a href="./src/Services/Email/IPPools/IPsService.php">create</a>(...$params)</code>
+- <code title="delete /email/ip_pools/{id}/ips/{ip_id}">$client->email->ipPools->ips-><a href="./src/Services/Email/IPPools/IPsService.php">delete</a>(...$params)</code>
+
+# NetworkRoutes
+
+Methods:
+
+- <code title="post /network_routes">$client->networkRoutes-><a href="./src/Services/NetworkRoutesService.php">create</a>(...$params)</code>
+- <code title="get /network_routes/{id}">$client->networkRoutes-><a href="./src/Services/NetworkRoutesService.php">retrieve</a>(...$params)</code>
+- <code title="get /network_routes">$client->networkRoutes-><a href="./src/Services/NetworkRoutesService.php">list</a>(...$params)</code>
+- <code title="delete /network_routes/{id}">$client->networkRoutes-><a href="./src/Services/NetworkRoutesService.php">delete</a>(...$params)</code>
+
+# PayConnectors
+
+Methods:
+
+- <code title="post /pay_connectors">$client->payConnectors-><a href="./src/Services/PayConnectorsService.php">create</a>(...$params)</code>
+- <code title="get /pay_connectors/{name}">$client->payConnectors-><a href="./src/Services/PayConnectorsService.php">retrieve</a>(...$params)</code>
+- <code title="patch /pay_connectors/{name}">$client->payConnectors-><a href="./src/Services/PayConnectorsService.php">update</a>(...$params)</code>
+- <code title="get /pay_connectors">$client->payConnectors-><a href="./src/Services/PayConnectorsService.php">list</a>(...$params)</code>
+- <code title="delete /pay_connectors/{name}">$client->payConnectors-><a href="./src/Services/PayConnectorsService.php">delete</a>(...$params)</code>
+
+# Tunnels
+
+Methods:
+
+- <code title="post /tunnels">$client->tunnels-><a href="./src/Services/TunnelsService.php">create</a>(...$params)</code>
+- <code title="get /tunnels/{id}">$client->tunnels-><a href="./src/Services/TunnelsService.php">retrieve</a>(...$params)</code>
+- <code title="get /tunnels">$client->tunnels-><a href="./src/Services/TunnelsService.php">list</a>(...$params)</code>
+- <code title="delete /tunnels/{id}">$client->tunnels-><a href="./src/Services/TunnelsService.php">delete</a>(...$params)</code>
+
+## Actions
+
+Methods:
+
+- <code title="post /tunnels/{id}/actions/rotate_token">$client->tunnels->actions-><a href="./src/Services/Tunnels/ActionsService.php">rotateToken</a>(...$params)</code>

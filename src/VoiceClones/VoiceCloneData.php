@@ -67,7 +67,7 @@ final class VoiceCloneData implements BaseModel
     public ?string $label;
 
     /**
-     * ISO 639-1 language code of the voice clone.
+     * Language code of the voice clone (ISO 639-1, or the Resemble catalogue code such as `en-US`).
      */
     #[Optional(nullable: true)]
     public ?string $language;
@@ -244,7 +244,7 @@ final class VoiceCloneData implements BaseModel
     }
 
     /**
-     * ISO 639-1 language code of the voice clone.
+     * Language code of the voice clone (ISO 639-1, or the Resemble catalogue code such as `en-US`).
      */
     public function withLanguage(?string $language): self
     {

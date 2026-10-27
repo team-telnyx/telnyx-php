@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\TranscriptionSettings\FallbackModel;
 
 /**
- * The fallback model. It must be a streaming model other than `transcription.model` and the other fallbacks: `deepgram/flux`, `deepgram/nova-3`, `deepgram/nova-2`, `assemblyai/universal-3-5-pro` (or its legacy alias `assemblyai/universal-streaming`), `xai/grok-stt`, `soniox/stt-rt-v4`, `soniox/stt-rt-v5`, `humain/realtime`, or `reson8/turns`.
+ * The fallback model. It must be a streaming model other than `transcription.model` and the other fallbacks: `deepgram/flux`, `deepgram/nova-3`, `deepgram/nova-2`, `assemblyai/universal-3-6-pro` (or its legacy aliases `assemblyai/universal-3-5-pro` and `assemblyai/universal-streaming`), `xai/grok-stt`, `soniox/stt-rt-v4`, `soniox/stt-rt-v5`, `humain/realtime`, or `reson8/turns`.
  */
 enum Model: string
 {
@@ -14,6 +14,8 @@ enum Model: string
     case DEEPGRAM_NOVA_3 = 'deepgram/nova-3';
 
     case DEEPGRAM_NOVA_2 = 'deepgram/nova-2';
+
+    case ASSEMBLYAI_UNIVERSAL_3_6_PRO = 'assemblyai/universal-3-6-pro';
 
     case ASSEMBLYAI_UNIVERSAL_3_5_PRO = 'assemblyai/universal-3-5-pro';
 

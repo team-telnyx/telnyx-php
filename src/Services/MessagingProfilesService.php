@@ -19,6 +19,7 @@ use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
+use Telnyx\MessagingProfiles\Mm7Metadata;
 use Telnyx\MessagingProfiles\NumberPoolSettings;
 use Telnyx\MessagingProfiles\URLShortenerSettings;
 use Telnyx\PhoneNumberWithMessagingSettings;
@@ -31,6 +32,7 @@ use Telnyx\ShortCode;
 /**
  * @phpstan-import-type FilterShape from \Telnyx\MessagingProfiles\MessagingProfileListParams\Filter
  * @phpstan-import-type MessagingProfileFeaturesShape from \Telnyx\MessagingProfiles\MessagingProfileFeatures
+ * @phpstan-import-type Mm7MetadataShape from \Telnyx\MessagingProfiles\Mm7Metadata
  * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
  * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -76,6 +78,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param bool $enabled specifies whether the messaging profile is enabled or not
      * @param Omitted|MessagingProfileFeatures|MessagingProfileFeaturesShape|null $features Telnyx product features the messaging customer can enable on the messaging profile. Keys map to individual feature flags; unknown keys are accepted and preserved for forward compatibility with rolling deployments.
      * @param string|Omitted|null $healthWebhookURL a URL to receive health check webhooks for numbers in this profile
+     * @param Omitted|Mm7Metadata|Mm7MetadataShape|null $mm7Metadata MM7 settings for inbound messages
      * @param bool $mmsFallBackToSMS enables SMS fallback for MMS messages
      * @param bool $mmsTranscoding enables automated resizing of MMS media
      * @param bool $mobileOnly send messages only to mobile phone numbers
@@ -110,6 +113,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         bool $enabled = true,
         Omitted|MessagingProfileFeatures|array|null $features = Omitted::VALUE,
         string|Omitted|null $healthWebhookURL = Omitted::VALUE,
+        Omitted|Mm7Metadata|array|null $mm7Metadata = Omitted::VALUE,
         bool $mmsFallBackToSMS = false,
         bool $mmsTranscoding = false,
         bool $mobileOnly = false,
@@ -133,6 +137,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
                 'enabled' => $enabled,
                 'features' => $features,
                 'healthWebhookURL' => $healthWebhookURL,
+                'mm7Metadata' => $mm7Metadata,
                 'mmsFallBackToSMS' => $mmsFallBackToSMS,
                 'mmsTranscoding' => $mmsTranscoding,
                 'mobileOnly' => $mobileOnly,
@@ -185,6 +190,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param bool $dailySpendLimitEnabled whether to enforce the value configured by `daily_spend_limit`
      * @param bool $enabled specifies whether the messaging profile is enabled or not
      * @param Omitted|MessagingProfileFeatures|MessagingProfileFeaturesShape|null $features Telnyx product features the messaging customer can enable on the messaging profile. Keys map to individual feature flags; unknown keys are accepted and preserved for forward compatibility with rolling deployments.
+     * @param Omitted|Mm7Metadata|Mm7MetadataShape|null $mm7Metadata MM7 settings for inbound messages
      * @param bool $mmsFallBackToSMS enables SMS fallback for MMS messages
      * @param bool $mmsTranscoding enables automated resizing of MMS media
      * @param bool $mobileOnly send messages only to mobile phone numbers
@@ -223,6 +229,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
         ?bool $dailySpendLimitEnabled = null,
         ?bool $enabled = null,
         Omitted|MessagingProfileFeatures|array|null $features = Omitted::VALUE,
+        Omitted|Mm7Metadata|array|null $mm7Metadata = Omitted::VALUE,
         bool $mmsFallBackToSMS = false,
         bool $mmsTranscoding = false,
         bool $mobileOnly = false,
@@ -247,6 +254,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
                 'dailySpendLimitEnabled' => $dailySpendLimitEnabled ?? Omitted::VALUE,
                 'enabled' => $enabled ?? Omitted::VALUE,
                 'features' => $features,
+                'mm7Metadata' => $mm7Metadata,
                 'mmsFallBackToSMS' => $mmsFallBackToSMS,
                 'mmsTranscoding' => $mmsTranscoding,
                 'mobileOnly' => $mobileOnly,

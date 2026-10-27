@@ -20,7 +20,7 @@ interface HostedSignupsContract
     /**
      * @api
      *
-     * @param string $appID Meta App ID linked to the Telnyx account. The app must be enabled.
+     * @param string $appID Meta App ID linked to the Telnyx account or its manager account. The app must be enabled.
      * @param \DateTimeInterface $expiresAt When the onboarding URL expires, in RFC 3339 format. Must be in the future and at most 3 days ahead. Defaults to 24 hours after creation.
      * @param SignupType|value-of<SignupType> $signupType Onboarding flow the hosted page launches. Use `coexistence` for a number that remains active in the WhatsApp Business app.
      * @param RequestOpts|null $requestOptions

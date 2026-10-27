@@ -142,7 +142,7 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * Retrieve a list of available voices from one or all TTS providers. When `provider` is specified, returns voices for that provider only. Otherwise, returns voices from all providers.
      *
-     * Some providers (ElevenLabs, Resemble) require an API key to list voices.
+     * Some providers (ElevenLabs) require an API key to list voices.
      *
      * @param string $apiKey API key for providers that require one to list voices (e.g. ElevenLabs).
      * @param \Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider|value-of<\Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider> $provider Filter voices by provider. If omitted, voices from all providers are returned.

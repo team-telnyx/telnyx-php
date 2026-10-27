@@ -15,6 +15,7 @@ use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams;
 use Telnyx\VoiceClones\VoiceCloneCreateParams;
 use Telnyx\VoiceClones\VoiceCloneData;
 use Telnyx\VoiceClones\VoiceCloneListParams;
+use Telnyx\VoiceClones\VoiceCloneListParams\FilterModelID;
 use Telnyx\VoiceClones\VoiceCloneListParams\FilterProvider;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
 use Telnyx\VoiceClones\VoiceCloneResponse;
@@ -110,6 +111,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
      * Returns a paginated list of voice clones belonging to the authenticated account.
      *
      * @param array{
+     *   filterModelID?: FilterModelID|value-of<FilterModelID>,
      *   filterName?: string,
      *   filterProvider?: FilterProvider|value-of<FilterProvider>,
      *   pageNumber?: int,
@@ -138,6 +140,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
             query: Util::array_transform_keys(
                 $parsed,
                 [
+                    'filterModelID' => 'filter[model_id]',
                     'filterName' => 'filter[name]',
                     'filterProvider' => 'filter[provider]',
                     'pageNumber' => 'page[number]',
@@ -178,7 +181,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
     /**
      * @api
      *
-     * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. Maximum file size: 20MB. Reference audio is trimmed per model: Qwen3TTS and Bayan use the first 10 seconds, Ultra uses up to 60 seconds, and Minimax accepts 10 seconds to 5 minutes. Ultra clones return `202` with status `pending`; all other models return `201` with status `active`. Bayan clones require `ref_text` (the exact transcript of the reference audio) and support `ar` (default) and `en` only.
+     * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. Maximum file size: 20MB. Reference audio is trimmed per model: Qwen3TTS, Bayan, and Resemble use the first 10 seconds, Ultra uses up to 60 seconds, and Minimax accepts 10 seconds to 5 minutes. Ultra clones return `202` with status `pending`; all other models return `201` with status `active`. Bayan clones require `ref_text` (the exact transcript of the reference audio) and support `ar` (default) and `en` only. Resemble clones (`provider: resemble`) take `model_id` `Pro`, `Turbo`, or `Urdu`.
      *
      * @param array{
      *   voiceCloneUploadRequest: VoiceCloneUploadRequestShape
