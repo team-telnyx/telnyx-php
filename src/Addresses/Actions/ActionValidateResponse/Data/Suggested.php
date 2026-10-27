@@ -7,15 +7,20 @@ namespace Telnyx\Addresses\Actions\ActionValidateResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * Provides normalized address when available.
  *
  * @phpstan-type SuggestedShape = array{
  *   administrativeArea?: string|null,
+ *   borough?: string|null,
  *   countryCode?: string|null,
  *   extendedAddress?: string|null,
+ *   latitude?: float|null,
  *   locality?: string|null,
+ *   longitude?: float|null,
+ *   neighborhood?: string|null,
  *   postalCode?: string|null,
  *   streetAddress?: string|null,
  * }
@@ -32,6 +37,12 @@ final class Suggested implements BaseModel
     public ?string $administrativeArea;
 
     /**
+     * The borough of the address. This field is not used for addresses in the US but is used for some international addresses.
+     */
+    #[Optional]
+    public ?string $borough;
+
+    /**
      * The two-character (ISO 3166-1 alpha-2) country code of the address.
      */
     #[Optional('country_code')]
@@ -44,10 +55,28 @@ final class Suggested implements BaseModel
     public ?string $extendedAddress;
 
     /**
+     * Latitude of the suggested address, when available.
+     */
+    #[Optional(nullable: true)]
+    public ?float $latitude;
+
+    /**
      * The locality of the address. For US addresses, this corresponds to the city of the address.
      */
     #[Optional]
     public ?string $locality;
+
+    /**
+     * Longitude of the suggested address, when available.
+     */
+    #[Optional(nullable: true)]
+    public ?float $longitude;
+
+    /**
+     * The neighborhood of the address. This field is not used for addresses in the US but is used for some international addresses.
+     */
+    #[Optional]
+    public ?string $neighborhood;
 
     /**
      * The postal code of the address.
@@ -72,19 +101,27 @@ final class Suggested implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        float|Omitted|null $latitude = Omitted::VALUE,
+        float|Omitted|null $longitude = Omitted::VALUE,
         ?string $administrativeArea = null,
+        ?string $borough = null,
         ?string $countryCode = null,
         ?string $extendedAddress = null,
         ?string $locality = null,
+        ?string $neighborhood = null,
         ?string $postalCode = null,
         ?string $streetAddress = null,
     ): self {
         $self = new self;
 
         null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        null !== $borough && $self['borough'] = $borough;
         null !== $countryCode && $self['countryCode'] = $countryCode;
         null !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
+        Omitted::VALUE !== $latitude && $self['latitude'] = $latitude;
         null !== $locality && $self['locality'] = $locality;
+        Omitted::VALUE !== $longitude && $self['longitude'] = $longitude;
+        null !== $neighborhood && $self['neighborhood'] = $neighborhood;
         null !== $postalCode && $self['postalCode'] = $postalCode;
         null !== $streetAddress && $self['streetAddress'] = $streetAddress;
 
@@ -98,6 +135,17 @@ final class Suggested implements BaseModel
     {
         $self = clone $this;
         $self['administrativeArea'] = $administrativeArea;
+
+        return $self;
+    }
+
+    /**
+     * The borough of the address. This field is not used for addresses in the US but is used for some international addresses.
+     */
+    public function withBorough(string $borough): self
+    {
+        $self = clone $this;
+        $self['borough'] = $borough;
 
         return $self;
     }
@@ -125,12 +173,45 @@ final class Suggested implements BaseModel
     }
 
     /**
+     * Latitude of the suggested address, when available.
+     */
+    public function withLatitude(?float $latitude): self
+    {
+        $self = clone $this;
+        $self['latitude'] = $latitude;
+
+        return $self;
+    }
+
+    /**
      * The locality of the address. For US addresses, this corresponds to the city of the address.
      */
     public function withLocality(string $locality): self
     {
         $self = clone $this;
         $self['locality'] = $locality;
+
+        return $self;
+    }
+
+    /**
+     * Longitude of the suggested address, when available.
+     */
+    public function withLongitude(?float $longitude): self
+    {
+        $self = clone $this;
+        $self['longitude'] = $longitude;
+
+        return $self;
+    }
+
+    /**
+     * The neighborhood of the address. This field is not used for addresses in the US but is used for some international addresses.
+     */
+    public function withNeighborhood(string $neighborhood): self
+    {
+        $self = clone $this;
+        $self['neighborhood'] = $neighborhood;
 
         return $self;
     }

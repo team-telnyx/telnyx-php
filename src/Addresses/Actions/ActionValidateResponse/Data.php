@@ -28,11 +28,7 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /**
-     * Indicates whether an address is valid or invalid.
-     *
-     * @var value-of<Result> $result
-     */
+    /** @var value-of<Result> $result */
     #[Required(enum: Result::class)]
     public string $result;
 
@@ -98,8 +94,6 @@ final class Data implements BaseModel
     }
 
     /**
-     * Indicates whether an address is valid or invalid.
-     *
      * @param Result|value-of<Result> $result
      */
     public function withResult(Result|string $result): self
