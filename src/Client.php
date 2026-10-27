@@ -25,6 +25,7 @@ use Telnyx\Services\BillingGroupsService;
 use Telnyx\Services\BotChallengeService;
 use Telnyx\Services\BotSessionsService;
 use Telnyx\Services\BotSignupService;
+use Telnyx\Services\BrowserSessionsService;
 use Telnyx\Services\BulkSimCardActionsService;
 use Telnyx\Services\BundlePricingService;
 use Telnyx\Services\CallControlApplicationsService;
@@ -219,6 +220,11 @@ class Client extends BaseClient
     public string $publicKey;
 
     public bool $baseUrlOverridden;
+
+    /**
+     * @api
+     */
+    public BrowserSessionsService $browserSessions;
 
     /**
      * @api
@@ -1262,6 +1268,7 @@ class Client extends BaseClient
             options: $options
         );
 
+        $this->browserSessions = new BrowserSessionsService($this);
         $this->legacy = new LegacyService($this);
         $this->oauth = new OAuthService($this);
         $this->oauthClients = new OAuthClientsService($this);
