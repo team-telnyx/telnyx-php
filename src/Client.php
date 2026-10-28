@@ -183,7 +183,6 @@ use Telnyx\Services\TexmlApplicationsService;
 use Telnyx\Services\TexmlService;
 use Telnyx\Services\TextToSpeechService;
 use Telnyx\Services\TrafficPolicyProfilesService;
-use Telnyx\Services\TtsIntegrationsService;
 use Telnyx\Services\TunnelsService;
 use Telnyx\Services\UacConnectionsService;
 use Telnyx\Services\UsageReportsService;
@@ -1194,11 +1193,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public TtsIntegrationsService $ttsIntegrations;
-
-    /**
-     * @api
-     */
     public TailscaleSubnetRoutersService $tailscaleSubnetRouters;
 
     /**
@@ -1491,7 +1485,6 @@ class Client extends BaseClient
         $this->llmTokenGateway = new LlmTokenGatewayService($this);
         $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
         $this->dialMetrics = new DialMetricsService($this);
-        $this->ttsIntegrations = new TtsIntegrationsService($this);
         $this->tailscaleSubnetRouters = new TailscaleSubnetRoutersService($this);
         $this->artifactDownloads = new ArtifactDownloadsService($this);
         $this->email = new EmailService($this);
