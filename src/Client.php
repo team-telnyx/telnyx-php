@@ -16,6 +16,7 @@ use Telnyx\Services\AddressesService;
 use Telnyx\Services\AdvancedOrdersService;
 use Telnyx\Services\AIService;
 use Telnyx\Services\AlphanumericSenderIDsService;
+use Telnyx\Services\ArtifactDownloadsService;
 use Telnyx\Services\AuditEventsService;
 use Telnyx\Services\AuthenticationProvidersService;
 use Telnyx\Services\AvailablePhoneNumberBlocksService;
@@ -25,6 +26,7 @@ use Telnyx\Services\BillingGroupsService;
 use Telnyx\Services\BotChallengeService;
 use Telnyx\Services\BotSessionsService;
 use Telnyx\Services\BotSignupService;
+use Telnyx\Services\BrowserSessionsService;
 use Telnyx\Services\BulkSimCardActionsService;
 use Telnyx\Services\BundlePricingService;
 use Telnyx\Services\CallControlApplicationsService;
@@ -55,6 +57,7 @@ use Telnyx\Services\EmailDomainsService;
 use Telnyx\Services\EmailEventsService;
 use Telnyx\Services\EmailInboxesService;
 use Telnyx\Services\EmailMessagesService;
+use Telnyx\Services\EmailService;
 use Telnyx\Services\EmailTemplatesService;
 use Telnyx\Services\EmailThreadsService;
 use Telnyx\Services\EmailUnsubscribeGroupsService;
@@ -108,6 +111,7 @@ use Telnyx\Services\MobilePhoneNumbersService;
 use Telnyx\Services\MobilePushCredentialsService;
 use Telnyx\Services\MobileVoiceConnectionsService;
 use Telnyx\Services\NetworkCoverageService;
+use Telnyx\Services\NetworkRoutesService;
 use Telnyx\Services\NetworksService;
 use Telnyx\Services\NoiseSuppressionEnginesService;
 use Telnyx\Services\NotificationChannelsService;
@@ -128,6 +132,7 @@ use Telnyx\Services\OperatorConnectService;
 use Telnyx\Services\OrganizationsService;
 use Telnyx\Services\OtaUpdatesService;
 use Telnyx\Services\OutboundVoiceProfilesService;
+use Telnyx\Services\PayConnectorsService;
 use Telnyx\Services\PaymentService;
 use Telnyx\Services\PhoneNumberBlocksService;
 use Telnyx\Services\PhoneNumbersRegulatoryRequirementsService;
@@ -179,6 +184,7 @@ use Telnyx\Services\TexmlService;
 use Telnyx\Services\TextToSpeechService;
 use Telnyx\Services\TrafficPolicyProfilesService;
 use Telnyx\Services\TtsIntegrationsService;
+use Telnyx\Services\TunnelsService;
 use Telnyx\Services\UacConnectionsService;
 use Telnyx\Services\UsageReportsService;
 use Telnyx\Services\UserAddressesService;
@@ -219,6 +225,11 @@ class Client extends BaseClient
     public string $publicKey;
 
     public bool $baseUrlOverridden;
+
+    /**
+     * @api
+     */
+    public BrowserSessionsService $browserSessions;
 
     /**
      * @api
@@ -1190,6 +1201,31 @@ class Client extends BaseClient
      */
     public TailscaleSubnetRoutersService $tailscaleSubnetRouters;
 
+    /**
+     * @api
+     */
+    public ArtifactDownloadsService $artifactDownloads;
+
+    /**
+     * @api
+     */
+    public EmailService $email;
+
+    /**
+     * @api
+     */
+    public NetworkRoutesService $networkRoutes;
+
+    /**
+     * @api
+     */
+    public PayConnectorsService $payConnectors;
+
+    /**
+     * @api
+     */
+    public TunnelsService $tunnels;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1262,6 +1298,7 @@ class Client extends BaseClient
             options: $options
         );
 
+        $this->browserSessions = new BrowserSessionsService($this);
         $this->legacy = new LegacyService($this);
         $this->oauth = new OAuthService($this);
         $this->oauthClients = new OAuthClientsService($this);
@@ -1456,6 +1493,11 @@ class Client extends BaseClient
         $this->dialMetrics = new DialMetricsService($this);
         $this->ttsIntegrations = new TtsIntegrationsService($this);
         $this->tailscaleSubnetRouters = new TailscaleSubnetRoutersService($this);
+        $this->artifactDownloads = new ArtifactDownloadsService($this);
+        $this->email = new EmailService($this);
+        $this->networkRoutes = new NetworkRoutesService($this);
+        $this->payConnectors = new PayConnectorsService($this);
+        $this->tunnels = new TunnelsService($this);
     }
 
     /** @return array<string,string> */

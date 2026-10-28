@@ -51,7 +51,7 @@ final class BotChallengeRawService implements BotChallengeRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'v2/bot_challenge',
+            path: 'bot_challenge',
             body: (object) $parsed,
             options: $options,
             convert: BotChallengeNewResponse::class,

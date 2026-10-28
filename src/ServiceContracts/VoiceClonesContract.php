@@ -8,12 +8,14 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\ResembleClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxBayanClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxQwen3TtsClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxUltraClone;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest\MinimaxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest\TelnyxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneData;
+use Telnyx\VoiceClones\VoiceCloneListParams\FilterModelID;
 use Telnyx\VoiceClones\VoiceCloneListParams\FilterProvider;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
 use Telnyx\VoiceClones\VoiceCloneResponse;
@@ -61,6 +63,7 @@ interface VoiceClonesContract
     /**
      * @api
      *
+     * @param FilterModelID|value-of<FilterModelID> $filterModelID Filter by TTS model. Case-insensitive.
      * @param string $filterName case-insensitive substring filter on the name field
      * @param FilterProvider|value-of<FilterProvider> $filterProvider Filter by voice synthesis provider. Case-insensitive.
      * @param int $pageNumber page number for pagination (1-based)
@@ -73,6 +76,7 @@ interface VoiceClonesContract
      * @throws APIException
      */
     public function list(
+        FilterModelID|string|null $filterModelID = null,
         ?string $filterName = null,
         FilterProvider|string|null $filterProvider = null,
         int $pageNumber = 1,
@@ -103,7 +107,7 @@ interface VoiceClonesContract
      * @throws APIException
      */
     public function createFromUpload(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone $voiceCloneUploadRequest,
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone|ResembleClone $voiceCloneUploadRequest,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneResponse;
 

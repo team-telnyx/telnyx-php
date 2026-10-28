@@ -11,12 +11,13 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Replaces the value of the existing limit for the product and period. Send exactly one of `amount` and `unlimited: true`. The period's spend is checked at once: raising the limit above the spend lifts the period's block (`evaluation.released`), and lowering it below the spend blocks the product (`evaluation.blocked_now`). Returns 404 when no limit is set; create it instead.
+ * Replaces the value of the existing limit for the product and period. Send exactly one of `amount` and `unlimited: true`. The period's spend is checked at once: raising the limit above the spend lifts the period's block (`evaluation.released`), and lowering it below the spend blocks the product (`evaluation.blocked_now`). Returns 404 when no limit is set; create it instead. With the `credential_id` query parameter, the request changes that API key's limit; it needs an `amount`, and it can be at most the period's total limit. Lowering the total limit below the period's highest API key limit is refused.
  *
  * @see Telnyx\Services\SpendLimitsService::update()
  *
  * @phpstan-type SpendLimitUpdateParamsShape = array{
  *   amount: float,
+ *   credentialID?: string|null,
  *   period?: null|SpendLimitPeriod|value-of<SpendLimitPeriod>,
  *   reason?: string|null,
  *   unlimited: bool,
@@ -33,6 +34,12 @@ final class SpendLimitUpdateParams implements BaseModel
      */
     #[Required]
     public float $amount;
+
+    /**
+     * Identifier of one API key as recorded on usage, never the key's secret, percent-encoded: the request is then about that key's limit. Absent means the total limit; present but blank is refused.
+     */
+    #[Optional]
+    public ?string $credentialID;
 
     /**
      * Limit period. Defaults to `daily`; send it explicitly.
@@ -83,6 +90,7 @@ final class SpendLimitUpdateParams implements BaseModel
     public static function with(
         float $amount,
         bool $unlimited,
+        ?string $credentialID = null,
         SpendLimitPeriod|string|null $period = null,
         ?string $reason = null,
     ): self {
@@ -91,6 +99,7 @@ final class SpendLimitUpdateParams implements BaseModel
         $self['amount'] = $amount;
         $self['unlimited'] = $unlimited;
 
+        null !== $credentialID && $self['credentialID'] = $credentialID;
         null !== $period && $self['period'] = $period;
         null !== $reason && $self['reason'] = $reason;
 
@@ -104,6 +113,17 @@ final class SpendLimitUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['amount'] = $amount;
+
+        return $self;
+    }
+
+    /**
+     * Identifier of one API key as recorded on usage, never the key's secret, percent-encoded: the request is then about that key's limit. Absent means the total limit; present but blank is refused.
+     */
+    public function withCredentialID(string $credentialID): self
+    {
+        $self = clone $this;
+        $self['credentialID'] = $credentialID;
 
         return $self;
     }

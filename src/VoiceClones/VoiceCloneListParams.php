@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\VoiceClones\VoiceCloneListParams\FilterModelID;
 use Telnyx\VoiceClones\VoiceCloneListParams\FilterProvider;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
 
@@ -17,6 +18,7 @@ use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
  * @see Telnyx\Services\VoiceClonesService::list()
  *
  * @phpstan-type VoiceCloneListParamsShape = array{
+ *   filterModelID?: null|FilterModelID|value-of<FilterModelID>,
  *   filterName?: string|null,
  *   filterProvider?: null|FilterProvider|value-of<FilterProvider>,
  *   pageNumber?: int|null,
@@ -29,6 +31,14 @@ final class VoiceCloneListParams implements BaseModel
     /** @use SdkModel<VoiceCloneListParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    /**
+     * Filter by TTS model. Case-insensitive.
+     *
+     * @var value-of<FilterModelID>|null $filterModelID
+     */
+    #[Optional(enum: FilterModelID::class)]
+    public ?string $filterModelID;
 
     /**
      * Case-insensitive substring filter on the name field.
@@ -74,10 +84,12 @@ final class VoiceCloneListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param FilterModelID|value-of<FilterModelID>|null $filterModelID
      * @param FilterProvider|value-of<FilterProvider>|null $filterProvider
      * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
+        FilterModelID|string|null $filterModelID = null,
         ?string $filterName = null,
         FilterProvider|string|null $filterProvider = null,
         ?int $pageNumber = null,
@@ -86,11 +98,25 @@ final class VoiceCloneListParams implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $filterModelID && $self['filterModelID'] = $filterModelID;
         null !== $filterName && $self['filterName'] = $filterName;
         null !== $filterProvider && $self['filterProvider'] = $filterProvider;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $sort && $self['sort'] = $sort;
+
+        return $self;
+    }
+
+    /**
+     * Filter by TTS model. Case-insensitive.
+     *
+     * @param FilterModelID|value-of<FilterModelID> $filterModelID
+     */
+    public function withFilterModelID(FilterModelID|string $filterModelID): self
+    {
+        $self = clone $this;
+        $self['filterModelID'] = $filterModelID;
 
         return $self;
     }

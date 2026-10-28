@@ -8,19 +8,21 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SpendLimits\SpendLimit\Block;
+use Telnyx\Core\Omitted;
+use Telnyx\SpendLimits\SpendLimit\CredentialLimit;
 use Telnyx\SpendLimits\SpendLimit\Evaluation;
 use Telnyx\SpendLimits\SpendLimit\Limit;
 
 /**
- * The spend limit, spend and block state of one product and period.
+ * The spend limit, spend and block state of one product and period. The top-level fields describe the total limit of the account; API key limits are nested in `credential_limits`.
  *
- * @phpstan-import-type BlockShape from \Telnyx\SpendLimits\SpendLimit\Block
+ * @phpstan-import-type SpendLimitBlockShape from \Telnyx\SpendLimits\SpendLimitBlock
  * @phpstan-import-type LimitShape from \Telnyx\SpendLimits\SpendLimit\Limit
+ * @phpstan-import-type CredentialLimitShape from \Telnyx\SpendLimits\SpendLimit\CredentialLimit
  * @phpstan-import-type EvaluationShape from \Telnyx\SpendLimits\SpendLimit\Evaluation
  *
  * @phpstan-type SpendLimitShape = array{
- *   block: null|Block|BlockShape,
+ *   block: null|SpendLimitBlock|SpendLimitBlockShape,
  *   blocked: bool,
  *   effectiveLimitUsd: string|null,
  *   limit: null|Limit|LimitShape,
@@ -32,6 +34,8 @@ use Telnyx\SpendLimits\SpendLimit\Limit;
  *   recordType: string,
  *   spendError: string|null,
  *   spendUsd: string|null,
+ *   credentialID?: string|null,
+ *   credentialLimits?: list<CredentialLimit|CredentialLimitShape>|null,
  *   evaluation?: null|Evaluation|EvaluationShape,
  * }
  */
@@ -44,10 +48,10 @@ final class SpendLimit implements BaseModel
      * The active block of the period. `null` when the period is not blocked.
      */
     #[Required]
-    public ?Block $block;
+    public ?SpendLimitBlock $block;
 
     /**
-     * The product is blocked for this period. Always `false` in write responses; list the limits to read the block state.
+     * The product is blocked for the whole account in this period (total limit). An API key's own block appears only in `credential_limits`. Always `false` in write responses; list the limits to read the block state.
      */
     #[Required]
     public bool $blocked;
@@ -115,6 +119,20 @@ final class SpendLimit implements BaseModel
     public ?string $spendUsd;
 
     /**
+     * In write responses, the API key the write was about; `null` for the total limit. Always `null` in list entries, which describe the total limit.
+     */
+    #[Optional('credential_id', nullable: true)]
+    public ?string $credentialID;
+
+    /**
+     * List responses only. One item per API key limit of the product and period, sorted by `credential_id`, plus every API key that is still blocked. `[]` when there are none.
+     *
+     * @var list<CredentialLimit>|null $credentialLimits
+     */
+    #[Optional('credential_limits', list: CredentialLimit::class)]
+    public ?array $credentialLimits;
+
+    /**
      * What a create, update or delete did to the period at once. Only present in write responses.
      */
     #[Optional]
@@ -169,13 +187,14 @@ final class SpendLimit implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Block|BlockShape|null $block
+     * @param SpendLimitBlock|SpendLimitBlockShape|null $block
      * @param Limit|LimitShape|null $limit
      * @param SpendLimitPeriod|value-of<SpendLimitPeriod> $period
+     * @param list<CredentialLimit|CredentialLimitShape>|null $credentialLimits
      * @param Evaluation|EvaluationShape|null $evaluation
      */
     public static function with(
-        Block|array|null $block,
+        SpendLimitBlock|array|null $block,
         bool $blocked,
         ?string $effectiveLimitUsd,
         Limit|array|null $limit,
@@ -187,6 +206,8 @@ final class SpendLimit implements BaseModel
         ?string $spendError,
         ?string $spendUsd,
         SpendLimitPeriod|string $period = 'daily',
+        string|Omitted|null $credentialID = Omitted::VALUE,
+        ?array $credentialLimits = null,
         Evaluation|array|null $evaluation = null,
     ): self {
         $self = new self;
@@ -204,6 +225,8 @@ final class SpendLimit implements BaseModel
         $self['spendError'] = $spendError;
         $self['spendUsd'] = $spendUsd;
 
+        Omitted::VALUE !== $credentialID && $self['credentialID'] = $credentialID;
+        null !== $credentialLimits && $self['credentialLimits'] = $credentialLimits;
         null !== $evaluation && $self['evaluation'] = $evaluation;
 
         return $self;
@@ -212,9 +235,9 @@ final class SpendLimit implements BaseModel
     /**
      * The active block of the period. `null` when the period is not blocked.
      *
-     * @param Block|BlockShape|null $block
+     * @param SpendLimitBlock|SpendLimitBlockShape|null $block
      */
-    public function withBlock(Block|array|null $block): self
+    public function withBlock(SpendLimitBlock|array|null $block): self
     {
         $self = clone $this;
         $self['block'] = $block;
@@ -223,7 +246,7 @@ final class SpendLimit implements BaseModel
     }
 
     /**
-     * The product is blocked for this period. Always `false` in write responses; list the limits to read the block state.
+     * The product is blocked for the whole account in this period (total limit). An API key's own block appears only in `credential_limits`. Always `false` in write responses; list the limits to read the block state.
      */
     public function withBlocked(bool $blocked): self
     {
@@ -343,6 +366,30 @@ final class SpendLimit implements BaseModel
     {
         $self = clone $this;
         $self['spendUsd'] = $spendUsd;
+
+        return $self;
+    }
+
+    /**
+     * In write responses, the API key the write was about; `null` for the total limit. Always `null` in list entries, which describe the total limit.
+     */
+    public function withCredentialID(?string $credentialID): self
+    {
+        $self = clone $this;
+        $self['credentialID'] = $credentialID;
+
+        return $self;
+    }
+
+    /**
+     * List responses only. One item per API key limit of the product and period, sorted by `credential_id`, plus every API key that is still blocked. `[]` when there are none.
+     *
+     * @param list<CredentialLimit|CredentialLimitShape> $credentialLimits
+     */
+    public function withCredentialLimits(array $credentialLimits): self
+    {
+        $self = clone $this;
+        $self['credentialLimits'] = $credentialLimits;
 
         return $self;
     }

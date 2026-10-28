@@ -11,12 +11,14 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceClonesContract;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\ResembleClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxBayanClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxQwen3TtsClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxUltraClone;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest\MinimaxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest\TelnyxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneData;
+use Telnyx\VoiceClones\VoiceCloneListParams\FilterModelID;
 use Telnyx\VoiceClones\VoiceCloneListParams\FilterProvider;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
 use Telnyx\VoiceClones\VoiceCloneResponse;
@@ -106,6 +108,7 @@ final class VoiceClonesService implements VoiceClonesContract
      *
      * Returns a paginated list of voice clones belonging to the authenticated account.
      *
+     * @param FilterModelID|value-of<FilterModelID> $filterModelID Filter by TTS model. Case-insensitive.
      * @param string $filterName case-insensitive substring filter on the name field
      * @param FilterProvider|value-of<FilterProvider> $filterProvider Filter by voice synthesis provider. Case-insensitive.
      * @param int $pageNumber page number for pagination (1-based)
@@ -118,6 +121,7 @@ final class VoiceClonesService implements VoiceClonesContract
      * @throws APIException
      */
     public function list(
+        FilterModelID|string|null $filterModelID = null,
         ?string $filterName = null,
         FilterProvider|string|null $filterProvider = null,
         int $pageNumber = 1,
@@ -127,6 +131,7 @@ final class VoiceClonesService implements VoiceClonesContract
     ): DefaultFlatPagination {
         $params = array_filter(
             [
+                'filterModelID' => $filterModelID ?? Omitted::VALUE,
                 'filterName' => $filterName ?? Omitted::VALUE,
                 'filterProvider' => $filterProvider ?? Omitted::VALUE,
                 'pageNumber' => $pageNumber,
@@ -165,7 +170,7 @@ final class VoiceClonesService implements VoiceClonesContract
     /**
      * @api
      *
-     * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. Maximum file size: 20MB. Reference audio is trimmed per model: Qwen3TTS and Bayan use the first 10 seconds, Ultra uses up to 60 seconds, and Minimax accepts 10 seconds to 5 minutes. Ultra clones return `202` with status `pending`; all other models return `201` with status `active`. Bayan clones require `ref_text` (the exact transcript of the reference audio) and support `ar` (default) and `en` only.
+     * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. Maximum file size: 20MB. Reference audio is trimmed per model: Qwen3TTS, Bayan, and Resemble use the first 10 seconds, Ultra uses up to 60 seconds, and Minimax accepts 10 seconds to 5 minutes. Ultra clones return `202` with status `pending`; all other models return `201` with status `active`. Bayan clones require `ref_text` (the exact transcript of the reference audio) and support `ar` (default) and `en` only. Resemble clones (`provider: resemble`) take `model_id` `Pro`, `Turbo`, or `Urdu`.
      *
      * @param VoiceCloneUploadRequestShape $voiceCloneUploadRequest Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 20MB.
      * @param RequestOpts|null $requestOptions
@@ -173,7 +178,7 @@ final class VoiceClonesService implements VoiceClonesContract
      * @throws APIException
      */
     public function createFromUpload(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone $voiceCloneUploadRequest,
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone|ResembleClone $voiceCloneUploadRequest,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneResponse {
         $params = ['voiceCloneUploadRequest' => $voiceCloneUploadRequest];

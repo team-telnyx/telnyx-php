@@ -13,6 +13,7 @@ use Telnyx\MessagingProfiles\MessagingMessagingProfile\WebhookAPIVersion;
 
 /**
  * @phpstan-import-type MessagingProfileFeaturesShape from \Telnyx\MessagingProfiles\MessagingProfileFeatures
+ * @phpstan-import-type Mm7MetadataShape from \Telnyx\MessagingProfiles\Mm7Metadata
  * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
  * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
  *
@@ -26,6 +27,7 @@ use Telnyx\MessagingProfiles\MessagingMessagingProfile\WebhookAPIVersion;
  *   enabled?: bool|null,
  *   features?: null|MessagingProfileFeatures|MessagingProfileFeaturesShape,
  *   healthWebhookURL?: string|null,
+ *   mm7Metadata?: null|Mm7Metadata|Mm7MetadataShape,
  *   mmsFallBackToSMS?: bool|null,
  *   mmsTranscoding?: bool|null,
  *   mobileOnly?: bool|null,
@@ -104,6 +106,12 @@ final class MessagingMessagingProfile implements BaseModel
      */
     #[Optional('health_webhook_url', nullable: true)]
     public ?string $healthWebhookURL;
+
+    /**
+     * MM7 settings for inbound messages.
+     */
+    #[Optional('mm7_metadata', nullable: true)]
+    public ?Mm7Metadata $mm7Metadata;
 
     /**
      * enables SMS fallback for MMS messages.
@@ -240,6 +248,7 @@ final class MessagingMessagingProfile implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Omitted|MessagingProfileFeatures|MessagingProfileFeaturesShape|null $features
+     * @param Omitted|Mm7Metadata|Mm7MetadataShape|null $mm7Metadata
      * @param Omitted|NumberPoolSettings|NumberPoolSettingsShape|null $numberPoolSettings
      * @param Omitted|URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings
      * @param RecordType|value-of<RecordType>|null $recordType
@@ -251,6 +260,7 @@ final class MessagingMessagingProfile implements BaseModel
         string|Omitted|null $alphaSender = Omitted::VALUE,
         Omitted|MessagingProfileFeatures|array|null $features = Omitted::VALUE,
         string|Omitted|null $healthWebhookURL = Omitted::VALUE,
+        Omitted|Mm7Metadata|array|null $mm7Metadata = Omitted::VALUE,
         Omitted|NumberPoolSettings|array|null $numberPoolSettings = Omitted::VALUE,
         string|Omitted|null $resourceGroupID = Omitted::VALUE,
         Omitted|URLShortenerSettings|array|null $urlShortenerSettings = Omitted::VALUE,
@@ -286,6 +296,7 @@ final class MessagingMessagingProfile implements BaseModel
         null !== $enabled && $self['enabled'] = $enabled;
         Omitted::VALUE !== $features && $self['features'] = $features;
         Omitted::VALUE !== $healthWebhookURL && $self['healthWebhookURL'] = $healthWebhookURL;
+        Omitted::VALUE !== $mm7Metadata && $self['mm7Metadata'] = $mm7Metadata;
         null !== $mmsFallBackToSMS && $self['mmsFallBackToSMS'] = $mmsFallBackToSMS;
         null !== $mmsTranscoding && $self['mmsTranscoding'] = $mmsTranscoding;
         null !== $mobileOnly && $self['mobileOnly'] = $mobileOnly;
@@ -407,6 +418,19 @@ final class MessagingMessagingProfile implements BaseModel
     {
         $self = clone $this;
         $self['healthWebhookURL'] = $healthWebhookURL;
+
+        return $self;
+    }
+
+    /**
+     * MM7 settings for inbound messages.
+     *
+     * @param Mm7Metadata|Mm7MetadataShape|null $mm7Metadata
+     */
+    public function withMm7Metadata(Mm7Metadata|array|null $mm7Metadata): self
+    {
+        $self = clone $this;
+        $self['mm7Metadata'] = $mm7Metadata;
 
         return $self;
     }

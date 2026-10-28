@@ -78,7 +78,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?bool $interimResults;
 
     /**
-     * A comma-separated list of key terms to boost for recognition during transcription, used by Deepgram, Reson8, Speechmatics Linden 1 and AssemblyAI models. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words. At most 1000 characters in total. For assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming), also at most 100 terms of up to 50 characters each. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to the speech-to-text engine.
+     * A comma-separated list of key terms to boost for recognition during transcription, used by Deepgram, Reson8, Speechmatics Linden 1 and AssemblyAI models. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words. At most 1000 characters in total. For assemblyai/universal-3-6-pro (and its legacy aliases assemblyai/universal-3-5-pro and assemblyai/universal-streaming), also at most 100 terms of up to 50 characters each. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to the speech-to-text engine.
      */
     #[Optional]
     public ?string $keyterm;
@@ -98,13 +98,13 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?int $maxEndpointDelayMs;
 
     /**
-     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Maximum duration of silence in milliseconds before forcing an end of turn.
+     * Available only for assemblyai/universal-3-6-pro (and its legacy aliases assemblyai/universal-3-5-pro and assemblyai/universal-streaming). Maximum duration of silence in milliseconds before forcing an end of turn.
      */
     #[Optional('max_turn_silence')]
     public ?int $maxTurnSilence;
 
     /**
-     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Minimum duration of silence in milliseconds before a turn can end. Must be less than or equal to max_turn_silence.
+     * Available only for assemblyai/universal-3-6-pro (and its legacy aliases assemblyai/universal-3-5-pro and assemblyai/universal-streaming). Minimum duration of silence in milliseconds before a turn can end. Must be less than or equal to max_turn_silence.
      */
     #[Optional('min_turn_silence')]
     public ?int $minTurnSilence;
@@ -113,7 +113,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?bool $numerals;
 
     /**
-     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Context about the conversation (domain, names, terms) to improve transcription; describe the content, do not give instructions. Leave empty unless needed. At most 1750 characters.
+     * Available only for assemblyai/universal-3-6-pro (and its legacy aliases assemblyai/universal-3-5-pro and assemblyai/universal-streaming). Context about the conversation (domain, names, terms) to improve transcription; describe the content, do not give instructions. Leave empty unless needed. At most 1750 characters.
      */
     #[Optional]
     public ?string $prompt;
@@ -259,7 +259,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * A comma-separated list of key terms to boost for recognition during transcription, used by Deepgram, Reson8, Speechmatics Linden 1 and AssemblyAI models. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words. At most 1000 characters in total. For assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming), also at most 100 terms of up to 50 characters each. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to the speech-to-text engine.
+     * A comma-separated list of key terms to boost for recognition during transcription, used by Deepgram, Reson8, Speechmatics Linden 1 and AssemblyAI models. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words. At most 1000 characters in total. For assemblyai/universal-3-6-pro (and its legacy aliases assemblyai/universal-3-5-pro and assemblyai/universal-streaming), also at most 100 terms of up to 50 characters each. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to the speech-to-text engine.
      */
     public function withKeyterm(string $keyterm): self
     {
@@ -294,7 +294,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Maximum duration of silence in milliseconds before forcing an end of turn.
+     * Available only for assemblyai/universal-3-6-pro (and its legacy aliases assemblyai/universal-3-5-pro and assemblyai/universal-streaming). Maximum duration of silence in milliseconds before forcing an end of turn.
      */
     public function withMaxTurnSilence(int $maxTurnSilence): self
     {
@@ -305,7 +305,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Minimum duration of silence in milliseconds before a turn can end. Must be less than or equal to max_turn_silence.
+     * Available only for assemblyai/universal-3-6-pro (and its legacy aliases assemblyai/universal-3-5-pro and assemblyai/universal-streaming). Minimum duration of silence in milliseconds before a turn can end. Must be less than or equal to max_turn_silence.
      */
     public function withMinTurnSilence(int $minTurnSilence): self
     {
@@ -324,7 +324,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for assemblyai/universal-3-5-pro (and its legacy alias assemblyai/universal-streaming). Context about the conversation (domain, names, terms) to improve transcription; describe the content, do not give instructions. Leave empty unless needed. At most 1750 characters.
+     * Available only for assemblyai/universal-3-6-pro (and its legacy aliases assemblyai/universal-3-5-pro and assemblyai/universal-streaming). Context about the conversation (domain, names, terms) to improve transcription; describe the content, do not give instructions. Leave empty unless needed. At most 1750 characters.
      */
     public function withPrompt(string $prompt): self
     {
