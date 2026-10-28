@@ -9,12 +9,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\ResembleClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxBayanClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxQwen3TtsClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxUltraClone;
 
 /**
- * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. Maximum file size: 20MB. Reference audio is trimmed per model: Qwen3TTS and Bayan use the first 10 seconds, Ultra uses up to 60 seconds, and Minimax accepts 10 seconds to 5 minutes. Ultra clones return `202` with status `pending`; all other models return `201` with status `active`. Bayan clones require `ref_text` (the exact transcript of the reference audio) and support `ar` (default) and `en` only.
+ * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. Maximum file size: 20MB. Reference audio is trimmed per model: Qwen3TTS, Bayan, and Resemble use the first 10 seconds, Ultra uses up to 60 seconds, and Minimax accepts 10 seconds to 5 minutes. Ultra clones return `202` with status `pending`; all other models return `201` with status `active`. Bayan clones require `ref_text` (the exact transcript of the reference audio) and support `ar` (default) and `en` only. Resemble clones (`provider: resemble`) take `model_id` `Pro`, `Turbo`, or `Urdu`.
  *
  * @see Telnyx\Services\VoiceClonesService::createFromUpload()
  *
@@ -37,7 +38,7 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
      * @var VoiceCloneUploadRequestVariants $voiceCloneUploadRequest
      */
     #[Required]
-    public TelnyxQwen3TtsClone|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone $voiceCloneUploadRequest;
+    public TelnyxQwen3TtsClone|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone|ResembleClone $voiceCloneUploadRequest;
 
     /**
      * `new VoiceCloneCreateFromUploadParams()` is missing required properties by the API.
@@ -66,7 +67,7 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
      * @param VoiceCloneUploadRequestShape $voiceCloneUploadRequest
      */
     public static function with(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone $voiceCloneUploadRequest,
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone|ResembleClone $voiceCloneUploadRequest,
     ): self {
         $self = new self;
 
@@ -81,7 +82,7 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
      * @param VoiceCloneUploadRequestShape $voiceCloneUploadRequest
      */
     public function withVoiceCloneUploadRequest(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone $voiceCloneUploadRequest,
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone|ResembleClone $voiceCloneUploadRequest,
     ): self {
         $self = clone $this;
         $self['voiceCloneUploadRequest'] = $voiceCloneUploadRequest;

@@ -19,7 +19,7 @@ final class SpendLimitResponse implements BaseModel
     use SdkModel;
 
     /**
-     * The spend limit, spend and block state of one product and period.
+     * The spend limit, spend and block state of one product and period. The top-level fields describe the total limit of the account; API key limits are nested in `credential_limits`.
      */
     #[Required]
     public SpendLimit $data;
@@ -60,7 +60,7 @@ final class SpendLimitResponse implements BaseModel
     }
 
     /**
-     * The spend limit, spend and block state of one product and period.
+     * The spend limit, spend and block state of one product and period. The top-level fields describe the total limit of the account; API key limits are nested in `credential_limits`.
      *
      * @param SpendLimit|SpendLimitShape $data
      */

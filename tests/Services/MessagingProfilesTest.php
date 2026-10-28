@@ -70,6 +70,10 @@ final class MessagingProfilesTest extends TestCase
             enabled: true,
             features: ['aiOptOutDetectionEnabled' => true],
             healthWebhookURL: 'health_webhook_url',
+            mm7Metadata: [
+                'mm7FailoverWebhookURL' => 'https://backup.example.com/hooks',
+                'mm7WebhookURL' => 'https://www.example.com/hooks',
+            ],
             mmsFallBackToSMS: true,
             mmsTranscoding: true,
             mobileOnly: true,

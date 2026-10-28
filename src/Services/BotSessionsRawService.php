@@ -52,7 +52,7 @@ final class BotSessionsRawService implements BotSessionsRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
-            path: 'v2/bot_sessions',
+            path: 'bot_sessions',
             query: Util::array_transform_keys(
                 $parsed,
                 ['portalRedirectToken' => 'portal_redirect_token']

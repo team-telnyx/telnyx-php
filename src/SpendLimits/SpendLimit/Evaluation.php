@@ -19,6 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   spendUsd: string|null,
  *   stillBlockedOtherPeriod: bool,
  *   stillOverLimit: bool,
+ *   accountBlocked?: bool|null,
  *   note?: string|null,
  * }
  */
@@ -52,7 +53,7 @@ final class Evaluation implements BaseModel
     public ?string $spendUsd;
 
     /**
-     * The other period has an active block, so the product stays blocked whatever this period's result.
+     * The other period has an active block, so the product stays blocked whatever this period's result. For an API key write, the API key's limit in the other period.
      */
     #[Required('still_blocked_other_period')]
     public bool $stillBlockedOtherPeriod;
@@ -62,6 +63,12 @@ final class Evaluation implements BaseModel
      */
     #[Required('still_over_limit')]
     public bool $stillOverLimit;
+
+    /**
+     * API key writes only: the account itself remains blocked for the product under a total limit. Absent for total limit writes.
+     */
+    #[Optional('account_blocked')]
+    public ?bool $accountBlocked;
 
     /**
      * Additional information about the result, when there is any.
@@ -113,6 +120,7 @@ final class Evaluation implements BaseModel
         ?string $spendUsd,
         bool $stillBlockedOtherPeriod,
         bool $stillOverLimit,
+        ?bool $accountBlocked = null,
         ?string $note = null,
     ): self {
         $self = new self;
@@ -124,6 +132,7 @@ final class Evaluation implements BaseModel
         $self['stillBlockedOtherPeriod'] = $stillBlockedOtherPeriod;
         $self['stillOverLimit'] = $stillOverLimit;
 
+        null !== $accountBlocked && $self['accountBlocked'] = $accountBlocked;
         null !== $note && $self['note'] = $note;
 
         return $self;
@@ -174,7 +183,7 @@ final class Evaluation implements BaseModel
     }
 
     /**
-     * The other period has an active block, so the product stays blocked whatever this period's result.
+     * The other period has an active block, so the product stays blocked whatever this period's result. For an API key write, the API key's limit in the other period.
      */
     public function withStillBlockedOtherPeriod(
         bool $stillBlockedOtherPeriod
@@ -192,6 +201,17 @@ final class Evaluation implements BaseModel
     {
         $self = clone $this;
         $self['stillOverLimit'] = $stillOverLimit;
+
+        return $self;
+    }
+
+    /**
+     * API key writes only: the account itself remains blocked for the product under a total limit. Absent for total limit writes.
+     */
+    public function withAccountBlocked(bool $accountBlocked): self
+    {
+        $self = clone $this;
+        $self['accountBlocked'] = $accountBlocked;
 
         return $self;
     }

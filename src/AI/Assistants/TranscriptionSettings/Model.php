@@ -13,7 +13,7 @@ namespace Telnyx\AI\Assistants\TranscriptionSettings;
  * - `speechmatics/standard` is a Speechmatics model self-hosted by Telnyx; it supports a fixed set of language packs (including bilingual packs such as `ar_en`) and defaults to `en`.
  * - `speechmatics/linden-1` (preview) is a vendor-hosted streaming model with no auto-detect; set `language` from Speechmatics' Realtime language list (defaults to `en`).
  * - `azure/fast` is a multilingual Azure transcription model.
- * - `assemblyai/universal-3-5-pro` is a multilingual streaming model with configurable turn detection. The legacy alias `assemblyai/universal-streaming` is still accepted and resolves to the same model.
+ * - `assemblyai/universal-3-6-pro` (AssemblyAI Universal-3.6 Pro) is a multilingual streaming model with configurable turn detection. The legacy aliases `assemblyai/universal-3-5-pro` and `assemblyai/universal-streaming` are still accepted and run the same model.
  * - `xai/grok-stt` is a multilingual Grok STT model.
  * - `soniox/stt-rt-v4` and `soniox/stt-rt-v5` are multilingual streaming models with automatic language detection, configurable endpointing, term biasing (`context`), and `language_hints`.
  * - `nvidia/parakeet-v3` is a multilingual transcription model with automatic language detection.
@@ -36,6 +36,8 @@ enum Model: string
     case SPEECHMATICS_LINDEN_1 = 'speechmatics/linden-1';
 
     case AZURE_FAST = 'azure/fast';
+
+    case ASSEMBLYAI_UNIVERSAL_3_6_PRO = 'assemblyai/universal-3-6-pro';
 
     case ASSEMBLYAI_UNIVERSAL_3_5_PRO = 'assemblyai/universal-3-5-pro';
 

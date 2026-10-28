@@ -59,7 +59,7 @@ final class BotSignupRawService implements BotSignupRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'v2/bot_signup',
+            path: 'bot_signup',
             body: (object) $parsed,
             options: $options,
             convert: SuccessResponse::class,
@@ -90,7 +90,7 @@ final class BotSignupRawService implements BotSignupRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'v2/bot_signup/resend_magic_link',
+            path: 'bot_signup/resend_magic_link',
             body: (object) $parsed,
             options: $options,
             convert: SuccessResponse::class,

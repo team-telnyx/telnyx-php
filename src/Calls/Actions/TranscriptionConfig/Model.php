@@ -11,7 +11,7 @@ namespace Telnyx\Calls\Actions\TranscriptionConfig;
  * - `deepgram/nova-3` and `deepgram/nova-2` for live streaming transcription.
  * - `speechmatics/standard` and `speechmatics/enhanced` for live streaming transcription.
  * - `speechmatics/linden-1` (preview, vendor-hosted) for live streaming transcription; no auto-detect, so set `language` from Speechmatics' Realtime language list (defaults to `en`).
- * - `assemblyai/universal-3-5-pro` for live streaming transcription. The legacy alias `assemblyai/universal-streaming` is still accepted and resolves to the same model.
+ * - `assemblyai/universal-3-6-pro` (AssemblyAI Universal-3.6 Pro) for live streaming transcription. The legacy aliases `assemblyai/universal-3-5-pro` and `assemblyai/universal-streaming` are still accepted and run the same Universal-3.6 Pro model.
  * - `xai/grok-stt` for live streaming transcription.
  * - `soniox/stt-rt-v4` for live streaming multilingual transcription with automatic language detection.
  * - `nvidia/parakeet-v3` for multilingual transcription with automatic language detection.
@@ -39,6 +39,8 @@ enum Model: string
     case SPEECHMATICS_ENHANCED = 'speechmatics/enhanced';
 
     case SPEECHMATICS_LINDEN_1 = 'speechmatics/linden-1';
+
+    case ASSEMBLYAI_UNIVERSAL_3_6_PRO = 'assemblyai/universal-3-6-pro';
 
     case ASSEMBLYAI_UNIVERSAL_3_5_PRO = 'assemblyai/universal-3-5-pro';
 

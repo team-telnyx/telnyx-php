@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\SpendLimits\SpendLimit;
+namespace Telnyx\SpendLimits;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -11,16 +11,16 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The active block of the period. `null` when the period is not blocked.
  *
- * @phpstan-type BlockShape = array{
+ * @phpstan-type SpendLimitBlockShape = array{
  *   blockedUntil: string,
  *   detectedAt: \DateTimeInterface,
  *   limitUsd: string,
  *   spendUsd: string,
  * }
  */
-final class Block implements BaseModel
+final class SpendLimitBlock implements BaseModel
 {
-    /** @use SdkModel<BlockShape> */
+    /** @use SdkModel<SpendLimitBlockShape> */
     use SdkModel;
 
     /**
@@ -48,17 +48,19 @@ final class Block implements BaseModel
     public string $spendUsd;
 
     /**
-     * `new Block()` is missing required properties by the API.
+     * `new SpendLimitBlock()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Block::with(blockedUntil: ..., detectedAt: ..., limitUsd: ..., spendUsd: ...)
+     * SpendLimitBlock::with(
+     *   blockedUntil: ..., detectedAt: ..., limitUsd: ..., spendUsd: ...
+     * )
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Block)
+     * (new SpendLimitBlock)
      *   ->withBlockedUntil(...)
      *   ->withDetectedAt(...)
      *   ->withLimitUsd(...)

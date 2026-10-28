@@ -8,6 +8,7 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\ResembleClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxBayanClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxQwen3TtsClone;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxUltraClone;
@@ -19,9 +20,10 @@ use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\
  * @phpstan-import-type TelnyxUltraCloneShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxUltraClone
  * @phpstan-import-type TelnyxBayanCloneShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxBayanClone
  * @phpstan-import-type MinimaxCloneShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone
+ * @phpstan-import-type ResembleCloneShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\ResembleClone
  *
- * @phpstan-type VoiceCloneUploadRequestVariants = TelnyxQwen3TtsClone|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone
- * @phpstan-type VoiceCloneUploadRequestShape = VoiceCloneUploadRequestVariants|TelnyxQwen3TtsCloneShape|TelnyxUltraCloneShape|TelnyxBayanCloneShape|MinimaxCloneShape
+ * @phpstan-type VoiceCloneUploadRequestVariants = TelnyxQwen3TtsClone|TelnyxUltraClone|TelnyxBayanClone|MinimaxClone|ResembleClone
+ * @phpstan-type VoiceCloneUploadRequestShape = VoiceCloneUploadRequestVariants|TelnyxQwen3TtsCloneShape|TelnyxUltraCloneShape|TelnyxBayanCloneShape|MinimaxCloneShape|ResembleCloneShape
  */
 final class VoiceCloneUploadRequest implements ConverterSource
 {
@@ -37,6 +39,7 @@ final class VoiceCloneUploadRequest implements ConverterSource
             TelnyxUltraClone::class,
             TelnyxBayanClone::class,
             MinimaxClone::class,
+            ResembleClone::class,
         ];
     }
 }

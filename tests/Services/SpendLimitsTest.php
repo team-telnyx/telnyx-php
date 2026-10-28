@@ -57,6 +57,7 @@ final class SpendLimitsTest extends TestCase
         $result = $this->client->spendLimits->create(
             amount: 100,
             product: 'inference',
+            credentialID: 'KEY0192F3A1B2C3D4E5F6A7B8C9D0E1F2',
             period: SpendLimitPeriod::DAILY,
             reason: 'Team budget',
             unlimited: true,
@@ -93,6 +94,7 @@ final class SpendLimitsTest extends TestCase
         $result = $this->client->spendLimits->update(
             'inference',
             amount: 100,
+            credentialID: 'KEY0192F3A1B2C3D4E5F6A7B8C9D0E1F2',
             period: SpendLimitPeriod::DAILY,
             reason: 'Raised for the product launch',
             unlimited: true,
