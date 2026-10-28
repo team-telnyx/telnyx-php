@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Telnyx product features the messaging customer can enable on the messaging profile. Keys map to individual feature flags; unknown keys are accepted and preserved for forward compatibility with rolling deployments.
  *
  * @phpstan-type MessagingProfileFeaturesShape = array{
- *   aiOptOutDetectionEnabled?: bool|null
+ *   aiOptOutDetectionEnabled?: bool|null, autoChunkLongMessages?: bool|null
  * }
  */
 final class MessagingProfileFeatures implements BaseModel
@@ -26,6 +26,12 @@ final class MessagingProfileFeatures implements BaseModel
     #[Optional('ai_opt_out_detection_enabled')]
     public ?bool $aiOptOutDetectionEnabled;
 
+    /**
+     * Enables server-side chunking of outbound SMS. When enabled, an outbound message that exceeds the maximum number of segments allowed for its destination (10 segments by default; some aggregators accept up to 25) is automatically split into multiple child messages, each within the segment limit, and sent sequentially in order. Splitting is encoding-aware: GSM-7 bodies split at 153-character boundaries and UCS-2 bodies at 134-character boundaries. When disabled (the default), messages exceeding the segment limit are rejected with an error.
+     */
+    #[Optional('auto_chunk_long_messages')]
+    public ?bool $autoChunkLongMessages;
+
     public function __construct()
     {
         $this->initialize();
@@ -36,11 +42,14 @@ final class MessagingProfileFeatures implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?bool $aiOptOutDetectionEnabled = null): self
-    {
+    public static function with(
+        ?bool $aiOptOutDetectionEnabled = null,
+        ?bool $autoChunkLongMessages = null
+    ): self {
         $self = new self;
 
         null !== $aiOptOutDetectionEnabled && $self['aiOptOutDetectionEnabled'] = $aiOptOutDetectionEnabled;
+        null !== $autoChunkLongMessages && $self['autoChunkLongMessages'] = $autoChunkLongMessages;
 
         return $self;
     }
@@ -53,6 +62,17 @@ final class MessagingProfileFeatures implements BaseModel
     ): self {
         $self = clone $this;
         $self['aiOptOutDetectionEnabled'] = $aiOptOutDetectionEnabled;
+
+        return $self;
+    }
+
+    /**
+     * Enables server-side chunking of outbound SMS. When enabled, an outbound message that exceeds the maximum number of segments allowed for its destination (10 segments by default; some aggregators accept up to 25) is automatically split into multiple child messages, each within the segment limit, and sent sequentially in order. Splitting is encoding-aware: GSM-7 bodies split at 153-character boundaries and UCS-2 bodies at 134-character boundaries. When disabled (the default), messages exceeding the segment limit are rejected with an error.
+     */
+    public function withAutoChunkLongMessages(bool $autoChunkLongMessages): self
+    {
+        $self = clone $this;
+        $self['autoChunkLongMessages'] = $autoChunkLongMessages;
 
         return $self;
     }
