@@ -16,11 +16,11 @@ use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetParams;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetPhoneNumberResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListParams;
-use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams\VerificationMethod;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberRetrieveConversationWindowParams;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberVerifyParams;
+use Telnyx\Whatsapp\PhoneNumbers\WhatsappPhoneResponse;
 
 /**
  * Manage Whatsapp phone numbers.
@@ -43,7 +43,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      * @param array{pageNumber?: int, pageSize?: int}|PhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumberListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WhatsappPhoneResponse>>
      *
      * @throws APIException
      */
@@ -65,7 +65,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PhoneNumberListResponse::class,
+            convert: WhatsappPhoneResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

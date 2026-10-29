@@ -10,7 +10,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
-use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariableSchema;
 use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariablesMode;
 
 /**
@@ -18,7 +17,7 @@ use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariablesMode;
  *
  * @see Telnyx\Services\EmailTemplatesService::create()
  *
- * @phpstan-import-type VariableSchemaShape from \Telnyx\EmailTemplates\EmailTemplateCreateParams\VariableSchema
+ * @phpstan-import-type VariableSchemaEntryShape from \Telnyx\EmailTemplates\VariableSchemaEntry
  *
  * @phpstan-type EmailTemplateCreateParamsShape = array{
  *   name: string,
@@ -27,7 +26,7 @@ use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariablesMode;
  *   strictVariables?: bool|null,
  *   subject?: string|null,
  *   textBody?: string|null,
- *   variableSchema?: array<string,VariableSchema|VariableSchemaShape>|null,
+ *   variableSchema?: array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null,
  *   variables?: list<string>|null,
  *   variablesMode?: null|VariablesMode|value-of<VariablesMode>,
  *   idempotencyKey?: string|null,
@@ -78,9 +77,13 @@ final class EmailTemplateCreateParams implements BaseModel
     /**
      * Structured variable requirements. Required variables cannot define defaults; invalid combinations return 422. This is independent of the legacy `variables` array. On render with `strict_variables` enabled: `required` variables must be supplied as non-empty values — absent, `null`, empty string, empty object `{}`, and empty array `[]` all fail with 422 naming the variable, while present values such as `false` and `0` pass (they are present, not empty). Optional variables fall back to their `default` when absent.
      *
-     * @var array<string,VariableSchema>|null $variableSchema
+     * @var array<string,VariableSchemaEntry>|null $variableSchema
      */
-    #[Optional('variable_schema', map: VariableSchema::class, nullable: true)]
+    #[Optional(
+        'variable_schema',
+        map: VariableSchemaEntry::class,
+        nullable: true
+    )]
     public ?array $variableSchema;
 
     /**
@@ -126,7 +129,7 @@ final class EmailTemplateCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Omitted|array<string,VariableSchema|VariableSchemaShape>|null $variableSchema
+     * @param Omitted|array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null $variableSchema
      * @param list<string>|Omitted|null $variables
      * @param VariablesMode|value-of<VariablesMode>|null $variablesMode
      */
@@ -228,7 +231,7 @@ final class EmailTemplateCreateParams implements BaseModel
     /**
      * Structured variable requirements. Required variables cannot define defaults; invalid combinations return 422. This is independent of the legacy `variables` array. On render with `strict_variables` enabled: `required` variables must be supplied as non-empty values — absent, `null`, empty string, empty object `{}`, and empty array `[]` all fail with 422 naming the variable, while present values such as `false` and `0` pass (they are present, not empty). Optional variables fall back to their `default` when absent.
      *
-     * @param array<string,VariableSchema|VariableSchemaShape>|null $variableSchema
+     * @param array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null $variableSchema
      */
     public function withVariableSchema(?array $variableSchema): self
     {
