@@ -58,7 +58,7 @@ final class BrowserSessionsTest extends TestCase
             policy: ['allowedDomains' => ['example.com']],
             idempotencyKey: 'x',
             limits: ['idleTimeoutS' => 30, 'lifetimeS' => 60],
-            metadata: (object) [],
+            metadata: ['foo' => 'bar'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

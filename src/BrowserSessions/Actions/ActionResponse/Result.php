@@ -9,6 +9,7 @@ use Telnyx\BrowserSessions\Actions\ActionResponse\Result\Observation;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\MapOf;
 
 /**
  * @phpstan-import-type ArtifactShape from \Telnyx\BrowserSessions\Actions\ActionResponse\Result\Artifact
@@ -17,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ResultShape = array{
  *   artifact?: null|Artifact|ArtifactShape,
  *   observation?: null|Observation|ObservationShape,
- *   results?: list<mixed>|null,
+ *   results?: list<array<string,mixed>>|null,
  *   title?: string|null,
  *   url?: string|null,
  * }
@@ -39,9 +40,9 @@ final class Result implements BaseModel
     /**
      * Present only for batch actions.
      *
-     * @var list<mixed>|null $results
+     * @var list<array<string,mixed>>|null $results
      */
-    #[Optional(list: 'mixed')]
+    #[Optional(list: new MapOf('mixed'))]
     public ?array $results;
 
     #[Optional]
@@ -62,7 +63,7 @@ final class Result implements BaseModel
      *
      * @param Artifact|ArtifactShape|null $artifact
      * @param Observation|ObservationShape|null $observation
-     * @param list<mixed>|null $results
+     * @param list<array<string,mixed>>|null $results
      */
     public static function with(
         Artifact|array|null $artifact = null,
@@ -109,7 +110,7 @@ final class Result implements BaseModel
     /**
      * Present only for batch actions.
      *
-     * @param list<mixed> $results
+     * @param list<array<string,mixed>> $results
      */
     public function withResults(array $results): self
     {

@@ -24,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   policy: Policy|PolicyShape,
  *   idempotencyKey?: string|null,
  *   limits?: null|Limits|LimitsShape,
- *   metadata?: mixed,
+ *   metadata?: array<string,mixed>|null,
  * }
  */
 final class BrowserSessionCreateParams implements BaseModel
@@ -47,9 +47,11 @@ final class BrowserSessionCreateParams implements BaseModel
 
     /**
      * Arbitrary key-value metadata.
+     *
+     * @var array<string,mixed>|null $metadata
      */
-    #[Optional]
-    public mixed $metadata;
+    #[Optional(map: 'mixed')]
+    public ?array $metadata;
 
     /**
      * `new BrowserSessionCreateParams()` is missing required properties by the API.
@@ -77,12 +79,13 @@ final class BrowserSessionCreateParams implements BaseModel
      *
      * @param Policy|PolicyShape $policy
      * @param Limits|LimitsShape|null $limits
+     * @param array<string,mixed>|null $metadata
      */
     public static function with(
         Policy|array $policy,
         ?string $idempotencyKey = null,
         Limits|array|null $limits = null,
-        mixed $metadata = null,
+        ?array $metadata = null,
     ): self {
         $self = new self;
 
@@ -130,8 +133,10 @@ final class BrowserSessionCreateParams implements BaseModel
 
     /**
      * Arbitrary key-value metadata.
+     *
+     * @param array<string,mixed> $metadata
      */
-    public function withMetadata(mixed $metadata): self
+    public function withMetadata(array $metadata): self
     {
         $self = clone $this;
         $self['metadata'] = $metadata;
