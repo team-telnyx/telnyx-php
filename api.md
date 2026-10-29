@@ -2261,6 +2261,7 @@ Methods:
 - <code title="get /telephony_credentials">$client->telephonyCredentials-><a href="./src/Services/TelephonyCredentialsService.php">list</a>(...$params)</code>
 - <code title="delete /telephony_credentials/{id}">$client->telephonyCredentials-><a href="./src/Services/TelephonyCredentialsService.php">delete</a>(...$params)</code>
 - <code title="post /telephony_credentials/{id}/token">$client->telephonyCredentials-><a href="./src/Services/TelephonyCredentialsService.php">createToken</a>(...$params)</code>
+- <code title="get /telephony_credentials/{id}/token_material">$client->telephonyCredentials-><a href="./src/Services/TelephonyCredentialsService.php">retrieveTokenMaterial</a>(...$params)</code>
 
 # Texml
 

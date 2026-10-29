@@ -15,9 +15,9 @@ use Telnyx\Core\Omitted;
  *   token: string,
  *   authType: 'bearer',
  *   endpointURL?: string|null,
- *   password?: mixed,
+ *   password?: string|null,
  *   timeout?: int|null,
- *   username?: mixed,
+ *   username?: string|null,
  * }
  */
 final class BearerAuthentication implements BaseModel
@@ -45,7 +45,7 @@ final class BearerAuthentication implements BaseModel
      * Nonblank string required for basic authentication. Write-only; omitted from responses. Re-send when replacing a basic-auth config.
      */
     #[Optional]
-    public mixed $password;
+    public ?string $password;
 
     /**
      * Processor HTTP timeout in milliseconds. Omitted or null uses 10000; null is removed before storage. Not the IVR digit-gather timeout.
@@ -57,7 +57,7 @@ final class BearerAuthentication implements BaseModel
      * Nonblank string required for basic authentication. Returned in connector responses.
      */
     #[Optional]
-    public mixed $username;
+    public ?string $username;
 
     /**
      * `new BearerAuthentication()` is missing required properties by the API.
@@ -87,8 +87,8 @@ final class BearerAuthentication implements BaseModel
         string $token,
         int|Omitted|null $timeout = Omitted::VALUE,
         ?string $endpointURL = null,
-        mixed $password = null,
-        mixed $username = null,
+        ?string $password = null,
+        ?string $username = null,
     ): self {
         $self = new self;
 
@@ -138,7 +138,7 @@ final class BearerAuthentication implements BaseModel
     /**
      * Nonblank string required for basic authentication. Write-only; omitted from responses. Re-send when replacing a basic-auth config.
      */
-    public function withPassword(mixed $password): self
+    public function withPassword(string $password): self
     {
         $self = clone $this;
         $self['password'] = $password;
@@ -160,7 +160,7 @@ final class BearerAuthentication implements BaseModel
     /**
      * Nonblank string required for basic authentication. Returned in connector responses.
      */
-    public function withUsername(mixed $username): self
+    public function withUsername(string $username): self
     {
         $self = clone $this;
         $self['username'] = $username;

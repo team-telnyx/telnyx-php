@@ -8,13 +8,13 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\EmailTemplates\EmailTemplateCommon\RecordType;
-use Telnyx\EmailTemplates\EmailTemplateCommon\VariableSchema;
 use Telnyx\EmailTemplates\EmailTemplateCommon\VariablesMode;
+use Telnyx\EmailTemplates\VariableSchemaEntry;
 
 /**
  * Template object with `subject`, `html_body`, and `text_body` replaced by their Liquid-rendered values. Rendered content is not limited by the stored template-field lengths. All other template fields remain unchanged.
  *
- * @phpstan-import-type VariableSchemaShape from \Telnyx\EmailTemplates\EmailTemplateCommon\VariableSchema
+ * @phpstan-import-type VariableSchemaEntryShape from \Telnyx\EmailTemplates\VariableSchemaEntry
  *
  * @phpstan-type DataShape = array{
  *   id: string,
@@ -26,7 +26,7 @@ use Telnyx\EmailTemplates\EmailTemplateCommon\VariablesMode;
  *   strictVariables: bool,
  *   textBody: string|null,
  *   updatedAt: \DateTimeInterface,
- *   variableSchema: array<string,VariableSchema|VariableSchemaShape>|null,
+ *   variableSchema: array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null,
  *   variables: list<string>,
  *   variablesMode: VariablesMode|value-of<VariablesMode>,
  *   subject: string|null,
@@ -74,9 +74,9 @@ final class Data implements BaseModel
     /**
      * Structured variable requirements, or `null` when the template uses only the legacy `variables` array.
      *
-     * @var array<string,VariableSchema>|null $variableSchema
+     * @var array<string,VariableSchemaEntry>|null $variableSchema
      */
-    #[Required('variable_schema', map: VariableSchema::class)]
+    #[Required('variable_schema', map: VariableSchemaEntry::class)]
     public ?array $variableSchema;
 
     /**
@@ -150,7 +150,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RecordType|value-of<RecordType> $recordType
-     * @param array<string,VariableSchema|VariableSchemaShape>|null $variableSchema
+     * @param array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null $variableSchema
      * @param list<string> $variables
      * @param VariablesMode|value-of<VariablesMode> $variablesMode
      */
@@ -272,7 +272,7 @@ final class Data implements BaseModel
     /**
      * Structured variable requirements, or `null` when the template uses only the legacy `variables` array.
      *
-     * @param array<string,VariableSchema|VariableSchemaShape>|null $variableSchema
+     * @param array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null $variableSchema
      */
     public function withVariableSchema(?array $variableSchema): self
     {

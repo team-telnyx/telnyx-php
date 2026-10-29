@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\PortoutListParams\Filter;
 
 /**
- * Returns the portout requests according to filters.
+ * Returns the portout requests according to filters. Carrier Port Out API available. Please contact porting@telnyx.com.
  *
  * @see Telnyx\Services\PortoutsService::list()
  *

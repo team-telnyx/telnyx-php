@@ -10,6 +10,4 @@ namespace Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRe
 enum Provider: string
 {
     case RESEMBLE = 'resemble';
-
-    case RESEMBLE1 = 'Resemble';
 }

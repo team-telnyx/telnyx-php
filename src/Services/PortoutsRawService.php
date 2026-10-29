@@ -64,7 +64,7 @@ final class PortoutsRawService implements PortoutsRawContract
     /**
      * @api
      *
-     * Returns the portout requests according to filters
+     * Returns the portout requests according to filters. Carrier Port Out API available. Please contact porting@telnyx.com.
      *
      * @param array{
      *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int

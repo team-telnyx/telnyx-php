@@ -33,6 +33,7 @@ use Telnyx\Messages\OutboundMessagePayload\Type;
  *   id?: string|null,
  *   body?: null|Body|BodyShape,
  *   cc?: list<Cc|CcShape>|null,
+ *   childMessageID?: string|null,
  *   completedAt?: \DateTimeInterface|null,
  *   cost?: null|Cost|CostShape,
  *   costBreakdown?: null|CostBreakdown|CostBreakdownShape,
@@ -44,6 +45,7 @@ use Telnyx\Messages\OutboundMessagePayload\Type;
  *   messagingProfileID?: string|null,
  *   numChars?: int|null,
  *   organizationID?: string|null,
+ *   parentMessageID?: string|null,
  *   parts?: int|null,
  *   receivedAt?: \DateTimeInterface|null,
  *   recordType?: null|RecordType|value-of<RecordType>,
@@ -85,6 +87,12 @@ final class OutboundMessagePayload implements BaseModel
     /** @var list<Cc>|null $cc */
     #[Optional(list: Cc::class)]
     public ?array $cc;
+
+    /**
+     * Identifies the next chunk when server-side SMS chunking (`auto_chunk_long_messages` on the messaging profile) split this message. Always present; null on non-chunked messages and on the final chunk.
+     */
+    #[Optional('child_message_id', nullable: true)]
+    public ?string $childMessageID;
 
     /**
      * ISO 8601 formatted date indicating when the message was finalized.
@@ -147,6 +155,12 @@ final class OutboundMessagePayload implements BaseModel
      */
     #[Optional('organization_id')]
     public ?string $organizationID;
+
+    /**
+     * Identifies the original request's message when server-side SMS chunking (`auto_chunk_long_messages` on the messaging profile) split it into chunks. The first chunk's ID is the original request's message ID. Always present; null when this message is not part of a chunked send.
+     */
+    #[Optional('parent_message_id', nullable: true)]
+    public ?string $parentMessageID;
 
     /**
      * Number of parts into which the message's body must be split.
@@ -292,9 +306,11 @@ final class OutboundMessagePayload implements BaseModel
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
+        string|Omitted|null $childMessageID = Omitted::VALUE,
         \DateTimeInterface|Omitted|null $completedAt = Omitted::VALUE,
         Omitted|Cost|array|null $cost = Omitted::VALUE,
         Omitted|CostBreakdown|array|null $costBreakdown = Omitted::VALUE,
+        string|Omitted|null $parentMessageID = Omitted::VALUE,
         \DateTimeInterface|Omitted|null $sentAt = Omitted::VALUE,
         string|Omitted|null $subject = Omitted::VALUE,
         string|Omitted|null $tcrCampaignID = Omitted::VALUE,
@@ -331,6 +347,7 @@ final class OutboundMessagePayload implements BaseModel
         null !== $id && $self['id'] = $id;
         null !== $body && $self['body'] = $body;
         null !== $cc && $self['cc'] = $cc;
+        Omitted::VALUE !== $childMessageID && $self['childMessageID'] = $childMessageID;
         Omitted::VALUE !== $completedAt && $self['completedAt'] = $completedAt;
         Omitted::VALUE !== $cost && $self['cost'] = $cost;
         Omitted::VALUE !== $costBreakdown && $self['costBreakdown'] = $costBreakdown;
@@ -342,6 +359,7 @@ final class OutboundMessagePayload implements BaseModel
         null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         null !== $numChars && $self['numChars'] = $numChars;
         null !== $organizationID && $self['organizationID'] = $organizationID;
+        Omitted::VALUE !== $parentMessageID && $self['parentMessageID'] = $parentMessageID;
         null !== $parts && $self['parts'] = $parts;
         null !== $receivedAt && $self['receivedAt'] = $receivedAt;
         null !== $recordType && $self['recordType'] = $recordType;
@@ -396,6 +414,17 @@ final class OutboundMessagePayload implements BaseModel
     {
         $self = clone $this;
         $self['cc'] = $cc;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the next chunk when server-side SMS chunking (`auto_chunk_long_messages` on the messaging profile) split this message. Always present; null on non-chunked messages and on the final chunk.
+     */
+    public function withChildMessageID(?string $childMessageID): self
+    {
+        $self = clone $this;
+        $self['childMessageID'] = $childMessageID;
 
         return $self;
     }
@@ -524,6 +553,17 @@ final class OutboundMessagePayload implements BaseModel
     {
         $self = clone $this;
         $self['organizationID'] = $organizationID;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the original request's message when server-side SMS chunking (`auto_chunk_long_messages` on the messaging profile) split it into chunks. The first chunk's ID is the original request's message ID. Always present; null when this message is not part of a chunked send.
+     */
+    public function withParentMessageID(?string $parentMessageID): self
+    {
+        $self = clone $this;
+        $self['parentMessageID'] = $parentMessageID;
 
         return $self;
     }

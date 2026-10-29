@@ -53,7 +53,7 @@ final class BrowserSessionsService implements BrowserSessionsContract
      * @param Policy|PolicyShape $policy
      * @param string $idempotencyKey Scoped to the organization. The same key and identical normalized policy, limits, and metadata replay the existing session (HTTP 201); a different request returns 409 idempotency_conflict. Replays do not restart terminal sessions.
      * @param Limits|LimitsShape $limits
-     * @param mixed $metadata arbitrary key-value metadata
+     * @param array<string,mixed> $metadata arbitrary key-value metadata
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -62,7 +62,7 @@ final class BrowserSessionsService implements BrowserSessionsContract
         Policy|array $policy,
         ?string $idempotencyKey = null,
         Limits|array|null $limits = null,
-        mixed $metadata = null,
+        ?array $metadata = null,
         RequestOptions|array|null $requestOptions = null,
     ): BrowserSessionNewResponse {
         $params = array_filter(

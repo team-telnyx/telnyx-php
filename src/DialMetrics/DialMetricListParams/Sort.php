@@ -9,7 +9,7 @@ namespace Telnyx\DialMetrics\DialMetricListParams;
  */
 enum Sort: string
 {
-    case MINUSSTART_TIME = '-start_time';
+    case MINUS_START_TIME = '-start_time';
 
     case START_TIME = 'start_time';
 }

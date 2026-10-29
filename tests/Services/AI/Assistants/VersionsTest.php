@@ -515,6 +515,7 @@ final class VersionsTest extends TestCase
                 'defaultTexmlAppID' => 'default_texml_app_id',
                 'disableDtmf' => true,
                 'fallbackDestination' => 'fallback_destination',
+                'greetingDelayMs' => 0,
                 'noiseSuppression' => 'aicoustics',
                 'noiseSuppressionConfig' => [
                     'attenuationLimit' => 0,

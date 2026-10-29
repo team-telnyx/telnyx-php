@@ -209,13 +209,20 @@ final class DedicatedIPsRawService implements DedicatedIPsRawContract
             $params,
             $requestOptions,
         );
-        $query_params = array_flip(['drain', 'force', 'reason']);
+        $query_params = array_flip(['queryDrain', 'queryForce', 'queryReason']);
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['email/dedicated_ips/%1$s', $id],
-            query: array_intersect_key($parsed, $query_params),
+            query: Util::array_transform_keys(
+                array_intersect_key($parsed, $query_params),
+                [
+                    'queryDrain' => 'drain',
+                    'queryForce' => 'force',
+                    'queryReason' => 'reason',
+                ],
+            ),
             body: (object) array_diff_key($parsed, $query_params),
             options: $options,
             convert: DedicatedIPShowResponse::class,

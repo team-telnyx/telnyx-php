@@ -7,12 +7,13 @@ namespace Telnyx\Enterprises\Reputation\ExternalVerification;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\Reputation\ExternalVerification\ExternalVerificationWrapped\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Enterprises\Reputation\ExternalVerification\ExternalVerificationWrapped\Data
+ * @phpstan-import-type ExternalVerificationShape from \Telnyx\Enterprises\Reputation\ExternalVerification\ExternalVerification
  *
- * @phpstan-type ExternalVerificationWrappedShape = array{data: Data|DataShape}
+ * @phpstan-type ExternalVerificationWrappedShape = array{
+ *   data: ExternalVerification|ExternalVerificationShape
+ * }
  */
 final class ExternalVerificationWrapped implements BaseModel
 {
@@ -20,7 +21,7 @@ final class ExternalVerificationWrapped implements BaseModel
     use SdkModel;
 
     #[Required]
-    public Data $data;
+    public ExternalVerification $data;
 
     /**
      * `new ExternalVerificationWrapped()` is missing required properties by the API.
@@ -46,9 +47,9 @@ final class ExternalVerificationWrapped implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape $data
+     * @param ExternalVerification|ExternalVerificationShape $data
      */
-    public static function with(Data|array $data): self
+    public static function with(ExternalVerification|array $data): self
     {
         $self = new self;
 
@@ -58,9 +59,9 @@ final class ExternalVerificationWrapped implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param ExternalVerification|ExternalVerificationShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(ExternalVerification|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
