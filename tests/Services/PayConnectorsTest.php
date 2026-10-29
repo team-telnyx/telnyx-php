@@ -56,11 +56,11 @@ final class PayConnectorsTest extends TestCase
         $result = $this->client->payConnectors->create(
             config: [
                 'authType' => 'none',
-                'token' => (object) [],
+                'token' => 'token',
                 'endpointURL' => 'https://processor.example.com/pay',
-                'password' => (object) [],
+                'password' => 'password',
                 'timeout' => 1,
-                'username' => (object) [],
+                'username' => 'username',
             ],
             name: 'my-payment-connector',
             mode: 'test',

@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Enterprises\VerifyEmail\EnterpriseEmailVerificationStatusWrapped;
+namespace Telnyx\Enterprises\VerifyEmail;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
-use Telnyx\Enterprises\VerifyEmail\EnterpriseEmailVerificationStatusWrapped\Data\RecordType;
-use Telnyx\Enterprises\VerifyEmail\EnterpriseEmailVerificationStatusWrapped\Data\Status;
+use Telnyx\Enterprises\VerifyEmail\EnterpriseEmailVerificationStatus\RecordType;
+use Telnyx\Enterprises\VerifyEmail\EnterpriseEmailVerificationStatus\Status;
 
 /**
  * Verification state for an enterprise account's contact email.
  *
- * @phpstan-type DataShape = array{
+ * @phpstan-type EnterpriseEmailVerificationStatusShape = array{
  *   emailVerified: bool,
  *   recordType: RecordType|value-of<RecordType>,
  *   status: Status|value-of<Status>,
@@ -23,9 +23,9 @@ use Telnyx\Enterprises\VerifyEmail\EnterpriseEmailVerificationStatusWrapped\Data
  *   sendsRemainingToday?: int|null,
  * }
  */
-final class Data implements BaseModel
+final class EnterpriseEmailVerificationStatus implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<EnterpriseEmailVerificationStatusShape> */
     use SdkModel;
 
     /**
@@ -63,17 +63,22 @@ final class Data implements BaseModel
     public ?int $sendsRemainingToday;
 
     /**
-     * `new Data()` is missing required properties by the API.
+     * `new EnterpriseEmailVerificationStatus()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(emailVerified: ..., recordType: ..., status: ...)
+     * EnterpriseEmailVerificationStatus::with(
+     *   emailVerified: ..., recordType: ..., status: ...
+     * )
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Data)->withEmailVerified(...)->withRecordType(...)->withStatus(...)
+     * (new EnterpriseEmailVerificationStatus)
+     *   ->withEmailVerified(...)
+     *   ->withRecordType(...)
+     *   ->withStatus(...)
      * ```
      */
     public function __construct()

@@ -15,7 +15,7 @@ use Telnyx\PayConnectors\GenericPayConnectorConfig\BasicAuthenticationAlsoTheVal
  * @phpstan-type BasicAuthenticationAlsoTheValidationDefaultShape = array{
  *   password: string,
  *   username: string,
- *   token?: mixed,
+ *   token?: string|null,
  *   authType?: null|AuthType|value-of<AuthType>,
  *   endpointURL?: string|null,
  *   timeout?: int|null,
@@ -42,7 +42,7 @@ final class BasicAuthenticationAlsoTheValidationDefault implements BaseModel
      * Nonblank string required for bearer authentication. Write-only; omitted from responses. Re-send when replacing a bearer-auth config.
      */
     #[Optional]
-    public mixed $token;
+    public ?string $token;
 
     /** @var value-of<AuthType>|null $authType */
     #[Optional('auth_type', enum: AuthType::class)]
@@ -92,7 +92,7 @@ final class BasicAuthenticationAlsoTheValidationDefault implements BaseModel
         string $password,
         string $username,
         int|Omitted|null $timeout = Omitted::VALUE,
-        mixed $token = null,
+        ?string $token = null,
         AuthType|string|null $authType = null,
         ?string $endpointURL = null,
     ): self {
@@ -134,7 +134,7 @@ final class BasicAuthenticationAlsoTheValidationDefault implements BaseModel
     /**
      * Nonblank string required for bearer authentication. Write-only; omitted from responses. Re-send when replacing a bearer-auth config.
      */
-    public function withToken(mixed $token): self
+    public function withToken(string $token): self
     {
         $self = clone $this;
         $self['token'] = $token;

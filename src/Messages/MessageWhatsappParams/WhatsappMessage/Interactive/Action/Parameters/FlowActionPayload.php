@@ -11,7 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * optional initial screen and data. When omitted, the flow opens on its first entry screen. Must be omitted when flow_action is data_exchange.
  *
- * @phpstan-type FlowActionPayloadShape = array{data?: mixed, screen?: string|null}
+ * @phpstan-type FlowActionPayloadShape = array{
+ *   data?: array<string,mixed>|null, screen?: string|null
+ * }
  */
 final class FlowActionPayload implements BaseModel
 {
@@ -20,9 +22,11 @@ final class FlowActionPayload implements BaseModel
 
     /**
      * input data for the first screen. Must be a non-empty object when provided.
+     *
+     * @var array<string,mixed>|null $data
      */
-    #[Optional]
-    public mixed $data;
+    #[Optional(map: 'mixed')]
+    public ?array $data;
 
     /**
      * ID of the first screen to show.
@@ -39,8 +43,10 @@ final class FlowActionPayload implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param array<string,mixed>|null $data
      */
-    public static function with(mixed $data = null, ?string $screen = null): self
+    public static function with(?array $data = null, ?string $screen = null): self
     {
         $self = new self;
 
@@ -52,8 +58,10 @@ final class FlowActionPayload implements BaseModel
 
     /**
      * input data for the first screen. Must be a non-empty object when provided.
+     *
+     * @param array<string,mixed> $data
      */
-    public function withData(mixed $data): self
+    public function withData(array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

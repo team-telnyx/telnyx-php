@@ -494,7 +494,7 @@ final class MessagesTest extends TestCase
                             'displayText' => 'display_text',
                             'flowAction' => 'navigate',
                             'flowActionPayload' => [
-                                'data' => (object) [], 'screen' => 'screen',
+                                'data' => ['foo' => 'bar'], 'screen' => 'screen',
                             ],
                             'flowCta' => 'flow_cta',
                             'flowID' => 'flow_id',
@@ -568,7 +568,8 @@ final class MessagesTest extends TestCase
                             'parameters' => [
                                 [
                                     'action' => [
-                                        'flowActionData' => (object) [], 'flowToken' => 'flow_token',
+                                        'flowActionData' => ['foo' => 'bar'],
+                                        'flowToken' => 'flow_token',
                                     ],
                                     'text' => 'text',
                                     'type' => 'text',

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Enterprises\VerifyEmail\EnterpriseEmailVerificationStatusWrapped\Data;
+namespace Telnyx\Enterprises\VerifyEmail\EnterpriseEmailVerificationStatus;
 
 /**
  * Always `email_verification`.

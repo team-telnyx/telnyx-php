@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Enterprises\Reputation\ExternalVerification\ExternalVerificationWrapped;
+namespace Telnyx\Enterprises\Reputation\ExternalVerification;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
-use Telnyx\Enterprises\Reputation\ExternalVerification\ExternalVerificationStatus;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type ExternalVerificationShape = array{
  *   documentIDs?: list<string>|null,
  *   enterpriseID?: string|null,
  *   phoneNumbers?: list<string>|null,
@@ -21,9 +20,9 @@ use Telnyx\Enterprises\Reputation\ExternalVerification\ExternalVerificationStatu
  *   submittedAt?: \DateTimeInterface|null,
  * }
  */
-final class Data implements BaseModel
+final class ExternalVerification implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<ExternalVerificationShape> */
     use SdkModel;
 
     /**

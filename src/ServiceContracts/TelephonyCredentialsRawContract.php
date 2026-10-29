@@ -13,6 +13,7 @@ use Telnyx\TelephonyCredentials\TelephonyCredentialCreateParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialCreateTokenParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
+use Telnyx\TelephonyCredentials\TelephonyCredentialGetTokenMaterialResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialNewResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateParams;
@@ -115,5 +116,20 @@ interface TelephonyCredentialsRawContract
         string $id,
         array|TelephonyCredentialCreateTokenParams $params,
         RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<TelephonyCredentialGetTokenMaterialResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveTokenMaterial(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }
