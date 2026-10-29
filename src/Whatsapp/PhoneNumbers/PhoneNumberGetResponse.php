@@ -8,14 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingPaginationMeta;
-use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse\Data
+ * @phpstan-import-type WhatsappPhoneResponseShape from \Telnyx\Whatsapp\PhoneNumbers\WhatsappPhoneResponse
  * @phpstan-import-type MessagingPaginationMetaShape from \Telnyx\MessagingPaginationMeta
  *
  * @phpstan-type PhoneNumberGetResponseShape = array{
- *   data?: list<Data|DataShape>|null,
+ *   data?: list<WhatsappPhoneResponse|WhatsappPhoneResponseShape>|null,
  *   meta?: null|MessagingPaginationMeta|MessagingPaginationMetaShape,
  * }
  */
@@ -24,8 +23,8 @@ final class PhoneNumberGetResponse implements BaseModel
     /** @use SdkModel<PhoneNumberGetResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
+    /** @var list<WhatsappPhoneResponse>|null $data */
+    #[Optional(list: WhatsappPhoneResponse::class)]
     public ?array $data;
 
     #[Optional]
@@ -41,7 +40,7 @@ final class PhoneNumberGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|DataShape>|null $data
+     * @param list<WhatsappPhoneResponse|WhatsappPhoneResponseShape>|null $data
      * @param MessagingPaginationMeta|MessagingPaginationMetaShape|null $meta
      */
     public static function with(
@@ -57,7 +56,7 @@ final class PhoneNumberGetResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|DataShape> $data
+     * @param list<WhatsappPhoneResponse|WhatsappPhoneResponseShape> $data
      */
     public function withData(array $data): self
     {

@@ -12,8 +12,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\HostedSignupsContract;
 use Telnyx\Whatsapp\HostedSignups\HostedSignupCreateParams\SignupType;
 use Telnyx\Whatsapp\HostedSignups\HostedSignupGetResponse;
-use Telnyx\Whatsapp\HostedSignups\HostedSignupListResponse;
 use Telnyx\Whatsapp\HostedSignups\HostedSignupNewResponse;
+use Telnyx\Whatsapp\HostedSignups\WhatsappHostedSignup;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -93,7 +93,7 @@ final class HostedSignupsService implements HostedSignupsContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<HostedSignupListResponse>
+     * @return DefaultFlatPagination<WhatsappHostedSignup>
      *
      * @throws APIException
      */

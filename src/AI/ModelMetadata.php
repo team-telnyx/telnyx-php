@@ -26,6 +26,7 @@ use Telnyx\Core\Omitted;
  *   parameters: int,
  *   tier: Tier|value-of<Tier>,
  *   baseModel?: string|null,
+ *   beta?: bool|null,
  *   description?: string|null,
  *   isFineTunable?: bool|null,
  *   isVisionSupported?: bool|null,
@@ -107,6 +108,12 @@ final class ModelMetadata implements BaseModel
      */
     #[Optional('base_model', nullable: true)]
     public ?string $baseModel;
+
+    /**
+     * Whether the model is in beta. New Telnyx-hosted models launch with `beta: true`; the label is removed once the model is established.
+     */
+    #[Optional]
+    public ?bool $beta;
 
     /**
      * Short, human-readable summary of what the model is best suited for.
@@ -243,6 +250,7 @@ final class ModelMetadata implements BaseModel
         string|Omitted|null $description = Omitted::VALUE,
         int|Omitted|null $maxCompletionTokens = Omitted::VALUE,
         string|Omitted|null $parametersStr = Omitted::VALUE,
+        ?bool $beta = null,
         ?bool $isFineTunable = null,
         ?bool $isVisionSupported = null,
         ?string $object = null,
@@ -265,6 +273,7 @@ final class ModelMetadata implements BaseModel
         $self['tier'] = $tier;
 
         Omitted::VALUE !== $baseModel && $self['baseModel'] = $baseModel;
+        null !== $beta && $self['beta'] = $beta;
         Omitted::VALUE !== $description && $self['description'] = $description;
         null !== $isFineTunable && $self['isFineTunable'] = $isFineTunable;
         null !== $isVisionSupported && $self['isVisionSupported'] = $isVisionSupported;
@@ -390,6 +399,17 @@ final class ModelMetadata implements BaseModel
     {
         $self = clone $this;
         $self['baseModel'] = $baseModel;
+
+        return $self;
+    }
+
+    /**
+     * Whether the model is in beta. New Telnyx-hosted models launch with `beta: true`; the label is removed once the model is established.
+     */
+    public function withBeta(bool $beta): self
+    {
+        $self = clone $this;
+        $self['beta'] = $beta;
 
         return $self;
     }

@@ -8,7 +8,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberInitializeVerificationParams\VerificationMethod;
-use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberListResponse;
+use Telnyx\Whatsapp\PhoneNumbers\WhatsappPhoneResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -21,7 +21,7 @@ interface PhoneNumbersContract
      * @param string $id Whatsapp Business Account ID
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PhoneNumberListResponse>
+     * @return DefaultFlatPagination<WhatsappPhoneResponse>
      *
      * @throws APIException
      */

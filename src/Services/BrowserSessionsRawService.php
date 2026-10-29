@@ -43,7 +43,7 @@ final class BrowserSessionsRawService implements BrowserSessionsRawContract
      *   policy: Policy|PolicyShape,
      *   idempotencyKey?: string,
      *   limits?: Limits|LimitsShape,
-     *   metadata?: mixed,
+     *   metadata?: array<string,mixed>,
      * }|BrowserSessionCreateParams $params
      * @param RequestOpts|null $requestOptions
      *

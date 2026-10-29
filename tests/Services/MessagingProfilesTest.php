@@ -68,7 +68,9 @@ final class MessagingProfilesTest extends TestCase
             dailySpendLimit: '269125115713',
             dailySpendLimitEnabled: true,
             enabled: true,
-            features: ['aiOptOutDetectionEnabled' => true],
+            features: [
+                'aiOptOutDetectionEnabled' => true, 'autoChunkLongMessages' => true,
+            ],
             healthWebhookURL: 'health_webhook_url',
             mm7Metadata: [
                 'mm7FailoverWebhookURL' => 'https://backup.example.com/hooks',

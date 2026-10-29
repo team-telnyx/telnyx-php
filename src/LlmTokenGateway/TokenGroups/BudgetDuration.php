@@ -6,9 +6,9 @@ namespace Telnyx\LlmTokenGateway\TokenGroups;
 
 enum BudgetDuration: string
 {
-    case _1D = '1d';
+    case BUDGET_DURATION_1_D = '1d';
 
-    case _7D = '7d';
+    case BUDGET_DURATION_7_D = '7d';
 
-    case _30D = '30d';
+    case BUDGET_DURATION_30_D = '30d';
 }

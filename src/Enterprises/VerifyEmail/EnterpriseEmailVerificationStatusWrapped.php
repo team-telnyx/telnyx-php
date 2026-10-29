@@ -7,13 +7,12 @@ namespace Telnyx\Enterprises\VerifyEmail;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\VerifyEmail\EnterpriseEmailVerificationStatusWrapped\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Enterprises\VerifyEmail\EnterpriseEmailVerificationStatusWrapped\Data
+ * @phpstan-import-type EnterpriseEmailVerificationStatusShape from \Telnyx\Enterprises\VerifyEmail\EnterpriseEmailVerificationStatus
  *
  * @phpstan-type EnterpriseEmailVerificationStatusWrappedShape = array{
- *   data: Data|DataShape
+ *   data: EnterpriseEmailVerificationStatus|EnterpriseEmailVerificationStatusShape
  * }
  */
 final class EnterpriseEmailVerificationStatusWrapped implements BaseModel
@@ -25,7 +24,7 @@ final class EnterpriseEmailVerificationStatusWrapped implements BaseModel
      * Verification state for an enterprise account's contact email.
      */
     #[Required]
-    public Data $data;
+    public EnterpriseEmailVerificationStatus $data;
 
     /**
      * `new EnterpriseEmailVerificationStatusWrapped()` is missing required properties by the API.
@@ -51,10 +50,11 @@ final class EnterpriseEmailVerificationStatusWrapped implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape $data
+     * @param EnterpriseEmailVerificationStatus|EnterpriseEmailVerificationStatusShape $data
      */
-    public static function with(Data|array $data): self
-    {
+    public static function with(
+        EnterpriseEmailVerificationStatus|array $data
+    ): self {
         $self = new self;
 
         $self['data'] = $data;
@@ -65,10 +65,11 @@ final class EnterpriseEmailVerificationStatusWrapped implements BaseModel
     /**
      * Verification state for an enterprise account's contact email.
      *
-     * @param Data|DataShape $data
+     * @param EnterpriseEmailVerificationStatus|EnterpriseEmailVerificationStatusShape $data
      */
-    public function withData(Data|array $data): self
-    {
+    public function withData(
+        EnterpriseEmailVerificationStatus|array $data
+    ): self {
         $self = clone $this;
         $self['data'] = $data;
 
