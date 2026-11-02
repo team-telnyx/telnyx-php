@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\EmailEvents\EmailEventGetStatsResponse;
 use Telnyx\EmailEvents\EmailEventListResponse;
+use Telnyx\EmailEventsCursorPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -36,10 +37,15 @@ final class EmailEventsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->emailEvents->list();
+        $page = $this->client->emailEvents->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EmailEventListResponse::class, $result);
+        $this->assertInstanceOf(EmailEventsCursorPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(EmailEventListResponse::class, $item);
+        }
     }
 
     #[Test]

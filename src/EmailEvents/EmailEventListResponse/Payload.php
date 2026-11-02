@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailEvents\EmailEventListResponse\Data;
+namespace Telnyx\EmailEvents\EmailEventListResponse;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\Bcc;
-use Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\Bcc\UnionMember1;
-use Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\From;
-use Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\Status;
+use Telnyx\EmailEvents\EmailEventListResponse\Payload\Bcc;
+use Telnyx\EmailEvents\EmailEventListResponse\Payload\Bcc\UnionMember1;
+use Telnyx\EmailEvents\EmailEventListResponse\Payload\From;
+use Telnyx\EmailEvents\EmailEventListResponse\Payload\Status;
 use Telnyx\EmailEvents\EmailWebhookRecipient;
 
 /**
  * Payload returned by GET /email_events. Every row includes id, status, and occurred_at. Recipient-scoped rows also include recipient_id, from, subject, and exactly one object-valued to, cc, or bcc field. Legacy or message-scoped rows can omit recipient_id and use object-valued or string-valued to/cc fields, including an empty string when no address exists; bcc is redacted. If the related message or recipient cannot be loaded, the minimal fallback can omit from, subject, and recipient fields. Additional persisted public evidence can be present.
  *
- * @phpstan-import-type BccVariants from \Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\Bcc
- * @phpstan-import-type CcVariants from \Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\Cc
- * @phpstan-import-type ToVariants from \Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\To
- * @phpstan-import-type BccShape from \Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\Bcc
- * @phpstan-import-type CcShape from \Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\Cc
- * @phpstan-import-type FromShape from \Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\From
- * @phpstan-import-type ToShape from \Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\To
+ * @phpstan-import-type BccVariants from \Telnyx\EmailEvents\EmailEventListResponse\Payload\Bcc
+ * @phpstan-import-type CcVariants from \Telnyx\EmailEvents\EmailEventListResponse\Payload\Cc
+ * @phpstan-import-type ToVariants from \Telnyx\EmailEvents\EmailEventListResponse\Payload\To
+ * @phpstan-import-type BccShape from \Telnyx\EmailEvents\EmailEventListResponse\Payload\Bcc
+ * @phpstan-import-type CcShape from \Telnyx\EmailEvents\EmailEventListResponse\Payload\Cc
+ * @phpstan-import-type FromShape from \Telnyx\EmailEvents\EmailEventListResponse\Payload\From
+ * @phpstan-import-type ToShape from \Telnyx\EmailEvents\EmailEventListResponse\Payload\To
  *
  * @phpstan-type PayloadShape = array{
  *   id: string,

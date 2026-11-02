@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailEvents\EmailEventListResponse\Data\Payload;
+namespace Telnyx\EmailEvents\EmailEventListResponse\Payload;
 
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\EmailEvents\EmailEventListResponse\Data\Payload\Bcc\UnionMember1;
+use Telnyx\EmailEvents\EmailEventListResponse\Payload\Bcc\UnionMember1;
 use Telnyx\EmailEvents\EmailWebhookRecipient;
 
 /**

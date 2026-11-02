@@ -10,6 +10,7 @@ use Telnyx\EmailEvents\EmailEventGetStatsResponse;
 use Telnyx\EmailEvents\EmailEventListParams;
 use Telnyx\EmailEvents\EmailEventListResponse;
 use Telnyx\EmailEvents\EmailEventRetrieveStatsParams;
+use Telnyx\EmailEventsCursorPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -23,7 +24,7 @@ interface EmailEventsRawContract
      * @param array<string,mixed>|EmailEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailEventListResponse>
+     * @return BaseResponse<EmailEventsCursorPagination<EmailEventListResponse>>
      *
      * @throws APIException
      */
