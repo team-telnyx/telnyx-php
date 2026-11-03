@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Conferences\Actions\ActionSpeakParams;
 
 use Telnyx\AzureVoiceSettings;
+use Telnyx\Calls\Actions\AssemblyAIVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\SonioxVoiceSettings;
@@ -29,9 +30,10 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type InworldVoiceSettingsShape from \Telnyx\InworldVoiceSettings
  * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\XaiVoiceSettings
  * @phpstan-import-type SonioxVoiceSettingsShape from \Telnyx\Calls\Actions\SonioxVoiceSettings
+ * @phpstan-import-type AssemblyAIVoiceSettingsShape from \Telnyx\Calls\Actions\AssemblyAIVoiceSettings
  *
- * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings
- * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|ResembleVoiceSettingsShape|InworldVoiceSettingsShape|XaiVoiceSettingsShape|SonioxVoiceSettingsShape
+ * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings
+ * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|ResembleVoiceSettingsShape|InworldVoiceSettingsShape|XaiVoiceSettingsShape|SonioxVoiceSettingsShape|AssemblyAIVoiceSettingsShape
  */
 final class VoiceSettings implements ConverterSource
 {
@@ -57,6 +59,7 @@ final class VoiceSettings implements ConverterSource
             'inworld' => InworldVoiceSettings::class,
             'xai' => XaiVoiceSettings::class,
             'soniox' => SonioxVoiceSettings::class,
+            'assemblyai' => AssemblyAIVoiceSettings::class,
         ];
     }
 }

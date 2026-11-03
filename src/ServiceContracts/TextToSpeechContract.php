@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Assemblyai;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs;
@@ -23,6 +24,7 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
 
 /**
+ * @phpstan-import-type AssemblyaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Assemblyai
  * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws
  * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure
  * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs
@@ -39,6 +41,7 @@ interface TextToSpeechContract
     /**
      * @api
      *
+     * @param Assemblyai|AssemblyaiShape $assemblyai AssemblyAI provider-specific parameters. Every voice speaks all six supported languages; set `language` to the language of the text.
      * @param Aws|AwsShape $aws AWS Polly provider-specific parameters
      * @param Azure|AzureShape $azure azure Cognitive Services provider-specific parameters
      * @param bool $disableCache when `true`, bypass the audio cache and generate fresh audio
@@ -61,6 +64,7 @@ interface TextToSpeechContract
      * @throws APIException
      */
     public function generateSpeech(
+        Assemblyai|array|null $assemblyai = null,
         Aws|array|null $aws = null,
         Azure|array|null $azure = null,
         bool $disableCache = false,

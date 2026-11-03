@@ -25,6 +25,7 @@ use Telnyx\Core\Omitted;
  *   apiKeyRef?: string|null,
  *   backgroundAudio?: BackgroundAudioShape|null,
  *   expressiveMode?: bool|null,
+ *   language?: string|null,
  *   languageBoost?: null|LanguageBoost|value-of<LanguageBoost>,
  *   similarityBoost?: float|null,
  *   speed?: float|null,
@@ -67,6 +68,12 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
      */
     #[Optional('expressive_mode')]
     public ?bool $expressiveMode;
+
+    /**
+     * Two-letter ISO 639-1 code of the language the voice speaks, for example `es`. Only applicable to Soniox and AssemblyAI voices, which speak every language of their model. AssemblyAI accepts `en`, `es`, `de`, `fr`, `it`, and `pt`. When unset, the voice speaks English.
+     */
+    #[Optional(nullable: true)]
+    public ?string $language;
 
     /**
      * Enhances recognition for specific languages and dialects during MiniMax TTS synthesis. Default is null (no boost). Set to 'auto' for automatic language detection. Only applicable when using MiniMax voices.
@@ -150,6 +157,7 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
      */
     public static function with(
         string $voice,
+        string|Omitted|null $language = Omitted::VALUE,
         Omitted|LanguageBoost|string|null $languageBoost = Omitted::VALUE,
         Omitted|InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember0|array|InferenceEmbeddingVoiceSettings\ToolCallAudio\UnionMember1|null $toolCallAudio = Omitted::VALUE,
         ?string $apiKeyRef = null,
@@ -169,6 +177,7 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
         null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
         null !== $backgroundAudio && $self['backgroundAudio'] = $backgroundAudio;
         null !== $expressiveMode && $self['expressiveMode'] = $expressiveMode;
+        Omitted::VALUE !== $language && $self['language'] = $language;
         Omitted::VALUE !== $languageBoost && $self['languageBoost'] = $languageBoost;
         null !== $similarityBoost && $self['similarityBoost'] = $similarityBoost;
         null !== $speed && $self['speed'] = $speed;
@@ -226,6 +235,17 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
     {
         $self = clone $this;
         $self['expressiveMode'] = $expressiveMode;
+
+        return $self;
+    }
+
+    /**
+     * Two-letter ISO 639-1 code of the language the voice speaks, for example `es`. Only applicable to Soniox and AssemblyAI voices, which speak every language of their model. AssemblyAI accepts `en`, `es`, `de`, `fr`, `it`, and `pt`. When unset, the voice speaks English.
+     */
+    public function withLanguage(?string $language): self
+    {
+        $self = clone $this;
+        $self['language'] = $language;
 
         return $self;
     }
