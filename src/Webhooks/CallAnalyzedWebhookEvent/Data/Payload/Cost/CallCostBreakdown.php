@@ -7,22 +7,22 @@ namespace Telnyx\Webhooks\CallAnalyzedWebhookEvent\Data\Payload\Cost;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallAnalyzedWebhookEvent\Data\Payload\Cost\UnionMember0\Breakdown;
+use Telnyx\Webhooks\CallAnalyzedWebhookEvent\Data\Payload\Cost\CallCostBreakdown\Breakdown;
 
 /**
- * The session's cost breakdown from Session Analysis, covering every product billed on the call: the AI Voice Assistant engine minutes (`ai-voice-assistant`), LLM inference tokens (`inference`), and call-control, SIP trunking, and recording lines. If cost data could not be retrieved after retries, this field carries the placeholder string `No cost data available.` instead of an object.
+ * The itemized cost of the call.
  *
- * @phpstan-import-type BreakdownShape from \Telnyx\Webhooks\CallAnalyzedWebhookEvent\Data\Payload\Cost\UnionMember0\Breakdown
+ * @phpstan-import-type BreakdownShape from \Telnyx\Webhooks\CallAnalyzedWebhookEvent\Data\Payload\Cost\CallCostBreakdown\Breakdown
  *
- * @phpstan-type UnionMember0Shape = array{
+ * @phpstan-type CallCostBreakdownShape = array{
  *   breakdown?: list<Breakdown|BreakdownShape>|null,
  *   currency?: string|null,
  *   total?: string|null,
  * }
  */
-final class UnionMember0 implements BaseModel
+final class CallCostBreakdown implements BaseModel
 {
-    /** @use SdkModel<UnionMember0Shape> */
+    /** @use SdkModel<CallCostBreakdownShape> */
     use SdkModel;
 
     /**

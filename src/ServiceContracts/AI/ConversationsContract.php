@@ -148,6 +148,21 @@ interface ConversationsContract
     /**
      * @api
      *
+     * @param string $insightID Unique identifier of the insight generation request to delete, as returned as `data.id` by the insight generation and insights-list operations. Note that the nested `conversation_insights[].insight_id` field returned in the insights-list response is the insight template ID, not the ID accepted here.
+     * @param string $conversationID unique identifier of the conversation
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function deleteDelete(
+        string $insightID,
+        string $conversationID,
+        RequestOptions|array|null $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
      * @param string $conversationID unique identifier of the conversation
      * @param RequestOpts|null $requestOptions
      *

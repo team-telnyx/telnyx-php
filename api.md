@@ -334,6 +334,7 @@ Methods:
 - <code title="get /ai/conversations">$client->ai->conversations-><a href="./src/Services/AI/ConversationsService.php">list</a>(...$params)</code>
 - <code title="delete /ai/conversations/{conversation_id}">$client->ai->conversations-><a href="./src/Services/AI/ConversationsService.php">delete</a>(...$params)</code>
 - <code title="post /ai/conversations/{conversation_id}/message">$client->ai->conversations-><a href="./src/Services/AI/ConversationsService.php">addMessage</a>(...$params)</code>
+- <code title="delete /ai/conversations/{conversation_id}/conversations-insights/{insight_id}">$client->ai->conversations-><a href="./src/Services/AI/ConversationsService.php">deleteDelete</a>(...$params)</code>
 - <code title="get /ai/conversations/{conversation_id}/conversations-insights">$client->ai->conversations-><a href="./src/Services/AI/ConversationsService.php">retrieveConversationsInsights</a>(...$params)</code>
 
 ### InsightGroups

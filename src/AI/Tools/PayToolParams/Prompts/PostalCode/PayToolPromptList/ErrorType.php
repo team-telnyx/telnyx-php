@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Tools\PayToolParams\Prompts\SecurityCode\UnionMember1;
+namespace Telnyx\AI\Tools\PayToolParams\Prompts\PostalCode\PayToolPromptList;
 
 /**
  * Step error for which this prompt applies.

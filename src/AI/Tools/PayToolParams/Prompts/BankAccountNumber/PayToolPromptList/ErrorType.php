@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Tools\PayToolParams\Prompts\PaymentCardNumber\UnionMember1;
+namespace Telnyx\AI\Tools\PayToolParams\Prompts\BankAccountNumber\PayToolPromptList;
 
 /**
  * Step error for which this prompt applies.

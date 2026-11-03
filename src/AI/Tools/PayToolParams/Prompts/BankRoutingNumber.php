@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Tools\PayToolParams\Prompts;
 
-use Telnyx\AI\Tools\PayToolParams\Prompts\BankRoutingNumber\UnionMember1;
+use Telnyx\AI\Tools\PayToolParams\Prompts\BankRoutingNumber\PayToolPromptList;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -13,10 +13,10 @@ use Telnyx\Core\Conversion\ListOf;
 /**
  * A default prompt string or an ordered list of qualified prompts.
  *
- * @phpstan-import-type UnionMember1Shape from \Telnyx\AI\Tools\PayToolParams\Prompts\BankRoutingNumber\UnionMember1
+ * @phpstan-import-type PayToolPromptListShape from \Telnyx\AI\Tools\PayToolParams\Prompts\BankRoutingNumber\PayToolPromptList
  *
- * @phpstan-type BankRoutingNumberVariants = string|list<UnionMember1>
- * @phpstan-type BankRoutingNumberShape = BankRoutingNumberVariants|list<UnionMember1Shape>
+ * @phpstan-type BankRoutingNumberVariants = string|list<PayToolPromptList>
+ * @phpstan-type BankRoutingNumberShape = BankRoutingNumberVariants|list<PayToolPromptListShape>
  */
 final class BankRoutingNumber implements ConverterSource
 {
@@ -27,6 +27,6 @@ final class BankRoutingNumber implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['string', new ListOf(UnionMember1::class)];
+        return ['string', new ListOf(PayToolPromptList::class)];
     }
 }

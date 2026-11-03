@@ -13,7 +13,7 @@ use Telnyx\Core\Omitted;
  * Enhanced caller name for the phone number's owner. Populated when `type=enhanced-caller-name` is requested.
  *
  * @phpstan-type EnhancedCallerNameShape = array{
- *   callerName?: string|null, errorCode?: string|null
+ *   callerName?: string|null, entityType?: string|null, errorCode?: string|null
  * }
  */
 final class EnhancedCallerName implements BaseModel
@@ -26,6 +26,12 @@ final class EnhancedCallerName implements BaseModel
      */
     #[Optional('caller_name', nullable: true)]
     public ?string $callerName;
+
+    /**
+     * The entity type of the phone number's owner, from the enhanced caller name data source — `Person` or `Business`. Null when not available.
+     */
+    #[Optional('entity_type', nullable: true)]
+    public ?string $entityType;
 
     /**
      * A lookup-specific error code if the enhanced caller name could not be resolved; otherwise null.
@@ -45,11 +51,13 @@ final class EnhancedCallerName implements BaseModel
      */
     public static function with(
         string|Omitted|null $callerName = Omitted::VALUE,
+        string|Omitted|null $entityType = Omitted::VALUE,
         string|Omitted|null $errorCode = Omitted::VALUE,
     ): self {
         $self = new self;
 
         Omitted::VALUE !== $callerName && $self['callerName'] = $callerName;
+        Omitted::VALUE !== $entityType && $self['entityType'] = $entityType;
         Omitted::VALUE !== $errorCode && $self['errorCode'] = $errorCode;
 
         return $self;
@@ -62,6 +70,17 @@ final class EnhancedCallerName implements BaseModel
     {
         $self = clone $this;
         $self['callerName'] = $callerName;
+
+        return $self;
+    }
+
+    /**
+     * The entity type of the phone number's owner, from the enhanced caller name data source — `Person` or `Business`. Null when not available.
+     */
+    public function withEntityType(?string $entityType): self
+    {
+        $self = clone $this;
+        $self['entityType'] = $entityType;
 
         return $self;
     }

@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\Conversations\Conversation;
 use Telnyx\AI\Conversations\ConversationAddMessageParams;
 use Telnyx\AI\Conversations\ConversationCreateParams;
+use Telnyx\AI\Conversations\ConversationDeleteDeleteParams;
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse;
 use Telnyx\AI\Conversations\ConversationGetResponse;
 use Telnyx\AI\Conversations\ConversationListParams;
@@ -194,7 +195,7 @@ final class ConversationsRawService implements ConversationsRawContract
     /**
      * @api
      *
-     * Delete a specific conversation by its ID.
+     * Delete a specific conversation by its ID. Permanently deletes the conversation and its associated data: the conversation's messages, its insight generation results, any conversation memories, and its webhook request logs. Recordings are not deleted — recordings are managed separately through the /v2/recordings endpoints. This action cannot be undone.
      *
      * @param string $conversationID The ID of the conversation to delete
      * @param RequestOpts|null $requestOptions
@@ -262,6 +263,44 @@ final class ConversationsRawService implements ConversationsRawContract
                 $parsed,
                 array_flip(array_keys($header_params))
             ),
+            options: $options,
+            convert: null,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Delete one insight generation request for a conversation. Generation results are stored per conversation and per insight template; deleting a request permanently removes the stored result but does not stop insight generation from running again. To remove every insight result for the conversation, delete the conversation itself. A successful delete returns an empty response.
+     *
+     * @param string $insightID Unique identifier of the insight generation request to delete, as returned as `data.id` by the insight generation and insights-list operations. Note that the nested `conversation_insights[].insight_id` field returned in the insights-list response is the insight template ID, not the ID accepted here.
+     * @param array{conversationID: string}|ConversationDeleteDeleteParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<mixed>
+     *
+     * @throws APIException
+     */
+    public function deleteDelete(
+        string $insightID,
+        array|ConversationDeleteDeleteParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ConversationDeleteDeleteParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+        $conversationID = $parsed['conversationID'];
+        unset($parsed['conversationID']);
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'delete',
+            path: [
+                'ai/conversations/%1$s/conversations-insights/%2$s',
+                $conversationID,
+                $insightID,
+            ],
             options: $options,
             convert: null,
         );
