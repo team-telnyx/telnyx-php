@@ -3531,3 +3531,10 @@ Methods:
 Methods:
 
 - <code title="post /tunnels/{id}/actions/rotate_token">$client->tunnels->actions-><a href="./src/Services/Tunnels/ActionsService.php">rotateToken</a>(...$params)</code>
+
+# UserProfile
+
+Methods:
+
+- <code title="get /user_profile">$client->userProfile-><a href="./src/Services/UserProfileService.php">list</a>()</code>
+- <code title="patch /user_profile">$client->userProfile-><a href="./src/Services/UserProfileService.php">patchAll</a>(...$params)</code>

@@ -187,6 +187,7 @@ use Telnyx\Services\TunnelsService;
 use Telnyx\Services\UacConnectionsService;
 use Telnyx\Services\UsageReportsService;
 use Telnyx\Services\UserAddressesService;
+use Telnyx\Services\UserProfileService;
 use Telnyx\Services\UserTagsService;
 use Telnyx\Services\VerificationsService;
 use Telnyx\Services\VerifiedNumbersService;
@@ -1220,6 +1221,11 @@ class Client extends BaseClient
      */
     public TunnelsService $tunnels;
 
+    /**
+     * @api
+     */
+    public UserProfileService $userProfile;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1491,6 +1497,7 @@ class Client extends BaseClient
         $this->networkRoutes = new NetworkRoutesService($this);
         $this->payConnectors = new PayConnectorsService($this);
         $this->tunnels = new TunnelsService($this);
+        $this->userProfile = new UserProfileService($this);
     }
 
     /** @return array<string,string> */
