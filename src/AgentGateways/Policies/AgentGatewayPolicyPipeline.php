@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\AgentGateways\Policies;
 
 use Telnyx\AgentGateways\Policies\AgentGatewayPolicyPipeline\Hook;
-use Telnyx\AgentGateways\Policies\AgentGatewayPolicyPipeline\Step;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,10 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Ordered steps that run in place of the policy's guardrails running independently.
  *
- * @phpstan-import-type StepShape from \Telnyx\AgentGateways\Policies\AgentGatewayPolicyPipeline\Step
+ * @phpstan-import-type AgentGatewayPolicyStepShape from \Telnyx\AgentGateways\Policies\AgentGatewayPolicyStep
  *
  * @phpstan-type AgentGatewayPolicyPipelineShape = array{
- *   hook: Hook|value-of<Hook>, steps: list<Step|StepShape>
+ *   hook: Hook|value-of<Hook>,
+ *   steps: list<AgentGatewayPolicyStep|AgentGatewayPolicyStepShape>,
  * }
  */
 final class AgentGatewayPolicyPipeline implements BaseModel
@@ -32,8 +32,8 @@ final class AgentGatewayPolicyPipeline implements BaseModel
     #[Required(enum: Hook::class)]
     public string $hook;
 
-    /** @var list<Step> $steps */
-    #[Required(list: Step::class)]
+    /** @var list<AgentGatewayPolicyStep> $steps */
+    #[Required(list: AgentGatewayPolicyStep::class)]
     public array $steps;
 
     /**
@@ -61,7 +61,7 @@ final class AgentGatewayPolicyPipeline implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Hook|value-of<Hook> $hook
-     * @param list<Step|StepShape> $steps
+     * @param list<AgentGatewayPolicyStep|AgentGatewayPolicyStepShape> $steps
      */
     public static function with(Hook|string $hook, array $steps): self
     {
@@ -87,7 +87,7 @@ final class AgentGatewayPolicyPipeline implements BaseModel
     }
 
     /**
-     * @param list<Step|StepShape> $steps
+     * @param list<AgentGatewayPolicyStep|AgentGatewayPolicyStepShape> $steps
      */
     public function withSteps(array $steps): self
     {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AgentGateways\Policies\AgentGatewayPolicyPipeline;
+namespace Telnyx\AgentGateways\Policies;
 
-use Telnyx\AgentGateways\Policies\AgentGatewayPolicyPipeline\Step\OnError;
-use Telnyx\AgentGateways\Policies\AgentGatewayPolicyPipeline\Step\OnFail;
-use Telnyx\AgentGateways\Policies\AgentGatewayPolicyPipeline\Step\OnPass;
+use Telnyx\AgentGateways\Policies\AgentGatewayPolicyStep\OnError;
+use Telnyx\AgentGateways\Policies\AgentGatewayPolicyStep\OnFail;
+use Telnyx\AgentGateways\Policies\AgentGatewayPolicyStep\OnPass;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,7 +16,7 @@ use Telnyx\Core\Omitted;
 /**
  * One pipeline step: a guardrail, and what happens when it passes, fails, or errors.
  *
- * @phpstan-type StepShape = array{
+ * @phpstan-type AgentGatewayPolicyStepShape = array{
  *   guardrail: string,
  *   message?: string|null,
  *   onError?: null|OnError|value-of<OnError>,
@@ -25,9 +25,9 @@ use Telnyx\Core\Omitted;
  *   passData?: bool|null,
  * }
  */
-final class Step implements BaseModel
+final class AgentGatewayPolicyStep implements BaseModel
 {
-    /** @use SdkModel<StepShape> */
+    /** @use SdkModel<AgentGatewayPolicyStepShape> */
     use SdkModel;
 
     /**
@@ -73,17 +73,17 @@ final class Step implements BaseModel
     public ?bool $passData;
 
     /**
-     * `new Step()` is missing required properties by the API.
+     * `new AgentGatewayPolicyStep()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Step::with(guardrail: ...)
+     * AgentGatewayPolicyStep::with(guardrail: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Step)->withGuardrail(...)
+     * (new AgentGatewayPolicyStep)->withGuardrail(...)
      * ```
      */
     public function __construct()
