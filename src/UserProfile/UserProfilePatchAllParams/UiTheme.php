@@ -9,7 +9,7 @@ namespace Telnyx\UserProfile\UserProfilePatchAllParams;
  */
 enum UiTheme: int
 {
-    case _0 = 0;
+    case DARK = 0;
 
-    case _1 = 1;
+    case LIGHT = 1;
 }

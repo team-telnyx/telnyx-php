@@ -9,11 +9,11 @@ namespace Telnyx\UserProfile\UserProfilePatchAllParams;
  */
 enum LowBalanceNotificationFrequency: int
 {
-    case _2 = 2;
+    case FREQUENCY_2 = 2;
 
-    case _4 = 4;
+    case FREQUENCY_4 = 4;
 
-    case _12 = 12;
+    case FREQUENCY_12 = 12;
 
-    case _24 = 24;
+    case FREQUENCY_24 = 24;
 }
