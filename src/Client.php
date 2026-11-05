@@ -14,6 +14,7 @@ use Telnyx\Services\AccessIPRangesService;
 use Telnyx\Services\ActionsService;
 use Telnyx\Services\AddressesService;
 use Telnyx\Services\AdvancedOrdersService;
+use Telnyx\Services\AgentGatewaysService;
 use Telnyx\Services\AIService;
 use Telnyx\Services\AlphanumericSenderIDsService;
 use Telnyx\Services\ArtifactDownloadsService;
@@ -1226,6 +1227,11 @@ class Client extends BaseClient
      */
     public UserProfileService $userProfile;
 
+    /**
+     * @api
+     */
+    public AgentGatewaysService $agentGateways;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1498,6 +1504,7 @@ class Client extends BaseClient
         $this->payConnectors = new PayConnectorsService($this);
         $this->tunnels = new TunnelsService($this);
         $this->userProfile = new UserProfileService($this);
+        $this->agentGateways = new AgentGatewaysService($this);
     }
 
     /** @return array<string,string> */

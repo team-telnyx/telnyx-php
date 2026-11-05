@@ -9,12 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Where a listing's page sits in the whole.
- *
- * A page is a snapshot: the counts it reports and the order it is drawn in
- * both move as writes land, so paging through a busy namespace can repeat or
- * miss an entry at a page boundary.
- *
  * @phpstan-type PageMetaShape = array{
  *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
  * }
@@ -31,19 +25,19 @@ final class PageMeta implements BaseModel
     public int $pageNumber;
 
     /**
-     * How many results a page holds.
+     * Results per page.
      */
     #[Required('page_size')]
     public int $pageSize;
 
     /**
-     * Pages that can be requested; 0 when nothing matched. Page until `page_number` reaches it rather than until a page comes back short: a page can hold fewer than `page_size` results without being the last. Capped at the deepest page served, so on a very large listing it covers fewer results than `total_results`.
+     * Pages that can be requested; 0 when nothing matched.
      */
     #[Required('total_pages')]
     public int $totalPages;
 
     /**
-     * Results the request matched, including any past the deepest page.
+     * Results across every page.
      */
     #[Required('total_results')]
     public int $totalResults;
@@ -106,7 +100,7 @@ final class PageMeta implements BaseModel
     }
 
     /**
-     * How many results a page holds.
+     * Results per page.
      */
     public function withPageSize(int $pageSize): self
     {
@@ -117,7 +111,7 @@ final class PageMeta implements BaseModel
     }
 
     /**
-     * Pages that can be requested; 0 when nothing matched. Page until `page_number` reaches it rather than until a page comes back short: a page can hold fewer than `page_size` results without being the last. Capped at the deepest page served, so on a very large listing it covers fewer results than `total_results`.
+     * Pages that can be requested; 0 when nothing matched.
      */
     public function withTotalPages(int $totalPages): self
     {
@@ -128,7 +122,7 @@ final class PageMeta implements BaseModel
     }
 
     /**
-     * Results the request matched, including any past the deepest page.
+     * Results across every page.
      */
     public function withTotalResults(int $totalResults): self
     {

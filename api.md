@@ -3538,3 +3538,91 @@ Methods:
 
 - <code title="get /user_profile">$client->userProfile-><a href="./src/Services/UserProfileService.php">list</a>()</code>
 - <code title="patch /user_profile">$client->userProfile-><a href="./src/Services/UserProfileService.php">patchAll</a>(...$params)</code>
+
+# AgentGateways
+
+Methods:
+
+- <code title="post /agent_gateways">$client->agentGateways-><a href="./src/Services/AgentGatewaysService.php">create</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}">$client->agentGateways-><a href="./src/Services/AgentGatewaysService.php">retrieve</a>(...$params)</code>
+- <code title="get /agent_gateways">$client->agentGateways-><a href="./src/Services/AgentGatewaysService.php">list</a>(...$params)</code>
+- <code title="delete /agent_gateways/{instance_id}">$client->agentGateways-><a href="./src/Services/AgentGatewaysService.php">delete</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/models">$client->agentGateways-><a href="./src/Services/AgentGatewaysService.php">retrieveModels</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/spend_logs">$client->agentGateways-><a href="./src/Services/AgentGatewaysService.php">retrieveSpendLogs</a>(...$params)</code>
+
+## APIs
+
+Methods:
+
+- <code title="post /agent_gateways/{instance_id}/apis">$client->agentGateways->apis-><a href="./src/Services/AgentGateways/APIsService.php">create</a>(...$params)</code>
+- <code title="patch /agent_gateways/{instance_id}/apis/{api_id}">$client->agentGateways->apis-><a href="./src/Services/AgentGateways/APIsService.php">update</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/apis">$client->agentGateways->apis-><a href="./src/Services/AgentGateways/APIsService.php">list</a>(...$params)</code>
+- <code title="delete /agent_gateways/{instance_id}/apis/{api_id}">$client->agentGateways->apis-><a href="./src/Services/AgentGateways/APIsService.php">delete</a>(...$params)</code>
+
+## Guardrails
+
+Methods:
+
+- <code title="post /agent_gateways/{instance_id}/guardrails">$client->agentGateways->guardrails-><a href="./src/Services/AgentGateways/GuardrailsService.php">create</a>(...$params)</code>
+- <code title="patch /agent_gateways/{instance_id}/guardrails/{guardrail_id}">$client->agentGateways->guardrails-><a href="./src/Services/AgentGateways/GuardrailsService.php">update</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/guardrails">$client->agentGateways->guardrails-><a href="./src/Services/AgentGateways/GuardrailsService.php">list</a>(...$params)</code>
+- <code title="delete /agent_gateways/{instance_id}/guardrails/{guardrail_id}">$client->agentGateways->guardrails-><a href="./src/Services/AgentGateways/GuardrailsService.php">delete</a>(...$params)</code>
+
+## Keys
+
+Methods:
+
+- <code title="post /agent_gateways/{instance_id}/keys">$client->agentGateways->keys-><a href="./src/Services/AgentGateways/KeysService.php">create</a>(...$params)</code>
+- <code title="patch /agent_gateways/{instance_id}/keys/{key_id}">$client->agentGateways->keys-><a href="./src/Services/AgentGateways/KeysService.php">update</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/keys">$client->agentGateways->keys-><a href="./src/Services/AgentGateways/KeysService.php">list</a>(...$params)</code>
+- <code title="delete /agent_gateways/{instance_id}/keys/{key_id}">$client->agentGateways->keys-><a href="./src/Services/AgentGateways/KeysService.php">delete</a>(...$params)</code>
+
+### ToolPermissions
+
+Methods:
+
+- <code title="put /agent_gateways/{instance_id}/keys/{key_id}/tool_permissions">$client->agentGateways->keys->toolPermissions-><a href="./src/Services/AgentGateways/Keys/ToolPermissionsService.php">create</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/keys/{key_id}/tool_permissions">$client->agentGateways->keys->toolPermissions-><a href="./src/Services/AgentGateways/Keys/ToolPermissionsService.php">list</a>(...$params)</code>
+
+## McpServers
+
+Methods:
+
+- <code title="post /agent_gateways/{instance_id}/mcp_servers">$client->agentGateways->mcpServers-><a href="./src/Services/AgentGateways/McpServersService.php">create</a>(...$params)</code>
+- <code title="patch /agent_gateways/{instance_id}/mcp_servers/{server_id}">$client->agentGateways->mcpServers-><a href="./src/Services/AgentGateways/McpServersService.php">update</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/mcp_servers">$client->agentGateways->mcpServers-><a href="./src/Services/AgentGateways/McpServersService.php">list</a>(...$params)</code>
+- <code title="delete /agent_gateways/{instance_id}/mcp_servers/{server_id}">$client->agentGateways->mcpServers-><a href="./src/Services/AgentGateways/McpServersService.php">delete</a>(...$params)</code>
+
+## Policies
+
+Methods:
+
+- <code title="post /agent_gateways/{instance_id}/policies">$client->agentGateways->policies-><a href="./src/Services/AgentGateways/PoliciesService.php">create</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/policies/{name}">$client->agentGateways->policies-><a href="./src/Services/AgentGateways/PoliciesService.php">retrieve</a>(...$params)</code>
+- <code title="patch /agent_gateways/{instance_id}/policies/{name}">$client->agentGateways->policies-><a href="./src/Services/AgentGateways/PoliciesService.php">update</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/policies">$client->agentGateways->policies-><a href="./src/Services/AgentGateways/PoliciesService.php">list</a>(...$params)</code>
+- <code title="delete /agent_gateways/{instance_id}/policies/{name}">$client->agentGateways->policies-><a href="./src/Services/AgentGateways/PoliciesService.php">delete</a>(...$params)</code>
+
+## PolicyAttachments
+
+Methods:
+
+- <code title="post /agent_gateways/{instance_id}/policy_attachments">$client->agentGateways->policyAttachments-><a href="./src/Services/AgentGateways/PolicyAttachmentsService.php">create</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/policy_attachments">$client->agentGateways->policyAttachments-><a href="./src/Services/AgentGateways/PolicyAttachmentsService.php">list</a>(...$params)</code>
+- <code title="delete /agent_gateways/{instance_id}/policy_attachments/{attachment_id}">$client->agentGateways->policyAttachments-><a href="./src/Services/AgentGateways/PolicyAttachmentsService.php">delete</a>(...$params)</code>
+
+## Teams
+
+Methods:
+
+- <code title="post /agent_gateways/{instance_id}/teams">$client->agentGateways->teams-><a href="./src/Services/AgentGateways/TeamsService.php">create</a>(...$params)</code>
+- <code title="patch /agent_gateways/{instance_id}/teams/{team_id}">$client->agentGateways->teams-><a href="./src/Services/AgentGateways/TeamsService.php">update</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/teams">$client->agentGateways->teams-><a href="./src/Services/AgentGateways/TeamsService.php">list</a>(...$params)</code>
+- <code title="delete /agent_gateways/{instance_id}/teams/{team_id}">$client->agentGateways->teams-><a href="./src/Services/AgentGateways/TeamsService.php">delete</a>(...$params)</code>
+
+### ToolPermissions
+
+Methods:
+
+- <code title="put /agent_gateways/{instance_id}/teams/{team_id}/tool_permissions">$client->agentGateways->teams->toolPermissions-><a href="./src/Services/AgentGateways/Teams/ToolPermissionsService.php">create</a>(...$params)</code>
+- <code title="get /agent_gateways/{instance_id}/teams/{team_id}/tool_permissions">$client->agentGateways->teams->toolPermissions-><a href="./src/Services/AgentGateways/Teams/ToolPermissionsService.php">list</a>(...$params)</code>
