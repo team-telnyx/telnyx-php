@@ -3305,6 +3305,7 @@ Methods:
 - <code title="delete /meeting_sessions/{id}">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">delete</a>(...$params)</code>
 - <code title="delete /meeting_sessions/{id}/recording_media">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">deleteRecordingMedia</a>(...$params)</code>
 - <code title="get /meeting_sessions/{id}/events">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">retrieveEvents</a>(...$params)</code>
+- <code title="get /meeting_sessions/{id}/recordings">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">retrieveRecordings</a>(...$params)</code>
 - <code title="get /meeting_sessions/{id}/transcript">$client->meetingSessions-><a href="./src/Services/MeetingSessionsService.php">retrieveTranscript</a>(...$params)</code>
 
 ## Actions
@@ -3626,3 +3627,28 @@ Methods:
 
 - <code title="put /agent_gateways/{instance_id}/teams/{team_id}/tool_permissions">$client->agentGateways->teams->toolPermissions-><a href="./src/Services/AgentGateways/Teams/ToolPermissionsService.php">create</a>(...$params)</code>
 - <code title="get /agent_gateways/{instance_id}/teams/{team_id}/tool_permissions">$client->agentGateways->teams->toolPermissions-><a href="./src/Services/AgentGateways/Teams/ToolPermissionsService.php">list</a>(...$params)</code>
+
+# CalendarConnections
+
+Methods:
+
+- <code title="post /calendar_connections">$client->calendarConnections-><a href="./src/Services/CalendarConnectionsService.php">create</a>(...$params)</code>
+- <code title="get /calendar_connections/{id}">$client->calendarConnections-><a href="./src/Services/CalendarConnectionsService.php">retrieve</a>(...$params)</code>
+- <code title="patch /calendar_connections/{id}">$client->calendarConnections-><a href="./src/Services/CalendarConnectionsService.php">update</a>(...$params)</code>
+- <code title="get /calendar_connections">$client->calendarConnections-><a href="./src/Services/CalendarConnectionsService.php">list</a>()</code>
+- <code title="delete /calendar_connections/{id}">$client->calendarConnections-><a href="./src/Services/CalendarConnectionsService.php">delete</a>(...$params)</code>
+
+## Meetings
+
+Methods:
+
+- <code title="patch /calendar_connections/{id}/meetings/{meeting_id}">$client->calendarConnections->meetings-><a href="./src/Services/CalendarConnections/MeetingsService.php">update</a>(...$params)</code>
+- <code title="get /calendar_connections/{id}/meetings">$client->calendarConnections->meetings-><a href="./src/Services/CalendarConnections/MeetingsService.php">list</a>(...$params)</code>
+
+# MeetingBot
+
+## Calendar
+
+Methods:
+
+- <code title="get /meeting_bot/calendar/oauth_callback">$client->meetingBot->calendar-><a href="./src/Services/MeetingBot/CalendarService.php">retrieveOAuthCallback</a>(...$params)</code>

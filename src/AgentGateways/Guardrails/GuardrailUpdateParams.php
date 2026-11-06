@@ -21,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   alwaysOn?: bool|null,
  *   modes?: list<Mode|value-of<Mode>>|null,
  *   name?: string|null,
- *   settings?: mixed,
+ *   settings?: array<string,mixed>|null,
  * }
  */
 final class GuardrailUpdateParams implements BaseModel
@@ -55,9 +55,11 @@ final class GuardrailUpdateParams implements BaseModel
 
     /**
      * The type's settings. `content_filter`: `patterns` (prebuilt patterns by name, such as `us_ssn` or `email`), `regexes`, `keywords`, and `categories` (such as `prompt_injection`), each with an `action` of `block` or `mask`. `tool_permission`: `rules` (`id`, `tool_name`, `tool_type`, `decision`, `argument_patterns`), a `default` decision, and `on_denied` (`block` or `rewrite`). `model_judge`: a `model` on the instance and weighted `criteria` (`name`, `description`, `weight`, the weights summing to 100). `custom_code`: `code` defining `apply_guardrail(inputs, request_data, input_type)`. `lakera`: `api_key`, `project_id`, `api_base`. `presidio`: `analyzer_url`, `anonymizer_url`, `entities` (entity name to `block` or `mask`), `language`. `bedrock`: `guardrail_id`, `version`, `region`, and `access_key_id` with `secret_access_key`, or `role_name`. `azure_content_safety`: `api_key`, `endpoint`, `severity` (0 to 7). Provider secrets are write-only.
+     *
+     * @var array<string,mixed>|null $settings
      */
-    #[Optional]
-    public mixed $settings;
+    #[Optional(map: 'mixed')]
+    public ?array $settings;
 
     /**
      * `new GuardrailUpdateParams()` is missing required properties by the API.
@@ -84,13 +86,14 @@ final class GuardrailUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Mode|value-of<Mode>>|null $modes
+     * @param array<string,mixed>|null $settings
      */
     public static function with(
         string $instanceID,
         ?bool $alwaysOn = null,
         ?array $modes = null,
         ?string $name = null,
-        mixed $settings = null,
+        ?array $settings = null,
     ): self {
         $self = new self;
 
@@ -149,8 +152,10 @@ final class GuardrailUpdateParams implements BaseModel
 
     /**
      * The type's settings. `content_filter`: `patterns` (prebuilt patterns by name, such as `us_ssn` or `email`), `regexes`, `keywords`, and `categories` (such as `prompt_injection`), each with an `action` of `block` or `mask`. `tool_permission`: `rules` (`id`, `tool_name`, `tool_type`, `decision`, `argument_patterns`), a `default` decision, and `on_denied` (`block` or `rewrite`). `model_judge`: a `model` on the instance and weighted `criteria` (`name`, `description`, `weight`, the weights summing to 100). `custom_code`: `code` defining `apply_guardrail(inputs, request_data, input_type)`. `lakera`: `api_key`, `project_id`, `api_base`. `presidio`: `analyzer_url`, `anonymizer_url`, `entities` (entity name to `block` or `mask`), `language`. `bedrock`: `guardrail_id`, `version`, `region`, and `access_key_id` with `secret_access_key`, or `role_name`. `azure_content_safety`: `api_key`, `endpoint`, `severity` (0 to 7). Provider secrets are write-only.
+     *
+     * @param array<string,mixed> $settings
      */
-    public function withSettings(mixed $settings): self
+    public function withSettings(array $settings): self
     {
         $self = clone $this;
         $self['settings'] = $settings;

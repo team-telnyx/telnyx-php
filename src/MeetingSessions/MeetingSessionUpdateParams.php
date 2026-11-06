@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Updates mutable properties of a meeting session. Only sessions in the scheduled state can be updated; any other state returns 409 with the invalid_state error code. All request fields are optional, and an empty object is a valid no-op update.
+ * Updates mutable properties of a meeting session. Only sessions in the scheduled state can be updated; any other state returns 409 with the invalid_state error code. All request fields are optional, and an empty object is a valid no-op update. Calendar-controlled Google Meet and Teams sessions return 409 calendar_managed; change the event instead. A conflicting pending edit returns 409 edit_in_progress. On a timeout or 503, read the session and retry the same changes.
  *
  * @see Telnyx\Services\MeetingSessionsService::update()
  *

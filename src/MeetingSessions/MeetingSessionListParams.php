@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MeetingSessions\MeetingSessionListParams\Status;
 
 /**
- * Returns a list of meeting sessions, optionally filtered by status.
+ * Returns a list of meeting sessions, optionally filtered by status. List items omit assistant.dynamic_variables and recording_export. Some items include remote_state_observed_at; retrieve the individual session for current state.
  *
  * @see Telnyx\Services\MeetingSessionsService::list()
  *

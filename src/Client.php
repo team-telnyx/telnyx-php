@@ -30,6 +30,7 @@ use Telnyx\Services\BotSignupService;
 use Telnyx\Services\BrowserSessionsService;
 use Telnyx\Services\BulkSimCardActionsService;
 use Telnyx\Services\BundlePricingService;
+use Telnyx\Services\CalendarConnectionsService;
 use Telnyx\Services\CallControlApplicationsService;
 use Telnyx\Services\CallEventsService;
 use Telnyx\Services\CallReasonsService;
@@ -95,6 +96,7 @@ use Telnyx\Services\LlmTokenGatewayService;
 use Telnyx\Services\MachinePaymentsService;
 use Telnyx\Services\ManagedAccountsService;
 use Telnyx\Services\MediaService;
+use Telnyx\Services\MeetingBotService;
 use Telnyx\Services\MeetingSessionsService;
 use Telnyx\Services\MessagesService;
 use Telnyx\Services\Messaging10dlcService;
@@ -1232,6 +1234,16 @@ class Client extends BaseClient
      */
     public AgentGatewaysService $agentGateways;
 
+    /**
+     * @api
+     */
+    public CalendarConnectionsService $calendarConnections;
+
+    /**
+     * @api
+     */
+    public MeetingBotService $meetingBot;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1505,6 +1517,8 @@ class Client extends BaseClient
         $this->tunnels = new TunnelsService($this);
         $this->userProfile = new UserProfileService($this);
         $this->agentGateways = new AgentGatewaysService($this);
+        $this->calendarConnections = new CalendarConnectionsService($this);
+        $this->meetingBot = new MeetingBotService($this);
     }
 
     /** @return array<string,string> */

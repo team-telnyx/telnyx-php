@@ -17,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt: \DateTimeInterface|null,
  *   modes: list<Mode|value-of<Mode>>,
  *   name: string,
- *   settings: mixed,
+ *   settings: array<string,mixed>,
  *   type: Type|value-of<Type>,
  *   updatedAt: \DateTimeInterface|null,
  * }
@@ -58,9 +58,11 @@ final class AgentGatewayGuardrail implements BaseModel
 
     /**
      * The type's settings. `content_filter`: `patterns` (prebuilt patterns by name, such as `us_ssn` or `email`), `regexes`, `keywords`, and `categories` (such as `prompt_injection`), each with an `action` of `block` or `mask`. `tool_permission`: `rules` (`id`, `tool_name`, `tool_type`, `decision`, `argument_patterns`), a `default` decision, and `on_denied` (`block` or `rewrite`). `model_judge`: a `model` on the instance and weighted `criteria` (`name`, `description`, `weight`, the weights summing to 100). `custom_code`: `code` defining `apply_guardrail(inputs, request_data, input_type)`. `lakera`: `api_key`, `project_id`, `api_base`. `presidio`: `analyzer_url`, `anonymizer_url`, `entities` (entity name to `block` or `mask`), `language`. `bedrock`: `guardrail_id`, `version`, `region`, and `access_key_id` with `secret_access_key`, or `role_name`. `azure_content_safety`: `api_key`, `endpoint`, `severity` (0 to 7). Provider secrets are write-only. Responses leave the secrets out.
+     *
+     * @var array<string,mixed> $settings
      */
-    #[Required]
-    public mixed $settings;
+    #[Required(map: 'mixed')]
+    public array $settings;
 
     /** @var value-of<Type> $type */
     #[Required(enum: Type::class)]
@@ -111,6 +113,7 @@ final class AgentGatewayGuardrail implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Mode|value-of<Mode>> $modes
+     * @param array<string,mixed> $settings
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -119,7 +122,7 @@ final class AgentGatewayGuardrail implements BaseModel
         ?\DateTimeInterface $createdAt,
         array $modes,
         string $name,
-        mixed $settings,
+        array $settings,
         Type|string $type,
         ?\DateTimeInterface $updatedAt,
     ): self {
@@ -193,8 +196,10 @@ final class AgentGatewayGuardrail implements BaseModel
 
     /**
      * The type's settings. `content_filter`: `patterns` (prebuilt patterns by name, such as `us_ssn` or `email`), `regexes`, `keywords`, and `categories` (such as `prompt_injection`), each with an `action` of `block` or `mask`. `tool_permission`: `rules` (`id`, `tool_name`, `tool_type`, `decision`, `argument_patterns`), a `default` decision, and `on_denied` (`block` or `rewrite`). `model_judge`: a `model` on the instance and weighted `criteria` (`name`, `description`, `weight`, the weights summing to 100). `custom_code`: `code` defining `apply_guardrail(inputs, request_data, input_type)`. `lakera`: `api_key`, `project_id`, `api_base`. `presidio`: `analyzer_url`, `anonymizer_url`, `entities` (entity name to `block` or `mask`), `language`. `bedrock`: `guardrail_id`, `version`, `region`, and `access_key_id` with `secret_access_key`, or `role_name`. `azure_content_safety`: `api_key`, `endpoint`, `severity` (0 to 7). Provider secrets are write-only. Responses leave the secrets out.
+     *
+     * @param array<string,mixed> $settings
      */
-    public function withSettings(mixed $settings): self
+    public function withSettings(array $settings): self
     {
         $self = clone $this;
         $self['settings'] = $settings;

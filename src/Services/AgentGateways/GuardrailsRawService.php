@@ -41,7 +41,7 @@ final class GuardrailsRawService implements GuardrailsRawContract
      *   name: string,
      *   type: value-of<Type>,
      *   alwaysOn?: bool,
-     *   settings?: mixed,
+     *   settings?: array<string,mixed>,
      * }|GuardrailCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -80,7 +80,7 @@ final class GuardrailsRawService implements GuardrailsRawContract
      *   alwaysOn?: bool,
      *   modes?: list<GuardrailUpdateParams\Mode|value-of<GuardrailUpdateParams\Mode>>,
      *   name?: string,
-     *   settings?: mixed,
+     *   settings?: array<string,mixed>,
      * }|GuardrailUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *

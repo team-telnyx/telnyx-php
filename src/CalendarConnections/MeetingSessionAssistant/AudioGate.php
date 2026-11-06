@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\MeetingSessions\MeetingSession\Assistant;
+namespace Telnyx\CalendarConnections\MeetingSessionAssistant;
 
 /**
  * Audio gating strategy in force for the assistant call leg.

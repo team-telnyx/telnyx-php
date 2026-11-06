@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\MeetingSessions\MeetingSession;
+namespace Telnyx\CalendarConnections;
 
+use Telnyx\CalendarConnections\MeetingSessionAssistant\AudioGate;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MeetingSessions\MeetingSession\Assistant\AudioGate;
+use Telnyx\Core\Omitted;
 
 /**
- * Assistant configuration if an assistant is attached, otherwise null.
- *
- * @phpstan-type AssistantShape = array{
+ * @phpstan-type MeetingSessionAssistantShape = array{
  *   id: string,
  *   audioGate: AudioGate|value-of<AudioGate>,
- *   dynamicVariables: array<string,string>|null,
  *   leaveOnEnd: bool,
+ *   dynamicVariables?: array<string,string>|null,
  * }
  */
-final class Assistant implements BaseModel
+final class MeetingSessionAssistant implements BaseModel
 {
-    /** @use SdkModel<AssistantShape> */
+    /** @use SdkModel<MeetingSessionAssistantShape> */
     use SdkModel;
 
     /**
@@ -39,34 +39,33 @@ final class Assistant implements BaseModel
     public string $audioGate;
 
     /**
-     * The dynamic variables in force for this session, or null when none were supplied.
-     *
-     * @var array<string,string>|null $dynamicVariables
-     */
-    #[Required('dynamic_variables', map: 'string')]
-    public ?array $dynamicVariables;
-
-    /**
      * Whether the bot leaves when the Assistant's conversation ends or fails.
      */
     #[Required('leave_on_end')]
     public bool $leaveOnEnd;
 
     /**
-     * `new Assistant()` is missing required properties by the API.
+     * Dynamic variables in individual-session responses; null when none were supplied. Omitted from session list items.
+     *
+     * @var array<string,string>|null $dynamicVariables
+     */
+    #[Optional('dynamic_variables', map: 'string', nullable: true)]
+    public ?array $dynamicVariables;
+
+    /**
+     * `new MeetingSessionAssistant()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Assistant::with(id: ..., audioGate: ..., dynamicVariables: ..., leaveOnEnd: ...)
+     * MeetingSessionAssistant::with(id: ..., audioGate: ..., leaveOnEnd: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Assistant)
+     * (new MeetingSessionAssistant)
      *   ->withID(...)
      *   ->withAudioGate(...)
-     *   ->withDynamicVariables(...)
      *   ->withLeaveOnEnd(...)
      * ```
      */
@@ -81,20 +80,21 @@ final class Assistant implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AudioGate|value-of<AudioGate> $audioGate
-     * @param array<string,string>|null $dynamicVariables
+     * @param Omitted|array<string,string>|null $dynamicVariables
      */
     public static function with(
         string $id,
         AudioGate|string $audioGate,
-        ?array $dynamicVariables,
         bool $leaveOnEnd,
+        Omitted|array|null $dynamicVariables = Omitted::VALUE,
     ): self {
         $self = new self;
 
         $self['id'] = $id;
         $self['audioGate'] = $audioGate;
-        $self['dynamicVariables'] = $dynamicVariables;
         $self['leaveOnEnd'] = $leaveOnEnd;
+
+        Omitted::VALUE !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
 
         return $self;
     }
@@ -124,7 +124,18 @@ final class Assistant implements BaseModel
     }
 
     /**
-     * The dynamic variables in force for this session, or null when none were supplied.
+     * Whether the bot leaves when the Assistant's conversation ends or fails.
+     */
+    public function withLeaveOnEnd(bool $leaveOnEnd): self
+    {
+        $self = clone $this;
+        $self['leaveOnEnd'] = $leaveOnEnd;
+
+        return $self;
+    }
+
+    /**
+     * Dynamic variables in individual-session responses; null when none were supplied. Omitted from session list items.
      *
      * @param array<string,string>|null $dynamicVariables
      */
@@ -132,17 +143,6 @@ final class Assistant implements BaseModel
     {
         $self = clone $this;
         $self['dynamicVariables'] = $dynamicVariables;
-
-        return $self;
-    }
-
-    /**
-     * Whether the bot leaves when the Assistant's conversation ends or fails.
-     */
-    public function withLeaveOnEnd(bool $leaveOnEnd): self
-    {
-        $self = clone $this;
-        $self['leaveOnEnd'] = $leaveOnEnd;
 
         return $self;
     }

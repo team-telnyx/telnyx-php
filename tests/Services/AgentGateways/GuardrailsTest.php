@@ -60,12 +60,7 @@ final class GuardrailsTest extends TestCase
             name: 'mask-pii',
             type: 'content_filter',
             alwaysOn: true,
-            settings: [
-                'patterns' => [
-                    ['name' => 'us_ssn', 'action' => 'mask'],
-                    ['name' => 'email', 'action' => 'mask'],
-                ],
-            ],
+            settings: ['patterns' => 'bar'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -101,7 +96,7 @@ final class GuardrailsTest extends TestCase
             alwaysOn: true,
             modes: ['before_request'],
             name: 'name',
-            settings: (object) [],
+            settings: ['foo' => 'bar'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
