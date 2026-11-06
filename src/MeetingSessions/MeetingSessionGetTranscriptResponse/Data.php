@@ -32,9 +32,15 @@ final class Data implements BaseModel
     #[Required('relative_ts')]
     public ?float $relativeTs;
 
+    /**
+     * Monotonic transcript append cursor. This is separate from the event-history cursor and does not establish conversational turn order.
+     */
     #[Required]
     public int $seq;
 
+    /**
+     * Recorded participant or bot label, or null when unavailable. Labels are attribution, not verified identity. Segments from concurrent speakers can finalize in a different order from the conversation.
+     */
     #[Required('speaker_label')]
     public ?string $speakerLabel;
 
@@ -122,6 +128,9 @@ final class Data implements BaseModel
         return $self;
     }
 
+    /**
+     * Monotonic transcript append cursor. This is separate from the event-history cursor and does not establish conversational turn order.
+     */
     public function withSeq(int $seq): self
     {
         $self = clone $this;
@@ -130,6 +139,9 @@ final class Data implements BaseModel
         return $self;
     }
 
+    /**
+     * Recorded participant or bot label, or null when unavailable. Labels are attribution, not verified identity. Segments from concurrent speakers can finalize in a different order from the conversation.
+     */
     public function withSpeakerLabel(?string $speakerLabel): self
     {
         $self = clone $this;

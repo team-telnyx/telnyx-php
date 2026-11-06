@@ -11,6 +11,7 @@ use Telnyx\AI\Assistants\TelephonySettings\VoicemailDetection;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Omitted;
 
 /**
  * @phpstan-import-type NoiseSuppressionConfigShape from \Telnyx\AI\Assistants\TelephonySettings\NoiseSuppressionConfig
@@ -22,6 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   defaultTexmlAppID?: string|null,
  *   disableDtmf?: bool|null,
  *   fallbackDestination?: string|null,
+ *   greetingDelayMs?: int|null,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
  *   noiseSuppressionConfig?: null|NoiseSuppressionConfig|NoiseSuppressionConfigShape,
  *   recordingSettings?: null|RecordingSettings|RecordingSettingsShape,
@@ -61,6 +63,12 @@ final class TelephonySettings implements BaseModel
      */
     #[Optional('fallback_destination')]
     public ?string $fallbackDestination;
+
+    /**
+     * Milliseconds to wait after an inbound call is answered before the assistant starts and speaks its greeting. Increase it if the beginning of the greeting is cut off on some connections (for example, WebRTC calls). When unset (`null`), the platform default of 250 ms is used. Set to `0` to start without a delay. Maximum 2000.
+     */
+    #[Optional('greeting_delay_ms', nullable: true)]
+    public ?int $greetingDelayMs;
 
     /**
      * The noise suppression engine to use. 'aicoustics' is STT-optimized and recommended for AI assistants (configure through noise_suppression_config). Use 'disabled' to turn off noise suppression.
@@ -134,6 +142,7 @@ final class TelephonySettings implements BaseModel
      * @param VoicemailDetection|VoicemailDetectionShape|null $voicemailDetection
      */
     public static function with(
+        int|Omitted|null $greetingDelayMs = Omitted::VALUE,
         ?bool $conversationEndedFullHistory = null,
         ?string $defaultTexmlAppID = null,
         ?bool $disableDtmf = null,
@@ -154,6 +163,7 @@ final class TelephonySettings implements BaseModel
         null !== $defaultTexmlAppID && $self['defaultTexmlAppID'] = $defaultTexmlAppID;
         null !== $disableDtmf && $self['disableDtmf'] = $disableDtmf;
         null !== $fallbackDestination && $self['fallbackDestination'] = $fallbackDestination;
+        Omitted::VALUE !== $greetingDelayMs && $self['greetingDelayMs'] = $greetingDelayMs;
         null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
         null !== $noiseSuppressionConfig && $self['noiseSuppressionConfig'] = $noiseSuppressionConfig;
         null !== $recordingSettings && $self['recordingSettings'] = $recordingSettings;
@@ -208,6 +218,17 @@ final class TelephonySettings implements BaseModel
     {
         $self = clone $this;
         $self['fallbackDestination'] = $fallbackDestination;
+
+        return $self;
+    }
+
+    /**
+     * Milliseconds to wait after an inbound call is answered before the assistant starts and speaks its greeting. Increase it if the beginning of the greeting is cut off on some connections (for example, WebRTC calls). When unset (`null`), the platform default of 250 ms is used. Set to `0` to start without a delay. Maximum 2000.
+     */
+    public function withGreetingDelayMs(?int $greetingDelayMs): self
+    {
+        $self = clone $this;
+        $self['greetingDelayMs'] = $greetingDelayMs;
 
         return $self;
     }

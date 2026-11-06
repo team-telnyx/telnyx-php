@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\TranscriptionSettings\Challenger;
-use Telnyx\AI\Assistants\TranscriptionSettings\FallbackModel;
 use Telnyx\AI\Assistants\TranscriptionSettings\Model;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -13,14 +11,14 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
 
 /**
- * @phpstan-import-type ChallengerShape from \Telnyx\AI\Assistants\TranscriptionSettings\Challenger
- * @phpstan-import-type FallbackModelShape from \Telnyx\AI\Assistants\TranscriptionSettings\FallbackModel
+ * @phpstan-import-type TranscriptionChallengerShape from \Telnyx\AI\Assistants\TranscriptionChallenger
+ * @phpstan-import-type TranscriptionFallbackModelShape from \Telnyx\AI\Assistants\TranscriptionFallbackModel
  * @phpstan-import-type TranscriptionSettingsConfigShape from \Telnyx\AI\Assistants\TranscriptionSettingsConfig
  *
  * @phpstan-type TranscriptionSettingsShape = array{
  *   apiKeyRef?: string|null,
- *   challenger?: null|Challenger|ChallengerShape,
- *   fallbackModels?: list<FallbackModel|FallbackModelShape>|null,
+ *   challenger?: null|TranscriptionChallenger|TranscriptionChallengerShape,
+ *   fallbackModels?: list<TranscriptionFallbackModel|TranscriptionFallbackModelShape>|null,
  *   language?: string|null,
  *   model?: null|Model|value-of<Model>,
  *   region?: string|null,
@@ -42,14 +40,18 @@ final class TranscriptionSettings implements BaseModel
      * A second speech-to-text model that transcribes alongside `transcription.model`, and the rule that decides which transcript the assistant uses.
      */
     #[Optional(nullable: true)]
-    public ?Challenger $challenger;
+    public ?TranscriptionChallenger $challenger;
 
     /**
      * Up to 3 streaming models that take over transcription, in this order, when the model in use fails, at the start of a call or mid-call. `model` must be a streaming model too, and must support `language` alongside other models. On update, a list replaces the stored one: omit the field to keep the stored list, or send `null` or `[]` to remove it. When an update changes `model` or `language`, stored fallbacks that no longer fit are removed without an error. Can't be combined with `challenger`, the language booster; to replace a stored language booster, send `challenger: null` in the same request.
      *
-     * @var list<FallbackModel>|null $fallbackModels
+     * @var list<TranscriptionFallbackModel>|null $fallbackModels
      */
-    #[Optional('fallback_models', list: FallbackModel::class, nullable: true)]
+    #[Optional(
+        'fallback_models',
+        list: TranscriptionFallbackModel::class,
+        nullable: true
+    )]
     public ?array $fallbackModels;
 
     /**
@@ -101,13 +103,13 @@ final class TranscriptionSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Omitted|Challenger|ChallengerShape|null $challenger
-     * @param list<FallbackModel|FallbackModelShape>|Omitted|null $fallbackModels
+     * @param Omitted|TranscriptionChallenger|TranscriptionChallengerShape|null $challenger
+     * @param list<TranscriptionFallbackModel|TranscriptionFallbackModelShape>|Omitted|null $fallbackModels
      * @param Model|value-of<Model>|null $model
      * @param TranscriptionSettingsConfig|TranscriptionSettingsConfigShape|null $settings
      */
     public static function with(
-        Omitted|Challenger|array|null $challenger = Omitted::VALUE,
+        Omitted|TranscriptionChallenger|array|null $challenger = Omitted::VALUE,
         array|Omitted|null $fallbackModels = Omitted::VALUE,
         ?string $apiKeyRef = null,
         ?string $language = null,
@@ -142,10 +144,11 @@ final class TranscriptionSettings implements BaseModel
     /**
      * A second speech-to-text model that transcribes alongside `transcription.model`, and the rule that decides which transcript the assistant uses.
      *
-     * @param Challenger|ChallengerShape|null $challenger
+     * @param TranscriptionChallenger|TranscriptionChallengerShape|null $challenger
      */
-    public function withChallenger(Challenger|array|null $challenger): self
-    {
+    public function withChallenger(
+        TranscriptionChallenger|array|null $challenger
+    ): self {
         $self = clone $this;
         $self['challenger'] = $challenger;
 
@@ -155,7 +158,7 @@ final class TranscriptionSettings implements BaseModel
     /**
      * Up to 3 streaming models that take over transcription, in this order, when the model in use fails, at the start of a call or mid-call. `model` must be a streaming model too, and must support `language` alongside other models. On update, a list replaces the stored one: omit the field to keep the stored list, or send `null` or `[]` to remove it. When an update changes `model` or `language`, stored fallbacks that no longer fit are removed without an error. Can't be combined with `challenger`, the language booster; to replace a stored language booster, send `challenger: null` in the same request.
      *
-     * @param list<FallbackModel|FallbackModelShape>|null $fallbackModels
+     * @param list<TranscriptionFallbackModel|TranscriptionFallbackModelShape>|null $fallbackModels
      */
     public function withFallbackModels(?array $fallbackModels): self
     {

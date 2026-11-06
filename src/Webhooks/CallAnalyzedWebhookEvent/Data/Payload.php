@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
 use Telnyx\Webhooks\CallAnalyzedWebhookEvent\Data\Payload\ConversationInsight;
-use Telnyx\Webhooks\CallAnalyzedWebhookEvent\Data\Payload\Cost\UnionMember0;
+use Telnyx\Webhooks\CallAnalyzedWebhookEvent\Data\Payload\Cost\CallCostBreakdown;
 use Telnyx\Webhooks\CallAnalyzedWebhookEvent\Data\Payload\Recording;
 
 /**
@@ -105,7 +105,7 @@ final class Payload implements BaseModel
      * @var CostVariants|null $cost
      */
     #[Optional]
-    public string|UnionMember0|null $cost;
+    public string|CallCostBreakdown|null $cost;
 
     /**
      * Duration of the conversation in seconds.
@@ -194,7 +194,7 @@ final class Payload implements BaseModel
         ?string $clientState = null,
         ?string $connectionID = null,
         ?string $conversationID = null,
-        string|UnionMember0|array|null $cost = null,
+        string|CallCostBreakdown|array|null $cost = null,
         ?int $durationSec = null,
         ?string $from = null,
         ?string $llmModel = null,
@@ -324,7 +324,7 @@ final class Payload implements BaseModel
      *
      * @param CostShape $cost
      */
-    public function withCost(string|UnionMember0|array $cost): self
+    public function withCost(string|CallCostBreakdown|array $cost): self
     {
         $self = clone $this;
         $self['cost'] = $cost;

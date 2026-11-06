@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ObservationShape = array{
  *   observationID?: string|null,
  *   refCount?: int|null,
- *   refs?: mixed,
+ *   refs?: array<string,mixed>|null,
  *   title?: string|null,
  *   tree?: string|null,
  *   truncated?: bool|null,
@@ -35,8 +35,9 @@ final class Observation implements BaseModel
     #[Optional('ref_count')]
     public ?int $refCount;
 
-    #[Optional]
-    public mixed $refs;
+    /** @var array<string,mixed>|null $refs */
+    #[Optional(map: 'mixed')]
+    public ?array $refs;
 
     #[Optional]
     public ?string $title;
@@ -59,11 +60,13 @@ final class Observation implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param array<string,mixed>|null $refs
      */
     public static function with(
         ?string $observationID = null,
         ?int $refCount = null,
-        mixed $refs = null,
+        ?array $refs = null,
         ?string $title = null,
         ?string $tree = null,
         ?bool $truncated = null,
@@ -101,7 +104,10 @@ final class Observation implements BaseModel
         return $self;
     }
 
-    public function withRefs(mixed $refs): self
+    /**
+     * @param array<string,mixed> $refs
+     */
+    public function withRefs(array $refs): self
     {
         $self = clone $this;
         $self['refs'] = $refs;

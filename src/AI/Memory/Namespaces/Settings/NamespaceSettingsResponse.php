@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Memory\Namespaces\Settings;
 
-use Telnyx\AI\Memory\Namespaces\Settings\NamespaceSettingsResponse\Data;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\AI\Memory\Namespaces\Settings\NamespaceSettingsResponse\Data
+ * @phpstan-import-type NamespaceSettingsShape from \Telnyx\AI\Memory\Namespaces\Settings\NamespaceSettings
  *
- * @phpstan-type NamespaceSettingsResponseShape = array{data: Data|DataShape}
+ * @phpstan-type NamespaceSettingsResponseShape = array{
+ *   data: NamespaceSettings|NamespaceSettingsShape
+ * }
  */
 final class NamespaceSettingsResponse implements BaseModel
 {
@@ -23,7 +24,7 @@ final class NamespaceSettingsResponse implements BaseModel
      * A namespace's settings, grouped by what they affect.
      */
     #[Required]
-    public Data $data;
+    public NamespaceSettings $data;
 
     /**
      * `new NamespaceSettingsResponse()` is missing required properties by the API.
@@ -49,9 +50,9 @@ final class NamespaceSettingsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape $data
+     * @param NamespaceSettings|NamespaceSettingsShape $data
      */
-    public static function with(Data|array $data): self
+    public static function with(NamespaceSettings|array $data): self
     {
         $self = new self;
 
@@ -63,9 +64,9 @@ final class NamespaceSettingsResponse implements BaseModel
     /**
      * A namespace's settings, grouped by what they affect.
      *
-     * @param Data|DataShape $data
+     * @param NamespaceSettings|NamespaceSettingsShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(NamespaceSettings|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

@@ -28,15 +28,15 @@ use Telnyx\Core\Omitted;
  *   backgroundSoundVolume?: float|null,
  *   effectiveVoiceVolume?: float|null,
  *   forkedFrom?: int|null,
- *   generationConfig?: mixed,
+ *   generationConfig?: array<string,mixed>|null,
  *   interruptionLevel?: string|null,
- *   messagePlan?: mixed,
- *   networkSimulation?: mixed,
+ *   messagePlan?: array<string,mixed>|null,
+ *   networkSimulation?: array<string,mixed>|null,
  *   organization?: int|null,
  *   project?: int|null,
  *   speed?: SpeedShape|null,
  *   startSpeakingPlan?: StartSpeakingPlanShape|null,
- *   stopSpeakingPlan?: mixed,
+ *   stopSpeakingPlan?: array<string,mixed>|null,
  *   voiceVolume?: float|null,
  * }
  */
@@ -87,8 +87,9 @@ final class V1GetPersonalitiesResponseItem implements BaseModel
     #[Optional('forked_from', nullable: true)]
     public ?int $forkedFrom;
 
-    #[Optional('generation_config', nullable: true)]
-    public mixed $generationConfig;
+    /** @var array<string,mixed>|null $generationConfig */
+    #[Optional('generation_config', map: 'mixed', nullable: true)]
+    public ?array $generationConfig;
 
     /**
      * How aggressively the personality interrupts the assistant.
@@ -98,12 +99,15 @@ final class V1GetPersonalitiesResponseItem implements BaseModel
 
     /**
      * Idle-timeout plan for messages during a call.
+     *
+     * @var array<string,mixed>|null $messagePlan
      */
-    #[Optional('message_plan', nullable: true)]
-    public mixed $messagePlan;
+    #[Optional('message_plan', map: 'mixed', nullable: true)]
+    public ?array $messagePlan;
 
-    #[Optional('network_simulation', nullable: true)]
-    public mixed $networkSimulation;
+    /** @var array<string,mixed>|null $networkSimulation */
+    #[Optional('network_simulation', map: 'mixed', nullable: true)]
+    public ?array $networkSimulation;
 
     #[Optional(nullable: true)]
     public ?int $organization;
@@ -121,10 +125,11 @@ final class V1GetPersonalitiesResponseItem implements BaseModel
         union: StartSpeakingPlan::class,
         nullable: true
     )]
-    public mixed $startSpeakingPlan;
+    public float|array|null $startSpeakingPlan;
 
-    #[Optional('stop_speaking_plan', nullable: true)]
-    public mixed $stopSpeakingPlan;
+    /** @var array<string,mixed>|null $stopSpeakingPlan */
+    #[Optional('stop_speaking_plan', map: 'mixed', nullable: true)]
+    public ?array $stopSpeakingPlan;
 
     #[Optional('voice_volume', nullable: true)]
     public ?float $voiceVolume;
@@ -160,12 +165,12 @@ final class V1GetPersonalitiesResponseItem implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param mixed|Omitted|null $generationConfig
-     * @param mixed|Omitted|null $messagePlan
-     * @param mixed|Omitted|null $networkSimulation
+     * @param Omitted|array<string,mixed>|null $generationConfig
+     * @param Omitted|array<string,mixed>|null $messagePlan
+     * @param Omitted|array<string,mixed>|null $networkSimulation
      * @param SpeedShape|Omitted|null $speed
      * @param StartSpeakingPlanShape|Omitted|null $startSpeakingPlan
-     * @param mixed|Omitted|null $stopSpeakingPlan
+     * @param Omitted|array<string,mixed>|null $stopSpeakingPlan
      */
     public static function with(
         int $id,
@@ -177,15 +182,15 @@ final class V1GetPersonalitiesResponseItem implements BaseModel
         float|Omitted|null $backgroundSoundVolume = Omitted::VALUE,
         float|Omitted|null $effectiveVoiceVolume = Omitted::VALUE,
         int|Omitted|null $forkedFrom = Omitted::VALUE,
-        mixed $generationConfig = Omitted::VALUE,
+        Omitted|array|null $generationConfig = Omitted::VALUE,
         string|Omitted|null $interruptionLevel = Omitted::VALUE,
-        mixed $messagePlan = Omitted::VALUE,
-        mixed $networkSimulation = Omitted::VALUE,
+        Omitted|array|null $messagePlan = Omitted::VALUE,
+        Omitted|array|null $networkSimulation = Omitted::VALUE,
         int|Omitted|null $organization = Omitted::VALUE,
         int|Omitted|null $project = Omitted::VALUE,
         Omitted|float|string|null $speed = Omitted::VALUE,
-        mixed $startSpeakingPlan = Omitted::VALUE,
-        mixed $stopSpeakingPlan = Omitted::VALUE,
+        Omitted|float|array|null $startSpeakingPlan = Omitted::VALUE,
+        Omitted|array|null $stopSpeakingPlan = Omitted::VALUE,
         float|Omitted|null $voiceVolume = Omitted::VALUE,
         ?string $accent = null,
     ): self {
@@ -309,7 +314,10 @@ final class V1GetPersonalitiesResponseItem implements BaseModel
         return $self;
     }
 
-    public function withGenerationConfig(mixed $generationConfig): self
+    /**
+     * @param array<string,mixed>|null $generationConfig
+     */
+    public function withGenerationConfig(?array $generationConfig): self
     {
         $self = clone $this;
         $self['generationConfig'] = $generationConfig;
@@ -330,8 +338,10 @@ final class V1GetPersonalitiesResponseItem implements BaseModel
 
     /**
      * Idle-timeout plan for messages during a call.
+     *
+     * @param array<string,mixed>|null $messagePlan
      */
-    public function withMessagePlan(mixed $messagePlan): self
+    public function withMessagePlan(?array $messagePlan): self
     {
         $self = clone $this;
         $self['messagePlan'] = $messagePlan;
@@ -339,7 +349,10 @@ final class V1GetPersonalitiesResponseItem implements BaseModel
         return $self;
     }
 
-    public function withNetworkSimulation(mixed $networkSimulation): self
+    /**
+     * @param array<string,mixed>|null $networkSimulation
+     */
+    public function withNetworkSimulation(?array $networkSimulation): self
     {
         $self = clone $this;
         $self['networkSimulation'] = $networkSimulation;
@@ -377,15 +390,19 @@ final class V1GetPersonalitiesResponseItem implements BaseModel
     /**
      * @param StartSpeakingPlanShape|null $startSpeakingPlan
      */
-    public function withStartSpeakingPlan(mixed $startSpeakingPlan): self
-    {
+    public function withStartSpeakingPlan(
+        float|array|null $startSpeakingPlan
+    ): self {
         $self = clone $this;
         $self['startSpeakingPlan'] = $startSpeakingPlan;
 
         return $self;
     }
 
-    public function withStopSpeakingPlan(mixed $stopSpeakingPlan): self
+    /**
+     * @param array<string,mixed>|null $stopSpeakingPlan
+     */
+    public function withStopSpeakingPlan(?array $stopSpeakingPlan): self
     {
         $self = clone $this;
         $self['stopSpeakingPlan'] = $stopSpeakingPlan;

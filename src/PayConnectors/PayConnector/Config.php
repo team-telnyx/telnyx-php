@@ -16,7 +16,7 @@ use Telnyx\PayConnectors\PayConnector\Config\AuthType;
  *   authType?: null|AuthType|value-of<AuthType>,
  *   endpointURL?: string|null,
  *   timeout?: int|null,
- *   username?: mixed,
+ *   username?: string|null,
  * }
  */
 final class Config implements BaseModel
@@ -48,7 +48,7 @@ final class Config implements BaseModel
      * Stored username, when supplied. Required to be a nonblank string for basic authentication.
      */
     #[Optional]
-    public mixed $username;
+    public ?string $username;
 
     public function __construct()
     {
@@ -66,7 +66,7 @@ final class Config implements BaseModel
         AuthType|string|null $authType = null,
         ?string $endpointURL = null,
         ?int $timeout = null,
-        mixed $username = null,
+        ?string $username = null,
     ): self {
         $self = new self;
 
@@ -116,7 +116,7 @@ final class Config implements BaseModel
     /**
      * Stored username, when supplied. Required to be a nonblank string for basic authentication.
      */
-    public function withUsername(mixed $username): self
+    public function withUsername(string $username): self
     {
         $self = clone $this;
         $self['username'] = $username;
