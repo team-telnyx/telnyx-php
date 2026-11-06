@@ -70,7 +70,7 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
     public ?bool $expressiveMode;
 
     /**
-     * Two-letter ISO 639-1 code of the language the voice speaks, for example `es`. Only applicable to Soniox and AssemblyAI voices, which speak every language of their model. AssemblyAI accepts `en`, `es`, `de`, `fr`, `it`, and `pt`. When unset, the voice speaks English.
+     * Two-letter ISO 639-1 code of the language the voice speaks, for example `es`. Only applicable to Soniox and AssemblyAI voices, which speak every language of their model. AssemblyAI accepts `en`, `es`, `de`, `fr`, `it`, and `pt`, as a literal code: a dynamic variable is rejected. When unset, the voice speaks English.
      */
     #[Optional(nullable: true)]
     public ?string $language;
@@ -240,7 +240,7 @@ final class InferenceEmbeddingVoiceSettings implements BaseModel
     }
 
     /**
-     * Two-letter ISO 639-1 code of the language the voice speaks, for example `es`. Only applicable to Soniox and AssemblyAI voices, which speak every language of their model. AssemblyAI accepts `en`, `es`, `de`, `fr`, `it`, and `pt`. When unset, the voice speaks English.
+     * Two-letter ISO 639-1 code of the language the voice speaks, for example `es`. Only applicable to Soniox and AssemblyAI voices, which speak every language of their model. AssemblyAI accepts `en`, `es`, `de`, `fr`, `it`, and `pt`, as a literal code: a dynamic variable is rejected. When unset, the voice speaks English.
      */
     public function withLanguage(?string $language): self
     {
