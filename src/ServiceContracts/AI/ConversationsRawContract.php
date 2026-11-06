@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts\AI;
 use Telnyx\AI\Conversations\Conversation;
 use Telnyx\AI\Conversations\ConversationAddMessageParams;
 use Telnyx\AI\Conversations\ConversationCreateParams;
+use Telnyx\AI\Conversations\ConversationDeleteDeleteParams;
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse;
 use Telnyx\AI\Conversations\ConversationGetResponse;
 use Telnyx\AI\Conversations\ConversationListParams;
@@ -113,6 +114,23 @@ interface ConversationsRawContract
     public function addMessage(
         string $conversationID,
         array|ConversationAddMessageParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $insightID Unique identifier of the insight generation request to delete, as returned as `data.id` by the insight generation and insights-list operations. Note that the nested `conversation_insights[].insight_id` field returned in the insights-list response is the insight template ID, not the ID accepted here.
+     * @param array<string,mixed>|ConversationDeleteDeleteParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<mixed>
+     *
+     * @throws APIException
+     */
+    public function deleteDelete(
+        string $insightID,
+        array|ConversationDeleteDeleteParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 

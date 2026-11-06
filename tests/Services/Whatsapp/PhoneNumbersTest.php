@@ -11,7 +11,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetPhoneNumberResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
-use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
+use Telnyx\Whatsapp\PhoneNumbers\WhatsappPhoneResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -46,7 +46,7 @@ final class PhoneNumbersTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PhoneNumberListResponse::class, $item);
+            $this->assertInstanceOf(WhatsappPhoneResponse::class, $item);
         }
     }
 

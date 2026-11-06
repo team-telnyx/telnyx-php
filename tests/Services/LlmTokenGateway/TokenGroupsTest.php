@@ -60,7 +60,7 @@ final class TokenGroupsTest extends TestCase
             name: 'support-backend',
             idempotencyKey: 'Idempotency-Key',
             blocked: true,
-            budgetDuration: BudgetDuration::_1D,
+            budgetDuration: BudgetDuration::BUDGET_DURATION_1_D,
             cacheTtl: 1,
             fallbacks: ['Kimi-K3' => ['GLM-5.3-Flash']],
             guardrails: [
@@ -134,7 +134,7 @@ final class TokenGroupsTest extends TestCase
             ifMatch: 'If-Match',
             allowedModels: ['Kimi-K3', 'GLM-5.3-Flash'],
             blocked: true,
-            budgetDuration: BudgetDuration::_1D,
+            budgetDuration: BudgetDuration::BUDGET_DURATION_1_D,
             cacheTtl: 1,
             fallbacks: ['Kimi-K3' => ['GLM-5.3-Flash']],
             guardrails: [

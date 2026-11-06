@@ -90,7 +90,7 @@ final class PortoutsService implements PortoutsContract
     /**
      * @api
      *
-     * Returns the portout requests according to filters
+     * Returns the portout requests according to filters. Carrier Port Out API available. Please contact porting@telnyx.com.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[carrier_name], filter[country_code], filter[country_code_in], filter[foc_date], filter[inserted_at], filter[phone_number], filter[pon], filter[ported_out_at], filter[spid], filter[status], filter[status_in], filter[support_key]
      * @param RequestOpts|null $requestOptions

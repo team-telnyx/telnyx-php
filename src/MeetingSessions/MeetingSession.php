@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\MeetingSessions;
 
+use Telnyx\CalendarConnections\MeetingSessionAssistant;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MeetingSessions\MeetingSession\Assistant;
+use Telnyx\Core\Omitted;
 use Telnyx\MeetingSessions\MeetingSession\AssistantState;
 use Telnyx\MeetingSessions\MeetingSession\Avatar;
 use Telnyx\MeetingSessions\MeetingSession\AvatarState;
@@ -16,16 +18,17 @@ use Telnyx\MeetingSessions\MeetingSession\Platform;
 use Telnyx\MeetingSessions\MeetingSession\Status;
 
 /**
- * Represents a meeting session. All serializer fields are present and required; nullable fields use null when absent. No actor, provider-bot, idempotency, routing, key, or internal fields are exposed.
+ * Represents a meeting session. Core serializer fields are required; platform-specific fields are optional. Nullable fields use null when absent. No actor, provider-bot, idempotency, routing, key, or internal fields are exposed.
  *
- * @phpstan-import-type AssistantShape from \Telnyx\MeetingSessions\MeetingSession\Assistant
+ * @phpstan-import-type MeetingSessionAssistantShape from \Telnyx\CalendarConnections\MeetingSessionAssistant
  * @phpstan-import-type AvatarShape from \Telnyx\MeetingSessions\MeetingSession\Avatar
  * @phpstan-import-type ConfigShape from \Telnyx\MeetingSessions\MeetingSession\Config
+ * @phpstan-import-type MeetingSessionRecordingExportShape from \Telnyx\MeetingSessions\MeetingSessionRecordingExport
  *
  * @phpstan-type MeetingSessionShape = array{
  *   id: string,
  *   accountID: string,
- *   assistant: null|Assistant|AssistantShape,
+ *   assistant: null|MeetingSessionAssistant|MeetingSessionAssistantShape,
  *   assistantState: null|AssistantState|value-of<AssistantState>,
  *   assistantStateChangedAt: \DateTimeInterface|null,
  *   avatar: null|Avatar|AvatarShape,
@@ -41,18 +44,28 @@ use Telnyx\MeetingSessions\MeetingSession\Status;
  *   meetingURL: string,
  *   metadata: array<string,mixed>,
  *   platform: Platform|value-of<Platform>,
- *   provider: string,
+ *   provider: 'telnyx',
  *   recording: bool,
  *   status: Status|value-of<Status>,
  *   statusDetail: string|null,
  *   updatedAt: \DateTimeInterface,
  *   webhookURL: string|null,
+ *   recordingExport?: null|MeetingSessionRecordingExport|MeetingSessionRecordingExportShape,
+ *   remoteStateObservedAt?: \DateTimeInterface|null,
  * }
  */
 final class MeetingSession implements BaseModel
 {
     /** @use SdkModel<MeetingSessionShape> */
     use SdkModel;
+
+    /**
+     * Always telnyx.
+     *
+     * @var 'telnyx' $provider
+     */
+    #[Required]
+    public string $provider = 'telnyx';
 
     /**
      * Unique identifier for the meeting session.
@@ -70,7 +83,7 @@ final class MeetingSession implements BaseModel
      * Assistant configuration if an assistant is attached, otherwise null.
      */
     #[Required]
-    public ?Assistant $assistant;
+    public ?MeetingSessionAssistant $assistant;
 
     /**
      * Current state of the assistant, or null if no assistant is attached.
@@ -128,7 +141,7 @@ final class MeetingSession implements BaseModel
     public ?\DateTimeInterface $endedAt;
 
     /**
-     * Human-readable failure reason if the session failed, or null.
+     * A machine-readable lifecycle reason, or null. Values include left_on_request, meeting_ended, everyone_left, no_one_joined, silence_timeout, max_duration_reached, admission_timeout, admission_denied, removed_from_meeting, recording_permission_denied, meeting_not_found, meeting_not_started, meeting_access_denied, meeting_full, cancelled, cancelled_calendar_disconnected, cancelled_calendar_event_deleted, cancelled_calendar_superseded, cancelled_policy, internal_error, and other. Treat this vocabulary as extensible.
      */
     #[Required('failure_reason')]
     public ?string $failureReason;
@@ -168,12 +181,6 @@ final class MeetingSession implements BaseModel
     public string $platform;
 
     /**
-     * Provider handling the meeting session.
-     */
-    #[Required]
-    public string $provider;
-
-    /**
      * Whether the session is being recorded.
      */
     #[Required]
@@ -188,7 +195,7 @@ final class MeetingSession implements BaseModel
     public string $status;
 
     /**
-     * Additional human-readable detail about the status, or null.
+     * A machine-readable lifecycle reason, or null. Values include left_on_request, meeting_ended, everyone_left, no_one_joined, silence_timeout, max_duration_reached, admission_timeout, admission_denied, removed_from_meeting, recording_permission_denied, meeting_not_found, meeting_not_started, meeting_access_denied, meeting_full, cancelled, cancelled_calendar_disconnected, cancelled_calendar_event_deleted, cancelled_calendar_superseded, cancelled_policy, internal_error, and other. Treat this vocabulary as extensible.
      */
     #[Required('status_detail')]
     public ?string $statusDetail;
@@ -204,6 +211,18 @@ final class MeetingSession implements BaseModel
      */
     #[Required('webhook_url')]
     public ?string $webhookURL;
+
+    /**
+     * Customer Storage recording reference. Pending is not downloadable; exported means upload was verified; failed is terminal. Download with ordinary Storage authorization. No presigned URL is returned.
+     */
+    #[Optional('recording_export', nullable: true)]
+    public ?MeetingSessionRecordingExport $recordingExport;
+
+    /**
+     * Optional observation time on session list items. Retrieve the individual session when current state is required.
+     */
+    #[Optional('remote_state_observed_at')]
+    public ?\DateTimeInterface $remoteStateObservedAt;
 
     /**
      * `new MeetingSession()` is missing required properties by the API.
@@ -229,7 +248,6 @@ final class MeetingSession implements BaseModel
      *   meetingURL: ...,
      *   metadata: ...,
      *   platform: ...,
-     *   provider: ...,
      *   recording: ...,
      *   status: ...,
      *   statusDetail: ...,
@@ -260,7 +278,6 @@ final class MeetingSession implements BaseModel
      *   ->withMeetingURL(...)
      *   ->withMetadata(...)
      *   ->withPlatform(...)
-     *   ->withProvider(...)
      *   ->withRecording(...)
      *   ->withStatus(...)
      *   ->withStatusDetail(...)
@@ -278,7 +295,7 @@ final class MeetingSession implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Assistant|AssistantShape|null $assistant
+     * @param MeetingSessionAssistant|MeetingSessionAssistantShape|null $assistant
      * @param AssistantState|value-of<AssistantState>|null $assistantState
      * @param Avatar|AvatarShape|null $avatar
      * @param AvatarState|value-of<AvatarState>|null $avatarState
@@ -286,11 +303,12 @@ final class MeetingSession implements BaseModel
      * @param array<string,mixed> $metadata
      * @param Platform|value-of<Platform> $platform
      * @param Status|value-of<Status> $status
+     * @param Omitted|MeetingSessionRecordingExport|MeetingSessionRecordingExportShape|null $recordingExport
      */
     public static function with(
         string $id,
         string $accountID,
-        Assistant|array|null $assistant,
+        MeetingSessionAssistant|array|null $assistant,
         AssistantState|string|null $assistantState,
         ?\DateTimeInterface $assistantStateChangedAt,
         Avatar|array|null $avatar,
@@ -306,12 +324,13 @@ final class MeetingSession implements BaseModel
         string $meetingURL,
         array $metadata,
         Platform|string $platform,
-        string $provider,
         bool $recording,
         Status|string $status,
         ?string $statusDetail,
         \DateTimeInterface $updatedAt,
         ?string $webhookURL,
+        Omitted|MeetingSessionRecordingExport|array|null $recordingExport = Omitted::VALUE,
+        ?\DateTimeInterface $remoteStateObservedAt = null,
     ): self {
         $self = new self;
 
@@ -333,12 +352,14 @@ final class MeetingSession implements BaseModel
         $self['meetingURL'] = $meetingURL;
         $self['metadata'] = $metadata;
         $self['platform'] = $platform;
-        $self['provider'] = $provider;
         $self['recording'] = $recording;
         $self['status'] = $status;
         $self['statusDetail'] = $statusDetail;
         $self['updatedAt'] = $updatedAt;
         $self['webhookURL'] = $webhookURL;
+
+        Omitted::VALUE !== $recordingExport && $self['recordingExport'] = $recordingExport;
+        null !== $remoteStateObservedAt && $self['remoteStateObservedAt'] = $remoteStateObservedAt;
 
         return $self;
     }
@@ -368,10 +389,11 @@ final class MeetingSession implements BaseModel
     /**
      * Assistant configuration if an assistant is attached, otherwise null.
      *
-     * @param Assistant|AssistantShape|null $assistant
+     * @param MeetingSessionAssistant|MeetingSessionAssistantShape|null $assistant
      */
-    public function withAssistant(Assistant|array|null $assistant): self
-    {
+    public function withAssistant(
+        MeetingSessionAssistant|array|null $assistant
+    ): self {
         $self = clone $this;
         $self['assistant'] = $assistant;
 
@@ -487,7 +509,7 @@ final class MeetingSession implements BaseModel
     }
 
     /**
-     * Human-readable failure reason if the session failed, or null.
+     * A machine-readable lifecycle reason, or null. Values include left_on_request, meeting_ended, everyone_left, no_one_joined, silence_timeout, max_duration_reached, admission_timeout, admission_denied, removed_from_meeting, recording_permission_denied, meeting_not_found, meeting_not_started, meeting_access_denied, meeting_full, cancelled, cancelled_calendar_disconnected, cancelled_calendar_event_deleted, cancelled_calendar_superseded, cancelled_policy, internal_error, and other. Treat this vocabulary as extensible.
      */
     public function withFailureReason(?string $failureReason): self
     {
@@ -557,7 +579,9 @@ final class MeetingSession implements BaseModel
     }
 
     /**
-     * Provider handling the meeting session.
+     * Always telnyx.
+     *
+     * @param 'telnyx' $provider
      */
     public function withProvider(string $provider): self
     {
@@ -592,7 +616,7 @@ final class MeetingSession implements BaseModel
     }
 
     /**
-     * Additional human-readable detail about the status, or null.
+     * A machine-readable lifecycle reason, or null. Values include left_on_request, meeting_ended, everyone_left, no_one_joined, silence_timeout, max_duration_reached, admission_timeout, admission_denied, removed_from_meeting, recording_permission_denied, meeting_not_found, meeting_not_started, meeting_access_denied, meeting_full, cancelled, cancelled_calendar_disconnected, cancelled_calendar_event_deleted, cancelled_calendar_superseded, cancelled_policy, internal_error, and other. Treat this vocabulary as extensible.
      */
     public function withStatusDetail(?string $statusDetail): self
     {
@@ -620,6 +644,32 @@ final class MeetingSession implements BaseModel
     {
         $self = clone $this;
         $self['webhookURL'] = $webhookURL;
+
+        return $self;
+    }
+
+    /**
+     * Customer Storage recording reference. Pending is not downloadable; exported means upload was verified; failed is terminal. Download with ordinary Storage authorization. No presigned URL is returned.
+     *
+     * @param MeetingSessionRecordingExport|MeetingSessionRecordingExportShape|null $recordingExport
+     */
+    public function withRecordingExport(
+        MeetingSessionRecordingExport|array|null $recordingExport
+    ): self {
+        $self = clone $this;
+        $self['recordingExport'] = $recordingExport;
+
+        return $self;
+    }
+
+    /**
+     * Optional observation time on session list items. Retrieve the individual session when current state is required.
+     */
+    public function withRemoteStateObservedAt(
+        \DateTimeInterface $remoteStateObservedAt
+    ): self {
+        $self = clone $this;
+        $self['remoteStateObservedAt'] = $remoteStateObservedAt;
 
         return $self;
     }

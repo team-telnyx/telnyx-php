@@ -17,8 +17,8 @@ use Telnyx\Services\Whatsapp\PhoneNumbers\ProfileService;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetPhoneNumberResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetResponse;
-use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams\VerificationMethod;
+use Telnyx\Whatsapp\PhoneNumbers\WhatsappPhoneResponse;
 
 /**
  * Manage Whatsapp phone numbers.
@@ -71,7 +71,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PhoneNumberListResponse>
+     * @return DefaultFlatPagination<WhatsappPhoneResponse>
      *
      * @throws APIException
      */

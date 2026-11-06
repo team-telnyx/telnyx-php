@@ -9,13 +9,13 @@ namespace Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Soniox;
  */
 enum SampleRate: int
 {
-    case _8000 = 8000;
+    case SAMPLE_RATE_8000 = 8000;
 
-    case _16000 = 16000;
+    case SAMPLE_RATE_16000 = 16000;
 
-    case _24000 = 24000;
+    case SAMPLE_RATE_24000 = 24000;
 
-    case _44100 = 44100;
+    case SAMPLE_RATE_44100 = 44100;
 
-    case _48000 = 48000;
+    case SAMPLE_RATE_48000 = 48000;
 }

@@ -14,6 +14,7 @@ use Telnyx\Services\AccessIPRangesService;
 use Telnyx\Services\ActionsService;
 use Telnyx\Services\AddressesService;
 use Telnyx\Services\AdvancedOrdersService;
+use Telnyx\Services\AgentGatewaysService;
 use Telnyx\Services\AIService;
 use Telnyx\Services\AlphanumericSenderIDsService;
 use Telnyx\Services\ArtifactDownloadsService;
@@ -29,6 +30,7 @@ use Telnyx\Services\BotSignupService;
 use Telnyx\Services\BrowserSessionsService;
 use Telnyx\Services\BulkSimCardActionsService;
 use Telnyx\Services\BundlePricingService;
+use Telnyx\Services\CalendarConnectionsService;
 use Telnyx\Services\CallControlApplicationsService;
 use Telnyx\Services\CallEventsService;
 use Telnyx\Services\CallReasonsService;
@@ -94,6 +96,7 @@ use Telnyx\Services\LlmTokenGatewayService;
 use Telnyx\Services\MachinePaymentsService;
 use Telnyx\Services\ManagedAccountsService;
 use Telnyx\Services\MediaService;
+use Telnyx\Services\MeetingBotService;
 use Telnyx\Services\MeetingSessionsService;
 use Telnyx\Services\MessagesService;
 use Telnyx\Services\Messaging10dlcService;
@@ -183,11 +186,11 @@ use Telnyx\Services\TexmlApplicationsService;
 use Telnyx\Services\TexmlService;
 use Telnyx\Services\TextToSpeechService;
 use Telnyx\Services\TrafficPolicyProfilesService;
-use Telnyx\Services\TtsIntegrationsService;
 use Telnyx\Services\TunnelsService;
 use Telnyx\Services\UacConnectionsService;
 use Telnyx\Services\UsageReportsService;
 use Telnyx\Services\UserAddressesService;
+use Telnyx\Services\UserProfileService;
 use Telnyx\Services\UserTagsService;
 use Telnyx\Services\VerificationsService;
 use Telnyx\Services\VerifiedNumbersService;
@@ -1194,11 +1197,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public TtsIntegrationsService $ttsIntegrations;
-
-    /**
-     * @api
-     */
     public TailscaleSubnetRoutersService $tailscaleSubnetRouters;
 
     /**
@@ -1225,6 +1223,26 @@ class Client extends BaseClient
      * @api
      */
     public TunnelsService $tunnels;
+
+    /**
+     * @api
+     */
+    public UserProfileService $userProfile;
+
+    /**
+     * @api
+     */
+    public AgentGatewaysService $agentGateways;
+
+    /**
+     * @api
+     */
+    public CalendarConnectionsService $calendarConnections;
+
+    /**
+     * @api
+     */
+    public MeetingBotService $meetingBot;
 
     private ?string $oauthAccessToken = null;
 
@@ -1491,13 +1509,16 @@ class Client extends BaseClient
         $this->llmTokenGateway = new LlmTokenGatewayService($this);
         $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
         $this->dialMetrics = new DialMetricsService($this);
-        $this->ttsIntegrations = new TtsIntegrationsService($this);
         $this->tailscaleSubnetRouters = new TailscaleSubnetRoutersService($this);
         $this->artifactDownloads = new ArtifactDownloadsService($this);
         $this->email = new EmailService($this);
         $this->networkRoutes = new NetworkRoutesService($this);
         $this->payConnectors = new PayConnectorsService($this);
         $this->tunnels = new TunnelsService($this);
+        $this->userProfile = new UserProfileService($this);
+        $this->agentGateways = new AgentGatewaysService($this);
+        $this->calendarConnections = new CalendarConnectionsService($this);
+        $this->meetingBot = new MeetingBotService($this);
     }
 
     /** @return array<string,string> */

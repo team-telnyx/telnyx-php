@@ -211,7 +211,7 @@ final class ConversationsService implements ConversationsContract
     /**
      * @api
      *
-     * Delete a specific conversation by its ID.
+     * Delete a specific conversation by its ID. Permanently deletes the conversation and its associated data: the conversation's messages, its insight generation results, any conversation memories, and its webhook request logs. Recordings are not deleted — recordings are managed separately through the /v2/recordings endpoints. This action cannot be undone.
      *
      * @param string $conversationID The ID of the conversation to delete
      * @param RequestOpts|null $requestOptions
@@ -277,6 +277,30 @@ final class ConversationsService implements ConversationsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->addMessage($conversationID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Delete one insight generation request for a conversation. Generation results are stored per conversation and per insight template; deleting a request permanently removes the stored result but does not stop insight generation from running again. To remove every insight result for the conversation, delete the conversation itself. A successful delete returns an empty response.
+     *
+     * @param string $insightID Unique identifier of the insight generation request to delete, as returned as `data.id` by the insight generation and insights-list operations. Note that the nested `conversation_insights[].insight_id` field returned in the insights-list response is the insight template ID, not the ID accepted here.
+     * @param string $conversationID unique identifier of the conversation
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function deleteDelete(
+        string $insightID,
+        string $conversationID,
+        RequestOptions|array|null $requestOptions = null,
+    ): mixed {
+        $params = ['conversationID' => $conversationID];
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->deleteDelete($insightID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

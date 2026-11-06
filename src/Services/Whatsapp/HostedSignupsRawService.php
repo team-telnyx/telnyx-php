@@ -15,8 +15,8 @@ use Telnyx\Whatsapp\HostedSignups\HostedSignupCreateParams;
 use Telnyx\Whatsapp\HostedSignups\HostedSignupCreateParams\SignupType;
 use Telnyx\Whatsapp\HostedSignups\HostedSignupGetResponse;
 use Telnyx\Whatsapp\HostedSignups\HostedSignupListParams;
-use Telnyx\Whatsapp\HostedSignups\HostedSignupListResponse;
 use Telnyx\Whatsapp\HostedSignups\HostedSignupNewResponse;
+use Telnyx\Whatsapp\HostedSignups\WhatsappHostedSignup;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -97,7 +97,7 @@ final class HostedSignupsRawService implements HostedSignupsRawContract
      * @param array{pageNumber?: int, pageSize?: int}|HostedSignupListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<HostedSignupListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WhatsappHostedSignup>>
      *
      * @throws APIException
      */
@@ -119,7 +119,7 @@ final class HostedSignupsRawService implements HostedSignupsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: HostedSignupListResponse::class,
+            convert: WhatsappHostedSignup::class,
             page: DefaultFlatPagination::class,
         );
     }

@@ -12,6 +12,7 @@ use Telnyx\EmailEvents\EmailEventGetStatsResponse;
 use Telnyx\EmailEvents\EmailEventListParams;
 use Telnyx\EmailEvents\EmailEventListResponse;
 use Telnyx\EmailEvents\EmailEventRetrieveStatsParams;
+use Telnyx\EmailEventsCursorPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailEventsRawContract;
 
@@ -44,7 +45,7 @@ final class EmailEventsRawService implements EmailEventsRawContract
      * }|EmailEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmailEventListResponse>
+     * @return BaseResponse<EmailEventsCursorPagination<EmailEventListResponse>>
      *
      * @throws APIException
      */
@@ -72,6 +73,7 @@ final class EmailEventsRawService implements EmailEventsRawContract
             ),
             options: $options,
             convert: EmailEventListResponse::class,
+            page: EmailEventsCursorPagination::class,
         );
     }
 

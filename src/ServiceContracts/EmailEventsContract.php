@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\EmailEvents\EmailEventGetStatsResponse;
 use Telnyx\EmailEvents\EmailEventListResponse;
+use Telnyx\EmailEventsCursorPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -43,6 +44,8 @@ interface EmailEventsContract
      * @param \DateTimeInterface $to Inclusive ISO 8601 end timestamp. When `from` is provided without `to`, defaults to `from + 30 days`.
      * @param RequestOpts|null $requestOptions
      *
+     * @return EmailEventsCursorPagination<EmailEventListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -53,7 +56,7 @@ interface EmailEventsContract
         ?string $pageCursor = null,
         ?\DateTimeInterface $to = null,
         RequestOptions|array|null $requestOptions = null,
-    ): EmailEventListResponse;
+    ): EmailEventsCursorPagination;
 
     /**
      * @api

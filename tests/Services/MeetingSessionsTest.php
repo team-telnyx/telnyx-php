@@ -9,6 +9,7 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\MeetingSessions\MeetingSessionDeleteRecordingMediaResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetEventsResponse;
+use Telnyx\MeetingSessions\MeetingSessionGetRecordingsResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetTranscriptResponse;
 use Telnyx\MeetingSessions\MeetingSessionListResponse;
 use Telnyx\MeetingSessions\MeetingSessionResponse;
@@ -57,8 +58,8 @@ final class MeetingSessionsTest extends TestCase
         $result = $this->client->meetingSessions->create(
             meetingURL: 'https://zoom.us/j/1234567890',
             assistant: [
-                'id' => 'asst_fake-uuid-1234',
-                'audioGate' => 'full_duplex',
+                'id' => 'x',
+                'audioGate' => 'half_duplex',
                 'avatar' => true,
                 'dynamicVariables' => ['foo' => 'string'],
                 'leaveOnEnd' => true,
@@ -70,9 +71,23 @@ final class MeetingSessionsTest extends TestCase
                 'format' => 'jpeg',
             ],
             chatOnEnter: 'x',
-            idempotencyKey: 'x',
+            idempotencyKey: 'weekly-planning-2026-11-10',
             joinAt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            leavePolicy: [
+                'aloneSeconds' => 300,
+                'botNameKeywords' => ['x'],
+                'hostWaitSeconds' => 1,
+                'lobbyWaitSeconds' => 1,
+                'maxDurationSeconds' => 7200,
+                'silenceGraceSeconds' => 1,
+                'silenceSeconds' => 1,
+            ],
             metadata: ['foo' => 'bar'],
+            recording: true,
+            recordingExport: [
+                'bucket' => 'meeting-recordings', 'prefix' => 'weekly-planning',
+            ],
+            recordingView: 'speaker_view',
             speakOnEnter: 'x',
             summarizeOnEnd: true,
             voice: 'x',
@@ -172,6 +187,24 @@ final class MeetingSessionsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MeetingSessionGetEventsResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRetrieveRecordings(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->meetingSessions->retrieveRecordings(
+            'mtgsess_a1b2c3d4-e5f6-7890-abcd-ef1234567890'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MeetingSessionGetRecordingsResponse::class,
+            $result
+        );
     }
 
     #[Test]

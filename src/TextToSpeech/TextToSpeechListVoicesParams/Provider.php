@@ -26,4 +26,6 @@ enum Provider: string
     case HUMAIN = 'humain';
 
     case SONIOX = 'soniox';
+
+    case ASSEMBLYAI = 'assemblyai';
 }
