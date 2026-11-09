@@ -13,11 +13,11 @@ use Telnyx\Core\Omitted;
 /**
  * @phpstan-type NoProcessorAuthenticationShape = array{
  *   authType: 'none',
- *   token?: mixed,
+ *   token?: string|null,
  *   endpointURL?: string|null,
- *   password?: mixed,
+ *   password?: string|null,
  *   timeout?: int|null,
- *   username?: mixed,
+ *   username?: string|null,
  * }
  */
 final class NoProcessorAuthentication implements BaseModel
@@ -33,7 +33,7 @@ final class NoProcessorAuthentication implements BaseModel
      * Nonblank string required for bearer authentication. Write-only; omitted from responses. Re-send when replacing a bearer-auth config.
      */
     #[Optional]
-    public mixed $token;
+    public ?string $token;
 
     /**
      * HTTP or HTTPS processor URL with a host. Use HTTPS to protect payment data in transit.
@@ -45,7 +45,7 @@ final class NoProcessorAuthentication implements BaseModel
      * Nonblank string required for basic authentication. Write-only; omitted from responses. Re-send when replacing a basic-auth config.
      */
     #[Optional]
-    public mixed $password;
+    public ?string $password;
 
     /**
      * Processor HTTP timeout in milliseconds. Omitted or null uses 10000; null is removed before storage. Not the IVR digit-gather timeout.
@@ -57,7 +57,7 @@ final class NoProcessorAuthentication implements BaseModel
      * Nonblank string required for basic authentication. Returned in connector responses.
      */
     #[Optional]
-    public mixed $username;
+    public ?string $username;
 
     public function __construct()
     {
@@ -71,10 +71,10 @@ final class NoProcessorAuthentication implements BaseModel
      */
     public static function with(
         int|Omitted|null $timeout = Omitted::VALUE,
-        mixed $token = null,
+        ?string $token = null,
         ?string $endpointURL = null,
-        mixed $password = null,
-        mixed $username = null,
+        ?string $password = null,
+        ?string $username = null,
     ): self {
         $self = new self;
 
@@ -101,7 +101,7 @@ final class NoProcessorAuthentication implements BaseModel
     /**
      * Nonblank string required for bearer authentication. Write-only; omitted from responses. Re-send when replacing a bearer-auth config.
      */
-    public function withToken(mixed $token): self
+    public function withToken(string $token): self
     {
         $self = clone $this;
         $self['token'] = $token;
@@ -123,7 +123,7 @@ final class NoProcessorAuthentication implements BaseModel
     /**
      * Nonblank string required for basic authentication. Write-only; omitted from responses. Re-send when replacing a basic-auth config.
      */
-    public function withPassword(mixed $password): self
+    public function withPassword(string $password): self
     {
         $self = clone $this;
         $self['password'] = $password;
@@ -145,7 +145,7 @@ final class NoProcessorAuthentication implements BaseModel
     /**
      * Nonblank string required for basic authentication. Returned in connector responses.
      */
-    public function withUsername(mixed $username): self
+    public function withUsername(string $username): self
     {
         $self = clone $this;
         $self['username'] = $username;

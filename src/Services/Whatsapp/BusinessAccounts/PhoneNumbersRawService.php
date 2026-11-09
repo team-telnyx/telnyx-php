@@ -14,7 +14,7 @@ use Telnyx\ServiceContracts\Whatsapp\BusinessAccounts\PhoneNumbersRawContract;
 use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberInitializeVerificationParams;
 use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberInitializeVerificationParams\VerificationMethod;
 use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberListParams;
-use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberListResponse;
+use Telnyx\Whatsapp\PhoneNumbers\WhatsappPhoneResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -36,7 +36,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      * @param array{pageNumber?: int, pageSize?: int}|PhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumberListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WhatsappPhoneResponse>>
      *
      * @throws APIException
      */
@@ -59,7 +59,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PhoneNumberListResponse::class,
+            convert: WhatsappPhoneResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

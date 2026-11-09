@@ -52,7 +52,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?bool $enableEndpointDetection;
 
     /**
-     * @deprecated
+     * @deprecated Ignored. Configure AssemblyAI turn detection with min_turn_silence and max_turn_silence instead.
      *
      * Deprecated and ignored. Accepted for backwards compatibility. AssemblyAI turn detection is configured with min_turn_silence and max_turn_silence.
      */

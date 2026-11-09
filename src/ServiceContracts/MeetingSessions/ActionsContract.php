@@ -17,7 +17,7 @@ interface ActionsContract
      * @api
      *
      * @param string $id unique identifier for the meeting session
-     * @param string $text chat message text to send in the meeting
+     * @param string $text Message text, 1–4000 characters. On Google Meet and Teams, also at most 4096 UTF-8 bytes and nonblank; control characters other than tab and line breaks are rejected. CRLF is normalized to LF.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

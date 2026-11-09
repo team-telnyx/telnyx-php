@@ -21,7 +21,7 @@ final class MeetingSessionResponse implements BaseModel
     use SdkModel;
 
     /**
-     * Represents a meeting session. All serializer fields are present and required; nullable fields use null when absent. No actor, provider-bot, idempotency, routing, key, or internal fields are exposed.
+     * Represents a meeting session. Core serializer fields are required; platform-specific fields are optional. Nullable fields use null when absent. No actor, provider-bot, idempotency, routing, key, or internal fields are exposed.
      */
     #[Required]
     public MeetingSession $data;
@@ -62,7 +62,7 @@ final class MeetingSessionResponse implements BaseModel
     }
 
     /**
-     * Represents a meeting session. All serializer fields are present and required; nullable fields use null when absent. No actor, provider-bot, idempotency, routing, key, or internal fields are exposed.
+     * Represents a meeting session. Core serializer fields are required; platform-specific fields are optional. Nullable fields use null when absent. No actor, provider-bot, idempotency, routing, key, or internal fields are exposed.
      *
      * @param MeetingSession|MeetingSessionShape $data
      */

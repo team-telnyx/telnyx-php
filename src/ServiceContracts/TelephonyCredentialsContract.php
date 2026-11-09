@@ -10,6 +10,7 @@ use Telnyx\RequestOptions;
 use Telnyx\TelephonyCredentials\TelephonyCredential;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
+use Telnyx\TelephonyCredentials\TelephonyCredentialGetTokenMaterialResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Filter;
 use Telnyx\TelephonyCredentials\TelephonyCredentialNewResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateResponse;
@@ -115,4 +116,17 @@ interface TelephonyCredentialsContract
         ?string $idempotencyKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): string;
+
+    /**
+     * @api
+     *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveTokenMaterial(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): TelephonyCredentialGetTokenMaterialResponse;
 }

@@ -7,9 +7,10 @@ namespace Telnyx\AI\Tests\TestFramework\V1\V1GetPersonalitiesResponseItem;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
+use Telnyx\Core\Conversion\MapOf;
 
 /**
- * @phpstan-type StartSpeakingPlanVariants = mixed|float
+ * @phpstan-type StartSpeakingPlanVariants = float|array<string,mixed>
  * @phpstan-type StartSpeakingPlanShape = StartSpeakingPlanVariants
  */
 final class StartSpeakingPlan implements ConverterSource
@@ -21,6 +22,6 @@ final class StartSpeakingPlan implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['float', 'mixed'];
+        return ['float', new MapOf('mixed')];
     }
 }

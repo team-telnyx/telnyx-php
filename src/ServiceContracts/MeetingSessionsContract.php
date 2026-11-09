@@ -8,17 +8,23 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\Assistant;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSessionCameraImageBase64Source;
 use Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage\MeetingSessionCameraImageURLSource;
+use Telnyx\MeetingSessions\MeetingSessionCreateParams\RecordingView;
 use Telnyx\MeetingSessions\MeetingSessionDeleteRecordingMediaResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetEventsResponse;
+use Telnyx\MeetingSessions\MeetingSessionGetRecordingsResponse;
 use Telnyx\MeetingSessions\MeetingSessionGetTranscriptResponse;
+use Telnyx\MeetingSessions\MeetingSessionLeavePolicy;
 use Telnyx\MeetingSessions\MeetingSessionListParams\Status;
 use Telnyx\MeetingSessions\MeetingSessionListResponse;
+use Telnyx\MeetingSessions\MeetingSessionRecordingDestination;
 use Telnyx\MeetingSessions\MeetingSessionResponse;
 use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type AssistantShape from \Telnyx\MeetingSessions\MeetingSessionCreateParams\Assistant
  * @phpstan-import-type CameraImageShape from \Telnyx\MeetingSessions\MeetingSessionCreateParams\CameraImage
+ * @phpstan-import-type MeetingSessionLeavePolicyShape from \Telnyx\MeetingSessions\MeetingSessionLeavePolicy
+ * @phpstan-import-type MeetingSessionRecordingDestinationShape from \Telnyx\MeetingSessions\MeetingSessionRecordingDestination
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface MeetingSessionsContract
@@ -27,17 +33,21 @@ interface MeetingSessionsContract
      * @api
      *
      * @param string $meetingURL the meeting URL the bot should join
-     * @param Assistant|AssistantShape $assistant Attach a Telnyx AI Assistant to the session. Supply the Assistant's ID; the Meeting service connects it to the meeting directly. The Call Control connection, caller ID and loopback SIP URI previously required here have been removed and are now rejected as unknown fields.
+     * @param Assistant|AssistantShape $assistant Attach a Telnyx AI Assistant owned by the authenticated account. Supply its ID and optional conversation settings. Unknown fields are rejected.
      * @param bool $bargeIn When enabled, a human participant `speech_on` event interrupts and stops the current bot audio; it does not bypass admission or initiate speech. Assistant sessions reject `barge_in: true`.
      * @param string $botName Display name for the bot in the meeting. Defaults to "Meeting Bot".
-     * @param CameraImageShape $cameraImage Write-only static camera-tile image for this session, not a native account or participant profile photo. Supply exactly one JPEG source. When effective, the image is used as the bot's static camera/video output; presentation varies by meeting platform and recording configuration and is not guaranteed in recordings. An effective Avatar or Assistant webpage output takes precedence, so this input is ignored and a URL source is not fetched.
-     * @param string $chatOnEnter A message the bot posts to the meeting's chat as soon as it becomes active — typically a recording disclosure. Delivered at most once. Independent of `speak_on_enter`: both may be set, and the chat message posts first because it does not wait for text-to-speech or avatar startup. Rejected with 422 `unsupported_capability` on platforms without meeting chat.
-     * @param string $idempotencyKey Client-supplied idempotency key to safely retry creation requests without duplicating sessions. Lookup is scoped to the authenticated account and compares the key only; the request payload is not fingerprinted or compared.
-     * @param \DateTimeInterface $joinAt ISO-8601 timestamp in the future at which the bot should join. If omitted, the bot joins immediately.
+     * @param CameraImageShape $cameraImage Not supported for Google Meet and Teams joins (422 unsupported_capability). Write-only static camera-tile image for this session, not an account or participant profile photo. Supply exactly one JPEG source. When effective, the image is used as the bot's static camera/video output; presentation varies by meeting platform and recording configuration and is not guaranteed in recordings. An attached assistant or avatar takes precedence, so this input is ignored and a URL source is not fetched.
+     * @param string $chatOnEnter A message the bot posts to the meeting's chat as soon as it becomes active — typically a recording disclosure. Delivered at most once. Independent of `speak_on_enter`: both may be set, and the chat message posts first because it does not wait for text-to-speech or avatar startup. Rejected with 422 `unsupported_capability` on platforms without meeting chat. For Google Meet and Teams, text must be nonblank, at most 4096 UTF-8 bytes, with no control characters except tabs and line breaks. Counts toward the 1000-chat-request session limit.
+     * @param string $idempotencyKey Use a unique key per intended join and reuse the same key and request on retries. Reusing a key with a different join configuration or meeting URL can return 409 invalid_state. Always retry with the original request.
+     * @param \DateTimeInterface $joinAt Future ISO-8601 join timestamp including timezone. Google Meet and Teams accept dates at most three years ahead. Omit for an immediate join. Assistant sessions created through this endpoint must join immediately.
+     * @param MeetingSessionLeavePolicy|MeetingSessionLeavePolicyShape $leavePolicy Automatic departure settings for Google Meet and Teams. Omitted fields use the default behavior. Set at creation; cannot be changed later. Zoom ignores this policy.
      * @param array<string,mixed> $metadata Arbitrary key-value metadata attached to the session. The serialized JSON representation must not exceed 16384 characters at runtime.
-     * @param string $speakOnEnter Text the bot speaks when it enters the meeting. **Not spoken when an `assistant` is attached**: the value is accepted and echoed back on the session, but the assistant owns the voice and the line is never delivered, with no event reporting the omission. Use `chat_on_enter` to announce an assistant-backed bot. Rejected with 400 `invalid_request` when `assistant.avatar` is `true`.
+     * @param bool $recording Google Meet and Teams only. Defaults to true when recording_export is supplied and false otherwise. True requires recording_export.bucket; false cannot be combined with recording_export. Fixed at creation, with no pause/resume action. Zoom rejects recording, recording_view, and recording_export with 422 unsupported_capability; omit these fields for Zoom.
+     * @param MeetingSessionRecordingDestination|MeetingSessionRecordingDestinationShape $recordingExport Customer-owned Telnyx Storage destination for recording exports. Uses the authenticated organization and user; do not supply credentials, region, organization ID or object key.
+     * @param RecordingView|value-of<RecordingView> $recordingView Recording layout for Google Meet and Teams. Defaults to speaker_view. Accepted at creation only; does not enable recording by itself.
+     * @param string $speakOnEnter Text the bot speaks after joining. Available for sessions without a digital avatar. With an AI Assistant, the greeting waits until the assistant is connected. Rejected with 400 invalid_request when assistant.avatar is true.
      * @param bool $summarizeOnEnd if true, generate a summary artifact when the session ends
-     * @param string $voice Session-default voice identifier used for `speak_on_enter` and ordinary speak actions. A voice supplied on an individual speak action overrides this default for that utterance.
+     * @param string $voice Session-default voice identifier used for `speak_on_enter` and ordinary speak actions. A voice supplied on an individual speak action overrides this default for that utterance. With an assistant attached, its conversational voice remains configured on the assistant.
      * @param string $webhookURL HTTPS endpoint to receive session lifecycle callbacks. Static validation requires HTTPS, rejects embedded credentials and blocked hosts, and enforces egress policy. Validation makes no network request to the endpoint.
      * @param RequestOpts|null $requestOptions
      *
@@ -52,7 +62,11 @@ interface MeetingSessionsContract
         ?string $chatOnEnter = null,
         ?string $idempotencyKey = null,
         ?\DateTimeInterface $joinAt = null,
+        MeetingSessionLeavePolicy|array|null $leavePolicy = null,
         ?array $metadata = null,
+        ?bool $recording = null,
+        MeetingSessionRecordingDestination|array|null $recordingExport = null,
+        RecordingView|string $recordingView = 'speaker_view',
         ?string $speakOnEnter = null,
         bool $summarizeOnEnd = false,
         ?string $voice = null,
@@ -145,6 +159,19 @@ interface MeetingSessionsContract
         int $limit = 100,
         RequestOptions|array|null $requestOptions = null,
     ): MeetingSessionGetEventsResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id unique identifier for the meeting session
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordings(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): MeetingSessionGetRecordingsResponse;
 
     /**
      * @api

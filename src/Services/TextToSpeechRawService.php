@@ -11,6 +11,7 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechRawContract;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Assemblyai;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs;
@@ -32,6 +33,7 @@ use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
 /**
  * Text to speech streaming command operations.
  *
+ * @phpstan-import-type AssemblyaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Assemblyai
  * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws
  * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure
  * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs
@@ -60,11 +62,12 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *
      * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`, `soniox`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`, `soniox`, `assemblyai`.
      *
      * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
      *
      * @param array{
+     *   assemblyai?: Assemblyai|AssemblyaiShape,
      *   aws?: Aws|AwsShape,
      *   azure?: Azure|AzureShape,
      *   disableCache?: bool,
@@ -149,7 +152,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *
      * Open a WebSocket connection to stream text and receive synthesized audio in real time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header. Send JSON frames with text to synthesize; receive JSON frames containing base64-encoded audio chunks.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `minimax`, `resemble`, `elevenlabs`, `xai`, `humain`, `soniox`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `minimax`, `resemble`, `elevenlabs`, `xai`, `humain`, `soniox`, `assemblyai`.
      *
      * **Connection flow:**
      * 1. Open WebSocket with query parameters specifying provider, voice, and model.

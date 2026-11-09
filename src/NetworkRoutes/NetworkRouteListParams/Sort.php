@@ -11,7 +11,7 @@ enum Sort: string
 {
     case CIDR = 'cidr';
 
-    case MINUSCIDR = '-cidr';
+    case MINUS_CIDR = '-cidr';
 
     case STATUS = 'status';
 

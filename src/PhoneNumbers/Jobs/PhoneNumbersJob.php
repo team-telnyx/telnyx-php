@@ -8,28 +8,26 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\FailedOperation;
-use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PendingOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\Status;
-use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\SuccessfulOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\Type;
 use Telnyx\PhoneNumbersJobPhoneNumber;
 
 /**
  * @phpstan-import-type FailedOperationShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\FailedOperation
- * @phpstan-import-type PendingOperationShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PendingOperation
+ * @phpstan-import-type PhoneNumbersJobPendingOperationShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJobPendingOperation
  * @phpstan-import-type PhoneNumbersJobPhoneNumberShape from \Telnyx\PhoneNumbersJobPhoneNumber
- * @phpstan-import-type SuccessfulOperationShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\SuccessfulOperation
+ * @phpstan-import-type PhoneNumbersJobSuccessfulOperationShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJobSuccessfulOperation
  *
  * @phpstan-type PhoneNumbersJobShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
  *   etc?: \DateTimeInterface|null,
  *   failedOperations?: list<FailedOperation|FailedOperationShape>|null,
- *   pendingOperations?: list<PendingOperation|PendingOperationShape>|null,
+ *   pendingOperations?: list<PhoneNumbersJobPendingOperation|PhoneNumbersJobPendingOperationShape>|null,
  *   phoneNumbers?: list<PhoneNumbersJobPhoneNumber|PhoneNumbersJobPhoneNumberShape>|null,
  *   recordType?: string|null,
  *   status?: null|Status|value-of<Status>,
- *   successfulOperations?: list<SuccessfulOperation|SuccessfulOperationShape>|null,
+ *   successfulOperations?: list<PhoneNumbersJobSuccessfulOperation|PhoneNumbersJobSuccessfulOperationShape>|null,
  *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  * }
@@ -61,8 +59,11 @@ final class PhoneNumbersJob implements BaseModel
     #[Optional('failed_operations', list: FailedOperation::class)]
     public ?array $failedOperations;
 
-    /** @var list<PendingOperation>|null $pendingOperations */
-    #[Optional('pending_operations', list: PendingOperation::class)]
+    /** @var list<PhoneNumbersJobPendingOperation>|null $pendingOperations */
+    #[Optional(
+        'pending_operations',
+        list: PhoneNumbersJobPendingOperation::class
+    )]
     public ?array $pendingOperations;
 
     /** @var list<PhoneNumbersJobPhoneNumber>|null $phoneNumbers */
@@ -83,8 +84,11 @@ final class PhoneNumbersJob implements BaseModel
     #[Optional(enum: Status::class)]
     public ?string $status;
 
-    /** @var list<SuccessfulOperation>|null $successfulOperations */
-    #[Optional('successful_operations', list: SuccessfulOperation::class)]
+    /** @var list<PhoneNumbersJobSuccessfulOperation>|null $successfulOperations */
+    #[Optional(
+        'successful_operations',
+        list: PhoneNumbersJobSuccessfulOperation::class
+    )]
     public ?array $successfulOperations;
 
     /**
@@ -112,10 +116,10 @@ final class PhoneNumbersJob implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<FailedOperation|FailedOperationShape>|null $failedOperations
-     * @param list<PendingOperation|PendingOperationShape>|null $pendingOperations
+     * @param list<PhoneNumbersJobPendingOperation|PhoneNumbersJobPendingOperationShape>|null $pendingOperations
      * @param list<PhoneNumbersJobPhoneNumber|PhoneNumbersJobPhoneNumberShape>|null $phoneNumbers
      * @param Status|value-of<Status>|null $status
-     * @param list<SuccessfulOperation|SuccessfulOperationShape>|null $successfulOperations
+     * @param list<PhoneNumbersJobSuccessfulOperation|PhoneNumbersJobSuccessfulOperationShape>|null $successfulOperations
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
@@ -193,7 +197,7 @@ final class PhoneNumbersJob implements BaseModel
     }
 
     /**
-     * @param list<PendingOperation|PendingOperationShape> $pendingOperations
+     * @param list<PhoneNumbersJobPendingOperation|PhoneNumbersJobPendingOperationShape> $pendingOperations
      */
     public function withPendingOperations(array $pendingOperations): self
     {
@@ -239,7 +243,7 @@ final class PhoneNumbersJob implements BaseModel
     }
 
     /**
-     * @param list<SuccessfulOperation|SuccessfulOperationShape> $successfulOperations
+     * @param list<PhoneNumbersJobSuccessfulOperation|PhoneNumbersJobSuccessfulOperationShape> $successfulOperations
      */
     public function withSuccessfulOperations(array $successfulOperations): self
     {

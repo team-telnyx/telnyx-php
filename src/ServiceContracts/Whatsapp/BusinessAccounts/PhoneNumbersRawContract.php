@@ -10,7 +10,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberInitializeVerificationParams;
 use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberListParams;
-use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberListResponse;
+use Telnyx\Whatsapp\PhoneNumbers\WhatsappPhoneResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -24,7 +24,7 @@ interface PhoneNumbersRawContract
      * @param array<string,mixed>|PhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumberListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WhatsappPhoneResponse>>
      *
      * @throws APIException
      */

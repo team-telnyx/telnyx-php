@@ -8,11 +8,10 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Omitted;
-use Telnyx\EmailTemplates\UpdateEmailTemplateRequest\VariableSchema;
 use Telnyx\EmailTemplates\UpdateEmailTemplateRequest\VariablesMode;
 
 /**
- * @phpstan-import-type VariableSchemaShape from \Telnyx\EmailTemplates\UpdateEmailTemplateRequest\VariableSchema
+ * @phpstan-import-type VariableSchemaEntryShape from \Telnyx\EmailTemplates\VariableSchemaEntry
  *
  * @phpstan-type UpdateEmailTemplateRequestShape = array{
  *   autoescape?: bool|null,
@@ -21,7 +20,7 @@ use Telnyx\EmailTemplates\UpdateEmailTemplateRequest\VariablesMode;
  *   strictVariables?: bool|null,
  *   subject?: string|null,
  *   textBody?: string|null,
- *   variableSchema?: array<string,VariableSchema|VariableSchemaShape>|null,
+ *   variableSchema?: array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null,
  *   variables?: list<string>|null,
  *   variablesMode?: null|VariablesMode|value-of<VariablesMode>,
  * }
@@ -67,9 +66,13 @@ final class UpdateEmailTemplateRequest implements BaseModel
     /**
      * Structured variable requirements. Required variables cannot define defaults; invalid combinations return 422. Set to `null` to clear the schema.
      *
-     * @var array<string,VariableSchema>|null $variableSchema
+     * @var array<string,VariableSchemaEntry>|null $variableSchema
      */
-    #[Optional('variable_schema', map: VariableSchema::class, nullable: true)]
+    #[Optional(
+        'variable_schema',
+        map: VariableSchemaEntry::class,
+        nullable: true
+    )]
     public ?array $variableSchema;
 
     /**
@@ -98,7 +101,7 @@ final class UpdateEmailTemplateRequest implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Omitted|array<string,VariableSchema|VariableSchemaShape>|null $variableSchema
+     * @param Omitted|array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null $variableSchema
      * @param list<string>|Omitted|null $variables
      * @param VariablesMode|value-of<VariablesMode>|null $variablesMode
      */
@@ -194,7 +197,7 @@ final class UpdateEmailTemplateRequest implements BaseModel
     /**
      * Structured variable requirements. Required variables cannot define defaults; invalid combinations return 422. Set to `null` to clear the schema.
      *
-     * @param array<string,VariableSchema|VariableSchemaShape>|null $variableSchema
+     * @param array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null $variableSchema
      */
     public function withVariableSchema(?array $variableSchema): self
     {

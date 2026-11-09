@@ -23,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   failureReason: string|null,
  *   lastActivityAt: \DateTimeInterface|null,
  *   limits: Limits|LimitsShape,
- *   metadata: mixed,
+ *   metadata: array<string,mixed>,
  *   policy: Policy|PolicyShape,
  *   readyAt: \DateTimeInterface|null,
  *   status: Status|value-of<Status>,
@@ -55,8 +55,9 @@ final class Session implements BaseModel
     #[Required]
     public Limits $limits;
 
-    #[Required]
-    public mixed $metadata;
+    /** @var array<string,mixed> $metadata */
+    #[Required(map: 'mixed')]
+    public array $metadata;
 
     #[Required]
     public Policy $policy;
@@ -116,6 +117,7 @@ final class Session implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Limits|LimitsShape $limits
+     * @param array<string,mixed> $metadata
      * @param Policy|PolicyShape $policy
      * @param Status|value-of<Status> $status
      */
@@ -127,7 +129,7 @@ final class Session implements BaseModel
         ?string $failureReason,
         ?\DateTimeInterface $lastActivityAt,
         Limits|array $limits,
-        mixed $metadata,
+        array $metadata,
         Policy|array $policy,
         ?\DateTimeInterface $readyAt,
         Status|string $status,
@@ -209,7 +211,10 @@ final class Session implements BaseModel
         return $self;
     }
 
-    public function withMetadata(mixed $metadata): self
+    /**
+     * @param array<string,mixed> $metadata
+     */
+    public function withMetadata(array $metadata): self
     {
         $self = clone $this;
         $self['metadata'] = $metadata;

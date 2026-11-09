@@ -4,15 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\SessionStatusChangedWebhookEvent;
 
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Webhooks\SessionStatusChangedWebhookEvent\Data\PreviousStatus;
 
 /**
  * Status transition details.
  *
  * @phpstan-type DataShape = array{
- *   recording: bool, sessionID: string, status: string, statusDetail: string|null
+ *   recording: bool,
+ *   sessionID: string,
+ *   status: string,
+ *   statusDetail: string|null,
+ *   previousStatus?: null|PreviousStatus|value-of<PreviousStatus>,
  * }
  */
 final class Data implements BaseModel
@@ -45,6 +51,14 @@ final class Data implements BaseModel
     public ?string $statusDetail;
 
     /**
+     * Previous lifecycle status, when supplied.
+     *
+     * @var value-of<PreviousStatus>|null $previousStatus
+     */
+    #[Optional('previous_status', enum: PreviousStatus::class)]
+    public ?string $previousStatus;
+
+    /**
      * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -71,12 +85,15 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PreviousStatus|value-of<PreviousStatus>|null $previousStatus
      */
     public static function with(
         bool $recording,
         string $sessionID,
         string $status,
-        ?string $statusDetail
+        ?string $statusDetail,
+        PreviousStatus|string|null $previousStatus = null,
     ): self {
         $self = new self;
 
@@ -84,6 +101,8 @@ final class Data implements BaseModel
         $self['sessionID'] = $sessionID;
         $self['status'] = $status;
         $self['statusDetail'] = $statusDetail;
+
+        null !== $previousStatus && $self['previousStatus'] = $previousStatus;
 
         return $self;
     }
@@ -128,6 +147,20 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['statusDetail'] = $statusDetail;
+
+        return $self;
+    }
+
+    /**
+     * Previous lifecycle status, when supplied.
+     *
+     * @param PreviousStatus|value-of<PreviousStatus> $previousStatus
+     */
+    public function withPreviousStatus(
+        PreviousStatus|string $previousStatus
+    ): self {
+        $self = clone $this;
+        $self['previousStatus'] = $previousStatus;
 
         return $self;
     }

@@ -4,17 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\MeetingSessions\MeetingSession;
 
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\MeetingSessions\MeetingSession\Config\DeepfakeDetection;
+use Telnyx\MeetingSessions\MeetingSession\Config\RecordingView;
+use Telnyx\MeetingSessions\MeetingSessionLeavePolicy;
 
 /**
+ * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\MeetingSessions\MeetingSession\Config\DeepfakeDetection
+ * @phpstan-import-type MeetingSessionLeavePolicyShape from \Telnyx\MeetingSessions\MeetingSessionLeavePolicy
+ *
  * @phpstan-type ConfigShape = array{
  *   bargeIn: bool,
  *   chatOnEnter: string|null,
+ *   deepfakeDetection: DeepfakeDetection|DeepfakeDetectionShape,
  *   speakOnEnter: string|null,
  *   summarizeOnEnd: bool,
  *   voice: string|null,
+ *   leavePolicy?: null|MeetingSessionLeavePolicy|MeetingSessionLeavePolicyShape,
+ *   recording?: bool|null,
+ *   recordingView?: null|RecordingView|value-of<RecordingView>,
  * }
  */
 final class Config implements BaseModel
@@ -35,6 +46,12 @@ final class Config implements BaseModel
     public ?string $chatOnEnter;
 
     /**
+     * Detection settings. Enabling audio or video detection is currently unsupported.
+     */
+    #[Required('deepfake_detection')]
+    public DeepfakeDetection $deepfakeDetection;
+
+    /**
      * Text spoken on meeting entry, or null if not set.
      */
     #[Required('speak_on_enter')]
@@ -53,6 +70,26 @@ final class Config implements BaseModel
     public ?string $voice;
 
     /**
+     * Automatic departure settings for Google Meet and Teams. Omitted fields use the default behavior. Set at creation; cannot be changed later. Zoom ignores this policy.
+     */
+    #[Optional('leave_policy')]
+    public ?MeetingSessionLeavePolicy $leavePolicy;
+
+    /**
+     * Recording intent set at creation for Google Meet and Teams. Distinct from the top-level recording field, which reports current activity.
+     */
+    #[Optional]
+    public ?bool $recording;
+
+    /**
+     * Non-default recording layout. Omitted for the default speaker_view layout.
+     *
+     * @var value-of<RecordingView>|null $recordingView
+     */
+    #[Optional('recording_view', enum: RecordingView::class)]
+    public ?string $recordingView;
+
+    /**
      * `new Config()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -60,6 +97,7 @@ final class Config implements BaseModel
      * Config::with(
      *   bargeIn: ...,
      *   chatOnEnter: ...,
+     *   deepfakeDetection: ...,
      *   speakOnEnter: ...,
      *   summarizeOnEnd: ...,
      *   voice: ...,
@@ -72,6 +110,7 @@ final class Config implements BaseModel
      * (new Config)
      *   ->withBargeIn(...)
      *   ->withChatOnEnter(...)
+     *   ->withDeepfakeDetection(...)
      *   ->withSpeakOnEnter(...)
      *   ->withSummarizeOnEnd(...)
      *   ->withVoice(...)
@@ -86,21 +125,34 @@ final class Config implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DeepfakeDetection|DeepfakeDetectionShape $deepfakeDetection
+     * @param MeetingSessionLeavePolicy|MeetingSessionLeavePolicyShape|null $leavePolicy
+     * @param RecordingView|value-of<RecordingView>|null $recordingView
      */
     public static function with(
         bool $bargeIn,
         ?string $chatOnEnter,
+        DeepfakeDetection|array $deepfakeDetection,
         ?string $speakOnEnter,
         bool $summarizeOnEnd,
         ?string $voice,
+        MeetingSessionLeavePolicy|array|null $leavePolicy = null,
+        ?bool $recording = null,
+        RecordingView|string|null $recordingView = null,
     ): self {
         $self = new self;
 
         $self['bargeIn'] = $bargeIn;
         $self['chatOnEnter'] = $chatOnEnter;
+        $self['deepfakeDetection'] = $deepfakeDetection;
         $self['speakOnEnter'] = $speakOnEnter;
         $self['summarizeOnEnd'] = $summarizeOnEnd;
         $self['voice'] = $voice;
+
+        null !== $leavePolicy && $self['leavePolicy'] = $leavePolicy;
+        null !== $recording && $self['recording'] = $recording;
+        null !== $recordingView && $self['recordingView'] = $recordingView;
 
         return $self;
     }
@@ -123,6 +175,20 @@ final class Config implements BaseModel
     {
         $self = clone $this;
         $self['chatOnEnter'] = $chatOnEnter;
+
+        return $self;
+    }
+
+    /**
+     * Detection settings. Enabling audio or video detection is currently unsupported.
+     *
+     * @param DeepfakeDetection|DeepfakeDetectionShape $deepfakeDetection
+     */
+    public function withDeepfakeDetection(
+        DeepfakeDetection|array $deepfakeDetection
+    ): self {
+        $self = clone $this;
+        $self['deepfakeDetection'] = $deepfakeDetection;
 
         return $self;
     }
@@ -156,6 +222,44 @@ final class Config implements BaseModel
     {
         $self = clone $this;
         $self['voice'] = $voice;
+
+        return $self;
+    }
+
+    /**
+     * Automatic departure settings for Google Meet and Teams. Omitted fields use the default behavior. Set at creation; cannot be changed later. Zoom ignores this policy.
+     *
+     * @param MeetingSessionLeavePolicy|MeetingSessionLeavePolicyShape $leavePolicy
+     */
+    public function withLeavePolicy(
+        MeetingSessionLeavePolicy|array $leavePolicy
+    ): self {
+        $self = clone $this;
+        $self['leavePolicy'] = $leavePolicy;
+
+        return $self;
+    }
+
+    /**
+     * Recording intent set at creation for Google Meet and Teams. Distinct from the top-level recording field, which reports current activity.
+     */
+    public function withRecording(bool $recording): self
+    {
+        $self = clone $this;
+        $self['recording'] = $recording;
+
+        return $self;
+    }
+
+    /**
+     * Non-default recording layout. Omitted for the default speaker_view layout.
+     *
+     * @param RecordingView|value-of<RecordingView> $recordingView
+     */
+    public function withRecordingView(RecordingView|string $recordingView): self
+    {
+        $self = clone $this;
+        $self['recordingView'] = $recordingView;
 
         return $self;
     }

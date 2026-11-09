@@ -138,6 +138,38 @@ final class ConversationsTest extends TestCase
     }
 
     #[Test]
+    public function testDeleteDelete(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->conversations->deleteDelete(
+            'insight_id',
+            conversationID: 'conversation_id'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
+    }
+
+    #[Test]
+    public function testDeleteDeleteWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->conversations->deleteDelete(
+            'insight_id',
+            conversationID: 'conversation_id'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
+    }
+
+    #[Test]
     public function testRetrieveConversationsInsights(): void
     {
         if (UnsupportedMockTests::$skip) {

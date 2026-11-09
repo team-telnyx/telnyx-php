@@ -20,7 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   completedAt: \DateTimeInterface|null,
  *   createdAt: \DateTimeInterface,
  *   error: null|Error|ErrorShape,
- *   request: mixed,
+ *   request: array<string,mixed>,
  *   result: null|Result|ResultShape,
  *   seq: int,
  *   sessionID: string,
@@ -51,9 +51,11 @@ final class ActionResponse implements BaseModel
 
     /**
      * Normalized request metadata; defaults may be materialized and fill values are redacted as {redacted: true, length: number}, including inside batch actions.
+     *
+     * @var array<string,mixed> $request
      */
-    #[Required]
-    public mixed $request;
+    #[Required(map: 'mixed')]
+    public array $request;
 
     #[Required]
     public ?Result $result;
@@ -126,6 +128,7 @@ final class ActionResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Error|ErrorShape|null $error
+     * @param array<string,mixed> $request
      * @param Result|ResultShape|null $result
      * @param Status|value-of<Status> $status
      */
@@ -134,7 +137,7 @@ final class ActionResponse implements BaseModel
         ?\DateTimeInterface $completedAt,
         \DateTimeInterface $createdAt,
         Error|array|null $error,
-        mixed $request,
+        array $request,
         Result|array|null $result,
         int $seq,
         string $sessionID,
@@ -198,8 +201,10 @@ final class ActionResponse implements BaseModel
 
     /**
      * Normalized request metadata; defaults may be materialized and fill values are redacted as {redacted: true, length: number}, including inside batch actions.
+     *
+     * @param array<string,mixed> $request
      */
-    public function withRequest(mixed $request): self
+    public function withRequest(array $request): self
     {
         $self = clone $this;
         $self['request'] = $request;

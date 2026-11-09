@@ -11,7 +11,6 @@ use Telnyx\Core\Util;
 use Telnyx\EmailCursorPagination;
 use Telnyx\EmailTemplates\EmailTemplate;
 use Telnyx\EmailTemplates\EmailTemplateCreateParams;
-use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariableSchema;
 use Telnyx\EmailTemplates\EmailTemplateCreateParams\VariablesMode;
 use Telnyx\EmailTemplates\EmailTemplateListParams;
 use Telnyx\EmailTemplates\EmailTemplateListParams\FilterAutoescape;
@@ -22,15 +21,14 @@ use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
 use Telnyx\EmailTemplates\EmailTemplateReplaceParams;
 use Telnyx\EmailTemplates\EmailTemplateResponse;
 use Telnyx\EmailTemplates\EmailTemplateUpdateParams;
+use Telnyx\EmailTemplates\VariableSchemaEntry;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailTemplatesRawContract;
 
 /**
  * Create, list, retrieve, update, delete, and render Liquid email templates.
  *
- * @phpstan-import-type VariableSchemaShape from \Telnyx\EmailTemplates\EmailTemplateCreateParams\VariableSchema
- * @phpstan-import-type VariableSchemaShape from \Telnyx\EmailTemplates\EmailTemplateUpdateParams\VariableSchema as VariableSchemaShape1
- * @phpstan-import-type VariableSchemaShape from \Telnyx\EmailTemplates\EmailTemplateReplaceParams\VariableSchema as VariableSchemaShape2
+ * @phpstan-import-type VariableSchemaEntryShape from \Telnyx\EmailTemplates\VariableSchemaEntry
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class EmailTemplatesRawService implements EmailTemplatesRawContract
@@ -53,7 +51,7 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
      *   strictVariables?: bool,
      *   subject?: string|null,
      *   textBody?: string|null,
-     *   variableSchema?: array<string,VariableSchema|VariableSchemaShape>|null,
+     *   variableSchema?: array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null,
      *   variables?: list<string>|null,
      *   variablesMode?: VariablesMode|value-of<VariablesMode>,
      *   idempotencyKey?: string,
@@ -129,7 +127,7 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
      *   strictVariables?: bool,
      *   subject?: string|null,
      *   textBody?: string|null,
-     *   variableSchema?: array<string,EmailTemplateUpdateParams\VariableSchema|VariableSchemaShape1>|null,
+     *   variableSchema?: array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null,
      *   variables?: list<string>|null,
      *   variablesMode?: EmailTemplateUpdateParams\VariablesMode|value-of<EmailTemplateUpdateParams\VariablesMode>,
      * }|EmailTemplateUpdateParams $params
@@ -283,7 +281,7 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
      *   strictVariables?: bool,
      *   subject?: string|null,
      *   textBody?: string|null,
-     *   variableSchema?: array<string,EmailTemplateReplaceParams\VariableSchema|VariableSchemaShape2>|null,
+     *   variableSchema?: array<string,VariableSchemaEntry|VariableSchemaEntryShape>|null,
      *   variables?: list<string>|null,
      *   variablesMode?: EmailTemplateReplaceParams\VariablesMode|value-of<EmailTemplateReplaceParams\VariablesMode>,
      * }|EmailTemplateReplaceParams $params

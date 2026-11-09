@@ -12,4 +12,6 @@ enum FilterProvider: string
     case TELNYX = 'telnyx';
 
     case MINIMAX = 'minimax';
+
+    case RESEMBLE = 'resemble';
 }

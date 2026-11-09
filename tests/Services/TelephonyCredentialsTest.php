@@ -11,6 +11,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\TelephonyCredentials\TelephonyCredential;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
+use Telnyx\TelephonyCredentials\TelephonyCredentialGetTokenMaterialResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialNewResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -134,5 +135,21 @@ final class TelephonyCredentialsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsString($result);
+    }
+
+    #[Test]
+    public function testRetrieveTokenMaterial(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->telephonyCredentials->retrieveTokenMaterial('id');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            TelephonyCredentialGetTokenMaterialResponse::class,
+            $result
+        );
     }
 }

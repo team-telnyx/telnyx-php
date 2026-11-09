@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\Compute\Funcs\Export;
 
-use Telnyx\Compute\Funcs\Export\FuncLogExportConfigResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Compute\Funcs\Export\FuncLogExportConfigResponse\Data
+ * @phpstan-import-type FuncLogExportConfigShape from \Telnyx\Compute\Funcs\Export\FuncLogExportConfig
  *
  * @phpstan-type FuncLogExportConfigResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|FuncLogExportConfig|FuncLogExportConfigShape
  * }
  */
 final class FuncLogExportConfigResponse implements BaseModel
@@ -25,7 +24,7 @@ final class FuncLogExportConfigResponse implements BaseModel
      * Metadata-only view of a function's log export destination. Header values are write-only (encrypted server-side) and never appear in any response.
      */
     #[Optional]
-    public ?Data $data;
+    public ?FuncLogExportConfig $data;
 
     public function __construct()
     {
@@ -37,9 +36,9 @@ final class FuncLogExportConfigResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param FuncLogExportConfig|FuncLogExportConfigShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(FuncLogExportConfig|array|null $data = null): self
     {
         $self = new self;
 
@@ -51,9 +50,9 @@ final class FuncLogExportConfigResponse implements BaseModel
     /**
      * Metadata-only view of a function's log export destination. Header values are write-only (encrypted server-side) and never appear in any response.
      *
-     * @param Data|DataShape $data
+     * @param FuncLogExportConfig|FuncLogExportConfigShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(FuncLogExportConfig|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

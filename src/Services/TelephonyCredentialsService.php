@@ -13,6 +13,7 @@ use Telnyx\ServiceContracts\TelephonyCredentialsContract;
 use Telnyx\TelephonyCredentials\TelephonyCredential;
 use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
+use Telnyx\TelephonyCredentials\TelephonyCredentialGetTokenMaterialResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Filter;
 use Telnyx\TelephonyCredentials\TelephonyCredentialNewResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateResponse;
@@ -204,6 +205,26 @@ final class TelephonyCredentialsService implements TelephonyCredentialsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createToken($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Returns the material a server needs to mint login tokens for the credential locally, with no request per token: `kid`, `tel_token` and `signing_secret`. The same material is in the response of `POST /telephony_credentials`. Treat it like the SIP password.
+     *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveTokenMaterial(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): TelephonyCredentialGetTokenMaterialResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveTokenMaterial($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

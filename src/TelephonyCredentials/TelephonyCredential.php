@@ -9,6 +9,8 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type TokenMaterialShape from \Telnyx\TelephonyCredentials\TokenMaterial
+ *
  * @phpstan-type TelephonyCredentialShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
@@ -19,6 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   resourceID?: string|null,
  *   sipPassword?: string|null,
  *   sipUsername?: string|null,
+ *   tokenMaterial?: null|TokenMaterial|TokenMaterialShape,
  *   updatedAt?: string|null,
  *   userID?: string|null,
  * }
@@ -80,6 +83,12 @@ final class TelephonyCredential implements BaseModel
     public ?string $sipUsername;
 
     /**
+     * Returned when the credential is created. See `GET /telephony_credentials/{id}/token_material` to fetch it again.
+     */
+    #[Optional('token_material')]
+    public ?TokenMaterial $tokenMaterial;
+
+    /**
      * ISO-8601 formatted date indicating when the resource was updated.
      */
     #[Optional('updated_at')]
@@ -100,6 +109,8 @@ final class TelephonyCredential implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param TokenMaterial|TokenMaterialShape|null $tokenMaterial
      */
     public static function with(
         ?string $id = null,
@@ -111,6 +122,7 @@ final class TelephonyCredential implements BaseModel
         ?string $resourceID = null,
         ?string $sipPassword = null,
         ?string $sipUsername = null,
+        TokenMaterial|array|null $tokenMaterial = null,
         ?string $updatedAt = null,
         ?string $userID = null,
     ): self {
@@ -125,6 +137,7 @@ final class TelephonyCredential implements BaseModel
         null !== $resourceID && $self['resourceID'] = $resourceID;
         null !== $sipPassword && $self['sipPassword'] = $sipPassword;
         null !== $sipUsername && $self['sipUsername'] = $sipUsername;
+        null !== $tokenMaterial && $self['tokenMaterial'] = $tokenMaterial;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $userID && $self['userID'] = $userID;
 
@@ -223,6 +236,19 @@ final class TelephonyCredential implements BaseModel
     {
         $self = clone $this;
         $self['sipUsername'] = $sipUsername;
+
+        return $self;
+    }
+
+    /**
+     * Returned when the credential is created. See `GET /telephony_credentials/{id}/token_material` to fetch it again.
+     *
+     * @param TokenMaterial|TokenMaterialShape $tokenMaterial
+     */
+    public function withTokenMaterial(TokenMaterial|array $tokenMaterial): self
+    {
+        $self = clone $this;
+        $self['tokenMaterial'] = $tokenMaterial;
 
         return $self;
     }
