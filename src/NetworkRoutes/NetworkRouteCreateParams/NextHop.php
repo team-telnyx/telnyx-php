@@ -20,7 +20,7 @@ final class NextHop implements BaseModel
     use SdkModel;
 
     /**
-     * The id of the tunnel.
+     * The id of the tunnel, or of a WireGuard peer on the Network's WireGuard Interface.
      */
     #[Required]
     public string $id;
@@ -70,7 +70,7 @@ final class NextHop implements BaseModel
     }
 
     /**
-     * The id of the tunnel.
+     * The id of the tunnel, or of a WireGuard peer on the Network's WireGuard Interface.
      */
     public function withID(string $id): self
     {

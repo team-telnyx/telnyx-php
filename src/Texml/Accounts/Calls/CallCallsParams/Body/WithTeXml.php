@@ -22,6 +22,11 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\RecordingStatusCa
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\RecordingTrack;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\SipRegion;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\StatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\StreamBidirectionalCodec;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\StreamBidirectionalMode;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\StreamBidirectionalSamplingRate;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\StreamCodec;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\StreamTrack;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\SupervisingRole;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\Trim;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\URLMethod;
@@ -63,6 +68,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\URLMethod;
  *   preferredCodecs?: string|null,
  *   record?: bool|null,
  *   recordingChannels?: null|RecordingChannels|value-of<RecordingChannels>,
+ *   recordingRedaction?: string|null,
  *   recordingStatusCallback?: string|null,
  *   recordingStatusCallbackEvent?: string|null,
  *   recordingStatusCallbackMethod?: null|RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
@@ -75,6 +81,14 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\WithTeXml\URLMethod;
  *   statusCallback?: string|null,
  *   statusCallbackEvent?: string|null,
  *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   streamAuthToken?: string|null,
+ *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
+ *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
+ *   streamBidirectionalSamplingRate?: null|StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,
+ *   streamCodec?: null|StreamCodec|value-of<StreamCodec>,
+ *   streamEstablishBeforeCallOriginate?: bool|null,
+ *   streamTrack?: null|StreamTrack|value-of<StreamTrack>,
+ *   streamURL?: string|null,
  *   superviseCallSid?: string|null,
  *   supervisingRole?: null|SupervisingRole|value-of<SupervisingRole>,
  *   timeLimit?: int|null,
@@ -316,6 +330,12 @@ final class WithTeXml implements BaseModel
     public ?string $recordingChannels;
 
     /**
+     * Silences spoken details of the given kinds in the recording: one or more of `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions), separated by commas, for example `pci,pii`. Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     */
+    #[Optional('RecordingRedaction')]
+    public ?string $recordingRedaction;
+
+    /**
      * The URL the recording callbacks will be sent to.
      */
     #[Optional('RecordingStatusCallback')]
@@ -397,6 +417,67 @@ final class WithTeXml implements BaseModel
      */
     #[Optional('StatusCallbackMethod', enum: StatusCallbackMethod::class)]
     public ?string $statusCallbackMethod;
+
+    /**
+     * An authentication token for the WebSocket server. It is sent as the `x-telnyx-streaming-auth-token` header of the WebSocket handshake and repeated as `connected.x-telnyx-streaming-auth-token` in the `connected` event. Maximum length is 4000 characters. Requires `StreamUrl`.
+     */
+    #[Optional('StreamAuthToken')]
+    public ?string $streamAuthToken;
+
+    /**
+     * Indicates the codec for bidirectional streaming RTP payloads. Used only with `StreamBidirectionalMode=rtp`. Case sensitive. Requires `StreamUrl`.
+     *
+     * @var value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
+     */
+    #[Optional('StreamBidirectionalCodec', enum: StreamBidirectionalCodec::class)]
+    public ?string $streamBidirectionalCodec;
+
+    /**
+     * Configures the method of bidirectional streaming: `mp3` or `rtp`. Requires `StreamUrl`.
+     *
+     * @var value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
+     */
+    #[Optional('StreamBidirectionalMode', enum: StreamBidirectionalMode::class)]
+    public ?string $streamBidirectionalMode;
+
+    /**
+     * Audio sampling rate for bidirectional streaming, in Hz. Requires `StreamUrl`.
+     *
+     * @var value-of<StreamBidirectionalSamplingRate>|null $streamBidirectionalSamplingRate
+     */
+    #[Optional(
+        'StreamBidirectionalSamplingRate',
+        enum: StreamBidirectionalSamplingRate::class,
+    )]
+    public ?int $streamBidirectionalSamplingRate;
+
+    /**
+     * Specifies the codec to be used for the streamed audio. When set to `default` or when transcoding is not possible, the codec from the call will be used. Requires `StreamUrl`.
+     *
+     * @var value-of<StreamCodec>|null $streamCodec
+     */
+    #[Optional('StreamCodec', enum: StreamCodec::class)]
+    public ?string $streamCodec;
+
+    /**
+     * Establishes the WebSocket connection before the destination is dialed, so no audio is missed while the connection is set up. If the WebSocket connection can't be established, the call is not placed and the request fails with a `422` error. `StreamUrl` is required when this is `true`.
+     */
+    #[Optional('StreamEstablishBeforeCallOriginate')]
+    public ?bool $streamEstablishBeforeCallOriginate;
+
+    /**
+     * Specifies which track should be streamed. Requires `StreamUrl`.
+     *
+     * @var value-of<StreamTrack>|null $streamTrack
+     */
+    #[Optional('StreamTrack', enum: StreamTrack::class)]
+    public ?string $streamTrack;
+
+    /**
+     * The destination WebSocket address where the call's media stream is delivered, for example `wss://www.example.com/websocket`. When set, a media stream is started on the outbound call. Required when any other `Stream*` parameter is set. Can't be combined with `SuperviseCallSid`.
+     */
+    #[Optional('StreamUrl')]
+    public ?string $streamURL;
 
     /**
      * The call control ID of the existing call to supervise. When provided, the created leg will be added to the specified call in supervising mode. Status callbacks and action callbacks will NOT be sent for the supervising leg.
@@ -486,6 +567,11 @@ final class WithTeXml implements BaseModel
      * @param RecordingTrack|value-of<RecordingTrack>|null $recordingTrack
      * @param SipRegion|value-of<SipRegion>|null $sipRegion
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod>|null $statusCallbackMethod
+     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
+     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>|null $streamBidirectionalSamplingRate
+     * @param StreamCodec|value-of<StreamCodec>|null $streamCodec
+     * @param StreamTrack|value-of<StreamTrack>|null $streamTrack
      * @param SupervisingRole|value-of<SupervisingRole>|null $supervisingRole
      * @param Trim|value-of<Trim>|null $trim
      * @param URLMethod|value-of<URLMethod>|null $urlMethod
@@ -525,6 +611,7 @@ final class WithTeXml implements BaseModel
         ?string $preferredCodecs = null,
         ?bool $record = null,
         RecordingChannels|string|null $recordingChannels = null,
+        ?string $recordingRedaction = null,
         ?string $recordingStatusCallback = null,
         ?string $recordingStatusCallbackEvent = null,
         RecordingStatusCallbackMethod|string|null $recordingStatusCallbackMethod = null,
@@ -537,6 +624,14 @@ final class WithTeXml implements BaseModel
         ?string $statusCallback = null,
         ?string $statusCallbackEvent = null,
         StatusCallbackMethod|string|null $statusCallbackMethod = null,
+        ?string $streamAuthToken = null,
+        StreamBidirectionalCodec|string|null $streamBidirectionalCodec = null,
+        StreamBidirectionalMode|string|null $streamBidirectionalMode = null,
+        StreamBidirectionalSamplingRate|int|null $streamBidirectionalSamplingRate = null,
+        StreamCodec|string|null $streamCodec = null,
+        ?bool $streamEstablishBeforeCallOriginate = null,
+        StreamTrack|string|null $streamTrack = null,
+        ?string $streamURL = null,
         ?string $superviseCallSid = null,
         SupervisingRole|string|null $supervisingRole = null,
         ?int $timeLimit = null,
@@ -581,6 +676,7 @@ final class WithTeXml implements BaseModel
         null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
         null !== $record && $self['record'] = $record;
         null !== $recordingChannels && $self['recordingChannels'] = $recordingChannels;
+        null !== $recordingRedaction && $self['recordingRedaction'] = $recordingRedaction;
         null !== $recordingStatusCallback && $self['recordingStatusCallback'] = $recordingStatusCallback;
         null !== $recordingStatusCallbackEvent && $self['recordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
         null !== $recordingStatusCallbackMethod && $self['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
@@ -593,6 +689,14 @@ final class WithTeXml implements BaseModel
         null !== $statusCallback && $self['statusCallback'] = $statusCallback;
         null !== $statusCallbackEvent && $self['statusCallbackEvent'] = $statusCallbackEvent;
         null !== $statusCallbackMethod && $self['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $streamAuthToken && $self['streamAuthToken'] = $streamAuthToken;
+        null !== $streamBidirectionalCodec && $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        null !== $streamBidirectionalMode && $self['streamBidirectionalMode'] = $streamBidirectionalMode;
+        null !== $streamBidirectionalSamplingRate && $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
+        null !== $streamCodec && $self['streamCodec'] = $streamCodec;
+        null !== $streamEstablishBeforeCallOriginate && $self['streamEstablishBeforeCallOriginate'] = $streamEstablishBeforeCallOriginate;
+        null !== $streamTrack && $self['streamTrack'] = $streamTrack;
+        null !== $streamURL && $self['streamURL'] = $streamURL;
         null !== $superviseCallSid && $self['superviseCallSid'] = $superviseCallSid;
         null !== $supervisingRole && $self['supervisingRole'] = $supervisingRole;
         null !== $timeLimit && $self['timeLimit'] = $timeLimit;
@@ -1010,6 +1114,17 @@ final class WithTeXml implements BaseModel
     }
 
     /**
+     * Silences spoken details of the given kinds in the recording: one or more of `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions), separated by commas, for example `pci,pii`. Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     */
+    public function withRecordingRedaction(string $recordingRedaction): self
+    {
+        $self = clone $this;
+        $self['recordingRedaction'] = $recordingRedaction;
+
+        return $self;
+    }
+
+    /**
      * The URL the recording callbacks will be sent to.
      */
     public function withRecordingStatusCallback(
@@ -1150,6 +1265,108 @@ final class WithTeXml implements BaseModel
     ): self {
         $self = clone $this;
         $self['statusCallbackMethod'] = $statusCallbackMethod;
+
+        return $self;
+    }
+
+    /**
+     * An authentication token for the WebSocket server. It is sent as the `x-telnyx-streaming-auth-token` header of the WebSocket handshake and repeated as `connected.x-telnyx-streaming-auth-token` in the `connected` event. Maximum length is 4000 characters. Requires `StreamUrl`.
+     */
+    public function withStreamAuthToken(string $streamAuthToken): self
+    {
+        $self = clone $this;
+        $self['streamAuthToken'] = $streamAuthToken;
+
+        return $self;
+    }
+
+    /**
+     * Indicates the codec for bidirectional streaming RTP payloads. Used only with `StreamBidirectionalMode=rtp`. Case sensitive. Requires `StreamUrl`.
+     *
+     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
+     */
+    public function withStreamBidirectionalCodec(
+        StreamBidirectionalCodec|string $streamBidirectionalCodec
+    ): self {
+        $self = clone $this;
+        $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+
+        return $self;
+    }
+
+    /**
+     * Configures the method of bidirectional streaming: `mp3` or `rtp`. Requires `StreamUrl`.
+     *
+     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
+     */
+    public function withStreamBidirectionalMode(
+        StreamBidirectionalMode|string $streamBidirectionalMode
+    ): self {
+        $self = clone $this;
+        $self['streamBidirectionalMode'] = $streamBidirectionalMode;
+
+        return $self;
+    }
+
+    /**
+     * Audio sampling rate for bidirectional streaming, in Hz. Requires `StreamUrl`.
+     *
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate
+     */
+    public function withStreamBidirectionalSamplingRate(
+        StreamBidirectionalSamplingRate|int $streamBidirectionalSamplingRate
+    ): self {
+        $self = clone $this;
+        $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
+
+        return $self;
+    }
+
+    /**
+     * Specifies the codec to be used for the streamed audio. When set to `default` or when transcoding is not possible, the codec from the call will be used. Requires `StreamUrl`.
+     *
+     * @param StreamCodec|value-of<StreamCodec> $streamCodec
+     */
+    public function withStreamCodec(StreamCodec|string $streamCodec): self
+    {
+        $self = clone $this;
+        $self['streamCodec'] = $streamCodec;
+
+        return $self;
+    }
+
+    /**
+     * Establishes the WebSocket connection before the destination is dialed, so no audio is missed while the connection is set up. If the WebSocket connection can't be established, the call is not placed and the request fails with a `422` error. `StreamUrl` is required when this is `true`.
+     */
+    public function withStreamEstablishBeforeCallOriginate(
+        bool $streamEstablishBeforeCallOriginate
+    ): self {
+        $self = clone $this;
+        $self['streamEstablishBeforeCallOriginate'] = $streamEstablishBeforeCallOriginate;
+
+        return $self;
+    }
+
+    /**
+     * Specifies which track should be streamed. Requires `StreamUrl`.
+     *
+     * @param StreamTrack|value-of<StreamTrack> $streamTrack
+     */
+    public function withStreamTrack(StreamTrack|string $streamTrack): self
+    {
+        $self = clone $this;
+        $self['streamTrack'] = $streamTrack;
+
+        return $self;
+    }
+
+    /**
+     * The destination WebSocket address where the call's media stream is delivered, for example `wss://www.example.com/websocket`. When set, a media stream is started on the outbound call. Required when any other `Stream*` parameter is set. Can't be combined with `SuperviseCallSid`.
+     */
+    public function withStreamURL(string $streamURL): self
+    {
+        $self = clone $this;
+        $self['streamURL'] = $streamURL;
 
         return $self;
     }

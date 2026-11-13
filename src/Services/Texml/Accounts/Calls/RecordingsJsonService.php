@@ -44,6 +44,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
      * @param string $accountSid Path param: The UUID of the Telnyx account that owns the resource, for example `f5586561-8ff0-4291-a51b-c7dfe4139ff9`. The `account_sid` path segment is kept for Twilio API compatibility, but the value is a Telnyx account UUID, not a Twilio `AC...` SID. It must match the account that owns the API key used to authenticate the request, otherwise the endpoint returns `404`. The same value is sent as `AccountSid` in TeXML webhooks.
      * @param bool $playBeep body param: Whether to play a beep when recording is started
      * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels Body param: When `dual`, final audio file has the first leg on channel A, and the rest on channel B. `single` mixes both tracks into a single channel.
+     * @param string $recordingRedaction Body param: Silences spoken details of the given kinds in the recording: one or more of `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions), separated by commas, for example `pci,pii`. Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
      * @param string $recordingStatusCallback body param: Url where status callbacks will be sent
      * @param string $recordingStatusCallbackEvent Body param: The changes to the recording's state that should generate a call to `RecoridngStatusCallback`. Can be: `in-progress`, `completed` and `absent`. Separate multiple values with a space. Defaults to `completed`.
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod body param: HTTP method used to send status callbacks
@@ -58,6 +59,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
         string $accountSid,
         bool $playBeep = true,
         RecordingChannels|string $recordingChannels = 'dual',
+        ?string $recordingRedaction = null,
         ?string $recordingStatusCallback = null,
         ?string $recordingStatusCallbackEvent = null,
         RecordingStatusCallbackMethod|string $recordingStatusCallbackMethod = 'POST',
@@ -70,6 +72,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
                 'accountSid' => $accountSid,
                 'playBeep' => $playBeep,
                 'recordingChannels' => $recordingChannels,
+                'recordingRedaction' => $recordingRedaction ?? Omitted::VALUE,
                 'recordingStatusCallback' => $recordingStatusCallback ?? Omitted::VALUE,
                 'recordingStatusCallbackEvent' => $recordingStatusCallbackEvent ?? Omitted::VALUE,
                 'recordingStatusCallbackMethod' => $recordingStatusCallbackMethod,

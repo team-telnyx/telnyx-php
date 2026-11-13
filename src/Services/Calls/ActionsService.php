@@ -12,6 +12,7 @@ use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordChannels;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordFormat;
+use Telnyx\Calls\Actions\ActionAnswerParams\RecordRedaction;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
@@ -64,6 +65,7 @@ use Telnyx\Calls\Actions\ActionStartPlaybackResponse;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Channels;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Format;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\RecordingTrack;
+use Telnyx\Calls\Actions\ActionStartRecordingParams\Redaction;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionLanguage;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Trim;
 use Telnyx\Calls\Actions\ActionStartRecordingResponse;
@@ -94,7 +96,6 @@ use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\AIAssistantJoinParticipant;
-use Telnyx\Calls\Actions\AssemblyAIVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ConversationRelayInterruptible;
 use Telnyx\Calls\Actions\ConversationRelayTranscriptionEngineConfig;
@@ -205,7 +206,7 @@ final class ActionsService implements ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param list<MessageShape> $messages the messages to add to the conversation
-     * @param bool $triggerResponse When `true`, the injected messages immediately trigger an assistant response/turn instead of waiting for the next natural turn or idle timeout. This may interrupt a user who is still speaking.
+     * @param bool $triggerResponse When `true`, the injected messages immediately trigger an assistant response/turn instead of waiting for the next natural turn or idle timeout. This may interrupt a user who is still speaking. How the turn starts depends on the last message in `messages`: if it is a `user` message, the assistant responds to that message as if the caller had said it, whether or not `trigger_response` is set. Any other last role (`system`, `developer`, `assistant`, `tool`) starts a turn with no new user input, as after a long silence. When `trigger_response` is not set, a payload that does not end in a `user` message is context only and does not start a turn. GPT Live models (`openai/gpt-live-*`) do not support a forced mid-session turn: injected `system`, `developer`, and `assistant` content is appended to the Live session's instructions and the model brings it into its next turn on its own; an injected `tool` record is not forwarded to the Live session, so it stays context only and never reaches the Live model. Any of `user`, `system`, `developer`, or `assistant` is the supported way to get content into the Live session.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -270,6 +271,7 @@ final class ActionsService implements ActionsContract
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      * @param RecordFormat|value-of<RecordFormat> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
      * @param int $recordMaxLength Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
+     * @param list<RecordRedaction|value-of<RecordRedaction>> $recordRedaction Applies to the recording started with `record`. Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
      * @param int $recordTimeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      * @param RecordTrack|value-of<RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
      * @param RecordTrim|value-of<RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
@@ -308,6 +310,7 @@ final class ActionsService implements ActionsContract
         ?string $recordCustomFileName = null,
         RecordFormat|string $recordFormat = 'mp3',
         int $recordMaxLength = 0,
+        ?array $recordRedaction = null,
         int $recordTimeoutSecs = 0,
         RecordTrack|string $recordTrack = 'both',
         RecordTrim|string|null $recordTrim = null,
@@ -344,6 +347,7 @@ final class ActionsService implements ActionsContract
                 'recordCustomFileName' => $recordCustomFileName ?? Omitted::VALUE,
                 'recordFormat' => $recordFormat,
                 'recordMaxLength' => $recordMaxLength,
+                'recordRedaction' => $recordRedaction ?? Omitted::VALUE,
                 'recordTimeoutSecs' => $recordTimeoutSecs,
                 'recordTrack' => $recordTrack,
                 'recordTrim' => $recordTrim ?? Omitted::VALUE,
@@ -398,6 +402,7 @@ final class ActionsService implements ActionsContract
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      * @param \Telnyx\Calls\Actions\ActionBridgeParams\RecordFormat|value-of<\Telnyx\Calls\Actions\ActionBridgeParams\RecordFormat> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
      * @param int $recordMaxLength Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
+     * @param list<\Telnyx\Calls\Actions\ActionBridgeParams\RecordRedaction|value-of<\Telnyx\Calls\Actions\ActionBridgeParams\RecordRedaction>> $recordRedaction Applies to the recording started with `record`. Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
      * @param int $recordTimeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      * @param \Telnyx\Calls\Actions\ActionBridgeParams\RecordTrack|value-of<\Telnyx\Calls\Actions\ActionBridgeParams\RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
      * @param \Telnyx\Calls\Actions\ActionBridgeParams\RecordTrim|value-of<\Telnyx\Calls\Actions\ActionBridgeParams\RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
@@ -424,6 +429,7 @@ final class ActionsService implements ActionsContract
         ?string $recordCustomFileName = null,
         \Telnyx\Calls\Actions\ActionBridgeParams\RecordFormat|string $recordFormat = 'mp3',
         int $recordMaxLength = 0,
+        ?array $recordRedaction = null,
         int $recordTimeoutSecs = 0,
         \Telnyx\Calls\Actions\ActionBridgeParams\RecordTrack|string $recordTrack = 'both',
         \Telnyx\Calls\Actions\ActionBridgeParams\RecordTrim|string|null $recordTrim = null,
@@ -448,6 +454,7 @@ final class ActionsService implements ActionsContract
                 'recordCustomFileName' => $recordCustomFileName ?? Omitted::VALUE,
                 'recordFormat' => $recordFormat,
                 'recordMaxLength' => $recordMaxLength,
+                'recordRedaction' => $recordRedaction ?? Omitted::VALUE,
                 'recordTimeoutSecs' => $recordTimeoutSecs,
                 'recordTrack' => $recordTrack,
                 'recordTrim' => $recordTrim ?? Omitted::VALUE,
@@ -633,7 +640,7 @@ final class ActionsService implements ActionsContract
         TranscriptionConfig|array|null $transcription = null,
         int $userResponseTimeoutMs = 10000,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingAIResponse {
         $params = array_filter(
@@ -804,7 +811,7 @@ final class ActionsService implements ActionsContract
         string $terminatingDigit = '#',
         int $timeoutMillis = 60000,
         string $validDigits = '0123456789#*',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingSpeakResponse {
         $params = array_filter(
@@ -1355,7 +1362,7 @@ final class ActionsService implements ActionsContract
         \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|string $serviceLevel = 'premium',
         ?string $stop = null,
         TargetLegs|string $targetLegs = 'self',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse {
         $params = array_filter(
@@ -1512,7 +1519,7 @@ final class ActionsService implements ActionsContract
         ?string $ttsProvider = null,
         ?string $url = null,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartConversationRelayResponse {
         $params = array_filter(
@@ -1735,9 +1742,10 @@ final class ActionsService implements ActionsContract
      * @param int $maxLength Defines the maximum length for the recording in seconds. The minimum value is 0. The maximum value is 14400. The default value is 0 (infinite)
      * @param bool $playBeep if enabled, a beep sound will be played at the start of a recording
      * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
+     * @param list<Redaction|value-of<Redaction>> $redaction Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
      * @param int $timeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite)
      * @param bool $transcription Enable post recording transcription. The default value is false.
-     * @param \Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine|value-of<\Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages.
+     * @param \Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine|value-of<\Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages. When `redaction` is set, leave this out or set a Deepgram engine.
      * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage Language code for transcription. Note: Not all languages are supported by all transcription engines (google, telnyx, deepgram). See engine-specific documentation for supported values.
      * @param int $transcriptionMaxSpeakerCount Defines maximum number of speakers in the conversation. Applies to `google` engine only.
      * @param int $transcriptionMinSpeakerCount Defines minimum number of speakers in the conversation. Applies to `google` engine only.
@@ -1758,6 +1766,7 @@ final class ActionsService implements ActionsContract
         int $maxLength = 0,
         ?bool $playBeep = null,
         RecordingTrack|string $recordingTrack = 'both',
+        ?array $redaction = null,
         int $timeoutSecs = 0,
         bool $transcription = false,
         \Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine|string $transcriptionEngine = 'A',
@@ -1779,6 +1788,7 @@ final class ActionsService implements ActionsContract
                 'maxLength' => $maxLength,
                 'playBeep' => $playBeep ?? Omitted::VALUE,
                 'recordingTrack' => $recordingTrack,
+                'redaction' => $redaction ?? Omitted::VALUE,
                 'timeoutSecs' => $timeoutSecs,
                 'transcription' => $transcription,
                 'transcriptionEngine' => $transcriptionEngine,
@@ -2385,6 +2395,7 @@ final class ActionsService implements ActionsContract
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      * @param \Telnyx\Calls\Actions\ActionTransferParams\RecordFormat|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordFormat> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
      * @param int $recordMaxLength Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
+     * @param list<\Telnyx\Calls\Actions\ActionTransferParams\RecordRedaction|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordRedaction>> $recordRedaction Applies to the recording started with `record`. Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
      * @param int $recordTimeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      * @param \Telnyx\Calls\Actions\ActionTransferParams\RecordTrack|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
      * @param \Telnyx\Calls\Actions\ActionTransferParams\RecordTrim|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
@@ -2432,6 +2443,7 @@ final class ActionsService implements ActionsContract
         ?string $recordCustomFileName = null,
         \Telnyx\Calls\Actions\ActionTransferParams\RecordFormat|string $recordFormat = 'mp3',
         int $recordMaxLength = 0,
+        ?array $recordRedaction = null,
         int $recordTimeoutSecs = 0,
         \Telnyx\Calls\Actions\ActionTransferParams\RecordTrack|string $recordTrack = 'both',
         \Telnyx\Calls\Actions\ActionTransferParams\RecordTrim|string|null $recordTrim = null,
@@ -2477,6 +2489,7 @@ final class ActionsService implements ActionsContract
                 'recordCustomFileName' => $recordCustomFileName ?? Omitted::VALUE,
                 'recordFormat' => $recordFormat,
                 'recordMaxLength' => $recordMaxLength,
+                'recordRedaction' => $recordRedaction ?? Omitted::VALUE,
                 'recordTimeoutSecs' => $recordTimeoutSecs,
                 'recordTrack' => $recordTrack,
                 'recordTrim' => $recordTrim ?? Omitted::VALUE,

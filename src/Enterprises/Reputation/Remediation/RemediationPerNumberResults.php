@@ -24,23 +24,43 @@ final class RemediationPerNumberResults implements BaseModel
     /** @use SdkModel<RemediationPerNumberResultsShape> */
     use SdkModel;
 
-    /** @var list<string>|null $ineligible */
+    /**
+     * Numbers the reputation partner did not re-review because it had already reviewed them within the previous 60 days (already reviewed). The cooldown is measured from the partner's most recent review, not the API submission date. This array identifies the numbers but does not include their last-review or re-eligibility dates.
+     *
+     * @var list<string>|null $ineligible
+     */
     #[Optional(list: 'string')]
     public ?array $ineligible;
 
-    /** @var list<string>|null $notFlagged */
+    /**
+     * The reputation partner reported no prior spam label for the number (no prior spam label).
+     *
+     * @var list<string>|null $notFlagged
+     */
     #[Optional('not_flagged', list: 'string')]
     public ?array $notFlagged;
 
-    /** @var list<string>|null $refused */
+    /**
+     * The reputation partner reviewed the number and declined the redress request (redress declined); the number remains flagged.
+     *
+     * @var list<string>|null $refused
+     */
     #[Optional(list: 'string')]
     public ?array $refused;
 
-    /** @var list<string>|null $remediated */
+    /**
+     * The reputation partner approved redress (redress approved) or reported that the number had already been redressed recently (already recently redressed). This does not guarantee removal from every spam list.
+     *
+     * @var list<string>|null $remediated
+     */
     #[Optional(list: 'string')]
     public ?array $remediated;
 
-    /** @var list<string>|null $requiresReview */
+    /**
+     * The number needs further review, or the partner response did not match a recognized outcome.
+     *
+     * @var list<string>|null $requiresReview
+     */
     #[Optional('requires_review', list: 'string')]
     public ?array $requiresReview;
 
@@ -79,6 +99,8 @@ final class RemediationPerNumberResults implements BaseModel
     }
 
     /**
+     * Numbers the reputation partner did not re-review because it had already reviewed them within the previous 60 days (already reviewed). The cooldown is measured from the partner's most recent review, not the API submission date. This array identifies the numbers but does not include their last-review or re-eligibility dates.
+     *
      * @param list<string> $ineligible
      */
     public function withIneligible(array $ineligible): self
@@ -90,6 +112,8 @@ final class RemediationPerNumberResults implements BaseModel
     }
 
     /**
+     * The reputation partner reported no prior spam label for the number (no prior spam label).
+     *
      * @param list<string> $notFlagged
      */
     public function withNotFlagged(array $notFlagged): self
@@ -101,6 +125,8 @@ final class RemediationPerNumberResults implements BaseModel
     }
 
     /**
+     * The reputation partner reviewed the number and declined the redress request (redress declined); the number remains flagged.
+     *
      * @param list<string> $refused
      */
     public function withRefused(array $refused): self
@@ -112,6 +138,8 @@ final class RemediationPerNumberResults implements BaseModel
     }
 
     /**
+     * The reputation partner approved redress (redress approved) or reported that the number had already been redressed recently (already recently redressed). This does not guarantee removal from every spam list.
+     *
      * @param list<string> $remediated
      */
     public function withRemediated(array $remediated): self
@@ -123,6 +151,8 @@ final class RemediationPerNumberResults implements BaseModel
     }
 
     /**
+     * The number needs further review, or the partner response did not match a recognized outcome.
+     *
      * @param list<string> $requiresReview
      */
     public function withRequiresReview(array $requiresReview): self

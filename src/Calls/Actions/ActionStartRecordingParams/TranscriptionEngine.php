@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions\ActionStartRecordingParams;
 
 /**
- * Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages.
+ * Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages. When `redaction` is set, leave this out or set a Deepgram engine.
  */
 enum TranscriptionEngine: string
 {

@@ -20,7 +20,7 @@ final class SourceRequest implements BaseModel
     use SdkModel;
 
     /**
-     * The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. Only `voice` is searchable today; `meeting_bot`, `message`, and `bucket` attach but are not yet searchable (Coming soon).
+     * The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. `voice`, `meeting_bot`, `message`, `email`, and `whatsapp` are searchable today; `bucket` attaches but is not yet searchable (Coming soon).
      *
      * @var value-of<SourceType> $sourceType
      */
@@ -73,7 +73,7 @@ final class SourceRequest implements BaseModel
     }
 
     /**
-     * The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. Only `voice` is searchable today; `meeting_bot`, `message`, and `bucket` attach but are not yet searchable (Coming soon).
+     * The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. `voice`, `meeting_bot`, `message`, `email`, and `whatsapp` are searchable today; `bucket` attaches but is not yet searchable (Coming soon).
      *
      * @param SourceType|value-of<SourceType> $sourceType
      */

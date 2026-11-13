@@ -49,7 +49,7 @@ final class PaymentRawService implements PaymentRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'v2/payment/stored_payment_transactions',
+            path: 'payment/stored_payment_transactions',
             body: (object) $parsed,
             options: $options,
             convert: PaymentNewStoredPaymentTransactionResponse::class,

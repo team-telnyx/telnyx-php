@@ -43,9 +43,9 @@ final class NetworkRoutesService implements NetworkRoutesContract
     /**
      * @api
      *
-     * Adds a route to a Network. Traffic on the Network to an address in `cidr` goes via `next_hop`. With a tunnel as the next hop, functions on the Network reach the CIDR through the tunnel without a redeploy. A Network holds each CIDR once.
+     * Adds a route to a Network. Traffic on the Network to an address in `cidr` goes via `next_hop`. With a tunnel as the next hop, functions on the Network reach the CIDR through the tunnel without a redeploy. With a WireGuard peer as the next hop, the peer routes the CIDR as a subnet router. A Network holds each CIDR once.
      *
-     * @param string $cidr The IPv4 subnet to route, such as a subnet behind the tunnel. It must be a canonical CIDR. Default, loopback, link-local, multicast, and shared address space (`100.64.0.0/10`) ranges are rejected. So are ranges that overlap the Tailscale Subnet Router ranges, `172.27.254.0/24` and `198.18.0.0/20`, or a subnet already on the Network.
+     * @param string $cidr The IPv4 subnet to route, such as a subnet behind a tunnel or a WireGuard peer. It must be a canonical CIDR. Default, loopback, link-local, multicast, and shared address space (`100.64.0.0/10`) ranges are rejected. So are ranges that overlap the Tailscale Subnet Router ranges, `172.27.254.0/24` and `198.18.0.0/20`, or a subnet already on the Network.
      * @param string $networkID the id of the Network to add the route to
      * @param NextHop|NextHopShape $nextHop where the Network sends traffic for `cidr`
      * @param RequestOpts|null $requestOptions

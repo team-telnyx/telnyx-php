@@ -74,7 +74,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'v2/mobile_voice_connections',
+            path: 'mobile_voice_connections',
             body: (object) $parsed,
             options: $options,
             convert: MobileVoiceConnectionNewResponse::class,
@@ -100,7 +100,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
-            path: ['v2/mobile_voice_connections/%1$s', $id],
+            path: ['mobile_voice_connections/%1$s', $id],
             options: $requestOptions,
             convert: MobileVoiceConnectionGetResponse::class,
         );
@@ -142,7 +142,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: ['v2/mobile_voice_connections/%1$s', $id],
+            path: ['mobile_voice_connections/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: MobileVoiceConnectionUpdateResponse::class,
@@ -178,7 +178,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
-            path: 'v2/mobile_voice_connections',
+            path: 'mobile_voice_connections',
             query: Util::array_transform_keys(
                 $parsed,
                 [
@@ -212,7 +212,7 @@ final class MobileVoiceConnectionsRawService implements MobileVoiceConnectionsRa
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
-            path: ['v2/mobile_voice_connections/%1$s', $id],
+            path: ['mobile_voice_connections/%1$s', $id],
             options: $requestOptions,
             convert: MobileVoiceConnectionDeleteResponse::class,
         );

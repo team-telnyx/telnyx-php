@@ -43,6 +43,8 @@ enum Model: string
 
     case SONIOX_STT_RT_V4 = 'soniox/stt-rt-v4';
 
+    case SONIOX_STT_RT_V6 = 'soniox/stt-rt-v6';
+
     case NVIDIA_PARAKEET_V3 = 'nvidia/parakeet-v3';
 
     case OMI_HEALTH_OMI_MED_STT_V1 = 'omi-health/omi-med-stt-v1';

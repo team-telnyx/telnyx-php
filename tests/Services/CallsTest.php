@@ -245,6 +245,7 @@ final class CallsTest extends TestCase
             recordCustomFileName: 'my_recording_file_name',
             recordFormat: 'wav',
             recordMaxLength: 1000,
+            recordRedaction: ['pci', 'pii'],
             recordTimeoutSecs: 100,
             recordTrack: 'outbound',
             recordTrim: 'trim-silence',

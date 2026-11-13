@@ -7,6 +7,7 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Channels;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Format;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\RecordingTrack;
+use Telnyx\Calls\Actions\ActionStartRecordingParams\Redaction;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionLanguage;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Trim;
@@ -36,6 +37,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   maxLength?: int|null,
  *   playBeep?: bool|null,
  *   recordingTrack?: null|RecordingTrack|value-of<RecordingTrack>,
+ *   redaction?: list<Redaction|value-of<Redaction>>|null,
  *   timeoutSecs?: int|null,
  *   transcription?: bool|null,
  *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
@@ -108,6 +110,14 @@ final class ActionStartRecordingParams implements BaseModel
     public ?string $recordingTrack;
 
     /**
+     * Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     *
+     * @var list<value-of<Redaction>>|null $redaction
+     */
+    #[Optional(list: Redaction::class)]
+    public ?array $redaction;
+
+    /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
     #[Optional('timeout_secs')]
@@ -120,7 +130,7 @@ final class ActionStartRecordingParams implements BaseModel
     public ?bool $transcription;
 
     /**
-     * Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages.
+     * Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages. When `redaction` is set, leave this out or set a Deepgram engine.
      *
      * @var value-of<TranscriptionEngine>|null $transcriptionEngine
      */
@@ -194,6 +204,7 @@ final class ActionStartRecordingParams implements BaseModel
      * @param Channels|value-of<Channels> $channels
      * @param Format|value-of<Format> $format
      * @param RecordingTrack|value-of<RecordingTrack>|null $recordingTrack
+     * @param list<Redaction|value-of<Redaction>>|null $redaction
      * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
      * @param TranscriptionLanguage|value-of<TranscriptionLanguage>|null $transcriptionLanguage
      * @param Trim|value-of<Trim>|null $trim
@@ -207,6 +218,7 @@ final class ActionStartRecordingParams implements BaseModel
         ?int $maxLength = null,
         ?bool $playBeep = null,
         RecordingTrack|string|null $recordingTrack = null,
+        ?array $redaction = null,
         ?int $timeoutSecs = null,
         ?bool $transcription = null,
         TranscriptionEngine|string|null $transcriptionEngine = null,
@@ -228,6 +240,7 @@ final class ActionStartRecordingParams implements BaseModel
         null !== $maxLength && $self['maxLength'] = $maxLength;
         null !== $playBeep && $self['playBeep'] = $playBeep;
         null !== $recordingTrack && $self['recordingTrack'] = $recordingTrack;
+        null !== $redaction && $self['redaction'] = $redaction;
         null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
         null !== $transcription && $self['transcription'] = $transcription;
         null !== $transcriptionEngine && $self['transcriptionEngine'] = $transcriptionEngine;
@@ -337,6 +350,19 @@ final class ActionStartRecordingParams implements BaseModel
     }
 
     /**
+     * Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     *
+     * @param list<Redaction|value-of<Redaction>> $redaction
+     */
+    public function withRedaction(array $redaction): self
+    {
+        $self = clone $this;
+        $self['redaction'] = $redaction;
+
+        return $self;
+    }
+
+    /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
     public function withTimeoutSecs(int $timeoutSecs): self
@@ -359,7 +385,7 @@ final class ActionStartRecordingParams implements BaseModel
     }
 
     /**
-     * Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages.
+     * Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages. When `redaction` is set, leave this out or set a Deepgram engine.
      *
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
      */

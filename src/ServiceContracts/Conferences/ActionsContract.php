@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Conferences;
 
 use Telnyx\AzureVoiceSettings;
-use Telnyx\Calls\Actions\AssemblyAIVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\SonioxVoiceSettings;
@@ -22,6 +21,7 @@ use Telnyx\Conferences\Actions\ActionRecordPauseResponse;
 use Telnyx\Conferences\Actions\ActionRecordResumeResponse;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Channels;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Format;
+use Telnyx\Conferences\Actions\ActionRecordStartParams\Redaction;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Trim;
 use Telnyx\Conferences\Actions\ActionRecordStartResponse;
 use Telnyx\Conferences\Actions\ActionRecordStopResponse;
@@ -302,6 +302,7 @@ interface ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `conference_id`.
      * @param string $customFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      * @param bool $playBeep if enabled, a beep sound will be played at the start of a recording
+     * @param list<Redaction|value-of<Redaction>> $redaction Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
      * @param ConferenceRegion|value-of<ConferenceRegion> $region Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      * @param Trim|value-of<Trim> $trim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
      * @param RequestOpts|null $requestOptions
@@ -315,6 +316,7 @@ interface ActionsContract
         ?string $commandID = null,
         ?string $customFileName = null,
         ?bool $playBeep = null,
+        ?array $redaction = null,
         ConferenceRegion|string|null $region = null,
         Trim|string|null $trim = null,
         RequestOptions|array|null $requestOptions = null,
@@ -404,7 +406,7 @@ interface ActionsContract
         Language|string|null $language = null,
         PayloadType|string $payloadType = 'text',
         ConferenceRegion|string|null $region = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse;
 

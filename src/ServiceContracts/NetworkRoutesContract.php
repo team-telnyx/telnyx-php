@@ -25,7 +25,7 @@ interface NetworkRoutesContract
     /**
      * @api
      *
-     * @param string $cidr The IPv4 subnet to route, such as a subnet behind the tunnel. It must be a canonical CIDR. Default, loopback, link-local, multicast, and shared address space (`100.64.0.0/10`) ranges are rejected. So are ranges that overlap the Tailscale Subnet Router ranges, `172.27.254.0/24` and `198.18.0.0/20`, or a subnet already on the Network.
+     * @param string $cidr The IPv4 subnet to route, such as a subnet behind a tunnel or a WireGuard peer. It must be a canonical CIDR. Default, loopback, link-local, multicast, and shared address space (`100.64.0.0/10`) ranges are rejected. So are ranges that overlap the Tailscale Subnet Router ranges, `172.27.254.0/24` and `198.18.0.0/20`, or a subnet already on the Network.
      * @param string $networkID the id of the Network to add the route to
      * @param NextHop|NextHopShape $nextHop where the Network sends traffic for `cidr`
      * @param RequestOpts|null $requestOptions
