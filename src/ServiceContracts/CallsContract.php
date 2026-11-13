@@ -15,6 +15,7 @@ use Telnyx\Calls\CallDialParams\Privacy;
 use Telnyx\Calls\CallDialParams\Record;
 use Telnyx\Calls\CallDialParams\RecordChannels;
 use Telnyx\Calls\CallDialParams\RecordFormat;
+use Telnyx\Calls\CallDialParams\RecordRedaction;
 use Telnyx\Calls\CallDialParams\RecordTrack;
 use Telnyx\Calls\CallDialParams\RecordTrim;
 use Telnyx\Calls\CallDialParams\SipRegion;
@@ -91,6 +92,7 @@ interface CallsContract
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      * @param RecordFormat|value-of<RecordFormat> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
      * @param int $recordMaxLength Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
+     * @param list<RecordRedaction|value-of<RecordRedaction>> $recordRedaction Applies to the recording started with `record`. Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
      * @param int $recordTimeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      * @param RecordTrack|value-of<RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
      * @param RecordTrim|value-of<RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
@@ -161,6 +163,7 @@ interface CallsContract
         ?string $recordCustomFileName = null,
         RecordFormat|string $recordFormat = 'mp3',
         int $recordMaxLength = 0,
+        ?array $recordRedaction = null,
         int $recordTimeoutSecs = 0,
         RecordTrack|string $recordTrack = 'both',
         RecordTrim|string|null $recordTrim = null,

@@ -66,6 +66,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\Body\ApplicationDefault\URLMetho
  *   preferredCodecs?: string|null,
  *   record?: bool|null,
  *   recordingChannels?: null|RecordingChannels|value-of<RecordingChannels>,
+ *   recordingRedaction?: string|null,
  *   recordingStatusCallback?: string|null,
  *   recordingStatusCallbackEvent?: string|null,
  *   recordingStatusCallbackMethod?: null|RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
@@ -320,6 +321,12 @@ final class ApplicationDefault implements BaseModel
      */
     #[Optional('RecordingChannels', enum: RecordingChannels::class)]
     public ?string $recordingChannels;
+
+    /**
+     * Silences spoken details of the given kinds in the recording: one or more of `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions), separated by commas, for example `pci,pii`. Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     */
+    #[Optional('RecordingRedaction')]
+    public ?string $recordingRedaction;
 
     /**
      * The URL the recording callbacks will be sent to.
@@ -586,6 +593,7 @@ final class ApplicationDefault implements BaseModel
         ?string $preferredCodecs = null,
         ?bool $record = null,
         RecordingChannels|string|null $recordingChannels = null,
+        ?string $recordingRedaction = null,
         ?string $recordingStatusCallback = null,
         ?string $recordingStatusCallbackEvent = null,
         RecordingStatusCallbackMethod|string|null $recordingStatusCallbackMethod = null,
@@ -648,6 +656,7 @@ final class ApplicationDefault implements BaseModel
         null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
         null !== $record && $self['record'] = $record;
         null !== $recordingChannels && $self['recordingChannels'] = $recordingChannels;
+        null !== $recordingRedaction && $self['recordingRedaction'] = $recordingRedaction;
         null !== $recordingStatusCallback && $self['recordingStatusCallback'] = $recordingStatusCallback;
         null !== $recordingStatusCallbackEvent && $self['recordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
         null !== $recordingStatusCallbackMethod && $self['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
@@ -1070,6 +1079,17 @@ final class ApplicationDefault implements BaseModel
     ): self {
         $self = clone $this;
         $self['recordingChannels'] = $recordingChannels;
+
+        return $self;
+    }
+
+    /**
+     * Silences spoken details of the given kinds in the recording: one or more of `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions), separated by commas, for example `pci,pii`. Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     */
+    public function withRecordingRedaction(string $recordingRedaction): self
+    {
+        $self = clone $this;
+        $self['recordingRedaction'] = $recordingRedaction;
 
         return $self;
     }

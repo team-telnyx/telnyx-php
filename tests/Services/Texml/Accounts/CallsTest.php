@@ -165,6 +165,7 @@ final class CallsTest extends TestCase
                 'preferredCodecs' => 'PCMA,PCMU',
                 'record' => false,
                 'recordingChannels' => 'dual',
+                'recordingRedaction' => 'pci,pii',
                 'recordingStatusCallback' => 'https://example.com/recording_status_callback',
                 'recordingStatusCallbackEvent' => 'in-progress completed absent',
                 'recordingStatusCallbackMethod' => 'GET',

@@ -212,6 +212,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
      *   cancelPlaybackOnMachineDetection?: bool,
      *   coaching?: bool,
      *   conferenceRecord?: ConferenceRecord|value-of<ConferenceRecord>,
+     *   conferenceRecordingRedaction?: string,
      *   conferenceRecordingStatusCallback?: string,
      *   conferenceRecordingStatusCallbackEvent?: string,
      *   conferenceRecordingStatusCallbackMethod?: ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod>,

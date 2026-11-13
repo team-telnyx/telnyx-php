@@ -16,4 +16,6 @@ enum Reason: string
     case UNSUPPORTED_BACKEND = 'Unsupported backend';
 
     case INTERNAL_SERVER_ERROR = 'Internal server error';
+
+    case RECORDING_REDACTION_FAILED_SO_THE_RECORDING_WAS_NOT_SAVED = 'Recording redaction failed, so the recording was not saved.';
 }

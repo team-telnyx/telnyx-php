@@ -206,6 +206,7 @@ final class ParticipantsTest extends TestCase
                 cancelPlaybackOnMachineDetection: false,
                 coaching: false,
                 conferenceRecord: 'record-from-start',
+                conferenceRecordingRedaction: 'pci,pii',
                 conferenceRecordingStatusCallback: 'https://example.com/conference_recording_status_callback',
                 conferenceRecordingStatusCallbackEvent: 'in-progress completed failed absent',
                 conferenceRecordingStatusCallbackMethod: 'GET',
