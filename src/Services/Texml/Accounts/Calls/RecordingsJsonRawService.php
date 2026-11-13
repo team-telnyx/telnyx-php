@@ -40,6 +40,7 @@ final class RecordingsJsonRawService implements RecordingsJsonRawContract
      *   accountSid: string,
      *   playBeep?: bool,
      *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
+     *   recordingRedaction?: string,
      *   recordingStatusCallback?: string,
      *   recordingStatusCallbackEvent?: string,
      *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,

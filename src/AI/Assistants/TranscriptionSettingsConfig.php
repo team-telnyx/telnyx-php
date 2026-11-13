@@ -34,7 +34,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     use SdkModel;
 
     /**
-     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. A comma-separated list of terms to boost for recognition during transcription, for staff names, building names, or other domain-specific vocabulary. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to Soniox.
+     * Available only for soniox/stt-rt-v4, soniox/stt-rt-v5, and soniox/stt-rt-v6. A comma-separated list of terms to boost for recognition during transcription, for staff names, building names, or other domain-specific vocabulary. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to Soniox.
      */
     #[Optional]
     public ?string $context;
@@ -46,7 +46,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?float $eagerEotThreshold;
 
     /**
-     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. When true, Soniox emits end-of-utterance events at the cadence configured by `max_endpoint_delay_ms`.
+     * Available only for soniox/stt-rt-v4, soniox/stt-rt-v5, and soniox/stt-rt-v6. When true, Soniox emits end-of-utterance events at the cadence configured by `max_endpoint_delay_ms`.
      */
     #[Optional('enable_endpoint_detection')]
     public ?bool $enableEndpointDetection;
@@ -72,7 +72,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?int $eotTimeoutMs;
 
     /**
-     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. When true, Soniox streams interim (non-final) results in addition to finalized transcripts.
+     * Available only for soniox/stt-rt-v4, soniox/stt-rt-v5, and soniox/stt-rt-v6. When true, Soniox streams interim (non-final) results in addition to finalized transcripts.
      */
     #[Optional('interim_results')]
     public ?bool $interimResults;
@@ -84,7 +84,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?string $keyterm;
 
     /**
-     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. A list of ISO 639-1 language codes (e.g. `["nl", "fr"]`) to pin recognition to multiple languages at once, overriding the single hint derived from `language`.
+     * Available only for soniox/stt-rt-v4, soniox/stt-rt-v5, and soniox/stt-rt-v6. A list of ISO 639-1 language codes (e.g. `["nl", "fr"]`) to pin recognition to multiple languages at once, overriding the single hint derived from `language`.
      *
      * @var list<string>|null $languageHints
      */
@@ -92,7 +92,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?array $languageHints;
 
     /**
-     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. Maximum silence (in milliseconds) before Soniox emits an end-of-utterance event. Only honored when `enable_endpoint_detection` is true.
+     * Available only for soniox/stt-rt-v4, soniox/stt-rt-v5, and soniox/stt-rt-v6. Maximum silence (in milliseconds) before Soniox emits an end-of-utterance event. Only honored when `enable_endpoint_detection` is true.
      */
     #[Optional('max_endpoint_delay_ms')]
     public ?int $maxEndpointDelayMs;
@@ -180,7 +180,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. A comma-separated list of terms to boost for recognition during transcription, for staff names, building names, or other domain-specific vocabulary. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to Soniox.
+     * Available only for soniox/stt-rt-v4, soniox/stt-rt-v5, and soniox/stt-rt-v6. A comma-separated list of terms to boost for recognition during transcription, for staff names, building names, or other domain-specific vocabulary. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to Soniox.
      */
     public function withContext(string $context): self
     {
@@ -202,7 +202,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. When true, Soniox emits end-of-utterance events at the cadence configured by `max_endpoint_delay_ms`.
+     * Available only for soniox/stt-rt-v4, soniox/stt-rt-v5, and soniox/stt-rt-v6. When true, Soniox emits end-of-utterance events at the cadence configured by `max_endpoint_delay_ms`.
      */
     public function withEnableEndpointDetection(
         bool $enableEndpointDetection
@@ -248,7 +248,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. When true, Soniox streams interim (non-final) results in addition to finalized transcripts.
+     * Available only for soniox/stt-rt-v4, soniox/stt-rt-v5, and soniox/stt-rt-v6. When true, Soniox streams interim (non-final) results in addition to finalized transcripts.
      */
     public function withInterimResults(bool $interimResults): self
     {
@@ -270,7 +270,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. A list of ISO 639-1 language codes (e.g. `["nl", "fr"]`) to pin recognition to multiple languages at once, overriding the single hint derived from `language`.
+     * Available only for soniox/stt-rt-v4, soniox/stt-rt-v5, and soniox/stt-rt-v6. A list of ISO 639-1 language codes (e.g. `["nl", "fr"]`) to pin recognition to multiple languages at once, overriding the single hint derived from `language`.
      *
      * @param list<string> $languageHints
      */
@@ -283,7 +283,7 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
-     * Available only for soniox/stt-rt-v4 and soniox/stt-rt-v5. Maximum silence (in milliseconds) before Soniox emits an end-of-utterance event. Only honored when `enable_endpoint_detection` is true.
+     * Available only for soniox/stt-rt-v4, soniox/stt-rt-v5, and soniox/stt-rt-v6. Maximum silence (in milliseconds) before Soniox emits an end-of-utterance event. Only honored when `enable_endpoint_detection` is true.
      */
     public function withMaxEndpointDelayMs(int $maxEndpointDelayMs): self
     {

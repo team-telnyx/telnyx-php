@@ -43,6 +43,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  *   cancelPlaybackOnMachineDetection?: bool|null,
  *   coaching?: bool|null,
  *   conferenceRecord?: null|ConferenceRecord|value-of<ConferenceRecord>,
+ *   conferenceRecordingRedaction?: string|null,
  *   conferenceRecordingStatusCallback?: string|null,
  *   conferenceRecordingStatusCallbackEvent?: string|null,
  *   conferenceRecordingStatusCallbackMethod?: null|ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod>,
@@ -165,6 +166,12 @@ final class ParticipantParticipantsParams implements BaseModel
      */
     #[Optional('ConferenceRecord', enum: ConferenceRecord::class)]
     public ?string $conferenceRecord;
+
+    /**
+     * Silences spoken details of the given kinds in the recording: one or more of `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions), separated by commas, for example `pci,pii`. Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     */
+    #[Optional('ConferenceRecordingRedaction')]
+    public ?string $conferenceRecordingRedaction;
 
     /**
      * The URL the conference recording callbacks will be sent to.
@@ -527,6 +534,7 @@ final class ParticipantParticipantsParams implements BaseModel
         ?bool $cancelPlaybackOnMachineDetection = null,
         ?bool $coaching = null,
         ConferenceRecord|string|null $conferenceRecord = null,
+        ?string $conferenceRecordingRedaction = null,
         ?string $conferenceRecordingStatusCallback = null,
         ?string $conferenceRecordingStatusCallbackEvent = null,
         ConferenceRecordingStatusCallbackMethod|string|null $conferenceRecordingStatusCallbackMethod = null,
@@ -588,6 +596,7 @@ final class ParticipantParticipantsParams implements BaseModel
         null !== $cancelPlaybackOnMachineDetection && $self['cancelPlaybackOnMachineDetection'] = $cancelPlaybackOnMachineDetection;
         null !== $coaching && $self['coaching'] = $coaching;
         null !== $conferenceRecord && $self['conferenceRecord'] = $conferenceRecord;
+        null !== $conferenceRecordingRedaction && $self['conferenceRecordingRedaction'] = $conferenceRecordingRedaction;
         null !== $conferenceRecordingStatusCallback && $self['conferenceRecordingStatusCallback'] = $conferenceRecordingStatusCallback;
         null !== $conferenceRecordingStatusCallbackEvent && $self['conferenceRecordingStatusCallbackEvent'] = $conferenceRecordingStatusCallbackEvent;
         null !== $conferenceRecordingStatusCallbackMethod && $self['conferenceRecordingStatusCallbackMethod'] = $conferenceRecordingStatusCallbackMethod;
@@ -762,6 +771,18 @@ final class ParticipantParticipantsParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['conferenceRecord'] = $conferenceRecord;
+
+        return $self;
+    }
+
+    /**
+     * Silences spoken details of the given kinds in the recording: one or more of `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions), separated by commas, for example `pci,pii`. Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     */
+    public function withConferenceRecordingRedaction(
+        string $conferenceRecordingRedaction
+    ): self {
+        $self = clone $this;
+        $self['conferenceRecordingRedaction'] = $conferenceRecordingRedaction;
 
         return $self;
     }

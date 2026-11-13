@@ -394,17 +394,6 @@ Methods:
 - <code title="get /ai/embeddings/buckets">$client->ai->embeddings->buckets-><a href="./src/Services/AI/Embeddings/BucketsService.php">list</a>()</code>
 - <code title="delete /ai/embeddings/buckets/{bucket_name}">$client->ai->embeddings->buckets-><a href="./src/Services/AI/Embeddings/BucketsService.php">delete</a>(...$params)</code>
 
-## FineTuning
-
-### Jobs
-
-Methods:
-
-- <code title="post /ai/fine_tuning/jobs">$client->ai->fineTuning->jobs-><a href="./src/Services/AI/FineTuning/JobsService.php">create</a>(...$params)</code>
-- <code title="get /ai/fine_tuning/jobs/{job_id}">$client->ai->fineTuning->jobs-><a href="./src/Services/AI/FineTuning/JobsService.php">retrieve</a>(...$params)</code>
-- <code title="get /ai/fine_tuning/jobs">$client->ai->fineTuning->jobs-><a href="./src/Services/AI/FineTuning/JobsService.php">list</a>()</code>
-- <code title="post /ai/fine_tuning/jobs/{job_id}/cancel">$client->ai->fineTuning->jobs-><a href="./src/Services/AI/FineTuning/JobsService.php">cancel</a>(...$params)</code>
-
 ## Integrations
 
 Methods:
@@ -1554,7 +1543,7 @@ Methods:
 
 Methods:
 
-- <code title="post /v2/payment/stored_payment_transactions">$client->payment-><a href="./src/Services/PaymentService.php">createStoredPaymentTransaction</a>(...$params)</code>
+- <code title="post /payment/stored_payment_transactions">$client->payment-><a href="./src/Services/PaymentService.php">createStoredPaymentTransaction</a>(...$params)</code>
 
 ## AutoRechargePrefs
 
@@ -2556,9 +2545,9 @@ Methods:
 
 Methods:
 
-- <code title="get /v2/mobile_phone_numbers/{id}">$client->mobilePhoneNumbers-><a href="./src/Services/MobilePhoneNumbersService.php">retrieve</a>(...$params)</code>
-- <code title="patch /v2/mobile_phone_numbers/{id}">$client->mobilePhoneNumbers-><a href="./src/Services/MobilePhoneNumbersService.php">update</a>(...$params)</code>
-- <code title="get /v2/mobile_phone_numbers">$client->mobilePhoneNumbers-><a href="./src/Services/MobilePhoneNumbersService.php">list</a>(...$params)</code>
+- <code title="get /mobile_phone_numbers/{id}">$client->mobilePhoneNumbers-><a href="./src/Services/MobilePhoneNumbersService.php">retrieve</a>(...$params)</code>
+- <code title="patch /mobile_phone_numbers/{id}">$client->mobilePhoneNumbers-><a href="./src/Services/MobilePhoneNumbersService.php">update</a>(...$params)</code>
+- <code title="get /mobile_phone_numbers">$client->mobilePhoneNumbers-><a href="./src/Services/MobilePhoneNumbersService.php">list</a>(...$params)</code>
 
 ## Messaging
 
@@ -2571,11 +2560,11 @@ Methods:
 
 Methods:
 
-- <code title="post /v2/mobile_voice_connections">$client->mobileVoiceConnections-><a href="./src/Services/MobileVoiceConnectionsService.php">create</a>(...$params)</code>
-- <code title="get /v2/mobile_voice_connections/{id}">$client->mobileVoiceConnections-><a href="./src/Services/MobileVoiceConnectionsService.php">retrieve</a>(...$params)</code>
-- <code title="patch /v2/mobile_voice_connections/{id}">$client->mobileVoiceConnections-><a href="./src/Services/MobileVoiceConnectionsService.php">update</a>(...$params)</code>
-- <code title="get /v2/mobile_voice_connections">$client->mobileVoiceConnections-><a href="./src/Services/MobileVoiceConnectionsService.php">list</a>(...$params)</code>
-- <code title="delete /v2/mobile_voice_connections/{id}">$client->mobileVoiceConnections-><a href="./src/Services/MobileVoiceConnectionsService.php">delete</a>(...$params)</code>
+- <code title="post /mobile_voice_connections">$client->mobileVoiceConnections-><a href="./src/Services/MobileVoiceConnectionsService.php">create</a>(...$params)</code>
+- <code title="get /mobile_voice_connections/{id}">$client->mobileVoiceConnections-><a href="./src/Services/MobileVoiceConnectionsService.php">retrieve</a>(...$params)</code>
+- <code title="patch /mobile_voice_connections/{id}">$client->mobileVoiceConnections-><a href="./src/Services/MobileVoiceConnectionsService.php">update</a>(...$params)</code>
+- <code title="get /mobile_voice_connections">$client->mobileVoiceConnections-><a href="./src/Services/MobileVoiceConnectionsService.php">list</a>(...$params)</code>
+- <code title="delete /mobile_voice_connections/{id}">$client->mobileVoiceConnections-><a href="./src/Services/MobileVoiceConnectionsService.php">delete</a>(...$params)</code>
 
 # Messaging10dlc
 

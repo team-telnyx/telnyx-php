@@ -12,6 +12,7 @@ use Telnyx\Calls\Actions\ActionTransferParams\Privacy;
 use Telnyx\Calls\Actions\ActionTransferParams\Record;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordChannels;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordFormat;
+use Telnyx\Calls\Actions\ActionTransferParams\RecordRedaction;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
@@ -74,6 +75,7 @@ use Telnyx\Core\Conversion\ListOf;
  *   recordCustomFileName?: string|null,
  *   recordFormat?: null|RecordFormat|value-of<RecordFormat>,
  *   recordMaxLength?: int|null,
+ *   recordRedaction?: list<RecordRedaction|value-of<RecordRedaction>>|null,
  *   recordTimeoutSecs?: int|null,
  *   recordTrack?: null|RecordTrack|value-of<RecordTrack>,
  *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
@@ -253,6 +255,14 @@ final class ActionTransferParams implements BaseModel
     public ?int $recordMaxLength;
 
     /**
+     * Applies to the recording started with `record`. Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     *
+     * @var list<value-of<RecordRedaction>>|null $recordRedaction
+     */
+    #[Optional('record_redaction', list: RecordRedaction::class)]
+    public ?array $recordRedaction;
+
+    /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
     #[Optional('record_timeout_secs')]
@@ -417,6 +427,7 @@ final class ActionTransferParams implements BaseModel
      * @param Record|value-of<Record>|null $record
      * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
      * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
+     * @param list<RecordRedaction|value-of<RecordRedaction>>|null $recordRedaction
      * @param RecordTrack|value-of<RecordTrack>|null $recordTrack
      * @param RecordTrim|value-of<RecordTrim>|null $recordTrim
      * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
@@ -451,6 +462,7 @@ final class ActionTransferParams implements BaseModel
         ?string $recordCustomFileName = null,
         RecordFormat|string|null $recordFormat = null,
         ?int $recordMaxLength = null,
+        ?array $recordRedaction = null,
         ?int $recordTimeoutSecs = null,
         RecordTrack|string|null $recordTrack = null,
         RecordTrim|string|null $recordTrim = null,
@@ -496,6 +508,7 @@ final class ActionTransferParams implements BaseModel
         null !== $recordCustomFileName && $self['recordCustomFileName'] = $recordCustomFileName;
         null !== $recordFormat && $self['recordFormat'] = $recordFormat;
         null !== $recordMaxLength && $self['recordMaxLength'] = $recordMaxLength;
+        null !== $recordRedaction && $self['recordRedaction'] = $recordRedaction;
         null !== $recordTimeoutSecs && $self['recordTimeoutSecs'] = $recordTimeoutSecs;
         null !== $recordTrack && $self['recordTrack'] = $recordTrack;
         null !== $recordTrim && $self['recordTrim'] = $recordTrim;
@@ -779,6 +792,19 @@ final class ActionTransferParams implements BaseModel
     {
         $self = clone $this;
         $self['recordMaxLength'] = $recordMaxLength;
+
+        return $self;
+    }
+
+    /**
+     * Applies to the recording started with `record`. Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     *
+     * @param list<RecordRedaction|value-of<RecordRedaction>> $recordRedaction
+     */
+    public function withRecordRedaction(array $recordRedaction): self
+    {
+        $self = clone $this;
+        $self['recordRedaction'] = $recordRedaction;
 
         return $self;
     }

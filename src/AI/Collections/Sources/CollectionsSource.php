@@ -42,7 +42,7 @@ final class CollectionsSource implements BaseModel
     public ?string $recordType;
 
     /**
-     * The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. Only `voice` is searchable today; `meeting_bot`, `message`, and `bucket` attach but are not yet searchable (Coming soon).
+     * The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. `voice`, `meeting_bot`, `message`, `email`, and `whatsapp` are searchable today; `bucket` attaches but is not yet searchable (Coming soon).
      *
      * @var value-of<SourceType>|null $sourceType
      */
@@ -123,7 +123,7 @@ final class CollectionsSource implements BaseModel
     }
 
     /**
-     * The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. Only `voice` is searchable today; `meeting_bot`, `message`, and `bucket` attach but are not yet searchable (Coming soon).
+     * The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. `voice`, `meeting_bot`, `message`, `email`, and `whatsapp` are searchable today; `bucket` attaches but is not yet searchable (Coming soon).
      *
      * @param SourceType|value-of<SourceType> $sourceType
      */

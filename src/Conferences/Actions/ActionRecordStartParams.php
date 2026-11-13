@@ -6,6 +6,7 @@ namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Channels;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Format;
+use Telnyx\Conferences\Actions\ActionRecordStartParams\Redaction;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Trim;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -28,6 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   commandID?: string|null,
  *   customFileName?: string|null,
  *   playBeep?: bool|null,
+ *   redaction?: list<Redaction|value-of<Redaction>>|null,
  *   region?: null|ConferenceRegion|value-of<ConferenceRegion>,
  *   trim?: null|Trim|value-of<Trim>,
  * }
@@ -73,6 +75,14 @@ final class ActionRecordStartParams implements BaseModel
     public ?bool $playBeep;
 
     /**
+     * Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     *
+     * @var list<value-of<Redaction>>|null $redaction
+     */
+    #[Optional(list: Redaction::class)]
+    public ?array $redaction;
+
+    /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
      * @var value-of<ConferenceRegion>|null $region
@@ -114,6 +124,7 @@ final class ActionRecordStartParams implements BaseModel
      *
      * @param Format|value-of<Format> $format
      * @param Channels|value-of<Channels>|null $channels
+     * @param list<Redaction|value-of<Redaction>>|null $redaction
      * @param ConferenceRegion|value-of<ConferenceRegion>|null $region
      * @param Trim|value-of<Trim>|null $trim
      */
@@ -123,6 +134,7 @@ final class ActionRecordStartParams implements BaseModel
         ?string $commandID = null,
         ?string $customFileName = null,
         ?bool $playBeep = null,
+        ?array $redaction = null,
         ConferenceRegion|string|null $region = null,
         Trim|string|null $trim = null,
     ): self {
@@ -134,6 +146,7 @@ final class ActionRecordStartParams implements BaseModel
         null !== $commandID && $self['commandID'] = $commandID;
         null !== $customFileName && $self['customFileName'] = $customFileName;
         null !== $playBeep && $self['playBeep'] = $playBeep;
+        null !== $redaction && $self['redaction'] = $redaction;
         null !== $region && $self['region'] = $region;
         null !== $trim && $self['trim'] = $trim;
 
@@ -195,6 +208,19 @@ final class ActionRecordStartParams implements BaseModel
     {
         $self = clone $this;
         $self['playBeep'] = $playBeep;
+
+        return $self;
+    }
+
+    /**
+     * Silences spoken details of the given kinds in the recording: `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions). Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
+     *
+     * @param list<Redaction|value-of<Redaction>> $redaction
+     */
+    public function withRedaction(array $redaction): self
+    {
+        $self = clone $this;
+        $self['redaction'] = $redaction;
 
         return $self;
     }

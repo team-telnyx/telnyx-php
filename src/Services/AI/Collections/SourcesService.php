@@ -42,7 +42,7 @@ final class SourcesService implements SourcesContract
      * Attaches a new content source to the specified collection and returns the created source. The source's content is ingested and embedded so it becomes searchable within the collection.
      *
      * @param string $uuid the collection's unique identifier
-     * @param SourceType|value-of<SourceType> $sourceType The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. Only `voice` is searchable today; `meeting_bot`, `message`, and `bucket` attach but are not yet searchable (Coming soon).
+     * @param SourceType|value-of<SourceType> $sourceType The type of Telnyx data attached as a source. `bucket` requires an additional `bucket_id`. `voice`, `meeting_bot`, `message`, `email`, and `whatsapp` are searchable today; `bucket` attaches but is not yet searchable (Coming soon).
      * @param string $bucketID The Telnyx Storage bucket name. Required when `source_type` is `bucket`; ignored otherwise.
      * @param RequestOpts|null $requestOptions
      *

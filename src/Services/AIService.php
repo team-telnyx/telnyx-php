@@ -22,7 +22,6 @@ use Telnyx\Services\AI\ClustersService;
 use Telnyx\Services\AI\CollectionsService;
 use Telnyx\Services\AI\ConversationsService;
 use Telnyx\Services\AI\EmbeddingsService;
-use Telnyx\Services\AI\FineTuningService;
 use Telnyx\Services\AI\IntegrationsService;
 use Telnyx\Services\AI\KnowledgeService;
 use Telnyx\Services\AI\McpServersService;
@@ -77,11 +76,6 @@ final class AIService implements AIContract
      * @api
      */
     public EmbeddingsService $embeddings;
-
-    /**
-     * @api
-     */
-    public FineTuningService $fineTuning;
 
     /**
      * @api
@@ -151,7 +145,6 @@ final class AIService implements AIContract
         $this->collections = new CollectionsService($client);
         $this->conversations = new ConversationsService($client);
         $this->embeddings = new EmbeddingsService($client);
-        $this->fineTuning = new FineTuningService($client);
         $this->integrations = new IntegrationsService($client);
         $this->mcpServers = new McpServersService($client);
         $this->missions = new MissionsService($client);

@@ -120,6 +120,7 @@ interface ParticipantsContract
      * @param bool $cancelPlaybackOnMachineDetection Body param: Whether to cancel ongoing playback on `machine` detection. Defaults to `true`.
      * @param bool $coaching Body param: Whether the participant is coaching another call. When `true`, `CallSidToCoach` has to be given.
      * @param ConferenceRecord|value-of<ConferenceRecord> $conferenceRecord Body param: Whether to record the conference the participant is joining. Defualts to `do-not-record`. The boolean values `true` and `false` are synonymous with `record-from-start` and `do-not-record` respectively.
+     * @param string $conferenceRecordingRedaction Body param: Silences spoken details of the given kinds in the recording: one or more of `pci` (card number, expiry date, security code), `pii` (personal details such as names, phone numbers, addresses and other identifying numbers) and `phi` (health details such as medications, doses and conditions), separated by commas, for example `pci,pii`. Redaction works on English speech only. Redacted recordings are charged at the Deepgram speech-to-text rate.
      * @param string $conferenceRecordingStatusCallback body param: The URL the conference recording callbacks will be sent to
      * @param string $conferenceRecordingStatusCallbackEvent Body param: The changes to the conference recording's state that should generate a call to `RecoridngStatusCallback`. Can be: `in-progress`, `completed` and `absent`. Separate multiple values with a space. Defaults to `completed`. `failed` and `absent` are synonymous.
      * @param ConferenceRecordingStatusCallbackMethod|value-of<ConferenceRecordingStatusCallbackMethod> $conferenceRecordingStatusCallbackMethod Body param: HTTP request type used for `ConferenceRecordingStatusCallback`. Defaults to `POST`.
@@ -183,6 +184,7 @@ interface ParticipantsContract
         bool $cancelPlaybackOnMachineDetection = true,
         ?bool $coaching = null,
         ConferenceRecord|string|null $conferenceRecord = null,
+        ?string $conferenceRecordingRedaction = null,
         ?string $conferenceRecordingStatusCallback = null,
         ?string $conferenceRecordingStatusCallbackEvent = null,
         ConferenceRecordingStatusCallbackMethod|string|null $conferenceRecordingStatusCallbackMethod = null,

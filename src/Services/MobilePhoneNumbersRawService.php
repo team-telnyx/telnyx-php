@@ -60,7 +60,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
-            path: ['v2/mobile_phone_numbers/%1$s', $id],
+            path: ['mobile_phone_numbers/%1$s', $id],
             options: $requestOptions,
             convert: MobilePhoneNumberGetResponse::class,
         );
@@ -104,7 +104,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: ['v2/mobile_phone_numbers/%1$s', $id],
+            path: ['mobile_phone_numbers/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: MobilePhoneNumberUpdateResponse::class,
@@ -137,7 +137,7 @@ final class MobilePhoneNumbersRawService implements MobilePhoneNumbersRawContrac
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
-            path: 'v2/mobile_phone_numbers',
+            path: 'mobile_phone_numbers',
             query: Util::array_transform_keys(
                 $parsed,
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']

@@ -16,6 +16,7 @@ use Telnyx\Calls\CallDialParams\Privacy;
 use Telnyx\Calls\CallDialParams\Record;
 use Telnyx\Calls\CallDialParams\RecordChannels;
 use Telnyx\Calls\CallDialParams\RecordFormat;
+use Telnyx\Calls\CallDialParams\RecordRedaction;
 use Telnyx\Calls\CallDialParams\RecordTrack;
 use Telnyx\Calls\CallDialParams\RecordTrim;
 use Telnyx\Calls\CallDialParams\SipRegion;
@@ -123,6 +124,7 @@ final class CallsRawService implements CallsRawContract
      *   recordCustomFileName?: string,
      *   recordFormat?: RecordFormat|value-of<RecordFormat>,
      *   recordMaxLength?: int,
+     *   recordRedaction?: list<RecordRedaction|value-of<RecordRedaction>>,
      *   recordTimeoutSecs?: int,
      *   recordTrack?: RecordTrack|value-of<RecordTrack>,
      *   recordTrim?: RecordTrim|value-of<RecordTrim>,

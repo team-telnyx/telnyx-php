@@ -27,6 +27,7 @@ use Telnyx\Conferences\Actions\ActionRecordResumeResponse;
 use Telnyx\Conferences\Actions\ActionRecordStartParams;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Channels;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Format;
+use Telnyx\Conferences\Actions\ActionRecordStartParams\Redaction;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Trim;
 use Telnyx\Conferences\Actions\ActionRecordStartResponse;
 use Telnyx\Conferences\Actions\ActionRecordStopParams;
@@ -487,6 +488,7 @@ final class ActionsRawService implements ActionsRawContract
      *   commandID?: string,
      *   customFileName?: string,
      *   playBeep?: bool,
+     *   redaction?: list<Redaction|value-of<Redaction>>,
      *   region?: ConferenceRegion|value-of<ConferenceRegion>,
      *   trim?: Trim|value-of<Trim>,
      * }|ActionRecordStartParams $params

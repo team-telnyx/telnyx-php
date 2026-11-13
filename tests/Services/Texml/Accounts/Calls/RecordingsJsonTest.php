@@ -73,6 +73,7 @@ final class RecordingsJsonTest extends TestCase
                 accountSid: 'f5586561-8ff0-4291-a51b-c7dfe4139ff9',
                 playBeep: false,
                 recordingChannels: 'single',
+                recordingRedaction: 'pci,pii',
                 recordingStatusCallback: 'http://webhook.com/callback',
                 recordingStatusCallbackEvent: 'in-progress completed absent',
                 recordingStatusCallbackMethod: 'GET',

@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Assemblyai;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs;
@@ -29,13 +28,12 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
  *
  * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
  *
- * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`, `soniox`, `assemblyai`.
+ * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `resemble`, `xai`, `humain`, `soniox`.
  *
  * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
  *
  * @see Telnyx\Services\TextToSpeechService::generateSpeech()
  *
- * @phpstan-import-type AssemblyaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Assemblyai
  * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws
  * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure
  * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs
@@ -47,7 +45,6 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
  * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai
  *
  * @phpstan-type TextToSpeechGenerateSpeechParamsShape = array{
- *   assemblyai?: null|Assemblyai|AssemblyaiShape,
  *   aws?: null|Aws|AwsShape,
  *   azure?: null|Azure|AzureShape,
  *   disableCache?: bool|null,
@@ -72,12 +69,6 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     /** @use SdkModel<TextToSpeechGenerateSpeechParamsShape> */
     use SdkModel;
     use SdkParams;
-
-    /**
-     * AssemblyAI provider-specific parameters. Every voice speaks all six supported languages; set `language` to the language of the text.
-     */
-    #[Optional]
-    public ?Assemblyai $assemblyai;
 
     /**
      * AWS Polly provider-specific parameters.
@@ -199,7 +190,6 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Assemblyai|AssemblyaiShape|null $assemblyai
      * @param Aws|AwsShape|null $aws
      * @param Azure|AzureShape|null $azure
      * @param Elevenlabs|ElevenlabsShape|null $elevenlabs
@@ -215,7 +205,6 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
      * @param Xai|XaiShape|null $xai
      */
     public static function with(
-        Assemblyai|array|null $assemblyai = null,
         Aws|array|null $aws = null,
         Azure|array|null $azure = null,
         ?bool $disableCache = null,
@@ -236,7 +225,6 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     ): self {
         $self = new self;
 
-        null !== $assemblyai && $self['assemblyai'] = $assemblyai;
         null !== $aws && $self['aws'] = $aws;
         null !== $azure && $self['azure'] = $azure;
         null !== $disableCache && $self['disableCache'] = $disableCache;
@@ -254,19 +242,6 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
         null !== $voice && $self['voice'] = $voice;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
         null !== $xai && $self['xai'] = $xai;
-
-        return $self;
-    }
-
-    /**
-     * AssemblyAI provider-specific parameters. Every voice speaks all six supported languages; set `language` to the language of the text.
-     *
-     * @param Assemblyai|AssemblyaiShape $assemblyai
-     */
-    public function withAssemblyai(Assemblyai|array $assemblyai): self
-    {
-        $self = clone $this;
-        $self['assemblyai'] = $assemblyai;
 
         return $self;
     }

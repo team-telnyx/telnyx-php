@@ -13,6 +13,7 @@ use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordChannels;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordFormat;
+use Telnyx\Calls\Actions\ActionAnswerParams\RecordRedaction;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
@@ -88,6 +89,7 @@ use Telnyx\Calls\Actions\ActionStartRecordingParams;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Channels;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Format;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\RecordingTrack;
+use Telnyx\Calls\Actions\ActionStartRecordingParams\Redaction;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionLanguage;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Trim;
 use Telnyx\Calls\Actions\ActionStartRecordingResponse;
@@ -280,6 +282,7 @@ final class ActionsRawService implements ActionsRawContract
      *   recordCustomFileName?: string,
      *   recordFormat?: RecordFormat|value-of<RecordFormat>,
      *   recordMaxLength?: int,
+     *   recordRedaction?: list<RecordRedaction|value-of<RecordRedaction>>,
      *   recordTimeoutSecs?: int,
      *   recordTrack?: RecordTrack|value-of<RecordTrack>,
      *   recordTrim?: RecordTrim|value-of<RecordTrim>,
@@ -352,6 +355,7 @@ final class ActionsRawService implements ActionsRawContract
      *   recordCustomFileName?: string,
      *   recordFormat?: ActionBridgeParams\RecordFormat|value-of<ActionBridgeParams\RecordFormat>,
      *   recordMaxLength?: int,
+     *   recordRedaction?: list<ActionBridgeParams\RecordRedaction|value-of<ActionBridgeParams\RecordRedaction>>,
      *   recordTimeoutSecs?: int,
      *   recordTrack?: ActionBridgeParams\RecordTrack|value-of<ActionBridgeParams\RecordTrack>,
      *   recordTrim?: ActionBridgeParams\RecordTrim|value-of<ActionBridgeParams\RecordTrim>,
@@ -1393,6 +1397,7 @@ final class ActionsRawService implements ActionsRawContract
      *   maxLength?: int,
      *   playBeep?: bool,
      *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
+     *   redaction?: list<Redaction|value-of<Redaction>>,
      *   timeoutSecs?: int,
      *   transcription?: bool,
      *   transcriptionEngine?: ActionStartRecordingParams\TranscriptionEngine|value-of<ActionStartRecordingParams\TranscriptionEngine>,
@@ -2017,6 +2022,7 @@ final class ActionsRawService implements ActionsRawContract
      *   recordCustomFileName?: string,
      *   recordFormat?: ActionTransferParams\RecordFormat|value-of<ActionTransferParams\RecordFormat>,
      *   recordMaxLength?: int,
+     *   recordRedaction?: list<ActionTransferParams\RecordRedaction|value-of<ActionTransferParams\RecordRedaction>>,
      *   recordTimeoutSecs?: int,
      *   recordTrack?: ActionTransferParams\RecordTrack|value-of<ActionTransferParams\RecordTrack>,
      *   recordTrim?: ActionTransferParams\RecordTrim|value-of<ActionTransferParams\RecordTrim>,
