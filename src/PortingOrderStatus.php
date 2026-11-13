@@ -7,16 +7,16 @@ namespace Telnyx;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\PortingOrderStatus\Detail;
 use Telnyx\PortingOrderStatus\Value;
 
 /**
  * Porting order status.
  *
- * @phpstan-import-type PortingOrdersExceptionTypeShape from \Telnyx\PortingOrdersExceptionType
+ * @phpstan-import-type DetailShape from \Telnyx\PortingOrderStatus\Detail
  *
  * @phpstan-type PortingOrderStatusShape = array{
- *   details?: list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape>|null,
- *   value?: null|Value|value-of<Value>,
+ *   details?: list<Detail|DetailShape>|null, value?: null|Value|value-of<Value>
  * }
  */
 final class PortingOrderStatus implements BaseModel
@@ -27,9 +27,9 @@ final class PortingOrderStatus implements BaseModel
     /**
      * A list of 0 or more details about this porting order's status.
      *
-     * @var list<PortingOrdersExceptionType>|null $details
+     * @var list<Detail>|null $details
      */
-    #[Optional(list: PortingOrdersExceptionType::class)]
+    #[Optional(list: Detail::class)]
     public ?array $details;
 
     /**
@@ -50,7 +50,7 @@ final class PortingOrderStatus implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape>|null $details
+     * @param list<Detail|DetailShape>|null $details
      * @param Value|value-of<Value>|null $value
      */
     public static function with(
@@ -68,7 +68,7 @@ final class PortingOrderStatus implements BaseModel
     /**
      * A list of 0 or more details about this porting order's status.
      *
-     * @param list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape> $details
+     * @param list<Detail|DetailShape> $details
      */
     public function withDetails(array $details): self
     {

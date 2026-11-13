@@ -94,7 +94,6 @@ use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\AIAssistantJoinParticipant;
-use Telnyx\Calls\Actions\AssemblyAIVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ConversationRelayInterruptible;
 use Telnyx\Calls\Actions\ConversationRelayTranscriptionEngineConfig;
@@ -205,7 +204,7 @@ final class ActionsService implements ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param list<MessageShape> $messages the messages to add to the conversation
-     * @param bool $triggerResponse When `true`, the injected messages immediately trigger an assistant response/turn instead of waiting for the next natural turn or idle timeout. This may interrupt a user who is still speaking.
+     * @param bool $triggerResponse When `true`, the injected messages immediately trigger an assistant response/turn instead of waiting for the next natural turn or idle timeout. This may interrupt a user who is still speaking. How the turn starts depends on the last message in `messages`: if it is a `user` message, the assistant responds to that message as if the caller had said it, whether or not `trigger_response` is set. Any other last role (`system`, `developer`, `assistant`, `tool`) starts a turn with no new user input, as after a long silence. When `trigger_response` is not set, a payload that does not end in a `user` message is context only and does not start a turn. GPT Live models (`openai/gpt-live-*`) do not support a forced mid-session turn: injected `system`, `developer`, and `assistant` content is appended to the Live session's instructions and the model brings it into its next turn on its own; an injected `tool` record is not forwarded to the Live session, so it stays context only and never reaches the Live model. Any of `user`, `system`, `developer`, or `assistant` is the supported way to get content into the Live session.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -633,7 +632,7 @@ final class ActionsService implements ActionsContract
         TranscriptionConfig|array|null $transcription = null,
         int $userResponseTimeoutMs = 10000,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingAIResponse {
         $params = array_filter(
@@ -804,7 +803,7 @@ final class ActionsService implements ActionsContract
         string $terminatingDigit = '#',
         int $timeoutMillis = 60000,
         string $validDigits = '0123456789#*',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingSpeakResponse {
         $params = array_filter(
@@ -1355,7 +1354,7 @@ final class ActionsService implements ActionsContract
         \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|string $serviceLevel = 'premium',
         ?string $stop = null,
         TargetLegs|string $targetLegs = 'self',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse {
         $params = array_filter(
@@ -1512,7 +1511,7 @@ final class ActionsService implements ActionsContract
         ?string $ttsProvider = null,
         ?string $url = null,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartConversationRelayResponse {
         $params = array_filter(

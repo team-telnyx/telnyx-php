@@ -122,7 +122,7 @@ final class ModelMetadata implements BaseModel
     public ?string $description;
 
     /**
-     * Whether the model can be used as a base for a fine-tuning job via `POST /v2/ai/fine_tuning/jobs`.
+     * Whether the model can be used as a base for fine-tuning. Fine-tuning jobs are no longer served by the Telnyx API.
      */
     #[Optional('is_fine_tunable')]
     public ?bool $isFineTunable;
@@ -426,7 +426,7 @@ final class ModelMetadata implements BaseModel
     }
 
     /**
-     * Whether the model can be used as a base for a fine-tuning job via `POST /v2/ai/fine_tuning/jobs`.
+     * Whether the model can be used as a base for fine-tuning. Fine-tuning jobs are no longer served by the Telnyx API.
      */
     public function withIsFineTunable(bool $isFineTunable): self
     {

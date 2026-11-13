@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Conferences;
 
 use Telnyx\AzureVoiceSettings;
-use Telnyx\Calls\Actions\AssemblyAIVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\SonioxVoiceSettings;
@@ -404,7 +403,7 @@ interface ActionsContract
         Language|string|null $language = null,
         PayloadType|string $payloadType = 'text',
         ConferenceRegion|string|null $region = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse;
 

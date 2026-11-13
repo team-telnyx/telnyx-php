@@ -52,7 +52,7 @@ final class RemediationRequest implements BaseModel
     public int $phoneNumbersCount;
 
     /**
-     * Numbers rejected before submission (e.g. cooldown).
+     * Number of phone numbers the reputation partner did not re-review because it had reviewed them within the previous 60 days.
      */
     #[Required('phone_numbers_ineligible')]
     public int $phoneNumbersIneligible;
@@ -207,7 +207,7 @@ final class RemediationRequest implements BaseModel
     }
 
     /**
-     * Numbers rejected before submission (e.g. cooldown).
+     * Number of phone numbers the reputation partner did not re-review because it had reviewed them within the previous 60 days.
      */
     public function withPhoneNumbersIneligible(
         int $phoneNumbersIneligible

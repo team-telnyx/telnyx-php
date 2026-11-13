@@ -10,4 +10,6 @@ namespace Telnyx\NetworkRoutes\NetworkRouteCreateParams\NextHop;
 enum Type: string
 {
     case TUNNEL = 'tunnel';
+
+    case WIREGUARD_PEER = 'wireguard_peer';
 }

@@ -148,7 +148,7 @@ final class ActionSpeakParams implements BaseModel
      * @var VoiceSettingsVariants|null $voiceSettings
      */
     #[Optional('voice_settings', union: VoiceSettings::class)]
-    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings;
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings;
 
     /**
      * `new ActionSpeakParams()` is missing required properties by the API.
@@ -192,7 +192,7 @@ final class ActionSpeakParams implements BaseModel
         ServiceLevel|string|null $serviceLevel = null,
         ?string $stop = null,
         TargetLegs|string|null $targetLegs = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
 
@@ -355,7 +355,7 @@ final class ActionSpeakParams implements BaseModel
      * @param VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings|AssemblyAIVoiceSettings $voiceSettings,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|SonioxVoiceSettings $voiceSettings,
     ): self {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;

@@ -56,7 +56,7 @@ final class Data implements BaseModel
     public ?string $recordID;
 
     /**
-     * The source record kind this chunk came from (e.g. `voice`, `meeting_bot`, `message`).
+     * The source record kind this chunk came from (e.g. `voice`, `meeting_bot`, `message`, `email`, `whatsapp`).
      */
     #[Optional('record_type')]
     public ?string $recordType;
@@ -191,7 +191,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * The source record kind this chunk came from (e.g. `voice`, `meeting_bot`, `message`).
+     * The source record kind this chunk came from (e.g. `voice`, `meeting_bot`, `message`, `email`, `whatsapp`).
      */
     public function withRecordType(string $recordType): self
     {

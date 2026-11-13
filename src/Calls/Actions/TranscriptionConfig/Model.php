@@ -13,7 +13,7 @@ namespace Telnyx\Calls\Actions\TranscriptionConfig;
  * - `speechmatics/linden-1` (preview, vendor-hosted) for live streaming transcription; no auto-detect, so set `language` from Speechmatics' Realtime language list (defaults to `en`).
  * - `assemblyai/universal-3-6-pro` (AssemblyAI Universal-3.6 Pro) for live streaming transcription. The legacy aliases `assemblyai/universal-3-5-pro` and `assemblyai/universal-streaming` are still accepted and run the same Universal-3.6 Pro model.
  * - `xai/grok-stt` for live streaming transcription.
- * - `soniox/stt-rt-v4` for live streaming multilingual transcription with automatic language detection.
+ * - `soniox/stt-rt-v4` and `soniox/stt-rt-v6` for live streaming multilingual transcription with automatic language detection.
  * - `nvidia/parakeet-v3` for multilingual transcription with automatic language detection.
  * - `omi-health/omi-med-stt-v1` for English-only medical transcription (Parakeet-based).
  * - `humain/realtime` for live streaming transcription with native Arabic and Arabic/English code-switching support.
@@ -49,6 +49,8 @@ enum Model: string
     case XAI_GROK_STT = 'xai/grok-stt';
 
     case SONIOX_STT_RT_V4 = 'soniox/stt-rt-v4';
+
+    case SONIOX_STT_RT_V6 = 'soniox/stt-rt-v6';
 
     case NVIDIA_PARAKEET_V3 = 'nvidia/parakeet-v3';
 

@@ -10,4 +10,6 @@ namespace Telnyx\Calls\Actions\TranscriptionEngineSonioxConfig;
 enum TranscriptionModel: string
 {
     case SONIOX_STT_RT_V4 = 'soniox/stt-rt-v4';
+
+    case SONIOX_STT_RT_V6 = 'soniox/stt-rt-v6';
 }
